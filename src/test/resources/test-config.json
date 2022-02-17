@@ -1,0 +1,68 @@
+{
+  "ui": {
+    "playback": {
+      "implicit_wait": 10,
+      "explicit_wait": 30
+    },
+    "web": {
+      "test1": {
+        "browser": "Chrome"
+      },
+      "test2": {
+        "browser": "Safari"
+      }
+    },
+    "android": {
+      "test1": {
+        "userName": "",
+        "password": "",
+        "remoteUrl": "",
+        "port": 4723,
+        "settings": {
+          "ignoreUnimportantViews": true
+        },
+        "capabilities": {
+          "platform": "Android",
+          "android.device.udid": "RF8R50ZA73B",
+          "app": "src/test/resources/builds/android/bolt-beta-release-5534.apk",
+          "appiumVersion": "1.17.1",
+          "fullReset": "false",
+          "unicodeKeyboard": true,
+          "deviceOrientation": "portrait",
+          "automationName": "uiautomator2",
+          "appActivity": "com.whistle.bolt.ui.splash.SplashActivity",
+          "appPackage": "com.whistle.bolt.beta"
+        }
+      }
+    },
+    "ios": {
+      "test1": {
+        "capabilities": {
+          "platformName": "iOS",
+          "platformVersion": "15.2",
+          "deviceName": "GSPANN_MD_301",
+          "ios.xcodeOrgId": "W3EYC2MS2B",
+          "ios.xcodeSigningId": "iPhone Developer",
+          "usePrebuiltWDA": "",
+          "showXcodeLog": true,
+          "showIOSLog": true,
+          "wdaStartupRetries": "3",
+          "noReset": true,
+          "automationName": "XCUITest",
+          "app": "src/test/resources/builds/iOS/Winston-3161.ipa",
+          "udid": "00008030-00092D8822EB402E"
+        }
+      }
+    }
+  },
+  "api": {
+    "test1": {
+      "baseUri": "https://0de5125f-4049-4940-b15d-36c433e69903.mock.pstmn.io",
+      "basePath": "/api",
+      "logging": {
+        "request": true,
+        "response": true
+      }
+    }
+  }
+}
