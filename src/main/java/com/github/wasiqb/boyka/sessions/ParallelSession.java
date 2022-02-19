@@ -1,9 +1,10 @@
 package com.github.wasiqb.boyka.sessions;
 
+import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.openqa.selenium.WebDriver;
 
-public class ParallelSession {
-    private static final ThreadLocal<Session<? extends WebDriver>> SESSION = new ThreadLocal<> ();
+public final class ParallelSession {
+    private static final ThreadLocal<DriverSession<? extends WebDriver>> SESSION = new ThreadLocal<> ();
 
     public static void clear () {
         SESSION.remove ();
@@ -15,7 +16,11 @@ public class ParallelSession {
             .getDriver ();
     }
 
-    public static <D extends WebDriver> void setDriver (final D driver) {
-        SESSION.set (new Session<> (driver));
+    public static <D extends WebDriver> void setDriver (final ApplicationType applicationType, final D driver) {
+        SESSION.set (new DriverSession<> (applicationType, driver));
+    }
+
+    private ParallelSession () {
+        // Utility class
     }
 }

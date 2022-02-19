@@ -18,11 +18,16 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class ApiManager {
+    public static ApiManager createRequest (final String key) {
+        return new ApiManager (key);
+    }
+
     private final ApiSetting           apiSetting;
     private       JsonPath             jsonPath;
     private final RequestSpecification request;
+    private       Response             response;
 
-    public ApiManager (final String apiKey) {
+    private ApiManager (final String apiKey) {
         this.apiSetting = loadSetting ().getApiSetting (apiKey);
         this.request = given ().contentType (JSON)
             .accept (JSON);
@@ -31,6 +36,12 @@ public class ApiManager {
 
     public ApiManager addHeader (final String name, final String value) {
         this.request.header (new Header (name, value));
+        return this;
+    }
+
+    public ApiManager basicAuth (final String userName, final String password) {
+        this.request.auth ()
+            .basic (userName, password);
         return this;
     }
 
@@ -73,15 +84,23 @@ public class ApiManager {
         return assertThat (this.jsonPath.getInt (expression));
     }
 
+    public IntegerSubject verifyStatusCode () {
+        return assertThat (this.response.statusCode ());
+    }
+
+    public StringSubject verifyStatusMessage () {
+        return assertThat (this.response.statusLine ());
+    }
+
     public StringSubject verifyTextField (final String expression) {
         return assertThat (this.jsonPath.getString (expression));
     }
 
     private ApiManager getResponse (final Function<RequestSpecification, Response> execute) {
         logRequest ();
-        final Response response = execute.apply (this.request);
-        logResponse (response);
-        this.jsonPath = from (response.asString ());
+        this.response = execute.apply (this.request);
+        logResponse (this.response);
+        this.jsonPath = from (this.response.asString ());
         return this;
     }
 

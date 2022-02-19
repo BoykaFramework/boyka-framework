@@ -6,4 +6,6 @@ import lombok.Data;
 public class PlaybackSetting {
     private int explicitWait;
     private int implicitWait;
+    private int pageLoadTimeout;
+    private int scriptTimeout;
 }

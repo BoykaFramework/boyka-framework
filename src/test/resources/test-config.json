@@ -6,7 +6,10 @@
     },
     "web": {
       "test1": {
-        "browser": "Chrome"
+        "browser": "Chrome",
+        "userName": "",
+        "password": "",
+        "remoteUrl": ""
       },
       "test2": {
         "browser": "Safari"
@@ -49,9 +52,9 @@
     }
   },
   "api": {
-    "test1": {
-      "baseUri": "https://0de5125f-4049-4940-b15d-36c433e69903.mock.pstmn.io",
-      "basePath": "/api",
+    "test_browserstack": {
+      "base_uri": "https://api.browserstack.com",
+      "base_path": "/automate",
       "logging": {
         "request": true,
         "response": true

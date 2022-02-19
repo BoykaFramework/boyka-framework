@@ -1,6 +1,6 @@
 package com.github.wasiqb.boyka.enums;
 
-public enum Platforms {
+public enum ApplicationType {
     ANDROID,
     API,
     IOS,

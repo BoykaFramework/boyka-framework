@@ -1,0 +1,6 @@
+name: API Test Suite
+tests:
+  - name: Test API
+    preserveOrder: true
+    classes:
+      - com.github.wasiqb.boyka.testng.api.TestApi
