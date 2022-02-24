@@ -1,9 +1,18 @@
 name: Web Test Suite
+parallel: tests
+threadCount: 2
 tests:
   - name: Test Web
     preserveOrder: true
     parameters:
-      appType: Web
+      appType: WEB
       driverKey: test1
+    classes:
+      - com.github.wasiqb.boyka.testng.web.TestWeb
+  - name: Test Web BrowserStack
+    preserveOrder: true
+    parameters:
+      appType: WEB
+      driverKey: test2
     classes:
       - com.github.wasiqb.boyka.testng.web.TestWeb

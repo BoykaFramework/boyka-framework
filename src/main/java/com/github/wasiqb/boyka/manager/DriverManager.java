@@ -1,6 +1,11 @@
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.Messages.CAPABILITIES_REQUIRED_FOR_REMOTE;
+import static com.github.wasiqb.boyka.enums.Messages.HOSTNAME_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Messages.INVALID_BROWSER;
+import static com.github.wasiqb.boyka.enums.Messages.PASSWORD_REQUIRED_FOR_CLOUD;
+import static com.github.wasiqb.boyka.enums.Messages.PROTOCOL_REQUIRED_FOR_HOST;
+import static com.github.wasiqb.boyka.enums.Messages.USER_NAME_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.clear;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
@@ -9,17 +14,26 @@ import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
+import static java.text.MessageFormat.format;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNullElse;
+
+import java.net.URL;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.config.ui.WebSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.exception.FrameworkError;
+import lombok.SneakyThrows;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverManager {
@@ -44,8 +58,36 @@ public class DriverManager {
         clear ();
     }
 
-    private WebDriver setupBrowserStack (final WebSetting webSetting) {
-        return null;
+    private Capabilities getCapabilities (final WebSetting webSetting) {
+        final var capabilities = requireNonNull (webSetting.getCapabilities (),
+            CAPABILITIES_REQUIRED_FOR_REMOTE.getMessage ());
+        final var remoteCapabilities = new DesiredCapabilities ();
+        capabilities.forEach (remoteCapabilities::setCapability);
+        return remoteCapabilities;
+    }
+
+    private String getHostName (final WebSetting webSetting) {
+        if (requireNonNullElse (webSetting.getCloud (), CloudProviders.NONE) != CloudProviders.NONE) {
+            final var hostNamePattern = "{0}:{1}@{2}";
+            return format (hostNamePattern,
+                requireNonNull (webSetting.getUserName (), USER_NAME_REQUIRED_FOR_CLOUD.getMessage ()),
+                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD.getMessage ()),
+                requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessage ()));
+        }
+        return requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessage ());
+    }
+
+    @SneakyThrows
+    private URL getRemoteUrl (final WebSetting webSetting) {
+        final var URL_PATTERN = "{0}://{1}/wd/hub";
+        var hostName = getHostName (webSetting);
+        if (webSetting.getPort () != 0) {
+            hostName = format ("{0}:{1}", hostName, webSetting.getPort ());
+        }
+        final var url = format (URL_PATTERN, requireNonNull (webSetting.getProtocol (),
+            format (PROTOCOL_REQUIRED_FOR_HOST.getMessage (), hostName)).name ()
+            .toLowerCase (), hostName);
+        return new URL (url);
     }
 
     private WebDriver setupChromeDriver () {
@@ -76,19 +118,12 @@ public class DriverManager {
     }
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
-        if (webSetting.getCloud () == CloudProviders.BROWSER_STACK) {
-            return setupBrowserStack (webSetting);
-        }
-        return setupSeleniumGrid ();
+        return new RemoteWebDriver (getRemoteUrl (webSetting), getCapabilities (webSetting));
     }
 
     private WebDriver setupSafariDriver () {
         safaridriver ().setup ();
         return new SafariDriver ();
-    }
-
-    private WebDriver setupSeleniumGrid () {
-        return null;
     }
 
     private void setupWebDriver (final WebSetting webSetting) {

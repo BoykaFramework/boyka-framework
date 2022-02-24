@@ -4,10 +4,11 @@ import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyAction.verifyElementDisplayed;
-import static com.github.wasiqb.boyka.enums.ApplicationType.valueOf;
+import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
 
+import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.manager.DriverManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -19,8 +20,8 @@ public class TestWeb {
 
     @BeforeClass
     @Parameters ({ "appType", "driverKey" })
-    public void setupTestClass (final String appType, final String driverKey) {
-        this.driverManager = DriverManager.createDriver (valueOf (appType.toUpperCase ()), driverKey);
+    public void setupTestClass (final ApplicationType appType, final String driverKey) {
+        this.driverManager = createDriver (appType, driverKey);
     }
 
     @AfterClass
