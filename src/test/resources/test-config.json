@@ -31,9 +31,9 @@
         "cloud": "NONE",
         "port": "4444",
         "capabilities": {
-          "browser": "Chrome",
-          "browser_version": "98",
-          "platform": "Linux"
+          "browserName": "chrome",
+          "version": "77.0.3865.75",
+          "platform": "LINUX"
         }
       }
     },
