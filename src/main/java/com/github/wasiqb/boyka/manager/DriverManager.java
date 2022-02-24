@@ -91,12 +91,15 @@ public class DriverManager {
         return new URL (url);
     }
 
-    private WebDriver setupChromeDriver () {
+    private WebDriver setupChromeDriver (final WebSetting webSetting) {
         chromedriver ().setup ();
         final ChromeOptions options = new ChromeOptions ();
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
+        if (webSetting.isHeadless ()) {
+            options.addArguments ("--headless");
+        }
         return new ChromeDriver (options);
     }
 
@@ -130,7 +133,7 @@ public class DriverManager {
     private void setupWebDriver (final WebSetting webSetting) {
         switch (webSetting.getBrowser ()) {
             case CHROME:
-                setDriver (this.applicationType, setupChromeDriver (), this.setting);
+                setDriver (this.applicationType, setupChromeDriver (webSetting), this.setting);
                 break;
             case NONE:
                 throw new FrameworkError (INVALID_BROWSER.getMessage ());

@@ -15,6 +15,7 @@ public class WebSetting {
     private Browser             browser  = Browser.NONE;
     private Map<String, Object> capabilities;
     private CloudProviders      cloud    = CloudProviders.NONE;
+    private boolean             headless = true;
     private String              host     = "localhost";
     private String              password;
     private int                 port;
