@@ -6,13 +6,10 @@
     },
     "web": {
       "test1": {
-        "browser": "Chrome",
-        "userName": "",
-        "password": "",
-        "remoteUrl": ""
+        "browser": "CHROME"
       },
       "test2": {
-        "browser": "Safari"
+        "browser": "SAFARI"
       }
     },
     "android": {
@@ -52,9 +49,9 @@
     }
   },
   "api": {
-    "test_browserstack": {
-      "base_uri": "https://api.browserstack.com",
-      "base_path": "/automate",
+    "test_reqres": {
+      "base_uri": "https://reqres.in",
+      "base_path": "/api",
       "logging": {
         "request": true,
         "response": true

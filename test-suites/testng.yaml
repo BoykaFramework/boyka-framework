@@ -1,3 +1,4 @@
 name: Boyka Test Suite
 suiteFiles:
   - testng-api.yaml
+  - testng-web.yaml

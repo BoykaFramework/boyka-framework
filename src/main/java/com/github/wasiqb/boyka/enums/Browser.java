@@ -1,6 +1,6 @@
 package com.github.wasiqb.boyka.enums;
 
-public enum Browsers {
+public enum Browser {
     CHROME,
     EDGE,
     FIREFOX,

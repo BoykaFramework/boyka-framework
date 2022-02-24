@@ -1,4 +1,4 @@
-package com.github.wasiqb.boyka.config.android;
+package com.github.wasiqb.boyka.config.ui;
 
 import java.util.Map;
 

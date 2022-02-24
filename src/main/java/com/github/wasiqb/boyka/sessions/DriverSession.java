@@ -1,12 +1,9 @@
 package com.github.wasiqb.boyka.sessions;
 
-import static com.github.wasiqb.boyka.enums.Messages.APP_TYPE_NOT_SUPPORT_DRIVERS;
-import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static java.time.Duration.ofSeconds;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
-import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,20 +15,17 @@ public class DriverSession<D extends WebDriver> {
     private final FrameworkSetting setting;
     private       WebDriverWait    wait;
 
-    public DriverSession (final ApplicationType applicationType, final D driver) {
+    public DriverSession (final ApplicationType applicationType, final D driver, final FrameworkSetting setting) {
         this.applicationType = applicationType;
-        if (this.applicationType == ApplicationType.API) {
-            throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
-        }
+        this.setting = setting;
         this.driver = driver;
-        this.setting = loadSetting ();
         setDriverWaits ();
     }
 
     private void setDriverWaits () {
         final var playback = this.setting.getUi ()
             .getPlayback ();
-        final WebDriver.Timeouts timeouts = this.driver.manage ()
+        final var timeouts = this.driver.manage ()
             .timeouts ();
         timeouts.implicitlyWait (ofSeconds (playback.getImplicitWait ()));
         if (this.applicationType == ApplicationType.WEB) {

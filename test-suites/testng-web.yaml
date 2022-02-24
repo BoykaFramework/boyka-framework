@@ -1,0 +1,9 @@
+name: Web Test Suite
+tests:
+  - name: Test Web
+    preserveOrder: true
+    parameters:
+      appType: Web
+      driverKey: test1
+    classes:
+      - com.github.wasiqb.boyka.testng.web.TestWeb
