@@ -39,8 +39,6 @@ public final class ElementFinder {
                 return parent != null
                        ? parent.findElements (locator.getAndroid ())
                        : driver.findElements (locator.getAndroid ());
-            case API:
-                throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
             case IOS:
                 return parent != null
                        ? parent.findElements (locator.getIos ())
@@ -49,8 +47,10 @@ public final class ElementFinder {
                 return parent != null
                        ? parent.findElements (locator.getWeb ())
                        : driver.findElements (locator.getWeb ());
+            case API:
+            default:
+                throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
         }
-        return List.of ();
     }
 
     private ElementFinder () {

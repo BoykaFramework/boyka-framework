@@ -80,9 +80,10 @@ public class DriverManager {
     @SneakyThrows
     private URL getRemoteUrl (final WebSetting webSetting) {
         final var URL_PATTERN = "{0}://{1}/wd/hub";
-        var hostName = getHostName (webSetting);
+        final var hostName = new StringBuilder (getHostName (webSetting));
         if (webSetting.getPort () != 0) {
-            hostName = format ("{0}:{1}", hostName, webSetting.getPort ());
+            hostName.append (":")
+                .append (webSetting.getPort ());
         }
         final var url = format (URL_PATTERN, requireNonNull (webSetting.getProtocol (),
             format (PROTOCOL_REQUIRED_FOR_HOST.getMessage (), hostName)).name ()
@@ -143,6 +144,7 @@ public class DriverManager {
                 setDriver (this.applicationType, setupEdgeDriver (), this.setting);
                 break;
             case FIREFOX:
+            default:
                 setDriver (this.applicationType, setupFirefoxDriver (), this.setting);
                 break;
         }

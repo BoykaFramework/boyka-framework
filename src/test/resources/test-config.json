@@ -25,6 +25,16 @@
           "build": "Test BrowserStack Build",
           "name": "Test BrowserStack Session"
         }
+      },
+      "test3": {
+        "browser": "REMOTE",
+        "cloud": "NONE",
+        "port": "4444",
+        "capabilities": {
+          "browser": "Chrome",
+          "browser_version": "98",
+          "platform": "Linux"
+        }
       }
     },
     "android": {
