@@ -9,7 +9,7 @@
     <inceptionYear>2022</inceptionYear>
 
     <properties>
-        <suite-xml>test-suites/testng.yaml</suite-xml>
+        <suite-xml>test-suites/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <sonar.organization>wasiqbhamla</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
