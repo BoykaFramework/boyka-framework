@@ -6,13 +6,35 @@
     },
     "web": {
       "test1": {
-        "browser": "Chrome",
-        "userName": "",
-        "password": "",
-        "remoteUrl": ""
+        "browser": "CHROME"
       },
       "test2": {
-        "browser": "Safari"
+        "browser": "REMOTE",
+        "cloud": "BROWSER_STACK",
+        "protocol": "HTTPS",
+        "host": "hub-cloud.browserstack.com",
+        "user_name": "${env:CLOUD_USER}",
+        "password": "${env:CLOUD_KEY}",
+        "capabilities": {
+          "browser": "Chrome",
+          "browser_version": "latest",
+          "os": "Windows",
+          "os_version": "10",
+          "resolution": "1920x1080",
+          "project": "Test Boyka Project",
+          "build": "Test BrowserStack Build",
+          "name": "Test BrowserStack Session"
+        }
+      },
+      "test3": {
+        "browser": "REMOTE",
+        "cloud": "NONE",
+        "port": "4444",
+        "capabilities": {
+          "browserName": "chrome",
+          "version": "77.0.3865.75",
+          "platform": "LINUX"
+        }
       }
     },
     "android": {
@@ -52,9 +74,9 @@
     }
   },
   "api": {
-    "test_browserstack": {
-      "base_uri": "https://api.browserstack.com",
-      "base_path": "/automate",
+    "test_reqres": {
+      "base_uri": "https://reqres.in",
+      "base_path": "/api",
       "logging": {
         "request": true,
         "response": true

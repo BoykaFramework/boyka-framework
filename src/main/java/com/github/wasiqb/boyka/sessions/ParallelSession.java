@@ -1,5 +1,6 @@
 package com.github.wasiqb.boyka.sessions;
 
+import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.openqa.selenium.WebDriver;
 
@@ -12,12 +13,17 @@ public final class ParallelSession {
 
     @SuppressWarnings ("unchecked")
     public static <D extends WebDriver> D getDriver () {
-        return (D) SESSION.get ()
-            .getDriver ();
+        return (D) getSession ().getDriver ();
     }
 
-    public static <D extends WebDriver> void setDriver (final ApplicationType applicationType, final D driver) {
-        SESSION.set (new DriverSession<> (applicationType, driver));
+    @SuppressWarnings ("unchecked")
+    public static <D extends WebDriver> DriverSession<D> getSession () {
+        return (DriverSession<D>) SESSION.get ();
+    }
+
+    public static <D extends WebDriver> void setDriver (final ApplicationType applicationType, final D driver,
+        final FrameworkSetting setting) {
+        SESSION.set (new DriverSession<> (applicationType, driver, setting));
     }
 
     private ParallelSession () {

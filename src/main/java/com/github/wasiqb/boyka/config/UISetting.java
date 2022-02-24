@@ -6,7 +6,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Map;
 
-import com.github.wasiqb.boyka.config.android.MobileSetting;
+import com.github.wasiqb.boyka.config.ui.MobileSetting;
+import com.github.wasiqb.boyka.config.ui.WebSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class UISetting {
     private Map<String, MobileSetting> android;
     private Map<String, MobileSetting> ios;
     private PlaybackSetting            playback;
+    private Map<String, WebSetting>    web;
 
     public MobileSetting getMobileSetting (final ApplicationType applicationType, final String key) {
         if (applicationType == ApplicationType.IOS) {
@@ -24,5 +26,9 @@ public class UISetting {
             return requireNonNull (this.android.get (key));
         }
         throw new FrameworkError (format (INVALID_PLATFORM_FOR_OPERATION.getMessage (), applicationType));
+    }
+
+    public WebSetting getWebSetting (final String key) {
+        return this.web.get (key);
     }
 }
