@@ -14,21 +14,17 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.utils;
+package com.github.wasiqb.boyka.builders;
 
-import org.apache.commons.text.StringSubstitutor;
+import lombok.Builder;
+import lombok.Getter;
+import org.openqa.selenium.By;
 
-public final class StringUtils {
-    public static String interpolate (final String value) {
-        if (value.startsWith ("${")) {
-            final StringSubstitutor substitute = StringSubstitutor.createInterpolator ();
-            substitute.setEnableSubstitutionInVariables (true);
-            return substitute.replace (value);
-        }
-        return value;
-    }
-
-    private StringUtils () {
-        // Utility class
-    }
+@Getter
+@Builder (builderMethodName = "createLocator", buildMethodName = "create")
+public class Locator {
+    private By      android;
+    private By      ios;
+    private Locator parent;
+    private By      web;
 }
