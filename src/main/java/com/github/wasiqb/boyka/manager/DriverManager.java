@@ -6,8 +6,8 @@ import static com.github.wasiqb.boyka.enums.Messages.INVALID_BROWSER;
 import static com.github.wasiqb.boyka.enums.Messages.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Messages.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Messages.USER_NAME_REQUIRED_FOR_CLOUD;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.clear;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getDriver;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
@@ -54,8 +54,9 @@ public class DriverManager {
     }
 
     public void close () {
-        getDriver ().quit ();
-        clear ();
+        getSession ().getDriver ()
+            .quit ();
+        clearSession ();
     }
 
     private Capabilities getCapabilities (final WebSetting webSetting) {

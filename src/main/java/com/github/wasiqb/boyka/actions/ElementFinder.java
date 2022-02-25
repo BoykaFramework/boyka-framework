@@ -1,7 +1,6 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.enums.Messages.APP_TYPE_NOT_SUPPORT_DRIVERS;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public final class ElementFinder {
     }
 
     public static List<WebElement> finds (final Locator locator) {
-        final var driver = getDriver ();
+        final var driver = getSession ().getDriver ();
         final List<WebElement> element;
         if (locator.getParent () != null) {
             final var parent = find (locator.getParent ());

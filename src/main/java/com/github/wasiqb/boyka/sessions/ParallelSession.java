@@ -7,13 +7,8 @@ import org.openqa.selenium.WebDriver;
 public final class ParallelSession {
     private static final ThreadLocal<DriverSession<? extends WebDriver>> SESSION = new ThreadLocal<> ();
 
-    public static void clear () {
+    public static void clearSession () {
         SESSION.remove ();
-    }
-
-    @SuppressWarnings ("unchecked")
-    public static <D extends WebDriver> D getDriver () {
-        return (D) getSession ().getDriver ();
     }
 
     @SuppressWarnings ("unchecked")

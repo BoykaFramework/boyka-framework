@@ -1,6 +1,6 @@
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.actions.ElementFinder.find;
+import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.google.common.truth.Truth.assertThat;
 
 import java.util.function.Predicate;
@@ -20,7 +20,7 @@ public final class VerifyAction {
 
     private static BooleanSubject verifyElementBooleanAttribute (final Predicate<WebElement> actual,
         final Locator locator) {
-        return assertThat (actual.test (find (locator)));
+        return assertThat (getElementAttribute (actual::test, locator));
     }
 
     private VerifyAction () {
