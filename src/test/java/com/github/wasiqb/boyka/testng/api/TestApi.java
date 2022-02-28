@@ -23,8 +23,8 @@ public class TestApi {
     @Test
     public void testGetMethod () {
         final ApiManager response = ApiManager.createRequest ("test_reqres")
-            .pathParam ("userId", 2)
-            .get ("/users/{userId}");
+            .pathParam ("userId", "2")
+            .get ("/users/${userId}");
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyIntField ("data.id")

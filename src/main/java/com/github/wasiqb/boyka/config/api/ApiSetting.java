@@ -22,6 +22,9 @@ import lombok.Data;
 public class ApiSetting {
     private String         basePath;
     private String         baseUri;
+    private int            connectionTimeout;
     private LoggingSetting logging = new LoggingSetting ();
     private int            port;
+    private int            readTimeout;
+    private int            writeTimeout;
 }

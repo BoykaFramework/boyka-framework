@@ -61,6 +61,6 @@ public class JsonParser {
     }
 
     private JsonParser () {
-        // Util class.
+        // Utility class.
     }
 }

@@ -20,18 +20,20 @@ import lombok.Getter;
 
 @Getter
 public enum Messages {
+    APP_TYPE_NOT_SUPPORT_DRIVERS ("API application type does not support drivers..."),
+    CAPABILITIES_REQUIRED_FOR_REMOTE ("Capabilities required for remote execution..."),
+    ERROR_EXECUTING_REQUEST ("Error occurred while executing request..."),
+    CONTENT_TYPE_MOT_SET ("Content type must be set before setting request body..."),
+    ERROR_READING_FILE ("Error occurred reading file [{0}]..."),
+    ERROR_WRITING_FILE ("Error occurred writing file [{0}]..."),
+    HOSTNAME_REQUIRED_FOR_REMOTE ("Host name is required for remote driver execution..."),
+    INVALID_BROWSER ("NONE Browser type is not allowed for Web platform..."),
     INVALID_PLATFORM_FOR_OPERATION ("Platform [{0}] is not supported for this setting..."),
     NO_API_SETTINGS_FOUND ("No settings found for API for key {0}..."),
     NO_JSON_FILE_FOUND ("JSON file [{0}] not found..."),
-    ERROR_READING_FILE ("Error occurred reading file [{0}]..."),
-    ERROR_WRITING_FILE ("Error occurred writing file [{0}]..."),
-    CAPABILITIES_REQUIRED_FOR_REMOTE ("Capabilities required for remote execution..."),
-    PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host [{0}]..."),
-    USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution..."),
     PASSWORD_REQUIRED_FOR_CLOUD ("Password is required for cloud execution..."),
-    HOSTNAME_REQUIRED_FOR_REMOTE ("Host name is required for remote driver execution..."),
-    APP_TYPE_NOT_SUPPORT_DRIVERS ("API application type does not support drivers..."),
-    INVALID_BROWSER ("NONE Browser type is not allowed for Web platform...");
+    PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host [{0}]..."),
+    USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution...");
 
     private final String message;
 

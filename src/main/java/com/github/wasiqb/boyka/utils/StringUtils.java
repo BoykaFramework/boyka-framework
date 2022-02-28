@@ -16,12 +16,23 @@
 
 package com.github.wasiqb.boyka.utils;
 
+import java.util.Map;
+
 import org.apache.commons.text.StringSubstitutor;
 
 public final class StringUtils {
     public static String interpolate (final String value) {
         if (value.startsWith ("${")) {
             final StringSubstitutor substitute = StringSubstitutor.createInterpolator ();
+            substitute.setEnableSubstitutionInVariables (true);
+            return substitute.replace (value);
+        }
+        return value;
+    }
+
+    public static String interpolate (final String value, final Map<String, String> valuesMap) {
+        if (value.contains ("${")) {
+            final StringSubstitutor substitute = new StringSubstitutor (valuesMap);
             substitute.setEnableSubstitutionInVariables (true);
             return substitute.replace (value);
         }
