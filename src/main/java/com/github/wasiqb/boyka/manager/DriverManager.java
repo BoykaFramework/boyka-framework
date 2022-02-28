@@ -1,3 +1,19 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2022 Wasiq Bhamla
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.Messages.CAPABILITIES_REQUIRED_FOR_REMOTE;
@@ -6,8 +22,8 @@ import static com.github.wasiqb.boyka.enums.Messages.INVALID_BROWSER;
 import static com.github.wasiqb.boyka.enums.Messages.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Messages.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Messages.USER_NAME_REQUIRED_FOR_CLOUD;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.clear;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getDriver;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
@@ -36,7 +52,28 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-public class DriverManager {
+/**
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
+public final class DriverManager {
+    /**
+     * Closes the driver instance and clears driver session.
+     */
+    public static void closeDriver () {
+        getSession ().getDriver ()
+            .quit ();
+        clearSession ();
+    }
+
+    /**
+     * Creates driver instance.
+     *
+     * @param applicationType the application type
+     * @param driverKey the driver config key
+     *
+     * @return the driver instance
+     */
     public static DriverManager createDriver (final ApplicationType applicationType, final String driverKey) {
         final var instance = new DriverManager (applicationType, driverKey);
         instance.setupDriver ();
@@ -51,11 +88,6 @@ public class DriverManager {
         this.applicationType = applicationType;
         this.driverKey = driverKey;
         this.setting = loadSetting ();
-    }
-
-    public void close () {
-        getDriver ().quit ();
-        clear ();
     }
 
     private Capabilities getCapabilities (final WebSetting webSetting) {

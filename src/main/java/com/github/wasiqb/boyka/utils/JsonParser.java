@@ -1,3 +1,19 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2022 Wasiq Bhamla
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 package com.github.wasiqb.boyka.utils;
 
 import static com.github.wasiqb.boyka.enums.Messages.ERROR_READING_FILE;
@@ -17,6 +33,12 @@ import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * Parser class to read and write json files.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 public class JsonParser {
     private static final Gson GSON;
 
@@ -25,6 +47,15 @@ public class JsonParser {
             .create ();
     }
 
+    /**
+     * Reads the JSON file.
+     *
+     * @param filePath the file path to be read
+     * @param objectClass the class of the object where data will be saved
+     * @param <T> the type of the object
+     *
+     * @return the object instance
+     */
     @SuppressWarnings ("UnstableApiUsage")
     public static <T> T fromFile (final String filePath, final Class<T> objectClass) {
         final var path = requireNonNull (SettingUtils.class.getClassLoader ()
@@ -36,6 +67,13 @@ public class JsonParser {
         }
     }
 
+    /**
+     * Writes the object to the JSON file.
+     *
+     * @param data the object to be written
+     * @param filePath the file path to be written
+     * @param <T> the type of the object
+     */
     public static <T> void toFile (final T data, final String filePath) {
         try (final FileWriter writer = new FileWriter (filePath)) {
             GSON.toJson (data, writer);
@@ -45,6 +83,6 @@ public class JsonParser {
     }
 
     private JsonParser () {
-        // Util class.
+        // Utility class.
     }
 }

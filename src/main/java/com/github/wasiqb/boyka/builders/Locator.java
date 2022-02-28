@@ -14,31 +14,23 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.exception;
+package com.github.wasiqb.boyka.builders;
+
+import lombok.Builder;
+import lombok.Getter;
+import org.openqa.selenium.By;
 
 /**
- * Common Framework specific Error.
+ * UI application locator.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 25-Feb-2022
  */
-public class FrameworkError extends Error {
-    /**
-     * Framework Error with only message.
-     *
-     * @param message Error message
-     */
-    public FrameworkError (final String message) {
-        super (message);
-    }
-
-    /**
-     * Framework Error with message and cause.
-     *
-     * @param message Error message
-     * @param cause Error cause
-     */
-    public FrameworkError (final String message, final Throwable cause) {
-        super (message, cause);
-    }
+@Getter
+@Builder (builderMethodName = "createLocator", buildMethodName = "create")
+public class Locator {
+    private By      android;
+    private By      ios;
+    private Locator parent;
+    private By      web;
 }

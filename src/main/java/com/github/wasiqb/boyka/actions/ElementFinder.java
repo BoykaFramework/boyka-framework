@@ -1,23 +1,58 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2022 Wasiq Bhamla
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.enums.Messages.APP_TYPE_NOT_SUPPORT_DRIVERS;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 
 import java.util.List;
 
+import com.github.wasiqb.boyka.builders.Locator;
 import com.github.wasiqb.boyka.exception.FrameworkError;
-import com.github.wasiqb.boyka.pages.Locator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Finds element on UI.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 public final class ElementFinder {
+    /**
+     * Find single element on UI.
+     *
+     * @param locator {@link Locator} to find element
+     *
+     * @return {@link WebElement}
+     */
     public static WebElement find (final Locator locator) {
         return finds (locator).get (0);
     }
 
+    /**
+     * Find all elements on UI.
+     *
+     * @param locator {@link Locator} to find elements
+     *
+     * @return {@link List} of {@link WebElement}
+     */
     public static List<WebElement> finds (final Locator locator) {
-        final var driver = getDriver ();
+        final var driver = getSession ().getDriver ();
         final List<WebElement> element;
         if (locator.getParent () != null) {
             final var parent = find (locator.getParent ());
