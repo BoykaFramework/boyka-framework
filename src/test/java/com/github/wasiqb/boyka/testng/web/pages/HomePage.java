@@ -22,12 +22,27 @@ import static org.openqa.selenium.By.id;
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
+/**
+ * Home page object for Sauce demo application.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 @Getter
 public class HomePage {
+    /**
+     * Home page instance.
+     *
+     * @return {@link HomePage}
+     */
     public static HomePage homePage () {
         return new HomePage ();
     }
 
     private final Locator menuButton = createLocator ().web (id ("react-burger-menu-btn"))
         .create ();
+
+    private HomePage () {
+        // Avoid explicit class initialisation
+    }
 }

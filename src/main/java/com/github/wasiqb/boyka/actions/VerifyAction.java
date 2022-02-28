@@ -25,11 +25,26 @@ import com.github.wasiqb.boyka.builders.Locator;
 import com.google.common.truth.BooleanSubject;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Verification class for verifying the UI attributes.
+ *
+ * @author Wasiq Bhamla
+ */
 public final class VerifyAction {
+    /**
+     * Verify if element is displayed.
+     *
+     * @param locator locator of element
+     */
     public static void verifyElementDisplayed (final Locator locator) {
         verifyElementBooleanAttribute (WebElement::isDisplayed, locator).isTrue ();
     }
 
+    /**
+     * Verify if element is not displayed.
+     *
+     * @param locator locator of element
+     */
     public static void verifyElementNotDisplayed (final Locator locator) {
         verifyElementBooleanAttribute (WebElement::isDisplayed, locator).isFalse ();
     }

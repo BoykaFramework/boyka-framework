@@ -18,6 +18,12 @@ package com.github.wasiqb.boyka.config.api;
 
 import lombok.Data;
 
+/**
+ * API setting class.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 @Data
 public class ApiSetting {
     private String         basePath;

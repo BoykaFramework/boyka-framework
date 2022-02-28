@@ -26,6 +26,12 @@ import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.Protocol;
 import lombok.Data;
 
+/**
+ * Web settings.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 @Data
 public class WebSetting {
     private Browser             browser  = Browser.NONE;
@@ -38,10 +44,20 @@ public class WebSetting {
     private Protocol            protocol = HTTP;
     private String              userName;
 
+    /**
+     * Gets cloud password.
+     *
+     * @return the cloud password
+     */
     public String getPassword () {
         return interpolate (this.password);
     }
 
+    /**
+     * Gets cloud user name.
+     *
+     * @return the cloud username.
+     */
     public String getUserName () {
         return interpolate (this.userName);
     }

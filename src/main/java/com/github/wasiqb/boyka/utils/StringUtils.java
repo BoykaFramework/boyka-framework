@@ -20,7 +20,21 @@ import java.util.Map;
 
 import org.apache.commons.text.StringSubstitutor;
 
+/**
+ * String utils.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 public final class StringUtils {
+    /**
+     * Replace all variables in the given string with the values from system environment variables, system properties,
+     * etc.
+     *
+     * @param value String to be interpolated
+     *
+     * @return Interpolated string
+     */
     public static String interpolate (final String value) {
         if (value.startsWith ("${")) {
             final StringSubstitutor substitute = StringSubstitutor.createInterpolator ();
@@ -30,6 +44,14 @@ public final class StringUtils {
         return value;
     }
 
+    /**
+     * Replace all the variables in the given string with the values from the specified map.
+     *
+     * @param value String to be interpolated
+     * @param valuesMap Map of values to lookup for variables
+     *
+     * @return Interpolated string
+     */
     public static String interpolate (final String value, final Map<String, String> valuesMap) {
         if (value.contains ("${")) {
             final StringSubstitutor substitute = new StringSubstitutor (valuesMap);

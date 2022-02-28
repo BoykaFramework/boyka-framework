@@ -19,8 +19,30 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import org.openqa.selenium.WebElement;
 
+/**
+ * Perform Keyboard actions.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 public final class KeyboardActions {
+    /**
+     * Clear text from text field.
+     *
+     * @param locator {@link Locator} of text field
+     */
+    public static void clearText (final Locator locator) {
+        performElementAction (WebElement::clear, locator);
+    }
+
+    /**
+     * Enter text in text field.
+     *
+     * @param locator {@link Locator} of text field
+     * @param text text to enter
+     */
     public static void enterText (final Locator locator, final String text) {
         performElementAction (e -> e.sendKeys (text), locator);
     }

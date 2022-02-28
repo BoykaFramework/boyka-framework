@@ -16,7 +16,19 @@
 
 package com.github.wasiqb.boyka.enums;
 
+/**
+ * Supported protocol types.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 public enum Protocol {
+    /**
+     * HTTP protocol.
+     */
     HTTP,
+    /**
+     * HTTPS protocol.
+     */
     HTTPS
 }

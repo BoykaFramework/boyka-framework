@@ -24,6 +24,14 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Driver session class containing everything needed to handle current session.
+ *
+ * @param <D> {@link WebDriver}
+ *
+ * @author Wasiq Bhamla
+ * @since 19-Feb-2022
+ */
 @Getter
 public class DriverSession<D extends WebDriver> {
     private final ApplicationType  applicationType;
@@ -31,6 +39,13 @@ public class DriverSession<D extends WebDriver> {
     private final FrameworkSetting setting;
     private       WebDriverWait    wait;
 
+    /**
+     * Driver session constructor.
+     *
+     * @param applicationType {@link ApplicationType}
+     * @param driver Generic type of {@link WebDriver}
+     * @param setting {@link FrameworkSetting} instance
+     */
     public DriverSession (final ApplicationType applicationType, final D driver, final FrameworkSetting setting) {
         this.applicationType = applicationType;
         this.setting = setting;

@@ -20,9 +20,20 @@ import static com.github.wasiqb.boyka.utils.JsonParser.fromFile;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 
+/**
+ * Utility class to ready config JSON file.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 public final class SettingUtils {
     private static FrameworkSetting frameworkSetting;
 
+    /**
+     * Loads the config JSON file only once.
+     *
+     * @return {@link FrameworkSetting}
+     */
     public static FrameworkSetting loadSetting () {
         if (frameworkSetting == null) {
             frameworkSetting = fromFile ("test-config.json", FrameworkSetting.class);

@@ -22,8 +22,19 @@ import static org.openqa.selenium.By.id;
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
+/**
+ * Login page object for Sauce demo application.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 @Getter
 public class LoginPage {
+    /**
+     * Login page object.
+     *
+     * @return {@link LoginPage}
+     */
     public static LoginPage loginPage () {
         return new LoginPage ();
     }
@@ -39,4 +50,8 @@ public class LoginPage {
     private final Locator username    = createLocator ().web (id ("user-name"))
         .parent (this.loginBox)
         .create ();
+
+    private LoginPage () {
+        // Avoid explicit class initialisation.
+    }
 }

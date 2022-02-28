@@ -25,11 +25,24 @@ import java.util.Map;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
 import lombok.Data;
 
+/**
+ * Framework setting.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 @Data
 public class FrameworkSetting {
     private Map<String, ApiSetting> api;
     private UISetting               ui;
 
+    /**
+     * Get API setting.
+     *
+     * @param key API config key
+     *
+     * @return {@link ApiSetting} instance
+     */
     public ApiSetting getApiSetting (final String key) {
         return requireNonNull (this.api.get (key), format (NO_API_SETTINGS_FOUND.getMessage (), key));
     }

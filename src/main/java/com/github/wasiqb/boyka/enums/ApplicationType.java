@@ -16,9 +16,27 @@
 
 package com.github.wasiqb.boyka.enums;
 
+/**
+ * Supported application types.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 public enum ApplicationType {
+    /**
+     * Android application.
+     */
     ANDROID,
+    /**
+     * API application.
+     */
     API,
+    /**
+     * iOS application.
+     */
     IOS,
+    /**
+     * Web application.
+     */
     WEB
 }

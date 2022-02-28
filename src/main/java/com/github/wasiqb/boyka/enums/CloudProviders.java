@@ -16,8 +16,24 @@
 
 package com.github.wasiqb.boyka.enums;
 
+/**
+ * Supported cloud providers.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 public enum CloudProviders {
+    /**
+     * BrowserStack.
+     */
     BROWSER_STACK,
-    SAUCE_LABS,
-    NONE
+    /**
+     * None.
+     */
+    NONE,
+    /**
+     * Sauce Labs.
+     */
+    SAUCE_LABS
+
 }

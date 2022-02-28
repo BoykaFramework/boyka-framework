@@ -21,11 +21,27 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 
 import org.openqa.selenium.WebDriver;
 
+/**
+ * Device / Browser specific actions.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 public final class DriverActions {
+    /**
+     * Navigate to url on browser.
+     *
+     * @param url url to navigate to
+     */
     public static void navigateTo (final String url) {
         performDriverAction (driver -> driver.get (url));
     }
 
+    /**
+     * Title of the browser.
+     *
+     * @return title of the browser
+     */
     public static String title () {
         return getDriverAttribute (WebDriver::getTitle);
     }

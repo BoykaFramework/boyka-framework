@@ -16,11 +16,35 @@
 
 package com.github.wasiqb.boyka.enums;
 
+/**
+ * Supported browsers.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 public enum Browser {
+    /**
+     * Chrome browser.
+     */
     CHROME,
+    /**
+     * Edge browser.
+     */
     EDGE,
+    /**
+     * Firefox browser.
+     */
     FIREFOX,
+    /**
+     * No browser.
+     */
     NONE,
+    /**
+     * Remote Grid / cloud browser.
+     */
     REMOTE,
+    /**
+     * Safari browser.
+     */
     SAFARI
 }

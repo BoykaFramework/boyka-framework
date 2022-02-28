@@ -26,11 +26,31 @@ import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Finds element on UI.
+ *
+ * @author Wasiq Bhamla
+ * @since 24-Feb-2022
+ */
 public final class ElementFinder {
+    /**
+     * Find single element on UI.
+     *
+     * @param locator {@link Locator} to find element
+     *
+     * @return {@link WebElement}
+     */
     public static WebElement find (final Locator locator) {
         return finds (locator).get (0);
     }
 
+    /**
+     * Find all elements on UI.
+     *
+     * @param locator {@link Locator} to find elements
+     *
+     * @return {@link List} of {@link WebElement}
+     */
     public static List<WebElement> finds (final Locator locator) {
         final var driver = getSession ().getDriver ();
         final List<WebElement> element;

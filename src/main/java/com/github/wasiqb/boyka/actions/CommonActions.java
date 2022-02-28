@@ -26,20 +26,56 @@ import com.github.wasiqb.boyka.builders.Locator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Common action methods to perform different actions on devices / browsers and on elements.
+ *
+ * @author Wasiq Bhamla
+ * @since 25-Feb-2022
+ */
 @SuppressWarnings ("unchecked")
 final class CommonActions {
+    /**
+     * Gets driver specific attributes.
+     *
+     * @param action action to get driver specific attributes
+     * @param <D> driver type
+     * @param <E> attribute type
+     *
+     * @return driver specific attribute.
+     */
     public static <D extends WebDriver, E> E getDriverAttribute (final Function<D, E> action) {
         return action.apply ((D) getSession ().getDriver ());
     }
 
+    /**
+     * Gets element specific attributes.
+     *
+     * @param action action to get element specific attributes
+     * @param locator locator to find element
+     * @param <E> attribute type
+     *
+     * @return element specific attribute.
+     */
     public static <E> E getElementAttribute (final Function<WebElement, E> action, final Locator locator) {
         return action.apply (find (locator));
     }
 
+    /**
+     * Perform driver specific action.
+     *
+     * @param action action to perform
+     * @param <D> driver type
+     */
     public static <D extends WebDriver> void performDriverAction (final Consumer<D> action) {
         action.accept ((D) getSession ().getDriver ());
     }
 
+    /**
+     * Perform element specific action.
+     *
+     * @param action action to perform
+     * @param locator locator to find element
+     */
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
         action.accept (find (locator));
     }

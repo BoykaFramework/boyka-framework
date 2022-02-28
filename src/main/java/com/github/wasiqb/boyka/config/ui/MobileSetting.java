@@ -20,6 +20,12 @@ import java.util.Map;
 
 import lombok.Data;
 
+/**
+ * Mobile settings.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 @Data
 public class MobileSetting {
     private Map<String, Object> capabilities;

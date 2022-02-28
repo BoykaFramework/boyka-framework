@@ -28,6 +28,10 @@ import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Data;
 
+/**
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 @Data
 public class UISetting {
     private Map<String, MobileSetting> android;
@@ -35,6 +39,14 @@ public class UISetting {
     private PlaybackSetting            playback;
     private Map<String, WebSetting>    web;
 
+    /**
+     * Gets the mobile setting.
+     *
+     * @param applicationType the {@link ApplicationType}
+     * @param key the config key for Mobile
+     *
+     * @return the {@link MobileSetting}
+     */
     public MobileSetting getMobileSetting (final ApplicationType applicationType, final String key) {
         if (applicationType == ApplicationType.IOS) {
             return requireNonNull (this.ios.get (key));
@@ -44,6 +56,13 @@ public class UISetting {
         throw new FrameworkError (format (INVALID_PLATFORM_FOR_OPERATION.getMessage (), applicationType));
     }
 
+    /**
+     * Gets the web setting.
+     *
+     * @param key the config key for Web
+     *
+     * @return the {@link WebSetting}
+     */
     public WebSetting getWebSetting (final String key) {
         return this.web.get (key);
     }

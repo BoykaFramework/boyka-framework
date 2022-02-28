@@ -20,6 +20,12 @@ import lombok.Builder;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+/**
+ * UI application locator.
+ *
+ * @author Wasiq Bhamla
+ * @since 25-Feb-2022
+ */
 @Getter
 @Builder (builderMethodName = "createLocator", buildMethodName = "create")
 public class Locator {

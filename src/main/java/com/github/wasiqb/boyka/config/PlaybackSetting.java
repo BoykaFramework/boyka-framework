@@ -18,6 +18,12 @@ package com.github.wasiqb.boyka.config;
 
 import lombok.Data;
 
+/**
+ * Playback setting.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 @Data
 public class PlaybackSetting {
     private int explicitWait    = 10;

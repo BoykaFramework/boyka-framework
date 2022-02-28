@@ -52,7 +52,28 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-public class DriverManager {
+/**
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
+public final class DriverManager {
+    /**
+     * Closes the driver instance and clears driver session.
+     */
+    public static void closeDriver () {
+        getSession ().getDriver ()
+            .quit ();
+        clearSession ();
+    }
+
+    /**
+     * Creates driver instance.
+     *
+     * @param applicationType the application type
+     * @param driverKey the driver config key
+     *
+     * @return the driver instance
+     */
     public static DriverManager createDriver (final ApplicationType applicationType, final String driverKey) {
         final var instance = new DriverManager (applicationType, driverKey);
         instance.setupDriver ();
@@ -67,12 +88,6 @@ public class DriverManager {
         this.applicationType = applicationType;
         this.driverKey = driverKey;
         this.setting = loadSetting ();
-    }
-
-    public void close () {
-        getSession ().getDriver ()
-            .quit ();
-        clearSession ();
     }
 
     private Capabilities getCapabilities (final WebSetting webSetting) {

@@ -33,6 +33,12 @@ import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * Parser class to read and write json files.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 public class JsonParser {
     private static final Gson GSON;
 
@@ -41,6 +47,15 @@ public class JsonParser {
             .create ();
     }
 
+    /**
+     * Reads the JSON file.
+     *
+     * @param filePath the file path to be read
+     * @param objectClass the class of the object where data will be saved
+     * @param <T> the type of the object
+     *
+     * @return the object instance
+     */
     @SuppressWarnings ("UnstableApiUsage")
     public static <T> T fromFile (final String filePath, final Class<T> objectClass) {
         final var path = requireNonNull (SettingUtils.class.getClassLoader ()
@@ -52,6 +67,13 @@ public class JsonParser {
         }
     }
 
+    /**
+     * Writes the object to the JSON file.
+     *
+     * @param data the object to be written
+     * @param filePath the file path to be written
+     * @param <T> the type of the object
+     */
     public static <T> void toFile (final T data, final String filePath) {
         try (final FileWriter writer = new FileWriter (filePath)) {
             GSON.toJson (data, writer);

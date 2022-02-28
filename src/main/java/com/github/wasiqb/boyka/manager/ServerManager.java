@@ -22,7 +22,7 @@ import com.github.wasiqb.boyka.config.ui.MobileSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
-public class ServerManager {
+public final class ServerManager {
     private       AppiumServiceBuilder builder;
     private final MobileSetting        setting;
 

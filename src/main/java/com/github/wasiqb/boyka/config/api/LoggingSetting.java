@@ -18,6 +18,12 @@ package com.github.wasiqb.boyka.config.api;
 
 import lombok.Data;
 
+/**
+ * Logging settings.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 @Data
 public class LoggingSetting {
     private boolean request  = true;

@@ -20,18 +20,42 @@ import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.openqa.selenium.WebDriver;
 
+/**
+ * Session class that supports parallel execution.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
 public final class ParallelSession {
     private static final ThreadLocal<DriverSession<? extends WebDriver>> SESSION = new ThreadLocal<> ();
 
+    /**
+     * Clears current session in thread.
+     */
     public static void clearSession () {
         SESSION.remove ();
     }
 
+    /**
+     * Gets current session in thread.
+     *
+     * @param <D> the generic WebDriver type
+     *
+     * @return {@link DriverSession}
+     */
     @SuppressWarnings ("unchecked")
     public static <D extends WebDriver> DriverSession<D> getSession () {
         return (DriverSession<D>) SESSION.get ();
     }
 
+    /**
+     * Sets current session in thread.
+     *
+     * @param applicationType the application type
+     * @param driver the driver instance
+     * @param setting the setting instance
+     * @param <D> the generic WebDriver type
+     */
     public static <D extends WebDriver> void setDriver (final ApplicationType applicationType, final D driver,
         final FrameworkSetting setting) {
         SESSION.set (new DriverSession<> (applicationType, driver, setting));

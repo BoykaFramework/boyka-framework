@@ -46,9 +46,22 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiManager {
+/**
+ * API manager to handle all API request executions.
+ *
+ * @author Wasiq Bhamla
+ * @since 17-Feb-2022
+ */
+public final class ApiManager {
     private static final String URL_PATTERN = "{0}{1}{2}";
 
+    /**
+     * Create a new request.
+     *
+     * @param key API config key
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public static ApiManager createRequest (final String key) {
         return new ApiManager (key);
     }
@@ -72,79 +85,191 @@ public class ApiManager {
         this.request = new Request.Builder ();
     }
 
+    /**
+     * Add request header.
+     *
+     * @param name Header name
+     * @param value Header value
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager addHeader (final String name, final String value) {
         this.request.header (name, value);
         return this;
     }
 
+    /**
+     * Add basic authentication for the request.
+     *
+     * @param userName User name
+     * @param password Password
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager basicAuth (final String userName, final String password) {
         final var credentials = basic (userName, password);
         addHeader ("Authorization", credentials);
         return this;
     }
 
+    /**
+     * Add request body.
+     *
+     * @param body Request body
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager body (final String body) {
         this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
         return this;
     }
 
+    /**
+     * Add request body from object.
+     *
+     * @param body Request body object
+     * @param <T> Request body type
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public <T> ApiManager body (final T body) {
         this.requestBody = create (body.toString (),
             requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
         return this;
     }
 
+    /**
+     * Set content type for request.
+     *
+     * @param contentType Content type
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager contentType (final String contentType) {
         this.mediaType = parse (contentType);
         return this;
     }
 
+    /**
+     * Execute the DELETE request.
+     *
+     * @param path Path for request
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager delete (final String path) {
         this.request.delete (this.requestBody);
         return getResponse (path);
     }
 
+    /**
+     * Execute the GET request.
+     *
+     * @param path Path for request
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager get (final String path) {
         this.request.get ();
         return getResponse (path);
     }
 
+    /**
+     * Execute the PATCH request.
+     *
+     * @param path Path for request
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager patch (final String path) {
         this.request.patch (this.requestBody);
         return getResponse (path);
     }
 
+    /**
+     * Add path params for request.
+     *
+     * @param param Path param name
+     * @param value Path param value
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager pathParam (final String param, final String value) {
         this.pathParams.put (param, value);
         return this;
     }
 
+    /**
+     * Execute the POST request.
+     *
+     * @param path Path for request
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager post (final String path) {
         this.request.post (this.requestBody);
         return getResponse (path);
     }
 
+    /**
+     * Execute the PUT request.
+     *
+     * @param path Path for request
+     *
+     * @return Instance of {@link ApiManager}
+     */
     public ApiManager put (final String path) {
         this.request.put (this.requestBody);
         return getResponse (path);
     }
 
+    /**
+     * Verify boolean field in request body
+     *
+     * @param expression JsonPath expression
+     *
+     * @return {@link BooleanSubject} instance
+     */
     public BooleanSubject verifyBooleanField (final String expression) {
         return assertThat (this.jsonPath.read (compile (expression), Boolean.class));
     }
 
+    /**
+     * Verify integer field in request body
+     *
+     * @param expression JsonPath expression
+     *
+     * @return {@link IntegerSubject} instance
+     */
     public IntegerSubject verifyIntField (final String expression) {
         return assertThat (this.jsonPath.read (compile (expression), Integer.class));
     }
 
+    /**
+     * Verify status code in response.
+     *
+     * @return {@link IntegerSubject} instance
+     */
     public IntegerSubject verifyStatusCode () {
         return assertThat (this.response.code ());
     }
 
+    /**
+     * Verify status message in response.
+     *
+     * @return {@link StringSubject} instance
+     */
     public StringSubject verifyStatusMessage () {
         return assertThat (this.response.message ());
     }
 
+    /**
+     * Verify string field in request body
+     *
+     * @param expression JsonPath expression
+     *
+     * @return {@link StringSubject} instance
+     */
     public StringSubject verifyTextField (final String expression) {
         return assertThat (this.jsonPath.read (compile (expression))
             .toString ());
