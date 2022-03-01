@@ -2,7 +2,9 @@
   "ui": {
     "playback": {
       "implicit_wait": 10,
-      "explicit_wait": 30
+      "explicit_wait": 10,
+      "page_load_timeout": 30,
+      "script_timeout": 10
     },
     "web": {
       "test1": {
