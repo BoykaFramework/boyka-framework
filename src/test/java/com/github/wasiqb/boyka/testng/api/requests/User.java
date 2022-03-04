@@ -26,7 +26,7 @@ import lombok.Getter;
  * @since 04-Mar-2022
  */
 @Getter
-@Builder
+@Builder (builderMethodName = "createUser", buildMethodName = "create")
 public class User {
     private final String job;
     private final String name;
