@@ -16,35 +16,39 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.ContentType.JSON;
+import static com.github.wasiqb.boyka.enums.Messages.AUTH_PASSWORD_REQUIRED;
 import static com.github.wasiqb.boyka.enums.Messages.CONTENT_TYPE_MOT_SET;
 import static com.github.wasiqb.boyka.enums.Messages.ERROR_EXECUTING_REQUEST;
+import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_RESPONSE_BODY;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
-import static com.google.common.truth.Truth.assertThat;
-import static com.jayway.jsonpath.JsonPath.compile;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNullElse;
 import static okhttp3.Credentials.basic;
 import static okhttp3.MediaType.parse;
 import static okhttp3.RequestBody.create;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.wasiqb.boyka.builders.ApiRequest;
+import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
+import com.github.wasiqb.boyka.enums.ContentType;
+import com.github.wasiqb.boyka.enums.RequestMethod;
 import com.github.wasiqb.boyka.exception.FrameworkError;
-import com.google.common.truth.BooleanSubject;
-import com.google.common.truth.IntegerSubject;
-import com.google.common.truth.StringSubject;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
+import com.github.wasiqb.boyka.utils.JsonParser;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * API manager to handle all API request executions.
@@ -56,24 +60,31 @@ public final class ApiManager {
     private static final String URL_PATTERN = "{0}{1}{2}";
 
     /**
-     * Create a new request.
+     * Execute API request.
      *
-     * @param key API config key
+     * @param request {@link ApiRequest} created instance
      *
-     * @return Instance of {@link ApiManager}
+     * @return {@link ApiResponse}
      */
-    public static ApiManager createRequest (final String key) {
-        return new ApiManager (key);
+    public static ApiResponse execute (final ApiRequest request) {
+        final var manager = new ApiManager (request.getConfigKey ());
+        requireNonNullElse (request.getHeaders (), new HashMap<String, String> ()).forEach (manager::addHeader);
+        requireNonNullElse (request.getPathParams (), new HashMap<String, String> ()).forEach (manager::pathParam);
+        return manager.contentType (request.getContentType ())
+            .basicAuth (request.getUserName (), request.getPassword ())
+            .body (requireNonNullElse (request.getBody (), EMPTY))
+            .body (request.getBodyObject ())
+            .method (request.getMethod ())
+            .getResponse (request.getPath ());
     }
 
     private final ApiSetting          apiSetting;
     private final OkHttpClient        client;
-    private       DocumentContext     jsonPath;
     private       MediaType           mediaType;
     private final Map<String, String> pathParams;
     private final Request.Builder     request;
     private       RequestBody         requestBody;
-    private       Response            response;
+    private       ApiResponse         response;
 
     private ApiManager (final String apiKey) {
         this.pathParams = new HashMap<> ();
@@ -85,209 +96,47 @@ public final class ApiManager {
         this.request = new Request.Builder ();
     }
 
-    /**
-     * Add request header.
-     *
-     * @param name Header name
-     * @param value Header value
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager addHeader (final String name, final String value) {
+    private void addHeader (final String name, final String value) {
         this.request.header (name, value);
+    }
+
+    private ApiManager basicAuth (final String userName, final String password) {
+        if (userName != null) {
+            final var credentials = basic (userName, requireNonNull (password, AUTH_PASSWORD_REQUIRED.getMessage ()));
+            addHeader ("Authorization", credentials);
+        }
         return this;
     }
 
-    /**
-     * Add basic authentication for the request.
-     *
-     * @param userName User name
-     * @param password Password
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager basicAuth (final String userName, final String password) {
-        final var credentials = basic (userName, password);
-        addHeader ("Authorization", credentials);
+    private <T> ApiManager body (final T body) {
+        if (body != null) {
+            this.requestBody = create (JsonParser.toString (body),
+                requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
+        }
         return this;
     }
 
-    /**
-     * Add request body.
-     *
-     * @param body Request body
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager body (final String body) {
+    private ApiManager body (final String body) {
         this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
         return this;
     }
 
-    /**
-     * Add request body from object.
-     *
-     * @param body Request body object
-     * @param <T> Request body type
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public <T> ApiManager body (final T body) {
-        this.requestBody = create (body.toString (),
-            requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
+    private ApiManager contentType (final ContentType contentType) {
+        this.mediaType = parse (requireNonNullElse (contentType, JSON).getType ());
         return this;
     }
 
-    /**
-     * Set content type for request.
-     *
-     * @param contentType Content type
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager contentType (final String contentType) {
-        this.mediaType = parse (contentType);
-        return this;
-    }
-
-    /**
-     * Execute the DELETE request.
-     *
-     * @param path Path for request
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager delete (final String path) {
-        this.request.delete (this.requestBody);
-        return getResponse (path);
-    }
-
-    /**
-     * Execute the GET request.
-     *
-     * @param path Path for request
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager get (final String path) {
-        this.request.get ();
-        return getResponse (path);
-    }
-
-    /**
-     * Execute the PATCH request.
-     *
-     * @param path Path for request
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager patch (final String path) {
-        this.request.patch (this.requestBody);
-        return getResponse (path);
-    }
-
-    /**
-     * Add path params for request.
-     *
-     * @param param Path param name
-     * @param value Path param value
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager pathParam (final String param, final String value) {
-        this.pathParams.put (param, value);
-        return this;
-    }
-
-    /**
-     * Execute the POST request.
-     *
-     * @param path Path for request
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager post (final String path) {
-        this.request.post (this.requestBody);
-        return getResponse (path);
-    }
-
-    /**
-     * Execute the PUT request.
-     *
-     * @param path Path for request
-     *
-     * @return Instance of {@link ApiManager}
-     */
-    public ApiManager put (final String path) {
-        this.request.put (this.requestBody);
-        return getResponse (path);
-    }
-
-    /**
-     * Verify boolean field in request body
-     *
-     * @param expression JsonPath expression
-     *
-     * @return {@link BooleanSubject} instance
-     */
-    public BooleanSubject verifyBooleanField (final String expression) {
-        return assertThat (this.jsonPath.read (compile (expression), Boolean.class));
-    }
-
-    /**
-     * Verify integer field in request body
-     *
-     * @param expression JsonPath expression
-     *
-     * @return {@link IntegerSubject} instance
-     */
-    public IntegerSubject verifyIntField (final String expression) {
-        return assertThat (this.jsonPath.read (compile (expression), Integer.class));
-    }
-
-    /**
-     * Verify status code in response.
-     *
-     * @return {@link IntegerSubject} instance
-     */
-    public IntegerSubject verifyStatusCode () {
-        return assertThat (this.response.code ());
-    }
-
-    /**
-     * Verify status message in response.
-     *
-     * @return {@link StringSubject} instance
-     */
-    public StringSubject verifyStatusMessage () {
-        return assertThat (this.response.message ());
-    }
-
-    /**
-     * Verify string field in request body
-     *
-     * @param expression JsonPath expression
-     *
-     * @return {@link StringSubject} instance
-     */
-    public StringSubject verifyTextField (final String expression) {
-        return assertThat (this.jsonPath.read (compile (expression))
-            .toString ());
-    }
-
-    private ApiManager getResponse (final String path) {
+    private ApiResponse getResponse (final String path) {
         try {
-            this.response = this.client.newCall (this.request.url (getUrl (path))
+            this.response = parseResponse (this.client.newCall (this.request.url (getUrl (path))
                     .build ())
-                .execute ();
-            this.jsonPath = JsonPath.parse (requireNonNull (this.response.body ()).string ());
-
+                .execute ());
             logRequest ();
             logResponse ();
         } catch (final IOException e) {
             throw new FrameworkError (ERROR_EXECUTING_REQUEST.getMessage (), e);
         }
-        return this;
+        return this.response;
     }
 
     private String getUrl (final String path) {
@@ -301,22 +150,68 @@ public final class ApiManager {
     private void logRequest () {
         if (this.apiSetting.getLogging ()
             .isRequest ()) {
-            final var req = this.response.request ();
-            System.out.println (req.url ());
-            System.out.println (req.body ());
-            req.headers ()
-                .forEach (System.out::println);
+            final var req = this.response.getRequest ();
+            System.out.println (req.getPath ());
+            System.out.println (req.getBody ());
         }
     }
 
     private void logResponse () {
         if (this.apiSetting.getLogging ()
             .isResponse ()) {
-            System.out.println (this.response.code ());
-            System.out.println (this.response.message ());
-            System.out.println (this.response.body ());
-            this.response.headers ()
-                .forEach (System.out::println);
+            System.out.println (this.response.getStatusCode ());
+            System.out.println (this.response.getStatusMessage ());
+            System.out.println (this.response.getBody ());
         }
+    }
+
+    private ApiManager method (final RequestMethod method) {
+        if (method != RequestMethod.GET) {
+            this.request.method (method.name (), requireNonNull (this.requestBody));
+        }
+        return this;
+    }
+
+    private ApiRequest parseRequest (final Request request) {
+        final var headers = new HashMap<String, String> ();
+        request.headers ()
+            .forEach (entry -> headers.put (entry.getFirst (), entry.getSecond ()));
+        return ApiRequest.createRequest ()
+            .body (requireNonNullElse (request.body (), EMPTY).toString ())
+            .method (RequestMethod.valueOf (request.method ()))
+            .headers (headers)
+            .path (request.url ()
+                .toString ())
+            .create ();
+    }
+
+    private ApiResponse parseResponse (final Response res) {
+        if (res == null) {
+            return null;
+        }
+        final var headers = new HashMap<String, String> ();
+        res.headers ()
+            .forEach (entry -> headers.put (entry.getFirst (), entry.getSecond ()));
+        try {
+            return ApiResponse.createResponse ()
+                .request (parseRequest (res.request ()))
+                .statusCode (res.code ())
+                .statusMessage (res.message ())
+                .sentRequestAt (res.sentRequestAtMillis ())
+                .headers (headers)
+                .networkResponse (parseResponse (res.networkResponse ()))
+                .previousResponse (parseResponse (res.priorResponse ()))
+                .receivedResponseAt (res.receivedResponseAtMillis ())
+                .body (requireNonNullElse (res.body (),
+                    ResponseBody.create (EMPTY, MediaType.parse (JSON.getType ()))).string ())
+                .create ();
+        } catch (final IOException e) {
+            throw new FrameworkError (ERROR_PARSING_RESPONSE_BODY.getMessage (), e);
+        }
+    }
+
+    private void pathParam (final String param, final String value) {
+        // TODO: Query Params: https://stackoverflow.com/a/43029045/5320558
+        this.pathParams.put (param, value);
     }
 }

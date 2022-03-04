@@ -82,6 +82,18 @@ public class JsonParser {
         }
     }
 
+    /**
+     * Converts the object to JSON.
+     *
+     * @param data the object to be converted
+     * @param <T> the type of the object
+     *
+     * @return the JSON string
+     */
+    public static <T> String toString (final T data) {
+        return GSON.toJson (data);
+    }
+
     private JsonParser () {
         // Utility class.
     }

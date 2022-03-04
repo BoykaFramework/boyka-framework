@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.manager;
 import static com.github.wasiqb.boyka.enums.Messages.CAPABILITIES_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Messages.HOSTNAME_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Messages.INVALID_BROWSER;
+import static com.github.wasiqb.boyka.enums.Messages.INVALID_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Messages.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Messages.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Messages.USER_NAME_REQUIRED_FOR_CLOUD;
@@ -34,6 +35,7 @@ import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
 import static java.util.Objects.requireNonNullElse;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
@@ -41,7 +43,6 @@ import com.github.wasiqb.boyka.config.ui.WebSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.exception.FrameworkError;
-import lombok.SneakyThrows;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -109,7 +110,6 @@ public final class DriverManager {
         return requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessage ());
     }
 
-    @SneakyThrows
     private URL getRemoteUrl (final WebSetting webSetting) {
         final var URL_PATTERN = "{0}://{1}/wd/hub";
         final var hostName = new StringBuilder (getHostName (webSetting));
@@ -120,7 +120,11 @@ public final class DriverManager {
         final var url = format (URL_PATTERN, requireNonNull (webSetting.getProtocol (),
             format (PROTOCOL_REQUIRED_FOR_HOST.getMessage (), hostName)).name ()
             .toLowerCase (), hostName);
-        return new URL (url);
+        try {
+            return new URL (url);
+        } catch (final MalformedURLException e) {
+            throw new FrameworkError (INVALID_REMOTE_URL.getMessage (), e);
+        }
     }
 
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
