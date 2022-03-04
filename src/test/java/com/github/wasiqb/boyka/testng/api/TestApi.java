@@ -16,9 +16,17 @@
 
 package com.github.wasiqb.boyka.testng.api;
 
-import static com.github.wasiqb.boyka.manager.ApiManager.createRequest;
+import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
+import static com.github.wasiqb.boyka.enums.RequestMethod.DELETE;
+import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
+import static com.github.wasiqb.boyka.enums.RequestMethod.PATCH;
+import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
+import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
 
+import com.github.wasiqb.boyka.builders.ApiRequest;
+import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.manager.ApiManager;
+import com.github.wasiqb.boyka.testng.api.requests.User;
 import org.testng.annotations.Test;
 
 /**
@@ -28,16 +36,126 @@ import org.testng.annotations.Test;
  * @since 19-Feb-2022
  */
 public class TestApi {
+    private static final String API_CONFIG_KEY = "test_reqres";
+
+    /**
+     * Method to test DELETE request.
+     */
+    @Test (description = "Test DELETE request", priority = 5)
+    public void testDeleteUser () {
+        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+            .method (DELETE)
+            .path ("/users/${userId}")
+            .pathParam ("userId", "2")
+            .create ();
+
+        ApiManager.execute (request)
+            .verifyStatusCode ()
+            .isEqualTo (204);
+    }
+
     /**
      * Method to test GET request.
      */
-    @Test (description = "Test GET request")
-    public void testGetMethod () {
-        final ApiManager response = createRequest ("test_reqres").pathParam ("userId", "2")
-            .get ("/users/${userId}");
+    @Test (description = "Test GET request", priority = 2)
+    public void testGetUser () {
+        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+            .method (GET)
+            .path ("/users/${userId}")
+            .pathParam ("userId", "2")
+            .create ();
+
+        final ApiResponse response = ApiManager.execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
-        response.verifyIntField ("data.id")
-            .isEqualTo (2);
+        response.verifyTextField ("data.first_name")
+            .isEqualTo ("Janet");
+        response.verifyTextField ("data.last_name")
+            .isEqualTo ("Weaver");
+    }
+
+    /**
+     * Method to test PATCH request.
+     */
+    @Test (description = "Test PATCH request", priority = 4)
+    public void testPatchUser () {
+        final User user = User.createUser ()
+            .name ("Wasiq")
+            .job ("Software Engineer")
+            .create ();
+
+        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+            .method (PATCH)
+            .path ("/users/${userId}")
+            .pathParam ("userId", "2")
+            .bodyObject (user)
+            .create ();
+
+        final ApiResponse response = ApiManager.execute (request);
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyTextField ("name")
+            .isEqualTo (user.getName ());
+        response.verifyTextField ("job")
+            .isEqualTo (user.getJob ());
+        response.verifyTextField ("updatedAt")
+            .isNotNull ();
+    }
+
+    /**
+     * Method to test PUT request.
+     */
+    @Test (description = "Test PUT request", priority = 3)
+    public void testPutUser () {
+        final User user = User.createUser ()
+            .name ("Wasiq")
+            .job ("Software Engineer")
+            .create ();
+
+        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+            .method (PUT)
+            .path ("/users/${userId}")
+            .pathParam ("userId", "2")
+            .bodyObject (user)
+            .create ();
+
+        final ApiResponse response = ApiManager.execute (request);
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyTextField ("name")
+            .isEqualTo (user.getName ());
+        response.verifyTextField ("job")
+            .isEqualTo (user.getJob ());
+        response.verifyTextField ("updatedAt")
+            .isNotNull ();
+    }
+
+    /**
+     * Method to test POST request.
+     */
+    @Test (description = "Test POST request for creating a new pet", priority = 1)
+    public void testUserCreation () {
+        final User user = User.createUser ()
+            .name ("Wasiq")
+            .job ("Software Engineer")
+            .create ();
+
+        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+            .method (POST)
+            .path ("/users")
+            .bodyObject (user)
+            .create ();
+
+        final ApiResponse response = ApiManager.execute (request);
+        response.verifyStatusCode ()
+            .isEqualTo (201);
+        response.verifyTextField ("id")
+            .isNotNull ();
+        response.verifyTextField ("name")
+            .isEqualTo (user.getName ());
+        response.verifyTextField ("job")
+            .isEqualTo (user.getJob ());
+        response.verifyTextField ("createdAt")
+            .isNotNull ();
     }
 }

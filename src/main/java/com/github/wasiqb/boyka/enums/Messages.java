@@ -31,6 +31,10 @@ public enum Messages {
      */
     APP_TYPE_NOT_SUPPORT_DRIVERS ("API application type does not support drivers..."),
     /**
+     * Basic auth password is empty.
+     */
+    AUTH_PASSWORD_REQUIRED ("Basic auth password is required..."),
+    /**
      * Remote execution requires capabilities
      */
     CAPABILITIES_REQUIRED_FOR_REMOTE ("Capabilities required for remote execution..."),
@@ -42,6 +46,10 @@ public enum Messages {
      * Error executing request
      */
     ERROR_EXECUTING_REQUEST ("Error occurred while executing request..."),
+    /**
+     * Parsing Error while parsing the response body.
+     */
+    ERROR_PARSING_RESPONSE_BODY ("Error parsing response body..."),
     /**
      * Error reading file
      */
@@ -63,9 +71,17 @@ public enum Messages {
      */
     INVALID_PLATFORM_FOR_OPERATION ("Platform [{0}] is not supported for this setting..."),
     /**
+     * Invalid Remote session URL.
+     */
+    INVALID_REMOTE_URL ("Invalid remote url generated..."),
+    /**
      * No API setting found
      */
     NO_API_SETTINGS_FOUND ("No settings found for API for key {0}..."),
+    /**
+     * Empty response body to parse as JsonPath.
+     */
+    NO_BODY_TO_PARSE ("No body to parse as JsonPath..."),
     /**
      * No JSON file found
      */
