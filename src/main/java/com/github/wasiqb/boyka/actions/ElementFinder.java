@@ -16,7 +16,6 @@
 
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.enums.Messages.APP_TYPE_NOT_SUPPORT_DRIVERS;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
@@ -25,7 +24,6 @@ import java.util.List;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import com.github.wasiqb.boyka.enums.WaitStrategy;
-import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -76,11 +74,8 @@ public final class ElementFinder {
                 wait.until (elementToBeClickable (locator.getLocator ()));
                 break;
             case VISIBLE:
-                wait.until (visibilityOfAllElementsLocatedBy (locator.getLocator ()));
-                break;
-            case NONE:
             default:
-                throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
+                wait.until (visibilityOfAllElementsLocatedBy (locator.getLocator ()));
         }
         return parent != null
                ? parent.findElements (locator.getLocator ())

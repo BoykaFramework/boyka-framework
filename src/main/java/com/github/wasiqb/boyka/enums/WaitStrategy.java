@@ -28,10 +28,6 @@ public enum WaitStrategy {
      */
     CLICKABLE,
     /**
-     * No wait strategy.
-     */
-    NONE,
-    /**
      * Wait for element to become visible.
      */
     VISIBLE
