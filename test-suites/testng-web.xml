@@ -16,7 +16,7 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Suite" verbose="2">
+<suite name="Boyka Suite" verbose="2" thread-count="10" parallel="tests">
     <suite-files>
         <suite-file path="testng-web-local.xml"/>
         <suite-file path="testng-web-bs.xml"/>
