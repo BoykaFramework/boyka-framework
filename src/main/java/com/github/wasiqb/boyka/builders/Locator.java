@@ -16,8 +16,10 @@
 
 package com.github.wasiqb.boyka.builders;
 
+import static com.github.wasiqb.boyka.enums.Messages.APP_TYPE_NOT_SUPPORT_DRIVERS;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Builder;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -51,7 +53,7 @@ public class Locator {
                 return this.web;
             case API:
             default:
-                return null;
+                throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
         }
     }
 }
