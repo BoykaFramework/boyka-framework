@@ -16,6 +16,8 @@
 
 package com.github.wasiqb.boyka.builders;
 
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+
 import lombok.Builder;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -33,4 +35,23 @@ public class Locator {
     private By      ios;
     private Locator parent;
     private By      web;
+
+    /**
+     * Returns locator specific to application type.
+     *
+     * @return {@link By}
+     */
+    public By getLocator () {
+        switch (getSession ().getApplicationType ()) {
+            case ANDROID:
+                return this.android;
+            case IOS:
+                return this.ios;
+            case WEB:
+                return this.web;
+            case API:
+            default:
+                return null;
+        }
+    }
 }

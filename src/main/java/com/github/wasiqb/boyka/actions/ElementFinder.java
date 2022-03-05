@@ -18,10 +18,13 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.enums.Messages.APP_TYPE_NOT_SUPPORT_DRIVERS;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
 
 import java.util.List;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.enums.WaitStrategy;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,55 +40,56 @@ public final class ElementFinder {
      * Find single element on UI.
      *
      * @param locator {@link Locator} to find element
+     * @param waitStrategy {@link WaitStrategy} to wait for element
      *
      * @return {@link WebElement}
      */
-    public static WebElement find (final Locator locator) {
-        return finds (locator).get (0);
+    public static WebElement find (final Locator locator, final WaitStrategy waitStrategy) {
+        return finds (locator, waitStrategy).get (0);
     }
 
     /**
      * Find all elements on UI.
      *
      * @param locator {@link Locator} to find elements
+     * @param waitStrategy {@link WaitStrategy} to wait for element
      *
      * @return {@link List} of {@link WebElement}
      */
-    public static List<WebElement> finds (final Locator locator) {
+    public static List<WebElement> finds (final Locator locator, final WaitStrategy waitStrategy) {
         final var driver = getSession ().getDriver ();
         final List<WebElement> element;
         if (locator.getParent () != null) {
-            final var parent = find (locator.getParent ());
-            element = finds (driver, parent, locator);
+            final var parent = find (locator.getParent (), waitStrategy);
+            element = finds (driver, parent, locator, waitStrategy);
         } else {
-            element = finds (driver, locator);
+            element = finds (driver, locator, waitStrategy);
         }
         return element;
     }
 
-    private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator) {
-        return finds (driver, null, locator);
-    }
-
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final WebElement parent,
-        final Locator locator) {
-        switch (getSession ().getApplicationType ()) {
-            case ANDROID:
-                return parent != null
-                       ? parent.findElements (locator.getAndroid ())
-                       : driver.findElements (locator.getAndroid ());
-            case IOS:
-                return parent != null
-                       ? parent.findElements (locator.getIos ())
-                       : driver.findElements (locator.getIos ());
-            case WEB:
-                return parent != null
-                       ? parent.findElements (locator.getWeb ())
-                       : driver.findElements (locator.getWeb ());
-            case API:
+        final Locator locator, final WaitStrategy waitStrategy) {
+        final var wait = getSession ().getWait ();
+        switch (waitStrategy) {
+            case CLICKABLE:
+                wait.until (elementToBeClickable (locator.getLocator ()));
+                break;
+            case VISIBLE:
+                wait.until (visibilityOfAllElementsLocatedBy (locator.getLocator ()));
+                break;
+            case NONE:
             default:
                 throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
         }
+        return parent != null
+               ? parent.findElements (locator.getLocator ())
+               : driver.findElements (locator.getLocator ());
+    }
+
+    private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator,
+        final WaitStrategy waitStrategy) {
+        return finds (driver, null, locator, waitStrategy);
     }
 
     private ElementFinder () {
