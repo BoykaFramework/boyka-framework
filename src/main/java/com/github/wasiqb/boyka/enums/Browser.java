@@ -40,6 +40,10 @@ public enum Browser {
      */
     NONE,
     /**
+     * Opera browser.
+     */
+    OPERA,
+    /**
      * Remote Grid / cloud browser.
      */
     REMOTE,
@@ -47,4 +51,5 @@ public enum Browser {
      * Safari browser.
      */
     SAFARI
+
 }
