@@ -44,6 +44,7 @@ public final class KeyboardActions {
      * @param text text to enter
      */
     public static void enterText (final Locator locator, final String text) {
+        clearText (locator);
         performElementAction (e -> e.sendKeys (text), locator);
     }
 

@@ -1,7 +1,7 @@
 {
   "ui": {
     "playback": {
-      "implicit_wait": 10,
+      "implicit_wait": 1,
       "explicit_wait": 30
     },
     "web": {
@@ -89,6 +89,9 @@
     "test_reqres": {
       "base_uri": "https://reqres.in",
       "base_path": "/api",
+      "read_timeout": 1,
+      "write_timeout": 1,
+      "connection_timeout": 1,
       "logging": {
         "request": true,
         "response": true

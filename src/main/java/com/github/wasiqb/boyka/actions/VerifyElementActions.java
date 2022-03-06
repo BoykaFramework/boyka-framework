@@ -16,45 +16,31 @@
 
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
-import static com.google.common.truth.Truth.assertThat;
-
-import java.util.function.Predicate;
+import static com.github.wasiqb.boyka.actions.CommonActions.verifyElementBooleanAttribute;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import com.google.common.truth.BooleanSubject;
 import org.openqa.selenium.WebElement;
 
 /**
- * Verification class for verifying the UI attributes.
+ * Verification class for verifying the UI element attributes.
  *
  * @author Wasiq Bhamla
+ * @since 24-Feb-2022
  */
-public final class VerifyAction {
+public final class VerifyElementActions {
     /**
      * Verify if element is displayed.
      *
      * @param locator locator of element
-     */
-    public static void verifyElementDisplayed (final Locator locator) {
-        verifyElementBooleanAttribute (WebElement::isDisplayed, locator).isTrue ();
-    }
-
-    /**
-     * Verify if element is not displayed.
      *
-     * @param locator locator of element
+     * @return {@link BooleanSubject} to verify the result
      */
-    public static void verifyElementNotDisplayed (final Locator locator) {
-        verifyElementBooleanAttribute (WebElement::isDisplayed, locator).isFalse ();
+    public static BooleanSubject verifyElementDisplayed (final Locator locator) {
+        return verifyElementBooleanAttribute (WebElement::isDisplayed, locator);
     }
 
-    private static BooleanSubject verifyElementBooleanAttribute (final Predicate<WebElement> actual,
-        final Locator locator) {
-        return assertThat (getElementAttribute (actual::test, locator));
-    }
-
-    private VerifyAction () {
+    private VerifyElementActions () {
         // Utility class
     }
 }
