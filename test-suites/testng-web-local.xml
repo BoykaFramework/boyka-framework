@@ -45,4 +45,11 @@
             <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
         </classes>
     </test>
+    <test name="Test Boyka web on Local Opera">
+        <parameter name="appType" value="WEB"/>
+        <parameter name="driverKey" value="test_local_opera"/>
+        <classes>
+            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
+        </classes>
+    </test>
 </suite>

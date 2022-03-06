@@ -17,7 +17,10 @@
       "test_local_safari": {
         "browser": "SAFARI"
       },
-      "test2": {
+      "test_local_opera": {
+        "browser": "OPERA"
+      },
+      "test_browserstack_chrome": {
         "browser": "REMOTE",
         "cloud": "BROWSER_STACK",
         "protocol": "HTTPS",
@@ -35,7 +38,7 @@
           "name": "Test BrowserStack Session"
         }
       },
-      "test3": {
+      "test_selenium_grid": {
         "browser": "REMOTE",
         "cloud": "NONE",
         "port": "4444",

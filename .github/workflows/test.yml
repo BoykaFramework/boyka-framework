@@ -59,8 +59,11 @@ jobs:
         with:
           name: target
 
+      - name: Install Opera
+        run: brew install --cask opera
+
       - name: Start Selenium Grid
-        run: java -jar libs/selenium-server-4.1.2.jar standalone > /dev/null 2>&1 &
+        run: java -jar libs/selenium-server-4.1.2.jar standalone > selenium-grid.log &
 
       - name: Test execution
         env:
@@ -82,6 +85,7 @@ jobs:
         with:
           name: target
           path: |
+            ${{ github.workspace }}/selenium-grid.log
             ${{ github.workspace }}/target
             ${{ github.workspace }}/reports
 
