@@ -5,8 +5,17 @@
       "explicit_wait": 30
     },
     "web": {
-      "test1": {
+      "test_local_chrome": {
         "browser": "CHROME"
+      },
+      "test_local_firefox": {
+        "browser": "FIREFOX"
+      },
+      "test_local_edge": {
+        "browser": "EDGE"
+      },
+      "test_local_safari": {
+        "browser": "SAFARI"
       },
       "test2": {
         "browser": "REMOTE",
@@ -31,9 +40,9 @@
         "cloud": "NONE",
         "port": "4444",
         "capabilities": {
-          "browserName": "chrome",
-          "version": "77.0.3865.75",
-          "platform": "LINUX"
+          "browserName": "safari",
+          "version": "15.3",
+          "platform": "MAC"
         }
       }
     },
