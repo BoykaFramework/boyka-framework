@@ -59,6 +59,9 @@ jobs:
         with:
           name: target
 
+      - name: Install Opera
+        run: brew install --cask opera
+
       - name: Start Selenium Grid
         run: java -jar libs/selenium-server-4.1.2.jar standalone > selenium-grid.log &
 
