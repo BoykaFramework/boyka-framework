@@ -16,10 +16,10 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Web Suite" verbose="2" thread-count="4" parallel="tests">
+<suite name="Boyka Web Suite" verbose="2">
     <test name="Test Boyka web on Local Chrome">
         <parameter name="appType" value="WEB"/>
-        <parameter name="driverKey" value="test_local_chrome"/>
+        <parameter name="driverKey" value="test_local_safari"/>
         <classes>
             <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
         </classes>
