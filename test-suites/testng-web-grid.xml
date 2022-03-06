@@ -19,7 +19,7 @@
 <suite name="Boyka Suite" verbose="2">
     <test name="Test Boyka web on Selenium Grid">
         <parameter name="appType" value="WEB"/>
-        <parameter name="driverKey" value="test3"/>
+        <parameter name="driverKey" value="test_selenium_grid"/>
         <classes>
             <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
         </classes>

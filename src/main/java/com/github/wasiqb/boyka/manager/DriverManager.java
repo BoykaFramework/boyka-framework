@@ -30,6 +30,7 @@ import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
+import static io.github.bonigarcia.wdm.WebDriverManager.operadriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
@@ -48,7 +49,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -133,9 +137,7 @@ public final class DriverManager {
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
-        if (webSetting.isHeadless ()) {
-            options.addArguments ("--headless");
-        }
+        options.setHeadless (webSetting.isHeadless ());
         return new ChromeDriver (options);
     }
 
@@ -147,14 +149,23 @@ public final class DriverManager {
         }
     }
 
-    private WebDriver setupEdgeDriver () {
+    private WebDriver setupEdgeDriver (final WebSetting webSetting) {
         edgedriver ().setup ();
-        return new EdgeDriver ();
+        final EdgeOptions options = new EdgeOptions ();
+        options.setHeadless (webSetting.isHeadless ());
+        return new EdgeDriver (options);
     }
 
-    private WebDriver setupFirefoxDriver () {
+    private WebDriver setupFirefoxDriver (final WebSetting webSetting) {
         firefoxdriver ().setup ();
-        return new FirefoxDriver ();
+        final FirefoxOptions options = new FirefoxOptions ();
+        options.setHeadless (webSetting.isHeadless ());
+        return new FirefoxDriver (options);
+    }
+
+    private WebDriver setupOperaDriver () {
+        operadriver ().setup ();
+        return new OperaDriver ();
     }
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
@@ -180,11 +191,14 @@ public final class DriverManager {
                 setDriver (this.applicationType, setupSafariDriver (), this.setting);
                 break;
             case EDGE:
-                setDriver (this.applicationType, setupEdgeDriver (), this.setting);
+                setDriver (this.applicationType, setupEdgeDriver (webSetting), this.setting);
                 break;
             case FIREFOX:
+                setDriver (this.applicationType, setupFirefoxDriver (webSetting), this.setting);
+                break;
+            case OPERA:
             default:
-                setDriver (this.applicationType, setupFirefoxDriver (), this.setting);
+                setDriver (this.applicationType, setupOperaDriver (), this.setting);
                 break;
         }
     }
