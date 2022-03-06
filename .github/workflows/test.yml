@@ -59,10 +59,8 @@ jobs:
         with:
           name: target
 
-      - name: Install Selenium Grid
-        run: |
-          brew install docker
-          docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:4.1.2
+      - name: Start Selenium Grid
+        run: java -jar libs/selenium-server-4.1.2.jar standalone
 
       - name: Test execution
         env:
