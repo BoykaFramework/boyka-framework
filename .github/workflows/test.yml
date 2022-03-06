@@ -61,7 +61,7 @@ jobs:
 
       - name: Install Selenium Grid
         run: |
-          brew cask install docker
+          brew install docker
           docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:4.1.2
 
       - name: Test execution
