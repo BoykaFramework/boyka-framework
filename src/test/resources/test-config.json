@@ -20,7 +20,7 @@
       "test_local_opera": {
         "browser": "OPERA"
       },
-      "test2": {
+      "test_browserstack_chrome": {
         "browser": "REMOTE",
         "cloud": "BROWSER_STACK",
         "protocol": "HTTPS",
