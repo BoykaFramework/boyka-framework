@@ -66,6 +66,7 @@ jobs:
         env:
           CLOUD_USER: ${{ secrets.CLOUD_USER }}
           CLOUD_KEY: ${{ secrets.CLOUD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test
 
       - name: Test Report
