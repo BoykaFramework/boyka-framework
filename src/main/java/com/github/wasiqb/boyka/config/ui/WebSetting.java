@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.config.ui;
 
 import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.Map;
 
@@ -39,10 +40,10 @@ public class WebSetting {
     private CloudProviders      cloud    = CloudProviders.NONE;
     private boolean             headless = true;
     private String              host     = "localhost";
-    private String              password;
+    private String              password = EMPTY;
     private int                 port;
     private Protocol            protocol = HTTP;
-    private String              userName;
+    private String              userName = EMPTY;
 
     /**
      * Gets cloud password.

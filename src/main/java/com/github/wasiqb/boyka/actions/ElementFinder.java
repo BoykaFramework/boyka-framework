@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
 
@@ -24,6 +25,7 @@ import java.util.List;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import com.github.wasiqb.boyka.enums.WaitStrategy;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -34,6 +36,8 @@ import org.openqa.selenium.WebElement;
  * @since 24-Feb-2022
  */
 public final class ElementFinder {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Find single element on UI.
      *
@@ -43,7 +47,8 @@ public final class ElementFinder {
      * @return {@link WebElement}
      */
     public static WebElement find (final Locator locator, final WaitStrategy waitStrategy) {
-        return finds (locator, waitStrategy).get (0);
+        LOGGER.traceEntry ("locator: {}, waitUntil: {}", locator, waitStrategy);
+        return LOGGER.traceExit (finds (locator, waitStrategy).get (0));
     }
 
     /**
@@ -55,6 +60,7 @@ public final class ElementFinder {
      * @return {@link List} of {@link WebElement}
      */
     public static List<WebElement> finds (final Locator locator, final WaitStrategy waitStrategy) {
+        LOGGER.traceEntry ("locator: {}, waitUntil: {}", locator, waitStrategy);
         final var driver = getSession ().getDriver ();
         final List<WebElement> element;
         if (locator.getParent () != null) {
@@ -63,11 +69,12 @@ public final class ElementFinder {
         } else {
             element = finds (driver, locator, waitStrategy);
         }
-        return element;
+        return LOGGER.traceExit (element);
     }
 
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final WebElement parent,
         final Locator locator, final WaitStrategy waitStrategy) {
+        LOGGER.traceEntry ();
         final var wait = getSession ().getWait ();
         switch (waitStrategy) {
             case CLICKABLE:
@@ -77,14 +84,14 @@ public final class ElementFinder {
             default:
                 wait.until (visibilityOfAllElementsLocatedBy (locator.getLocator ()));
         }
-        return parent != null
-               ? parent.findElements (locator.getLocator ())
-               : driver.findElements (locator.getLocator ());
+        return LOGGER.traceExit (
+            parent != null ? parent.findElements (locator.getLocator ()) : driver.findElements (locator.getLocator ()));
     }
 
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator,
         final WaitStrategy waitStrategy) {
-        return finds (driver, null, locator, waitStrategy);
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (finds (driver, null, locator, waitStrategy));
     }
 
     private ElementFinder () {

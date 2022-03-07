@@ -35,5 +35,4 @@ public enum CloudProviders {
      * Sauce Labs.
      */
     SAUCE_LABS
-
 }

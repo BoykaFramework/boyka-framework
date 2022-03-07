@@ -22,10 +22,10 @@ import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PATCH;
 import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
+import static com.github.wasiqb.boyka.manager.ApiManager.execute;
 
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.builders.ApiResponse;
-import com.github.wasiqb.boyka.manager.ApiManager;
 import com.github.wasiqb.boyka.testng.api.requests.User;
 import org.testng.annotations.Test;
 
@@ -49,8 +49,7 @@ public class TestApi {
             .pathParam ("userId", "2")
             .create ();
 
-        ApiManager.execute (request)
-            .verifyStatusCode ()
+        execute (request).verifyStatusCode ()
             .isEqualTo (204);
     }
 
@@ -65,7 +64,7 @@ public class TestApi {
             .pathParam ("userId", "2")
             .create ();
 
-        final ApiResponse response = ApiManager.execute (request);
+        final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("data.first_name")
@@ -91,7 +90,7 @@ public class TestApi {
             .bodyObject (user)
             .create ();
 
-        final ApiResponse response = ApiManager.execute (request);
+        final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("name")
@@ -119,7 +118,7 @@ public class TestApi {
             .bodyObject (user)
             .create ();
 
-        final ApiResponse response = ApiManager.execute (request);
+        final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("name")
@@ -146,7 +145,7 @@ public class TestApi {
             .bodyObject (user)
             .create ();
 
-        final ApiResponse response = ApiManager.execute (request);
+        final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (201);
         response.verifyTextField ("id")

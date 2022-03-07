@@ -21,6 +21,7 @@ import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -29,6 +30,7 @@ import java.util.function.Predicate;
 import com.github.wasiqb.boyka.builders.Locator;
 import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.StringSubject;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -40,6 +42,8 @@ import org.openqa.selenium.WebElement;
  */
 @SuppressWarnings ("unchecked")
 final class CommonActions {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Gets driver specific attributes.
      *
@@ -50,7 +54,8 @@ final class CommonActions {
      * @return driver specific attribute.
      */
     public static <D extends WebDriver, E> E getDriverAttribute (final Function<D, E> action) {
-        return action.apply ((D) getSession ().getDriver ());
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (action.apply ((D) getSession ().getDriver ()));
     }
 
     /**
@@ -63,7 +68,8 @@ final class CommonActions {
      * @return element specific attribute.
      */
     public static <E> E getElementAttribute (final Function<WebElement, E> action, final Locator locator) {
-        return action.apply (find (locator, VISIBLE));
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (action.apply (find (locator, VISIBLE)));
     }
 
     /**
@@ -73,7 +79,9 @@ final class CommonActions {
      * @param <D> driver type
      */
     public static <D extends WebDriver> void performDriverAction (final Consumer<D> action) {
+        LOGGER.traceEntry ();
         action.accept ((D) getSession ().getDriver ());
+        LOGGER.traceExit ();
     }
 
     /**
@@ -83,7 +91,9 @@ final class CommonActions {
      * @param locator locator to find element
      */
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
+        LOGGER.traceEntry ();
         action.accept (find (locator, CLICKABLE));
+        LOGGER.traceExit ();
     }
 
     /**
@@ -95,6 +105,7 @@ final class CommonActions {
      * @return {@link BooleanSubject} to verify boolean attributes
      */
     public static <D extends WebDriver> StringSubject verifyDriverTextAttribute (final Function<D, String> actual) {
+        LOGGER.traceEntry ();
         return assertThat (getDriverAttribute (actual));
     }
 
@@ -108,6 +119,7 @@ final class CommonActions {
      */
     public static BooleanSubject verifyElementBooleanAttribute (final Predicate<WebElement> actual,
         final Locator locator) {
+        LOGGER.traceEntry ();
         return assertThat (getElementAttribute (actual::test, locator));
     }
 

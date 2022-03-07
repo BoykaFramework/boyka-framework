@@ -16,9 +16,12 @@
 
 package com.github.wasiqb.boyka.utils;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+
 import java.util.Map;
 
 import org.apache.commons.text.StringSubstitutor;
+import org.apache.logging.log4j.Logger;
 
 /**
  * String utils.
@@ -27,6 +30,8 @@ import org.apache.commons.text.StringSubstitutor;
  * @since 24-Feb-2022
  */
 public final class StringUtils {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Replace all variables in the given string with the values from system environment variables, system properties,
      * etc.
@@ -36,11 +41,13 @@ public final class StringUtils {
      * @return Interpolated string
      */
     public static String interpolate (final String value) {
+        LOGGER.traceEntry ("Interpolating string: {}", value);
         if (value.startsWith ("${")) {
             final StringSubstitutor substitute = StringSubstitutor.createInterpolator ();
             substitute.setEnableSubstitutionInVariables (true);
             return substitute.replace (value);
         }
+        LOGGER.traceExit ();
         return value;
     }
 
@@ -53,12 +60,13 @@ public final class StringUtils {
      * @return Interpolated string
      */
     public static String interpolate (final String value, final Map<String, String> valuesMap) {
+        LOGGER.traceEntry ("Interpolating string: {}", value);
         if (value.contains ("${")) {
             final StringSubstitutor substitute = new StringSubstitutor (valuesMap);
             substitute.setEnableSubstitutionInVariables (true);
-            return substitute.replace (value);
+            return LOGGER.traceExit (substitute.replace (value));
         }
-        return value;
+        return LOGGER.traceExit (value);
     }
 
     private StringUtils () {

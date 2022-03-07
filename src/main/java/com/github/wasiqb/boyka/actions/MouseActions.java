@@ -17,8 +17,10 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -28,13 +30,17 @@ import org.openqa.selenium.WebElement;
  * @since 24-Feb-2022
  */
 public final class MouseActions {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Click on element
      *
      * @param locator {@link Locator} of element
      */
     public static void clickOn (final Locator locator) {
+        LOGGER.traceEntry ("Locator: {}", locator);
         performElementAction (WebElement::click, locator);
+        LOGGER.traceExit ();
     }
 
     private MouseActions () {

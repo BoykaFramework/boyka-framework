@@ -17,9 +17,11 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.verifyElementBooleanAttribute;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import com.google.common.truth.BooleanSubject;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -29,6 +31,8 @@ import org.openqa.selenium.WebElement;
  * @since 24-Feb-2022
  */
 public final class VerifyElementActions {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Verify if element is displayed.
      *
@@ -37,6 +41,7 @@ public final class VerifyElementActions {
      * @return {@link BooleanSubject} to verify the result
      */
     public static BooleanSubject verifyElementDisplayed (final Locator locator) {
+        LOGGER.traceEntry ("Locator: {}", locator);
         return verifyElementBooleanAttribute (WebElement::isDisplayed, locator);
     }
 

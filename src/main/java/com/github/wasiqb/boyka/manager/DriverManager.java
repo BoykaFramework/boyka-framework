@@ -35,6 +35,7 @@ import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
 import static java.util.Objects.requireNonNullElse;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -44,6 +45,7 @@ import com.github.wasiqb.boyka.config.ui.WebSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.exception.FrameworkError;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -62,13 +64,17 @@ import org.openqa.selenium.safari.SafariDriver;
  * @since 17-Feb-2022
  */
 public final class DriverManager {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Closes the driver instance and clears driver session.
      */
     public static void closeDriver () {
+        LOGGER.traceEntry ();
         getSession ().getDriver ()
             .quit ();
         clearSession ();
+        LOGGER.traceExit ();
     }
 
     /**
@@ -80,9 +86,10 @@ public final class DriverManager {
      * @return the driver instance
      */
     public static DriverManager createDriver (final ApplicationType applicationType, final String driverKey) {
+        LOGGER.traceEntry ("Application Type : {}, Driver Key : {}", applicationType, driverKey);
         final var instance = new DriverManager (applicationType, driverKey);
         instance.setupDriver ();
-        return instance;
+        return LOGGER.traceExit (instance);
     }
 
     private final ApplicationType  applicationType;
@@ -90,20 +97,24 @@ public final class DriverManager {
     private final FrameworkSetting setting;
 
     private DriverManager (final ApplicationType applicationType, final String driverKey) {
+        LOGGER.traceEntry ("Application Type : {}, Driver Key : {}", applicationType, driverKey);
         this.applicationType = applicationType;
         this.driverKey = driverKey;
         this.setting = loadSetting ();
+        LOGGER.traceExit ();
     }
 
     private Capabilities getCapabilities (final WebSetting webSetting) {
+        LOGGER.traceEntry ("Web Setting : {}", webSetting);
         final var capabilities = requireNonNull (webSetting.getCapabilities (),
             CAPABILITIES_REQUIRED_FOR_REMOTE.getMessage ());
         final var remoteCapabilities = new DesiredCapabilities ();
         capabilities.forEach (remoteCapabilities::setCapability);
-        return remoteCapabilities;
+        return LOGGER.traceExit (remoteCapabilities);
     }
 
     private String getHostName (final WebSetting webSetting) {
+        LOGGER.traceEntry ("Web Setting : {}", webSetting);
         if (requireNonNullElse (webSetting.getCloud (), CloudProviders.NONE) != CloudProviders.NONE) {
             final var hostNamePattern = "{0}:{1}@{2}";
             return format (hostNamePattern,
@@ -111,10 +122,11 @@ public final class DriverManager {
                 requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD.getMessage ()),
                 requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessage ()));
         }
-        return requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessage ());
+        return LOGGER.traceExit (requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessage ()));
     }
 
     private URL getRemoteUrl (final WebSetting webSetting) {
+        LOGGER.traceEntry ("Web Setting : {}", webSetting);
         final var URL_PATTERN = "{0}://{1}/wd/hub";
         final var hostName = new StringBuilder (getHostName (webSetting));
         if (webSetting.getPort () != 0) {
@@ -125,59 +137,68 @@ public final class DriverManager {
             format (PROTOCOL_REQUIRED_FOR_HOST.getMessage (), hostName)).name ()
             .toLowerCase (), hostName);
         try {
-            return new URL (url);
+            return LOGGER.traceExit (new URL (url));
         } catch (final MalformedURLException e) {
             throw new FrameworkError (INVALID_REMOTE_URL.getMessage (), e);
         }
     }
 
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
+        LOGGER.traceEntry ("Web Setting : {}", webSetting);
         chromedriver ().setup ();
         final ChromeOptions options = new ChromeOptions ();
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
         options.setHeadless (webSetting.isHeadless ());
-        return new ChromeDriver (options);
+        return LOGGER.traceExit (new ChromeDriver (options));
     }
 
     private void setupDriver () {
+        LOGGER.traceEntry ();
         if (this.applicationType == ApplicationType.WEB) {
             final var webSetting = this.setting.getUi ()
                 .getWebSetting (this.driverKey);
             setupWebDriver (webSetting);
         }
+        LOGGER.traceExit ();
     }
 
     private WebDriver setupEdgeDriver (final WebSetting webSetting) {
+        LOGGER.traceEntry ("Web Setting : {}", webSetting);
         edgedriver ().setup ();
         final EdgeOptions options = new EdgeOptions ();
         options.setHeadless (webSetting.isHeadless ());
-        return new EdgeDriver (options);
+        return LOGGER.traceExit (new EdgeDriver (options));
     }
 
     private WebDriver setupFirefoxDriver (final WebSetting webSetting) {
+        LOGGER.traceEntry ("Web Setting : {}", webSetting);
         firefoxdriver ().setup ();
         final FirefoxOptions options = new FirefoxOptions ();
         options.setHeadless (webSetting.isHeadless ());
-        return new FirefoxDriver (options);
+        return LOGGER.traceExit (new FirefoxDriver (options));
     }
 
     private WebDriver setupOperaDriver () {
+        LOGGER.traceEntry ();
         operadriver ().setup ();
-        return new OperaDriver ();
+        return LOGGER.traceExit (new OperaDriver ());
     }
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
-        return new RemoteWebDriver (getRemoteUrl (webSetting), getCapabilities (webSetting));
+        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        return LOGGER.traceExit (new RemoteWebDriver (getRemoteUrl (webSetting), getCapabilities (webSetting)));
     }
 
     private WebDriver setupSafariDriver () {
+        LOGGER.traceEntry ();
         safaridriver ().setup ();
-        return new SafariDriver ();
+        return LOGGER.traceExit (new SafariDriver ());
     }
 
     private void setupWebDriver (final WebSetting webSetting) {
+        LOGGER.traceEntry ("Web Setting : {}", webSetting);
         switch (webSetting.getBrowser ()) {
             case CHROME:
                 setDriver (this.applicationType, setupChromeDriver (webSetting), this.setting);
@@ -201,5 +222,6 @@ public final class DriverManager {
                 setDriver (this.applicationType, setupOperaDriver (), this.setting);
                 break;
         }
+        LOGGER.traceExit ();
     }
 }

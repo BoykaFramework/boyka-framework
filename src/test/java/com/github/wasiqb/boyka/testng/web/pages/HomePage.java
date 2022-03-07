@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.web.pages;
 
-import static com.github.wasiqb.boyka.builders.Locator.createLocator;
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -39,8 +39,8 @@ public class HomePage {
         return new HomePage ();
     }
 
-    private final Locator menuButton = createLocator ().web (id ("react-burger-menu-btn"))
-        .create ();
+    private final Locator menuButton = buildLocator ().web (id ("react-burger-menu-btn"))
+        .build ();
 
     private HomePage () {
         // Avoid explicit class initialisation

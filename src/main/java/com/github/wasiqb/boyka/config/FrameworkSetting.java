@@ -19,11 +19,13 @@ package com.github.wasiqb.boyka.config;
 import static com.github.wasiqb.boyka.enums.Messages.NO_API_SETTINGS_FOUND;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
 import com.github.wasiqb.boyka.config.api.ApiSetting;
 import lombok.Data;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Framework setting.
@@ -33,6 +35,8 @@ import lombok.Data;
  */
 @Data
 public class FrameworkSetting {
+    private static final Logger LOGGER = getLogger ();
+
     private Map<String, ApiSetting> api;
     private UISetting               ui;
 
@@ -44,6 +48,8 @@ public class FrameworkSetting {
      * @return {@link ApiSetting} instance
      */
     public ApiSetting getApiSetting (final String key) {
-        return requireNonNull (this.api.get (key), format (NO_API_SETTINGS_FOUND.getMessage (), key));
+        LOGGER.traceEntry ("Key: {}", key);
+        return LOGGER.traceExit (
+            requireNonNull (this.api.get (key), format (NO_API_SETTINGS_FOUND.getMessage (), key)));
     }
 }
