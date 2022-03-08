@@ -105,7 +105,7 @@ public final class DriverManager {
     }
 
     private Capabilities getCapabilities (final WebSetting webSetting) {
-        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        LOGGER.traceEntry ();
         final var capabilities = requireNonNull (webSetting.getCapabilities (),
             CAPABILITIES_REQUIRED_FOR_REMOTE.getMessage ());
         final var remoteCapabilities = new DesiredCapabilities ();
@@ -114,7 +114,7 @@ public final class DriverManager {
     }
 
     private String getHostName (final WebSetting webSetting) {
-        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        LOGGER.traceEntry ();
         if (requireNonNullElse (webSetting.getCloud (), CloudProviders.NONE) != CloudProviders.NONE) {
             final var hostNamePattern = "{0}:{1}@{2}";
             return format (hostNamePattern,
@@ -126,7 +126,7 @@ public final class DriverManager {
     }
 
     private URL getRemoteUrl (final WebSetting webSetting) {
-        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        LOGGER.traceEntry ();
         final var URL_PATTERN = "{0}://{1}/wd/hub";
         final var hostName = new StringBuilder (getHostName (webSetting));
         if (webSetting.getPort () != 0) {
@@ -139,14 +139,15 @@ public final class DriverManager {
         try {
             return LOGGER.traceExit (new URL (url));
         } catch (final MalformedURLException e) {
+            LOGGER.catching (e);
             throw new FrameworkError (INVALID_REMOTE_URL.getMessage (), e);
         }
     }
 
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
-        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        LOGGER.traceEntry ();
         chromedriver ().setup ();
-        final ChromeOptions options = new ChromeOptions ();
+        final var options = new ChromeOptions ();
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
@@ -165,17 +166,17 @@ public final class DriverManager {
     }
 
     private WebDriver setupEdgeDriver (final WebSetting webSetting) {
-        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        LOGGER.traceEntry ();
         edgedriver ().setup ();
-        final EdgeOptions options = new EdgeOptions ();
+        final var options = new EdgeOptions ();
         options.setHeadless (webSetting.isHeadless ());
         return LOGGER.traceExit (new EdgeDriver (options));
     }
 
     private WebDriver setupFirefoxDriver (final WebSetting webSetting) {
-        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        LOGGER.traceEntry ();
         firefoxdriver ().setup ();
-        final FirefoxOptions options = new FirefoxOptions ();
+        final var options = new FirefoxOptions ();
         options.setHeadless (webSetting.isHeadless ());
         return LOGGER.traceExit (new FirefoxDriver (options));
     }
@@ -187,7 +188,7 @@ public final class DriverManager {
     }
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
-        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        LOGGER.traceEntry ();
         return LOGGER.traceExit (new RemoteWebDriver (getRemoteUrl (webSetting), getCapabilities (webSetting)));
     }
 

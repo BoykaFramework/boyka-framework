@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.utils;
 
+import static org.apache.commons.text.StringSubstitutor.createInterpolator;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
@@ -42,13 +43,14 @@ public final class StringUtils {
      */
     public static String interpolate (final String value) {
         LOGGER.traceEntry ("Interpolating string: {}", value);
+        var result = value;
         if (value.startsWith ("${")) {
-            final StringSubstitutor substitute = StringSubstitutor.createInterpolator ();
+            final var substitute = createInterpolator ();
             substitute.setEnableSubstitutionInVariables (true);
-            return substitute.replace (value);
+            result = substitute.replace (value);
         }
         LOGGER.traceExit ();
-        return value;
+        return result;
     }
 
     /**
@@ -61,12 +63,14 @@ public final class StringUtils {
      */
     public static String interpolate (final String value, final Map<String, String> valuesMap) {
         LOGGER.traceEntry ("Interpolating string: {}", value);
+        var result = value;
         if (value.contains ("${")) {
-            final StringSubstitutor substitute = new StringSubstitutor (valuesMap);
+            final var substitute = new StringSubstitutor (valuesMap);
             substitute.setEnableSubstitutionInVariables (true);
-            return LOGGER.traceExit (substitute.replace (value));
+            result = substitute.replace (value);
         }
-        return LOGGER.traceExit (value);
+        LOGGER.traceExit ();
+        return result;
     }
 
     private StringUtils () {

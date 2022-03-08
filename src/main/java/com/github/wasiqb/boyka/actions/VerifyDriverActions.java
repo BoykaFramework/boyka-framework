@@ -39,6 +39,7 @@ public class VerifyDriverActions {
      */
     public static StringSubject verifyBrowserTitle () {
         LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return verifyDriverTextAttribute (WebDriver::getTitle);
     }
 

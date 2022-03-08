@@ -16,6 +16,8 @@
 
 package com.github.wasiqb.boyka.config;
 
+import static com.github.wasiqb.boyka.enums.ApplicationType.ANDROID;
+import static com.github.wasiqb.boyka.enums.ApplicationType.IOS;
 import static com.github.wasiqb.boyka.enums.Messages.INVALID_PLATFORM_FOR_OPERATION;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
@@ -53,9 +55,9 @@ public class UISetting {
      */
     public MobileSetting getMobileSetting (final ApplicationType applicationType, final String key) {
         LOGGER.traceEntry ("ApplicationType: {0}, Key: {1}", applicationType, key);
-        if (applicationType == ApplicationType.IOS) {
+        if (applicationType == IOS) {
             return LOGGER.traceExit (requireNonNull (this.ios.get (key)));
-        } else if (applicationType == ApplicationType.ANDROID) {
+        } else if (applicationType == ANDROID) {
             return LOGGER.traceExit (requireNonNull (this.android.get (key)));
         }
         throw new FrameworkError (format (INVALID_PLATFORM_FOR_OPERATION.getMessage (), applicationType));

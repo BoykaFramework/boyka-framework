@@ -143,7 +143,7 @@ public final class ApiManager {
 
     private String getRequestBody (final RequestBody body) {
         LOGGER.traceEntry ();
-        final Buffer buffer = new Buffer ();
+        final var buffer = new Buffer ();
         try {
             requireNonNullElse (body, create ("{}", parse (JSON.getType ()))).writeTo (buffer);
         } catch (final IOException e) {
@@ -188,7 +188,9 @@ public final class ApiManager {
                 .forEach ((key, value) -> LOGGER.info ("Request Header: {} => {}", key, value));
             req.getPathParams ()
                 .forEach ((key, value) -> LOGGER.info ("Request Path Param: {} => {}", key, value));
-            LOGGER.info ("Request Body: {}", req.getBody ());
+            if (isNotEmpty (req.getBody ())) {
+                LOGGER.info ("Request Body: {}", req.getBody ());
+            }
         }
         LOGGER.traceExit ();
     }
@@ -260,7 +262,6 @@ public final class ApiManager {
 
     private void pathParam (final String param, final String value) {
         LOGGER.traceEntry ("Parameter: {}, {}", param, value);
-        // TODO: Query Params: https://stackoverflow.com/a/43029045/5320558
         this.pathParams.put (param, value);
         LOGGER.traceExit ();
     }

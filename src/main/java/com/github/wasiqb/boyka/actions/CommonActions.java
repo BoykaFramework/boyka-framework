@@ -106,6 +106,7 @@ final class CommonActions {
      */
     public static <D extends WebDriver> StringSubject verifyDriverTextAttribute (final Function<D, String> actual) {
         LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return assertThat (getDriverAttribute (actual));
     }
 
@@ -120,6 +121,7 @@ final class CommonActions {
     public static BooleanSubject verifyElementBooleanAttribute (final Predicate<WebElement> actual,
         final Locator locator) {
         LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return assertThat (getElementAttribute (actual::test, locator));
     }
 

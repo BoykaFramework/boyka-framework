@@ -42,6 +42,7 @@ public final class VerifyElementActions {
      */
     public static BooleanSubject verifyElementDisplayed (final Locator locator) {
         LOGGER.traceEntry ("Locator: {}", locator);
+        LOGGER.traceExit ();
         return verifyElementBooleanAttribute (WebElement::isDisplayed, locator);
     }
 

@@ -64,8 +64,8 @@ public class ApiResponse {
      * @return String field data
      */
     public String getResponseData (final String expression) {
-        LOGGER.traceEntry ("Expression: {}", expression);
-        return LOGGER.traceExit (jsonPath ().read (compile (expression), String.class));
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (getResponseData (expression, String.class));
     }
 
     /**
@@ -90,8 +90,9 @@ public class ApiResponse {
      * @return {@link BooleanSubject} instance
      */
     public BooleanSubject verifyBooleanField (final String expression) {
-        LOGGER.traceEntry ("Expression: {}", expression);
-        return LOGGER.traceExit (assertThat (getResponseData (expression, Boolean.class)));
+        LOGGER.traceEntry ();
+        LOGGER.traceExit ();
+        return assertThat (getResponseData (expression, Boolean.class));
     }
 
     /**
@@ -103,7 +104,8 @@ public class ApiResponse {
      */
     public IntegerSubject verifyIntField (final String expression) {
         LOGGER.traceEntry ("Expression: {}", expression);
-        return LOGGER.traceExit (assertThat (getResponseData (expression, Integer.class)));
+        LOGGER.traceExit ();
+        return assertThat (getResponseData (expression, Integer.class));
     }
 
     /**
@@ -113,6 +115,7 @@ public class ApiResponse {
      */
     public IntegerSubject verifyStatusCode () {
         LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return assertThat (getStatusCode ());
     }
 
@@ -123,6 +126,7 @@ public class ApiResponse {
      */
     public StringSubject verifyStatusMessage () {
         LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return assertThat (getStatusMessage ());
     }
 
@@ -135,11 +139,12 @@ public class ApiResponse {
      */
     public StringSubject verifyTextField (final String expression) {
         LOGGER.traceEntry ("Expression: {}", expression);
+        LOGGER.traceExit ();
         return assertThat (getResponseData (expression));
     }
 
     private DocumentContext jsonPath () {
         LOGGER.traceEntry ();
-        return parse (requireNonNull (this.body, NO_BODY_TO_PARSE.getMessage ()));
+        return LOGGER.traceExit (parse (requireNonNull (this.body, NO_BODY_TO_PARSE.getMessage ())));
     }
 }

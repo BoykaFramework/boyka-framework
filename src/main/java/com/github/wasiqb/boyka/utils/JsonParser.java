@@ -28,7 +28,6 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.gson.Gson;
@@ -65,9 +64,10 @@ public class JsonParser {
         final var path = requireNonNull (SettingUtils.class.getClassLoader ()
             .getResource (filePath), NO_JSON_FILE_FOUND.getMessage ());
         final T result;
-        try (final Reader reader = new FileReader (path.getPath ())) {
+        try (final var reader = new FileReader (path.getPath ())) {
             result = GSON.fromJson (reader, of (objectClass).getType ());
         } catch (final IOException e) {
+            LOGGER.catching (e);
             throw new FrameworkError (format (ERROR_READING_FILE.getMessage (), path.getPath ()), e);
         }
         return LOGGER.traceExit (result);
@@ -82,7 +82,7 @@ public class JsonParser {
      */
     public static <T> void toFile (final T data, final String filePath) {
         LOGGER.traceEntry ("data: {0}, filePath: {1}", data, filePath);
-        try (final FileWriter writer = new FileWriter (filePath)) {
+        try (final var writer = new FileWriter (filePath)) {
             GSON.toJson (data, writer);
         } catch (final IOException e) {
             LOGGER.catching (e);
