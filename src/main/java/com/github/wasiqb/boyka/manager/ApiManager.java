@@ -113,7 +113,7 @@ public final class ApiManager {
 
     private ApiManager basicAuth (final String userName, final String password) {
         if (userName != null) {
-            LOGGER.traceEntry ("Parameters: userName={}, password=****", userName);
+            LOGGER.traceEntry ("Parameters: userName={}", userName);
             final var credentials = basic (userName, requireNonNull (password, AUTH_PASSWORD_REQUIRED.getMessage ()));
             addHeader ("Authorization", credentials);
         }
