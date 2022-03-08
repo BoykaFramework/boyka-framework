@@ -24,32 +24,32 @@
             <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
         </classes>
     </test>
-    <test name="Test Boyka web on Local Firefox">
-        <parameter name="appType" value="WEB"/>
-        <parameter name="driverKey" value="test_local_firefox"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
-        </classes>
-    </test>
-    <test name="Test Boyka web on Local Edge">
-        <parameter name="appType" value="WEB"/>
-        <parameter name="driverKey" value="test_local_edge"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
-        </classes>
-    </test>
-    <test name="Test Boyka web on Local Safari">
-        <parameter name="appType" value="WEB"/>
-        <parameter name="driverKey" value="test_local_safari"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
-        </classes>
-    </test>
-    <test name="Test Boyka web on Local Opera">
-        <parameter name="appType" value="WEB"/>
-        <parameter name="driverKey" value="test_local_opera"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
-        </classes>
-    </test>
+<!--    <test name="Test Boyka web on Local Firefox">-->
+<!--        <parameter name="appType" value="WEB"/>-->
+<!--        <parameter name="driverKey" value="test_local_firefox"/>-->
+<!--        <classes>-->
+<!--            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="Test Boyka web on Local Edge">-->
+<!--        <parameter name="appType" value="WEB"/>-->
+<!--        <parameter name="driverKey" value="test_local_edge"/>-->
+<!--        <classes>-->
+<!--            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="Test Boyka web on Local Safari">-->
+<!--        <parameter name="appType" value="WEB"/>-->
+<!--        <parameter name="driverKey" value="test_local_safari"/>-->
+<!--        <classes>-->
+<!--            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="Test Boyka web on Local Opera">-->
+<!--        <parameter name="appType" value="WEB"/>-->
+<!--        <parameter name="driverKey" value="test_local_opera"/>-->
+<!--        <classes>-->
+<!--            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
