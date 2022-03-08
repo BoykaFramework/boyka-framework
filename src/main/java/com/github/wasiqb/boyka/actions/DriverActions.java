@@ -18,7 +18,9 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -28,13 +30,17 @@ import org.openqa.selenium.WebDriver;
  * @since 24-Feb-2022
  */
 public final class DriverActions {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Navigate to url on browser.
      *
      * @param url url to navigate to
      */
     public static void navigateTo (final String url) {
+        LOGGER.traceEntry ("url: {}", url);
         performDriverAction (driver -> driver.get (url));
+        LOGGER.traceExit ();
     }
 
     /**
@@ -43,7 +49,8 @@ public final class DriverActions {
      * @return title of the browser
      */
     public static String title () {
-        return getDriverAttribute (WebDriver::getTitle);
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle));
     }
 
     private DriverActions () {

@@ -18,10 +18,12 @@ package com.github.wasiqb.boyka.builders;
 
 import static com.github.wasiqb.boyka.enums.Messages.APP_TYPE_NOT_SUPPORT_DRIVERS;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Builder;
 import lombok.Getter;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
 /**
@@ -31,8 +33,10 @@ import org.openqa.selenium.By;
  * @since 25-Feb-2022
  */
 @Getter
-@Builder (builderMethodName = "createLocator", buildMethodName = "create")
+@Builder (builderMethodName = "buildLocator")
 public class Locator {
+    private static final Logger LOGGER = getLogger ();
+
     private By      android;
     private By      ios;
     private Locator parent;
@@ -44,16 +48,22 @@ public class Locator {
      * @return {@link By}
      */
     public By getLocator () {
+        LOGGER.traceEntry ();
+        final By result;
         switch (getSession ().getApplicationType ()) {
             case ANDROID:
-                return this.android;
+                result = this.android;
+                break;
             case IOS:
-                return this.ios;
+                result = this.ios;
+                break;
             case WEB:
-                return this.web;
+                result = this.web;
+                break;
             case API:
             default:
                 throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
         }
+        return LOGGER.traceExit (result);
     }
 }

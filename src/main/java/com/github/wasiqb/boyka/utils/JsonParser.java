@@ -23,15 +23,16 @@ import static com.google.common.reflect.TypeToken.of;
 import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Parser class to read and write json files.
@@ -40,7 +41,8 @@ import com.google.gson.GsonBuilder;
  * @since 17-Feb-2022
  */
 public class JsonParser {
-    private static final Gson GSON;
+    private static final Gson   GSON;
+    private static final Logger LOGGER = getLogger ();
 
     static {
         GSON = new GsonBuilder ().setFieldNamingPolicy (LOWER_CASE_WITH_UNDERSCORES)
@@ -58,13 +60,17 @@ public class JsonParser {
      */
     @SuppressWarnings ("UnstableApiUsage")
     public static <T> T fromFile (final String filePath, final Class<T> objectClass) {
+        LOGGER.traceEntry ("filePath: {}, objectClass: {}", filePath, objectClass);
         final var path = requireNonNull (SettingUtils.class.getClassLoader ()
             .getResource (filePath), NO_JSON_FILE_FOUND.getMessage ());
-        try (final Reader reader = new FileReader (path.getPath ())) {
-            return GSON.fromJson (reader, of (objectClass).getType ());
+        final T result;
+        try (final var reader = new FileReader (path.getPath ())) {
+            result = GSON.fromJson (reader, of (objectClass).getType ());
         } catch (final IOException e) {
+            LOGGER.catching (e);
             throw new FrameworkError (format (ERROR_READING_FILE.getMessage (), path.getPath ()), e);
         }
+        return LOGGER.traceExit (result);
     }
 
     /**
@@ -75,11 +81,14 @@ public class JsonParser {
      * @param <T> the type of the object
      */
     public static <T> void toFile (final T data, final String filePath) {
-        try (final FileWriter writer = new FileWriter (filePath)) {
+        LOGGER.traceEntry ("data: {}, filePath: {}", data, filePath);
+        try (final var writer = new FileWriter (filePath)) {
             GSON.toJson (data, writer);
         } catch (final IOException e) {
+            LOGGER.catching (e);
             throw new FrameworkError (format (ERROR_WRITING_FILE.getMessage (), filePath), e);
         }
+        LOGGER.traceExit ();
     }
 
     /**
@@ -91,7 +100,8 @@ public class JsonParser {
      * @return the JSON string
      */
     public static <T> String toString (final T data) {
-        return GSON.toJson (data);
+        LOGGER.traceEntry ("data: {}", data);
+        return LOGGER.traceExit (GSON.toJson (data));
     }
 
     private JsonParser () {

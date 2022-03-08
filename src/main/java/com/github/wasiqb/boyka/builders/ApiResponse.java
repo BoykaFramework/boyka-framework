@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.jayway.jsonpath.JsonPath.compile;
 import static com.jayway.jsonpath.JsonPath.parse;
 import static java.util.Objects.requireNonNull;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
@@ -31,6 +32,7 @@ import com.jayway.jsonpath.DocumentContext;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Response container class.
@@ -41,6 +43,8 @@ import lombok.Singular;
 @Getter
 @Builder (builderMethodName = "createResponse", buildMethodName = "create")
 public class ApiResponse {
+    private static final Logger LOGGER = getLogger ();
+
     private String              body;
     @Singular
     private Map<String, String> headers;
@@ -60,7 +64,8 @@ public class ApiResponse {
      * @return String field data
      */
     public String getResponseData (final String expression) {
-        return jsonPath ().read (compile (expression), String.class);
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (getResponseData (expression, String.class));
     }
 
     /**
@@ -73,7 +78,8 @@ public class ApiResponse {
      * @return Data in specified type
      */
     public <T> T getResponseData (final String expression, final Class<T> type) {
-        return jsonPath ().read (compile (expression), type);
+        LOGGER.traceEntry ("Expression: {}, Type: {}", expression, type);
+        return LOGGER.traceExit (jsonPath ().read (compile (expression), type));
     }
 
     /**
@@ -84,6 +90,8 @@ public class ApiResponse {
      * @return {@link BooleanSubject} instance
      */
     public BooleanSubject verifyBooleanField (final String expression) {
+        LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return assertThat (getResponseData (expression, Boolean.class));
     }
 
@@ -95,6 +103,8 @@ public class ApiResponse {
      * @return {@link IntegerSubject} instance
      */
     public IntegerSubject verifyIntField (final String expression) {
+        LOGGER.traceEntry ("Expression: {}", expression);
+        LOGGER.traceExit ();
         return assertThat (getResponseData (expression, Integer.class));
     }
 
@@ -104,6 +114,8 @@ public class ApiResponse {
      * @return {@link IntegerSubject} instance
      */
     public IntegerSubject verifyStatusCode () {
+        LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return assertThat (getStatusCode ());
     }
 
@@ -113,6 +125,8 @@ public class ApiResponse {
      * @return {@link StringSubject} instance
      */
     public StringSubject verifyStatusMessage () {
+        LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return assertThat (getStatusMessage ());
     }
 
@@ -124,10 +138,13 @@ public class ApiResponse {
      * @return {@link StringSubject} instance
      */
     public StringSubject verifyTextField (final String expression) {
+        LOGGER.traceEntry ("Expression: {}", expression);
+        LOGGER.traceExit ();
         return assertThat (getResponseData (expression));
     }
 
     private DocumentContext jsonPath () {
-        return parse (requireNonNull (this.body, NO_BODY_TO_PARSE.getMessage ()));
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (parse (requireNonNull (this.body, NO_BODY_TO_PARSE.getMessage ())));
     }
 }

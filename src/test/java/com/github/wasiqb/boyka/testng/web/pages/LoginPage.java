@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.web.pages;
 
-import static com.github.wasiqb.boyka.builders.Locator.createLocator;
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -39,17 +39,17 @@ public class LoginPage {
         return new LoginPage ();
     }
 
-    private final Locator loginBox    = createLocator ().web (id ("login_button_container"))
-        .create ();
-    private final Locator loginButton = createLocator ().web (id ("login-button"))
+    private final Locator loginBox    = buildLocator ().web (id ("login_button_container"))
+        .build ();
+    private final Locator loginButton = buildLocator ().web (id ("login-button"))
         .parent (this.loginBox)
-        .create ();
-    private final Locator password    = createLocator ().web (id ("password"))
+        .build ();
+    private final Locator password    = buildLocator ().web (id ("password"))
         .parent (this.loginBox)
-        .create ();
-    private final Locator username    = createLocator ().web (id ("user-name"))
+        .build ();
+    private final Locator username    = buildLocator ().web (id ("user-name"))
         .parent (this.loginBox)
-        .create ();
+        .build ();
 
     private LoginPage () {
         // Avoid explicit class initialisation.

@@ -17,8 +17,10 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.verifyDriverTextAttribute;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.google.common.truth.StringSubject;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -28,12 +30,16 @@ import org.openqa.selenium.WebDriver;
  * @since 05-Mar-2022
  */
 public class VerifyDriverActions {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Verify browser title.
      *
      * @return {@link StringSubject} to verify browser title
      */
     public static StringSubject verifyBrowserTitle () {
+        LOGGER.traceEntry ();
+        LOGGER.traceExit ();
         return verifyDriverTextAttribute (WebDriver::getTitle);
     }
 

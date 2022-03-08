@@ -51,5 +51,4 @@ public enum Browser {
      * Safari browser.
      */
     SAFARI
-
 }

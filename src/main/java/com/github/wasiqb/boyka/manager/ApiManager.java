@@ -20,6 +20,7 @@ import static com.github.wasiqb.boyka.enums.ContentType.JSON;
 import static com.github.wasiqb.boyka.enums.Messages.AUTH_PASSWORD_REQUIRED;
 import static com.github.wasiqb.boyka.enums.Messages.CONTENT_TYPE_MOT_SET;
 import static com.github.wasiqb.boyka.enums.Messages.ERROR_EXECUTING_REQUEST;
+import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_REQUEST_BODY;
 import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_RESPONSE_BODY;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
@@ -31,6 +32,8 @@ import static okhttp3.Credentials.basic;
 import static okhttp3.MediaType.parse;
 import static okhttp3.RequestBody.create;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -49,6 +52,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okio.Buffer;
+import org.apache.logging.log4j.Logger;
 
 /**
  * API manager to handle all API request executions.
@@ -57,6 +62,7 @@ import okhttp3.ResponseBody;
  * @since 17-Feb-2022
  */
 public final class ApiManager {
+    private static final Logger LOGGER      = getLogger ();
     private static final String URL_PATTERN = "{0}{1}{2}";
 
     /**
@@ -67,15 +73,16 @@ public final class ApiManager {
      * @return {@link ApiResponse}
      */
     public static ApiResponse execute (final ApiRequest request) {
+        LOGGER.traceEntry ();
         final var manager = new ApiManager (request.getConfigKey ());
         requireNonNullElse (request.getHeaders (), new HashMap<String, String> ()).forEach (manager::addHeader);
         requireNonNullElse (request.getPathParams (), new HashMap<String, String> ()).forEach (manager::pathParam);
-        return manager.contentType (request.getContentType ())
+        return LOGGER.traceExit (manager.contentType (request.getContentType ())
             .basicAuth (request.getUserName (), request.getPassword ())
             .body (requireNonNullElse (request.getBody (), EMPTY))
             .body (request.getBodyObject ())
             .method (request.getMethod ())
-            .getResponse (request.getPath ());
+            .getResponse (request.getPath ()));
     }
 
     private final ApiSetting          apiSetting;
@@ -87,6 +94,7 @@ public final class ApiManager {
     private       ApiResponse         response;
 
     private ApiManager (final String apiKey) {
+        LOGGER.traceEntry ("Parameter : {}", apiKey);
         this.pathParams = new HashMap<> ();
         this.apiSetting = loadSetting ().getApiSetting (apiKey);
         this.client = new OkHttpClient.Builder ().connectTimeout (ofSeconds (this.apiSetting.getConnectionTimeout ()))
@@ -94,39 +102,59 @@ public final class ApiManager {
             .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()))
             .build ();
         this.request = new Request.Builder ();
+        LOGGER.traceExit ();
     }
 
     private void addHeader (final String name, final String value) {
+        LOGGER.traceEntry ("Parameter: {}, {}", name, value);
         this.request.header (name, value);
+        LOGGER.traceExit ();
     }
 
     private ApiManager basicAuth (final String userName, final String password) {
         if (userName != null) {
+            LOGGER.traceEntry ("Parameters: userName={}", userName);
             final var credentials = basic (userName, requireNonNull (password, AUTH_PASSWORD_REQUIRED.getMessage ()));
             addHeader ("Authorization", credentials);
         }
-        return this;
+        return LOGGER.traceExit (this);
     }
 
     private <T> ApiManager body (final T body) {
+        LOGGER.traceEntry ();
         if (body != null) {
             this.requestBody = create (JsonParser.toString (body),
                 requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
         }
-        return this;
+        return LOGGER.traceExit (this);
     }
 
     private ApiManager body (final String body) {
+        LOGGER.traceEntry ();
         this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
-        return this;
+        return LOGGER.traceExit (this);
     }
 
     private ApiManager contentType (final ContentType contentType) {
+        LOGGER.traceEntry ("Parameter : {}", contentType);
         this.mediaType = parse (requireNonNullElse (contentType, JSON).getType ());
-        return this;
+        return LOGGER.traceExit (this);
+    }
+
+    private String getRequestBody (final RequestBody body) {
+        LOGGER.traceEntry ();
+        final var buffer = new Buffer ();
+        try {
+            requireNonNullElse (body, create ("{}", parse (JSON.getType ()))).writeTo (buffer);
+        } catch (final IOException e) {
+            LOGGER.catching (e);
+            throw new FrameworkError (ERROR_PARSING_REQUEST_BODY.getMessage (), e);
+        }
+        return LOGGER.traceExit (buffer.readUtf8 ());
     }
 
     private ApiResponse getResponse (final String path) {
+        LOGGER.traceEntry ("Parameters: {}", path);
         try {
             this.response = parseResponse (this.client.newCall (this.request.url (getUrl (path))
                     .build ())
@@ -134,58 +162,80 @@ public final class ApiManager {
             logRequest ();
             logResponse ();
         } catch (final IOException e) {
+            LOGGER.catching (e);
             throw new FrameworkError (ERROR_EXECUTING_REQUEST.getMessage (), e);
         }
-        return this.response;
+        return LOGGER.traceExit (this.response);
     }
 
     private String getUrl (final String path) {
+        LOGGER.traceEntry ("Parameter: {}", path);
         var hostName = this.apiSetting.getBaseUri ();
         if (this.apiSetting.getPort () > 0) {
             hostName = format ("{0}:{1}", hostName, this.apiSetting.getPort ());
         }
-        return format (URL_PATTERN, hostName, this.apiSetting.getBasePath (), interpolate (path, this.pathParams));
+        return LOGGER.traceExit (
+            format (URL_PATTERN, hostName, this.apiSetting.getBasePath (), interpolate (path, this.pathParams)));
     }
 
     private void logRequest () {
+        LOGGER.traceEntry ();
         if (this.apiSetting.getLogging ()
             .isRequest ()) {
             final var req = this.response.getRequest ();
-            System.out.println (req.getPath ());
-            System.out.println (req.getBody ());
+            LOGGER.info ("Request URL: {}", req.getPath ());
+            req.getHeaders ()
+                .forEach ((key, value) -> LOGGER.info ("Request Header: {} => {}", key, value));
+            req.getPathParams ()
+                .forEach ((key, value) -> LOGGER.info ("Request Path Param: {} => {}", key, value));
+            if (isNotEmpty (req.getBody ())) {
+                LOGGER.info ("Request Body: {}", req.getBody ());
+            }
         }
+        LOGGER.traceExit ();
     }
 
     private void logResponse () {
+        LOGGER.traceEntry ();
         if (this.apiSetting.getLogging ()
             .isResponse ()) {
-            System.out.println (this.response.getStatusCode ());
-            System.out.println (this.response.getStatusMessage ());
-            System.out.println (this.response.getBody ());
+            LOGGER.info ("Status Code: {}", this.response.getStatusCode ());
+            if (isNotEmpty (this.response.getBody ())) {
+                LOGGER.info ("Status Message: {}", this.response.getStatusMessage ());
+            }
+            this.response.getHeaders ()
+                .forEach ((k, v) -> LOGGER.info ("Response Header: {} => {}", k, v));
+            if (isNotEmpty (this.response.getBody ())) {
+                LOGGER.info ("Response Body: {}", this.response.getBody ());
+            }
         }
+        LOGGER.traceExit ();
     }
 
     private ApiManager method (final RequestMethod method) {
+        LOGGER.traceEntry ("Parameter: {}", method);
         if (method != RequestMethod.GET) {
             this.request.method (method.name (), requireNonNull (this.requestBody));
         }
-        return this;
+        return LOGGER.traceExit (this);
     }
 
     private ApiRequest parseRequest (final Request request) {
+        LOGGER.traceEntry ();
         final var headers = new HashMap<String, String> ();
         request.headers ()
             .forEach (entry -> headers.put (entry.getFirst (), entry.getSecond ()));
-        return ApiRequest.createRequest ()
-            .body (requireNonNullElse (request.body (), EMPTY).toString ())
+        return LOGGER.traceExit (ApiRequest.createRequest ()
+            .body (getRequestBody (request.body ()))
             .method (RequestMethod.valueOf (request.method ()))
             .headers (headers)
             .path (request.url ()
                 .toString ())
-            .create ();
+            .create ());
     }
 
     private ApiResponse parseResponse (final Response res) {
+        LOGGER.traceEntry ();
         if (res == null) {
             return null;
         }
@@ -193,7 +243,7 @@ public final class ApiManager {
         res.headers ()
             .forEach (entry -> headers.put (entry.getFirst (), entry.getSecond ()));
         try {
-            return ApiResponse.createResponse ()
+            return LOGGER.traceExit (ApiResponse.createResponse ()
                 .request (parseRequest (res.request ()))
                 .statusCode (res.code ())
                 .statusMessage (res.message ())
@@ -202,16 +252,17 @@ public final class ApiManager {
                 .networkResponse (parseResponse (res.networkResponse ()))
                 .previousResponse (parseResponse (res.priorResponse ()))
                 .receivedResponseAt (res.receivedResponseAtMillis ())
-                .body (requireNonNullElse (res.body (),
-                    ResponseBody.create (EMPTY, MediaType.parse (JSON.getType ()))).string ())
-                .create ();
+                .body (requireNonNullElse (res.body (), ResponseBody.create (EMPTY, parse (JSON.getType ()))).string ())
+                .create ());
         } catch (final IOException e) {
+            LOGGER.catching (e);
             throw new FrameworkError (ERROR_PARSING_RESPONSE_BODY.getMessage (), e);
         }
     }
 
     private void pathParam (final String param, final String value) {
-        // TODO: Query Params: https://stackoverflow.com/a/43029045/5320558
+        LOGGER.traceEntry ("Parameter: {}, {}", param, value);
         this.pathParams.put (param, value);
+        LOGGER.traceExit ();
     }
 }

@@ -16,8 +16,11 @@
 
 package com.github.wasiqb.boyka.sessions;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -27,13 +30,16 @@ import org.openqa.selenium.WebDriver;
  * @since 17-Feb-2022
  */
 public final class ParallelSession {
+    private static final Logger                                          LOGGER  = getLogger ();
     private static final ThreadLocal<DriverSession<? extends WebDriver>> SESSION = new ThreadLocal<> ();
 
     /**
      * Clears current session in thread.
      */
     public static void clearSession () {
+        LOGGER.traceEntry ();
         SESSION.remove ();
+        LOGGER.traceExit ();
     }
 
     /**
@@ -45,7 +51,8 @@ public final class ParallelSession {
      */
     @SuppressWarnings ("unchecked")
     public static <D extends WebDriver> DriverSession<D> getSession () {
-        return (DriverSession<D>) SESSION.get ();
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit ((DriverSession<D>) SESSION.get ());
     }
 
     /**
@@ -58,7 +65,9 @@ public final class ParallelSession {
      */
     public static <D extends WebDriver> void setDriver (final ApplicationType applicationType, final D driver,
         final FrameworkSetting setting) {
+        LOGGER.traceEntry ("Application Type: {}, Driver: {}, FrameworkSetting: {}", applicationType, driver, setting);
         SESSION.set (new DriverSession<> (applicationType, driver, setting));
+        LOGGER.traceExit ();
     }
 
     private ParallelSession () {

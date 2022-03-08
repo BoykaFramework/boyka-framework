@@ -17,10 +17,12 @@
 package com.github.wasiqb.boyka.sessions;
 
 import static java.time.Duration.ofSeconds;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import lombok.Getter;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,6 +36,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 @Getter
 public class DriverSession<D extends WebDriver> {
+    private static final Logger LOGGER = getLogger ();
+
     private final ApplicationType  applicationType;
     private final D                driver;
     private final FrameworkSetting setting;
@@ -47,13 +51,16 @@ public class DriverSession<D extends WebDriver> {
      * @param setting {@link FrameworkSetting} instance
      */
     public DriverSession (final ApplicationType applicationType, final D driver, final FrameworkSetting setting) {
+        LOGGER.traceEntry ("Application type: {}, Driver: {}, FrameworkSetting: {}", applicationType, driver, setting);
         this.applicationType = applicationType;
         this.setting = setting;
         this.driver = driver;
         setDriverWaits ();
+        LOGGER.traceExit ();
     }
 
     private void setDriverWaits () {
+        LOGGER.traceEntry ();
         final var playback = this.setting.getUi ()
             .getPlayback ();
         final var timeouts = this.driver.manage ()
@@ -64,5 +71,6 @@ public class DriverSession<D extends WebDriver> {
             timeouts.scriptTimeout (ofSeconds (playback.getScriptTimeout ()));
         }
         this.wait = new WebDriverWait (getDriver (), ofSeconds (playback.getExplicitWait ()));
+        LOGGER.traceExit ();
     }
 }

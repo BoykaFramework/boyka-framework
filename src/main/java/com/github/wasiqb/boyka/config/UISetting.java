@@ -16,9 +16,12 @@
 
 package com.github.wasiqb.boyka.config;
 
+import static com.github.wasiqb.boyka.enums.ApplicationType.ANDROID;
+import static com.github.wasiqb.boyka.enums.ApplicationType.IOS;
 import static com.github.wasiqb.boyka.enums.Messages.INVALID_PLATFORM_FOR_OPERATION;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
@@ -27,6 +30,7 @@ import com.github.wasiqb.boyka.config.ui.WebSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Data;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author Wasiq Bhamla
@@ -34,6 +38,8 @@ import lombok.Data;
  */
 @Data
 public class UISetting {
+    private static final Logger LOGGER = getLogger ();
+
     private Map<String, MobileSetting> android;
     private Map<String, MobileSetting> ios;
     private PlaybackSetting            playback;
@@ -48,10 +54,11 @@ public class UISetting {
      * @return the {@link MobileSetting}
      */
     public MobileSetting getMobileSetting (final ApplicationType applicationType, final String key) {
-        if (applicationType == ApplicationType.IOS) {
-            return requireNonNull (this.ios.get (key));
-        } else if (applicationType == ApplicationType.ANDROID) {
-            return requireNonNull (this.android.get (key));
+        LOGGER.traceEntry ("ApplicationType: {}, Key: {}", applicationType, key);
+        if (applicationType == IOS) {
+            return LOGGER.traceExit (requireNonNull (this.ios.get (key)));
+        } else if (applicationType == ANDROID) {
+            return LOGGER.traceExit (requireNonNull (this.android.get (key)));
         }
         throw new FrameworkError (format (INVALID_PLATFORM_FOR_OPERATION.getMessage (), applicationType));
     }
@@ -64,6 +71,7 @@ public class UISetting {
      * @return the {@link WebSetting}
      */
     public WebSetting getWebSetting (final String key) {
-        return this.web.get (key);
+        LOGGER.traceEntry ("Key: {}", key);
+        return LOGGER.traceExit (this.web.get (key));
     }
 }

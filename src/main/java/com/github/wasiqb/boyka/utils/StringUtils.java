@@ -16,9 +16,13 @@
 
 package com.github.wasiqb.boyka.utils;
 
+import static org.apache.commons.text.StringSubstitutor.createInterpolator;
+import static org.apache.logging.log4j.LogManager.getLogger;
+
 import java.util.Map;
 
 import org.apache.commons.text.StringSubstitutor;
+import org.apache.logging.log4j.Logger;
 
 /**
  * String utils.
@@ -27,6 +31,8 @@ import org.apache.commons.text.StringSubstitutor;
  * @since 24-Feb-2022
  */
 public final class StringUtils {
+    private static final Logger LOGGER = getLogger ();
+
     /**
      * Replace all variables in the given string with the values from system environment variables, system properties,
      * etc.
@@ -36,12 +42,15 @@ public final class StringUtils {
      * @return Interpolated string
      */
     public static String interpolate (final String value) {
+        LOGGER.traceEntry ("Interpolating string: {}", value);
+        var result = value;
         if (value.startsWith ("${")) {
-            final StringSubstitutor substitute = StringSubstitutor.createInterpolator ();
+            final var substitute = createInterpolator ();
             substitute.setEnableSubstitutionInVariables (true);
-            return substitute.replace (value);
+            result = substitute.replace (value);
         }
-        return value;
+        LOGGER.traceExit ();
+        return result;
     }
 
     /**
@@ -53,12 +62,15 @@ public final class StringUtils {
      * @return Interpolated string
      */
     public static String interpolate (final String value, final Map<String, String> valuesMap) {
+        LOGGER.traceEntry ("Interpolating string: {}", value);
+        var result = value;
         if (value.contains ("${")) {
-            final StringSubstitutor substitute = new StringSubstitutor (valuesMap);
+            final var substitute = new StringSubstitutor (valuesMap);
             substitute.setEnableSubstitutionInVariables (true);
-            return substitute.replace (value);
+            result = substitute.replace (value);
         }
-        return value;
+        LOGGER.traceExit ();
+        return result;
     }
 
     private StringUtils () {

@@ -47,9 +47,13 @@ public enum Messages {
      */
     ERROR_EXECUTING_REQUEST ("Error occurred while executing request..."),
     /**
+     * Error occurred while parsing request body.
+     */
+    ERROR_PARSING_REQUEST_BODY ("Error occurred while parsing request body..."),
+    /**
      * Parsing Error while parsing the response body.
      */
-    ERROR_PARSING_RESPONSE_BODY ("Error parsing response body..."),
+    ERROR_PARSING_RESPONSE_BODY ("Error occurred while parsing response body..."),
     /**
      * Error reading file
      */

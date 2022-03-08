@@ -17,17 +17,23 @@
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.config.ui.MobileSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import org.apache.logging.log4j.Logger;
 
 public final class ServerManager {
+    private static final Logger LOGGER = getLogger ();
+
     private       AppiumServiceBuilder builder;
     private final MobileSetting        setting;
 
     public ServerManager (final ApplicationType applicationType, final String appiumKey) {
+        LOGGER.traceEntry ("ApplicationType: {}, AppiumKey: {}", applicationType, appiumKey);
         this.setting = loadSetting ().getUi ()
             .getMobileSetting (applicationType, appiumKey);
+        LOGGER.traceExit ();
     }
 }

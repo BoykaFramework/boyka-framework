@@ -17,8 +17,10 @@
 package com.github.wasiqb.boyka.utils;
 
 import static com.github.wasiqb.boyka.utils.JsonParser.fromFile;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Utility class to ready config JSON file.
@@ -27,6 +29,8 @@ import com.github.wasiqb.boyka.config.FrameworkSetting;
  * @since 17-Feb-2022
  */
 public final class SettingUtils {
+    private static final Logger LOGGER = getLogger ();
+
     private static FrameworkSetting frameworkSetting;
 
     /**
@@ -35,10 +39,11 @@ public final class SettingUtils {
      * @return {@link FrameworkSetting}
      */
     public static FrameworkSetting loadSetting () {
+        LOGGER.traceEntry ();
         if (frameworkSetting == null) {
-            frameworkSetting = fromFile ("test-config.json", FrameworkSetting.class);
+            frameworkSetting = fromFile ("boyka-config.json", FrameworkSetting.class);
         }
-        return frameworkSetting;
+        return LOGGER.traceExit (frameworkSetting);
     }
 
     private SettingUtils () {

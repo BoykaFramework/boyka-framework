@@ -27,7 +27,6 @@ import static com.github.wasiqb.boyka.testng.web.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
-import com.github.wasiqb.boyka.manager.DriverManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -40,8 +39,6 @@ import org.testng.annotations.Test;
  * @since 24-Feb-2022
  */
 public class TestWeb {
-    private DriverManager driverManager;
-
     /**
      * Setup test class by initialising driver.
      *
@@ -51,7 +48,7 @@ public class TestWeb {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "appType", "driverKey" })
     public void setupTestClass (final ApplicationType appType, final String driverKey) {
-        this.driverManager = createDriver (appType, driverKey);
+        createDriver (appType, driverKey);
     }
 
     /**
