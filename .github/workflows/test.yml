@@ -85,6 +85,7 @@ jobs:
         with:
           name: target
           path: |
+            ${{ github.workspace }}/logs
             ${{ github.workspace }}/selenium-grid.log
             ${{ github.workspace }}/target
             ${{ github.workspace }}/reports

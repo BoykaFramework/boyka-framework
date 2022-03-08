@@ -14,7 +14,7 @@ Configuration:
       - name: test-log
         value: boyka-log-main
       - name: log-pattern
-        value: "[%d{HH:mm:ss.SSS}] [%-5level] - %msg (%logger{1}:%method:%L) %throwable{short.message}%n"
+        value: "[%d{HH:mm:ss.SSS}] [%-5level] [%tn] - %msg (%logger{1}:%method:%L) %throwable{short.message}%n"
 
   appenders:
     Console:

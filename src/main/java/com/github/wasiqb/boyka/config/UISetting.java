@@ -54,7 +54,7 @@ public class UISetting {
      * @return the {@link MobileSetting}
      */
     public MobileSetting getMobileSetting (final ApplicationType applicationType, final String key) {
-        LOGGER.traceEntry ("ApplicationType: {0}, Key: {1}", applicationType, key);
+        LOGGER.traceEntry ("ApplicationType: {}, Key: {}", applicationType, key);
         if (applicationType == IOS) {
             return LOGGER.traceExit (requireNonNull (this.ios.get (key)));
         } else if (applicationType == ANDROID) {
@@ -71,7 +71,7 @@ public class UISetting {
      * @return the {@link WebSetting}
      */
     public WebSetting getWebSetting (final String key) {
-        LOGGER.traceEntry ("Key: {0}", key);
+        LOGGER.traceEntry ("Key: {}", key);
         return LOGGER.traceExit (this.web.get (key));
     }
 }

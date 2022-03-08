@@ -81,7 +81,7 @@ public class JsonParser {
      * @param <T> the type of the object
      */
     public static <T> void toFile (final T data, final String filePath) {
-        LOGGER.traceEntry ("data: {0}, filePath: {1}", data, filePath);
+        LOGGER.traceEntry ("data: {}, filePath: {}", data, filePath);
         try (final var writer = new FileWriter (filePath)) {
             GSON.toJson (data, writer);
         } catch (final IOException e) {
@@ -100,7 +100,7 @@ public class JsonParser {
      * @return the JSON string
      */
     public static <T> String toString (final T data) {
-        LOGGER.traceEntry ("data: {0}", data);
+        LOGGER.traceEntry ("data: {}", data);
         return LOGGER.traceExit (GSON.toJson (data));
     }
 

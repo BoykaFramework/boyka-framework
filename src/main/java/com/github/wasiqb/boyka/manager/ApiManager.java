@@ -106,7 +106,7 @@ public final class ApiManager {
     }
 
     private void addHeader (final String name, final String value) {
-        LOGGER.traceEntry ("Parameter: {0}, {1}", name, value);
+        LOGGER.traceEntry ("Parameter: {}, {}", name, value);
         this.request.header (name, value);
         LOGGER.traceExit ();
     }
