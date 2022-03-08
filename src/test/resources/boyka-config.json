@@ -1,7 +1,7 @@
 {
   "ui": {
     "playback": {
-      "implicit_wait": 5,
+      "implicit_wait": 10,
       "explicit_wait": 10,
       "page_load_timeout": 30,
       "script_timeout": 10
