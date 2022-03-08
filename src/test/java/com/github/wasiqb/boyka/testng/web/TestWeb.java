@@ -26,8 +26,10 @@ import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
 import static com.github.wasiqb.boyka.testng.web.pages.ProductDetailsPage.productDetailsPage;
+import static com.github.wasiqb.boyka.testng.web.pages.ProductPage.productPage;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -63,7 +65,7 @@ public class TestWeb {
     /**
      * Test login functionality.
      */
-    @Test (description = "Test login functionality")
+    @Test (description = "Test login functionality", priority = 1)
     public void testLogin () {
         navigateTo ("https://www.saucedemo.com/");
         enterText (loginPage ().getUsername (), "standard_user");
@@ -81,4 +83,15 @@ public class TestWeb {
         clickOn (homePage ().productItem ("Sauce Labs Backpack"));
         verifyElementDisplayed (productDetailsPage ().getContainer ()).isTrue ();
     }
+    @Test(description = "Test adding a product to cart", priority = 2)
+    public void testAddToCart () {
+        verifyElementDisplayed(productPage().getSauceLabsBackPackTitle()).isTrue();
+        verifyElementDisplayed(productPage().getSauceLabsBackPackDesc()).isTrue();
+        clickOn(productPage().getSauceLabsBackPackAddToCardBtn());
+
+        Assert.assertEquals(productPage().getSauceLabsBackPackPrice(), "$29.99");
+        Assert.assertEquals(productPage().getShoppingCart(), 1);
+
+    }
+
 }
