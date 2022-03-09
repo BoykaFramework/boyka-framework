@@ -1,11 +1,11 @@
 package com.github.wasiqb.boyka.testng.web.pages;
 
-import com.github.wasiqb.boyka.builders.Locator;
-import lombok.Getter;
-
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
+
+import com.github.wasiqb.boyka.builders.Locator;
+import lombok.Getter;
 
 @Getter
 public class ProductPage {
