@@ -21,14 +21,13 @@ import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
-import static com.github.wasiqb.boyka.testng.web.pages.ProductPage.productPage;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -63,12 +62,12 @@ public class TestWeb {
 
     @Test (description = "Test adding a product to cart", priority = 2)
     public void testAddToCart () {
-        verifyElementDisplayed (productPage ().getSauceLabsBackPackTitle ()).isTrue ();
-        verifyElementDisplayed (productPage ().getSauceLabsBackPackDesc ()).isTrue ();
-        clickOn (productPage ().getSauceLabsBackPackAddToCardBtn ());
+        verifyElementDisplayed (homePage ().getProductTitle ()).isTrue ();
+        verifyElementDisplayed (homePage ().getProductDescription ()).isTrue ();
+        clickOn (homePage ().getAddToCartButton ());
 
-        Assert.assertEquals (productPage ().getSauceLabsBackPackPrice (), "$29.99");
-        Assert.assertEquals (productPage ().getShoppingCart (), 1);
+        verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
+        verifyTextOf (homePage ().getShoppingCartCount ()).isEqualTo ("1");
     }
 
     /**

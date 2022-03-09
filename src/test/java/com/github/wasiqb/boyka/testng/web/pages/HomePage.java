@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.testng.web.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -39,7 +40,23 @@ public class HomePage {
         return new HomePage ();
     }
 
-    private final Locator menuButton = buildLocator ().web (id ("react-burger-menu-btn"))
+    private final Locator menuButton         = buildLocator ().web (id ("react-burger-menu-btn"))
+        .build ();
+    private final Locator productParent      = buildLocator ().web (cssSelector ("div.inventory_item"))
+        .build ();
+    private final Locator productDescription = buildLocator ().parent (this.productParent)
+        .web (cssSelector ("div.inventory_item_desc"))
+        .build ();
+    private final Locator addToCartButton    = buildLocator ().parent (this.productParent)
+        .web (id ("add-to-cart-sauce-labs-backpack"))
+        .build ();
+    private final Locator productPrice       = buildLocator ().parent (this.productParent)
+        .web (cssSelector ("div.inventory_item_price"))
+        .build ();
+    private final Locator productTitle       = buildLocator ().parent (this.productParent)
+        .web (cssSelector ("div.inventory_item_name"))
+        .build ();
+    private final Locator shoppingCartCount  = buildLocator ().web (cssSelector ("span.shopping_cart_badge"))
         .build ();
 
     private HomePage () {
