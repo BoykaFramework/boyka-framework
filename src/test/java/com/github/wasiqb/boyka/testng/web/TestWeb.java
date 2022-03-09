@@ -16,13 +16,6 @@
 
 package com.github.wasiqb.boyka.testng.web;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
@@ -35,6 +28,13 @@ import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
 import static com.github.wasiqb.boyka.testng.web.pages.ProductDetailsPage.productDetailsPage;
 import static com.github.wasiqb.boyka.testng.web.pages.ProductPage.productPage;
 
+import com.github.wasiqb.boyka.enums.ApplicationType;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
 /**
  * Test class to test web application.
  *
@@ -45,21 +45,31 @@ public class TestWeb {
     /**
      * Setup test class by initialising driver.
      *
-     * @param appType   Application type
+     * @param appType Application type
      * @param driverKey Driver config key
      */
-    @BeforeClass(description = "Setup test class")
-    @Parameters({"appType", "driverKey"})
-    public void setupTestClass(final ApplicationType appType, final String driverKey) {
-        createDriver(appType, driverKey);
+    @BeforeClass (description = "Setup test class")
+    @Parameters ({ "appType", "driverKey" })
+    public void setupTestClass (final ApplicationType appType, final String driverKey) {
+        createDriver (appType, driverKey);
     }
 
     /**
      * Tear down test class by closing driver.
      */
-    @AfterClass(description = "Tear down test class")
-    public void tearDownTestClass() {
-        closeDriver();
+    @AfterClass (description = "Tear down test class")
+    public void tearDownTestClass () {
+        closeDriver ();
+    }
+
+    @Test (description = "Test adding a product to cart", priority = 2)
+    public void testAddToCart () {
+        verifyElementDisplayed (productPage ().getSauceLabsBackPackTitle ()).isTrue ();
+        verifyElementDisplayed (productPage ().getSauceLabsBackPackDesc ()).isTrue ();
+        clickOn (productPage ().getSauceLabsBackPackAddToCardBtn ());
+
+        Assert.assertEquals (productPage ().getSauceLabsBackPackPrice (), "$29.99");
+        Assert.assertEquals (productPage ().getShoppingCart (), 1);
     }
 
     /**
@@ -83,14 +93,4 @@ public class TestWeb {
         clickOn (homePage ().productItem ("Sauce Labs Backpack"));
         verifyElementDisplayed (productDetailsPage ().getContainer ()).isTrue ();
     }
-    @Test(description = "Test adding a product to cart", priority = 2)
-    public void testAddToCart() {
-        verifyElementDisplayed(productPage().getSauceLabsBackPackTitle()).isTrue();
-        verifyElementDisplayed(productPage().getSauceLabsBackPackDesc()).isTrue();
-        clickOn(productPage().getSauceLabsBackPackAddToCardBtn());
-
-        Assert.assertEquals(productPage().getSauceLabsBackPackPrice(), "$29.99");
-        Assert.assertEquals(productPage().getShoppingCart(), 1);
-    }
-
 }
