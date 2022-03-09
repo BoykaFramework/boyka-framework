@@ -16,12 +16,12 @@
 
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.actions.CommonActions.verifyDriverTextAttribute;
+import static com.github.wasiqb.boyka.actions.DriverActions.title;
+import static com.google.common.truth.Truth.assertThat;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.google.common.truth.StringSubject;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 
 /**
  * Verify driver actions.
@@ -40,7 +40,7 @@ public class VerifyDriverActions {
     public static StringSubject verifyBrowserTitle () {
         LOGGER.traceEntry ();
         LOGGER.traceExit ();
-        return verifyDriverTextAttribute (WebDriver::getTitle);
+        return assertThat (title ());
     }
 
     private VerifyDriverActions () {
