@@ -25,6 +25,7 @@ import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
+import static com.github.wasiqb.boyka.testng.web.pages.ProductDetailsPage.productDetailsPage;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
@@ -70,5 +71,14 @@ public class TestWeb {
         clickOn (loginPage ().getLoginButton ());
         verifyBrowserTitle ().isEqualTo ("Swag Labs");
         verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
+    }
+
+    /**
+     * Test login functionality.
+     */
+    @Test (description = "Test login functionality")
+    public void testProductDetails () {
+        clickOn (homePage ().productItem ("Sauce Labs Backpack"));
+        verifyElementDisplayed (productDetailsPage ().getContainer ()).isTrue ();
     }
 }
