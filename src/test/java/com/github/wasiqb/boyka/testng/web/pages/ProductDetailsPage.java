@@ -17,46 +17,33 @@
 package com.github.wasiqb.boyka.testng.web.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
-import static java.text.MessageFormat.format;
-import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.By.xpath;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
+import org.openqa.selenium.By;
 
 /**
- * Home page object for Sauce demo application.
+ * Product details page.
  *
  * @author Wasiq Bhamla
- * @since 24-Feb-2022
+ * @since 10-Mar-2022
  */
 @Getter
-public class HomePage {
+public class ProductDetailsPage {
     /**
-     * Home page instance.
+     * Gets the product details page instance.
      *
-     * @return {@link HomePage}
+     * @return {@link ProductDetailsPage} instance
      */
-    public static HomePage homePage () {
-        return new HomePage ();
+    public static ProductDetailsPage productDetailsPage () {
+        return new ProductDetailsPage ();
     }
 
-    private final Locator menuButton = buildLocator ().web (id ("react-burger-menu-btn"))
+    private final Locator container = buildLocator ().web (
+            By.cssSelector ("div#inventory_item_container div.inventory_details"))
         .build ();
 
-    private HomePage () {
-        // Avoid explicit class initialisation
-    }
-
-    /**
-     * Get product item title locator based on its text.
-     *
-     * @param productName Product name
-     *
-     * @return {@link Locator} of product item title
-     */
-    public Locator productItem (final String productName) {
-        return buildLocator ().web (xpath (format (".//*[text()=\"{0}\"]", productName)))
-            .build ();
+    private ProductDetailsPage () {
+        // Avoid explicit class initialisation.
     }
 }
