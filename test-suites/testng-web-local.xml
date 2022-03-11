@@ -38,7 +38,7 @@
             <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
         </classes>
     </test>
-    <test name="Test Boyka web on Local Safari">
+    <test name="Test Boyka web on Local Safari" enabled="false">
         <parameter name="appType" value="WEB"/>
         <parameter name="driverKey" value="test_local_safari"/>
         <classes>
