@@ -3,3 +3,4 @@
 /reports
 /logs
 *.iml
+.DS_Store
