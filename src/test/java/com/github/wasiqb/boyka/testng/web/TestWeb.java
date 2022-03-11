@@ -61,6 +61,9 @@ public class TestWeb {
         closeDriver ();
     }
 
+    /**
+     * Test add to cart functionality.
+     */
     @Test (description = "Test adding a product to cart", priority = 2)
     public void testAddToCart () {
         verifyElementDisplayed (homePage ().getProductTitle ()).isTrue ();
@@ -74,23 +77,22 @@ public class TestWeb {
     /**
      * Test login functionality.
      */
-    @Test(description = "Test login functionality", priority = 1)
-    public void testLogin() {
-        navigateTo("https://www.saucedemo.com/");
-        enterText(loginPage().getUsername(), "standard_user");
-        enterText(loginPage().getPassword(), "secret_sauce");
-        clickOn(loginPage().getLoginButton());
-        verifyBrowserTitle().isEqualTo("Swag Labs");
-        verifyElementDisplayed(homePage().getMenuButton()).isTrue();
+    @Test (description = "Test login functionality", priority = 1)
+    public void testLogin () {
+        navigateTo ("https://www.saucedemo.com/");
+        enterText (loginPage ().getUsername (), "standard_user");
+        enterText (loginPage ().getPassword (), "secret_sauce");
+        clickOn (loginPage ().getLoginButton ());
+        verifyBrowserTitle ().isEqualTo ("Swag Labs");
+        verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
     }
 
     /**
      * Test login functionality.
      */
-    @Test (description = "Test login functionality")
+    @Test (description = "Test login functionality", priority = 3)
     public void testProductDetails () {
         clickOn (homePage ().productItem ("Sauce Labs Backpack"));
         verifyElementDisplayed (productDetailsPage ().getContainer ()).isTrue ();
     }
-
 }
