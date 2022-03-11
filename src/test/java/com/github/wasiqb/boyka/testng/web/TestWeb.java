@@ -92,4 +92,5 @@ public class TestWeb {
         clickOn (homePage ().productItem ("Sauce Labs Backpack"));
         verifyElementDisplayed (productDetailsPage ().getContainer ()).isTrue ();
     }
+
 }
