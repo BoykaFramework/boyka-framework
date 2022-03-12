@@ -23,6 +23,7 @@ import com.github.wasiqb.boyka.enums.RequestMethod;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import lombok.ToString;
 
 /**
  * Request builder class.
@@ -30,6 +31,7 @@ import lombok.Singular;
  * @author Wasiq Bhamla
  * @since 04-Mar-2022
  */
+@ToString
 @Getter
 @Builder (builderMethodName = "createRequest", buildMethodName = "create")
 public class ApiRequest {
