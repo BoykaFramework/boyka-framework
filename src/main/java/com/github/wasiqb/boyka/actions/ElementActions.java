@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
+import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -33,6 +34,33 @@ public final class ElementActions {
     private static final Logger LOGGER = getLogger ();
 
     /**
+     * Gets the value of the attribute of the element.
+     *
+     * @param locator locator of the element
+     * @param attribute attribute of the element
+     *
+     * @return value of the attribute of the element
+     */
+    public static String attributeOf (final Locator locator, final String attribute) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator);
+        LOGGER.traceExit ();
+        return getElementAttribute (e -> e.getAttribute (attribute), locator);
+    }
+
+    /**
+     * Clear text, selection of element.
+     *
+     * @param locator {@link Locator} of text field
+     */
+    public static void clear (final Locator locator) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Clearing element located by: {}", locator);
+        performElementAction (WebElement::clear, locator);
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Gets the value if the element is displayed.
      *
      * @param locator locator of the element
@@ -41,6 +69,7 @@ public final class ElementActions {
      */
     public static boolean isDisplayed (final Locator locator) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Checking if element located by: {} is displayed", locator);
         return LOGGER.traceExit (getElementAttribute (WebElement::isDisplayed, locator));
     }
 
@@ -53,6 +82,7 @@ public final class ElementActions {
      */
     public static boolean isEnabled (final Locator locator) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Checking if element located by: {} is enabled", locator);
         return LOGGER.traceExit (getElementAttribute (WebElement::isEnabled, locator));
     }
 
@@ -65,7 +95,20 @@ public final class ElementActions {
      */
     public static boolean isSelected (final Locator locator) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Checking if element located by: {} is selected", locator);
         return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, locator));
+    }
+
+    /**
+     * Submit the element.
+     *
+     * @param locator {@link Locator} of element
+     */
+    public static void submit (final Locator locator) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Submitting element located by: {}", locator);
+        performElementAction (WebElement::submit, locator);
+        LOGGER.traceExit ();
     }
 
     /**
@@ -77,6 +120,7 @@ public final class ElementActions {
      */
     public static String textOf (final Locator locator) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Getting text of element located by: {}", locator);
         return LOGGER.traceExit (getElementAttribute (WebElement::getText, locator));
     }
 

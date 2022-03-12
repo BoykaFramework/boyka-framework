@@ -39,6 +39,7 @@ public class VerifyDriverActions {
      */
     public static StringSubject verifyBrowserTitle () {
         LOGGER.traceEntry ();
+        LOGGER.info ("Verifying browser title");
         LOGGER.traceExit ();
         return assertThat (title ());
     }

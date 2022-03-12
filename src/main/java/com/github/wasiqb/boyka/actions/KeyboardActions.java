@@ -17,11 +17,11 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.actions.ElementActions.clear;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebElement;
 
 /**
  * Perform Keyboard actions.
@@ -32,14 +32,10 @@ import org.openqa.selenium.WebElement;
 public final class KeyboardActions {
     private static final Logger LOGGER = getLogger ();
 
-    /**
-     * Clear text from text field.
-     *
-     * @param locator {@link Locator} of text field
-     */
-    public static void clearText (final Locator locator) {
-        LOGGER.traceEntry ("Locator: {}", locator);
-        performElementAction (WebElement::clear, locator);
+    public static void appendText (final Locator locator, final String text) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Appending text {} to element {}", text, locator);
+        performElementAction (e -> e.sendKeys (text), locator);
         LOGGER.traceExit ();
     }
 
@@ -50,9 +46,10 @@ public final class KeyboardActions {
      * @param text text to enter
      */
     public static void enterText (final Locator locator, final String text) {
-        LOGGER.traceEntry ("Locator: {}, Text: {}", locator, text);
-        clearText (locator);
-        performElementAction (e -> e.sendKeys (text), locator);
+        LOGGER.traceEntry ();
+        LOGGER.info ("Entering text {} in element {}", text, locator);
+        clear (locator);
+        appendText (locator, text);
         LOGGER.traceExit ();
     }
 

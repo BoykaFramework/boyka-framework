@@ -38,7 +38,8 @@ public final class DriverActions {
      * @param url url to navigate to
      */
     public static void navigateTo (final String url) {
-        LOGGER.traceEntry ("url: {}", url);
+        LOGGER.traceEntry ();
+        LOGGER.info ("Navigating to url: {}", url);
         performDriverAction (driver -> driver.get (url));
         LOGGER.traceExit ();
     }
@@ -50,6 +51,7 @@ public final class DriverActions {
      */
     public static String title () {
         LOGGER.traceEntry ();
+        LOGGER.info ("Getting title of the browser");
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle));
     }
 
