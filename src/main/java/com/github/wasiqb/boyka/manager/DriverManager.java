@@ -71,6 +71,7 @@ public final class DriverManager {
      */
     public static void closeDriver () {
         LOGGER.traceEntry ();
+        LOGGER.info ("Closing driver instance");
         getSession ().getDriver ()
             .quit ();
         clearSession ();
@@ -86,7 +87,8 @@ public final class DriverManager {
      * @return the driver instance
      */
     public static DriverManager createDriver (final ApplicationType applicationType, final String driverKey) {
-        LOGGER.traceEntry ("Application Type : {}, Driver Key : {}", applicationType, driverKey);
+        LOGGER.traceEntry ();
+        LOGGER.info ("Creating Driver Instance for {} and driver key: {}", applicationType, driverKey);
         final var instance = new DriverManager (applicationType, driverKey);
         instance.setupDriver ();
         return LOGGER.traceExit (instance);
@@ -97,7 +99,7 @@ public final class DriverManager {
     private final FrameworkSetting setting;
 
     private DriverManager (final ApplicationType applicationType, final String driverKey) {
-        LOGGER.traceEntry ("Application Type : {}, Driver Key : {}", applicationType, driverKey);
+        LOGGER.traceEntry ();
         this.applicationType = applicationType;
         this.driverKey = driverKey;
         this.setting = loadSetting ();
@@ -199,7 +201,7 @@ public final class DriverManager {
     }
 
     private void setupWebDriver (final WebSetting webSetting) {
-        LOGGER.traceEntry ("Web Setting : {}", webSetting);
+        LOGGER.traceEntry ();
         switch (webSetting.getBrowser ()) {
             case CHROME:
                 setDriver (this.applicationType, setupChromeDriver (webSetting), this.setting);
