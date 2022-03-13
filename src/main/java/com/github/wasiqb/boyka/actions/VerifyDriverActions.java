@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.title;
+import static com.github.wasiqb.boyka.actions.DriverActions.url;
 import static com.google.common.truth.Truth.assertThat;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -42,6 +43,18 @@ public class VerifyDriverActions {
         LOGGER.info ("Verifying browser title");
         LOGGER.traceExit ();
         return assertThat (title ());
+    }
+
+    /**
+     * Verify browser url.
+     *
+     * @return {@link StringSubject} to verify browser url
+     */
+    public static StringSubject verifyBrowserUrl () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying browser url");
+        LOGGER.traceExit ();
+        return assertThat (url ());
     }
 
     private VerifyDriverActions () {

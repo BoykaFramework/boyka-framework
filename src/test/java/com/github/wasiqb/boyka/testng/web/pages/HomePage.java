@@ -42,6 +42,8 @@ public class HomePage {
         return new HomePage ();
     }
 
+    private final Locator logout             = buildLocator ().web (id ("logout_sidebar_link"))
+        .build ();
     private final Locator menuButton         = buildLocator ().web (id ("react-burger-menu-btn"))
         .build ();
     private final Locator productParent      = buildLocator ().web (cssSelector ("div.inventory_item"))
@@ -57,6 +59,8 @@ public class HomePage {
         .build ();
     private final Locator productTitle       = buildLocator ().parent (this.productParent)
         .web (cssSelector ("div.inventory_item_name"))
+        .build ();
+    private final Locator shoppingCart       = buildLocator ().web (cssSelector ("a.shopping_cart_link"))
         .build ();
     private final Locator shoppingCartCount  = buildLocator ().web (cssSelector ("span.shopping_cart_badge"))
         .build ();

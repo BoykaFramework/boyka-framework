@@ -55,6 +55,17 @@ public final class DriverActions {
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle));
     }
 
+    /**
+     * Get current url of the browser.
+     *
+     * @return current url of the browser
+     */
+    public static String url () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting url of the browser");
+        return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl));
+    }
+
     private DriverActions () {
         // Utility class.
     }
