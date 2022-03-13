@@ -17,10 +17,12 @@
 package com.github.wasiqb.boyka.testng.web;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.ElementActions.submit;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyAttributeOf;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementEnabled;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
@@ -75,6 +77,8 @@ public class TestWeb {
     public void testAddToCart () {
         verifyElementDisplayed (homePage ().getProductTitle ()).isTrue ();
         verifyElementDisplayed (homePage ().getProductDescription ()).isTrue ();
+        verifyAttributeOf (homePage ().getAddToCartButton (), "data-test").isEqualTo (
+            "add-to-cart-sauce-labs-backpack");
         clickOn (homePage ().getAddToCartButton ());
 
         verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
@@ -121,7 +125,7 @@ public class TestWeb {
         verifyBrowserUrl ().startsWith (URL);
         enterText (loginPage ().getUsername (), "standard_user");
         enterText (loginPage ().getPassword (), "secret_sauce");
-        clickOn (loginPage ().getLoginButton ());
+        submit (loginPage ().getLoginButton ());
         verifyBrowserUrl ().isEqualTo (format ("{0}/inventory.html", URL));
         verifyBrowserTitle ().isEqualTo ("Swag Labs");
         verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
