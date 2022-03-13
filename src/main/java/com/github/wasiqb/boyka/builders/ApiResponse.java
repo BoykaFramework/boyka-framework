@@ -32,6 +32,7 @@ import com.jayway.jsonpath.DocumentContext;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import lombok.ToString;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -40,6 +41,7 @@ import org.apache.logging.log4j.Logger;
  * @author Wasiq Bhamla
  * @since 04-Mar-2022
  */
+@ToString
 @Getter
 @Builder (builderMethodName = "createResponse", buildMethodName = "create")
 public class ApiResponse {
@@ -65,6 +67,7 @@ public class ApiResponse {
      */
     public String getResponseData (final String expression) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Get response data for expression: {}", expression);
         return LOGGER.traceExit (getResponseData (expression, String.class));
     }
 
@@ -78,7 +81,8 @@ public class ApiResponse {
      * @return Data in specified type
      */
     public <T> T getResponseData (final String expression, final Class<T> type) {
-        LOGGER.traceEntry ("Expression: {}, Type: {}", expression, type);
+        LOGGER.traceEntry ();
+        LOGGER.info ("Get response data for expression: {} and type: {}", expression, type);
         return LOGGER.traceExit (jsonPath ().read (compile (expression), type));
     }
 
@@ -91,6 +95,7 @@ public class ApiResponse {
      */
     public BooleanSubject verifyBooleanField (final String expression) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Verifying boolean field for expression: {}", expression);
         LOGGER.traceExit ();
         return assertThat (getResponseData (expression, Boolean.class));
     }
@@ -103,7 +108,8 @@ public class ApiResponse {
      * @return {@link IntegerSubject} instance
      */
     public IntegerSubject verifyIntField (final String expression) {
-        LOGGER.traceEntry ("Expression: {}", expression);
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying integer field for expression: {}", expression);
         LOGGER.traceExit ();
         return assertThat (getResponseData (expression, Integer.class));
     }
@@ -115,6 +121,7 @@ public class ApiResponse {
      */
     public IntegerSubject verifyStatusCode () {
         LOGGER.traceEntry ();
+        LOGGER.info ("Verifying Status Code");
         LOGGER.traceExit ();
         return assertThat (getStatusCode ());
     }
@@ -126,6 +133,7 @@ public class ApiResponse {
      */
     public StringSubject verifyStatusMessage () {
         LOGGER.traceEntry ();
+        LOGGER.info ("Verifying Status Message");
         LOGGER.traceExit ();
         return assertThat (getStatusMessage ());
     }
@@ -138,7 +146,8 @@ public class ApiResponse {
      * @return {@link StringSubject} instance
      */
     public StringSubject verifyTextField (final String expression) {
-        LOGGER.traceEntry ("Expression: {}", expression);
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying text field for expression: {}", expression);
         LOGGER.traceExit ();
         return assertThat (getResponseData (expression));
     }

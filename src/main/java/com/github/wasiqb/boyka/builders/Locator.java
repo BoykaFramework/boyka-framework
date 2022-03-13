@@ -23,6 +23,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
@@ -32,6 +33,7 @@ import org.openqa.selenium.By;
  * @author Wasiq Bhamla
  * @since 25-Feb-2022
  */
+@ToString
 @Getter
 @Builder (builderMethodName = "buildLocator")
 public class Locator {

@@ -38,7 +38,8 @@ public final class MouseActions {
      * @param locator {@link Locator} of element
      */
     public static void clickOn (final Locator locator) {
-        LOGGER.traceEntry ("Locator: {}", locator);
+        LOGGER.traceEntry ();
+        LOGGER.info ("Clicking on element: {}", locator);
         performElementAction (WebElement::click, locator);
         LOGGER.traceExit ();
     }

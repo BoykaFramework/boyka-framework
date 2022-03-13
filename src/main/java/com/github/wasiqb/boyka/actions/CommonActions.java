@@ -20,16 +20,12 @@ import static com.github.wasiqb.boyka.actions.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
-import static com.google.common.truth.Truth.assertThat;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import com.github.wasiqb.boyka.builders.Locator;
-import com.google.common.truth.BooleanSubject;
-import com.google.common.truth.StringSubject;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -94,35 +90,6 @@ final class CommonActions {
         LOGGER.traceEntry ();
         action.accept (find (locator, CLICKABLE));
         LOGGER.traceExit ();
-    }
-
-    /**
-     * Verify if driver boolean attributes.
-     *
-     * @param actual actual test
-     * @param <D> driver type
-     *
-     * @return {@link BooleanSubject} to verify boolean attributes
-     */
-    public static <D extends WebDriver> StringSubject verifyDriverTextAttribute (final Function<D, String> actual) {
-        LOGGER.traceEntry ();
-        LOGGER.traceExit ();
-        return assertThat (getDriverAttribute (actual));
-    }
-
-    /**
-     * Verify if element boolean attributes.
-     *
-     * @param actual actual test
-     * @param locator locator to find element
-     *
-     * @return {@link BooleanSubject} to verify boolean attributes
-     */
-    public static BooleanSubject verifyElementBooleanAttribute (final Predicate<WebElement> actual,
-        final Locator locator) {
-        LOGGER.traceEntry ();
-        LOGGER.traceExit ();
-        return assertThat (getElementAttribute (actual::test, locator));
     }
 
     private CommonActions () {

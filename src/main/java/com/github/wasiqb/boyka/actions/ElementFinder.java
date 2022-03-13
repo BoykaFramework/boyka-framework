@@ -47,7 +47,7 @@ public final class ElementFinder {
      * @return {@link WebElement}
      */
     public static WebElement find (final Locator locator, final WaitStrategy waitStrategy) {
-        LOGGER.traceEntry ("locator: {}, waitUntil: {}", locator, waitStrategy);
+        LOGGER.traceEntry ();
         return LOGGER.traceExit (finds (locator, waitStrategy).get (0));
     }
 
@@ -60,7 +60,7 @@ public final class ElementFinder {
      * @return {@link List} of {@link WebElement}
      */
     public static List<WebElement> finds (final Locator locator, final WaitStrategy waitStrategy) {
-        LOGGER.traceEntry ("locator: {}, waitUntil: {}", locator, waitStrategy);
+        LOGGER.traceEntry ();
         final var driver = getSession ().getDriver ();
         final List<WebElement> element;
         if (locator.getParent () != null) {
