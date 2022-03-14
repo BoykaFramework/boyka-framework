@@ -1,0 +1,40 @@
+{
+  "name": "boyka-java",
+  "version": "1.0.0",
+  "description": "Ultimate Automation framework to handle automation of web, mobile and API applications.",
+  "author": {
+    "name": "Wasiq Bhamla",
+    "email": "wasbhamla2005@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Wasiq Bhamla",
+      "email": "wasbhamla2005@gmail.com"
+    },
+    {
+      "name": "Mohammad Faisal Khatri",
+      "email": "mohammadfaisalkhatri@gmail.com"
+    }
+  ],
+  "homepage": "https://github.com/WasiqBhamla/boyka-java",
+  "bugs": {
+    "url": "https://github.com/WasiqBhamla/boyka-java/issues"
+  },
+  "license": "MIT",
+  "packageManager": "yarn@3.2.0",
+  "private": true,
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "commitlint": "^16.2.1",
+    "husky": "^7.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "scripts": {
+    "postinstall": "husky install"
+  }
+}
