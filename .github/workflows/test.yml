@@ -55,9 +55,10 @@ jobs:
           key: ${{ runner.os }}-maven-${{ github.sha }}
 
       - name: Download target folder
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: target
+          path: ${{ github.workspace }}/core-java
 
       - name: Install Opera
         run: brew install --cask opera
@@ -113,9 +114,10 @@ jobs:
           key: ${{ runner.os }}-maven-${{ github.sha }}
 
       - name: Download target folder
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: target
+          path: ${{ github.workspace }}/core-java
 
       - name: Build and analyze
         env:
