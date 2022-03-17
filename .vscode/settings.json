@@ -1,0 +1,4 @@
+{
+  "conventionalCommits.scopes": ["workflow", "readme", "website"],
+  "git.enableCommitSigning": true
+}
