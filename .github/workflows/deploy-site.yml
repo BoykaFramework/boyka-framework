@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - "../../website/**"
-      - "./**"
+      - "website/**"
+      - ".github/**"
   push:
     branches:
       - main
     paths:
-      - "../../website/**"
-      - "./**"
+      - "website/**"
+      - ".github/**"
 
 jobs:
   checks:
