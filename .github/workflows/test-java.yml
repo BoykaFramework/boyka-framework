@@ -1,10 +1,16 @@
 name: Test boyka-java project
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "./core-java/**"
   push:
     branches:
       - main
-      - issue-*
+    paths:
+      - "./core-java/**"
 
 jobs:
   build:
