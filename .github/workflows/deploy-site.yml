@@ -1,5 +1,10 @@
 name: Deploy boyka website on GitHub
 
+defaults:
+  run:
+    shell: bash
+    working-directory: website
+
 on:
   pull_request:
     branches:
@@ -24,7 +29,6 @@ jobs:
         with:
           node-version: "16"
           cache: "yarn"
-          cache-dependency-path: website/yarn.lock
       - name: Test Build
         working-directory: website
         run: |
@@ -39,7 +43,6 @@ jobs:
         with:
           node-version: "16"
           cache: "yarn"
-          cache-dependency-path: website/yarn.lock
       - uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
