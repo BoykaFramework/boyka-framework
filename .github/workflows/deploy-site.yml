@@ -26,6 +26,7 @@ jobs:
           cache: "yarn"
       - name: Test Build
         run: |
+          cd website
           yarn install --immutable
           yarn build
   gh-release:
@@ -47,5 +48,6 @@ jobs:
         run: |
           git config --global user.email "wasbhamla2005@gmail.com"
           git config --global user.name "Wasiq Bhamla"
+          cd website
           yarn install --immutable
           yarn deploy
