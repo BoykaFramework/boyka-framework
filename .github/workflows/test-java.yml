@@ -5,12 +5,14 @@ on:
     branches:
       - main
     paths:
-      - "./core-java/**"
+      - "../../core-java/**"
+      - "./**"
   push:
     branches:
       - main
     paths:
-      - "./core-java/**"
+      - "../../core-java/**"
+      - "./**"
 
 jobs:
   build:
