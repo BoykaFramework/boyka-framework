@@ -28,7 +28,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-          cache: "yarn"
       - name: Test Build
         working-directory: website
         run: |
@@ -42,7 +41,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-          cache: "yarn"
       - uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
