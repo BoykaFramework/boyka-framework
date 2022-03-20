@@ -51,6 +51,7 @@
     "start:site": "yarn workspace website start",
     "deploy:site": "yarn workspace website deploy",
     "lint": "eslint --report-unused-disable-directives \"**/*.{js,jsx,ts,tsx,mjs}\"",
+    "lint:ci": "yarn lint --quiet",
     "format": "prettier --check .",
     "format-fix": "prettier --write ."
   },
