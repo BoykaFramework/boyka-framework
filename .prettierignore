@@ -1,0 +1,10 @@
+website/.docusaurus
+website/build
+/.github
+**/.yarn
+**/.vscode
+/core-java
+*.md*
+.pnp.*
+*.json
+*.yml
