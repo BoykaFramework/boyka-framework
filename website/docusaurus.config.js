@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Boyka-Framework',
+  title: 'boyka',
   tagline:
     'Ultimate test automation framework for automating Web, Android, iOS and API applications',
   url: 'https://wasiqbhamla.github.io',
@@ -41,9 +41,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Boyka-Framework',
+        title: 'boyka',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'boyka logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -51,12 +51,12 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'tutorial',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          { to: '/blog', label: 'blog', position: 'left' },
           {
             href: 'https://github.com/WasiqBhamla/boyka-java',
-            label: 'GitHub',
+            label: 'gitHub',
             position: 'right',
           },
         ],
@@ -65,46 +65,46 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'tutorial',
                 to: '/docs/intro',
               },
             ],
           },
           {
-            title: 'Community',
+            title: 'community',
             items: [
               {
-                label: 'Stack Overflow',
+                label: 'stack overflow',
                 href: 'https://stackoverflow.com/questions/tagged/boyka-java',
               },
               {
-                label: 'Discord',
+                label: 'discord',
                 href: 'https://discord.gg/dUg8K9DAsR',
               },
               {
-                label: 'Twitter',
+                label: 'twitter',
                 href: 'https://twitter.com/WasiqBhamla',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'more',
             items: [
               {
-                label: 'Blog',
+                label: 'blog',
                 to: '/blog',
               },
               {
-                label: 'GitHub',
+                label: 'github',
                 href: 'https://github.com/WasiqBhamla/boyka-java',
               },
             ],
           },
         ],
-        copyright: `Copyright ©️ ${new Date().getFullYear()} Wasiq Bhamla. Built with ❤️ using Docusaurus.`,
+        copyright: `copyright ©️ ${new Date().getFullYear()} Wasiq Bhamla. Built with ❤️ using Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
