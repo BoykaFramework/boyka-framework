@@ -13,7 +13,7 @@ const config = {
   baseUrl: '/boyka-java/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/boyka-favicon.png',
   organizationName: 'WasiqBhamla', // Usually your GitHub org/user name.
   projectName: 'boyka-java', // Usually your repo name.
 
@@ -24,11 +24,11 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/',
+          editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/website/',
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/blog/',
+          editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -44,7 +44,7 @@ const config = {
         title: 'boyka',
         logo: {
           alt: 'boyka logo',
-          src: 'img/logo.svg',
+          src: 'img/boyka-favicon.png',
         },
         items: [
           {
@@ -63,6 +63,10 @@ const config = {
       },
       footer: {
         style: 'dark',
+        logo: {
+          alt: 'boyka logo',
+          src: 'img/boyka-favicon.png',
+        },
         links: [
           {
             title: 'docs',
