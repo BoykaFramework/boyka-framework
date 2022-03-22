@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[428],{8132:function(a){a.exports=JSON.parse('{"allTagsPath":"/boyka-java/blog/tags","slug":"/boyka-java/blog/tags/docusaurus","name":"docusaurus","count":4,"permalink":"/boyka-java/blog/tags/docusaurus"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[312],{7380:function(a){a.exports=JSON.parse('{"allTagsPath":"/boyka-java/blog/tags","slug":"/boyka-java/blog/tags/hello","name":"hello","count":2,"permalink":"/boyka-java/blog/tags/hello"}')}}]);
