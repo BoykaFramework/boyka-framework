@@ -1,0 +1,8 @@
+*.config.js
+/node_modules
+/.docusaurus
+/core-java
+*.css
+*.svg
+website/build
+*.json

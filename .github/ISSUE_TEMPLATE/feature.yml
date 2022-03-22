@@ -2,7 +2,7 @@ name: ✨ New Feature request"
 description: |
   This template is used to create a new feature request.
   Please provide as much information as possible.
-title: "✨ : "
+title: '✨ : '
 body:
   - type: textarea
     attributes:

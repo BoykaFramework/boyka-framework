@@ -1,0 +1,9 @@
+{
+  // This file is not used in compilation. It is here just for a nice editor experience.
+  "extends": "@tsconfig/docusaurus/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["DOM", "ES2021"],
+    "resolveJsonModule": true
+  },
+  "include": ["src/"]
+}

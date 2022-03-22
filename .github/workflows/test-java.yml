@@ -1,10 +1,18 @@
 name: Test boyka-java project
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'core-java/**'
+      - '.github/**'
   push:
     branches:
       - main
-      - issue-*
+    paths:
+      - 'core-java/**'
+      - '.github/**'
 
 jobs:
   build:
@@ -16,8 +24,8 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v2
         with:
-          java-version: "11"
-          distribution: "adopt"
+          java-version: '11'
+          distribution: 'adopt'
 
       - name: Build the project
         run: mvn install -f core-java/pom.xml -DskipTests
@@ -45,8 +53,8 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v2
         with:
-          java-version: "11"
-          distribution: "adopt"
+          java-version: '11'
+          distribution: 'adopt'
 
       - name: Restore local Maven repository
         uses: actions/cache@v2
@@ -104,8 +112,8 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v2
         with:
-          java-version: "11"
-          distribution: "adopt"
+          java-version: '11'
+          distribution: 'adopt'
 
       - name: Restore local Maven repository
         uses: actions/cache@v2
