@@ -1,0 +1,115 @@
+{
+  "image": "/img/boyka-favicon.png",
+  "title": "boyka",
+  "description": "Ultimate Test Automation framework for Web, API, Android and iOS platforms",
+  "buttons": [
+    {
+      "id": 1,
+      "text": "Get Started",
+      "type": "button--primary",
+      "href": "#",
+      "target": "_self"
+    },
+    {
+      "id": 2,
+      "text": "View on GitHub",
+      "type": "button--info",
+      "href": "https://github.com/WasiqBhamla/boyka-java",
+      "target": "_self"
+    },
+    {
+      "id": 3,
+      "text": "Join us on Discord",
+      "type": "button--info",
+      "href": "https://discord.gg/dUg8K9DAsR",
+      "target": "_blank"
+    }
+  ],
+  "gitButtons": [
+    {
+      "id": 1,
+      "userId": "WasiqBhamla",
+      "repoName": "boyka-java",
+      "type": "Star"
+    },
+    {
+      "id": 2,
+      "userId": "WasiqBhamla",
+      "repoName": "boyka-java",
+      "type": "Watch"
+    },
+    {
+      "id": 3,
+      "userId": "WasiqBhamla",
+      "repoName": "boyka-java",
+      "type": "Fork"
+    }
+  ],
+  "features": [
+    {
+      "title": "Configurable",
+      "image": "./img/projects/coteafs-appium/undraw_personal_settings_kihd.svg",
+      "description": "All the capabilities and server flags are configurable via config file in any of the following formats: yaml, json, xml and properties."
+    },
+    {
+      "title": "Battery aware",
+      "image": "/img/projects/coteafs-appium/undraw_access_denied_6w73.svg",
+      "description": "Has battery awareness for real device as the test execution will terminate if battery level is less than 20% and the device is not on charge."
+    },
+    {
+      "title": "Video Record",
+      "image": "./img/projects/coteafs-appium/undraw_video_upload_3d4u.svg",
+      "description": "Provides facility to allow video recording of tests on Android and iOS."
+    },
+    {
+      "title": "Multi Language",
+      "image": "/img/projects/coteafs-appium/undraw_Around_the_world_re_n353.svg",
+      "description": "Allows running tests on different languages on Android and iOS platform."
+    },
+    {
+      "title": "Cloud Support",
+      "image": "/img/projects/coteafs-appium/undraw_going_up_ttm5.svg",
+      "description": "Provides facility to run tests on Cloud platforms like BrowserStack."
+    },
+    {
+      "title": "Multi device support",
+      "image": "/img/projects/coteafs-appium/undraw_in_sync_xwsa.svg",
+      "description": "Supports automation of mobiles and tablets for real devices or simulators / emulators for Android and iOS platforms."
+    },
+    {
+      "title": "Control Mobile Network",
+      "image": "/img/projects/coteafs-appium/Network_Monochromatic.svg",
+      "description": "Provides facility to control mobile networks by allowing to toggle ON / OFF WiFi, Mobile Data, Airplane mode and Location services."
+    },
+    {
+      "title": "Screenshots",
+      "image": "/img/projects/coteafs-appium/undraw_Camera_re_cnp4.svg",
+      "description": "Provides facility to capture screenshot while test execution or on test failure"
+    },
+    {
+      "title": "Page object modal",
+      "image": "/img/projects/coteafs-appium/undraw_content_structure_79gj.svg",
+      "description": "Promotes clean code practices by enforcing page object model where all the locators are stored in their respective activity classes."
+    },
+    {
+      "title": "Parallel execution",
+      "image": "/img/projects/coteafs-appium/undraw_real-time_sync_o57k.svg",
+      "description": "Provides parallel and sequential execution of tests on same or multiple devices"
+    },
+    {
+      "title": "Logging events",
+      "image": "/img/projects/coteafs-appium/undraw_my_files_swob.svg",
+      "description": "Provides logging support using Log4J 2 to log all events occurred during test execution."
+    },
+    {
+      "title": "Inbuilt verification",
+      "image": "/img/projects/coteafs-appium/undraw_check_boxes_m3d0.svg",
+      "description": "Provides inbuilt verification for inline assertion of element properties."
+    },
+    {
+      "title": "Video streaming",
+      "image": "/img/projects/coteafs-appium/undraw_Video_streaming_re_v3qg.svg",
+      "description": "Live video stream running tests on Android devices"
+    }
+  ]
+}

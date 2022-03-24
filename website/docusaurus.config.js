@@ -28,10 +28,16 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          postsPerPage: 10,
+          sortPosts: 'ascending',
           editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
         },
       }),
     ],
@@ -63,10 +69,6 @@ const config = {
       },
       footer: {
         style: 'dark',
-        logo: {
-          alt: 'boyka logo',
-          src: 'img/boyka-favicon.png',
-        },
         links: [
           {
             title: 'docs',
