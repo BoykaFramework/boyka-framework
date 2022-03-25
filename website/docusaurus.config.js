@@ -46,6 +46,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: 'star-the-repo',
+        content:
+          '⭐ Star the repo on <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-java">GitHub</a> ⭐',
+        backgroundColor: '#ffb600',
+        textColor: '#000000',
+        isCloseable: false,
+      },
       navbar: {
         title: 'boyka',
         logo: {
