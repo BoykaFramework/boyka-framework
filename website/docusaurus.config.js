@@ -28,10 +28,16 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          postsPerPage: 10,
+          sortPosts: 'ascending',
           editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
         },
       }),
     ],
@@ -40,6 +46,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: 'star-the-repo',
+        content:
+          '⭐ Star the repo on <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-java">GitHub</a> ⭐',
+        backgroundColor: '#ffb600',
+        textColor: '#000000',
+        isCloseable: false,
+      },
       navbar: {
         title: 'boyka',
         logo: {
@@ -63,10 +77,6 @@ const config = {
       },
       footer: {
         style: 'dark',
-        logo: {
-          alt: 'boyka logo',
-          src: 'img/boyka-favicon.png',
-        },
         links: [
           {
             title: 'docs',
@@ -113,6 +123,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['java', 'json'],
       },
     }),
 };

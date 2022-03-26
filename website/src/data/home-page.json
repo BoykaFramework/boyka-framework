@@ -1,0 +1,90 @@
+{
+  "image": "/img/boyka-favicon.png",
+  "title": "boyka",
+  "description": "Ultimate Test Automation framework for Web, API, Android and iOS platforms",
+  "buttons": [
+    {
+      "id": 1,
+      "text": "Get Started",
+      "type": "button--primary",
+      "href": "#",
+      "target": "_self"
+    },
+    {
+      "id": 2,
+      "text": "View on GitHub",
+      "type": "button--info",
+      "href": "https://github.com/WasiqBhamla/boyka-java",
+      "target": "_self"
+    },
+    {
+      "id": 3,
+      "text": "Join us on Discord",
+      "type": "button--info",
+      "href": "https://discord.gg/dUg8K9DAsR",
+      "target": "_blank"
+    }
+  ],
+  "gitButtons": [
+    {
+      "id": 1,
+      "userId": "WasiqBhamla",
+      "repoName": "boyka-java",
+      "type": "Star"
+    },
+    {
+      "id": 2,
+      "userId": "WasiqBhamla",
+      "repoName": "boyka-java",
+      "type": "Watch"
+    },
+    {
+      "id": 3,
+      "userId": "WasiqBhamla",
+      "repoName": "boyka-java",
+      "type": "Fork"
+    }
+  ],
+  "features": [
+    {
+      "title": "Zero boilerplate code",
+      "image": "img/home/no-code.svg",
+      "description": "Exposes ready to use static methods to perform various actions on web, mobile and API platforms, thus reducing the need to write any boilerplate codes."
+    },
+    {
+      "title": "Configurable",
+      "image": "img/home/configurable.svg",
+      "description": "Highly configurable via JSON files and environment variables. It is easy to extend and customize the framework."
+    },
+    {
+      "title": "API Testing",
+      "image": "img/home/api-testing.svg",
+      "description": "Supports API testing with simple and easy to write test cases."
+    },
+    {
+      "title": "Web Testing",
+      "image": "img/home/web-testing.svg",
+      "description": "Supports Web testing with Chrome, Firefox, Edge, Safari and Opera browsers."
+    },
+    {
+      "title": "Cloud Support",
+      "image": "img/home/cloud-support.svg",
+      "description": "Provides facility to run tests on Cloud platforms like BrowserStack."
+    },
+    {
+      "title": "Parallel execution",
+      "image": "img/home/parallel.svg",
+      "description": "Allows parallel and sequential execution of tests using any testing framework."
+    },
+    {
+      "title": "Logging events",
+      "image": "img/home/logging.svg",
+      "description": "Provides logging support using Log4J 2 to log all events occurred during test execution."
+    },
+    {
+      "title": "Inbuilt verification",
+      "image": "img/home/inline-check.svg",
+      "description": "Provides inbuilt verification for inline assertion of element properties and API responses."
+    }
+  ]
+}

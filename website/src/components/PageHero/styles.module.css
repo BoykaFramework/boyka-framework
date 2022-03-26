@@ -1,0 +1,175 @@
+.HeroContainer {
+  display: grid;
+  grid-template-columns: 0.5fr;
+  grid-template-rows: 0.5fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    'HeroContent'
+    'CallToActions';
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  background-color: #2b3137;
+  overflow: hidden;
+  min-height: calc(100vh - 60px);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #000;
+  background-position: 60%;
+}
+
+.HeroContent {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 0.5fr;
+  gap: 10px 0px;
+  grid-template-areas:
+    'HeroTitle'
+    'HeroDescription';
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  align-self: end;
+  grid-area: HeroContent;
+}
+
+.HeroTitle {
+  grid-area: HeroTitle;
+  color: var(--ifm-color-primary);
+  font-size: 50px;
+  text-transform: uppercase;
+  text-shadow: rgb(216, 60, 13) 5px 5px 10px;
+}
+
+.HeroDescription {
+  grid-area: HeroDescription;
+  color: #fff;
+  font-size: 30px;
+}
+
+.CallToActions {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 0.5fr;
+  gap: 10px 10px;
+  grid-template-areas:
+    'ctaButtons'
+    'SocialButtons';
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  justify-self: center;
+  align-self: start;
+  grid-area: CallToActions;
+}
+
+.ctaButtons {
+  grid-area: ctaButtons;
+  text-transform: uppercase;
+}
+
+.ctaButtons a {
+  margin: 5px;
+}
+
+.SocialButtons {
+  grid-area: SocialButtons;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  justify-self: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.SocialButtons span {
+  padding: 5px;
+}
+
+@media only screen and (max-width: 900px) {
+  .HeroContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    gap: 10px 10px;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-areas:
+      'HeroContent'
+      'CallToActions';
+  }
+
+  .HeroContent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    gap: 10px 10px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      'HeroTitle'
+      'HeroDescription';
+    justify-self: center;
+    padding-right: 10px;
+    grid-area: HeroContent;
+  }
+
+  .HeroTitle {
+    justify-self: center;
+    align-self: center;
+    font-size: 30px;
+    grid-area: HeroTitle;
+  }
+
+  .HeroDescription {
+    align-self: center;
+    font-size: 20px;
+    grid-area: HeroDescription;
+  }
+
+  .CallToActions {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    gap: 10px 10px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      'ctaButtons'
+      'SocialButtons';
+    justify-self: center;
+    grid-area: CallToActions;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+  }
+
+  .ctaButtons {
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    grid-area: ctaButtons;
+  }
+
+  .SocialButtons {
+    display: block;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+    grid-area: SocialButtons;
+  }
+}
