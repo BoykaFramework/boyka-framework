@@ -23,7 +23,11 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
+          path: './docs/framework-docs',
+          routeBasePath: '/docs',
+          sidebarPath: require.resolve('./docs/framework-docs/sidebars.js'),
           editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/website/',
         },
         blog: {
@@ -49,7 +53,7 @@ const config = {
       announcementBar: {
         id: 'star-the-repo',
         content:
-          '⭐ Star the repo on <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-java">GitHub</a> ⭐',
+          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-java">GitHub</a> ⭐',
         backgroundColor: '#ffb600',
         textColor: '#000000',
         isCloseable: false,
@@ -64,13 +68,13 @@ const config = {
           {
             type: 'doc',
             docId: 'intro',
-            position: 'left',
-            label: 'tutorial',
+            position: 'right',
+            label: 'documentation',
           },
-          { to: '/blog', label: 'blog', position: 'left' },
+          { to: '/blog', label: 'blogs', position: 'right' },
           {
             href: 'https://github.com/WasiqBhamla/boyka-java',
-            label: 'gitHub',
+            label: 'github',
             position: 'right',
           },
         ],
@@ -82,7 +86,7 @@ const config = {
             title: 'docs',
             items: [
               {
-                label: 'tutorial',
+                label: 'documentation',
                 to: '/docs/intro',
               },
             ],
@@ -108,7 +112,7 @@ const config = {
             title: 'more',
             items: [
               {
-                label: 'blog',
+                label: 'blogs',
                 to: '/blog',
               },
               {
@@ -118,7 +122,7 @@ const config = {
             ],
           },
         ],
-        copyright: `copyright ©️ ${new Date().getFullYear()} Wasiq Bhamla. Built with ❤️ using Docusaurus.`,
+        copyright: `copyright ©️ ${new Date().getFullYear()} Wasiq Bhamla. Built in 🇮🇳 with ❤️ using <a href="https://docusaurus.io/" target="_blank">Docusaurus</a>.`,
       },
       prism: {
         theme: lightCodeTheme,

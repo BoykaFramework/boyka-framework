@@ -7,7 +7,7 @@
       "id": 1,
       "text": "Get Started",
       "type": "button--primary",
-      "href": "#",
+      "href": "/docs/intro",
       "target": "_self"
     },
     {
