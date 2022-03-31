@@ -58,6 +58,10 @@ const config = {
         textColor: '#000000',
         isCloseable: false,
       },
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 4,
+      },
       navbar: {
         title: 'boyka',
         logo: {

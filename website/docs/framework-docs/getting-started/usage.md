@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Usage
 ---
 
@@ -7,7 +7,7 @@ title: Usage
 
 You can start by adding the following dependency to your `pom.xml` file:
 
-```xml
+```xml title=pom.xml
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-java</artifactId>
@@ -19,6 +19,14 @@ You can start by adding the following dependency to your `pom.xml` file:
 
 You can start by adding the following dependency to your `build.gradle` file:
 
-```groovy
+```groovy title=build.gradle
 compile "com.github.wasiqb.boyka:boyka-java:1.0.0"
 ```
+
+## Download the jar
+
+You can also download the JAR files from the [GitHub Releases page][release].
+
+After downloading the jar, you can add it to your class path.
+
+[release]: https://github.com/WasiqBhamla/boyka-java/releases/latest

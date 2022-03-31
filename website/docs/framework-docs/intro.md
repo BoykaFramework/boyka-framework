@@ -15,3 +15,5 @@ From my past experience, I found that most frameworks required to write some boi
 Boyka was created with the aim to simplify writing tests on any project you may work on. That means, no need to write any boilerplate code, just write your tests and run them.
 
 Boyka also helps in writing simple page objects for your application where you can specify locators for Web, Android and iOS applications, and it will automatically use the appropriate locator when running your tests.
+
+In addition, Boyka also helps with writing tests for API applications, which means you can write tests for any API endpoint.

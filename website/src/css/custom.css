@@ -6,16 +6,15 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --site-primary-hue-saturation: 222 68%;
-  --ifm-color-primary: #69140e;
-  --ifm-color-primary-dark: #5e120d;
-  --ifm-color-primary-darker: #59110c;
-  --ifm-color-primary-darkest: #4a0e0a;
-  --ifm-color-primary-light: #73160f;
-  --ifm-color-primary-lighter: #791710;
-  --ifm-color-primary-lightest: #891a12;
-  --ifm-background-color: #eaefbd;
-  --ifm-background-surface-color: #eaefbd;
+  --ifm-color-primary: #3e291d;
+  --ifm-color-primary-dark: #38251a;
+  --ifm-color-primary-darker: #352319;
+  --ifm-color-primary-darkest: #2b1d14;
+  --ifm-color-primary-light: #442d20;
+  --ifm-color-primary-lighter: #472f21;
+  --ifm-color-primary-lightest: #513526;
+  --ifm-background-color: #ead8be;
+  --ifm-background-surface-color: #ead8be;
 
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: 'IBM Plex Sans', PT Sans, Montserrat, Lato;
@@ -24,15 +23,15 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark']:root {
-  --ifm-color-primary: #eaefbd;
-  --ifm-color-primary-dark: #dfe79b;
-  --ifm-color-primary-darker: #dae289;
-  --ifm-color-primary-darkest: #c9d656;
-  --ifm-color-primary-light: #f5f7df;
-  --ifm-color-primary-lighter: #fafcf1;
+  --ifm-color-primary: #ead8be;
+  --ifm-color-primary-dark: #e0c59e;
+  --ifm-color-primary-darker: #dabb8e;
+  --ifm-color-primary-darkest: #cb9e5e;
+  --ifm-color-primary-light: #f4ebde;
+  --ifm-color-primary-lighter: #faf5ee;
   --ifm-color-primary-lightest: #ffffff;
-  --ifm-background-color: #69140e;
-  --ifm-background-surface-color: #69140e;
+  --ifm-background-color: #3e291d;
+  --ifm-background-surface-color: #3e291d;
 }
 
 .docusaurus-highlight-code-line {
@@ -47,14 +46,7 @@
 }
 
 div[class^='announcementBar_'] {
-  --site-announcement-bar-stripe-color1: hsl(var(--site-primary-hue-saturation) 85%);
-  --site-announcement-bar-stripe-color2: hsl(var(--site-primary-hue-saturation) 95%);
-  background: repeating-linear-gradient(
-    35deg,
-    var(--site-announcement-bar-stripe-color1),
-    var(--site-announcement-bar-stripe-color1) 20px,
-    var(--site-announcement-bar-stripe-color2) 10px,
-    var(--site-announcement-bar-stripe-color2) 40px
-  );
+  background: lightsalmon !important;
   font-weight: bold;
+  font-size: 1.2rem;
 }
