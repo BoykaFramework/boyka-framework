@@ -1,5 +1,10 @@
 {
-  "conventionalCommits.scopes": ["workflow", "readme", "website"],
+  "conventionalCommits.scopes": [
+    "workflow",
+    "readme",
+    "website",
+    "java"
+  ],
   "git.enableCommitSigning": true,
 
   "search.exclude": {

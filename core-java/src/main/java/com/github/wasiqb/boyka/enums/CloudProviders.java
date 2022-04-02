@@ -32,7 +32,7 @@ public enum CloudProviders {
      */
     NONE,
     /**
-     * Sauce Labs.
+     * Lambda Test.
      */
-    SAUCE_LABS
+    LAMBDA_TEST
 }
