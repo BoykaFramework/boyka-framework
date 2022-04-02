@@ -17,7 +17,7 @@ Configuration is stored in `boyka-config.json` file. This file is in JSON format
 The file name and it's location cannot be modified.
 :::
 
-## Configuration file sample
+## Configuration file sample {#config-sample}
 
 ```json title="boyka-config.json"
 {
@@ -100,10 +100,16 @@ The file name and it's location cannot be modified.
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| `playback` | Contains playback configuration. See [Playback Config below](#playback-config). | `object` |  |
-| `web` | Contains web platform configuration. See [Web Config below](#web-config). | `object` |  |
+| `playback` | Contains playback configuration. See [Playback Config below](#playback-config). | `PlaybackSetting` |  |
+| `web` | Contains web platform configuration. See [Web Config below](#web-config). | `Map<String, WebSetting>` |  |
 | `android` | Contains Android platform configuration. See [Android Config below](#android-config). | `object` |  |
 | `ios` | Contains iOS platform configuration. See [iOS Config below](#ios-config). | `object` |  |
+
+:::info Web Configuration
+In `ui` configuration block, you can provide different versions of web settings having different key names under `web` object.
+
+See the example in [sample configuration file](#config-sample).
+:::
 
 #### Playback Configuration {#playback-config}
 
@@ -177,6 +183,12 @@ COMING SOON, STAY TUNED!
 | `read_timeout` | Read timeout in seconds for the API. | `number` | 5 |
 | `write_timeout` | Write timeout in seconds for the API. | `number` | 5 |
 | `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` |  |
+
+:::info API Configuration
+In `api` configuration block, you can provide different versions of API settings having different key names.
+
+See the example in [sample configuration file](#config-sample).
+:::
 
 #### Logging Configuration {#logging-config}
 
