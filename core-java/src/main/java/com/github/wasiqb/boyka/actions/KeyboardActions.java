@@ -32,6 +32,12 @@ import org.apache.logging.log4j.Logger;
 public final class KeyboardActions {
     private static final Logger LOGGER = getLogger ();
 
+    /**
+     * Append text in text field.
+     *
+     * @param locator {@link Locator} of text field
+     * @param text text to append
+     */
     public static void appendText (final Locator locator, final String text) {
         LOGGER.traceEntry ();
         LOGGER.info ("Appending text {} to element {}", text, locator);

@@ -27,8 +27,8 @@
         "cloud": "BROWSER_STACK",
         "protocol": "HTTPS",
         "host": "hub-cloud.browserstack.com",
-        "user_name": "${env:CLOUD_USER}",
-        "password": "${env:CLOUD_KEY}",
+        "user_name": "${env:BS_USER}",
+        "password": "${env:BS_KEY}",
         "capabilities": {
           "browser": "Chrome",
           "browser_version": "latest",
@@ -47,6 +47,26 @@
         "capabilities": {
           "browserName": "chrome",
           "platform": "MAC"
+        }
+      },
+      "test_lambda_test_chrome": {
+        "browser": "REMOTE",
+        "cloud": "LAMBDA_TEST",
+        "protocol": "HTTPS",
+        "host": "hub.lambdatest.com",
+        "user_name": "${env:LT_USER}",
+        "password": "${env:LT_KEY}",
+        "capabilities": {
+          "browserName": "Chrome",
+          "version": "99.0",
+          "platform": "Windows 10",
+          "resolution": "1920x1080",
+          "build": "Test LambdaTest Build",
+          "name": "Test LambdaTest Session",
+          "network": true,
+          "visual": true,
+          "video": true,
+          "console": true
         }
       }
     },
