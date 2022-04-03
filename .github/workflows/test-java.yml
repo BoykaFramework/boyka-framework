@@ -76,8 +76,10 @@ jobs:
 
       - name: Test execution
         env:
-          CLOUD_USER: ${{ secrets.CLOUD_USER }}
-          CLOUD_KEY: ${{ secrets.CLOUD_KEY }}
+          BS_USER: ${{ secrets.BS_USER }}
+          BS_KEY: ${{ secrets.BS_KEY }}
+          LT_USER: ${{ secrets.LT_USER }}
+          LT_KEY: ${{ secrets.LT_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
 
