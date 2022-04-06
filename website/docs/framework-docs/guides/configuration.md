@@ -222,8 +222,4 @@ We have an enum `CloudProviders` where we maintain the list of supported cloud p
 
 - `NONE`: No cloud provider will be used.
 - `BROWSER_STACK`: Is used for BrowserStack cloud provider.
-- `SAUCE_LABS`: Is used for SauceLabs cloud provider.
-
-:::info
-SauceLabs support is coming soon.
-:::
+- `LAMBDA_TEST`: Is used for LambdaTest cloud provider.
