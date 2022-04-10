@@ -29,7 +29,7 @@ Let's see how to set configuration in the configuration file for API end-points.
 ```
 
 :::info
-For more information about API configuration settings, please refer to [API configuration settings][api-config].
+For more information about API configurations, please refer to [API configuration guide][api-config].
 :::
 
 [api-config]: /docs/guides/configuration#api-config
