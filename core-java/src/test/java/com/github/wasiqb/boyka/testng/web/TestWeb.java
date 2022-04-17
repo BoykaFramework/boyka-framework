@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.testng.web;
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
 import static com.github.wasiqb.boyka.actions.ElementActions.submit;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
+import static com.github.wasiqb.boyka.actions.KeyboardActions.pressKey;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
@@ -34,6 +35,8 @@ import static com.github.wasiqb.boyka.testng.web.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
 import static com.github.wasiqb.boyka.testng.web.pages.ProductDetailsPage.productDetailsPage;
 import static java.text.MessageFormat.format;
+import static org.openqa.selenium.Keys.CONTROL;
+import static org.openqa.selenium.Keys.DELETE;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
@@ -123,6 +126,8 @@ public class TestWeb {
     public void testLogin () {
         navigateTo (URL);
         verifyBrowserUrl ().startsWith (URL);
+        enterText (loginPage ().getUsername (), "standard_user");
+        pressKey (loginPage ().getUsername (), CONTROL, "a", DELETE);
         enterText (loginPage ().getUsername (), "standard_user");
         enterText (loginPage ().getPassword (), "secret_sauce");
         submit (loginPage ().getLoginButton ());

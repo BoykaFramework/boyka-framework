@@ -18,7 +18,9 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.ElementActions.clear;
+import static java.util.Arrays.stream;
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.openqa.selenium.Keys.chord;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import org.apache.logging.log4j.Logger;
@@ -56,6 +58,19 @@ public final class KeyboardActions {
         LOGGER.info ("Entering text {} in element {}", text, locator);
         clear (locator);
         appendText (locator, text);
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Press specified keys in text field.
+     *
+     * @param locator {@link Locator} of text field
+     * @param keys keys to press
+     */
+    public static void pressKey (final Locator locator, final CharSequence... keys) {
+        LOGGER.traceEntry ();
+        stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, locator));
+        performElementAction (e -> e.sendKeys (chord (keys)), locator);
         LOGGER.traceExit ();
     }
 
