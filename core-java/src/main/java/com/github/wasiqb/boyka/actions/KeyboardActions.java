@@ -20,10 +20,10 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction
 import static com.github.wasiqb.boyka.actions.ElementActions.clear;
 import static java.util.Arrays.stream;
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.openqa.selenium.Keys.chord;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Keys;
 
 /**
  * Perform Keyboard actions.
@@ -67,10 +67,10 @@ public final class KeyboardActions {
      * @param locator {@link Locator} of text field
      * @param keys keys to press
      */
-    public static void pressKey (final Locator locator, final Keys... keys) {
+    public static void pressKey (final Locator locator, final CharSequence... keys) {
         LOGGER.traceEntry ();
-        stream (keys).forEach (key -> LOGGER.info ("Pressing keys: {}", key));
-        performElementAction (e -> e.sendKeys (keys), locator);
+        stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, locator));
+        performElementAction (e -> e.sendKeys (chord (keys)), locator);
         LOGGER.traceExit ();
     }
 
