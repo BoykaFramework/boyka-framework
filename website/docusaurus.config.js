@@ -17,6 +17,22 @@ const config = {
   organizationName: 'WasiqBhamla', // Usually your GitHub org/user name.
   projectName: 'boyka-java', // Usually your repo name.
 
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'api',
+        path: './docs/api',
+        routeBasePath: 'api',
+        editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/website/',
+        editCurrentVersion: true,
+        sidebarPath: require.resolve('./docs/api/sidebars.js'),
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      }),
+    ],
+  ],
   presets: [
     [
       'classic',
@@ -75,6 +91,12 @@ const config = {
             position: 'right',
             label: 'documentation',
           },
+          {
+            to: '/api/intro',
+            sidebarId: 'api',
+            position: 'right',
+            label: 'api',
+          },
           { to: '/blog', label: 'blogs', position: 'right' },
           {
             href: 'https://github.com/WasiqBhamla/boyka-java',
@@ -92,6 +114,10 @@ const config = {
               {
                 label: 'documentation',
                 to: '/docs/intro',
+              },
+              {
+                to: '/api/intro',
+                label: 'api',
               },
             ],
           },
