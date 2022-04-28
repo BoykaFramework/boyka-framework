@@ -1,0 +1,16 @@
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addCheck: true
+    addComment: false
+    addBadge: true
+tasks:
+  - name: Root project setup
+    command: yarn install
+  - name: Build Java project
+    command: mvn -f core-java/pom.xml clean install -DskipTests
+  - name: Build Website
+    command: yarn build:site
