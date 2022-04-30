@@ -203,6 +203,10 @@ Wasiq Bhamla - [@WasiqBhamla](https://twitter.com/WasiqBhamla) - wasbhamla2005@g
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
-[![BrowserStack](/assets/browserstack-logo.png)](https://www.browserstack.com/)
+<a href="https://www.browserstack.com">
+  <img src="assets/browserstack-logo.png" alt="BrowserStack" width="300" height="auto" />
+</a>
 
-[![LambdaTest](/assets/LT-logo.jpeg)](https://www.lambdatest.com/)
+<a href="https://www.lambdatest.com">
+  <img src="assets/LT-logo.jpeg" alt="LambdaTest" width="300" height="auto" />
+</a>
