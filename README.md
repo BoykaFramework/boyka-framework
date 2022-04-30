@@ -2,9 +2,12 @@
 
   <img src="assets/Boyka.png" alt="logo" width="200" height="auto" />
 
-  <p>
+  <h2>
     🎉 Ultimate test automation for testing any application on any platform
-  </p>
+  </h2>
+  <h3>
+    Don't forget to ⭐ the repository if you like it!
+  </h3>
 
 <!-- Badges -->
 <p>
@@ -56,12 +59,6 @@
     - [:camera: Screenshots](#camera-screenshots)
     - [:space_invader: Tech Stack](#space_invader-tech-stack)
     - [:dart: Features](#dart-features)
-  - [:toolbox: Getting Started](#toolbox-getting-started)
-    - [:bangbang: Prerequisites](#bangbang-prerequisites)
-    - [:gear: Installation](#gear-installation)
-    - [:test_tube: Running Tests](#test_tube-running-tests)
-    - [:running: Run Locally](#running-run-locally)
-    - [:triangular_flag_on_post: Deployment](#triangular_flag_on_post-deployment)
   - [:eyes: Usage](#eyes-usage)
   - [:compass: Roadmap](#compass-roadmap)
   - [:wave: Contributing](#wave-contributing)
@@ -70,18 +67,38 @@
   - [:handshake: Contact](#handshake-contact)
   - [:gem: Acknowledgements](#gem-acknowledgements)
 
-  
-
 <!-- About the Project -->
 ## :star2: About the Project
 
-
-<!-- Screenshots // TODO -->
+<!-- Screenshots -->
 ### :camera: Screenshots
 
-<div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+<details>
+  <summary>Boyka Config file</summary>
+
+<div>
+  <img src="assets/config.png" alt="Boyka Config" width="400" height="auto" />
 </div>
+
+</details>
+
+<details>
+  <summary>API Sample</summary>
+
+<div>
+  <img src="assets/api.png" alt="API sample" width="400" height="auto" />
+</div>
+
+</details>
+
+<details>
+  <summary>Web Sample</summary>
+
+<div>
+  <img src="assets/web.png" alt="Boyka Config" width="400" height="auto" />
+</div>
+
+</details>
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
@@ -136,84 +153,17 @@
 - Has in-built logging for all the events
 - Has in-built Assertion methods
 
-<!-- Getting Started // TODO -->
-## :toolbox: Getting Started
-
-<!-- Prerequisites // TODO -->
-### :bangbang: Prerequisites
-
-This project uses Yarn as package manager
-
-```bash
- npm install --global yarn
-```
-
-<!-- Installation // TODO -->
-### :gear: Installation
-
-Install my-project with npm
-
-```bash
-  yarn install my-project
-  cd my-project
-```
-
-<!-- Running Tests // TODO -->
-### :test_tube: Running Tests
-
-To run tests, run the following command
-
-```bash
-  yarn test test
-```
-
-<!-- Run Locally // TODO -->
-### :running: Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  yarn install
-```
-
-Start the server
-
-```bash
-  yarn start
-```
-
-<!-- Deployment // TODO -->
-### :triangular_flag_on_post: Deployment
-
-To deploy this project run
-
-```bash
-  yarn deploy
-```
-
-<!-- Usage // TODO -->
+<!-- Usage -->
 ## :eyes: Usage
 
 Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
 
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
+```xml
+<dependency>
+  <groupId>com.github.wasiqb.boyka</groupId>
+  <artifactId>boyka-java</artifactId>
+  <version>1.0.0</version>
+</dependency>
 ```
 
 <!-- Roadmap -->
@@ -230,6 +180,7 @@ See our [Roadmap project](https://github.com/WasiqBhamla/boyka-java/projects/2) 
 
 Contributions are always welcome!
 
+<!-- //TODO -->
 See `contributing.md` for ways to get started.
 
 <!-- Code of Conduct -->
