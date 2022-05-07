@@ -3,7 +3,8 @@
     "workflow",
     "readme",
     "website",
-    "java"
+    "java",
+    "Internal"
   ],
   "git.enableCommitSigning": true,
 

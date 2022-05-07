@@ -1,6 +1,6 @@
 {
   "name": "boyka-java",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Ultimate Automation framework to handle automation of web, mobile and API applications.",
   "author": {
     "name": "Wasiq Bhamla",
@@ -62,12 +62,12 @@
     "changelog": "lerna-changelog"
   },
   "lint-staged": {
-    "**/*.ts*": [
+    "**/*.{ts,tsx}": [
       "yarn lint",
       "yarn format",
       "yarn format-fix"
     ],
-    "**/*.js*": [
+    "**/*.{js,jsx}": [
       "yarn lint",
       "yarn format",
       "yarn format-fix"
