@@ -12,40 +12,40 @@
 <!-- Badges -->
 <p>
 
-  <a href="https://gitpod.io/#https://github.com/WasiqBhamla/boyka-java">
+  <a href="https://gitpod.io/#https://github.com/WasiqBhamla/boyka-framework">
     <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="open in GitPod">
   </a>
   <a href="https://discord.gg/dUg8K9DAsR">
     <img src="https://img.shields.io/discord/950985052769120337?label=Discord&logo=Discord&style=for-the-badge" alt="open in GitPod">
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-java/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/WasiqBhamla/boyka-java?style=for-the-badge" alt="contributors" />
+  <a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/WasiqBhamla/boyka-framework?style=for-the-badge" alt="contributors" />
   </a>
   <a href="">
-    <img src="https://img.shields.io/github/last-commit/WasiqBhamla/boyka-java?style=for-the-badge" alt="last update" />
+    <img src="https://img.shields.io/github/last-commit/WasiqBhamla/boyka-framework?style=for-the-badge" alt="last update" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-java/network/members">
-    <img src="https://img.shields.io/github/forks/WasiqBhamla/boyka-java?style=for-the-badge" alt="forks" />
+  <a href="https://github.com/WasiqBhamla/boyka-framework/network/members">
+    <img src="https://img.shields.io/github/forks/WasiqBhamla/boyka-framework?style=for-the-badge" alt="forks" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-java/stargazers">
-    <img src="https://img.shields.io/github/stars/WasiqBhamla/boyka-java?style=for-the-badge" alt="stars" />
+  <a href="https://github.com/WasiqBhamla/boyka-framework/stargazers">
+    <img src="https://img.shields.io/github/stars/WasiqBhamla/boyka-framework?style=for-the-badge" alt="stars" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-java/issues/">
-    <img src="https://img.shields.io/github/issues/WasiqBhamla/boyka-java?style=for-the-badge" alt="open issues" />
+  <a href="https://github.com/WasiqBhamla/boyka-framework/issues/">
+    <img src="https://img.shields.io/github/issues/WasiqBhamla/boyka-framework?style=for-the-badge" alt="open issues" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-java/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/WasiqBhamla/boyka-java.svg?style=for-the-badge" alt="license" />
+  <a href="https://github.com/WasiqBhamla/boyka-framework/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/WasiqBhamla/boyka-framework.svg?style=for-the-badge" alt="license" />
   </a>
 </p>
 
   <h4>
-    <a href="https://github.com/WasiqBhamla/boyka-java/">View Demo</a>
+    <a href="#camera-screenshots">View Demo</a>
   <span> · </span>
-    <a href="https://wasiqbhamla.github.io/boyka-java/">Documentation</a>
+    <a href="https://wasiqbhamla.github.io/boyka-framework/">Documentation</a>
   <span> · </span>
-    <a href="https://github.com/WasiqBhamla/boyka-java/issues/new/choose">Report Bug</a>
+    <a href="https://github.com/WasiqBhamla/boyka-framework/issues/new/choose">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/WasiqBhamla/boyka-java/issues/new/choose">Request Feature</a>
+    <a href="https://github.com/WasiqBhamla/boyka-framework/issues/new/choose">Request Feature</a>
   </h4>
 </div>
 
@@ -95,7 +95,11 @@
   <summary>Web Sample</summary>
 
 <div>
-  <img src="assets/web.png" alt="Boyka Config" width="400" height="auto" />
+  <img src="assets/page.png" alt="Web Page object" width="400" height="auto" />
+</div>
+
+<div>
+  <img src="assets/web.png" alt="Web Test" width="400" height="auto" />
 </div>
 
 </details>
@@ -161,7 +165,7 @@ Use this space to tell a little more about your project and how it can be used. 
 ```xml
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
-  <artifactId>boyka-java</artifactId>
+  <artifactId>boyka-framework</artifactId>
   <version>1.0.0</version>
 </dependency>
 ```
@@ -169,13 +173,13 @@ Use this space to tell a little more about your project and how it can be used. 
 <!-- Roadmap -->
 ## :compass: Roadmap
 
-See our [Roadmap project](https://github.com/WasiqBhamla/boyka-java/projects/2) for more details.
+See our [Roadmap project](https://github.com/WasiqBhamla/boyka-framework/projects/2) for more details.
 
 <!-- Contributing -->
 ## :wave: Contributing
 
-<a href="https://github.com/WasiqBhamla/boyka-java/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=WasiqBhamla/boyka-java" />
+<a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=WasiqBhamla/boyka-framework" />
 </a>
 
 Contributions are always welcome!
@@ -186,7 +190,7 @@ See `contributing.md` for ways to get started.
 <!-- Code of Conduct -->
 ### :scroll: Code of Conduct
 
-Please read the [Code of Conduct](https://github.com/WasiqBhamla/boyka-java/blob/master/.github/CODE_OF_CONDUCT.md)
+Please read the [Code of Conduct](https://github.com/WasiqBhamla/boyka-framework/blob/master/.github/CODE_OF_CONDUCT.md)
 
 <!-- License -->
 ## :warning: License

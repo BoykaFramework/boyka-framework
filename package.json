@@ -1,5 +1,5 @@
 {
-  "name": "boyka-java",
+  "name": "boyka-framework",
   "version": "1.0.0",
   "description": "Ultimate Automation framework to handle automation of web, mobile and API applications.",
   "author": {
@@ -16,9 +16,9 @@
       "email": "mohammadfaisalkhatri@gmail.com"
     }
   ],
-  "homepage": "https://github.com/WasiqBhamla/boyka-java",
+  "homepage": "https://github.com/WasiqBhamla/boyka-framework",
   "bugs": {
-    "url": "https://github.com/WasiqBhamla/boyka-java/issues"
+    "url": "https://github.com/WasiqBhamla/boyka-framework/issues"
   },
   "workspaces": [
     "website"

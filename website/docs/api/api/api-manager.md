@@ -13,5 +13,5 @@ This method takes in [`ApiRequest`](/api/api/api-request) instance and returns `
 ### Example
 
 ```java
-final ApiResponse response = execute (request);
+final ApiResponse response = ApiManager.execute (request);
 ```

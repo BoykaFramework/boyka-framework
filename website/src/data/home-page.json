@@ -14,7 +14,7 @@
       "id": 2,
       "text": "View on GitHub",
       "type": "button--info",
-      "href": "https://github.com/WasiqBhamla/boyka-java",
+      "href": "https://github.com/WasiqBhamla/boyka-framework",
       "target": "_self"
     },
     {
@@ -29,19 +29,19 @@
     {
       "id": 1,
       "userId": "WasiqBhamla",
-      "repoName": "boyka-java",
+      "repoName": "boyka-framework",
       "type": "Star"
     },
     {
       "id": 2,
       "userId": "WasiqBhamla",
-      "repoName": "boyka-java",
+      "repoName": "boyka-framework",
       "type": "Watch"
     },
     {
       "id": 3,
       "userId": "WasiqBhamla",
-      "repoName": "boyka-java",
+      "repoName": "boyka-framework",
       "type": "Fork"
     }
   ],
