@@ -29,7 +29,7 @@
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <sonar.organization>wasiqbhamla</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.projectKey>com.github.wasiqb.boyka:boyka-framework</sonar.projectKey>
+        <sonar.projectKey>WasiqBhamla_boyka-framework</sonar.projectKey>
         <checkstyle.config>checkstyles/checkstyle.xml</checkstyle.config>
         <checkstyle.suppress>checkstyles/checkstyle-suppressions.xml</checkstyle.suppress>
         <sonar.report>${project.basedir}/reports/jacoco.exec</sonar.report>
