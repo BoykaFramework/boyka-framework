@@ -6,11 +6,7 @@ slug: /api/api-manager
 
 ## `execute`
 
-### Description
-
 This method takes in [`ApiRequest`](/api/api/api-request) instance and returns `ApiResponse` instance.
-
-### Example
 
 ```java
 final ApiResponse response = ApiManager.execute (request);

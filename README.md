@@ -52,6 +52,7 @@
 <br />
 
 <!-- Table of Contents -->
+
 # :notebook_with_decorative_cover: Table of Contents
 
 - [:notebook_with_decorative_cover: Table of Contents](#notebook_with_decorative_cover-table-of-contents)
@@ -68,9 +69,11 @@
   - [:gem: Acknowledgements](#gem-acknowledgements)
 
 <!-- About the Project -->
+
 ## :star2: About the Project
 
 <!-- Screenshots -->
+
 ### :camera: Screenshots
 
 <details>
@@ -105,6 +108,7 @@
 </details>
 
 <!-- TechStack -->
+
 ### :space_invader: Tech Stack
 
 <details>
@@ -114,7 +118,7 @@
 - Maven
 - Checkstyle
 - Sonar cloud
-  
+
 </details>
 
 <details>
@@ -123,7 +127,7 @@
 - Typescript
 - Docusaurus 2
 - React JS
-  
+
 </details>
 
 <details>
@@ -134,7 +138,7 @@
 - ESLint
 - Prettier
 - Husky
-  
+
 </details>
 
 <details>
@@ -142,10 +146,11 @@
 
 - GitHub Actions
 - Gitpod
-  
+
 </details>
 
 <!-- Features -->
+
 ### :dart: Features
 
 - Supports Rest API Automation
@@ -158,6 +163,7 @@
 - Has in-built Assertion methods
 
 <!-- Usage -->
+
 ## :eyes: Usage
 
 Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
@@ -171,11 +177,13 @@ Use this space to tell a little more about your project and how it can be used. 
 ```
 
 <!-- Roadmap -->
+
 ## :compass: Roadmap
 
 See our [Roadmap project](https://github.com/WasiqBhamla/boyka-framework/projects/2) for more details.
 
 <!-- Contributing -->
+
 ## :wave: Contributing
 
 <a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
@@ -185,24 +193,31 @@ See our [Roadmap project](https://github.com/WasiqBhamla/boyka-framework/project
 Contributions are always welcome!
 
 <!-- //TODO -->
+
 See `contributing.md` for ways to get started.
 
 <!-- Code of Conduct -->
+
 ### :scroll: Code of Conduct
 
 Please read the [Code of Conduct](https://github.com/WasiqBhamla/boyka-framework/blob/master/.github/CODE_OF_CONDUCT.md)
 
 <!-- License -->
+
 ## :warning: License
 
 Distributed under MIT License. See [LICENSE](LICENSE) for more information.
 
 <!-- Contact -->
+
 ## :handshake: Contact
 
-Wasiq Bhamla - [@WasiqBhamla](https://twitter.com/WasiqBhamla) - wasbhamla2005@gmail.com
+- Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
+- Open a [new Discussion](https://github.com/WasiqBhamla/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
+- Contact / Follow me on [Twitter @WasiqBhamla](https://twitter.com/WasiqBhamla)
 
 <!-- Acknowledgments -->
+
 ## :gem: Acknowledgements
 
 Big thanks to the following organizations for their support to the project with their open source licenses:

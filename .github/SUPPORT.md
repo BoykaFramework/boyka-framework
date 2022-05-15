@@ -1,4 +1,4 @@
-## Support
+# Support
 
 You can get support by:
 

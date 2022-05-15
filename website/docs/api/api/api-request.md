@@ -5,15 +5,11 @@ sidebar_position: 1
 
 ## `createRequest`
 
-### Description
-
 This is a builder method to build `ApiRequest` instance.
 
 :::caution Important!
 Always start composing the request with `createRequest` method.
 :::
-
-### Example
 
 ```java
 // highlight-next-line
@@ -27,11 +23,7 @@ final ApiRequest request = ApiRequest.createRequest ()
 
 ## `configKey`
 
-### Description
-
 This method is used to set the configuration key corresponding to API config block in `boyka-config.json`.
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
@@ -45,16 +37,12 @@ final ApiRequest request = ApiRequest.createRequest ()
 
 ## `contentType`
 
-### Description
-
 This method is used to set the content type of the request. Allowed values are:
 
 - `FORM_URLENCODED`
 - `JSON` (**default**)
 - `MULTIPART_FORM_DATA`
 - `PLAIN_TEXT`
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
@@ -69,11 +57,7 @@ final ApiRequest request = ApiRequest.createRequest ()
 
 ## `header`
 
-### Description
-
 This method is used to set the header of the request.
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
@@ -91,11 +75,7 @@ final ApiRequest request = ApiRequest.createRequest ()
 
 ## `path`
 
-### Description
-
 This method is used to set the path of the request.
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
@@ -112,11 +92,7 @@ final ApiRequest request = ApiRequest.createRequest ()
 
 ## `pathParam`
 
-### Description
-
 This method is used to set the path parameter(s) of the request.
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
@@ -133,11 +109,7 @@ final ApiRequest request = ApiRequest.createRequest ()
 
 ## `queryParam`
 
-### Description
-
 This method is used to set the query parameter(s) of the request.
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
@@ -155,11 +127,7 @@ final ApiRequest request = ApiRequest.createRequest ()
 
 ## `body`
 
-### Description
-
 This method is used to set the body of the request.
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
@@ -172,11 +140,7 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 
 ## `bodyObject`
 
-### Description
-
 This method is used to set the body of the request using Java object.
-
-### Example
 
 ```java
 final User user = User.createUser ()
@@ -194,8 +158,6 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 
 ## `method`
 
-### Description
-
 This method is used to set the method of the request. Following are the allowed values:
 
 - `DELETE`
@@ -206,8 +168,6 @@ This method is used to set the method of the request. Following are the allowed 
 - `POST`
 - `PUT`
 - `TRACE`
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
@@ -220,11 +180,7 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 
 ## `userName`
 
-### Description
-
 This method is used to set the user name of the request.
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
@@ -239,11 +195,7 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 
 ## `password`
 
-### Description
-
 This method is used to set the password of the request.
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
@@ -258,15 +210,11 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 
 ## `create`
 
-### Description
-
 This method will create `ApiRequest` instance.
 
 :::caution Important!
 Always end composing the request with `create` method.
 :::
-
-### Example
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()

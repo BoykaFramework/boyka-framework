@@ -35,7 +35,7 @@ import org.openqa.selenium.WebElement;
  * @author Wasiq Bhamla
  * @since 24-Feb-2022
  */
-public final class ElementFinder {
+final class ElementFinder {
     private static final Logger LOGGER = getLogger ();
 
     /**

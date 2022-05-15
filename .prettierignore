@@ -4,7 +4,6 @@ website/build
 **/.yarn
 **/.vscode
 /core-java
-*.md*
 .pnp.*
 *.json
 *.yml
