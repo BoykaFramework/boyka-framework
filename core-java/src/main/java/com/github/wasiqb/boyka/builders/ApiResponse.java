@@ -31,7 +31,6 @@ import com.google.common.truth.StringSubject;
 import com.jayway.jsonpath.DocumentContext;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Singular;
 import lombok.ToString;
 import org.apache.logging.log4j.Logger;
 
@@ -48,7 +47,6 @@ public class ApiResponse {
     private static final Logger LOGGER = getLogger ();
 
     private String              body;
-    @Singular
     private Map<String, String> headers;
     private ApiResponse         networkResponse;
     private ApiResponse         previousResponse;

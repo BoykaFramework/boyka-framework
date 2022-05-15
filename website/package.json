@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-beta.20",
+    "@docusaurus/plugin-content-docs": "^2.0.0-beta.20",
     "@tsconfig/docusaurus": "^1.0.5",
     "react-typist": "^2.0.5"
   },

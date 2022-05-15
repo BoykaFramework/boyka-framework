@@ -1,4 +1,4 @@
-name: Test boyka-java project
+name: Test boyka-framework project
 
 on:
   pull_request:

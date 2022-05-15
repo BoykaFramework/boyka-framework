@@ -10,13 +10,29 @@ const config = {
   tagline:
     'Ultimate test automation framework for automating Web, Android, iOS and API applications',
   url: 'https://wasiqbhamla.github.io',
-  baseUrl: '/boyka-java/',
+  baseUrl: '/boyka-framework/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/boyka-favicon.png',
   organizationName: 'WasiqBhamla', // Usually your GitHub org/user name.
-  projectName: 'boyka-java', // Usually your repo name.
+  projectName: 'boyka-framework', // Usually your repo name.
 
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'api',
+        path: './docs/api',
+        routeBasePath: 'api',
+        editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
+        editCurrentVersion: true,
+        sidebarPath: require.resolve('./docs/api/sidebars.js'),
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      }),
+    ],
+  ],
   presets: [
     [
       'classic',
@@ -28,13 +44,13 @@ const config = {
           path: './docs/framework-docs',
           routeBasePath: '/docs',
           sidebarPath: require.resolve('./docs/framework-docs/sidebars.js'),
-          editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/website/',
+          editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
         },
         blog: {
           showReadingTime: true,
           postsPerPage: 10,
           sortPosts: 'ascending',
-          editUrl: 'https://github.com/WasiqBhamla/boyka-java/edit/main/website/blog/',
+          editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -53,7 +69,7 @@ const config = {
       announcementBar: {
         id: 'star-the-repo',
         content:
-          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-java">GitHub</a> ⭐',
+          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-framework">GitHub</a> ⭐',
         backgroundColor: '#ffb600',
         textColor: '#000000',
         isCloseable: false,
@@ -75,9 +91,15 @@ const config = {
             position: 'right',
             label: 'documentation',
           },
+          {
+            to: '/api/intro',
+            sidebarId: 'api',
+            position: 'right',
+            label: 'api',
+          },
           { to: '/blog', label: 'blogs', position: 'right' },
           {
-            href: 'https://github.com/WasiqBhamla/boyka-java',
+            href: 'https://github.com/WasiqBhamla/boyka-framework',
             label: 'github',
             position: 'right',
           },
@@ -93,6 +115,10 @@ const config = {
                 label: 'documentation',
                 to: '/docs/intro',
               },
+              {
+                to: '/api/intro',
+                label: 'api',
+              },
             ],
           },
           {
@@ -100,7 +126,7 @@ const config = {
             items: [
               {
                 label: 'stack overflow',
-                href: 'https://stackoverflow.com/questions/tagged/boyka-java',
+                href: 'https://stackoverflow.com/questions/tagged/boyka-framework',
               },
               {
                 label: 'discord',
@@ -121,7 +147,7 @@ const config = {
               },
               {
                 label: 'github',
-                href: 'https://github.com/WasiqBhamla/boyka-java',
+                href: 'https://github.com/WasiqBhamla/boyka-framework',
               },
             ],
           },
