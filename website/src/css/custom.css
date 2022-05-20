@@ -19,6 +19,7 @@
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: 'IBM Plex Sans', PT Sans, Montserrat, Lato;
   --ifm-font-family-monospace: 'Fira Code', PT Sans, Open Sans, Roboto Slab, Roboto Condensed;
+  --ifm-link-color: #a07c4a;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -32,6 +33,7 @@
   --ifm-color-primary-lightest: #ffffff;
   --ifm-background-color: #3e291d;
   --ifm-background-surface-color: #3e291d;
+  --ifm-link-color: #cb9e5e;
 }
 
 .docusaurus-highlight-code-line {
@@ -49,4 +51,11 @@ div[class^='announcementBar_'] {
   background: lightsalmon !important;
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.footer {
+  --ifm-footer-background-color: var(--ifm-background-color);
+  --ifm-footer-color: var(--ifm-footer-link-color);
+  --ifm-footer-link-color: var(--ifm-navbar-link-color);
+  --ifm-footer-title-color: var(--ifm-color-primary);
 }
