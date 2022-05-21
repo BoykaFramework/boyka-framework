@@ -1,5 +1,5 @@
 ---
-title: Setup Configuration file
+title: 🪛 Setup Configuration file
 sidebar_position: 1
 ---
 

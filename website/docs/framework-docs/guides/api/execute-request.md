@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Execute Request
+title: 🔫 Execute Request
 ---
 
 Once you have composed your API request, you can execute it using class `ApiManager` and method `execute`.

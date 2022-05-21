@@ -65,12 +65,17 @@
     "**/*.{ts,tsx}": [
       "yarn lint",
       "yarn format",
-      "yarn format-fix"
+      "yarn format-fix",
+      "yarn build:site"
     ],
     "**/*.{js,jsx}": [
       "yarn lint",
       "yarn format",
-      "yarn format-fix"
+      "yarn format-fix",
+      "yarn build:site"
+    ],
+    "/core-java/*": [
+      "mvn install -f core-java/pom.xml -DskipTests"
     ]
   }
 }

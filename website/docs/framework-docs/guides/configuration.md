@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Configuration
+title: 🔩 Configuration
 ---
 
 The framework is highly configurable. You can configure repeated setting for your test in the framework configuration file.
