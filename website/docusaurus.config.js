@@ -92,6 +92,11 @@ const config = {
         textColor: '#000000',
         isCloseable: false,
       },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: true,
+        respectPrefersColorScheme: true,
+      },
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 4,
