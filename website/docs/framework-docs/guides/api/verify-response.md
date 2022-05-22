@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: Verify Response
+title: ✅ Verify Response
 ---
 
 Once the `ApiResponse` object is returned from the `execute` method, it can be used to verify that the response is valid.

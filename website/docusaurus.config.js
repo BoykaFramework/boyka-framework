@@ -6,14 +6,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'boyka',
+  title: 'Boyka-framework',
   tagline:
     'Ultimate test automation framework for automating Web, Android, iOS and API applications',
   url: 'https://wasiqbhamla.github.io',
   baseUrl: '/boyka-framework/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/boyka-favicon.png',
+  favicon: 'img/Boyka.png',
   organizationName: 'WasiqBhamla', // Usually your GitHub org/user name.
   projectName: 'boyka-framework', // Usually your repo name.
 
@@ -28,6 +28,20 @@ const config = {
         editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
         editCurrentVersion: true,
         sidebarPath: require.resolve('./docs/api/sidebars.js'),
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      }),
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'contributing',
+        path: './docs/contributing',
+        routeBasePath: 'contributing',
+        editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
+        editCurrentVersion: true,
+        sidebarPath: require.resolve('./docs/contributing/sidebars.js'),
         showLastUpdateAuthor: true,
         showLastUpdateTime: true,
       }),
@@ -56,8 +70,12 @@ const config = {
           customCss: require.resolve('./src/css/custom.css'),
         },
         sitemap: {
-          changefreq: 'weekly',
+          changefreq: 'daily',
           priority: 0.5,
+        },
+        googleAnalytics: {
+          trackingID: 'G-FZCKMQCL6G',
+          anonymizeIP: true,
         },
       }),
     ],
@@ -74,30 +92,38 @@ const config = {
         textColor: '#000000',
         isCloseable: false,
       },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: true,
+        respectPrefersColorScheme: true,
+      },
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 4,
       },
       navbar: {
-        title: 'boyka',
+        title: 'Boyka-framework',
         logo: {
           alt: 'boyka logo',
-          src: 'img/boyka-favicon.png',
+          src: 'img/Boyka.png',
         },
         items: [
           {
             type: 'doc',
             docId: 'intro',
-            position: 'right',
             label: 'documentation',
           },
           {
             to: '/api/intro',
             sidebarId: 'api',
-            position: 'right',
             label: 'api',
           },
-          { to: '/blog', label: 'blogs', position: 'right' },
+          {
+            to: '/contributing/welcome',
+            sidebarId: 'contributing',
+            label: 'contributing',
+          },
+          { to: '/blog', label: 'blogs' },
           {
             href: 'https://github.com/WasiqBhamla/boyka-framework',
             label: 'github',
@@ -119,10 +145,14 @@ const config = {
                 to: '/api/intro',
                 label: 'api',
               },
+              {
+                to: '/contributing/welcome',
+                label: 'contributing',
+              },
             ],
           },
           {
-            title: 'community',
+            title: 'Follow us',
             items: [
               {
                 label: 'stack overflow',

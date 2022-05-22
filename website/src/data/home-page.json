@@ -1,7 +1,7 @@
 {
-  "image": "/img/boyka-favicon.png",
-  "title": "boyka",
-  "description": "Ultimate Test Automation framework for Web, API, Android and iOS platforms",
+  "image": "/img/boyka-banner.png",
+  "title": "",
+  "description": "Ultimate Test Automation framework for Web, API, Android, iOS and Database automation testing",
   "buttons": [
     {
       "id": 1,
@@ -79,7 +79,7 @@
     {
       "title": "Logging events",
       "image": "img/home/logging.svg",
-      "description": "Provides logging support using Log4J 2 to log all events occurred during test execution."
+      "description": "Provides logging support using Log4J2 to log all events occurred during test execution."
     },
     {
       "title": "Inbuilt verification",

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Framework Architecture
+title: 📐 Framework Architecture
 ---
 
 ## Design

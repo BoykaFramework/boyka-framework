@@ -1,5 +1,5 @@
 ---
-title: Create Page Object
+title: 📄 Create Page Object
 sidebar_position: 2
 ---
 

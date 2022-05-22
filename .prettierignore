@@ -7,3 +7,4 @@ website/build
 .pnp.*
 *.json
 *.yml
+*.md*

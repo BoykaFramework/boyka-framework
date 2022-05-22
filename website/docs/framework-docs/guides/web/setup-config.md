@@ -1,5 +1,5 @@
 ---
-title: Setup Configuration file
+title: 🪛 Setup Configuration file
 sidebar_position: 1
 ---
 
@@ -94,5 +94,16 @@ Before starting to automate Web applications, we need to first setup the configu
 :::info
 To know more about Web configurations, please refer to the [Web Configuration guide][web-config].
 :::
+
+## Details of each Web configurations {#web-config-details}
+
+- `test_local_chrome`: This is the configuration for running the test on local Chrome browser.
+- `test_local_firefox`: This is the configuration for running the test on local Firefox browser.
+- `test_local_edge`: This is the configuration for running the test on local Edge browser.
+- `test_local_safari`: This is the configuration for running the test on local Safari browser.
+- `test_local_opera`: This is the configuration for running the test on local Opera browser.
+- `test_browserstack_chrome`: This is the configuration for running the test on BrowserStack Chrome browser.
+- `test_selenium_grid`: This is the configuration for running the test on Selenium Grid.
+- `test_lambda_test_chrome`: This is the configuration for running the test on LambdaTest Chrome browser.
 
 [web-config]: /docs/guides/configuration#web-config
