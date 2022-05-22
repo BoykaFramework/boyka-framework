@@ -1,7 +1,7 @@
 {
   "image": "/img/boyka-banner.png",
   "title": "",
-  "description": "Ultimate Test Automation framework for Web, API, Android, iOS and Database automation testing",
+  "description": "Ultimate Test Automation framework for Web, API, Android and iOS automation testing",
   "buttons": [
     {
       "id": 1,

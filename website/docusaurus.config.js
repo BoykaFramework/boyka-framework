@@ -74,7 +74,11 @@ const config = {
           priority: 0.5,
         },
         googleAnalytics: {
-          trackingID: 'G-FZCKMQCL6G',
+          trackingID: 'G-1QT63P70E7',
+          anonymizeIP: true,
+        },
+        gtag: {
+          trackingID: 'G-1QT63P70E7',
           anonymizeIP: true,
         },
       }),
