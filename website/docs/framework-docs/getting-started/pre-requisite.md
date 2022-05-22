@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Pre-Requisite
+title: 🚩 Pre-Requisite
 ---
 
 In order to use this framework, you need to have the following pre-requisites installed on your machine:

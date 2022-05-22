@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Usage
+title: 👨‍🦼 Usage
 ---
 
 ## Add as Maven dependency
