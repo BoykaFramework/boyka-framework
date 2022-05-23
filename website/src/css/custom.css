@@ -6,7 +6,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #3e291d;
+  /* --ifm-color-primary: #3e291d;
   --ifm-color-primary-dark: #38251a;
   --ifm-color-primary-darker: #352319;
   --ifm-color-primary-darkest: #2b1d14;
@@ -15,11 +15,22 @@
   --ifm-color-primary-lightest: #513526;
   --ifm-background-color: #ead8be;
   --ifm-background-surface-color: #ead8be;
+  --ifm-link-color: #a07c4a; */
+
+  --ifm-color-primary: #ead8be;
+  --ifm-color-primary-dark: #e0c59e;
+  --ifm-color-primary-darker: #dabb8e;
+  --ifm-color-primary-darkest: #cb9e5e;
+  --ifm-color-primary-light: #f4ebde;
+  --ifm-color-primary-lighter: #faf5ee;
+  --ifm-color-primary-lightest: #ffffff;
+  --ifm-background-color: #3e291d;
+  --ifm-background-surface-color: #3e291d;
+  --ifm-link-color: #cb9e5e;
 
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: 'IBM Plex Sans', PT Sans, Montserrat, Lato;
   --ifm-font-family-monospace: 'Fira Code', PT Sans, Open Sans, Roboto Slab, Roboto Condensed;
-  --ifm-link-color: #a07c4a;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */

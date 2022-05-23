@@ -23,6 +23,10 @@ Also select the checkboxes in the description section according to the type of c
 
 Make sure that the PR checks are passing, incase the checks are failing, please make sure to fix those first.
 
+## SonarCloud Quality Gate
+
+Make sure that the SonarCloud Quality Gate is passing, incase the checks are failing, please make sure to fix those first. Mostly it fails if the code coverage is less than 80%.
+
 ## Reviewers feedback
 
 Make sure to address the reviewers feedbacks.
