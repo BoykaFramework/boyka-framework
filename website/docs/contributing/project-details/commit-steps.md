@@ -74,6 +74,8 @@ Following checks will happen when you commit:
 - Commit message lint to check if the commit message is in correct format
 - ESLint to check if the website code complies with the [ESLint](https://eslint.org/) rules. It will only run if there is change to `.js`, `.jsx`, `.ts` or `.tsx` files.
 - Prettier to check if the website code complies with the [Prettier](https://prettier.io/) rules. It will only run if there is change to `.js`, `.jsx`, `.ts` or `.tsx` files.
+- Build the documentation website to check if the website builds successfully.
+- Build the Java project to check if the checkstyle and code compilation is successful.
 
 ## Push your commit
 

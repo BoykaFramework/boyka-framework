@@ -71,9 +71,6 @@
       "yarn lint",
       "yarn format",
       "yarn format-fix"
-    ],
-    "/core-java/*": [
-      "mvn install -f core-java/pom.xml -DskipTests"
     ]
   }
 }
