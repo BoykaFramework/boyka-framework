@@ -25,7 +25,9 @@ import java.util.Map;
 import com.github.wasiqb.boyka.enums.Browser;
 import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.Protocol;
+import com.github.wasiqb.boyka.enums.WindowResizeType;
 import lombok.Data;
+import org.openqa.selenium.Dimension;
 
 /**
  * Web settings.
@@ -35,15 +37,17 @@ import lombok.Data;
  */
 @Data
 public class WebSetting {
-    private Browser             browser  = Browser.NONE;
+    private Browser             browser    = Browser.NONE;
     private Map<String, Object> capabilities;
-    private CloudProviders      cloud    = CloudProviders.NONE;
-    private boolean             headless = true;
-    private String              host     = "localhost";
-    private String              password = EMPTY;
+    private CloudProviders      cloud      = CloudProviders.NONE;
+    private Dimension           customSize = new Dimension (1920, 1080);
+    private boolean             headless   = true;
+    private String              host       = "localhost";
+    private String              password   = EMPTY;
     private int                 port;
-    private Protocol            protocol = HTTP;
-    private String              userName = EMPTY;
+    private Protocol            protocol   = HTTP;
+    private WindowResizeType    resize     = WindowResizeType.NORMAL;
+    private String              userName   = EMPTY;
 
     /**
      * Gets cloud password.

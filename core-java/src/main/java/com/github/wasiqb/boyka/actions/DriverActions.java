@@ -20,8 +20,12 @@ import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 
 /**
  * Device / Browser specific actions.
@@ -33,6 +37,18 @@ public final class DriverActions {
     private static final Logger LOGGER = getLogger ();
 
     /**
+     * Gets the current window handle.
+     *
+     * @return the current window handle
+     */
+    public static String currentWindowHandle () {
+        LOGGER.traceEntry ();
+        final String handle = getDriverAttribute (WebDriver::getWindowHandle);
+        LOGGER.traceExit ();
+        return handle;
+    }
+
+    /**
      * Navigate to url on browser.
      *
      * @param url url to navigate to
@@ -41,6 +57,27 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Navigating to url: {}", url);
         performDriverAction (driver -> driver.get (url));
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Switch to new tab window.
+     *
+     * @param type type of window
+     */
+    public static void switchToNewWindow (final WindowType type) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Switching to new tab");
+        performDriverAction (driver -> driver.switchTo ()
+            .newWindow (type));
+        LOGGER.traceExit ();
+    }
+
+    public static void switchToWindow (final String nameOrHandle) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Switching to window: {}", nameOrHandle);
+        performDriverAction (driver -> driver.switchTo ()
+            .window (nameOrHandle));
         LOGGER.traceExit ();
     }
 
@@ -64,6 +101,18 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting url of the browser");
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl));
+    }
+
+    /**
+     * Gets all open window handles.
+     *
+     * @return all open window handles
+     */
+    public static List<String> windowHandles () {
+        LOGGER.traceEntry ();
+        final var handles = getDriverAttribute (WebDriver::getWindowHandles);
+        LOGGER.traceExit ();
+        return new ArrayList<> (handles);
     }
 
     private DriverActions () {
