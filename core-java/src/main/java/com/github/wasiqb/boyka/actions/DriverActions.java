@@ -73,6 +73,11 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Switch to window for specific name / handle.
+     *
+     * @param nameOrHandle name or handle of the window
+     */
     public static void switchToWindow (final String nameOrHandle) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to window: {}", nameOrHandle);
