@@ -146,6 +146,31 @@ public final class DriverManager {
         }
     }
 
+    private void setDriverSize (final WebSetting webSetting) {
+        if (this.applicationType == ApplicationType.WEB) {
+            final var window = getSession ().getDriver ()
+                .manage ()
+                .window ();
+            switch (webSetting.getResize ()) {
+                case CUSTOM:
+                    window.setSize (webSetting.getCustomSize ());
+                    break;
+                case FULL_SCREEN:
+                    window.fullscreen ();
+                    break;
+                case MAXIMIZED:
+                    window.maximize ();
+                    break;
+                case MINIMIZED:
+                    window.minimize ();
+                    break;
+                case NORMAL:
+                default:
+                    break;
+            }
+        }
+    }
+
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         chromedriver ().setup ();
@@ -225,6 +250,7 @@ public final class DriverManager {
                 setDriver (this.applicationType, setupOperaDriver (), this.setting);
                 break;
         }
+        setDriverSize (webSetting);
         LOGGER.traceExit ();
     }
 }
