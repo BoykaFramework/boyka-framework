@@ -1,29 +1,5 @@
-## Contributing
+# 👷‍♂️ Contributing
 
-### The process we follow
+Check out our [Contributing page][contributing] on our website to know how you can start contributing to Boyka-framework.
 
-### Join our Discord server
-
-### How you can contribute?
-
-#### Fork the repository
-
-#### Setup your IDE
-
-#### Create a new branch
-
-#### Check for any Checkstyle issues
-
-#### Commit your changes
-
-##### Sign your commits
-
-##### Commit message convention
-
-#### Push your changes to the remote repository
-
-#### Create a pull request
-
-##### Make changes as per review change requests
-
-[discord]: https://discord.gg/dUg8K9DAsR
+[contributing]: https://wasiqbhamla.github.io/boyka-framework/contributing/welcome

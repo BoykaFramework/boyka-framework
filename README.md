@@ -192,9 +192,7 @@ See our [Roadmap project](https://github.com/WasiqBhamla/boyka-framework/project
 
 Contributions are always welcome!
 
-<!-- //TODO -->
-
-See `contributing.md` for ways to get started.
+See [`contributing.md`](https://github.com/WasiqBhamla/boyka-framework/blob/main/.github/CONTRIBUTING.md) for ways to get started.
 
 <!-- Code of Conduct -->
 
