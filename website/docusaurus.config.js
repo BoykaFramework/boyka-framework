@@ -142,7 +142,7 @@ const config = {
             label: 'Contributing',
           },
           {
-            to: '/community/support',
+            to: '/community/our-supporters',
             sidebarId: 'community',
             docId: 'community',
             label: 'Community',
@@ -173,7 +173,7 @@ const config = {
                 label: 'Contributing',
               },
               {
-                to: '/community/support',
+                to: '/community/our-supporters',
                 label: 'Community',
               },
             ],
