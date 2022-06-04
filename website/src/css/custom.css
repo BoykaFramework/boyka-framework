@@ -18,8 +18,6 @@
   --ifm-link-color: #a07c4a;
 
   --ifm-code-font-size: 95%;
-  --ifm-font-family-base: 'IBM Plex Sans', PT Sans, Montserrat, Lato;
-  --ifm-font-family-monospace: 'Fira Code', PT Sans, Open Sans, Roboto Slab, Roboto Condensed;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -58,4 +56,21 @@ div[class^='announcementBar_'] {
   --ifm-footer-color: var(--ifm-footer-link-color);
   --ifm-footer-link-color: var(--ifm-navbar-link-color);
   --ifm-footer-title-color: var(--ifm-color-primary);
+}
+
+[data-theme='light'] img[src$='#gh-dark-mode-only'],
+[data-theme='dark'] img[src$='#gh-light-mode-only'] {
+  display: none;
+}
+
+img[src*='browserstack'],
+img[src*='LT-logo'] {
+  width: 40%;
+  height: auto;
+}
+
+.gh-sponsor-big {
+  height: 225px;
+  width: 600px;
+  border: 0;
 }

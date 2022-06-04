@@ -1,8 +1,4 @@
 {
   "label": "🌐 API",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "title": "API"
-  }
+  "position": 2
 }

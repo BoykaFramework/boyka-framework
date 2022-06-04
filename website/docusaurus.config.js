@@ -46,6 +46,20 @@ const config = {
         showLastUpdateTime: true,
       }),
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'community',
+        path: './docs/community',
+        routeBasePath: 'community',
+        editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
+        editCurrentVersion: true,
+        sidebarPath: require.resolve('./docs/community/sidebars.js'),
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      }),
+    ],
   ],
   presets: [
     [
@@ -115,23 +129,28 @@ const config = {
           {
             type: 'doc',
             docId: 'intro',
-            label: 'documentation',
+            label: 'Documentation',
           },
           {
             to: '/api/intro',
             sidebarId: 'api',
-            label: 'api',
+            label: 'API',
           },
           {
             to: '/contributing/welcome',
             sidebarId: 'contributing',
-            label: 'contributing',
+            label: 'Contributing',
           },
-          { to: '/blog', label: 'blogs' },
+          {
+            to: '/community/our-supporters',
+            sidebarId: 'community',
+            docId: 'community',
+            label: 'Community',
+          },
+          { to: '/blog', label: 'Blogs' },
           {
             href: 'https://github.com/WasiqBhamla/boyka-framework',
-            label: 'github',
-            position: 'right',
+            label: 'GitHub',
           },
         ],
       },
@@ -139,19 +158,23 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'docs',
+            title: 'Read This',
             items: [
               {
-                label: 'documentation',
+                label: 'Documentation',
                 to: '/docs/intro',
               },
               {
                 to: '/api/intro',
-                label: 'api',
+                label: 'API',
               },
               {
                 to: '/contributing/welcome',
-                label: 'contributing',
+                label: 'Contributing',
+              },
+              {
+                to: '/community/our-supporters',
+                label: 'Community',
               },
             ],
           },
@@ -159,34 +182,34 @@ const config = {
             title: 'Follow us',
             items: [
               {
-                label: 'stack overflow',
+                label: 'StackOverflow',
                 href: 'https://stackoverflow.com/questions/tagged/boyka-framework',
               },
               {
-                label: 'discord',
+                label: 'Join our Discord server',
                 href: 'https://discord.gg/dUg8K9DAsR',
               },
               {
-                label: 'twitter',
+                label: 'Twitter',
                 href: 'https://twitter.com/WasiqBhamla',
               },
             ],
           },
           {
-            title: 'more',
+            title: 'More',
             items: [
               {
-                label: 'blogs',
+                label: 'Blogs',
                 to: '/blog',
               },
               {
-                label: 'github',
+                label: 'GitHub',
                 href: 'https://github.com/WasiqBhamla/boyka-framework',
               },
             ],
           },
         ],
-        copyright: `copyright ©️ ${new Date().getFullYear()} Wasiq Bhamla. Built in 🇮🇳 with ❤️ using <a href="https://docusaurus.io/" target="_blank">Docusaurus</a>.`,
+        copyright: `Copyright ©️ ${new Date().getFullYear()} Wasiq Bhamla. Built in 🇮🇳 with ❤️ using <a href="https://docusaurus.io/" target="_blank">Docusaurus</a>.`,
       },
       prism: {
         theme: lightCodeTheme,
