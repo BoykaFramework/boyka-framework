@@ -59,7 +59,11 @@
     "format": "prettier --check .",
     "format-fix": "prettier --write .",
     "clear:website": "yarn workspace website clear",
-    "changelog": "lerna-changelog"
+    "changelog": "lerna-changelog",
+    "patch": "lerna version patch --yes --no-git-tag-version --no-push",
+    "minor": "lerna version minor --yes --no-git-tag-version --no-push",
+    "major": "lerna version major --yes --no-git-tag-version --no-push",
+    "release": "lerna version --conventional-commits --create-release github"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
