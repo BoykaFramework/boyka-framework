@@ -110,6 +110,11 @@ const config = {
         textColor: '#000000',
         isCloseable: false,
       },
+      algolia: {
+        appId: 'M6T24BY13H',
+        apiKey: '11afb7c9d506ae1308ffd375ec5da5e1',
+        indexName: 'boyka-framework',
+      },
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: false,
