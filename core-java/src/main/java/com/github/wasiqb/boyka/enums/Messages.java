@@ -41,7 +41,7 @@ public enum Messages {
     /**
      * Content type must be set before setting request body
      */
-    CONTENT_TYPE_MOT_SET ("Content type must be set before setting request body..."),
+    CONTENT_TYPE_NOT_SET("Content type must be set before setting request body..."),
     /**
      * Error executing request
      */
