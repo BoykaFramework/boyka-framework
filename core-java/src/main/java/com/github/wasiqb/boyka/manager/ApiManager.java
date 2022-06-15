@@ -46,7 +46,8 @@ import com.github.wasiqb.boyka.enums.ContentType;
 import com.github.wasiqb.boyka.enums.RequestMethod;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.utils.JsonParser;
-import com.moczul.ok2curl.CurlBuilder;
+import com.moczul.ok2curl.Configuration;
+import com.moczul.ok2curl.CurlCommandGenerator;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -158,11 +159,10 @@ public final class ApiManager {
     private ApiResponse getResponse (final String path) {
         LOGGER.traceEntry ("Parameters: {}", path);
         try {
-            Response response = this.client.newCall (this.request.url (getUrl (path))
+            this.response = parseResponse (this.client.newCall (this.request.url (getUrl (path))
                             .build ())
-                    .execute ();
-            this.response = parseResponse (response);
-            logRequest (response.request());
+                    .execute ());
+            logRequest ();
             logResponse ();
         } catch (final IOException e) {
             LOGGER.catching (e);
@@ -181,7 +181,7 @@ public final class ApiManager {
             format (URL_PATTERN, hostName, this.apiSetting.getBasePath (), interpolate (path, this.pathParams)));
     }
 
-    private void logRequest (Request request) {
+    private void logRequest () {
         LOGGER.traceEntry ();
         if (this.apiSetting.getLogging ()
             .isRequest ()) {
@@ -194,8 +194,8 @@ public final class ApiManager {
             if (isNotEmpty (req.getBody ())) {
                 LOGGER.info ("Request Body: {}", req.getBody ());
             }
-            String curl = new CurlBuilder(request).build();
-            LOGGER.info("Request Curl : "+curl);
+            final String curl = new CurlCommandGenerator(new Configuration()).generate(this.request.build());
+            LOGGER.info("Request Curl: {} ", curl);
         }
         LOGGER.traceExit ();
     }
