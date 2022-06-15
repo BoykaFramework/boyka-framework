@@ -181,7 +181,7 @@ public final class ApiManager {
             format (URL_PATTERN, hostName, this.apiSetting.getBasePath (), interpolate (path, this.pathParams)));
     }
 
-    private void logRequest (Request request) {
+    private void logRequest () {
         LOGGER.traceEntry ();
         if (this.apiSetting.getLogging ()
             .isRequest ()) {
