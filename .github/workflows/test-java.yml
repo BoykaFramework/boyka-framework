@@ -46,6 +46,10 @@ jobs:
     needs:
       - build
     runs-on: macos-latest
+    permissions:
+      id-token: write
+      contents: read
+      checks: write
     env:
       BS_USER: ${{ secrets.BS_USER }}
       BS_KEY: ${{ secrets.BS_KEY }}
