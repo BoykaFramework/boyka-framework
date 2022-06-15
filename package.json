@@ -1,6 +1,6 @@
 {
   "name": "boyka-framework",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Ultimate Automation framework to handle automation of web, mobile and API applications.",
   "author": {
     "name": "Wasiq Bhamla",
@@ -29,9 +29,9 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
-    "@types/node": "^17.0.39",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
+    "@types/node": "^17.0.41",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
     "commitlint": "^17.0.2",
     "eslint": "^8.17.0",
     "eslint-config-google": "^0.14.0",
@@ -41,9 +41,9 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "husky": "^8.0.1",
-    "lerna": "^5.0.0",
+    "lerna": "^5.1.1",
     "lerna-changelog": "^2.2.0",
-    "lint-staged": "^13.0.0",
+    "lint-staged": "^13.0.1",
     "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -59,7 +59,11 @@
     "format": "prettier --check .",
     "format-fix": "prettier --write .",
     "clear:website": "yarn workspace website clear",
-    "changelog": "lerna-changelog"
+    "changelog": "lerna-changelog",
+    "patch": "lerna version patch --yes --no-git-tag-version --no-push",
+    "minor": "lerna version minor --yes --no-git-tag-version --no-push",
+    "major": "lerna version major --yes --no-git-tag-version --no-push",
+    "release": "lerna version --conventional-commits --create-release github"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [

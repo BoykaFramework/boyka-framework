@@ -7,7 +7,6 @@
     "Internal"
   ],
   "git.enableCommitSigning": true,
-
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
