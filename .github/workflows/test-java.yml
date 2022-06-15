@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Java and Maven
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'adopt'
@@ -31,13 +31,13 @@ jobs:
         run: mvn install -f core-java/pom.xml -DskipTests
 
       - name: Upload target folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: target
           path: ${{ github.workspace }}/core-java/target
 
       - name: Cache local Maven repository
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ github.sha }}
@@ -46,18 +46,24 @@ jobs:
     needs:
       - build
     runs-on: macos-latest
+    env:
+      BS_USER: ${{ secrets.BS_USER }}
+      BS_KEY: ${{ secrets.BS_KEY }}
+      LT_USER: ${{ secrets.LT_USER }}
+      LT_KEY: ${{ secrets.LT_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Java and Maven
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'adopt'
 
       - name: Restore local Maven repository
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ github.sha }}
@@ -74,14 +80,13 @@ jobs:
       - name: Start Selenium Grid
         run: java -jar core-java/libs/selenium-server-4.1.2.jar standalone > core-java/selenium-grid.log &
 
-      - name: Test execution
-        env:
-          BS_USER: ${{ secrets.BS_USER }}
-          BS_KEY: ${{ secrets.BS_KEY }}
-          LT_USER: ${{ secrets.LT_USER }}
-          LT_KEY: ${{ secrets.LT_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: All Test execution
+        if: github.event_name != 'pull_request'
         run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
+
+      - name: PR Test execution
+        if: github.event_name != 'push'
+        run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test -Dsuite-xml=test-suites/testng-pr.xml
 
       - name: Test Report
         uses: dorny/test-reporter@v1
@@ -92,7 +97,7 @@ jobs:
           reporter: java-junit
 
       - name: Upload target folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: target
           path: |
@@ -107,18 +112,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Install Java and Maven
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'adopt'
 
       - name: Restore local Maven repository
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ github.sha }}
