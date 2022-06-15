@@ -18,7 +18,7 @@ package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.ContentType.JSON;
 import static com.github.wasiqb.boyka.enums.Messages.AUTH_PASSWORD_REQUIRED;
-import static com.github.wasiqb.boyka.enums.Messages.CONTENT_TYPE_MOT_SET;
+import static com.github.wasiqb.boyka.enums.Messages.CONTENT_TYPE_NOT_SET;
 import static com.github.wasiqb.boyka.enums.Messages.ERROR_EXECUTING_REQUEST;
 import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_REQUEST_BODY;
 import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_RESPONSE_BODY;
@@ -46,6 +46,8 @@ import com.github.wasiqb.boyka.enums.ContentType;
 import com.github.wasiqb.boyka.enums.RequestMethod;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.utils.JsonParser;
+import com.moczul.ok2curl.Configuration;
+import com.moczul.ok2curl.CurlCommandGenerator;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -125,14 +127,14 @@ public final class ApiManager {
         LOGGER.traceEntry ();
         if (body != null) {
             this.requestBody = create (JsonParser.toString (body),
-                requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
+                requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessage ()));
         }
         return LOGGER.traceExit (this);
     }
 
     private ApiManager body (final String body) {
         LOGGER.traceEntry ();
-        this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_MOT_SET.getMessage ()));
+        this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessage ()));
         return LOGGER.traceExit (this);
     }
 
@@ -158,8 +160,8 @@ public final class ApiManager {
         LOGGER.traceEntry ("Parameters: {}", path);
         try {
             this.response = parseResponse (this.client.newCall (this.request.url (getUrl (path))
-                    .build ())
-                .execute ());
+                            .build ())
+                    .execute ());
             logRequest ();
             logResponse ();
         } catch (final IOException e) {
@@ -192,6 +194,8 @@ public final class ApiManager {
             if (isNotEmpty (req.getBody ())) {
                 LOGGER.info ("Request Body: {}", req.getBody ());
             }
+            final String curl = new CurlCommandGenerator(new Configuration()).generate(this.request.build());
+            LOGGER.info("Request Curl: {} ", curl);
         }
         LOGGER.traceExit ();
     }

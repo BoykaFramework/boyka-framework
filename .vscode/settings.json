@@ -34,5 +34,6 @@
     "titleBar.inactiveBackground": "#0000ff99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "blue"
+  "peacock.color": "blue",
+  "maven.view": "flat"
 }
