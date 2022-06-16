@@ -152,6 +152,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.13.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.mrmike</groupId>
+            <artifactId>ok2curl</artifactId>
+            <version>0.8.0</version>
+        </dependency>
     </dependencies>
 
     <build>
