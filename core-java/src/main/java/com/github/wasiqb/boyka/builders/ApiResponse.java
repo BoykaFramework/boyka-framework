@@ -114,9 +114,8 @@ public class ApiResponse {
         LOGGER.traceExit ();
         if (getHeaders ().get (key) == null) {
             throw new FrameworkError (format (INVALID_HEADER_KEY.getMessage (), key));
-        } else {
-            return assertThat (getHeaders ().get (key));
         }
+        return assertThat (getHeaders ().get (key));
     }
 
     /**
