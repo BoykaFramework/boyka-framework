@@ -16,15 +16,18 @@
 
 package com.github.wasiqb.boyka.builders;
 
+import static com.github.wasiqb.boyka.enums.Messages.INVALID_HEADER_KEY;
 import static com.github.wasiqb.boyka.enums.Messages.NO_BODY_TO_PARSE;
 import static com.google.common.truth.Truth.assertThat;
 import static com.jayway.jsonpath.JsonPath.compile;
 import static com.jayway.jsonpath.JsonPath.parse;
+import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.IntegerSubject;
 import com.google.common.truth.StringSubject;
@@ -96,6 +99,24 @@ public class ApiResponse {
         LOGGER.info ("Verifying boolean field for expression: {}", expression);
         LOGGER.traceExit ();
         return assertThat (getResponseData (expression, Boolean.class));
+    }
+
+    /**
+     * Verify header in response.
+     *
+     * @param key header key
+     *
+     * @return {@link StringSubject} instance
+     */
+    public StringSubject verifyHeader (final String key) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying response Header: {}", key);
+        LOGGER.traceExit ();
+        if (getHeaders ().get (key) == null) {
+            throw new FrameworkError (format (INVALID_HEADER_KEY.getMessage (), key));
+        } else {
+            return assertThat (getHeaders ().get (key));
+        }
     }
 
     /**
