@@ -112,7 +112,7 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying response Header: {}", key);
         LOGGER.traceExit ();
-        if (getHeaders ().get (key) == null) {
+        if (!getHeaders ().containsKey (key)) {
             throw new FrameworkError (format (INVALID_HEADER_KEY.getMessage (), key));
         }
         return assertThat (getHeaders ().get (key));
