@@ -101,7 +101,11 @@ public enum Messages {
     /**
      * User name required for cloud execution
      */
-    USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution...");
+    USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution..."),
+    /**
+     * Schema validation assert failure
+     */
+    RESPONSE_SCHEMA_NOT_MATCHING("Schema validation assert failure...");
 
     private final String message;
 

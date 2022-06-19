@@ -71,6 +71,7 @@ public class TestApi {
             .isEqualTo ("Janet");
         response.verifyTextField ("data.last_name")
             .isEqualTo ("Weaver");
+        response.verifySchema(API_CONFIG_KEY,"GetUserSchema.json");
     }
 
     /**
@@ -99,6 +100,7 @@ public class TestApi {
             .isEqualTo (user.getJob ());
         response.verifyTextField ("updatedAt")
             .isNotNull ();
+        response.verifySchema(API_CONFIG_KEY,"PatchUserSchema.json");
     }
 
     /**
@@ -127,6 +129,7 @@ public class TestApi {
             .isEqualTo (user.getJob ());
         response.verifyTextField ("updatedAt")
             .isNotNull ();
+        response.verifySchema(API_CONFIG_KEY,"PutUserSchema.json");
     }
 
     /**
@@ -156,5 +159,6 @@ public class TestApi {
             .isEqualTo (user.getJob ());
         response.verifyTextField ("createdAt")
             .isNotNull ();
+        response.verifySchema(API_CONFIG_KEY,"CreateUserSchema.json");
     }
 }
