@@ -93,6 +93,20 @@ This parameter expects a valid `JsonPath` expression.
 
 Returns the [`StringSubject`][string-subject] object.
 
+## `verifyHeader` {#verify-response-header}
+
+This method will verify the header keys in the response body.
+
+### Parameters
+
+#### `key`
+
+This parameter expects a valid `key` value.
+
+### Return Type: `StringSubject`
+
+Returns the [`StringSubject`][string-subject] object.
+
 [boolean-subject]: https://truth.dev/api/latest/com/google/common/truth/BooleanSubject.html#method.summary
 [string-subject]: https://truth.dev/api/latest/com/google/common/truth/StringSubject.html#method.summary
 [int-subject]: https://truth.dev/api/latest/com/google/common/truth/IntegerSubject.html#method.summary

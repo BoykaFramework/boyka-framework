@@ -67,6 +67,8 @@ public class TestApi {
         final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
+        response.verifyHeader ("content-type")
+            .isEqualTo ("application/json; charset=utf-8");
         response.verifyTextField ("data.first_name")
             .isEqualTo ("Janet");
         response.verifyTextField ("data.last_name")
