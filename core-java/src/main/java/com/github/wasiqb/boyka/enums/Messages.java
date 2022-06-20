@@ -103,15 +103,13 @@ public enum Messages {
      */
     USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution..."),
     /**
-<<<<<<< HEAD
      * Schema validation assert failure
      */
-    RESPONSE_SCHEMA_NOT_MATCHING("Schema validation assert failure...");
-=======
+    RESPONSE_SCHEMA_NOT_MATCHING("Schema validation assert failure..."),
+    /** 
      * No such key found
      */
     INVALID_HEADER_KEY ("No such key {0} found...");
->>>>>>> main
 
     private final String message;
 
