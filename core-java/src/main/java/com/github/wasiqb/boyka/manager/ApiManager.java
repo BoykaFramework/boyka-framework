@@ -48,6 +48,7 @@ import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.utils.JsonParser;
 import com.moczul.ok2curl.Configuration;
 import com.moczul.ok2curl.CurlCommandGenerator;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -64,8 +65,7 @@ import org.apache.logging.log4j.Logger;
  * @since 17-Feb-2022
  */
 public final class ApiManager {
-    private static final Logger LOGGER      = getLogger ();
-    private static final String URL_PATTERN = "{0}{1}{2}";
+    private static final Logger LOGGER = getLogger ();
 
     /**
      * Execute API request.
@@ -85,7 +85,7 @@ public final class ApiManager {
             .body (requireNonNullElse (request.getBody (), EMPTY))
             .body (request.getBodyObject ())
             .method (request.getMethod ())
-            .getResponse (request.getPath ()));
+            .getResponse (request.getQueryParams (), request.getPath ()));
     }
 
     private final ApiSetting          apiSetting;
@@ -156,10 +156,12 @@ public final class ApiManager {
         return LOGGER.traceExit (buffer.readUtf8 ());
     }
 
-    private ApiResponse getResponse (final String path) {
+    private ApiResponse getResponse (final Map<String, String> queryParams, final String path) {
         LOGGER.traceEntry ("Parameters: {}", path);
         try {
-            this.response = parseResponse (this.client.newCall (this.request.url (getUrl (path))
+            final HttpUrl.Builder urlBuilder = requireNonNull (HttpUrl.parse (getUrl (path))).newBuilder ();
+            queryParams.forEach (urlBuilder::addQueryParameter);
+            this.response = parseResponse (this.client.newCall (this.request.url (urlBuilder.build ())
                     .build ())
                 .execute ());
             logRequest ();
@@ -171,14 +173,18 @@ public final class ApiManager {
         return LOGGER.traceExit (this.response);
     }
 
-    private String getUrl (final String path) {
-        LOGGER.traceEntry ("Parameter: {}", path);
+    private String getUrl () {
+        LOGGER.traceEntry ();
         var hostName = this.apiSetting.getBaseUri ();
         if (this.apiSetting.getPort () > 0) {
             hostName = format ("{0}:{1}", hostName, this.apiSetting.getPort ());
         }
-        return LOGGER.traceExit (
-            format (URL_PATTERN, hostName, this.apiSetting.getBasePath (), interpolate (path, this.pathParams)));
+        return LOGGER.traceExit (format ("{0}{1}", hostName, this.apiSetting.getBasePath ()));
+    }
+
+    private String getUrl (final String path) {
+        LOGGER.traceEntry ("Parameter: {}", path);
+        return LOGGER.traceExit (format ("{0}{1}", getUrl (), interpolate (path, this.pathParams)));
     }
 
     private void logRequest () {
@@ -194,9 +200,9 @@ public final class ApiManager {
             if (isNotEmpty (req.getBody ())) {
                 LOGGER.info ("Request Body: {}", req.getBody ());
             }
+            final var curl = new CurlCommandGenerator (new Configuration ()).generate (this.request.build ());
+            LOGGER.info ("Request Curl: {} ", curl);
         }
-        final String curl = new CurlCommandGenerator(new Configuration()).generate(this.request.build());
-        LOGGER.info("Request Curl: {} ", curl);
         LOGGER.traceExit ();
     }
 
