@@ -30,6 +30,7 @@ Following are the methods exposed in `ApiResponse` class to verify the response 
 - `verifyStatusMessage`: Verifies the status message of response.
 - `verifyTextField`: Verifies the text field in response body.
 - `verifySchema`: Verifies the json schema of resonse body.
+
 ### Methods to get response data
 
 Following are the methods exposed in `ApiResponse` class to get response data:

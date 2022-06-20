@@ -107,16 +107,19 @@ This parameter expects a valid `key` value.
 
 Returns the [`StringSubject`][string-subject] object.
 
-## `verifyHeader` {#verify-response-header}
+## `verifySchema` {#verify-schema}
 
-This method will verify the header keys in the response body.
+This method will verify the api response body json schema.
 
 ### Parameters
 
-#### `key`
+#### `config`
 
-This parameter expects a valid `key` value.
+This parameter expects a valid `config` value.
 
+#### `schemaName`
+
+This parameter expects a valid `schemaName` value. The schemaName is a json file stored at location src/tst/resources/<schameName.json>
 
 [boolean-subject]: https://truth.dev/api/latest/com/google/common/truth/BooleanSubject.html#method.summary
 [string-subject]: https://truth.dev/api/latest/com/google/common/truth/StringSubject.html#method.summary
