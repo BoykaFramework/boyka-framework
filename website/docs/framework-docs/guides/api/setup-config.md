@@ -22,7 +22,8 @@ Let's see how to set configuration in the configuration file for API end-points.
       "logging": {
         "request": true,
         "response": true
-      }
+      },
+      "schema_path":"schema/"
     }
   }
 }
