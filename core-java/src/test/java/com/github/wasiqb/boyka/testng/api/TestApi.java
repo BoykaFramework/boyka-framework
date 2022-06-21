@@ -76,6 +76,30 @@ public class TestApi {
     }
 
     /**
+     * Method to test GET request with Query params.
+     */
+    @Test (description = "Test GET request with Query params", priority = 6)
+    public void testGetUserPerPage () {
+        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+            .method (GET)
+            .path ("/users")
+            .queryParam ("page", "2")
+            .create ();
+
+        final ApiResponse response = execute (request);
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyIntField ("page")
+            .isEqualTo (2);
+        response.verifyIntField ("per_page")
+            .isEqualTo (6);
+        response.verifyIntField ("total")
+            .isEqualTo (12);
+        response.verifyIntField ("total_pages")
+            .isEqualTo (2);
+    }
+
+    /**
      * Method to test PATCH request.
      */
     @Test (description = "Test PATCH request", priority = 4)
