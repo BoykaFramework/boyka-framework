@@ -197,7 +197,7 @@ public class ApiResponse {
             e.getCausingExceptions().stream()
                     .map(ValidationException::getMessage)
                     .forEach(LOGGER::info);
-            throw new FrameworkError(RESPONSE_SCHEMA_NOT_MATCHING.getMessage());
+            throw new FrameworkError(RESPONSE_SCHEMA_NOT_MATCHING.getMessage(),e);
         }
         LOGGER.info("API response schema validation successfully verified");
         LOGGER.traceExit ();
