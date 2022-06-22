@@ -33,4 +33,5 @@ public class ApiSetting {
     private int            port;
     private int            readTimeout       = 5;
     private int            writeTimeout      = 5;
+    private String         schemaPath;
 }

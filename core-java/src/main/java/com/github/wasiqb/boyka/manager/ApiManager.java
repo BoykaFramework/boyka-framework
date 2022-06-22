@@ -254,17 +254,18 @@ public final class ApiManager {
         res.headers ()
             .forEach (entry -> headers.put (entry.getFirst (), entry.getSecond ()));
         try {
-            return LOGGER.traceExit (ApiResponse.createResponse ()
-                .request (parseRequest (res.request ()))
-                .statusCode (res.code ())
-                .statusMessage (res.message ())
-                .sentRequestAt (res.sentRequestAtMillis ())
-                .headers (headers)
-                .networkResponse (parseResponse (res.networkResponse ()))
-                .previousResponse (parseResponse (res.priorResponse ()))
-                .receivedResponseAt (res.receivedResponseAtMillis ())
-                .body (requireNonNullElse (res.body (), ResponseBody.create (EMPTY, parse (JSON.getType ()))).string ())
-                .create ());
+            return LOGGER.traceExit (ApiResponse.createResponse()
+                    .request(parseRequest(res.request()))
+                    .statusCode(res.code())
+                    .statusMessage(res.message())
+                    .sentRequestAt(res.sentRequestAtMillis())
+                    .headers(headers).networkResponse(parseResponse(res.networkResponse()))
+                    .apiSetting(this.apiSetting)
+                    .networkResponse (parseResponse (res.networkResponse ()))
+                    .previousResponse (parseResponse (res.priorResponse ()))
+                    .receivedResponseAt (res.receivedResponseAtMillis ())
+                    .body (requireNonNullElse (res.body (), ResponseBody.create (EMPTY, parse (JSON.getType ()))).string ())
+                    .create ());
         } catch (final IOException e) {
             LOGGER.catching (e);
             throw new FrameworkError (ERROR_PARSING_RESPONSE_BODY.getMessage (), e);

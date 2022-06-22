@@ -116,7 +116,8 @@
       "logging": {
         "request": true,
         "response": true
-      }
+      },
+      "schema_path": "schema/"
     }
   }
 }

@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.builders;
 
 import static com.github.wasiqb.boyka.enums.Messages.INVALID_HEADER_KEY;
 import static com.github.wasiqb.boyka.enums.Messages.NO_BODY_TO_PARSE;
+import static com.github.wasiqb.boyka.enums.Messages.RESPONSE_SCHEMA_NOT_MATCHING;
 import static com.google.common.truth.Truth.assertThat;
 import static com.jayway.jsonpath.JsonPath.compile;
 import static com.jayway.jsonpath.JsonPath.parse;
@@ -27,6 +28,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
+import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.IntegerSubject;
@@ -36,6 +38,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.apache.logging.log4j.Logger;
+import org.everit.json.schema.Schema;
+import org.everit.json.schema.ValidationException;
+import org.everit.json.schema.loader.SchemaLoader;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 /**
  * Response container class.
@@ -58,6 +65,7 @@ public class ApiResponse {
     private long                sentRequestAt;
     private int                 statusCode;
     private String              statusMessage;
+    private ApiSetting           apiSetting;
 
     /**
      * Get response body field data.
@@ -168,6 +176,31 @@ public class ApiResponse {
         LOGGER.info ("Verifying text field for expression: {}", expression);
         LOGGER.traceExit ();
         return assertThat (getResponseData (expression));
+    }
+
+    /**
+     * Verify schema of response.
+     *
+     * @param schemaName String expression
+     */
+    public void verifySchema(final String schemaName) {
+        LOGGER.traceEntry();
+        LOGGER.info("Verifying Response Schema");
+        try {
+
+            final Schema schema = SchemaLoader.load(new JSONObject(
+                    new JSONTokener(requireNonNull(getClass().getClassLoader().getResourceAsStream(
+                            this.apiSetting.getSchemaPath() + schemaName)))));
+            schema.validate(new JSONObject(getBody()));
+        } catch (ValidationException e) {
+            LOGGER.info(e.getMessage());
+            e.getCausingExceptions().stream()
+                    .map(ValidationException::getMessage)
+                    .forEach(LOGGER::info);
+            throw new FrameworkError(RESPONSE_SCHEMA_NOT_MATCHING.getMessage(),e);
+        }
+        LOGGER.info("API response schema validation successfully verified");
+        LOGGER.traceExit ();
     }
 
     private DocumentContext jsonPath () {
