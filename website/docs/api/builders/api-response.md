@@ -113,13 +113,9 @@ This method will verify the api response body json schema.
 
 ### Parameters
 
-#### `config`
-
-This parameter expects a valid `config` value.
-
 #### `schemaName`
 
-This parameter expects a valid `schemaName` value. The schemaName is a json file stored at location `src/tst/resources/<schameName>.json`
+This parameter expects a valid `schemaName` value. The schemaName is a json file containing the expected json schema version stored at location `src/test/resources/schema/<schameName>.json`.
 
 [boolean-subject]: https://truth.dev/api/latest/com/google/common/truth/BooleanSubject.html#method.summary
 [string-subject]: https://truth.dev/api/latest/com/google/common/truth/StringSubject.html#method.summary
