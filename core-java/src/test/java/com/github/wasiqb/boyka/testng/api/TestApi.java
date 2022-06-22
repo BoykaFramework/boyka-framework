@@ -16,14 +16,18 @@
 
 package com.github.wasiqb.boyka.testng.api;
 
+import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
+import static com.github.wasiqb.boyka.enums.RequestMethod.DELETE;
+import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
+import static com.github.wasiqb.boyka.enums.RequestMethod.PATCH;
+import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
+import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
+import static com.github.wasiqb.boyka.manager.ApiManager.execute;
+
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.testng.api.requests.User;
 import org.testng.annotations.Test;
-
-import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
-import static com.github.wasiqb.boyka.enums.RequestMethod.*;
-import static com.github.wasiqb.boyka.manager.ApiManager.execute;
 
 /**
  * Test class for testing Api manager class.

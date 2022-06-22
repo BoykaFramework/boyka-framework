@@ -16,6 +16,18 @@
 
 package com.github.wasiqb.boyka.builders;
 
+import static com.github.wasiqb.boyka.enums.Messages.INVALID_HEADER_KEY;
+import static com.github.wasiqb.boyka.enums.Messages.NO_BODY_TO_PARSE;
+import static com.github.wasiqb.boyka.enums.Messages.RESPONSE_SCHEMA_NOT_MATCHING;
+import static com.google.common.truth.Truth.assertThat;
+import static com.jayway.jsonpath.JsonPath.compile;
+import static com.jayway.jsonpath.JsonPath.parse;
+import static java.text.MessageFormat.format;
+import static java.util.Objects.requireNonNull;
+import static org.apache.logging.log4j.LogManager.getLogger;
+
+import java.util.Map;
+
 import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.common.truth.BooleanSubject;
@@ -31,16 +43,6 @@ import org.everit.json.schema.ValidationException;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
-import java.util.Map;
-
-import static com.github.wasiqb.boyka.enums.Messages.*;
-import static com.google.common.truth.Truth.assertThat;
-import static com.jayway.jsonpath.JsonPath.compile;
-import static com.jayway.jsonpath.JsonPath.parse;
-import static java.text.MessageFormat.format;
-import static java.util.Objects.requireNonNull;
-import static org.apache.logging.log4j.LogManager.getLogger;
 
 /**
  * Response container class.
@@ -62,8 +64,8 @@ public class ApiResponse {
     private ApiRequest          request;
     private long                sentRequestAt;
     private int                 statusCode;
-    private String statusMessage;
-    private ApiSetting apiSetting;
+    private String              statusMessage;
+    private ApiSetting           apiSetting;
 
     /**
      * Get response body field data.

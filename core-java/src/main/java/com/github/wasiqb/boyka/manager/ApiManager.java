@@ -16,25 +16,12 @@
 
 package com.github.wasiqb.boyka.manager;
 
-import com.github.wasiqb.boyka.builders.ApiRequest;
-import com.github.wasiqb.boyka.builders.ApiResponse;
-import com.github.wasiqb.boyka.config.api.ApiSetting;
-import com.github.wasiqb.boyka.enums.ContentType;
-import com.github.wasiqb.boyka.enums.RequestMethod;
-import com.github.wasiqb.boyka.exception.FrameworkError;
-import com.github.wasiqb.boyka.utils.JsonParser;
-import com.moczul.ok2curl.Configuration;
-import com.moczul.ok2curl.CurlCommandGenerator;
-import okhttp3.*;
-import okio.Buffer;
-import org.apache.logging.log4j.Logger;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.github.wasiqb.boyka.enums.ContentType.JSON;
-import static com.github.wasiqb.boyka.enums.Messages.*;
+import static com.github.wasiqb.boyka.enums.Messages.AUTH_PASSWORD_REQUIRED;
+import static com.github.wasiqb.boyka.enums.Messages.CONTENT_TYPE_NOT_SET;
+import static com.github.wasiqb.boyka.enums.Messages.ERROR_EXECUTING_REQUEST;
+import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_REQUEST_BODY;
+import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_RESPONSE_BODY;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 import static java.text.MessageFormat.format;
@@ -47,6 +34,29 @@ import static okhttp3.RequestBody.create;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.github.wasiqb.boyka.builders.ApiRequest;
+import com.github.wasiqb.boyka.builders.ApiResponse;
+import com.github.wasiqb.boyka.config.api.ApiSetting;
+import com.github.wasiqb.boyka.enums.ContentType;
+import com.github.wasiqb.boyka.enums.RequestMethod;
+import com.github.wasiqb.boyka.exception.FrameworkError;
+import com.github.wasiqb.boyka.utils.JsonParser;
+import com.moczul.ok2curl.Configuration;
+import com.moczul.ok2curl.CurlCommandGenerator;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okio.Buffer;
+import org.apache.logging.log4j.Logger;
 
 /**
  * API manager to handle all API request executions.
