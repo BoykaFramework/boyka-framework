@@ -30,7 +30,6 @@ import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
-import static io.github.bonigarcia.wdm.WebDriverManager.operadriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
@@ -54,7 +53,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -208,12 +206,6 @@ public final class DriverManager {
         return LOGGER.traceExit (new FirefoxDriver (options));
     }
 
-    private WebDriver setupOperaDriver () {
-        LOGGER.traceEntry ();
-        operadriver ().setup ();
-        return LOGGER.traceExit (new OperaDriver ());
-    }
-
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         return LOGGER.traceExit (new RemoteWebDriver (getRemoteUrl (webSetting), getCapabilities (webSetting)));
@@ -243,11 +235,8 @@ public final class DriverManager {
                 setDriver (this.applicationType, setupEdgeDriver (webSetting), this.setting);
                 break;
             case FIREFOX:
-                setDriver (this.applicationType, setupFirefoxDriver (webSetting), this.setting);
-                break;
-            case OPERA:
             default:
-                setDriver (this.applicationType, setupOperaDriver (), this.setting);
+                setDriver (this.applicationType, setupFirefoxDriver (webSetting), this.setting);
                 break;
         }
         setDriverSize (webSetting);
