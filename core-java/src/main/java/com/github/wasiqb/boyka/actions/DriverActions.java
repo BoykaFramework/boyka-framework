@@ -18,12 +18,19 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.openqa.selenium.OutputType.FILE;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.wasiqb.boyka.enums.Messages;
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 
@@ -35,6 +42,14 @@ import org.openqa.selenium.WindowType;
  */
 public final class DriverActions {
     private static final Logger LOGGER = getLogger ();
+
+    public static void acceptAlert () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.switchTo ()
+            .alert ()
+            .accept ());
+        LOGGER.traceExit ();
+    }
 
     /**
      * Gets the current window handle.
@@ -48,6 +63,66 @@ public final class DriverActions {
         return handle;
     }
 
+    public static void deleteAllCookies () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.manage ()
+            .deleteAllCookies ());
+        LOGGER.traceExit ();
+    }
+
+    public static void deleteCookie (final String name) {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.manage ()
+            .deleteCookieNamed (name));
+        LOGGER.traceExit ();
+    }
+
+    public static void dismissAlert () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.switchTo ()
+            .alert ()
+            .dismiss ());
+        LOGGER.traceExit ();
+    }
+
+    public static void fullScreen () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.manage ()
+            .window ()
+            .fullscreen ());
+        LOGGER.traceExit ();
+    }
+
+    public static void goBack () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.navigate ()
+            .back ());
+        LOGGER.traceExit ();
+    }
+
+    public static void goForward () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.navigate ()
+            .forward ());
+        LOGGER.traceExit ();
+    }
+
+    public static void maximize () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.manage ()
+            .window ()
+            .maximize ());
+        LOGGER.traceExit ();
+    }
+
+    public static void minimize () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.manage ()
+            .window ()
+            .minimize ());
+        LOGGER.traceExit ();
+    }
+
     /**
      * Navigate to url on browser.
      *
@@ -57,6 +132,13 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Navigating to url: {}", url);
         performDriverAction (driver -> driver.get (url));
+        LOGGER.traceExit ();
+    }
+
+    public static void refresh () {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> driver.navigate ()
+            .refresh ());
         LOGGER.traceExit ();
     }
 
@@ -83,6 +165,20 @@ public final class DriverActions {
         LOGGER.info ("Switching to window: {}", nameOrHandle);
         performDriverAction (driver -> driver.switchTo ()
             .window (nameOrHandle));
+        LOGGER.traceExit ();
+    }
+
+    public static void takeScreenshot (final String fileName) {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> {
+            final var file = ((TakesScreenshot) driver).getScreenshotAs (FILE);
+            try {
+                copyFile (file, new File (fileName));
+            } catch (final IOException e) {
+                LOGGER.error (e.getMessage (), e);
+                throw new FrameworkError (Messages.ERROR_SAVING_SCREENSHOT.getMessage (), e);
+            }
+        });
         LOGGER.traceExit ();
     }
 

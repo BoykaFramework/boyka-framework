@@ -54,18 +54,17 @@ import org.json.JSONTokener;
 @Getter
 @Builder (builderMethodName = "createResponse", buildMethodName = "create")
 public class ApiResponse {
-    private static final Logger LOGGER = getLogger ();
-
-    private String              body;
-    private Map<String, String> headers;
-    private ApiResponse         networkResponse;
-    private ApiResponse         previousResponse;
-    private long                receivedResponseAt;
-    private ApiRequest          request;
-    private long                sentRequestAt;
-    private int                 statusCode;
-    private String              statusMessage;
-    private ApiSetting           apiSetting;
+    private static final Logger              LOGGER = getLogger ();
+    private              ApiSetting          apiSetting;
+    private              String              body;
+    private              Map<String, String> headers;
+    private              ApiResponse         networkResponse;
+    private              ApiResponse         previousResponse;
+    private              long                receivedResponseAt;
+    private              ApiRequest          request;
+    private              long                sentRequestAt;
+    private              int                 statusCode;
+    private              String              statusMessage;
 
     /**
      * Get response body field data.
@@ -141,6 +140,31 @@ public class ApiResponse {
     }
 
     /**
+     * Verify schema of response.
+     *
+     * @param schemaName String expression
+     */
+    public void verifySchema (final String schemaName) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying Response Schema");
+        try {
+            final Schema schema = SchemaLoader.load (new JSONObject (new JSONTokener (requireNonNull (
+                getClass ().getClassLoader ()
+                    .getResourceAsStream (this.apiSetting.getSchemaPath () + schemaName)))));
+            schema.validate (new JSONObject (getBody ()));
+        } catch (final ValidationException e) {
+            LOGGER.info (e.getMessage ());
+            e.getCausingExceptions ()
+                .stream ()
+                .map (ValidationException::getMessage)
+                .forEach (LOGGER::info);
+            throw new FrameworkError (RESPONSE_SCHEMA_NOT_MATCHING.getMessage (), e);
+        }
+        LOGGER.info ("API response schema validation successfully verified");
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Verify status code in response.
      *
      * @return {@link IntegerSubject} instance
@@ -176,31 +200,6 @@ public class ApiResponse {
         LOGGER.info ("Verifying text field for expression: {}", expression);
         LOGGER.traceExit ();
         return assertThat (getResponseData (expression));
-    }
-
-    /**
-     * Verify schema of response.
-     *
-     * @param schemaName String expression
-     */
-    public void verifySchema(final String schemaName) {
-        LOGGER.traceEntry();
-        LOGGER.info("Verifying Response Schema");
-        try {
-
-            final Schema schema = SchemaLoader.load(new JSONObject(
-                    new JSONTokener(requireNonNull(getClass().getClassLoader().getResourceAsStream(
-                            this.apiSetting.getSchemaPath() + schemaName)))));
-            schema.validate(new JSONObject(getBody()));
-        } catch (ValidationException e) {
-            LOGGER.info(e.getMessage());
-            e.getCausingExceptions().stream()
-                    .map(ValidationException::getMessage)
-                    .forEach(LOGGER::info);
-            throw new FrameworkError(RESPONSE_SCHEMA_NOT_MATCHING.getMessage(),e);
-        }
-        LOGGER.info("API response schema validation successfully verified");
-        LOGGER.traceExit ();
     }
 
     private DocumentContext jsonPath () {
