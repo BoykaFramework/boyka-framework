@@ -5,13 +5,13 @@
   "changelog": {
     "repo": "WasiqBhamla/boyka-framework",
     "labels": {
-      "tag: new feature": ":rocket: New Feature",
-      "tag: breaking change": ":boom: Breaking Change",
-      "tag: bug fix": ":bug: Bug Fix",
-      "tag: polish": ":nail_care: Polish",
-      "tag: documentation": ":memo: Documentation",
-      "tag: internal": ":house: Internal",
-      "tag: performance": ":running_woman: Performance"
+      ":rocket: pr: new feature": ":rocket: New Feature",
+      ":boom: pr: breaking change": ":boom: Breaking Change",
+      ":bug: pr: bug fix": ":bug: Bug Fix",
+      ":nail_care: pr: polish": ":nail_care: Polish",
+      ":memo: pr: documentation": ":memo: Documentation",
+      ":house: pr: internal": ":house: Internal",
+      ":running_woman: pr: performance": ":running_woman: Performance"
     },
     "cacheDir": ".changelog"
   }

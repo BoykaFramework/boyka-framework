@@ -1,0 +1,38 @@
+name: ⭐ New Feature request"
+description: |
+  This template is used to create a new feature request.
+  Please provide as much information as possible.
+labels:
+  - '⭐ goal: addition'
+  - '🏷 status: label work required'
+  - '🏁 status: ready for dev'
+title: '⭐ New feature:'
+body:
+  - type: textarea
+    attributes:
+      label: 📗 Description of the new feature request?
+      placeholder: What is the expected behavior of the proposed feature?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 🚧 Scenario where this would be used?
+      placeholder: |
+        What is the scenario this would be used? Why is this important to your workflow?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 💁 Supporting information
+      placeholder: |
+        Having additional evidence, data, tweets, blog posts, research, ... anything is extremely helpful.
+        This information provides context to the scenario that may otherwise be lost.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ Please limit one request per issue.

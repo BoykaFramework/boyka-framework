@@ -19,9 +19,6 @@
       "test_local_safari": {
         "browser": "SAFARI"
       },
-      "test_local_opera": {
-        "browser": "OPERA"
-      },
       "test_browserstack_chrome": {
         "browser": "REMOTE",
         "cloud": "BROWSER_STACK",

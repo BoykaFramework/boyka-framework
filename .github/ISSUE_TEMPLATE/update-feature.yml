@@ -1,12 +1,32 @@
-name: ✨ New Feature request"
+name: ✨ Update existing Feature request"
 description: |
   This template is used to create a new feature request.
   Please provide as much information as possible.
-title: '✨ : '
+labels:
+  - '✨ goal: improvement'
+  - '🏷 status: label work required'
+  - '🏁 status: ready for dev'
+title: '✨ Update feature:'
 body:
+  - type: dropdown
+    id: domain-type
+    attributes:
+      label: 🖥️ What framework domain type is this feature for?
+      options:
+        - API
+        - Web
+        - Android
+        - iOS
+        - Workflow
+        - Documentations
+        - Issues / PR templates
+        - NOT APPLICABLE
+    validations:
+      required: true
+
   - type: textarea
     attributes:
-      label: 📗 Description of the new feature request?
+      label: 📗 Description of the feature improvement request?
       placeholder: What is the expected behavior of the proposed feature?
     validations:
       required: true

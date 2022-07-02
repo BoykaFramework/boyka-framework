@@ -229,7 +229,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: core-java/pom.xml
-          message: Released latest version to Maven central
+          message: 'chore(Internal): 🎉 Released latest version to Maven central'
           push: true
           default_author: user_info
           signoff: true
@@ -268,11 +268,7 @@ jobs:
   github-release-tweet:
     runs-on: ubuntu-latest
     needs:
-      - push-pom
       - push-tag
-
-    outputs:
-      changelog: ${{ steps.artifacts.outputs.changelog }}
 
     steps:
       - name: Check out Git repository
@@ -294,7 +290,7 @@ jobs:
           name: Version ${{ needs.push-pom.outputs.release-version }}
           prerelease: false
           draft: false
-          body: v${{ needs.push-pom.outputs.release-changelog }}
+          body: ${{ needs.push-pom.outputs.release-changelog }}
           discussion_category_name: Announcements
           generate_release_notes: false
           files: |

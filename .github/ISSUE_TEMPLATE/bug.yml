@@ -2,7 +2,11 @@ name: 🐛 Raise a bug
 description: |
   This template is used to create a new bug report.
   Please provide as much information as possible.
-title: '🐛 : '
+title: '🐛 New Bug:'
+labels:
+  - '🛠 goal: fix'
+  - '🏷 status: label work required'
+  - '🏁 status: ready for dev'
 body:
   - type: input
     id: description
@@ -18,20 +22,22 @@ body:
       label: Version
       description: 🔢 What version of the framework is this bug related to?
       options:
-        - 1.0.0 (Default)
+        - 0.1.0 (Default)
     validations:
       required: true
 
   - type: dropdown
-    id: app-type
+    id: domain-type
     attributes:
-      label: 🖥️ What application type is this bug for?
-      multiple: true
+      label: 🖥️ What framework domain type is this bug for?
       options:
         - API
-        - WEB
-        - ANDROID
-        - IOS
+        - Web
+        - Android
+        - iOS
+        - Workflow
+        - Documentations
+        - Issues / PR templates
         - NOT APPLICABLE
     validations:
       required: true
@@ -39,9 +45,9 @@ body:
   - type: textarea
     id: steps-to-reproduce
     attributes:
-      label: 📃 Steps to reproduce
+      label: 📃 Steps to reproduce the bug
       description: We highly suggest including a screenshots and a bug report log (GitHub Gist link).
-      placeholder: Tell us the steps required to trigger your bug.
+      placeholder: Tell us the steps required to replicate your bug.
     validations:
       required: true
 
