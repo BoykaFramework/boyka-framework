@@ -1,6 +1,6 @@
 {
   "name": "boyka-framework",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Ultimate Automation framework to handle automation of web, mobile and API applications.",
   "author": {
     "name": "Wasiq Bhamla",
@@ -29,14 +29,14 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@types/node": "^18.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.30.0",
-    "@typescript-eslint/parser": "^5.30.0",
+    "@types/node": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
     "commitlint": "^17.0.3",
-    "eslint": "^8.18.0",
+    "eslint": "^8.19.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.1.1",
+    "eslint-import-resolver-typescript": "^3.2.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
