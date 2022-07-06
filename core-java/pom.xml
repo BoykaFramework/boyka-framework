@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <inceptionYear>2022</inceptionYear>
     <url>https://github.com/WasiqBhamla/boyka-framework</url>
 
@@ -41,6 +41,8 @@
         <jacoco.version>0.8.8</jacoco.version>
         <checkstyle.version>3.1.2</checkstyle.version>
         <surefire-version>3.0.0-M7</surefire-version>
+        <nexus.version>1.6.13</nexus.version>
+        <maven.gpg.version>3.0.1</maven.gpg.version>
     </properties>
 
     <distributionManagement>
@@ -366,7 +368,6 @@
         </plugins>
     </build>
 
-
     <profiles>
         <profile>
             <id>coverage-per-test</id>
@@ -427,6 +428,44 @@
                     <scope>test</scope>
                 </dependency>
             </dependencies>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven.gpg.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>

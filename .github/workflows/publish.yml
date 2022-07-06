@@ -247,7 +247,7 @@ jobs:
           message: 'chore(Internal): 🎉 Released latest version to Maven central'
           push: true
           default_author: user_info
-          commit: --signoff --no-verify
+          commit: --no-verify
 
   push-tag:
     runs-on: ubuntu-latest
@@ -277,7 +277,6 @@ jobs:
         with:
           tag: v${{ needs.prepare-release.outputs.new-version }}
           message: 🎉 Released to Maven central
-          commit: --signoff
           default_author: user_info
           push: true
 
