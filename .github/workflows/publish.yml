@@ -247,7 +247,7 @@ jobs:
             core-java/pom.xml
             package.json
             website/package.json
-          message: 'chore(Internal): 🎉 Released latest version to Maven central'
+          message: 'chore(Internal): 🎉 Released latest version to Maven central [skip ci]'
           push: true
           default_author: user_info
           commit: --no-verify
@@ -261,6 +261,8 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ env.PUSH_TOKEN }}
 
       - name: Download target folder
         uses: actions/download-artifact@v3
@@ -279,9 +281,10 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           tag: v${{ needs.prepare-release.outputs.new-version }}
-          message: 🎉 Released to Maven central
+          message: 🎉 Released to Maven central [skip ci]
           default_author: user_info
           push: true
+          pull: '--rebase'
 
   github-release-tweet:
     runs-on: ubuntu-latest
