@@ -21,8 +21,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <inceptionYear>2022</inceptionYear>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>🎉 Ultimate test automation for testing any application on any platform</description>
     <url>https://github.com/WasiqBhamla/boyka-framework</url>
 
     <properties>
