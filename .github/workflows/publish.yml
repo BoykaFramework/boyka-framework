@@ -14,6 +14,7 @@ on:
         default: 'minor'
 
 env:
+  PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
   NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
@@ -211,6 +212,8 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ env.PUSH_TOKEN }}
 
       - name: Install Java and Maven
         uses: actions/setup-java@v3
