@@ -71,6 +71,13 @@ const config = {
           showLastUpdateTime: true,
           path: './docs/framework-docs',
           routeBasePath: '/docs',
+          lastVersion: '0.7.0',
+          versions: {
+            current: {
+              label: '0.8.0 🚧',
+              path: '0.8.0',
+            },
+          },
           sidebarPath: require.resolve('./docs/framework-docs/sidebars.js'),
           editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
         },
@@ -153,6 +160,10 @@ const config = {
             label: 'Community',
           },
           { to: '/blog', label: 'Blogs' },
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+          },
           {
             href: 'https://github.com/WasiqBhamla/boyka-framework',
             label: 'GitHub',
