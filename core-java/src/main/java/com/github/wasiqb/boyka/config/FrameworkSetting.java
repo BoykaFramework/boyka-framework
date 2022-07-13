@@ -24,6 +24,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.util.Map;
 
 import com.github.wasiqb.boyka.config.api.ApiSetting;
+import com.github.wasiqb.boyka.config.ui.UISetting;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 

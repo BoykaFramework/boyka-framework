@@ -153,11 +153,11 @@ public class ApiResponse {
                     .getResourceAsStream (this.apiSetting.getSchemaPath () + schemaName)))));
             schema.validate (new JSONObject (getBody ()));
         } catch (final ValidationException e) {
-            LOGGER.info (e.getMessage ());
+            LOGGER.error (e.getMessage ());
             e.getCausingExceptions ()
                 .stream ()
                 .map (ValidationException::getMessage)
-                .forEach (LOGGER::info);
+                .forEach (LOGGER::error);
             throw new FrameworkError (RESPONSE_SCHEMA_NOT_MATCHING.getMessage (), e);
         }
         LOGGER.info ("API response schema validation successfully verified");

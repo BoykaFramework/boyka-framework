@@ -26,10 +26,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.github.wasiqb.boyka.enums.Messages;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -43,12 +45,50 @@ import org.openqa.selenium.WindowType;
 public final class DriverActions {
     private static final Logger LOGGER = getLogger ();
 
-    public static void acceptAlert () {
+    /**
+     * Accepts browser alert.
+     *
+     * @return the alert message
+     */
+    public static String acceptAlert () {
         LOGGER.traceEntry ();
-        performDriverAction (driver -> driver.switchTo ()
-            .alert ()
-            .accept ());
+        return getDriverAttribute (driver -> {
+            final var alert = driver.switchTo ()
+                .alert ();
+            final var message = alert.getText ();
+            alert.accept ();
+            return message;
+        });
+    }
+
+    /**
+     * Enters text in browser alert and accept it.
+     *
+     * @param text Text to enter in alert
+     */
+    public static void acceptAlert (final String text) {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> {
+            final var alert = driver.switchTo ()
+                .alert ();
+            alert.sendKeys (text);
+            alert.accept ();
+        });
         LOGGER.traceExit ();
+    }
+
+    /**
+     * Gets all the browser cookies.
+     *
+     * @return List of cookie names.
+     */
+    public static List<String> cookies () {
+        LOGGER.traceEntry ();
+        return getDriverAttribute (driver -> driver.manage ()
+            .getCookies ()
+            .stream ()
+            .map (Cookie::getName)
+            .collect (Collectors.toList ()));
     }
 
     /**
@@ -63,6 +103,9 @@ public final class DriverActions {
         return handle;
     }
 
+    /**
+     * Deletes all browser cookies.
+     */
     public static void deleteAllCookies () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
@@ -70,6 +113,11 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Deletes browser cookie.
+     *
+     * @param name cookie name
+     */
     public static void deleteCookie (final String name) {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
@@ -77,14 +125,25 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
-    public static void dismissAlert () {
+    /**
+     * Dismisses browser alert.
+     *
+     * @return the alert message
+     */
+    public static String dismissAlert () {
         LOGGER.traceEntry ();
-        performDriverAction (driver -> driver.switchTo ()
-            .alert ()
-            .dismiss ());
-        LOGGER.traceExit ();
+        return getDriverAttribute (driver -> {
+            final var alert = driver.switchTo ()
+                .alert ();
+            final var message = alert.getText ();
+            alert.dismiss ();
+            return message;
+        });
     }
 
+    /**
+     * Switch browser window to full screen.
+     */
     public static void fullScreen () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
@@ -93,6 +152,9 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Navigate back to previous page on browser.
+     */
     public static void goBack () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.navigate ()
@@ -100,6 +162,9 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Navigate forward to next page on browser.
+     */
     public static void goForward () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.navigate ()
@@ -107,6 +172,9 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Makes browser window maximized.
+     */
     public static void maximize () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
@@ -115,6 +183,9 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Makes browser window minimized.
+     */
     public static void minimize () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
@@ -135,6 +206,9 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Refreshes browser page.
+     */
     public static void refresh () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.navigate ()
@@ -168,6 +242,11 @@ public final class DriverActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Take screenshot of browser.
+     *
+     * @param fileName file name
+     */
     public static void takeScreenshot (final String fileName) {
         LOGGER.traceEntry ();
         performDriverAction (driver -> {

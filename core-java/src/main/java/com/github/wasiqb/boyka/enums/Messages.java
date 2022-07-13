@@ -43,6 +43,10 @@ public enum Messages {
      */
     CONTENT_TYPE_NOT_SET ("Content type must be set before setting request body..."),
     /**
+     * Element not found.
+     */
+    ELEMENT_NOT_FOUND ("Element not found for locator {0}..."),
+    /**
      * Error executing request
      */
     ERROR_EXECUTING_REQUEST ("Error occurred while executing request..."),

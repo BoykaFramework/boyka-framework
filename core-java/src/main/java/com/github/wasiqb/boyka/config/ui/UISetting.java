@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config;
+package com.github.wasiqb.boyka.config.ui;
 
 import static com.github.wasiqb.boyka.enums.ApplicationType.ANDROID;
 import static com.github.wasiqb.boyka.enums.ApplicationType.IOS;
@@ -25,8 +25,6 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
-import com.github.wasiqb.boyka.config.ui.MobileSetting;
-import com.github.wasiqb.boyka.config.ui.WebSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Data;
@@ -42,7 +40,8 @@ public class UISetting {
 
     private Map<String, MobileSetting> android;
     private Map<String, MobileSetting> ios;
-    private PlaybackSetting            playback;
+    private ScreenshotSetting          screenshot;
+    private TimeoutSetting             timeout;
     private Map<String, WebSetting>    web;
 
     /**

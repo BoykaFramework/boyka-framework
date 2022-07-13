@@ -16,7 +16,9 @@
 
 package com.github.wasiqb.boyka.actions;
 
+import static com.github.wasiqb.boyka.enums.Messages.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static java.text.MessageFormat.format;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
@@ -25,6 +27,7 @@ import java.util.List;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import com.github.wasiqb.boyka.enums.WaitStrategy;
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -48,7 +51,13 @@ final class ElementFinder {
      */
     public static WebElement find (final Locator locator, final WaitStrategy waitStrategy) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (finds (locator, waitStrategy).get (0));
+        if (locator.getFilter () != null) {
+            return finds (locator, waitStrategy).stream ()
+                .filter (locator.getFilter ())
+                .findFirst ()
+                .orElseThrow (() -> new FrameworkError (format (ELEMENT_NOT_FOUND.getMessage (), locator)));
+        }
+        return finds (locator, waitStrategy).get (locator.getIndex ());
     }
 
     /**

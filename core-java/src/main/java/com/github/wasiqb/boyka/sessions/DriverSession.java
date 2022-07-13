@@ -50,7 +50,7 @@ public class DriverSession<D extends WebDriver> {
      * @param driver Generic type of {@link WebDriver}
      * @param setting {@link FrameworkSetting} instance
      */
-    public DriverSession (final ApplicationType applicationType, final D driver, final FrameworkSetting setting) {
+    DriverSession (final ApplicationType applicationType, final D driver, final FrameworkSetting setting) {
         LOGGER.traceEntry ("Application type: {}, Driver: {}, FrameworkSetting: {}", applicationType, driver, setting);
         this.applicationType = applicationType;
         this.setting = setting;
@@ -61,16 +61,16 @@ public class DriverSession<D extends WebDriver> {
 
     private void setDriverWaits () {
         LOGGER.traceEntry ();
-        final var playback = this.setting.getUi ()
-            .getPlayback ();
+        final var timeoutSetting = this.setting.getUi ()
+            .getTimeout ();
         final var timeouts = this.driver.manage ()
             .timeouts ();
-        timeouts.implicitlyWait (ofSeconds (playback.getImplicitWait ()));
+        timeouts.implicitlyWait (ofSeconds (timeoutSetting.getImplicitWait ()));
         if (this.applicationType == ApplicationType.WEB) {
-            timeouts.pageLoadTimeout (ofSeconds (playback.getPageLoadTimeout ()));
-            timeouts.scriptTimeout (ofSeconds (playback.getScriptTimeout ()));
+            timeouts.pageLoadTimeout (ofSeconds (timeoutSetting.getPageLoadTimeout ()));
+            timeouts.scriptTimeout (ofSeconds (timeoutSetting.getScriptTimeout ()));
         }
-        this.wait = new WebDriverWait (getDriver (), ofSeconds (playback.getExplicitWait ()));
+        this.wait = new WebDriverWait (getDriver (), ofSeconds (timeoutSetting.getExplicitWait ()));
         LOGGER.traceExit ();
     }
 }

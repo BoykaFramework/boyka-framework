@@ -14,36 +14,44 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages;
+package com.github.wasiqb.boyka.testng.web.pages.saucedemo;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
-import org.openqa.selenium.By;
 
 /**
- * Product details page.
+ * Login page object for Sauce demo application.
  *
  * @author Wasiq Bhamla
- * @since 10-Mar-2022
+ * @since 24-Feb-2022
  */
 @Getter
-public class ProductDetailsPage {
+public class LoginPage {
     /**
-     * Gets the product details page instance.
+     * Login page object.
      *
-     * @return {@link ProductDetailsPage} instance
+     * @return {@link LoginPage}
      */
-    public static ProductDetailsPage productDetailsPage () {
-        return new ProductDetailsPage ();
+    public static LoginPage loginPage () {
+        return new LoginPage ();
     }
 
-    private final Locator container = buildLocator ().web (
-            By.cssSelector ("div#inventory_item_container div.inventory_details"))
+    private final Locator loginBox    = buildLocator ().web (id ("login_button_container"))
+        .build ();
+    private final Locator loginButton = buildLocator ().web (id ("login-button"))
+        .parent (this.loginBox)
+        .build ();
+    private final Locator password    = buildLocator ().web (id ("password"))
+        .parent (this.loginBox)
+        .build ();
+    private final Locator username    = buildLocator ().web (id ("user-name"))
+        .parent (this.loginBox)
         .build ();
 
-    private ProductDetailsPage () {
+    private LoginPage () {
         // Avoid explicit class initialisation.
     }
 }

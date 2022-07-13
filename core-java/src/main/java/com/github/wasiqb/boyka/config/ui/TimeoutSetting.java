@@ -14,24 +14,20 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config.api;
+package com.github.wasiqb.boyka.config.ui;
 
 import lombok.Data;
 
 /**
- * API setting class.
+ * Playback setting.
  *
  * @author Wasiq Bhamla
  * @since 17-Feb-2022
  */
 @Data
-public class ApiSetting {
-    private String         basePath;
-    private String         baseUri;
-    private int            connectionTimeout = 5;
-    private LoggingSetting logging           = new LoggingSetting ();
-    private int            port;
-    private int            readTimeout       = 5;
-    private String         schemaPath        = "";
-    private int            writeTimeout      = 5;
+public class TimeoutSetting {
+    private int explicitWait    = 10;
+    private int implicitWait    = 1;
+    private int pageLoadTimeout = 30;
+    private int scriptTimeout   = 10;
 }

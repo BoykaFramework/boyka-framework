@@ -14,20 +14,35 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config;
+package com.github.wasiqb.boyka.testng.web.pages.theinternet;
 
-import lombok.Data;
+import static org.openqa.selenium.By.linkText;
+
+import com.github.wasiqb.boyka.builders.Locator;
+import lombok.Getter;
 
 /**
- * Playback setting.
+ * Home page.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 13-Jul-2022
  */
-@Data
-public class PlaybackSetting {
-    private int explicitWait    = 10;
-    private int implicitWait    = 1;
-    private int pageLoadTimeout = 30;
-    private int scriptTimeout   = 10;
+@Getter
+public class HomePage {
+    public static HomePage homePage () {
+        return new HomePage ();
+    }
+
+    /**
+     * Gets link locator based on the link name.
+     *
+     * @param linkText link name
+     *
+     * @return link locator
+     */
+    public Locator link (final String linkText) {
+        return Locator.buildLocator ()
+            .web (linkText (linkText))
+            .build ();
+    }
 }

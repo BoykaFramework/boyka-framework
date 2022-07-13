@@ -14,24 +14,20 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config.api;
+package com.github.wasiqb.boyka.config.ui;
 
 import lombok.Data;
 
 /**
- * API setting class.
+ * Screenshot setting.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 13-Jul-2022
  */
 @Data
-public class ApiSetting {
-    private String         basePath;
-    private String         baseUri;
-    private int            connectionTimeout = 5;
-    private LoggingSetting logging           = new LoggingSetting ();
-    private int            port;
-    private int            readTimeout       = 5;
-    private String         schemaPath        = "";
-    private int            writeTimeout      = 5;
+public class ScreenshotSetting {
+    private boolean enabled   = false;
+    private String  extension = "png";
+    private String  path      = "./screenshots";
+    private String  prefix    = "SCR";
 }

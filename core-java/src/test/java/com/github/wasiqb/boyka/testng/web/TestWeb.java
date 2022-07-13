@@ -29,11 +29,11 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElement
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
-import static com.github.wasiqb.boyka.testng.web.pages.CartPage.cartPage;
-import static com.github.wasiqb.boyka.testng.web.pages.CheckoutPage.checkoutPage;
-import static com.github.wasiqb.boyka.testng.web.pages.HomePage.homePage;
-import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
-import static com.github.wasiqb.boyka.testng.web.pages.ProductDetailsPage.productDetailsPage;
+import static com.github.wasiqb.boyka.testng.web.pages.saucedemo.CartPage.cartPage;
+import static com.github.wasiqb.boyka.testng.web.pages.saucedemo.CheckoutPage.checkoutPage;
+import static com.github.wasiqb.boyka.testng.web.pages.saucedemo.HomePage.homePage;
+import static com.github.wasiqb.boyka.testng.web.pages.saucedemo.LoginPage.loginPage;
+import static com.github.wasiqb.boyka.testng.web.pages.saucedemo.ProductDetailsPage.productDetailsPage;
 import static java.text.MessageFormat.format;
 import static org.openqa.selenium.Keys.CONTROL;
 import static org.openqa.selenium.Keys.DELETE;
@@ -76,7 +76,7 @@ public class TestWeb {
     /**
      * Test add to cart functionality.
      */
-    @Test (description = "Test adding a product to cart", priority = 2)
+    @Test (description = "Test adding a product to cart")
     public void testAddToCart () {
         verifyElementDisplayed (homePage ().getProductTitle ()).isTrue ();
         verifyElementDisplayed (homePage ().getProductDescription ()).isTrue ();
@@ -91,7 +91,7 @@ public class TestWeb {
     /**
      * Test checkout page step 1.
      */
-    @Test (description = "Test checkout page step 1.", priority = 5)
+    @Test (description = "Test checkout page step 1.")
     public void testCheckoutStep1 () {
         clickOn (cartPage ().getCheckout ());
 
@@ -108,7 +108,7 @@ public class TestWeb {
     /**
      * Test checkout page step 2.
      */
-    @Test (description = "Test checkout page step 2.", priority = 6)
+    @Test (description = "Test checkout page step 2.")
     public void testCheckoutStep2 () {
         clickOn (checkoutPage ().getFinish ());
 
@@ -122,7 +122,7 @@ public class TestWeb {
     /**
      * Test login functionality.
      */
-    @Test (description = "Test login functionality", priority = 1)
+    @Test (description = "Test login functionality")
     public void testLogin () {
         navigateTo (URL);
         verifyBrowserUrl ().startsWith (URL);
@@ -140,7 +140,7 @@ public class TestWeb {
     /**
      * Test product cart page.
      */
-    @Test (description = "Test product cart page", priority = 4)
+    @Test (description = "Test product cart page")
     public void testProductCartPage () {
         clickOn (homePage ().getShoppingCart ());
 
@@ -151,7 +151,7 @@ public class TestWeb {
     /**
      * Test login functionality.
      */
-    @Test (description = "Test product details page", priority = 3)
+    @Test (description = "Test product details page")
     public void testProductDetailsPage () {
         clickOn (homePage ().productItem ("Sauce Labs Backpack"));
 
@@ -162,7 +162,7 @@ public class TestWeb {
     /**
      * Test checkout page step 2.
      */
-    @Test (description = "Test Sign out.", priority = 7)
+    @Test (description = "Test Sign out.")
     public void testSignOut () {
         clickOn (homePage ().getMenuButton ());
         clickOn (homePage ().getLogout ());

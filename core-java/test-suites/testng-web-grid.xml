@@ -21,7 +21,25 @@
         <parameter name="appType" value="WEB"/>
         <parameter name="driverKey" value="test_selenium_grid"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
+            <class name="com.github.wasiqb.boyka.testng.web.TestWeb">
+                <methods>
+                    <include name="testLogin"/>
+                    <include name="testAddToCart"/>
+                    <include name="testProductDetailsPage"/>
+                    <include name="testProductCartPage"/>
+                    <include name="testCheckoutStep1"/>
+                    <include name="testCheckoutStep2"/>
+                    <include name="testSignOut"/>
+                </methods>
+            </class>
+            <class name="com.github.wasiqb.boyka.testng.web.TestWebActions">
+                <methods>
+                    <include name="testAcceptAlert"/>
+                    <include name="testAcceptConfirmAlert"/>
+                    <include name="testDismissConfirmAlert"/>
+                    <include name="testDismissPromptAlert"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

@@ -14,35 +14,33 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages;
+package com.github.wasiqb.boyka.testng.web.pages.theinternet;
 
-import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
-/**
- * Cart page.
- *
- * @author Wasiq Bhamla
- * @since 13-Mar-2022
- */
 @Getter
-public class CartPage {
-    /**
-     * Gets Cart page instance.
-     *
-     * @return Cart page instance
-     */
-    public static CartPage cartPage () {
-        return new CartPage ();
+public class AlertPage {
+    public static AlertPage alertPage () {
+        return new AlertPage ();
     }
 
-    private final Locator checkout = buildLocator ().web (id ("checkout"))
+    private final Locator alertButton   = Locator.buildLocator ()
+        .web (cssSelector ("ul > li > button"))
+        .index (0)
         .build ();
-
-    private CartPage () {
-        // Avoid explicit class initialisation
-    }
+    private final Locator confirmButton = Locator.buildLocator ()
+        .web (cssSelector ("ul > li > button"))
+        .index (1)
+        .build ();
+    private final Locator promptButton  = Locator.buildLocator ()
+        .web (cssSelector ("ul > li > button"))
+        .index (2)
+        .build ();
+    private final Locator result        = Locator.buildLocator ()
+        .web (id ("result"))
+        .build ();
 }

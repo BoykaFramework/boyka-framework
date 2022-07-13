@@ -14,24 +14,35 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config.api;
+package com.github.wasiqb.boyka.testng.web.pages.saucedemo;
 
-import lombok.Data;
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.id;
+
+import com.github.wasiqb.boyka.builders.Locator;
+import lombok.Getter;
 
 /**
- * API setting class.
+ * Cart page.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 13-Mar-2022
  */
-@Data
-public class ApiSetting {
-    private String         basePath;
-    private String         baseUri;
-    private int            connectionTimeout = 5;
-    private LoggingSetting logging           = new LoggingSetting ();
-    private int            port;
-    private int            readTimeout       = 5;
-    private String         schemaPath        = "";
-    private int            writeTimeout      = 5;
+@Getter
+public class CartPage {
+    /**
+     * Gets Cart page instance.
+     *
+     * @return Cart page instance
+     */
+    public static CartPage cartPage () {
+        return new CartPage ();
+    }
+
+    private final Locator checkout = buildLocator ().web (id ("checkout"))
+        .build ();
+
+    private CartPage () {
+        // Avoid explicit class initialisation
+    }
 }
