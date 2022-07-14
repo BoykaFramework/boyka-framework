@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages.theinternet;
+package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
@@ -22,8 +22,19 @@ import static org.openqa.selenium.By.id;
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
+/**
+ * Alert page object.
+ *
+ * @author Wasiq Bhamla
+ * @since 14-Jul-2022
+ */
 @Getter
 public class AlertPage {
+    /**
+     * Alert page instance.
+     *
+     * @return {@link AlertPage}
+     */
     public static AlertPage alertPage () {
         return new AlertPage ();
     }

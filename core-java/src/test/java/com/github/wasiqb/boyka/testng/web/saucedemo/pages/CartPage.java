@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages.saucedemo;
+package com.github.wasiqb.boyka.testng.web.saucedemo.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.id;
@@ -23,35 +23,26 @@ import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
 /**
- * Login page object for Sauce demo application.
+ * Cart page.
  *
  * @author Wasiq Bhamla
- * @since 24-Feb-2022
+ * @since 13-Mar-2022
  */
 @Getter
-public class LoginPage {
+public class CartPage {
     /**
-     * Login page object.
+     * Gets Cart page instance.
      *
-     * @return {@link LoginPage}
+     * @return Cart page instance
      */
-    public static LoginPage loginPage () {
-        return new LoginPage ();
+    public static CartPage cartPage () {
+        return new CartPage ();
     }
 
-    private final Locator loginBox    = buildLocator ().web (id ("login_button_container"))
-        .build ();
-    private final Locator loginButton = buildLocator ().web (id ("login-button"))
-        .parent (this.loginBox)
-        .build ();
-    private final Locator password    = buildLocator ().web (id ("password"))
-        .parent (this.loginBox)
-        .build ();
-    private final Locator username    = buildLocator ().web (id ("user-name"))
-        .parent (this.loginBox)
+    private final Locator checkout = buildLocator ().web (id ("checkout"))
         .build ();
 
-    private LoginPage () {
-        // Avoid explicit class initialisation.
+    private CartPage () {
+        // Avoid explicit class initialisation
     }
 }

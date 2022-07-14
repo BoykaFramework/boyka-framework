@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web;
+package com.github.wasiqb.boyka.testng.web.theinternet;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.acceptAlert;
 import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
@@ -26,8 +26,8 @@ import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyDismissA
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
-import static com.github.wasiqb.boyka.testng.web.pages.theinternet.AlertPage.alertPage;
-import static com.github.wasiqb.boyka.testng.web.pages.theinternet.HomePage.homePage;
+import static com.github.wasiqb.boyka.testng.web.theinternet.pages.AlertPage.alertPage;
+import static com.github.wasiqb.boyka.testng.web.theinternet.pages.HomePage.homePage;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * @author Wasiq Bhamla
  * @since 12-Jul-2022
  */
-public class TestWebActions {
+public class AlertsTest {
     private static final String URL = "https://the-internet.herokuapp.com/";
 
     /**
@@ -54,6 +54,8 @@ public class TestWebActions {
     @Parameters ({ "appType", "driverKey" })
     public void setupTest (final ApplicationType appType, final String driverKey) {
         createDriver (appType, driverKey);
+        navigateTo (URL);
+        clickOn (homePage ().link ("JavaScript Alerts"));
     }
 
     /**
@@ -69,8 +71,6 @@ public class TestWebActions {
      */
     @Test (description = "Tests Accept alert")
     public void testAcceptAlert () {
-        navigateTo (URL);
-        clickOn (homePage ().link ("JavaScript Alerts"));
         clickOn (alertPage ().getAlertButton ());
         verifyAcceptAlert ().isEqualTo ("I am a JS Alert");
         verifyTextOf (alertPage ().getResult ()).isEqualTo ("You successfully clicked an alert");

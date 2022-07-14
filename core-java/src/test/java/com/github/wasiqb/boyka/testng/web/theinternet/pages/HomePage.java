@@ -14,36 +14,40 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages.saucedemo;
+package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
-import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.linkText;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
-import org.openqa.selenium.By;
 
 /**
- * Product details page.
+ * Home page.
  *
  * @author Wasiq Bhamla
- * @since 10-Mar-2022
+ * @since 13-Jul-2022
  */
 @Getter
-public class ProductDetailsPage {
+public class HomePage {
     /**
-     * Gets the product details page instance.
+     * Home page instance.
      *
-     * @return {@link ProductDetailsPage} instance
+     * @return {@link HomePage}
      */
-    public static ProductDetailsPage productDetailsPage () {
-        return new ProductDetailsPage ();
+    public static HomePage homePage () {
+        return new HomePage ();
     }
 
-    private final Locator container = buildLocator ().web (
-            By.cssSelector ("div#inventory_item_container div.inventory_details"))
-        .build ();
-
-    private ProductDetailsPage () {
-        // Avoid explicit class initialisation.
+    /**
+     * Gets link locator based on the link name.
+     *
+     * @param linkText link name
+     *
+     * @return link locator
+     */
+    public Locator link (final String linkText) {
+        return Locator.buildLocator ()
+            .web (linkText (linkText))
+            .build ();
     }
 }

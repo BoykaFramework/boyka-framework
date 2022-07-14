@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  * @author Wasiq Bhamla
  * @since 19-Feb-2022
  */
-public class TestApi {
+public class ApiTest {
     private static final String API_CONFIG_KEY = "test_reqres";
 
     /**
