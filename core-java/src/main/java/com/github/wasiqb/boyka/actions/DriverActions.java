@@ -78,6 +78,29 @@ public final class DriverActions {
     }
 
     /**
+     * Close browser window.
+     */
+    public static void closeWindow () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Closing window");
+        performDriverAction (WebDriver::close);
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Gets a particular cookie from browser.
+     *
+     * @param name Cookie name
+     *
+     * @return {@link Cookie}
+     */
+    public static Cookie cookie (final String name) {
+        LOGGER.traceEntry ();
+        return getDriverAttribute (driver -> driver.manage ()
+            .getCookieNamed (name));
+    }
+
+    /**
      * Gets all the browser cookies.
      *
      * @return List of cookie names.

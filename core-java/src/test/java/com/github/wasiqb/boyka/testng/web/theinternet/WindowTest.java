@@ -16,19 +16,24 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.acceptAlert;
-import static com.github.wasiqb.boyka.actions.DriverActions.fullScreen;
+import static com.github.wasiqb.boyka.actions.DriverActions.closeWindow;
+import static com.github.wasiqb.boyka.actions.DriverActions.currentWindowHandle;
 import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
+import static com.github.wasiqb.boyka.actions.DriverActions.goForward;
+import static com.github.wasiqb.boyka.actions.DriverActions.maximize;
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
+import static com.github.wasiqb.boyka.actions.DriverActions.switchToWindow;
+import static com.github.wasiqb.boyka.actions.DriverActions.windowHandles;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyDismissAlert;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
-import static com.github.wasiqb.boyka.testng.web.theinternet.pages.AlertPage.alertPage;
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.HomePage.homePage;
+import static com.github.wasiqb.boyka.testng.web.theinternet.pages.MultiWindowPage.multiWindowPage;
+import static com.google.common.truth.Truth.assertThat;
+import static java.text.MessageFormat.format;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
@@ -37,12 +42,12 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
- * This will test all Web related actions.
+ * Browser window specific tests.
  *
  * @author Wasiq Bhamla
- * @since 12-Jul-2022
+ * @since 16-Jul-2022
  */
-public class AlertsTest {
+public class WindowTest {
     private static final String URL = "https://the-internet.herokuapp.com/";
 
     /**
@@ -55,9 +60,9 @@ public class AlertsTest {
     @Parameters ({ "appType", "driverKey" })
     public void setupClass (final ApplicationType appType, final String driverKey) {
         createDriver (appType, driverKey);
-        fullScreen ();
+        maximize ();
         navigateTo (URL);
-        clickOn (homePage ().link ("JavaScript Alerts"));
+        clickOn (homePage ().link ("Multiple Windows"));
     }
 
     /**
@@ -65,48 +70,49 @@ public class AlertsTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        goBack ();
-        verifyBrowserUrl ().isEqualTo (URL);
         closeDriver ();
     }
 
     /**
-     * This will test Accept alert button action.
+     * Test case to verify browser back navigation.
      */
-    @Test (description = "Tests Accept alert")
-    public void testAcceptAlert () {
-        clickOn (alertPage ().getAlertButton ());
-        verifyAcceptAlert ().isEqualTo ("I am a JS Alert");
-        verifyTextOf (alertPage ().getResult ()).isEqualTo ("You successfully clicked an alert");
+    @Test (description = "Test browser back navigation")
+    public void testBackNavigation () {
+        goBack ();
+        verifyBrowserUrl ().isEqualTo (URL);
     }
 
     /**
-     * This will test accept confirm button action.
+     * Test case to verify browser forward navigation.
      */
-    @Test (description = "Tests Accept confirm alert")
-    public void testAcceptConfirmAlert () {
-        clickOn (alertPage ().getConfirmButton ());
-        verifyAcceptAlert ().isEqualTo ("I am a JS Confirm");
-        verifyTextOf (alertPage ().getResult ()).isEqualTo ("You clicked: Ok");
+    @Test (description = "Test browser forward navigation")
+    public void testForwardNavigation () {
+        goForward ();
+        verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
+    }
+
+    @Test
+    public void testOpenWindow () {
+        final var currentWindow = currentWindowHandle ();
+        clickOn (multiWindowPage ().getClickHere ());
+        final var newWindow = windowHandles ().stream ()
+            .filter (handle -> !handle.equals (currentWindow))
+            .findFirst ();
+        assertThat (newWindow.isPresent ()).isTrue ();
+        switchToWindow (newWindow.get ());
+        verifyBrowserUrl ().isEqualTo (format ("{0}windows/new", URL));
+        verifyTextOf (multiWindowPage ().getTitle ()).isEqualTo ("New Window");
+        closeWindow ();
+        switchToWindow (currentWindow);
+        verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
     }
 
     /**
-     * This will test dismiss confirm button action.
+     * Test case to verify browser refresh.
      */
-    @Test (description = "Tests Dismiss confirm alert")
-    public void testDismissConfirmAlert () {
-        clickOn (alertPage ().getConfirmButton ());
-        verifyDismissAlert ().isEqualTo ("I am a JS Confirm");
-        verifyTextOf (alertPage ().getResult ()).isEqualTo ("You clicked: Cancel");
-    }
-
-    /**
-     * This will test dismiss confirm button action.
-     */
-    @Test (description = "Tests Dismiss prompt alert")
-    public void testDismissPromptAlert () {
-        clickOn (alertPage ().getPromptButton ());
-        acceptAlert ("Wasiq");
-        verifyTextOf (alertPage ().getResult ()).isEqualTo ("You entered: Wasiq");
+    @Test (description = "Test to verify page refresh")
+    public void testRefreshPage () {
+        refresh ();
+        verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
     }
 }
