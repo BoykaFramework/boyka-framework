@@ -89,6 +89,7 @@
   <summary>API Sample</summary>
 
 <div>
+  <img src="assets/api-schemas.png" alt="API Schemas" width="400" height="auto" />
   <img src="assets/api.png" alt="API sample" width="400" height="auto" />
 </div>
 
@@ -99,9 +100,6 @@
 
 <div>
   <img src="assets/page.png" alt="Web Page object" width="400" height="auto" />
-</div>
-
-<div>
   <img src="assets/web.png" alt="Web Test" width="400" height="auto" />
 </div>
 
@@ -114,38 +112,18 @@
 <details>
   <summary>Boyka Framework</summary>
 
-- Java 11
-- Maven
-- Checkstyle
-- Sonar cloud
+<div>
+  <img src="assets/boyka-core-tech-stack.png" alt="Boyka core tech stack" width="400" height="auto" />
+</div>
 
 </details>
 
 <details>
-  <summary>Documentation site</summary>
+  <summary>Main project and Website</summary>
 
-- Typescript
-- Docusaurus 2
-- React JS
-
-</details>
-
-<details>
-<summary>Main project</summary>
-
-- Typescript
-- Commitlint
-- ESLint
-- Prettier
-- Husky
-
-</details>
-
-<details>
-<summary>DevOps</summary>
-
-- GitHub Actions
-- Gitpod
+<div>
+  <img src="assets/boyka-main-tech-stack.png" alt="Boyka Main project tech stack" width="400" height="auto" />
+</div>
 
 </details>
 
@@ -157,6 +135,7 @@
 - Supports Web Automation
 - Highly configurable
 - Zero boilerplate code for your projects
+- Supports Rest API schema validation testing
 - Supports execution on Cloud platforms like BrowserStack, LambdaTest, etc.
 - Supports Parallel execution
 - Has in-built logging for all the events
@@ -192,13 +171,13 @@ See our [Roadmap project](https://github.com/orgs/WasiqBhamla/projects/4/views/1
 
 Contributions are always welcome!
 
-See [`contributing.md`](https://github.com/WasiqBhamla/boyka-framework/blob/main/.github/CONTRIBUTING.md) for ways to get started.
+See [`contributing.md`](./.github/CONTRIBUTING.md) for ways to get started.
 
 <!-- Code of Conduct -->
 
 ### :scroll: Code of Conduct
 
-Please read the [Code of Conduct](https://github.com/WasiqBhamla/boyka-framework/blob/master/.github/CODE_OF_CONDUCT.md)
+Please read the [Code of Conduct](./.github/CODE_OF_CONDUCT.md)
 
 <!-- License -->
 
@@ -220,10 +199,12 @@ Distributed under MIT License. See [LICENSE](LICENSE) for more information.
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
-<a href="https://www.browserstack.com">
-  <img src="assets/browserstack-logo.png" alt="BrowserStack" width="300" height="auto" />
-</a>
+<div style="display: flex;align-item: center;justify-content: center">
+  <a href="https://www.browserstack.com">
+    <img src="assets/browserstack-logo.png" alt="BrowserStack" width="300" height="auto" />
+  </a>
 
-<a href="https://www.lambdatest.com">
-  <img src="assets/LT-logo.jpeg" alt="LambdaTest" width="300" height="auto" />
-</a>
+  <a href="https://www.lambdatest.com">
+    <img src="assets/LT-logo.jpeg" alt="LambdaTest" width="300" height="auto" />
+  </a>
+</div>
