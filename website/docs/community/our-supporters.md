@@ -7,6 +7,9 @@ sidebar_position: 1
 
 Thanks to the following organizations for their generous support with free open source licenses:
 
-[![BrowserStack](/img/docs/community/our-supporters/browserstack-logo.png)](https://www.browserstack.com/)
+![Our supporters](/img/docs/community/our-supporters/org-supporters.png)
 
-[![LambdaTest](/img/docs/community/our-supporters/LT-logo.jpeg)](https://www.lambdatest.com/)
+### Links to our supporters
+
+- [BrowserStack](https://www.browserstack.com/)
+- [LambdaTest](https://www.lambdatest.com/)

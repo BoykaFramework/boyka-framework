@@ -21,7 +21,7 @@
   <a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/WasiqBhamla/boyka-framework?style=for-the-badge" alt="contributors" />
   </a>
-  <a href="">
+  <a href="https://github.com/WasiqBhamla/boyka-framework/commits/main">
     <img src="https://img.shields.io/github/last-commit/WasiqBhamla/boyka-framework?style=for-the-badge" alt="last update" />
   </a>
   <a href="https://github.com/WasiqBhamla/boyka-framework/network/members">
@@ -165,9 +165,7 @@ See our [Roadmap project](https://github.com/orgs/WasiqBhamla/projects/4/views/1
 
 ## :wave: Contributing
 
-<a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=WasiqBhamla/boyka-framework" />
-</a>
+[![Contributors](https://contrib.rocks/image?repo=WasiqBhamla/boyka-framework)](https://github.com/WasiqBhamla/boyka-framework/graphs/contributors)
 
 Contributions are always welcome!
 
@@ -199,12 +197,4 @@ Distributed under MIT License. See [LICENSE](LICENSE) for more information.
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
-<div style="display: flex;align-item: center;justify-content: center">
-  <a href="https://www.browserstack.com">
-    <img src="assets/browserstack-logo.png" alt="BrowserStack" width="300" height="auto" />
-  </a>
-
-  <a href="https://www.lambdatest.com">
-    <img src="assets/LT-logo.jpeg" alt="LambdaTest" width="300" height="auto" />
-  </a>
-</div>
+![Our supporters](website/static/img/docs/community/our-supporters/org-supporters.png)

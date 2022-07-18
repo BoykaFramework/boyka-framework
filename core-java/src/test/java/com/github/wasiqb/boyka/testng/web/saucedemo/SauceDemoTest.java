@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.testng.web.saucedemo;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.ElementActions.submit;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.pressKey;
@@ -40,6 +41,7 @@ import static org.openqa.selenium.Keys.DELETE;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -52,6 +54,14 @@ import org.testng.annotations.Test;
  */
 public class SauceDemoTest {
     private static final String URL = "https://www.saucedemo.com";
+
+    /**
+     * Setup test method to take screenshot after each test method.
+     */
+    @AfterMethod
+    public void afterMethod () {
+        takeScreenshot ();
+    }
 
     /**
      * Setup test class by initialising driver.

@@ -18,16 +18,21 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.OutputType.FILE;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.github.wasiqb.boyka.config.ui.ScreenshotSetting;
 import com.github.wasiqb.boyka.enums.Messages;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
@@ -263,6 +268,22 @@ public final class DriverActions {
         performDriverAction (driver -> driver.switchTo ()
             .window (nameOrHandle));
         LOGGER.traceExit ();
+    }
+
+    /**
+     * Takes screenshot of browser.
+     */
+    public static void takeScreenshot () {
+        final ScreenshotSetting setting = getSession ().getSetting ()
+            .getUi ()
+            .getScreenshot ();
+        final String path = setting.getPath ();
+        final String prefix = setting.getPrefix ();
+        final SimpleDateFormat date = new SimpleDateFormat ("yyyyMMdd-HHmmss");
+        final String timeStamp = date.format (Calendar.getInstance ()
+            .getTime ());
+        final String fileName = "%s/%s-%s.%s";
+        takeScreenshot (format (fileName, path, prefix, timeStamp, "jpeg"));
     }
 
     /**
