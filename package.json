@@ -23,6 +23,9 @@
   "workspaces": [
     "website"
   ],
+  "engines": {
+    "node": ">=16.15.0"
+  },
   "license": "MIT",
   "packageManager": "yarn@3.2.1",
   "private": true,

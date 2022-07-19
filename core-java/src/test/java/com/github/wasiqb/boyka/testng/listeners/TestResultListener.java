@@ -101,10 +101,7 @@ public class TestResultListener implements IReporter {
     }
 
     private void saveReportTemplate (final String outputDirectory, final String reportTemplate) {
-        final var dirCreated = new File (outputDirectory).mkdirs ();
-        if (!dirCreated) {
-            LOGGER.info ("Directory created: {}", outputDirectory);
-        }
+        new File (outputDirectory).mkdirs ();
         try (
             final PrintWriter reportWriter = new PrintWriter (
                 new BufferedWriter (new FileWriter (new File (outputDirectory, "my-report.html"))))) {

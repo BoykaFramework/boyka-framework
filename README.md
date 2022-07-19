@@ -12,6 +12,8 @@
 <!-- Badges -->
 <p>
 
+  <a href="https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light" alt="Boyka&#0045;Framework - 🎉&#0032;Ultimate&#0032;test&#0032;automation&#0032;for&#0032;testing&#0032;any&#0032;application&#0032;type | Product Hunt" width="250" height="54" /></a>
+
   <a href="https://gitpod.io/#https://github.com/WasiqBhamla/boyka-framework">
     <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="open in GitPod">
   </a>
