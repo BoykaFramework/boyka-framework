@@ -65,6 +65,10 @@ This failure will not be clear in VSCode, instead you will see an Error pop-up.
 
 In that case, you can copy the commit message and paste it in Terminal and execute the following command:
 
+:::tip
+Please make sure your commits are verified and signed. To know more about signing the commits please [checkout this page][commit-sign]
+:::
+
 ```shell
 > git commit -m "<copied commit message>"
 ```
@@ -96,3 +100,6 @@ When you click on the `Push` button, you will see a pop-up asking you to confirm
 ## Create draft PR
 
 As soon as you push your commit, you must create a draft PR on GitHub. Because our workflows will only get triggered on PR's that are raised against `main` branch.
+
+
+[commit-sign]:https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
