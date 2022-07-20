@@ -38,7 +38,7 @@ The main Java project is located in `core-java/` directory.
 `Maven` is the build tool we would be using for this project. So need to have Maven installed on your machine before you proceed to build the project.
 In case Maven is not installed on your machine, the following steps should help.
 
-**Installing Maven on Windows**
+#### Installing Maven on Windows
 
 1. Download the Maven Zip File from the maven download page and extract it.
 1. Add `MAVEN_HOME` System Variable.
@@ -60,10 +60,10 @@ In case Maven is not installed on your machine, the following steps should help.
     1. It should display the Maven version as shown in the screenshot below:
     ![Maven Version Check](/img/docs/contributing/command-prompt-mvn-v.png)
 
-**Installing Maven on MacOS**
+#### Installing Maven on MacOS
 
 Installation of Maven on a Mac machine can be easily done using the Homebrew software. 
-After installing Homebrew, just run the command “brew install maven”, and it will install Maven within seconds on your machine, and you could straight away start using maven.
+After installing Homebrew, just run the command `brew install maven`, and it will install Maven within seconds on your machine, and you could straight away start using maven.
 
 Once Maven installation is complete, from the root repository directory, run the following command:
 
