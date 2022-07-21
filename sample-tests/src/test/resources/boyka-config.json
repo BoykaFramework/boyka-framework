@@ -1,0 +1,19 @@
+{
+  "ui": {
+    ...
+  },
+  "api": {
+    "test_restfulbooker": {
+      "base_uri": "https://restful-booker.herokuapp.com",
+      "base_path": "/booking",
+      "read_timeout": 2,
+      "write_timeout": 2,
+      "connection_timeout": 1,
+      "logging": {
+        "request": true,
+        "response": true
+      },
+      "schema_path":""
+    }
+  }
+}
