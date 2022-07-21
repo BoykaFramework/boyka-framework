@@ -23,9 +23,11 @@ import static com.github.wasiqb.boyka.actions.DriverActions.goForward;
 import static com.github.wasiqb.boyka.actions.DriverActions.maximize;
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
 import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
+import static com.github.wasiqb.boyka.actions.DriverActions.switchToNewWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.switchToWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.windowHandles;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
@@ -34,6 +36,7 @@ import static com.github.wasiqb.boyka.testng.web.theinternet.pages.HomePage.home
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.MultiWindowPage.multiWindowPage;
 import static com.google.common.truth.Truth.assertThat;
 import static java.text.MessageFormat.format;
+import static org.openqa.selenium.WindowType.TAB;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
@@ -89,6 +92,20 @@ public class WindowTest {
     public void testForwardNavigation () {
         goForward ();
         verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
+    }
+
+    /**
+     * Test case to verify opening new tab window.
+     */
+    @Test (description = "Test to verify opening new tab")
+    public void testOpenNewTab () {
+        try {
+            switchToNewWindow (TAB);
+            verifyBrowserTitle ().isEmpty ();
+            verifyBrowserUrl ().isEqualTo ("about:blank");
+        } finally {
+            closeWindow ();
+        }
     }
 
     @Test

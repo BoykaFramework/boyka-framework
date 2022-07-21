@@ -60,10 +60,15 @@
 - [:notebook_with_decorative_cover: Table of Contents](#notebook_with_decorative_cover-table-of-contents)
   - [:star2: About the Project](#star2-about-the-project)
     - [:camera: Screenshots](#camera-screenshots)
+      - [:hammer_and_wrench: Boyka Config file](#hammer_and_wrench-boyka-config-file)
+      - [:knot: API Sample](#knot-api-sample)
+      - [:computer: Web Sample](#computer-web-sample)
     - [:space_invader: Tech Stack](#space_invader-tech-stack)
+      - [:house_buildings: Boyka Framework](#house_buildings-boyka-framework)
+      - [:computer: Main project and Website](#computer-main-project-and-website)
     - [:dart: Features](#dart-features)
   - [:eyes: Usage](#eyes-usage)
-  - [:compass: Roadmap](#compass-roadmap)
+  - [:compass: Future Road-map](#compass-future-road-map)
   - [:wave: Contributing](#wave-contributing)
     - [:scroll: Code of Conduct](#scroll-code-of-conduct)
   - [:warning: License](#warning-license)
@@ -75,62 +80,44 @@
 ## :star2: About the Project
 
 <!-- Screenshots -->
-
 ### :camera: Screenshots
 
-<details>
-  <summary>Boyka Config file</summary>
+#### :hammer_and_wrench: Boyka Config file
 
 <div>
   <img src="assets/config.png" alt="Boyka Config" width="400" height="auto" />
 </div>
 
-</details>
-
-<details>
-  <summary>API Sample</summary>
+#### :knot: API Sample
 
 <div>
   <img src="assets/api-schemas.png" alt="API Schemas" width="400" height="auto" />
   <img src="assets/api.png" alt="API sample" width="400" height="auto" />
 </div>
 
-</details>
-
-<details>
-  <summary>Web Sample</summary>
+#### :computer: Web Sample
 
 <div>
   <img src="assets/page.png" alt="Web Page object" width="400" height="auto" />
   <img src="assets/web.png" alt="Web Test" width="400" height="auto" />
 </div>
 
-</details>
-
 <!-- TechStack -->
-
 ### :space_invader: Tech Stack
 
-<details>
-  <summary>Boyka Framework</summary>
+#### :house_buildings: Boyka Framework
 
 <div>
   <img src="assets/boyka-core-tech-stack.png" alt="Boyka core tech stack" width="400" height="auto" />
 </div>
 
-</details>
-
-<details>
-  <summary>Main project and Website</summary>
+#### :computer: Main project and Website
 
 <div>
   <img src="assets/boyka-main-tech-stack.png" alt="Boyka Main project tech stack" width="400" height="auto" />
 </div>
 
-</details>
-
 <!-- Features -->
-
 ### :dart: Features
 
 - Supports Rest API Automation
@@ -144,7 +131,6 @@
 - Has in-built Assertion methods
 
 <!-- Usage -->
-
 ## :eyes: Usage
 
 Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
@@ -157,14 +143,12 @@ Use this space to tell a little more about your project and how it can be used. 
 </dependency>
 ```
 
-<!-- Roadmap -->
+<!-- Road-map -->
+## :compass: Future Road-map
 
-## :compass: Roadmap
-
-See our [Roadmap project](https://github.com/orgs/WasiqBhamla/projects/4/views/1) for more details.
+See our [Road-map project](https://github.com/orgs/WasiqBhamla/projects/4/views/1) for more details.
 
 <!-- Contributing -->
-
 ## :wave: Contributing
 
 [![Contributors](https://contrib.rocks/image?repo=WasiqBhamla/boyka-framework)](https://github.com/WasiqBhamla/boyka-framework/graphs/contributors)
@@ -174,19 +158,16 @@ Contributions are always welcome!
 See [`contributing.md`](./.github/CONTRIBUTING.md) for ways to get started.
 
 <!-- Code of Conduct -->
-
 ### :scroll: Code of Conduct
 
 Please read the [Code of Conduct](./.github/CODE_OF_CONDUCT.md)
 
 <!-- License -->
-
 ## :warning: License
 
 Distributed under MIT License. See [LICENSE](LICENSE) for more information.
 
 <!-- Contact -->
-
 ## :handshake: Contact
 
 - Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
@@ -194,9 +175,10 @@ Distributed under MIT License. See [LICENSE](LICENSE) for more information.
 - Contact / Follow me on [Twitter @WasiqBhamla](https://twitter.com/WasiqBhamla)
 
 <!-- Acknowledgments -->
-
 ## :gem: Acknowledgements
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
-![Our supporters](website/static/img/docs/community/our-supporters/org-supporters.png)
+<div>
+  <img src="website/static/img/docs/community/our-supporters/org-supporters.png" alt="Our supporters" width="400" height="auto" />
+</div>

@@ -16,7 +16,6 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.acceptAlert;
 import static com.github.wasiqb.boyka.actions.DriverActions.fullScreen;
 import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
@@ -106,7 +105,7 @@ public class AlertsTest {
     @Test (description = "Tests Dismiss prompt alert")
     public void testDismissPromptAlert () {
         clickOn (alertPage ().getPromptButton ());
-        acceptAlert ("Wasiq");
+        verifyAcceptAlert ("Wasiq").isEqualTo ("I am a JS prompt");
         verifyTextOf (alertPage ().getResult ()).isEqualTo ("You entered: Wasiq");
     }
 }

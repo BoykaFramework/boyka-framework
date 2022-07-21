@@ -32,11 +32,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.wasiqb.boyka.config.ui.ScreenshotSetting;
 import com.github.wasiqb.boyka.enums.Messages;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -71,15 +71,16 @@ public final class DriverActions {
      *
      * @param text Text to enter in alert
      */
-    public static void acceptAlert (final String text) {
+    public static String acceptAlert (final String text) {
         LOGGER.traceEntry ();
-        performDriverAction (driver -> {
+        return getDriverAttribute (driver -> {
             final var alert = driver.switchTo ()
                 .alert ();
+            final var message = alert.getText ();
             alert.sendKeys (text);
             alert.accept ();
+            return message;
         });
-        LOGGER.traceExit ();
     }
 
     /**
@@ -89,6 +90,7 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Closing window");
         performDriverAction (WebDriver::close);
+        switchToMainWindow ();
         LOGGER.traceExit ();
     }
 
@@ -170,6 +172,22 @@ public final class DriverActions {
     }
 
     /**
+     * Executes javascript in browser.
+     *
+     * @param script Javascript to execute
+     * @param args Arguments to pass to javascript
+     * @param <T> Return type of the result of the script
+     *
+     * @return the result of the script
+     */
+    @SuppressWarnings ("unchecked")
+    public static <T> T executeScript (final String script, final Object... args) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Executing script");
+        return (T) getDriverAttribute (driver -> ((JavascriptExecutor) driver).executeScript (script, args));
+    }
+
+    /**
      * Switch browser window to full screen.
      */
     public static void fullScreen () {
@@ -245,6 +263,30 @@ public final class DriverActions {
     }
 
     /**
+     * Switch to an iFrame.
+     *
+     * @param frameName Name of the Iframe.
+     */
+    public static void switchToFrame (final String frameName) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Switching to frame: {}", frameName);
+        performDriverAction (driver -> driver.switchTo ()
+            .frame (frameName));
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Switch to main window.
+     */
+    public static void switchToMainWindow () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Switching to main window");
+        performDriverAction (driver -> driver.switchTo ()
+            .window (windowHandles ().get (0)));
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Switch to new tab window.
      *
      * @param type type of window
@@ -274,16 +316,17 @@ public final class DriverActions {
      * Takes screenshot of browser.
      */
     public static void takeScreenshot () {
-        final ScreenshotSetting setting = getSession ().getSetting ()
+        final var setting = getSession ().getSetting ()
             .getUi ()
             .getScreenshot ();
-        final String path = setting.getPath ();
-        final String prefix = setting.getPrefix ();
-        final SimpleDateFormat date = new SimpleDateFormat ("yyyyMMdd-HHmmss");
-        final String timeStamp = date.format (Calendar.getInstance ()
+        final var path = setting.getPath ();
+        final var prefix = setting.getPrefix ();
+        final var extension = setting.getExtension ();
+        final var date = new SimpleDateFormat ("yyyyMMdd-HHmmss");
+        final var timeStamp = date.format (Calendar.getInstance ()
             .getTime ());
-        final String fileName = "%s/%s-%s.%s";
-        takeScreenshot (format (fileName, path, prefix, timeStamp, "jpeg"));
+        final var fileName = "%s/%s-%s.%s";
+        takeScreenshot (format (fileName, path, prefix, timeStamp, extension));
     }
 
     /**

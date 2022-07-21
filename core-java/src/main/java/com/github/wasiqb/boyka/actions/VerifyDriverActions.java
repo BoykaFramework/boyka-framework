@@ -48,6 +48,18 @@ public class VerifyDriverActions {
     }
 
     /**
+     * Verify alert text, enter text in prompt and accept the alert
+     *
+     * @return {@link StringSubject}
+     */
+    public static StringSubject verifyAcceptAlert (final String text) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying accept prompt");
+        LOGGER.traceExit ();
+        return assertThat (acceptAlert (text));
+    }
+
+    /**
      * Verify browser title.
      *
      * @return {@link StringSubject} to verify browser title
