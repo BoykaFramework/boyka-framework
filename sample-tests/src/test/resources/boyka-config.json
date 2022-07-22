@@ -1,7 +1,4 @@
 {
-  "ui": {
-    ...
-  },
   "api": {
     "test_restfulbooker": {
       "base_uri": "https://restful-booker.herokuapp.com",
@@ -12,8 +9,7 @@
       "logging": {
         "request": true,
         "response": true
-      },
-      "schema_path":""
+      }
     }
   }
 }
