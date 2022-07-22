@@ -14,7 +14,6 @@
   ~ The above copyright notice and this permission notice shall be included in all
   ~ copies or substantial portions of the Software.
   -->
-
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Restful Booker Test Suite">
     <test name="Restful Booker tests">
@@ -22,9 +21,13 @@
             <class name="com.restfulbooker.tests.APITests">
                 <methods>
                     <include name="testCreateBooking"/>
+                    <include name="testGetBooking"/>
+                    <include name="testUpdateBooking"/>
+                    <include name="testUpdatePartialBooking"/>
+                    <include name="testDeleteBooking"/>
+                    <include name="testDeletedBooking"/>
                 </methods>
             </class>
         </classes>
     </test>
-
 </suite> <!-- Suite -->

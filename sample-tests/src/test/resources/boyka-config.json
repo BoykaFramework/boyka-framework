@@ -2,7 +2,7 @@
   "api": {
     "test_restfulbooker": {
       "base_uri": "https://restful-booker.herokuapp.com",
-      "base_path": "/booking",
+      "base_path": "",
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,
