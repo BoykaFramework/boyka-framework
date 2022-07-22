@@ -35,11 +35,10 @@ public class APITests {
     public void createBookingTest () {
         ApiRequest createBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (POST)
-            .body (String.valueOf (newBooking))
+            .bodyObject (newBooking)
             .create ();
 
         ApiResponse response = execute (createBookingRequest);
-
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("bookingid")
