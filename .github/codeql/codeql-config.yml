@@ -1,8 +1,0 @@
-name: 'Boyka-Framework CodeQL config'
-
-paths:
-  - website/
-  - core-java/
-
-paths-ignore:
-  - sample-tests/
