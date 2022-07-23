@@ -276,6 +276,17 @@ public final class DriverActions {
     }
 
     /**
+     * Switch to Parent Frame.
+     */
+    public static void switchToParentFrame () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Switching to main frame...");
+        performDriverAction (driver -> driver.switchTo ()
+            .parentFrame ());
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Switch to main window.
      */
     public static void switchToMainWindow () {
