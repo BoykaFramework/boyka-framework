@@ -71,9 +71,9 @@ public class TestApi {
             .isEqualTo ("application/json; charset=utf-8");
         response.verifyTextField ("data.first_name")
             .isEqualTo ("Janet");
-        response.verifyTextField("data.last_name")
-                .isEqualTo("Weaver");
-        response.verifySchema("get-user-schema.json");
+        response.verifyTextField ("data.last_name")
+            .isEqualTo ("Weaver");
+        response.verifySchema ("get-user-schema.json");
     }
 
     /**
@@ -124,9 +124,9 @@ public class TestApi {
             .isEqualTo (user.getName ());
         response.verifyTextField ("job")
             .isEqualTo (user.getJob ());
-        response.verifyTextField("updatedAt")
-                .isNotNull();
-        response.verifySchema("patch-user-schema.json");
+        response.verifyTextField ("updatedAt")
+            .isNotNull ();
+        response.verifySchema ("patch-user-schema.json");
     }
 
     /**
@@ -153,9 +153,9 @@ public class TestApi {
             .isEqualTo (user.getName ());
         response.verifyTextField ("job")
             .isEqualTo (user.getJob ());
-        response.verifyTextField("updatedAt")
-                .isNotNull();
-        response.verifySchema("put-user-schema.json");
+        response.verifyTextField ("updatedAt")
+            .isNotNull ();
+        response.verifySchema ("put-user-schema.json");
     }
 
     /**
@@ -183,8 +183,8 @@ public class TestApi {
             .isEqualTo (user.getName ());
         response.verifyTextField ("job")
             .isEqualTo (user.getJob ());
-        response.verifyTextField("createdAt")
-                .isNotNull();
-        response.verifySchema("create-user-schema.json");
+        response.verifyTextField ("createdAt")
+            .isNotNull ();
+        response.verifySchema ("create-user-schema.json");
     }
 }
