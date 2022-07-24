@@ -1,6 +1,6 @@
 ---
-title: JsonParser
-sidebar_position: 8
+title: JsonUtil
+sidebar_position: 2
 ---
 
 ## `fromFile`
@@ -23,7 +23,7 @@ import static com.github.wasiqb.boyka.utils.JsonParser.toFile;
 toFile (users, "/path/to/file.json");
 ```
 
-## `toString`
+## `toString(object)`
 
 This method is used to convert the given object to JSON string.
 
@@ -31,4 +31,15 @@ This method is used to convert the given object to JSON string.
 import static com.github.wasiqb.boyka.utils.JsonParser.toString;
 . . .
 System.out.println (toString (users));
+```
+
+## `toString(string)`
+
+This method is used to pretty-print the given JSON string.
+
+```java
+import static com.github.wasiqb.boyka.utils.JsonParser.toString;
+. . .
+String jsonString = "{\"name\":\"Wasiq\",\"age\":25}";
+System.out.println (toString (jsonString));
 ```

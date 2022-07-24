@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.builders;
 
-import static com.github.wasiqb.boyka.enums.Messages.APP_TYPE_NOT_SUPPORT_DRIVERS;
+import static com.github.wasiqb.boyka.enums.Message.APP_TYPE_NOT_SUPPORT_DRIVERS;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
