@@ -18,7 +18,7 @@ package com.github.wasiqb.boyka.config;
 
 import static com.github.wasiqb.boyka.enums.ApplicationType.ANDROID;
 import static com.github.wasiqb.boyka.enums.ApplicationType.IOS;
-import static com.github.wasiqb.boyka.enums.Messages.INVALID_PLATFORM_FOR_OPERATION;
+import static com.github.wasiqb.boyka.enums.Message.INVALID_PLATFORM_FOR_OPERATION;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
 import static org.apache.logging.log4j.LogManager.getLogger;

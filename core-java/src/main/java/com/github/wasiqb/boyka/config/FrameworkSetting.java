@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.config;
 
-import static com.github.wasiqb.boyka.enums.Messages.NO_API_SETTINGS_FOUND;
+import static com.github.wasiqb.boyka.enums.Message.NO_API_SETTINGS_FOUND;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
 import static org.apache.logging.log4j.LogManager.getLogger;

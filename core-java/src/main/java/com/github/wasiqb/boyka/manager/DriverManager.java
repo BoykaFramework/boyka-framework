@@ -16,16 +16,17 @@
 
 package com.github.wasiqb.boyka.manager;
 
-import static com.github.wasiqb.boyka.enums.Messages.CAPABILITIES_REQUIRED_FOR_REMOTE;
-import static com.github.wasiqb.boyka.enums.Messages.HOSTNAME_REQUIRED_FOR_REMOTE;
-import static com.github.wasiqb.boyka.enums.Messages.INVALID_BROWSER;
-import static com.github.wasiqb.boyka.enums.Messages.INVALID_REMOTE_URL;
-import static com.github.wasiqb.boyka.enums.Messages.PASSWORD_REQUIRED_FOR_CLOUD;
-import static com.github.wasiqb.boyka.enums.Messages.PROTOCOL_REQUIRED_FOR_HOST;
-import static com.github.wasiqb.boyka.enums.Messages.USER_NAME_REQUIRED_FOR_CLOUD;
+import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
+import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
+import static com.github.wasiqb.boyka.enums.Message.INVALID_BROWSER;
+import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
+import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
+import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
+import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
@@ -139,9 +140,9 @@ public final class DriverManager {
         try {
             return LOGGER.traceExit (new URL (url));
         } catch (final MalformedURLException e) {
-            LOGGER.catching (e);
-            throw new FrameworkError (INVALID_REMOTE_URL.getMessage (), e);
+            handleAndThrow (INVALID_REMOTE_URL, e);
         }
+        return null;
     }
 
     private void setDriverSize (final WebSetting webSetting) {
