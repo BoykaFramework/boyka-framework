@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.enums.Messages.ELEMENT_NOT_FOUND;
+import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static java.text.MessageFormat.format;
 import static org.apache.logging.log4j.LogManager.getLogger;

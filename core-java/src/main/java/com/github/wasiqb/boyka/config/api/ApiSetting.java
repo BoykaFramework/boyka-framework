@@ -26,7 +26,7 @@ import lombok.Data;
  */
 @Data
 public class ApiSetting {
-    private String         basePath;
+    private String         basePath          = "";
     private String         baseUri;
     private int            connectionTimeout = 5;
     private LoggingSetting logging           = new LoggingSetting ();

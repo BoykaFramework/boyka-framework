@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
@@ -32,7 +33,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.wasiqb.boyka.enums.Messages;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
@@ -276,17 +276,6 @@ public final class DriverActions {
     }
 
     /**
-     * Switch to Parent Frame.
-     */
-    public static void switchToParentFrame () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Switching to main frame...");
-        performDriverAction (driver -> driver.switchTo ()
-            .parentFrame ());
-        LOGGER.traceExit ();
-    }
-
-    /**
      * Switch to main window.
      */
     public static void switchToMainWindow () {
@@ -307,6 +296,17 @@ public final class DriverActions {
         LOGGER.info ("Switching to new tab");
         performDriverAction (driver -> driver.switchTo ()
             .newWindow (type));
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Switch to Parent Frame.
+     */
+    public static void switchToParentFrame () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Switching to main frame...");
+        performDriverAction (driver -> driver.switchTo ()
+            .parentFrame ());
         LOGGER.traceExit ();
     }
 
@@ -353,7 +353,7 @@ public final class DriverActions {
                 copyFile (file, new File (fileName));
             } catch (final IOException e) {
                 LOGGER.error (e.getMessage (), e);
-                throw new FrameworkError (Messages.ERROR_SAVING_SCREENSHOT.getMessage (), e);
+                throw new FrameworkError (ERROR_SAVING_SCREENSHOT.getMessage (), e);
             }
         });
         LOGGER.traceExit ();

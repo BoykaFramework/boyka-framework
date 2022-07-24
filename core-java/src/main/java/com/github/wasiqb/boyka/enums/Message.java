@@ -25,7 +25,7 @@ import lombok.Getter;
  * @since 19-Feb-2022
  */
 @Getter
-public enum Messages {
+public enum Message {
     /**
      * Driver does not support API application type
      */
@@ -91,6 +91,10 @@ public enum Messages {
      */
     INVALID_REMOTE_URL ("Invalid remote url generated..."),
     /**
+     * Malformed JSON syntax error.
+     */
+    JSON_SYNTAX_ERROR ("JSON syntax error..."),
+    /**
      * No API setting found
      */
     NO_API_SETTINGS_FOUND ("No settings found for API for key {0}..."),
@@ -121,7 +125,7 @@ public enum Messages {
 
     private final String message;
 
-    Messages (final String message) {
+    Message (final String message) {
         this.message = message;
     }
 }
