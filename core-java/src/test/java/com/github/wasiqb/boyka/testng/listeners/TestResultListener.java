@@ -29,10 +29,12 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.apache.logging.log4j.Logger;
@@ -64,8 +66,10 @@ public class TestResultListener implements IReporter {
 
     private List<String> generateReportRows (final String testName, final String suiteName,
         final Set<ITestResult> allTestResults) {
-        return allTestResults.stream ()
-            .map (testResultToResultRow (testName, suiteName))
+        final var results = new ArrayList<> (allTestResults);
+        return IntStream.range (1, allTestResults.size ())
+            .boxed ()
+            .map (i -> testResultToResultRow (testName, suiteName, results.get (i), i))
             .collect (toList ());
     }
 
@@ -119,28 +123,27 @@ public class TestResultListener implements IReporter {
             .flatMap (resultsToRows (suite));
     }
 
-    private Function<ITestResult, String> testResultToResultRow (final String testName, final String suiteName) {
-        final String ROW_TEMPLATE = "<tr class=\"{0}\"><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td></tr>";
-        return testResult -> {
-            final var testClass = testResult.getTestClass ()
-                .getRealClass ();
-            switch (testResult.getStatus ()) {
-                case ITestResult.FAILURE:
-                    return format (ROW_TEMPLATE, "danger", suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "FAILED", "NA");
+    private String testResultToResultRow (final String testName, final String suiteName, final ITestResult testResult,
+        final int index) {
+        final String ROW_TEMPLATE = "<tr class=\"{0}\"><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>";
+        final var testClass = testResult.getTestClass ()
+            .getRealClass ();
+        switch (testResult.getStatus ()) {
+            case ITestResult.FAILURE:
+                return format (ROW_TEMPLATE, "danger", index, suiteName, testName, testClass.getPackageName (),
+                    testClass.getSimpleName (), testResult.getName (), "FAILED", "NA");
 
-                case ITestResult.SUCCESS:
-                    return format (ROW_TEMPLATE, "success", suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "PASSED",
-                        String.valueOf (testResult.getEndMillis () - testResult.getStartMillis ()));
+            case ITestResult.SUCCESS:
+                return format (ROW_TEMPLATE, "success", index, suiteName, testName, testClass.getPackageName (),
+                    testClass.getSimpleName (), testResult.getName (), "PASSED",
+                    String.valueOf (testResult.getEndMillis () - testResult.getStartMillis ()));
 
-                case ITestResult.SKIP:
-                    return format (ROW_TEMPLATE, "warning", suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "SKIPPED", "NA");
+            case ITestResult.SKIP:
+                return format (ROW_TEMPLATE, "warning", index, suiteName, testName, testClass.getPackageName (),
+                    testClass.getSimpleName (), testResult.getName (), "SKIPPED", "NA");
 
-                default:
-                    return "";
-            }
-        };
+            default:
+                return "";
+        }
     }
 }
