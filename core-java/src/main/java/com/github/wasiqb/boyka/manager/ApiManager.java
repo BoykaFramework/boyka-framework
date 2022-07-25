@@ -17,11 +17,12 @@
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.ContentType.JSON;
-import static com.github.wasiqb.boyka.enums.Messages.AUTH_PASSWORD_REQUIRED;
-import static com.github.wasiqb.boyka.enums.Messages.CONTENT_TYPE_NOT_SET;
-import static com.github.wasiqb.boyka.enums.Messages.ERROR_EXECUTING_REQUEST;
-import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_REQUEST_BODY;
-import static com.github.wasiqb.boyka.enums.Messages.ERROR_PARSING_RESPONSE_BODY;
+import static com.github.wasiqb.boyka.enums.Message.AUTH_PASSWORD_REQUIRED;
+import static com.github.wasiqb.boyka.enums.Message.CONTENT_TYPE_NOT_SET;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_EXECUTING_REQUEST;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_REQUEST_BODY;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_RESPONSE_BODY;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 import static java.text.MessageFormat.format;
@@ -44,8 +45,7 @@ import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.enums.ContentType;
 import com.github.wasiqb.boyka.enums.RequestMethod;
-import com.github.wasiqb.boyka.exception.FrameworkError;
-import com.github.wasiqb.boyka.utils.JsonParser;
+import com.github.wasiqb.boyka.utils.JsonUtil;
 import com.moczul.ok2curl.Configuration;
 import com.moczul.ok2curl.CurlCommandGenerator;
 import okhttp3.HttpUrl;
@@ -126,7 +126,7 @@ public final class ApiManager {
     private <T> ApiManager body (final T body) {
         LOGGER.traceEntry ();
         if (body != null) {
-            this.requestBody = create (JsonParser.toString (body),
+            this.requestBody = create (JsonUtil.toString (body),
                 requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessage ()));
         }
         return LOGGER.traceExit (this);
@@ -150,8 +150,7 @@ public final class ApiManager {
         try {
             requireNonNullElse (body, create ("{}", parse (JSON.getType ()))).writeTo (buffer);
         } catch (final IOException e) {
-            LOGGER.catching (e);
-            throw new FrameworkError (ERROR_PARSING_REQUEST_BODY.getMessage (), e);
+            handleAndThrow (ERROR_PARSING_REQUEST_BODY, e);
         }
         return LOGGER.traceExit (buffer.readUtf8 ());
     }
@@ -167,8 +166,7 @@ public final class ApiManager {
             logRequest ();
             logResponse ();
         } catch (final IOException e) {
-            LOGGER.catching (e);
-            throw new FrameworkError (ERROR_EXECUTING_REQUEST.getMessage (), e);
+            handleAndThrow (ERROR_EXECUTING_REQUEST, e);
         }
         return LOGGER.traceExit (this.response);
     }
@@ -184,7 +182,8 @@ public final class ApiManager {
 
     private String getUrl (final String path) {
         LOGGER.traceEntry ("Parameter: {}", path);
-        return LOGGER.traceExit (format ("{0}{1}", getUrl (), interpolate (path, this.pathParams)));
+        return LOGGER.traceExit (
+            format ("{0}{1}", getUrl (), interpolate (requireNonNullElse (path, EMPTY), this.pathParams)));
     }
 
     private void logRequest () {
@@ -216,8 +215,9 @@ public final class ApiManager {
             }
             this.response.getHeaders ()
                 .forEach ((k, v) -> LOGGER.info ("Response Header: {} => {}", k, v));
-            if (isNotEmpty (this.response.getBody ())) {
-                LOGGER.info ("Response Body: {}", this.response.getBody ());
+            final var body = JsonUtil.toString (this.response.getBody ());
+            if (isNotEmpty (body)) {
+                LOGGER.info ("Response Body: {}", body);
             }
         }
         LOGGER.traceExit ();
@@ -261,14 +261,16 @@ public final class ApiManager {
                 .sentRequestAt (res.sentRequestAtMillis ())
                 .headers (headers)
                 .networkResponse (parseResponse (res.networkResponse ()))
+                .apiSetting (this.apiSetting)
+                .networkResponse (parseResponse (res.networkResponse ()))
                 .previousResponse (parseResponse (res.priorResponse ()))
                 .receivedResponseAt (res.receivedResponseAtMillis ())
                 .body (requireNonNullElse (res.body (), ResponseBody.create (EMPTY, parse (JSON.getType ()))).string ())
                 .create ());
         } catch (final IOException e) {
-            LOGGER.catching (e);
-            throw new FrameworkError (ERROR_PARSING_RESPONSE_BODY.getMessage (), e);
+            handleAndThrow (ERROR_PARSING_RESPONSE_BODY, e);
         }
+        return null;
     }
 
     private void pathParam (final String param, final String value) {

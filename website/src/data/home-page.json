@@ -64,7 +64,7 @@
     {
       "title": "Web Testing",
       "image": "img/home/web-testing.svg",
-      "description": "Supports Web testing with Chrome, Firefox, Edge, Safari and Opera browsers."
+      "description": "Supports Web testing with Chrome, Firefox, Edge and Safari browsers."
     },
     {
       "title": "Cloud Support",
@@ -85,6 +85,11 @@
       "title": "Inbuilt verification",
       "image": "img/home/inline-check.svg",
       "description": "Provides inbuilt verification for inline assertion of element properties and API responses."
+    },
+    {
+      "title": "Response schema verification",
+      "image": "img/home/schema-validation.svg",
+      "description": "Provides API response schema verification for Rest APIs."
     }
   ]
 }

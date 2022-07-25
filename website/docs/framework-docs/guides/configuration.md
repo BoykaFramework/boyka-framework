@@ -41,9 +41,6 @@ The file name and it's location cannot be modified.
       "test_local_safari": {
         "browser": "SAFARI"
       },
-      "test_local_opera": {
-        "browser": "OPERA"
-      },
       "test_browserstack_chrome": {
         "browser": "REMOTE",
         "cloud": "BROWSER_STACK",
@@ -183,7 +180,7 @@ COMING SOON, STAY TUNED!
 | `read_timeout` | Read timeout in seconds for the API. | `number` | 5 |
 | `write_timeout` | Write timeout in seconds for the API. | `number` | 5 |
 | `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` |  |
-
+| `schema_path` | Path of schema file at location `src/test/resources` | `string` |  |
 :::info API Configuration
 In `api` configuration block, you can provide different versions of API settings having different key names.
 
@@ -205,7 +202,6 @@ We have an enum `Browser` where we maintain the list of supported browsers. They
 - `EDGE`: Is used for Edge browser.
 - `FIREFOX`: Is used for Firefox browser.
 - `NONE`: No browser will be used.
-- `OPERA`: Is used for Opera browser.
 - `REMOTE`: Is used for Selenium Grid or cloud based browsers.
 - `SAFARI`: Is used for Safari browser.
 

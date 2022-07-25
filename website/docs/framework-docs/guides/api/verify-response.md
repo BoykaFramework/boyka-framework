@@ -18,6 +18,7 @@ response.verifyTextField ("job")
     .isEqualTo (user.getJob ());
 response.verifyTextField ("createdAt")
     .isNotNull ();
+response.verifySchema("CreateUserSchema.json");
 ```
 
 :::info

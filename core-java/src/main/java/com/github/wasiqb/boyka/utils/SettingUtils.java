@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.utils;
 
-import static com.github.wasiqb.boyka.utils.JsonParser.fromFile;
+import static com.github.wasiqb.boyka.utils.JsonUtil.fromFile;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;

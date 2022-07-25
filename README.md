@@ -172,7 +172,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>1.0.0</version>
+  <version>0.7.0</version>
 </dependency>
 ```
 
@@ -180,7 +180,7 @@ Use this space to tell a little more about your project and how it can be used. 
 
 ## :compass: Roadmap
 
-See our [Roadmap project](https://github.com/WasiqBhamla/boyka-framework/projects/2) for more details.
+See our [Roadmap project](https://github.com/orgs/WasiqBhamla/projects/4/views/1) for more details.
 
 <!-- Contributing -->
 

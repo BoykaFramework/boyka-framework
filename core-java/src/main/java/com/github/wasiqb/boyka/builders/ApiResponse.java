@@ -16,8 +16,10 @@
 
 package com.github.wasiqb.boyka.builders;
 
-import static com.github.wasiqb.boyka.enums.Messages.INVALID_HEADER_KEY;
-import static com.github.wasiqb.boyka.enums.Messages.NO_BODY_TO_PARSE;
+import static com.github.wasiqb.boyka.enums.Message.INVALID_HEADER_KEY;
+import static com.github.wasiqb.boyka.enums.Message.NO_BODY_TO_PARSE;
+import static com.github.wasiqb.boyka.enums.Message.RESPONSE_SCHEMA_NOT_MATCHING;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.google.common.truth.Truth.assertThat;
 import static com.jayway.jsonpath.JsonPath.compile;
 import static com.jayway.jsonpath.JsonPath.parse;
@@ -27,6 +29,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
+import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.IntegerSubject;
@@ -36,6 +39,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.apache.logging.log4j.Logger;
+import org.everit.json.schema.Schema;
+import org.everit.json.schema.ValidationException;
+import org.everit.json.schema.loader.SchemaLoader;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 /**
  * Response container class.
@@ -49,6 +57,7 @@ import org.apache.logging.log4j.Logger;
 public class ApiResponse {
     private static final Logger LOGGER = getLogger ();
 
+    private ApiSetting          apiSetting;
     private String              body;
     private Map<String, String> headers;
     private ApiResponse         networkResponse;
@@ -130,6 +139,31 @@ public class ApiResponse {
         LOGGER.info ("Verifying integer field for expression: {}", expression);
         LOGGER.traceExit ();
         return assertThat (getResponseData (expression, Integer.class));
+    }
+
+    /**
+     * Verify schema of response.
+     *
+     * @param schemaName String expression
+     */
+    public void verifySchema (final String schemaName) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying Response Schema");
+        try {
+
+            final Schema schema = SchemaLoader.load (new JSONObject (new JSONTokener (requireNonNull (
+                getClass ().getClassLoader ()
+                    .getResourceAsStream (this.apiSetting.getSchemaPath () + schemaName)))));
+            schema.validate (new JSONObject (getBody ()));
+        } catch (final ValidationException e) {
+            e.getCausingExceptions ()
+                .stream ()
+                .map (ValidationException::getMessage)
+                .forEach (LOGGER::error);
+            handleAndThrow (RESPONSE_SCHEMA_NOT_MATCHING, e);
+        }
+        LOGGER.info ("API response schema validation successfully verified");
+        LOGGER.traceExit ();
     }
 
     /**

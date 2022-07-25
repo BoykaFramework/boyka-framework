@@ -1,6 +1,6 @@
 ---
 title: ApiResponse
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 ## `getResponseData` {#get-response-data-1}
@@ -106,6 +106,16 @@ This parameter expects a valid `key` value.
 ### Return Type: `StringSubject`
 
 Returns the [`StringSubject`][string-subject] object.
+
+## `verifySchema` {#verify-schema}
+
+This method will verify the api response body json schema.
+
+### Parameters
+
+#### `schemaName`
+
+This parameter expects a valid `schemaName` value. The schemaName is a json file containing the expected json schema version stored at location `src/test/resources/schema/<schameName>.json`.
 
 [boolean-subject]: https://truth.dev/api/latest/com/google/common/truth/BooleanSubject.html#method.summary
 [string-subject]: https://truth.dev/api/latest/com/google/common/truth/StringSubject.html#method.summary

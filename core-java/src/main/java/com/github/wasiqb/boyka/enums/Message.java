@@ -25,7 +25,7 @@ import lombok.Getter;
  * @since 19-Feb-2022
  */
 @Getter
-public enum Messages {
+public enum Message {
     /**
      * Driver does not support API application type
      */
@@ -71,6 +71,10 @@ public enum Messages {
      */
     INVALID_BROWSER ("NONE Browser type is not allowed for Web platform..."),
     /**
+     * No such key found
+     */
+    INVALID_HEADER_KEY ("No such key {0} found..."),
+    /**
      * Invalid platform for operation
      */
     INVALID_PLATFORM_FOR_OPERATION ("Platform [{0}] is not supported for this setting..."),
@@ -78,6 +82,10 @@ public enum Messages {
      * Invalid Remote session URL.
      */
     INVALID_REMOTE_URL ("Invalid remote url generated..."),
+    /**
+     * Malformed JSON syntax error.
+     */
+    JSON_SYNTAX_ERROR ("JSON syntax error..."),
     /**
      * No API setting found
      */
@@ -99,17 +107,17 @@ public enum Messages {
      */
     PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host [{0}]..."),
     /**
+     * Schema validation assert failure
+     */
+    RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),
+    /**
      * User name required for cloud execution
      */
-    USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution..."),
-    /**
-     * No such key found
-     */
-    INVALID_HEADER_KEY ("No such key {0} found...");
+    USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution...");
 
     private final String message;
 
-    Messages (final String message) {
+    Message (final String message) {
         this.message = message;
     }
 }
