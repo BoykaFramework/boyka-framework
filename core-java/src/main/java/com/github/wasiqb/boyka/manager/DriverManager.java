@@ -108,7 +108,7 @@ public final class DriverManager {
     private Capabilities getCapabilities (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         final var capabilities = requireNonNull (webSetting.getCapabilities (),
-            CAPABILITIES_REQUIRED_FOR_REMOTE.getMessage ());
+            CAPABILITIES_REQUIRED_FOR_REMOTE.getMessageText ());
         final var remoteCapabilities = new DesiredCapabilities ();
         capabilities.forEach (remoteCapabilities::setCapability);
         return LOGGER.traceExit (remoteCapabilities);
@@ -119,11 +119,12 @@ public final class DriverManager {
         if (requireNonNullElse (webSetting.getCloud (), CloudProviders.NONE) != CloudProviders.NONE) {
             final var hostNamePattern = "{0}:{1}@{2}";
             return format (hostNamePattern,
-                requireNonNull (webSetting.getUserName (), USER_NAME_REQUIRED_FOR_CLOUD.getMessage ()),
-                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD.getMessage ()),
-                requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessage ()));
+                requireNonNull (webSetting.getUserName (), USER_NAME_REQUIRED_FOR_CLOUD.getMessageText ()),
+                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD.getMessageText ()),
+                requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessageText ()));
         }
-        return LOGGER.traceExit (requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessage ()));
+        return LOGGER.traceExit (
+            requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessageText ()));
     }
 
     private URL getRemoteUrl (final WebSetting webSetting) {
@@ -135,7 +136,7 @@ public final class DriverManager {
                 .append (webSetting.getPort ());
         }
         final var url = format (URL_PATTERN, requireNonNull (webSetting.getProtocol (),
-            format (PROTOCOL_REQUIRED_FOR_HOST.getMessage (), hostName)).name ()
+            format (PROTOCOL_REQUIRED_FOR_HOST.getMessageText (), hostName)).name ()
             .toLowerCase (), hostName);
         try {
             return LOGGER.traceExit (new URL (url));
@@ -209,7 +210,8 @@ public final class DriverManager {
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (new RemoteWebDriver (getRemoteUrl (webSetting), getCapabilities (webSetting)));
+        return LOGGER.traceExit (
+            new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting)), getCapabilities (webSetting)));
     }
 
     private WebDriver setupSafariDriver () {
@@ -225,7 +227,7 @@ public final class DriverManager {
                 setDriver (this.applicationType, setupChromeDriver (webSetting), this.setting);
                 break;
             case NONE:
-                throw new FrameworkError (INVALID_BROWSER.getMessage ());
+                throw new FrameworkError (INVALID_BROWSER.getMessageText ());
             case REMOTE:
                 setDriver (this.applicationType, setupRemoteDriver (webSetting), this.setting);
                 break;

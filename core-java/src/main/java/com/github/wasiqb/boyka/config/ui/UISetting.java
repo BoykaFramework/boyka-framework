@@ -40,8 +40,8 @@ public class UISetting {
 
     private Map<String, MobileSetting> android;
     private Map<String, MobileSetting> ios;
-    private ScreenshotSetting          screenshot;
-    private TimeoutSetting             timeout;
+    private ScreenshotSetting          screenshot = new ScreenshotSetting ();
+    private TimeoutSetting             timeout    = new TimeoutSetting ();
     private Map<String, WebSetting>    web;
 
     /**
@@ -59,7 +59,7 @@ public class UISetting {
         } else if (applicationType == ANDROID) {
             return LOGGER.traceExit (requireNonNull (this.android.get (key)));
         }
-        throw new FrameworkError (format (INVALID_PLATFORM_FOR_OPERATION.getMessage (), applicationType));
+        throw new FrameworkError (format (INVALID_PLATFORM_FOR_OPERATION.getMessageText (), applicationType));
     }
 
     /**

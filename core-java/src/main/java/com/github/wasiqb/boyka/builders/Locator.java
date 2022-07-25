@@ -69,7 +69,7 @@ public class Locator {
                 break;
             case API:
             default:
-                throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
+                throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessageText ());
         }
         return LOGGER.traceExit (result);
     }

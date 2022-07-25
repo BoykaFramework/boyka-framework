@@ -17,15 +17,21 @@
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.switchToFrame;
+import static com.github.wasiqb.boyka.actions.DriverActions.switchToParentFrame;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.testng.web.theinternet.pages.FramesPage.framesPage;
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.HomePage.homePage;
+import static com.github.wasiqb.boyka.testng.web.theinternet.pages.NestedFramePage.nestedFramePage;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 /**
  * Frames related tests.
@@ -58,4 +64,62 @@ public class FramesTest {
         closeDriver ();
     }
 
+    /**
+     * Test nested bottom frame.
+     */
+    @Test
+    public void testNestedBottomFrame () {
+        try {
+            clickOn (framesPage ().getNestedFrames ());
+            switchToFrame (nestedFramePage ().getFrameBottom ());
+            verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("BOTTOM");
+        } finally {
+            switchToParentFrame ();
+        }
+    }
+
+    /**
+     * Test nested left frame.
+     */
+    @Test
+    public void testNestedLeftFrame () {
+        try {
+            switchToFrame (nestedFramePage ().getFrameTop ());
+            switchToFrame (nestedFramePage ().getFrameLeft ());
+            verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("LEFT");
+        } finally {
+            switchToParentFrame ();
+            switchToParentFrame ();
+        }
+    }
+
+    /**
+     * Test nested middle frame.
+     */
+    @Test
+    public void testNestedMiddleFrame () {
+        try {
+            switchToFrame (nestedFramePage ().getFrameTop ());
+            switchToFrame (nestedFramePage ().getFrameMiddle ());
+            verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("MIDDLE");
+        } finally {
+            switchToParentFrame ();
+            switchToParentFrame ();
+        }
+    }
+
+    /**
+     * Test nested right frame.
+     */
+    @Test
+    public void testNestedRightFrame () {
+        try {
+            switchToFrame (nestedFramePage ().getFrameTop ());
+            switchToFrame (nestedFramePage ().getFrameRight ());
+            verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("RIGHT");
+        } finally {
+            switchToParentFrame ();
+            switchToParentFrame ();
+        }
+    }
 }

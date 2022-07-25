@@ -62,7 +62,7 @@ public final class ErrorHandler {
             throwable = throwable.getCause ();
         } while (throwable != null);
         stack.forEach (LOGGER::error);
-        throw new FrameworkError (format (message.getMessage (), args), cause);
+        throw new FrameworkError (format (message.getMessageText (), args), cause);
     }
 
     private ErrorHandler () {

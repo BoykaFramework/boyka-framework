@@ -70,6 +70,8 @@ public final class DriverActions {
      * Enters text in browser alert and accept it.
      *
      * @param text Text to enter in alert
+     *
+     * @return the alert message
      */
     public static String acceptAlert (final String text) {
         LOGGER.traceEntry ();
@@ -353,7 +355,7 @@ public final class DriverActions {
                 copyFile (file, new File (fileName));
             } catch (final IOException e) {
                 LOGGER.error (e.getMessage (), e);
-                throw new FrameworkError (ERROR_SAVING_SCREENSHOT.getMessage (), e);
+                throw new FrameworkError (ERROR_SAVING_SCREENSHOT.getMessageText (), e);
             }
         });
         LOGGER.traceExit ();

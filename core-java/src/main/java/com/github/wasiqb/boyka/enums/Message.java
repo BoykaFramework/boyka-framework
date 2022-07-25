@@ -123,9 +123,9 @@ public enum Message {
      */
     USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution...");
 
-    private final String message;
+    private final String messageText;
 
     Message (final String message) {
-        this.message = message;
+        this.messageText = message;
     }
 }

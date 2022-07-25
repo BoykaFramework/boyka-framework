@@ -16,31 +16,33 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
-import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
-import static org.openqa.selenium.By.linkText;
-
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
+import org.openqa.selenium.By;
 
 /**
- * Frames pages.
+ * Nested Frames pages.
  *
  * @author Wasiq Bhamla
- * @since 23-Jul-2022
+ * @since 25-Jul-2022
  */
 @Getter
-public class FramesPage {
+public class NestedFramePage {
     /**
-     * Frames page locators.
+     * Nested Frames page.
      *
-     * @return {@link FramesPage} instance
+     * @return {@link NestedFramePage}
      */
-    public static FramesPage framesPage () {
-        return new FramesPage ();
+    public static NestedFramePage nestedFramePage () {
+        return new NestedFramePage ();
     }
 
-    private final Locator frame        = buildLocator ().web (linkText ("iFrame"))
+    private final Locator body        = Locator.buildLocator ()
+        .web (By.tagName ("body"))
         .build ();
-    private final Locator nestedFrames = buildLocator ().web (linkText ("Nested Frames"))
-        .build ();
+    private final String  frameBottom = "frame-bottom";
+    private final String  frameLeft   = "frame-left";
+    private final String  frameMiddle = "frame-middle";
+    private final String  frameRight  = "frame-right";
+    private final String  frameTop    = "frame-top";
 }

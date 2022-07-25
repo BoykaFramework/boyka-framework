@@ -51,6 +51,6 @@ public class FrameworkSetting {
     public ApiSetting getApiSetting (final String key) {
         LOGGER.traceEntry ("Key: {}", key);
         return LOGGER.traceExit (
-            requireNonNull (this.api.get (key), format (NO_API_SETTINGS_FOUND.getMessage (), key)));
+            requireNonNull (this.api.get (key), format (NO_API_SETTINGS_FOUND.getMessageText (), key)));
     }
 }

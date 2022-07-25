@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.testng.web.theinternet;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.closeWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.currentWindowHandle;
+import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
 import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
 import static com.github.wasiqb.boyka.actions.DriverActions.goForward;
 import static com.github.wasiqb.boyka.actions.DriverActions.maximize;
@@ -27,6 +28,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.switchToNewWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.switchToWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.windowHandles;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
@@ -86,6 +88,16 @@ public class WindowTest {
     }
 
     /**
+     * Test case to verify execute script.
+     */
+    @Test (description = "Test execute script method")
+    public void testExecuteScript () {
+        final String script = "alert('Hello World');";
+        executeScript (script);
+        verifyAcceptAlert ().isEqualTo ("Hello World");
+    }
+
+    /**
      * Test case to verify browser forward navigation.
      */
     @Test (description = "Test browser forward navigation")
@@ -108,6 +120,9 @@ public class WindowTest {
         }
     }
 
+    /**
+     * Test case to verify opening new window.
+     */
     @Test
     public void testOpenWindow () {
         final var currentWindow = currentWindowHandle ();

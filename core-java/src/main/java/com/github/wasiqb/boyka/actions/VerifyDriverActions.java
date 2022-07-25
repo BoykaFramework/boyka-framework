@@ -50,6 +50,8 @@ public class VerifyDriverActions {
     /**
      * Verify alert text, enter text in prompt and accept the alert
      *
+     * @param text Text to enter in prompt
+     *
      * @return {@link StringSubject}
      */
     public static StringSubject verifyAcceptAlert (final String text) {

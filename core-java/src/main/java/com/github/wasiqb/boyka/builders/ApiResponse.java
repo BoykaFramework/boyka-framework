@@ -122,7 +122,7 @@ public class ApiResponse {
         LOGGER.info ("Verifying response Header: {}", key);
         LOGGER.traceExit ();
         if (!getHeaders ().containsKey (key)) {
-            throw new FrameworkError (format (INVALID_HEADER_KEY.getMessage (), key));
+            throw new FrameworkError (format (INVALID_HEADER_KEY.getMessageText (), key));
         }
         return assertThat (getHeaders ().get (key));
     }
@@ -205,6 +205,6 @@ public class ApiResponse {
 
     private DocumentContext jsonPath () {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (parse (requireNonNull (this.body, NO_BODY_TO_PARSE.getMessage ())));
+        return LOGGER.traceExit (parse (requireNonNull (this.body, NO_BODY_TO_PARSE.getMessageText ())));
     }
 }

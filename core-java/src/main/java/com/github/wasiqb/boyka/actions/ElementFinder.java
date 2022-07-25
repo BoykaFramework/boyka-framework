@@ -55,7 +55,7 @@ final class ElementFinder {
             return finds (locator, waitStrategy).stream ()
                 .filter (locator.getFilter ())
                 .findFirst ()
-                .orElseThrow (() -> new FrameworkError (format (ELEMENT_NOT_FOUND.getMessage (), locator)));
+                .orElseThrow (() -> new FrameworkError (format (ELEMENT_NOT_FOUND.getMessageText (), locator)));
         }
         return finds (locator, waitStrategy).get (locator.getIndex ());
     }
