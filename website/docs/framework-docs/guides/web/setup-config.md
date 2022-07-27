@@ -8,11 +8,17 @@ Before starting to automate Web applications, we need to first setup the configu
 ```json title="src/test/resources/boyka-config.json"
 {
   "ui": {
-    "playback": {
+    "timeout": {
       "implicit_wait": 10,
       "explicit_wait": 30,
       "page_load_timeout": 30,
       "script_timeout": 10
+    },
+    "screenshot": {
+      "enabled": true,
+      "path": "./screenshots",
+      "extension": "jpeg",
+      "prefix": "SCR"
     },
     "web": {
       "test_local_chrome": {
@@ -74,16 +80,7 @@ Before starting to automate Web applications, we need to first setup the configu
           "console": true
         }
       }
-    },
-    "android": {
-      ...
-    },
-    "ios": {
-      ...
     }
-  },
-  "api": {
-    ...
   }
 }
 ```
