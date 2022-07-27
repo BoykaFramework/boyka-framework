@@ -1,11 +1,9 @@
 ---
-title: 🙏 Our Supporters
+title: 👏 Our Supporters
 sidebar_position: 1
 ---
 
-## Open source license support
-
-Thanks to the following organizations for their generous support with free open source licenses:
+## Thanks to the following organizations for their generous support with free open source licenses
 
 ![Our supporters](/img/docs/community/our-supporters/org-supporters.png)
 

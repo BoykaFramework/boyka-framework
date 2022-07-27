@@ -21,7 +21,7 @@ import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static java.text.MessageFormat.format;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 import java.util.List;
 
@@ -91,7 +91,7 @@ final class ElementFinder {
                 break;
             case VISIBLE:
             default:
-                wait.until (visibilityOfAllElementsLocatedBy (locator.getLocator ()));
+                wait.until (visibilityOfElementLocated (locator.getLocator ()));
         }
         return LOGGER.traceExit (
             parent != null ? parent.findElements (locator.getLocator ()) : driver.findElements (locator.getLocator ()));

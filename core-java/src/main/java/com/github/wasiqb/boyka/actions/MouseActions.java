@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
+import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -44,8 +45,11 @@ public final class MouseActions {
     public static void clickAndHold (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Click and hold on element: {}", locator);
-        new Actions (getSession ().getDriver ()).clickAndHold (find (locator, CLICKABLE))
-            .perform ();
+        performElementAction (element -> {
+            final Actions actions = new Actions (getSession ().getDriver ());
+            actions.clickAndHold (element)
+                .perform ();
+        }, locator);
         LOGGER.traceExit ();
     }
 
@@ -69,8 +73,11 @@ public final class MouseActions {
     public static void doubleClickOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Double Click on element: {}", locator);
-        new Actions (getSession ().getDriver ()).doubleClick (find (locator, CLICKABLE))
-            .perform ();
+        performElementAction (element -> {
+            final Actions actions = new Actions (getSession ().getDriver ());
+            actions.doubleClick (element)
+                .perform ();
+        }, locator);
         LOGGER.traceExit ();
     }
 
@@ -83,8 +90,11 @@ public final class MouseActions {
     public static void dragDropTo (final Locator source, final Locator destination) {
         LOGGER.traceEntry ();
         LOGGER.info ("Drag and Drop on element: {} , {}", source, destination);
-        new Actions (getSession ().getDriver ()).dragAndDrop (find (source, CLICKABLE), find (destination, CLICKABLE))
-            .perform ();
+        performElementAction (element -> {
+            final var actions = new Actions (getSession ().getDriver ());
+            actions.dragAndDrop (element, find (destination, VISIBLE))
+                .perform ();
+        }, source);
         LOGGER.traceExit ();
     }
 
@@ -96,8 +106,11 @@ public final class MouseActions {
     public static void hoverOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Hover on element: {}", locator);
-        new Actions (getSession ().getDriver ()).moveToElement (find (locator, CLICKABLE))
-            .perform ();
+        performElementAction (element -> {
+            final Actions actions = new Actions (getSession ().getDriver ());
+            actions.moveToElement (element)
+                .perform ();
+        }, locator);
         LOGGER.traceExit ();
     }
 
