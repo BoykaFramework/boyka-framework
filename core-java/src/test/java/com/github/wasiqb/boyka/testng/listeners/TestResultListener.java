@@ -20,6 +20,7 @@ import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.testng.ITestResult.FAILURE;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,12 +30,11 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.apache.logging.log4j.Logger;
@@ -52,7 +52,8 @@ import org.testng.xml.XmlSuite;
  * @since 13-Jul-2022
  */
 public class TestResultListener implements IReporter {
-    private static final Logger LOGGER = getLogger ();
+    private static final Logger        LOGGER  = getLogger ();
+    private static final AtomicInteger counter = new AtomicInteger (1);
 
     @Override
     public void generateReport (final List<XmlSuite> xmlSuites, final List<ISuite> suites,
@@ -66,10 +67,8 @@ public class TestResultListener implements IReporter {
 
     private List<String> generateReportRows (final String testName, final String suiteName,
         final Set<ITestResult> allTestResults) {
-        final var results = new ArrayList<> (allTestResults);
-        return IntStream.range (1, allTestResults.size ())
-            .boxed ()
-            .map (i -> testResultToResultRow (testName, suiteName, results.get (i), i))
+        return allTestResults.stream ()
+            .map (testResultToResultRow (testName, suiteName))
             .collect (toList ());
     }
 
@@ -123,27 +122,29 @@ public class TestResultListener implements IReporter {
             .flatMap (resultsToRows (suite));
     }
 
-    private String testResultToResultRow (final String testName, final String suiteName, final ITestResult testResult,
-        final int index) {
+    private Function<ITestResult, String> testResultToResultRow (final String testName, final String suiteName) {
         final String ROW_TEMPLATE = "<tr class=\"{0}\"><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>";
-        final var testClass = testResult.getTestClass ()
-            .getRealClass ();
-        switch (testResult.getStatus ()) {
-            case ITestResult.FAILURE:
-                return format (ROW_TEMPLATE, "danger", index, suiteName, testName, testClass.getPackageName (),
-                    testClass.getSimpleName (), testResult.getName (), "FAILED", "NA");
+        return testResult -> {
+            final var testClass = testResult.getTestClass ()
+                .getRealClass ();
+            final var index = counter.getAndIncrement ();
+            switch (testResult.getStatus ()) {
+                case FAILURE:
+                    return format (ROW_TEMPLATE, "danger", index, suiteName, testName, testClass.getPackageName (),
+                        testClass.getSimpleName (), testResult.getName (), "FAILED", "NA");
 
-            case ITestResult.SUCCESS:
-                return format (ROW_TEMPLATE, "success", index, suiteName, testName, testClass.getPackageName (),
-                    testClass.getSimpleName (), testResult.getName (), "PASSED",
-                    String.valueOf (testResult.getEndMillis () - testResult.getStartMillis ()));
+                case ITestResult.SUCCESS:
+                    return format (ROW_TEMPLATE, "success", index, suiteName, testName, testClass.getPackageName (),
+                        testClass.getSimpleName (), testResult.getName (), "PASSED",
+                        String.valueOf (testResult.getEndMillis () - testResult.getStartMillis ()));
 
-            case ITestResult.SKIP:
-                return format (ROW_TEMPLATE, "warning", index, suiteName, testName, testClass.getPackageName (),
-                    testClass.getSimpleName (), testResult.getName (), "SKIPPED", "NA");
+                case ITestResult.SKIP:
+                    return format (ROW_TEMPLATE, "warning", index, suiteName, testName, testClass.getPackageName (),
+                        testClass.getSimpleName (), testResult.getName (), "SKIPPED", "NA");
 
-            default:
-                return "";
-        }
+                default:
+                    return "";
+            }
+        };
     }
 }
