@@ -117,7 +117,8 @@ public final class ApiManager {
     private ApiManager basicAuth (final String userName, final String password) {
         if (userName != null) {
             LOGGER.traceEntry ("Parameters: userName={}", userName);
-            final var credentials = basic (userName, requireNonNull (password, AUTH_PASSWORD_REQUIRED.getMessage ()));
+            final var credentials = basic (userName,
+                requireNonNull (password, AUTH_PASSWORD_REQUIRED.getMessageText ()));
             addHeader ("Authorization", credentials);
         }
         return LOGGER.traceExit (this);
@@ -127,14 +128,14 @@ public final class ApiManager {
         LOGGER.traceEntry ();
         if (body != null) {
             this.requestBody = create (JsonUtil.toString (body),
-                requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessage ()));
+                requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
         }
         return LOGGER.traceExit (this);
     }
 
     private ApiManager body (final String body) {
         LOGGER.traceEntry ();
-        this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessage ()));
+        this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
         return LOGGER.traceExit (this);
     }
 

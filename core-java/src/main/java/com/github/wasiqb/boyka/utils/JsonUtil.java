@@ -65,7 +65,7 @@ public class JsonUtil {
     public static <T> T fromFile (final String filePath, final Class<T> objectClass) {
         LOGGER.traceEntry ("filePath: {}, objectClass: {}", filePath, objectClass);
         final var path = requireNonNull (SettingUtils.class.getClassLoader ()
-            .getResource (filePath), NO_JSON_FILE_FOUND.getMessage ());
+            .getResource (filePath), NO_JSON_FILE_FOUND.getMessageText ());
         T result = null;
         try (final var reader = new FileReader (path.getPath ())) {
             result = GSON.fromJson (reader, of (objectClass).getType ());

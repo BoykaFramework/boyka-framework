@@ -14,36 +14,35 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages;
+package com.github.wasiqb.boyka.testng.web.saucedemo.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
-import org.openqa.selenium.By;
 
 /**
- * Product details page.
+ * Cart page.
  *
  * @author Wasiq Bhamla
- * @since 10-Mar-2022
+ * @since 13-Mar-2022
  */
 @Getter
-public class ProductDetailsPage {
+public class CartPage {
     /**
-     * Gets the product details page instance.
+     * Gets Cart page instance.
      *
-     * @return {@link ProductDetailsPage} instance
+     * @return Cart page instance
      */
-    public static ProductDetailsPage productDetailsPage () {
-        return new ProductDetailsPage ();
+    public static CartPage cartPage () {
+        return new CartPage ();
     }
 
-    private final Locator container = buildLocator ().web (
-            By.cssSelector ("div#inventory_item_container div.inventory_details"))
+    private final Locator checkout = buildLocator ().web (id ("checkout"))
         .build ();
 
-    private ProductDetailsPage () {
-        // Avoid explicit class initialisation.
+    private CartPage () {
+        // Avoid explicit class initialisation
     }
 }

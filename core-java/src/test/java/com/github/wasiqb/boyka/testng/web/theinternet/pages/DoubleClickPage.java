@@ -14,20 +14,29 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config;
+package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
-import lombok.Data;
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.tagName;
+
+import com.github.wasiqb.boyka.builders.Locator;
+import lombok.Getter;
 
 /**
- * Playback setting.
+ * Double click page.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 27-Jul-2022
  */
-@Data
-public class PlaybackSetting {
-    private int explicitWait    = 10;
-    private int implicitWait    = 1;
-    private int pageLoadTimeout = 30;
-    private int scriptTimeout   = 10;
+@Getter
+public class DoubleClickPage {
+    /**
+     * Double click page instance.
+     */
+    public static DoubleClickPage doubleClickPage () {
+        return new DoubleClickPage ();
+    }
+
+    private final Locator button = buildLocator ().web (tagName ("button"))
+        .build ();
 }

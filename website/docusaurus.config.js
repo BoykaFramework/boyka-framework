@@ -105,7 +105,7 @@ const config = {
       announcementBar: {
         id: 'star-the-repo',
         content:
-          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-framework">GitHub</a> ⭐',
+          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-framework">GitHub</a> ⭐ | 🤝 Support us by Sponsoring us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/WasiqB">GitHub Sponsors</a> 🤝',
         backgroundColor: '#ffb600',
         textColor: '#000000',
         isCloseable: false,

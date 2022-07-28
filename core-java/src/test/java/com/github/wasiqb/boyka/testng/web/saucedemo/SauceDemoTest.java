@@ -14,9 +14,10 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web;
+package com.github.wasiqb.boyka.testng.web.saucedemo;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.ElementActions.submit;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.pressKey;
@@ -29,17 +30,18 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElement
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
-import static com.github.wasiqb.boyka.testng.web.pages.CartPage.cartPage;
-import static com.github.wasiqb.boyka.testng.web.pages.CheckoutPage.checkoutPage;
-import static com.github.wasiqb.boyka.testng.web.pages.HomePage.homePage;
-import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
-import static com.github.wasiqb.boyka.testng.web.pages.ProductDetailsPage.productDetailsPage;
+import static com.github.wasiqb.boyka.testng.web.saucedemo.pages.CartPage.cartPage;
+import static com.github.wasiqb.boyka.testng.web.saucedemo.pages.CheckoutPage.checkoutPage;
+import static com.github.wasiqb.boyka.testng.web.saucedemo.pages.HomePage.homePage;
+import static com.github.wasiqb.boyka.testng.web.saucedemo.pages.LoginPage.loginPage;
+import static com.github.wasiqb.boyka.testng.web.saucedemo.pages.ProductDetailsPage.productDetailsPage;
 import static java.text.MessageFormat.format;
 import static org.openqa.selenium.Keys.CONTROL;
 import static org.openqa.selenium.Keys.DELETE;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -50,8 +52,16 @@ import org.testng.annotations.Test;
  * @author Wasiq Bhamla
  * @since 24-Feb-2022
  */
-public class TestWeb {
+public class SauceDemoTest {
     private static final String URL = "https://www.saucedemo.com";
+
+    /**
+     * Setup test method to take screenshot after each test method.
+     */
+    @AfterMethod
+    public void afterMethod () {
+        takeScreenshot ();
+    }
 
     /**
      * Setup test class by initialising driver.

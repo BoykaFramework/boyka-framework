@@ -1,12 +1,13 @@
 ---
-title: 🙏 Our Supporters
+title: 👏 Our Supporters
 sidebar_position: 1
 ---
 
-## Open source license support
+## Thanks to the following organizations for their generous support with free open source licenses
 
-Thanks to the following organizations for their generous support with free open source licenses:
+![Our supporters](/img/docs/community/our-supporters/org-supporters.png)
 
-[![BrowserStack](/img/docs/community/our-supporters/browserstack-logo.png)](https://www.browserstack.com/)
+### Links to our supporters
 
-[![LambdaTest](/img/docs/community/our-supporters/LT-logo.jpeg)](https://www.lambdatest.com/)
+- [BrowserStack](https://www.browserstack.com/)
+- [LambdaTest](https://www.lambdatest.com/)

@@ -14,44 +14,37 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages;
+package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
-import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.id;
+import static org.openqa.selenium.By.tagName;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
 /**
- * Login page object for Sauce demo application.
+ * Drag drop page.
  *
  * @author Wasiq Bhamla
- * @since 24-Feb-2022
+ * @since 26-Jul-2022
  */
 @Getter
-public class LoginPage {
+public class DragDropPage {
     /**
-     * Login page object.
-     *
-     * @return {@link LoginPage}
+     * Drag and drop page instance.
      */
-    public static LoginPage loginPage () {
-        return new LoginPage ();
+    public static DragDropPage dragDropPage () {
+        return new DragDropPage ();
     }
 
-    private final Locator loginBox    = buildLocator ().web (id ("login_button_container"))
+    private final Locator draggable = Locator.buildLocator ()
+        .web (id ("draggable"))
         .build ();
-    private final Locator loginButton = buildLocator ().web (id ("login-button"))
-        .parent (this.loginBox)
+    private final Locator droppable = Locator.buildLocator ()
+        .web (id ("droppable"))
         .build ();
-    private final Locator password    = buildLocator ().web (id ("password"))
-        .parent (this.loginBox)
+    private final Locator header    = Locator.buildLocator ()
+        .web (tagName ("p"))
+        .parent (this.droppable)
         .build ();
-    private final Locator username    = buildLocator ().web (id ("user-name"))
-        .parent (this.loginBox)
-        .build ();
-
-    private LoginPage () {
-        // Avoid explicit class initialisation.
-    }
 }

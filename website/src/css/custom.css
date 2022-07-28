@@ -6,34 +6,40 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #3e291d;
-  --ifm-color-primary-dark: #38251a;
-  --ifm-color-primary-darker: #352319;
-  --ifm-color-primary-darkest: #2b1d14;
-  --ifm-color-primary-light: #442d20;
-  --ifm-color-primary-lighter: #472f21;
-  --ifm-color-primary-lightest: #513526;
-  --ifm-background-color: #ead8be;
-  --ifm-background-surface-color: #ead8be;
-  --ifm-link-color: #a07c4a;
-  --docusaurus-highlighted-code-line-bg: #dabb8e;
+  --ifm-color-primary: #073b4c;
+  --ifm-color-primary-dark: #063544;
+  --ifm-color-primary-darker: #063241;
+  --ifm-color-primary-darkest: #052935;
+  --ifm-color-primary-light: #084154;
+  --ifm-color-primary-lighter: #084457;
+  --ifm-color-primary-lightest: #094d63;
+  --ifm-background-color: #94d2bd;
+  --ifm-background-surface-color: #94d2bd;
+  --ifm-link-color: #094d63;
+  --docusaurus-highlighted-code-line-bg: #7ec9b1;
+  --docsearch-text-color: #073b4c;
+  --ifm-code-background: #c5e7dc;
+  --prism-background-color: #c5e7dc;
 
   --ifm-code-font-size: 95%;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark']:root {
-  --ifm-color-primary: #ead8be;
-  --ifm-color-primary-dark: #e0c59e;
-  --ifm-color-primary-darker: #dabb8e;
-  --ifm-color-primary-darkest: #cb9e5e;
-  --ifm-color-primary-light: #f4ebde;
-  --ifm-color-primary-lighter: #faf5ee;
+  --ifm-color-primary: #e9d8a6;
+  --ifm-color-primary-dark: #e1ca86;
+  --ifm-color-primary-darker: #ddc376;
+  --ifm-color-primary-darkest: #d1ae46;
+  --ifm-color-primary-light: #f1e6c6;
+  --ifm-color-primary-lighter: #f5edd6;
   --ifm-color-primary-lightest: #ffffff;
-  --ifm-background-color: #3e291d;
-  --ifm-background-surface-color: #3e291d;
-  --ifm-link-color: #cb9e5e;
+  --ifm-background-color: #001219;
+  --ifm-background-surface-color: #001219;
+  --ifm-link-color: #ddc376;
+  --docsearch-text-color: #003a52;
   --docusaurus-highlighted-code-line-bg: #513526;
+  --ifm-code-background: #003a52;
+  --prism-background-color: #003a52;
 }
 
 .docusaurus-highlight-code-line {
@@ -48,7 +54,8 @@
 }
 
 div[class^='announcementBar_'] {
-  background: lightsalmon !important;
+  background: #094d63 !important;
+  color: #ffffff !important;
   font-weight: bold;
   font-size: 1.2rem;
 }

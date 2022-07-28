@@ -14,35 +14,33 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages;
+package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
-import static org.openqa.selenium.By.id;
+import static org.openqa.selenium.By.linkText;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
 /**
- * Cart page.
+ * Frames pages.
  *
  * @author Wasiq Bhamla
- * @since 13-Mar-2022
+ * @since 23-Jul-2022
  */
 @Getter
-public class CartPage {
+public class FramesPage {
     /**
-     * Gets Cart page instance.
+     * Frames page locators.
      *
-     * @return Cart page instance
+     * @return {@link FramesPage} instance
      */
-    public static CartPage cartPage () {
-        return new CartPage ();
+    public static FramesPage framesPage () {
+        return new FramesPage ();
     }
 
-    private final Locator checkout = buildLocator ().web (id ("checkout"))
+    private final Locator frame        = buildLocator ().web (linkText ("iFrame"))
         .build ();
-
-    private CartPage () {
-        // Avoid explicit class initialisation
-    }
+    private final Locator nestedFrames = buildLocator ().web (linkText ("Nested Frames"))
+        .build ();
 }

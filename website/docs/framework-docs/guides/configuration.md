@@ -22,11 +22,17 @@ The file name and it's location cannot be modified.
 ```json title="boyka-config.json"
 {
   "ui": {
-    "playback": {
+    "timeout": {
       "implicit_wait": 10,
       "explicit_wait": 30,
       "page_load_timeout": 30,
       "script_timeout": 10
+    },
+    "screenshot": {
+      "enabled": true,
+      "path": "./screenshots",
+      "extension": "jpeg",
+      "prefix": "SCR"
     },
     "web": {
       "test_local_chrome": {
@@ -80,7 +86,8 @@ The file name and it's location cannot be modified.
       "logging": {
         "request": true,
         "response": true
-      }
+      },
+      "schema_path": "schema/"
     }
   }
 }
@@ -97,7 +104,8 @@ The file name and it's location cannot be modified.
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| `playback` | Contains playback configuration. See [Playback Config below](#playback-config). | `PlaybackSetting` |  |
+| `timeout` | Contains timeout configuration. See [Timeout Config below](#timeout-config). | `TimeoutSetting` |  |
+| `screenshot` | Contains screenshot configuration. See [Screenshot Config below](#screenshot-config). | `ScreenshotSetting` |  |
 | `web` | Contains web platform configuration. See [Web Config below](#web-config). | `Map<String, WebSetting>` |  |
 | `android` | Contains Android platform configuration. See [Android Config below](#android-config). | `object` |  |
 | `ios` | Contains iOS platform configuration. See [iOS Config below](#ios-config). | `object` |  |
@@ -108,7 +116,7 @@ In `ui` configuration block, you can provide different versions of web settings 
 See the example in [sample configuration file](#config-sample).
 :::
 
-#### Playback Configuration {#playback-config}
+#### Timeout Configuration {#timeout-config}
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -116,6 +124,15 @@ See the example in [sample configuration file](#config-sample).
 | `explicit_wait` | Explicit wait for finding the elements on UI (in seconds). | `number` | `1` |
 | `page_load_timeout` | Page load timeout for waiting for page to load (in seconds). | `number` | `30` |
 | `script_timeout` | Script timeout for waiting for page to load (in seconds). | `number` | `30` |
+
+#### Screenshot Configuration {#screenshot-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `enabled` | Enable/disable screenshot capturing. | `boolean` | `true` |
+| `path` | Path to the directory where screenshots are stored. | `string` | `./screenshots` |
+| `extension` | Extension of the screenshot file. | `string` | `jpeg` |
+| `prefix` | Prefix of the screenshot file. | `string` | `SCR` |
 
 #### Web Configuration {#web-config}
 
@@ -181,6 +198,7 @@ COMING SOON, STAY TUNED!
 | `write_timeout` | Write timeout in seconds for the API. | `number` | 5 |
 | `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` |  |
 | `schema_path` | Path of schema file at location `src/test/resources` | `string` |  |
+
 :::info API Configuration
 In `api` configuration block, you can provide different versions of API settings having different key names.
 
