@@ -40,6 +40,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 /**
  * Device / Browser specific actions.
@@ -381,6 +382,21 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting url of the browser");
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl));
+    }
+
+    /**
+     * Wait for a specific condition to be true.
+     *
+     * @param condition condition to wait for
+     */
+    public static void waitUntil (final ExpectedCondition<Boolean> condition) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Waiting for condition...");
+        performDriverAction (driver -> {
+            final var wait = getSession ().getWait ();
+            wait.until (condition);
+        });
+        LOGGER.traceExit ();
     }
 
     /**

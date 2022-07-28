@@ -26,6 +26,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
 import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
 import static com.github.wasiqb.boyka.actions.DriverActions.switchToNewWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.switchToWindow;
+import static com.github.wasiqb.boyka.actions.DriverActions.waitUntil;
 import static com.github.wasiqb.boyka.actions.DriverActions.windowHandles;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
@@ -39,6 +40,7 @@ import static com.github.wasiqb.boyka.testng.web.theinternet.pages.MultiWindowPa
 import static com.google.common.truth.Truth.assertThat;
 import static java.text.MessageFormat.format;
 import static org.openqa.selenium.WindowType.TAB;
+import static org.openqa.selenium.support.ui.ExpectedConditions.urlMatches;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
@@ -132,10 +134,10 @@ public class WindowTest {
             .findFirst ();
         assertThat (newWindow.isPresent ()).isTrue ();
         switchToWindow (newWindow.get ());
+        waitUntil (urlMatches (format ("{0}windows/new", URL)));
         verifyBrowserUrl ().isEqualTo (format ("{0}windows/new", URL));
         verifyTextOf (multiWindowPage ().getTitle ()).isEqualTo ("New Window");
         closeWindow ();
-        switchToWindow (currentWindow);
         verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
     }
 

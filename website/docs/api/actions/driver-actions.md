@@ -269,6 +269,17 @@ import static com.github.wasiqb.boyka.actions.DriverActions.url;
 System.out.println (url ());
 ```
 
+## `waitUntil`
+
+This method will wait for any given condition to be true. It takes in Selenium WebDrivers `ExpectedCondition<Boolean>` object as parameter.
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.waitUntil;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+. . .
+waitUntil (ExpectedConditions.urlMatches (URL));
+```
+
 ## `windowHandles`
 
 This method will get the list of all open window handles.
