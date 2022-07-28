@@ -388,6 +388,9 @@ public final class DriverActions {
      * Wait for a specific condition to be true.
      *
      * @param condition condition to wait for
+     * @param <T> type of condition
+     *
+     * @return value of the condition
      */
     public static <T> T waitUntil (final Function<WebDriver, T> condition) {
         LOGGER.traceEntry ();
