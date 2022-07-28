@@ -59,6 +59,10 @@ public enum Message {
      */
     ERROR_PARSING_RESPONSE_BODY ("Error occurred while parsing response body..."),
     /**
+     * Error occurred while quitting driver.
+     */
+    ERROR_QUITTING_DRIVER ("Error quitting driver..."),
+    /**
      * Error reading file
      */
     ERROR_READING_FILE ("Error occurred reading file [{0}]..."),

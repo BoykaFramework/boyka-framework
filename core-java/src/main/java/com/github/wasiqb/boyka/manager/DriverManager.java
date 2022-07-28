@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_QUITTING_DRIVER;
 import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_BROWSER;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
@@ -48,6 +49,7 @@ import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -71,9 +73,14 @@ public final class DriverManager {
     public static void closeDriver () {
         LOGGER.traceEntry ();
         LOGGER.info ("Closing driver instance");
-        getSession ().getDriver ()
-            .quit ();
-        clearSession ();
+        try {
+            getSession ().getDriver ()
+                .quit ();
+        } catch (final WebDriverException e) {
+            handleAndThrow (ERROR_QUITTING_DRIVER, e);
+        } finally {
+            clearSession ();
+        }
         LOGGER.traceExit ();
     }
 
