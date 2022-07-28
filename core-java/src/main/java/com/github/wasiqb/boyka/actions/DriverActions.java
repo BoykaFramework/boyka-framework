@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
@@ -40,7 +41,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 
 /**
  * Device / Browser specific actions.
@@ -389,14 +389,13 @@ public final class DriverActions {
      *
      * @param condition condition to wait for
      */
-    public static void waitUntil (final ExpectedCondition<Boolean> condition) {
+    public static <T> T waitUntil (final Function<WebDriver, T> condition) {
         LOGGER.traceEntry ();
         LOGGER.info ("Waiting for condition...");
-        performDriverAction (driver -> {
+        return getDriverAttribute (driver -> {
             final var wait = getSession ().getWait ();
-            wait.until (condition);
+            return wait.until (condition);
         });
-        LOGGER.traceExit ();
     }
 
     /**

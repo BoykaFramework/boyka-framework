@@ -17,11 +17,13 @@
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.waitUntil;
 import static com.github.wasiqb.boyka.actions.MouseActions.doubleClickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.DoubleClickPage.doubleClickPage;
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
@@ -65,6 +67,7 @@ public class DoubleClickTest {
     @Test (description = "Double click test")
     public void testDoubleClick () {
         doubleClickOn (doubleClickPage ().getButton ());
+        waitUntil (alertIsPresent ());
         verifyAcceptAlert ().isEqualTo ("You double clicked me.. Thank You..");
     }
 }
