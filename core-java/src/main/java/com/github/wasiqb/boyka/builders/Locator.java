@@ -20,12 +20,15 @@ import static com.github.wasiqb.boyka.enums.Message.APP_TYPE_NOT_SUPPORT_DRIVERS
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.function.Predicate;
+
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * UI application locator.
@@ -39,10 +42,12 @@ import org.openqa.selenium.By;
 public class Locator {
     private static final Logger LOGGER = getLogger ();
 
-    private By      android;
-    private By      ios;
-    private Locator parent;
-    private By      web;
+    private By                    android;
+    private Predicate<WebElement> filter;
+    private int                   index;
+    private By                    ios;
+    private Locator               parent;
+    private By                    web;
 
     /**
      * Returns locator specific to application type.
@@ -64,7 +69,7 @@ public class Locator {
                 break;
             case API:
             default:
-                throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessage ());
+                throw new FrameworkError (APP_TYPE_NOT_SUPPORT_DRIVERS.getMessageText ());
         }
         return LOGGER.traceExit (result);
     }

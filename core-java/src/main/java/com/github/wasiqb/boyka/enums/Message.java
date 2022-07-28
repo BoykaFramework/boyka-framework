@@ -43,6 +43,10 @@ public enum Message {
      */
     CONTENT_TYPE_NOT_SET ("Content type must be set before setting request body..."),
     /**
+     * Element not found.
+     */
+    ELEMENT_NOT_FOUND ("Element not found for locator {0}..."),
+    /**
      * Error executing request
      */
     ERROR_EXECUTING_REQUEST ("Error occurred while executing request..."),
@@ -55,9 +59,17 @@ public enum Message {
      */
     ERROR_PARSING_RESPONSE_BODY ("Error occurred while parsing response body..."),
     /**
+     * Error occurred while quitting driver.
+     */
+    ERROR_QUITTING_DRIVER ("Error quitting driver..."),
+    /**
      * Error reading file
      */
     ERROR_READING_FILE ("Error occurred reading file [{0}]..."),
+    /**
+     * Error while saving screenshot.
+     */
+    ERROR_SAVING_SCREENSHOT ("Error saving screenshot"),
     /**
      * Error writing file
      */
@@ -115,9 +127,9 @@ public enum Message {
      */
     USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution...");
 
-    private final String message;
+    private final String messageText;
 
     Message (final String message) {
-        this.message = message;
+        this.messageText = message;
     }
 }

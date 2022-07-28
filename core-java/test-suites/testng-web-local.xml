@@ -20,29 +20,33 @@
     <test name="Test Boyka web on Local Chrome">
         <parameter name="appType" value="WEB"/>
         <parameter name="driverKey" value="test_local_chrome"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
-        </classes>
+        <packages>
+            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+        </packages>
     </test>
-    <test name="Test Boyka web on Local Firefox">
+    <test name="Test Boyka web on Local Firefox" enabled="false">
         <parameter name="appType" value="WEB"/>
         <parameter name="driverKey" value="test_local_firefox"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
-        </classes>
+        <packages>
+            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+        </packages>
     </test>
     <test name="Test Boyka web on Local Edge">
         <parameter name="appType" value="WEB"/>
         <parameter name="driverKey" value="test_local_edge"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
-        </classes>
+        <packages>
+            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+        </packages>
     </test>
     <test name="Test Boyka web on Local Safari" enabled="false">
         <parameter name="appType" value="WEB"/>
         <parameter name="driverKey" value="test_local_safari"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.web.TestWeb"/>
-        </classes>
+        <packages>
+            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+        </packages>
     </test>
 </suite>

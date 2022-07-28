@@ -17,3 +17,6 @@
 .changelog
 .docusaurus/
 build/
+
+screenshots/
+test-output/

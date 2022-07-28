@@ -19,7 +19,7 @@
 <suite name="Boyka API Suite" verbose="2">
     <test name="Test Boyka API">
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.api.TestApi"/>
+            <class name="com.github.wasiqb.boyka.testng.api.ApiTest"/>
         </classes>
     </test>
 </suite>

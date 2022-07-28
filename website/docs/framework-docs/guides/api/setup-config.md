@@ -9,9 +9,6 @@ Let's see how to set configuration in the configuration file for API end-points.
 
 ```json title="src/test/resources/boyka-config.json"
 {
-  "ui": {
-    ...
-  },
   "api": {
     "test_reqres": {
       "base_uri": "https://reqres.in",

@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.web.pages;
+package com.github.wasiqb.boyka.testng.web.saucedemo.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static java.text.MessageFormat.format;

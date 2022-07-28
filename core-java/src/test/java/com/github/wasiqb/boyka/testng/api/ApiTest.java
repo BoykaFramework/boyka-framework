@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  * @author Wasiq Bhamla
  * @since 19-Feb-2022
  */
-public class TestApi {
+public class ApiTest {
     private static final String API_CONFIG_KEY = "test_reqres";
 
     /**
@@ -67,13 +67,13 @@ public class TestApi {
         final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
+        response.verifySchema ("get-user-schema.json");
         response.verifyHeader ("content-type")
             .isEqualTo ("application/json; charset=utf-8");
         response.verifyTextField ("data.first_name")
             .isEqualTo ("Janet");
         response.verifyTextField ("data.last_name")
             .isEqualTo ("Weaver");
-        response.verifySchema ("get-user-schema.json");
     }
 
     /**
@@ -120,13 +120,13 @@ public class TestApi {
         final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
+        response.verifySchema ("patch-user-schema.json");
         response.verifyTextField ("name")
             .isEqualTo (user.getName ());
         response.verifyTextField ("job")
             .isEqualTo (user.getJob ());
         response.verifyTextField ("updatedAt")
             .isNotNull ();
-        response.verifySchema ("patch-user-schema.json");
     }
 
     /**
@@ -149,13 +149,13 @@ public class TestApi {
         final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
+        response.verifySchema ("put-user-schema.json");
         response.verifyTextField ("name")
             .isEqualTo (user.getName ());
         response.verifyTextField ("job")
             .isEqualTo (user.getJob ());
         response.verifyTextField ("updatedAt")
             .isNotNull ();
-        response.verifySchema ("put-user-schema.json");
     }
 
     /**
@@ -177,6 +177,7 @@ public class TestApi {
         final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (201);
+        response.verifySchema ("create-user-schema.json");
         response.verifyTextField ("id")
             .isNotNull ();
         response.verifyTextField ("name")
@@ -185,6 +186,5 @@ public class TestApi {
             .isEqualTo (user.getJob ());
         response.verifyTextField ("createdAt")
             .isNotNull ();
-        response.verifySchema ("create-user-schema.json");
     }
 }

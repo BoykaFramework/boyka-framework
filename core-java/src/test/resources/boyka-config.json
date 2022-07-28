@@ -1,10 +1,16 @@
 {
   "ui": {
-    "playback": {
+    "timeout": {
       "implicit_wait": 10,
       "explicit_wait": 30,
       "page_load_timeout": 30,
       "script_timeout": 10
+    },
+    "screenshot": {
+      "enabled": true,
+      "path": "./screenshots",
+      "extension": "jpeg",
+      "prefix": "SCR"
     },
     "web": {
       "test_local_chrome": {

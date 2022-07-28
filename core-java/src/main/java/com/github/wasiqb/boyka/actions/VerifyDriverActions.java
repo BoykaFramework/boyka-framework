@@ -16,6 +16,8 @@
 
 package com.github.wasiqb.boyka.actions;
 
+import static com.github.wasiqb.boyka.actions.DriverActions.acceptAlert;
+import static com.github.wasiqb.boyka.actions.DriverActions.dismissAlert;
 import static com.github.wasiqb.boyka.actions.DriverActions.title;
 import static com.github.wasiqb.boyka.actions.DriverActions.url;
 import static com.google.common.truth.Truth.assertThat;
@@ -32,6 +34,32 @@ import org.apache.logging.log4j.Logger;
  */
 public class VerifyDriverActions {
     private static final Logger LOGGER = getLogger ();
+
+    /**
+     * Verify alert text and accept the alert
+     *
+     * @return {@link StringSubject}
+     */
+    public static StringSubject verifyAcceptAlert () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying accept alert");
+        LOGGER.traceExit ();
+        return assertThat (acceptAlert ());
+    }
+
+    /**
+     * Verify alert text, enter text in prompt and accept the alert
+     *
+     * @param text Text to enter in prompt
+     *
+     * @return {@link StringSubject}
+     */
+    public static StringSubject verifyAcceptAlert (final String text) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying accept prompt");
+        LOGGER.traceExit ();
+        return assertThat (acceptAlert (text));
+    }
 
     /**
      * Verify browser title.
@@ -55,6 +83,18 @@ public class VerifyDriverActions {
         LOGGER.info ("Verifying browser url");
         LOGGER.traceExit ();
         return assertThat (url ());
+    }
+
+    /**
+     * Verify alert text and dismissing the alert
+     *
+     * @return {@link StringSubject}
+     */
+    public static StringSubject verifyDismissAlert () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying alert message and dismissing the alert");
+        LOGGER.traceExit ();
+        return assertThat (dismissAlert ());
     }
 
     private VerifyDriverActions () {

@@ -17,11 +17,16 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.actions.ElementFinder.find;
+import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
+import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Perform Mouse actions on UI elements.
@@ -33,6 +38,22 @@ public final class MouseActions {
     private static final Logger LOGGER = getLogger ();
 
     /**
+     * LongPress on element
+     *
+     * @param locator {@link Locator} of element
+     */
+    public static void clickAndHold (final Locator locator) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Click and hold on element: {}", locator);
+        performElementAction (element -> {
+            final Actions actions = new Actions (getSession ().getDriver ());
+            actions.clickAndHold (element)
+                .perform ();
+        }, locator);
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Click on element
      *
      * @param locator {@link Locator} of element
@@ -41,6 +62,68 @@ public final class MouseActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Clicking on element: {}", locator);
         performElementAction (WebElement::click, locator);
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * DoubleClick on element
+     *
+     * @param locator {@link Locator} of element
+     */
+    public static void doubleClickOn (final Locator locator) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Double Click on element: {}", locator);
+        performElementAction (element -> {
+            final Actions actions = new Actions (getSession ().getDriver ());
+            actions.doubleClick (element)
+                .perform ();
+        }, locator);
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * DragAndDrop on element
+     *
+     * @param source {@link Locator} of element
+     * @param destination {@link Locator} of element
+     */
+    public static void dragDropTo (final Locator source, final Locator destination) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Drag and Drop on element: {} , {}", source, destination);
+        performElementAction (element -> {
+            final var actions = new Actions (getSession ().getDriver ());
+            actions.dragAndDrop (element, find (destination, VISIBLE))
+                .perform ();
+        }, source);
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Hover on element
+     *
+     * @param locator {@link Locator} of element
+     */
+    public static void hoverOn (final Locator locator) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Hover on element: {}", locator);
+        performElementAction (element -> {
+            final Actions actions = new Actions (getSession ().getDriver ());
+            actions.moveToElement (element)
+                .perform ();
+        }, locator);
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * RightClick on element
+     *
+     * @param locator {@link Locator} of element
+     */
+    public static void rightClickOn (final Locator locator) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Right Click on element: {}", locator);
+        new Actions (getSession ().getDriver ()).contextClick (find (locator, CLICKABLE))
+            .perform ();
         LOGGER.traceExit ();
     }
 

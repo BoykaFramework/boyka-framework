@@ -24,6 +24,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.util.Map;
 
 import com.github.wasiqb.boyka.config.api.ApiSetting;
+import com.github.wasiqb.boyka.config.ui.UISetting;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 
@@ -50,6 +51,6 @@ public class FrameworkSetting {
     public ApiSetting getApiSetting (final String key) {
         LOGGER.traceEntry ("Key: {}", key);
         return LOGGER.traceExit (
-            requireNonNull (this.api.get (key), format (NO_API_SETTINGS_FOUND.getMessage (), key)));
+            requireNonNull (this.api.get (key), format (NO_API_SETTINGS_FOUND.getMessageText (), key)));
     }
 }
