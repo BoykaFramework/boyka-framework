@@ -16,7 +16,7 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Web Local Suite" verbose="2">
+<suite name="Boyka Web Local Suite" verbose="2" parallel="classes">
     <listeners>
         <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
     </listeners>
