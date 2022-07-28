@@ -53,11 +53,7 @@ public final class ErrorHandler {
             }
             stack.add (format ("Message: {0}", throwable.getMessage ()));
             for (final var trace : cause.getStackTrace ()) {
-                if (trace.getClassName ()
-                    .startsWith ("com.github.wasiqb.boyka")) {
-                    stack.add (
-                        format (stackTrace, trace.getClassName (), trace.getMethodName (), trace.getLineNumber ()));
-                }
+                stack.add (format (stackTrace, trace.getClassName (), trace.getMethodName (), trace.getLineNumber ()));
             }
             throwable = throwable.getCause ();
         } while (throwable != null);
