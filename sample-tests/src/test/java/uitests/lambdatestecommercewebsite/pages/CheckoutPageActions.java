@@ -1,18 +1,16 @@
 package uitests.lambdatestecommercewebsite.pages;
 
-import static uitests.lambdatestecommercewebsite.pages.CheckoutPage.checkoutPage;
-
-
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
-import static com.github.wasiqb.boyka.actions.MouseActions.;
+import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static uitests.lambdatestecommercewebsite.pages.CheckoutPage.checkoutPage;
 
 /**
  * Created By Faisal Khatri on 29-07-2022
  */
 public class CheckoutPageActions {
 
-    public void verifyUnitPriceOfCameraLens() {
+    public void verifyUnitPriceOfCameraLens () {
         verifyTextOf (checkoutPage ().getGetUnitPriceOfCameraLens ());
 
     }
@@ -23,17 +21,17 @@ public class CheckoutPageActions {
         enterText (checkoutPage ().getAddressLineOneField (), billingData.getAddressLineOne ());
         enterText (checkoutPage ().getCityField (), billingData.getCity ());
         enterText (checkoutPage ().getPostCodeField (), billingData.getPostCode ());
-        checkoutPage ().getCountryField ().selectByVisibleText (billingData.getCountry ()); // To Do
-        checkoutPage ().getStateField ().selectByVisibleText (billingData.getState ()); // To Do
+        checkoutPage ().getCountryField ()
+            .selectByVisibleText (billingData.getCountry ()); // To Do
+        checkoutPage ().getStateField ()
+            .selectByVisibleText (billingData.getState ()); // To Do
         return this;
     }
 
     public ConfirmOrderPage checkoutProduct () {
-        hoverOn(checkoutPage ().getAgreeTermsAndConditionsField ());
+        hoverOn (checkoutPage ().getAgreeTermsAndConditionsField ());
         clickOn (checkoutPage ().getAgreeTermsAndConditionsField ());
         clickOn (checkoutPage ().getContinueBtn ());
         return ConfirmOrderPage.confirmOrderPage ();
     }
-
-
 }
