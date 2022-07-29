@@ -28,6 +28,7 @@ jobs:
         run: yarn
       - name: Build site
         run: yarn build:site
+
   gh-release:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
