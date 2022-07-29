@@ -18,7 +18,7 @@
 <suite name="Restful Booker Test Suite">
     <test name="Restful Booker tests">
         <classes>
-            <class name="com.restfulbooker.tests.APITests">
+            <class name="apitests.restfulbooker.tests.APITests">
                 <methods>
                     <include name="testCreateBooking"/>
                     <include name="testGetBooking"/>

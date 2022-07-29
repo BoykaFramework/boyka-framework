@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.restfulbooker.requests;
+package apitests.restfulbooker.requests;
 
 import lombok.Builder;
 import lombok.Getter;

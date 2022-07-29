@@ -1,14 +1,47 @@
 {
-  "api": {
-    "test_restfulbooker": {
-      "base_uri": "https://restful-booker.herokuapp.com",
-      "base_path": "",
-      "read_timeout": 2,
-      "write_timeout": 2,
-      "connection_timeout": 1,
-      "logging": {
-        "request": true,
-        "response": true
+  "ui": {
+    "playback": {
+      "implicit_wait": 10,
+      "explicit_wait": 30,
+      "page_load_timeout": 30,
+      "script_timeout": 10
+    },
+    "web": {
+      "test_local_chrome": {
+        "browser": "CHROME"
+      },
+      "test_lambda_test_chrome": {
+        "browser": "REMOTE",
+        "cloud": "LAMBDA_TEST",
+        "protocol": "HTTPS",
+        "host": "hub.lambdatest.com",
+        "user_name": "${env:LT_USER}",
+        "password": "${env:LT_KEY}",
+        "capabilities": {
+          "browserName": "Chrome",
+          "version": "99.0",
+          "platform": "Windows 10",
+          "resolution": "1920x1080",
+          "build": "Test LambdaTest Build",
+          "name": "Test LambdaTest Session",
+          "network": true,
+          "visual": true,
+          "video": true,
+          "console": true
+        },
+        "api": {
+          "test_restfulbooker": {
+            "base_uri": "https://restful-booker.herokuapp.com",
+            "base_path": "",
+            "read_timeout": 2,
+            "write_timeout": 2,
+            "connection_timeout": 1,
+            "logging": {
+              "request": true,
+              "response": true
+            }
+          }
+        }
       }
     }
   }

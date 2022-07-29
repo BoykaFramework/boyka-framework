@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.restfulbooker.tests;
+package apitests.restfulbooker.tests;
 
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
 import static com.github.wasiqb.boyka.enums.RequestMethod.DELETE;
@@ -25,11 +25,11 @@ import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
 import static com.github.wasiqb.boyka.manager.ApiManager.execute;
 
 import com.github.wasiqb.boyka.builders.ApiResponse;
-import com.restfulbooker.requests.BookingData;
-import com.restfulbooker.requests.BookingDataBuilder;
-import com.restfulbooker.requests.PartialBookingData;
-import com.restfulbooker.requests.TokenBuilder;
-import com.restfulbooker.requests.Tokencreds;
+import apitests.restfulbooker.requests.BookingData;
+import apitests.restfulbooker.requests.BookingDataBuilder;
+import apitests.restfulbooker.requests.PartialBookingData;
+import apitests.restfulbooker.requests.TokenBuilder;
+import apitests.restfulbooker.requests.Tokencreds;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 

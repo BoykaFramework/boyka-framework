@@ -1,7 +1,6 @@
-package com.restfulbooker.requests;
+package apitests.restfulbooker.requests;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 
 /**
