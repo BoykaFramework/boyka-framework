@@ -16,17 +16,10 @@
 
 package com.github.wasiqb.boyka.config.ui;
 
-import static com.github.wasiqb.boyka.enums.ApplicationType.ANDROID;
-import static com.github.wasiqb.boyka.enums.ApplicationType.IOS;
-import static com.github.wasiqb.boyka.enums.Message.INVALID_PLATFORM_FOR_OPERATION;
-import static java.text.MessageFormat.format;
-import static java.util.Objects.requireNonNull;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
-import com.github.wasiqb.boyka.exception.FrameworkError;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 
@@ -38,29 +31,9 @@ import org.apache.logging.log4j.Logger;
 public class UISetting {
     private static final Logger LOGGER = getLogger ();
 
-    private Map<String, MobileSetting> android;
-    private Map<String, MobileSetting> ios;
-    private ScreenshotSetting          screenshot = new ScreenshotSetting ();
-    private TimeoutSetting             timeout    = new TimeoutSetting ();
-    private Map<String, WebSetting>    web;
-
-    /**
-     * Gets the mobile setting.
-     *
-     * @param applicationType the {@link ApplicationType}
-     * @param key the config key for Mobile
-     *
-     * @return the {@link MobileSetting}
-     */
-    public MobileSetting getMobileSetting (final ApplicationType applicationType, final String key) {
-        LOGGER.traceEntry ("ApplicationType: {}, Key: {}", applicationType, key);
-        if (applicationType == IOS) {
-            return LOGGER.traceExit (requireNonNull (this.ios.get (key)));
-        } else if (applicationType == ANDROID) {
-            return LOGGER.traceExit (requireNonNull (this.android.get (key)));
-        }
-        throw new FrameworkError (format (INVALID_PLATFORM_FOR_OPERATION.getMessageText (), applicationType));
-    }
+    private ScreenshotSetting       screenshot = new ScreenshotSetting ();
+    private TimeoutSetting          timeout    = new TimeoutSetting ();
+    private Map<String, WebSetting> web;
 
     /**
      * Gets the web setting.

@@ -26,6 +26,7 @@ import static com.github.wasiqb.boyka.manager.ApiManager.execute;
 
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.builders.ApiResponse;
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.testng.api.requests.User;
 import org.testng.annotations.Test;
 
@@ -79,11 +80,12 @@ public class ApiTest {
     /**
      * Method to test GET request with Query params.
      */
-    @Test (description = "Test GET request with Query params", priority = 6)
+    @Test (description = "Test GET request with Query params", priority = 6, expectedExceptions = FrameworkError.class)
     public void testGetUserPerPage () {
         final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
             .method (GET)
             .path ("/users")
+            .header ("Content-Type", "application/json")
             .queryParam ("page", "2")
             .create ();
 
@@ -98,6 +100,8 @@ public class ApiTest {
             .isEqualTo (12);
         response.verifyIntField ("total_pages")
             .isEqualTo (2);
+        response.verifyHeader ("content-type1")
+            .isEqualTo ("application/json; charset=utf-8");
     }
 
     /**
@@ -120,6 +124,8 @@ public class ApiTest {
         final ApiResponse response = execute (request);
         response.verifyStatusCode ()
             .isEqualTo (200);
+        response.verifyStatusMessage ()
+            .isEmpty ();
         response.verifySchema ("patch-user-schema.json");
         response.verifyTextField ("name")
             .isEqualTo (user.getName ());

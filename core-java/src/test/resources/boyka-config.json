@@ -14,7 +14,8 @@
     },
     "web": {
       "test_local_chrome": {
-        "browser": "CHROME"
+        "browser": "CHROME",
+        "resize": "CUSTOM"
       },
       "test_local_firefox": {
         "browser": "FIREFOX"

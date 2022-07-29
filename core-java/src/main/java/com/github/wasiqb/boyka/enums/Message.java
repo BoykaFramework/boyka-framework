@@ -27,9 +27,9 @@ import lombok.Getter;
 @Getter
 public enum Message {
     /**
-     * Driver does not support API application type
+     * Driver only supports Web application type
      */
-    APP_TYPE_NOT_SUPPORT_DRIVERS ("API application type does not support drivers..."),
+    APP_TYPE_NOT_SUPPORTED ("Application type [{0}] is not yet supported..."),
     /**
      * Basic auth password is empty.
      */
@@ -122,6 +122,10 @@ public enum Message {
      * Schema validation assert failure
      */
     RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),
+    /**
+     * Test Error.
+     */
+    TEST_ERROR ("Test error..."),
     /**
      * User name required for cloud execution
      */

@@ -400,6 +400,27 @@
                                     <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
                                 </configuration>
                             </execution>
+                            <execution>
+                                <id>jacoco-check</id>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <dataFile>${sonar.report}</dataFile>
+                                    <rules>
+                                        <rule>
+                                            <element>PACKAGE</element>
+                                            <limits>
+                                                <limit>
+                                                    <counter>LINE</counter>
+                                                    <value>COVEREDRATIO</value>
+                                                    <minimum>0.7</minimum>
+                                                </limit>
+                                            </limits>
+                                        </rule>
+                                    </rules>
+                                </configuration>
+                            </execution>
                         </executions>
                     </plugin>
                     <plugin>
