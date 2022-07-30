@@ -24,17 +24,9 @@ package com.github.wasiqb.boyka.enums;
  */
 public enum ApplicationType {
     /**
-     * Android application.
-     */
-    ANDROID,
-    /**
      * API application.
      */
     API,
-    /**
-     * iOS application.
-     */
-    IOS,
     /**
      * Web application.
      */

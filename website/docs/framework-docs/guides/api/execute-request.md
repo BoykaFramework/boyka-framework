@@ -5,6 +5,10 @@ title: 🔫 Execute Request
 
 Once you have composed your API request, you can execute it using class `ApiManager` and method `execute`.
 
+:::tip
+Check out complete documentation for [ApiManager](/api/api/api-manager).
+:::
+
 ## Example
 
 ```java
@@ -16,8 +20,8 @@ final ApiResponse response = ApiManager.execute (request);
 
 The `execute` method will return `ApiResponse` class object which contains methods to verify the response body and status code.
 
-:::caution
-Methods to verify Response headers will be added soon!
+:::tip
+Check out complete documentation for [ApiResponse](/api/builders/api-response).
 :::
 
 ### Verification methods
@@ -25,11 +29,12 @@ Methods to verify Response headers will be added soon!
 Following are the methods exposed in `ApiResponse` class to verify the response body and status code:
 
 - `verifyBooleanField`: Verifies the boolean field in response body.
+- `verifyHeader`: Verifies the header in response.
 - `verifyIntField`: Verifies the integer field in response body.
+- `verifySchema`: Verifies the response body against the given schema.
 - `verifyStatusCode`: Verifies the status code of response.
 - `verifyStatusMessage`: Verifies the status message of response.
 - `verifyTextField`: Verifies the text field in response body.
-- `verifySchema`: Verifies the json schema of resonse body.
 
 ### Methods to get response data
 

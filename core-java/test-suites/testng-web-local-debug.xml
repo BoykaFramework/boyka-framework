@@ -28,12 +28,4 @@
             <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
         </packages>
     </test>
-    <test name="Test Boyka web on Local Firefox">
-        <parameter name="appType" value="WEB"/>
-        <parameter name="driverKey" value="test_local_firefox"/>
-        <packages>
-            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
-        </packages>
-    </test>
 </suite>

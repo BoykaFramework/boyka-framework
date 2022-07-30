@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.Message.APP_TYPE_NOT_SUPPORTED;
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_QUITTING_DRIVER;
 import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
@@ -182,6 +183,7 @@ public final class DriverManager {
         LOGGER.traceEntry ();
         chromedriver ().setup ();
         final var options = new ChromeOptions ();
+        options.addArguments ("enable-automation");
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
@@ -195,6 +197,8 @@ public final class DriverManager {
             final var webSetting = this.setting.getUi ()
                 .getWebSetting (this.driverKey);
             setupWebDriver (webSetting);
+        } else {
+            throw new FrameworkError (format (APP_TYPE_NOT_SUPPORTED.getMessageText (), this.applicationType));
         }
         LOGGER.traceExit ();
     }

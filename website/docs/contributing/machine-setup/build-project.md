@@ -29,6 +29,31 @@ The above URLs for SSH, HTTPS and Github CLI can be found on the github repo mai
 
 ![Github repo main page](/img/docs/contributing/gh-repo-main-page.png)
 
+## Setting up the project
+
+To build the project, `yarn` is required to be installed on your machine.
+
+Open your terminal or command prompt and run the following command:
+
+```shell
+> npm install --global yarn
+```
+
+Once the installation is complete you can check by running the following command to verify that `yarn` was installed correctly on your machine:
+
+```shell
+> yarn --version
+```
+
+Now, execute the following command to set up the project:
+
+```shell
+> cd boyka-framework
+> yarn install
+```
+
+This step is mandatory before you start contributing to the project, because it will setup pre-commit hooks to automatically run the tests and lint the code before you commit.
+
 ## Java project
 
 The main Java project is located in `core-java/` directory.
@@ -79,23 +104,9 @@ The documentation project is located in `website/` directory.
 
 ### Build the project {#build-documentation-project}
 
-To build the project, `yarn` is required to be installed on your machine. 
-Open your terminal or command prompt and run the following command:
+To build the documentation project, navigate to the root folder of the project and run the following command:
 
 ```shell
-> npm install --global yarn
-```
-
-Once the installation is complete you can check by running the following command to verify that `yarn` was installed correctly on your machine:
-
-```shell
-> yarn --version
-```
-
-Once `yarn` is installed on your machine, navigate to the root folder of the project and run the following command:
-
-```shell
-> yarn install
 > yarn build:site
 ```
 
@@ -109,9 +120,13 @@ From the root repository directory, run the following command:
 > yarn start:site
 ```
 
-This will start the documentation site on `localhost:3000`.
+This will start the documentation site on `localhost:3000` and will constantly watch on any changes you do in the project.
 
 ### Upgrade outdated dependencies
+
+:::danger
+Dependency upgrade will only be done by `boyka-core` team members.
+:::
 
 From the root repository directory, run the following command:
 
@@ -120,16 +135,5 @@ From the root repository directory, run the following command:
 ```
 
 This will prompt to select the version to which we need to upgrade any particular dependency.
-
-:::tip
-You can upgrade any dependency to latest version even if it is upgrading to major version, except for the following dependencies:
-
-- `react`
-- `react-dom`
-- `@mdx-js/react`
-- `@docusaurus/*`
-
-Only the `boyka-core` team will upgrade the above dependencies.
-:::
 
 [github_cli]:https://github.com/cli/cli

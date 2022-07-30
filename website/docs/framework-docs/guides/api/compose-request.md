@@ -5,6 +5,10 @@ title: 🏗️ Compose Request
 
 For API automation, we have created `ApiRequest` class which you can utilize to build API requests.
 
+:::tip
+Check out complete documentation for [ApiRequest](/api/builders/api-request).
+:::
+
 This class has a builder pattern which allows you to build API requests in a fluent way.
 
 ## Example
