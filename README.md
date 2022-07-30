@@ -9,36 +9,36 @@
     Don't forget to ⭐ the repository if you like it!
   </h3>
 
-  <!-- Badges -->
-  <p>
+<!-- Badges -->
+<p>
 
-    <a href="https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light" alt="Boyka&#0045;Framework - 🎉&#0032;Ultimate&#0032;test&#0032;automation&#0032;for&#0032;testing&#0032;any&#0032;application&#0032;type | Product Hunt" width="250" height="54" /></a>
+  <a href="https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light" alt="Boyka&#0045;Framework - 🎉&#0032;Ultimate&#0032;test&#0032;automation&#0032;for&#0032;testing&#0032;any&#0032;application&#0032;type | Product Hunt" width="250" height="54" /></a>
 
-    <a href="https://gitpod.io/#https://github.com/WasiqBhamla/boyka-framework">
-      <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="open in GitPod">
-    </a>
-    <a href="https://discord.gg/dUg8K9DAsR">
-      <img src="https://img.shields.io/discord/950985052769120337?label=Discord&logo=Discord&style=for-the-badge" alt="open in GitPod">
-    </a>
-    <a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
-      <img src="https://img.shields.io/github/contributors/WasiqBhamla/boyka-framework?style=for-the-badge" alt="contributors" />
-    </a>
-    <a href="https://github.com/WasiqBhamla/boyka-framework/commits/main">
-      <img src="https://img.shields.io/github/last-commit/WasiqBhamla/boyka-framework?style=for-the-badge" alt="last update" />
-    </a>
-    <a href="https://github.com/WasiqBhamla/boyka-framework/network/members">
-      <img src="https://img.shields.io/github/forks/WasiqBhamla/boyka-framework?style=for-the-badge" alt="forks" />
-    </a>
-    <a href="https://github.com/WasiqBhamla/boyka-framework/stargazers">
-      <img src="https://img.shields.io/github/stars/WasiqBhamla/boyka-framework?style=for-the-badge" alt="stars" />
-    </a>
-    <a href="https://github.com/WasiqBhamla/boyka-framework/issues/">
-      <img src="https://img.shields.io/github/issues/WasiqBhamla/boyka-framework?style=for-the-badge" alt="open issues" />
-    </a>
-    <a href="https://github.com/WasiqBhamla/boyka-framework/blob/master/LICENSE">
-      <img src="https://img.shields.io/github/license/WasiqBhamla/boyka-framework.svg?style=for-the-badge" alt="license" />
-    </a>
-  </p>
+  <a href="https://gitpod.io/#https://github.com/WasiqBhamla/boyka-framework">
+    <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="open in GitPod">
+  </a>
+  <a href="https://discord.gg/dUg8K9DAsR">
+    <img src="https://img.shields.io/discord/950985052769120337?label=Discord&logo=Discord&style=for-the-badge" alt="open in GitPod">
+  </a>
+  <a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/WasiqBhamla/boyka-framework?style=for-the-badge" alt="contributors" />
+  </a>
+  <a href="https://github.com/WasiqBhamla/boyka-framework/commits/main">
+    <img src="https://img.shields.io/github/last-commit/WasiqBhamla/boyka-framework?style=for-the-badge" alt="last update" />
+  </a>
+  <a href="https://github.com/WasiqBhamla/boyka-framework/network/members">
+    <img src="https://img.shields.io/github/forks/WasiqBhamla/boyka-framework?style=for-the-badge" alt="forks" />
+  </a>
+  <a href="https://github.com/WasiqBhamla/boyka-framework/stargazers">
+    <img src="https://img.shields.io/github/stars/WasiqBhamla/boyka-framework?style=for-the-badge" alt="stars" />
+  </a>
+  <a href="https://github.com/WasiqBhamla/boyka-framework/issues/">
+    <img src="https://img.shields.io/github/issues/WasiqBhamla/boyka-framework?style=for-the-badge" alt="open issues" />
+  </a>
+  <a href="https://github.com/WasiqBhamla/boyka-framework/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/WasiqBhamla/boyka-framework.svg?style=for-the-badge" alt="license" />
+  </a>
+</p>
 
   <h4>
     <a href="#camera-screenshots">View Demo</a>
