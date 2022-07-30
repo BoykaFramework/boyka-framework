@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package apitests.restfulbooker.requests;
+package com.github.wasiqb.boyka.apitests.restfulbooker.requests;
 
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;

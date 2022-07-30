@@ -1,4 +1,4 @@
-package apitests.restfulbooker.requests;
+package com.github.wasiqb.boyka.apitests.restfulbooker.requests;
 
 /**
  * @author Faisal Khatri

@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package apitests.restfulbooker.tests;
+package com.github.wasiqb.boyka.apitests.restfulbooker.tests;
 
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
 import static com.github.wasiqb.boyka.enums.RequestMethod.DELETE;
@@ -24,12 +24,12 @@ import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
 import static com.github.wasiqb.boyka.manager.ApiManager.execute;
 
+import com.github.wasiqb.boyka.apitests.restfulbooker.requests.PartialBookingData;
+import com.github.wasiqb.boyka.apitests.restfulbooker.requests.TokenBuilder;
+import com.github.wasiqb.boyka.apitests.restfulbooker.requests.Tokencreds;
 import com.github.wasiqb.boyka.builders.ApiResponse;
-import apitests.restfulbooker.requests.BookingData;
-import apitests.restfulbooker.requests.BookingDataBuilder;
-import apitests.restfulbooker.requests.PartialBookingData;
-import apitests.restfulbooker.requests.TokenBuilder;
-import apitests.restfulbooker.requests.Tokencreds;
+import com.github.wasiqb.boyka.apitests.restfulbooker.requests.BookingData;
+import com.github.wasiqb.boyka.apitests.restfulbooker.requests.BookingDataBuilder;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -44,9 +44,9 @@ public class APITests {
     private static final String             API_CONFIG_KEY = "test_restfulbooker";
     private              String             bookingId;
     private              BookingData        newBooking;
-    private              BookingData        updatedBooking;
-    private              Tokencreds         tokenCreds;
-    private              PartialBookingData partialUpdateBooking;
+    private BookingData        updatedBooking;
+    private Tokencreds         tokenCreds;
+    private PartialBookingData partialUpdateBooking;
 
     @BeforeTest
     public void setupTest () {

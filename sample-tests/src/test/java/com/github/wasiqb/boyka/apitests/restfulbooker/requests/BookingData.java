@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package apitests.restfulbooker.requests;
+package com.github.wasiqb.boyka.apitests.restfulbooker.requests;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +25,11 @@ import lombok.Getter;
  */
 @Getter
 @Builder
-public class BookingDates {
-    private String checkin;
-    private String checkout;
+public class BookingData {
+    private String       additionalneeds;
+    private BookingDates bookingdates;
+    private boolean      depositpaid;
+    private String       firstname;
+    private String       lastname;
+    private int          totalprice;
 }

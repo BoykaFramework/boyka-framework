@@ -1,18 +1,23 @@
-package uitests.lambdatestecommercewebsite.pages;
+package com.github.wasiqb.boyka.uitests.actions;
 
+import static com.github.wasiqb.boyka.actions.ElementActions.textOf;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
-import static uitests.lambdatestecommercewebsite.pages.CheckoutPage.checkoutPage;
+import static com.github.wasiqb.boyka.actions.MouseActions.hoverOn;
+import static com.github.wasiqb.boyka.uitests.pages.CheckoutPage.checkoutPage;
+
+import com.github.wasiqb.boyka.uitests.pages.ConfirmOrderPage;
 
 /**
  * Created By Faisal Khatri on 29-07-2022
  */
 public class CheckoutPageActions {
 
-    public void verifyUnitPriceOfCameraLens () {
-        verifyTextOf (checkoutPage ().getGetUnitPriceOfCameraLens ());
-
+    public ConfirmOrderPage checkoutProduct () {
+        hoverOn (checkoutPage ().getAgreeTermsAndConditionsField ());
+        clickOn (checkoutPage ().getAgreeTermsAndConditionsField ());
+        clickOn (checkoutPage ().getContinueBtn ());
+        return ConfirmOrderPage.confirmOrderPage ();
     }
 
     public CheckoutPageActions setBillingAddress (final BillingData billingData) {
@@ -28,10 +33,7 @@ public class CheckoutPageActions {
         return this;
     }
 
-    public ConfirmOrderPage checkoutProduct () {
-        hoverOn (checkoutPage ().getAgreeTermsAndConditionsField ());
-        clickOn (checkoutPage ().getAgreeTermsAndConditionsField ());
-        clickOn (checkoutPage ().getContinueBtn ());
-        return ConfirmOrderPage.confirmOrderPage ();
+    public void verifyUnitPriceOfCameraLens () {
+        textOf (checkoutPage ().getGetUnitPriceOfCameraLens ());
     }
 }
