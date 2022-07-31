@@ -1,9 +1,9 @@
 ---
 title: VerifyElementActions
-sidebar_position: 6
+sidebar_position: 8
 ---
 
-## `verifyAttributeOf`
+## `verifyAttributeOf (locator, attribute)` {#verify-attribute-of}
 
 This method is used to verify the given attribute of the given element.
 
@@ -13,7 +13,7 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyAttribu
 verifyAttributeOf (locator, "attribute-name").isEqualTo ("Swag Labs");
 ```
 
-## `verifyElementDisplayed`
+## `verifyElementDisplayed (locator)` {#verify-element-displayed}
 
 This method is used to verify the given element is displayed.
 
@@ -23,7 +23,7 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElement
 verifyElementDisplayed (locator).isTrue();
 ```
 
-## `verifyElementEnabled`
+## `verifyElementEnabled (locator)` {#verify-element-enabled}
 
 This method is used to verify the given element is enabled.
 
@@ -33,7 +33,7 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElement
 verifyElementEnabled (locator).isTrue();
 ```
 
-## `verifyElementSelected`
+## `verifyElementSelected (locator)` {#verify-element-selected}
 
 This method is used to verify the given element is selected.
 
@@ -43,7 +43,17 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElement
 verifyElementSelected (locator).isTrue();
 ```
 
-## `verifyTextOf`
+## `verifyStyleOf (locator, attribute)` {#verify-style-of}
+
+This method is used to verify the style of the given element locator.
+
+```java
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyStyleOf;
+. . .
+verifyStyleOf (locator, "color").isEqualTo ("Red");
+```
+
+## `verifyTextOf (locator)` {#verify-text-of}
 
 This method is used to verify the text of the given element.
 

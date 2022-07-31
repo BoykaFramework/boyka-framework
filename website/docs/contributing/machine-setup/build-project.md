@@ -52,6 +52,15 @@ Now, execute the following command to set up the project:
 > yarn install
 ```
 
+:::danger Windows users
+You must execute the following command after `yarn install`:
+
+```shell
+> yarn prepare
+```
+
+:::
+
 This step is mandatory before you start contributing to the project, because it will setup pre-commit hooks to automatically run the tests and lint the code before you commit.
 
 ## Java project
@@ -87,7 +96,7 @@ In case Maven is not installed on your machine, the following steps should help.
 
 #### Installing Maven on MacOS
 
-Installation of Maven on a Mac machine can be easily done using the Homebrew software. 
+Installation of Maven on a Mac machine can be easily done using the [Homebrew](https://brew.sh/) package manager.
 After installing Homebrew, just run the command `brew install maven`, and it will install Maven within seconds on your machine, and you could straight away start using maven.
 
 Once Maven installation is complete, from the root repository directory, run the following command:

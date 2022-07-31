@@ -100,6 +100,21 @@ public final class ElementActions {
     }
 
     /**
+     * Gets the styling attribute of the element.
+     *
+     * @param locator locator of the element
+     * @param attribute attribute of the element
+     *
+     * @return value of the styling attribute of the element
+     */
+    public static String styleOf (final Locator locator, final String attribute) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator);
+        LOGGER.traceExit ();
+        return getElementAttribute (e -> e.getCssValue (attribute), locator);
+    }
+
+    /**
      * Submit the element.
      *
      * @param locator {@link Locator} of element

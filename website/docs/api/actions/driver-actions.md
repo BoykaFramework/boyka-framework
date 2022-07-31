@@ -3,27 +3,27 @@ title: DriverActions
 sidebar_position: 1
 ---
 
-## `acceptAlert`
+## `acceptAlert` {#accept-alert}
 
 This method returns the alert text and accepts the alert.
 
 ```java
 import static com.github.wasiqb.boyka.actions.DriverActions.acceptAlert;
 . . .
-System.out.println (acceptAlert ());
+String message = acceptAlert ();
 ```
 
-## `acceptAlert(string)`
+## `acceptAlert (text)` {#accept-alert-text}
 
 This method returns the alert text, enter text in prompt and accepts the prompt alert.
 
 ```java
 import static com.github.wasiqb.boyka.actions.DriverActions.acceptAlert;
 . . .
-System.out.println (acceptAlert ("Hello World"));
+String message = acceptAlert ("Hello World");
 ```
 
-## `closeWindow`
+## `closeWindow` {#close-window}
 
 This method will close the open browser window.
 
@@ -33,7 +33,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.closeWindow;
 closeWindow ();
 ```
 
-## `cookie(string)`
+## `cookie (name)` {#cookie-name}
 
 This method will get the cookie from the browser based on it's name.
 
@@ -54,17 +54,17 @@ import static com.github.wasiqb.boyka.actions.DriverActions.cookies;
 List<String> cookieNames = cookies ();
 ```
 
-## `currentWindowHandle`
+## `currentWindowHandle` {#current-window-handle}
 
 This method returns the current window handle.
 
 ```java
 import static com.github.wasiqb.boyka.actions.DriverActions.currentWindowHandle;
 . . .
-System.out.println (currentWindowHandle ());
+String handle = currentWindowHandle ();
 ```
 
-## `deleteAllCookies`
+## `deleteAllCookies` {#delete-all-cookies}
 
 This method will delete all the cookies from the browser.
 
@@ -74,7 +74,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.deleteAllCookies;
 deleteAllCookies ();
 ```
 
-## `deleteCookie(string)`
+## `deleteCookie (name)` {#delete-cookie-name}
 
 This method will delete the cookie from the browser based on it's name.
 
@@ -84,7 +84,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.deleteCookie;
 deleteCookie ("cookie-name");
 ```
 
-## `dismissAlert`
+## `dismissAlert` {#dismiss-alert}
 
 This method will dismiss the alert and returns the alert text.
 
@@ -94,7 +94,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.dismissAlert;
 String message = dismissAlert ();
 ```
 
-## `executeScript(string, object[])`
+## `executeScript (script, args[])` {#execute-script}
 
 This method will execute the JS script and returns the result.
 
@@ -104,7 +104,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
 String output = executeScript ("alert('Hello World');");
 ```
 
-## `fullScreen`
+## `fullScreen` {#full-screen}
 
 This method will on-demand do full screen on the browser window.
 
@@ -114,7 +114,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.fullScreen;
 fullScreen ();
 ```
 
-## `goBack`
+## `goBack` {#go-back}
 
 This method will go back to the previous page.
 
@@ -124,7 +124,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
 goBack ();
 ```
 
-## `goForward`
+## `goForward` {#go-forward}
 
 This method will go forward to the next page.
 
@@ -154,7 +154,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.minimize;
 minimize ();
 ```
 
-## `navigateTo`
+## `navigateTo` {#navigate-to}
 
 This method is used to navigate to the given URL.
 
@@ -174,7 +174,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
 refresh ();
 ```
 
-## `switchToFrame(string)`
+## `switchToFrame (name)` {#switch-to-frame-name}
 
 This method will switch to the given frame by it's name.
 
@@ -188,7 +188,7 @@ switchToFrame ("frame-name");
 In order to come out of this frame, use [`switchToParentFrame`](#switchtoparentframe) method.
 :::
 
-## `switchToMainWindow`
+## `switchToMainWindow` {#switch-to-main-window}
 
 This method will switch to the first window after you close any of the other opened windows.
 
@@ -198,7 +198,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.switchToMainWindow;
 switchToMainWindow ();
 ```
 
-## `switchToNewWindow`
+## `switchToNewWindow` {#switch-to-new-window}
 
 This method is used to switch to new window of given type.
 
@@ -209,7 +209,7 @@ import org.openqa.selenium.WindowType;
 switchToNewWindow (WindowType.TAB);
 ```
 
-## `switchToParentFrame`
+## `switchToParentFrame` {#switch-to-parent-frame}
 
 This method will switch to the parent frame of the current frame. This method is used to come out of any iframe.
 
@@ -219,7 +219,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.switchToParentFrame;
 switchToParentFrame ();
 ```
 
-## `switchToWindow(string)`
+## `switchToWindow (handle)` {#switch-to-window-handle}
 
 This method is used to switch to window of given handle.
 
@@ -229,7 +229,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.switchToWindow;
 switchToWindow ("window-handle");
 ```
 
-## `takeScreenshot`
+## `takeScreenshot` {#take-screenshot}
 
 This method will take the screenshot of the current page and save it at the path configured in `boyka-config.json`.
 
@@ -239,7 +239,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 takeScreenshot ();
 ```
 
-## `takeScreenshot(string)`
+## `takeScreenshot (path)` {#take-screenshot-path}
 
 This method will take the screenshot of the current page and save it at the path mentioned in the parameter.
 
@@ -269,7 +269,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.url;
 System.out.println (url ());
 ```
 
-## `waitUntil`
+## `waitUntil` {#wait-until}
 
 This method will wait for any given condition to be true. It takes in Selenium WebDrivers `ExpectedCondition<Boolean>` object as parameter.
 
@@ -280,12 +280,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 waitUntil (ExpectedConditions.urlMatches (URL));
 ```
 
-## `windowHandles`
+## `windowHandles` {#window-handles}
 
 This method will get the list of all open window handles.
 
 ```java
 import static com.github.wasiqb.boyka.actions.DriverActions.windowHandles;
 . . .
-System.out.println (windowHandles ());
+List<String> handles = windowHandles ();
 ```

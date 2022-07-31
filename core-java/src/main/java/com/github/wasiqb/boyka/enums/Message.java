@@ -47,6 +47,10 @@ public enum Message {
      */
     ELEMENT_NOT_FOUND ("Element not found for locator {0}..."),
     /**
+     * Deselect from dropdown Error.
+     */
+    ERROR_DESELECT_FROM_DROPDOWN ("Cannot deselect from dropdown, it should be Multi-select box..."),
+    /**
      * Error executing request
      */
     ERROR_EXECUTING_REQUEST ("Error occurred while executing request..."),

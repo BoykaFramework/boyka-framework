@@ -6,7 +6,7 @@ sidebar_position: 3
 Once the page object class is created, we can use it to interact with the page in our tests by passing the locators to static action methods exposed by Boyka framework.
 
 :::tip
-Check out all the available static methods to interact with the page in our tests. Following are the available action methods:
+Check out all the available static methods to interact with the page in your tests. Following are the available action classes:
 
 - [`DriverActions`](/api/actions/driver-actions): Contains all driver related actions
 - [`ElementActions`](/api/actions/element-actions): Contains all element related actions

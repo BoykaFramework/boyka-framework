@@ -20,6 +20,7 @@ import static com.github.wasiqb.boyka.actions.ElementActions.attributeOf;
 import static com.github.wasiqb.boyka.actions.ElementActions.isDisplayed;
 import static com.github.wasiqb.boyka.actions.ElementActions.isEnabled;
 import static com.github.wasiqb.boyka.actions.ElementActions.isSelected;
+import static com.github.wasiqb.boyka.actions.ElementActions.styleOf;
 import static com.github.wasiqb.boyka.actions.ElementActions.textOf;
 import static com.google.common.truth.Truth.assertThat;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -93,6 +94,21 @@ public final class VerifyElementActions {
         LOGGER.info ("Verifying element {} is selected", locator);
         LOGGER.traceExit ();
         return assertThat (isSelected (locator));
+    }
+
+    /**
+     * Verify style of element.
+     *
+     * @param locator locator of element
+     * @param attribute attribute to verify
+     *
+     * @return {@link StringSubject} to verify the result
+     */
+    public static StringSubject verifyStyleOf (final Locator locator, final String attribute) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying style of {}", locator);
+        LOGGER.traceExit ();
+        return assertThat (styleOf (locator, attribute));
     }
 
     /**

@@ -17,13 +17,11 @@
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
-import static com.github.wasiqb.boyka.actions.DriverActions.waitUntil;
 import static com.github.wasiqb.boyka.actions.MouseActions.doubleClickOn;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyStyleOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.DoubleClickPage.doubleClickPage;
-import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.testng.annotations.AfterClass;
@@ -38,7 +36,7 @@ import org.testng.annotations.Test;
  * @since 26-Jul-2022
  */
 public class DoubleClickTest {
-    private static final String URL = "https://demo.guru99.com/test/simple_context_menu.html";
+    private static final String URL = "https://webdriveruniversity.com/Actions/index.html";
 
     /**
      * Setup test class by initialising driver.
@@ -66,8 +64,7 @@ public class DoubleClickTest {
      */
     @Test (description = "Double click test")
     public void testDoubleClick () {
-        doubleClickOn (doubleClickPage ().getButton ());
-        waitUntil (alertIsPresent ());
-        verifyAcceptAlert ().isEqualTo ("You double clicked me.. Thank You..");
+        doubleClickOn (doubleClickPage ().getDoubleClick ());
+        verifyStyleOf (doubleClickPage ().getDoubleClick (), "background-color").isEqualTo ("rgba(147, 203, 90, 1)");
     }
 }

@@ -1,9 +1,9 @@
 ---
 title: VerifyDriverActions
-sidebar_position: 5
+sidebar_position: 6
 ---
 
-## `verifyAcceptAlert`
+## `verifyAcceptAlert` {#verify-accept-alert}
 
 This method is used to verify the alert message after accepting the alert.
 
@@ -13,7 +13,7 @@ import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAl
 verifyAcceptAlert ().isEqualTo ("Swag Labs");
 ```
 
-## `verifyAcceptAlert(string)`
+## `verifyAcceptAlert (text)` {#verify-accept-alert-text}
 
 This method is used to verify the alert message after entering the text in the prompt and accepting it.
 
@@ -23,7 +23,7 @@ import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAl
 verifyAcceptAlert ("Sample text").isEqualTo ("Swag Labs");
 ```
 
-## `verifyBrowserTitle`
+## `verifyBrowserTitle` {#verify-browser-title}
 
 This method is used to verify the browser title.
 
@@ -33,7 +33,7 @@ import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserT
 verifyBrowserTitle (title).isEqualTo ("Swag Labs");
 ```
 
-## `verifyBrowserUrl`
+## `verifyBrowserUrl` {#verify-browser-url}
 
 This method is used to verify the browser url.
 
@@ -43,7 +43,7 @@ import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserU
 verifyBrowserUrl (url).isEqualTo ("https://www.swaglabs.com/");
 ```
 
-## `verifyDismissAlert`
+## `verifyDismissAlert` {#verify-dismiss-alert}
 
 This method is used to verify the alert message after dismissing the alert.
 
