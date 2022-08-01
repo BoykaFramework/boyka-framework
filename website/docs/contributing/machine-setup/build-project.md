@@ -25,7 +25,7 @@ Run the following command if you want to clone using [Github CLI][github_cli]:
 > git clone gh repo clone WasiqBhamla/boyka-framework
 ```
 
-The above URLs for SSH, HTTPS and Github CLI can be found on the github repo main page as well.
+The above URLs for `SSH`, `HTTPS` and `Github CLI` can be found on the github repo main page as well.
 
 ![Github repo main page](/img/docs/contributing/gh-repo-main-page.png)
 
@@ -33,10 +33,16 @@ The above URLs for SSH, HTTPS and Github CLI can be found on the github repo mai
 
 To build the project, `yarn` is required to be installed on your machine.
 
-Open your terminal or command prompt and run the following command:
+On Mac OS, run the following command:
 
 ```shell
-> npm install --global yarn
+> brew install yarn
+```
+
+On Windows and Linux, you can run the following command:
+
+```shell
+> npm install -g yarn
 ```
 
 Once the installation is complete you can check by running the following command to verify that `yarn` was installed correctly on your machine:
@@ -53,7 +59,7 @@ Now, execute the following command to set up the project:
 ```
 
 :::danger Windows users
-You must execute the following command after `yarn install`:
+You must also execute the following command after `yarn install`:
 
 ```shell
 > yarn prepare
@@ -61,15 +67,16 @@ You must execute the following command after `yarn install`:
 
 :::
 
-This step is mandatory before you start contributing to the project, because it will setup pre-commit hooks to automatically run the tests and lint the code before you commit.
+This step is mandatory before you start contributing to the project, because it will setup pre-commit hooks to automatically run the lint checks and test coverage check for the code before you can commit.
 
-## Java project
+## Core framework project
 
-The main Java project is located in `core-java/` directory.
+The core framework project is located in `core-java/` directory.
 
-### Build the project {#build-project}
+### Install Maven
 
 `Maven` is the build tool we would be using for this project. So need to have Maven installed on your machine before you proceed to build the project.
+
 In case Maven is not installed on your machine, the following steps should help.
 
 #### Installing Maven on Windows
@@ -99,19 +106,31 @@ In case Maven is not installed on your machine, the following steps should help.
 Installation of Maven on a Mac machine can be easily done using the [Homebrew](https://brew.sh/) package manager.
 After installing Homebrew, just run the command `brew install maven`, and it will install Maven within seconds on your machine, and you could straight away start using maven.
 
+### Build the Core project {#build-project}
+
 Once Maven installation is complete, from the root repository directory, run the following command:
 
 ```shell
 > mvn install -f core-java/pom.xml -DskipTests
 ```
 
-This will resolve the dependencies and run checkstyle for the project.
+This will resolve the dependencies and run check-style check for the project without actually running the tests.
 
 ## Documentation project
 
 The documentation project is located in `website/` directory.
 
-### Build the project {#build-documentation-project}
+### Install Node >= v16.15.0 {#install-node}
+
+1. Install NVM (Node Version Manager) on your machine.
+1. Open your terminal or command prompt and run the following command: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
+1. Run the following command to set up the project: `nvm install`
+1. Verify if Node is installed correctly.
+    1. Open Command Prompt and run the command: `nvm -v` and `node -v`
+    1. It should display the NVM and Node version as shown in the screenshot below:
+    ![Node Version Check](/img/docs/contributing/command-prompt-node-v.png)
+
+### Build the documentation project {#build-documentation-project}
 
 To build the documentation project, navigate to the root folder of the project and run the following command:
 
