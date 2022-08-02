@@ -1,19 +1,19 @@
 ---
 title: ElementActions
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-## `attributeOf`
+## `attributeOf (locator, attribute)` {#attribute-of}
 
 This method is used to get the attribute of the given element.
 
 ```java
 import static com.github.wasiqb.boyka.actions.ElementActions.attributeOf;
 . . .
-System.out.println (attributeOf ("href"));
+String attribute = attributeOf ("href");
 ```
 
-## `clear`
+## `clear (locator)` {#clear}
 
 This method is used to clear the given element.
 
@@ -23,37 +23,47 @@ import static com.github.wasiqb.boyka.actions.ElementActions.clear;
 clear (locator);
 ```
 
-## `isDisplayed`
+## `isDisplayed (locator)` {#isDisplayed}
 
 This method is used to check whether the given element is displayed or not.
 
 ```java
 import static com.github.wasiqb.boyka.actions.ElementActions.isDisplayed;
 . . .
-System.out.println (isDisplayed (locator));
+boolean displayed = isDisplayed (locator);
 ```
 
-## `isEnabled`
+## `isEnabled (locator)` {#isEnabled}
 
 This method is used to check whether the given element is enabled or not.
 
 ```java
 import static com.github.wasiqb.boyka.actions.ElementActions.isEnabled;
 . . .
-System.out.println (isEnabled (locator));
+boolean enabled = isEnabled (locator);
 ```
 
-## `isSelected`
+## `isSelected (locator)` {#isSelected}
 
 This method is used to check whether the given element is selected or not.
 
 ```java
 import static com.github.wasiqb.boyka.actions.ElementActions.isSelected;
 . . .
-System.out.println (isSelected (locator));
+boolean selected = isSelected (locator);
 ```
 
-## `submit`
+## `styleOf (locator, attribute)` {#styleOf}
+
+This method will return the style of the given element for the given attribute.
+
+```java
+import static com.github.wasiqb.boyka.actions.ElementActions.styleOf;
+. . .
+String backgroundColor = styleOf (locator, "background-color");
+```
+
+## `submit (locator)` {#submit}
 
 This method is used to submit the given element.
 
@@ -63,12 +73,12 @@ import static com.github.wasiqb.boyka.actions.ElementActions.submit;
 submit (locator);
 ```
 
-## `textOf`
+## `textOf (locator)` {#textOf}
 
 This method is used to get the text of the given element.
 
 ```java
 import static com.github.wasiqb.boyka.actions.ElementActions.textOf;
 . . .
-System.out.println (textOf (locator));
+String text = textOf (locator));
 ```

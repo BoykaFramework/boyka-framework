@@ -16,35 +16,29 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.By.tagName;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
 /**
- * Drag drop page.
+ * DropDown page.
  *
  * @author Wasiq Bhamla
- * @since 26-Jul-2022
+ * @since 30-Jul-2022
  */
 @Getter
-public class DragDropPage {
+public class DropDownPage {
     /**
      * Drag and drop page instance.
      */
-    public static DragDropPage dragDropPage () {
-        return new DragDropPage ();
+    public static DropDownPage dropDownPage () {
+        return new DropDownPage ();
     }
 
-    private final Locator draggable = Locator.buildLocator ()
-        .web (id ("draggable"))
+    private final Locator fruits      = buildLocator ().web (id ("fruits"))
         .build ();
-    private final Locator droppable = Locator.buildLocator ()
-        .web (id ("droppable"))
-        .build ();
-    private final Locator header    = Locator.buildLocator ()
-        .web (tagName ("b"))
-        .parent (this.droppable)
+    private final Locator superHeroes = buildLocator ().web (id ("superheros"))
         .build ();
 }

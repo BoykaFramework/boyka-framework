@@ -12,6 +12,20 @@ const HeroContent = ({ title, tagLine }): JSX.Element => {
       <Typist avgTypingDelay={40} cursor={{ hideWhenDone: true, show: false }}>
         <p className={styles.HeroDescription}>{tagLine}</p>
       </Typist>
+      <a
+        // eslint-disable-next-line max-len
+        href='https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework'
+        target='_blank'
+        rel='noreferrer'
+      >
+        <img
+          // eslint-disable-next-line max-len
+          src='https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light'
+          alt='Boyka Framework'
+          width='245'
+          height='45'
+        />
+      </a>
     </div>
   );
 };

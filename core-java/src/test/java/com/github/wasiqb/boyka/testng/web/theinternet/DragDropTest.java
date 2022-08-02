@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
  * @since 26-Jul-2022
  */
 public class DragDropTest {
-    private static final String URL = "https://demoqa.com/droppable/";
+    private static final String URL = "https://webdriveruniversity.com/Actions/index.html";
 
     /**
      * Setup test class by initialising driver.
