@@ -4,6 +4,10 @@ import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+/**
+ * @author Faisal Khatri
+ * @since 30/07/2022
+ */
 @Getter
 public class ConfirmOrderPage {
 

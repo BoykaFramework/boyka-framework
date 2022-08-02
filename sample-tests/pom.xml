@@ -32,7 +32,7 @@
         <maven.source.encoding>UTF-8</maven.source.encoding>
         <suite-xml>test-suite/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
-        <boyka.version>0.7.0</boyka.version>
+        <boyka.version>0.8.0</boyka.version>
         <testng.version>7.6.1</testng.version>
         <lombok.version>1.18.24</lombok.version>
         <java.faker.version>1.0.2</java.faker.version>

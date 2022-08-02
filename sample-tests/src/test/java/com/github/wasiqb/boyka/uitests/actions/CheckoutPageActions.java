@@ -9,7 +9,8 @@ import static com.github.wasiqb.boyka.uitests.pages.CheckoutPage.checkoutPage;
 import com.github.wasiqb.boyka.uitests.pages.ConfirmOrderPage;
 
 /**
- * Created By Faisal Khatri on 29-07-2022
+ * @author Faisal Khatri
+ * @since 30/07/2022
  */
 public class CheckoutPageActions {
 

@@ -6,6 +6,10 @@ import static com.github.wasiqb.boyka.uitests.pages.ConfirmOrderPage.confirmOrde
 
 import java.text.MessageFormat;
 
+/**
+ * @author Faisal Khatri
+ * @since 30/07/2022
+ */
 public class ConfirmOrderPageActions {
 
     public OrderSuccessPageActions confirmOrder () {
