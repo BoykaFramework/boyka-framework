@@ -7,12 +7,21 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.uitests.pages.RegistrationPage.registrationPage;
 
 import com.github.wasiqb.boyka.uitests.pages.RegistrationSuccessPage;
+import com.github.wasiqb.boyka.uitests.testdata.RegisterUserData;
+import com.github.wasiqb.boyka.uitests.testdata.TestDataBuilder;
 
 /**
  * @author Faisal Khatri
  * @since 8/2/2022
  **/
 public class RegistrationPageActions {
+
+    private static final String           PASSWORD = "Password@123";
+    private final        RegisterUserData registerUserData;
+
+    public RegistrationPageActions () {
+        this.registerUserData = TestDataBuilder.getRegisterUserData ();
+    }
 
     public RegistrationSuccessPage registerUser () {
         enterText (registrationPage ().getFirstNameField (), this.registerUserData.getFirstName ());
