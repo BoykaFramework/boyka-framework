@@ -33,13 +33,13 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@types/node": "^18.6.3",
-    "@typescript-eslint/eslint-plugin": "^5.31.0",
-    "@typescript-eslint/parser": "^5.31.0",
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
     "commitlint": "^17.0.3",
     "eslint": "^8.21.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.3.0",
+    "eslint-import-resolver-typescript": "^3.4.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
@@ -63,10 +63,8 @@
     "format-fix": "prettier --write .",
     "clear:website": "yarn workspace website clear",
     "changelog": "lerna-changelog",
-    "patch": "lerna version patch --yes --no-git-tag-version --no-push",
-    "minor": "lerna version minor --yes --no-git-tag-version --no-push",
-    "major": "lerna version major --yes --no-git-tag-version --no-push",
-    "release": "lerna version --conventional-commits --create-release github"
+    "prerelease": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-prerelease --preid rc",
+    "release": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-graduate"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [

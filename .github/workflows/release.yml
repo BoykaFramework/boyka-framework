@@ -1,17 +1,13 @@
+# Auto release version to Maven Central and GitHub Releases
+# As soon as PR from staging to main gets merged and closed.
 name: Deploy Release to GitHub and Maven Central
 
 on:
-  workflow_dispatch:
-    inputs:
-      release_type:
-        type: choice
-        description: 'Release Type'
-        required: true
-        options:
-          - major
-          - minor
-          - patch
-        default: 'minor'
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
 
 env:
   PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
@@ -23,6 +19,7 @@ env:
 jobs:
   prepare-release:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
 
     outputs:
       new-version: ${{ steps.version.outputs.version }}
@@ -39,7 +36,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
       - name: Get the previous release version
         id: old_version
@@ -47,17 +44,8 @@ jobs:
           export MVN_OLD_VERSION=$(node -pe "require('./package.json').version")
           echo "::set-output name=previous_version::$MVN_OLD_VERSION"
 
-      - name: Update version major
-        if: ${{ github.event.inputs.release_type == 'major' }}
-        run: yarn run major
-
-      - name: Update version minor
-        if: ${{ github.event.inputs.release_type == 'minor' }}
-        run: yarn run minor
-
-      - name: Update version patch
-        if: ${{ github.event.inputs.release_type == 'patch' }}
-        run: yarn run patch
+      - name: Update release version
+        run: yarn release
 
       - name: Get the new version
         id: version
@@ -250,7 +238,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           tag: v${{ needs.prepare-release.outputs.new-version }}
-          message: 🎉 Released to Maven central [skip ci]
+          message: 🎉 Released v${{ needs.prepare-release.outputs.new-version }} to Maven central [skip ci]
           default_author: user_info
           push: true
 
@@ -275,8 +263,14 @@ jobs:
         with:
           name: target
 
+      - name: Build all the dependencies
+        run: yarn install
+
       - name: Generate Change log
-        run: echo $(yarn changelog --from v${{ needs.prepare-release.outputs.previous-version }} --next-version v${{ needs.prepare-release.outputs.new-version }}) >> CURRENT_CHANGELOG.md
+        id: changelog
+        run: |
+          export CHANGELOG=$(yarn changelog --from v${{ needs.prepare-release.outputs.previous-version }} --next-version v${{ needs.prepare-release.outputs.new-version }})
+          echo "::set-output name=change_log::$CHANGELOG"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
@@ -288,7 +282,7 @@ jobs:
           name: Version ${{ needs.prepare-release.outputs.new-version }}
           prerelease: false
           draft: false
-          body_path: CURRENT_CHANGELOG.md
+          body: ${{ steps.changelog.outputs.change_log }}
           discussion_category_name: Announcements
           generate_release_notes: false
           files: |
