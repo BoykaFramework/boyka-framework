@@ -8,7 +8,8 @@
     },
     "web": {
       "test_local_chrome": {
-        "browser": "CHROME"
+        "browser": "CHROME",
+        "headless": "false"
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
@@ -28,20 +29,20 @@
           "visual": true,
           "video": true,
           "console": true
-        },
-        "api": {
-          "test_restfulbooker": {
-            "base_uri": "https://restful-booker.herokuapp.com",
-            "base_path": "",
-            "read_timeout": 2,
-            "write_timeout": 2,
-            "connection_timeout": 1,
-            "logging": {
-              "request": true,
-              "response": true
-            }
-          }
         }
+      }
+    }
+  },
+  "api": {
+    "test_restfulbooker": {
+      "base_uri": "https://restful-booker.herokuapp.com",
+      "base_path": "",
+      "read_timeout": 2,
+      "write_timeout": 2,
+      "connection_timeout": 1,
+      "logging": {
+        "request": true,
+        "response": true
       }
     }
   }

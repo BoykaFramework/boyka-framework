@@ -15,9 +15,19 @@
   ~ copies or substantial portions of the Software.
   -->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Boyka Framework Sample Test Suite">
-    <suite-files>
-        <suite-file path="testng-api.xml"/>
-        <suite-file path="testng-web.xml"/>
-    </suite-files>
+<suite name="Boyka API Test Suite">
+    <test name="Restful Booker tests">
+        <classes>
+            <class name="com.github.wasiqb.boyka.api.APITests">
+                <methods>
+                    <include name="testCreateBooking"/>
+                    <include name="testGetBooking"/>
+                    <include name="testUpdateBooking"/>
+                    <include name="testUpdatePartialBooking"/>
+                    <include name="testDeleteBooking"/>
+                    <include name="testDeletedBooking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite> <!-- Suite -->

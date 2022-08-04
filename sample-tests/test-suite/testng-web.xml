@@ -15,9 +15,14 @@
   ~ copies or substantial portions of the Software.
   -->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Boyka Framework Sample Test Suite">
-    <suite-files>
-        <suite-file path="testng-api.xml"/>
-        <suite-file path="testng-web.xml"/>
-    </suite-files>
+<suite name="Boyka Web Automation Test Suite">
+    <test name="Ecommerce Playground tests">
+        <classes>
+            <class name="com.github.wasiqb.boyka.ui.EcommerceEndToEndTests">
+                <methods>
+                    <include name="testRegisterUser"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite> <!-- Suite -->
