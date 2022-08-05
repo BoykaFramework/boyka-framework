@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.text.MessageFormat.format;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -29,6 +30,7 @@ import com.github.wasiqb.boyka.builders.Locator;
 import com.github.wasiqb.boyka.enums.WaitStrategy;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -85,13 +87,17 @@ final class ElementFinder {
         final Locator locator, final WaitStrategy waitStrategy) {
         LOGGER.traceEntry ();
         final var wait = getSession ().getWait ();
-        switch (waitStrategy) {
-            case CLICKABLE:
-                wait.until (elementToBeClickable (locator.getWeb ()));
-                break;
-            case VISIBLE:
-            default:
-                wait.until (visibilityOfElementLocated (locator.getWeb ()));
+        try {
+            switch (waitStrategy) {
+                case CLICKABLE:
+                    wait.until (elementToBeClickable (locator.getWeb ()));
+                    break;
+                case VISIBLE:
+                default:
+                    wait.until (visibilityOfElementLocated (locator.getWeb ()));
+            }
+        } catch (final TimeoutException e) {
+            handleAndThrow (ELEMENT_NOT_FOUND, e);
         }
         return LOGGER.traceExit (
             parent != null ? parent.findElements (locator.getWeb ()) : driver.findElements (locator.getWeb ()));
