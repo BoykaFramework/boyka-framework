@@ -258,19 +258,12 @@ jobs:
           node-version: '16'
           cache: 'yarn'
 
-      - name: Download target folder
-        uses: actions/download-artifact@v3
-        with:
-          name: target
-
       - name: Build all the dependencies
         run: yarn install
 
       - name: Generate Change log
-        id: changelog
         run: |
-          export CHANGELOG=$(yarn changelog --from v${{ needs.prepare-release.outputs.previous-version }} --next-version v${{ needs.prepare-release.outputs.new-version }})
-          echo "::set-output name=change_log::$CHANGELOG"
+          yarn changelog --from v${{ needs.prepare-release.outputs.previous-version }} --next-version v${{ needs.prepare-release.outputs.new-version }} > CHANGELOG.md
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
@@ -282,7 +275,7 @@ jobs:
           name: Version ${{ needs.prepare-release.outputs.new-version }}
           prerelease: false
           draft: false
-          body: ${{ steps.changelog.outputs.change_log }}
+          body_path: CHANGELOG.md
           discussion_category_name: Announcements
           generate_release_notes: false
           files: |

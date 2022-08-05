@@ -5,13 +5,16 @@ on:
     branches:
       - develop
       - staging
+      - main
     paths:
       - 'core-java/**'
       - '.github/**'
+
   push:
     branches:
       - develop
       - staging
+      - main
     paths:
       - 'core-java/**'
       - '.github/**'
