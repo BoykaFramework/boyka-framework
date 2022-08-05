@@ -17,9 +17,9 @@ public class CheckoutPage {
         return new CheckoutPage ();
     }
 
-    private final Locator agreeTermsAndConditionsField = buildLocator ().web (By.id ("input-agree"))
+    private final Locator agreeTermsAndConditionsField = buildLocator ().web (By.cssSelector ("#input-agree +label"))
         .build ();
-    private final Locator continueBtn                  = buildLocator ().web (By.id ("button#button-save"))
+    private final Locator continueBtn                  = buildLocator ().web (By.cssSelector ("button#button-save"))
         .build ();
     private final Locator getUnitPriceOfCameraLens     = buildLocator ().web (
             By.cssSelector ("#checkout-total > tbody > tr:nth-child(1) > td.text-right"))

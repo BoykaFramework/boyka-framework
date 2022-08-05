@@ -14,6 +14,10 @@ import com.github.wasiqb.boyka.ui.data.BillingData;
  */
 public class ConfirmOrderPageActions {
 
+    public static ConfirmOrderPageActions confirmOrderPageActions () {
+        return new ConfirmOrderPageActions ();
+    }
+
     public OrderSuccessPageActions confirmOrder () {
         clickOn (confirmOrderPage ().getConfirmOrderBtn ());
         return new OrderSuccessPageActions ();
@@ -30,7 +34,7 @@ public class ConfirmOrderPageActions {
     }
 
     public ConfirmOrderPageActions verifyShippingAddress (final BillingData billingData) {
-        final String expectedShippingAddress = "{0} {1}\n{2}\n{3} {4}\n {5},{6}";
+        final String expectedShippingAddress = "{0} {1}\n{2}\n{3} {4}\n{5},{6}";
         verifyTextOf (confirmOrderPage ().getShippingAddress ()).isEqualTo (
             MessageFormat.format (expectedShippingAddress, billingData.getFirstName (), billingData.getLastName (),
                 billingData.getAddressLineOne (), billingData.getCity (), billingData.getPostCode (),

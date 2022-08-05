@@ -2,7 +2,6 @@ package com.github.wasiqb.boyka.ui.actions;
 
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.MouseActions.hoverOn;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.ui.pages.RegistrationPage.registrationPage;
 
@@ -29,7 +28,7 @@ public class RegistrationPageActions {
         enterText (registrationPage ().getTelephoneField (), this.registerUserData.getTelephone ());
         enterText (registrationPage ().getPasswordField (), PASSWORD);
         enterText (registrationPage ().getConfirmPasswordField (), PASSWORD);
-        hoverOn (registrationPage ().getAgreePrivacyPolicyField ());
+        //  hoverOn (registrationPage ().getAgreePrivacyPolicyField ());
         clickOn (registrationPage ().getAgreePrivacyPolicyField ());
         clickOn (registrationPage ().getContinueBtn ());
         return new RegistrationSuccessPageActions ();

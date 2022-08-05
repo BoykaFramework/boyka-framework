@@ -15,21 +15,22 @@ public class ProductPage {
         return new ProductPage ();
     }
 
-    private final Locator addToCartBtn      = Locator.buildLocator ()
+    private final Locator addToCartBtn       = Locator.buildLocator ()
         .web (By.cssSelector ("div.product-action > button.btn.btn-cart.cart-29"))
         .build ();
-    private final Locator checkoutBtn       = Locator.buildLocator ()
-        .web (By.cssSelector ("div.form-row > div:nth-child(2) > a"))
-        .build ();
-    private final Locator notificationPopUp = Locator.buildLocator ()
+    private final Locator notificationPopUp  = Locator.buildLocator ()
         .web (By.id ("notification-box-top"))
         .build ();
-
+    private final Locator checkoutBtn        = Locator.buildLocator ()
+        .web (By.cssSelector ("div.form-row > div:nth-child(2) > a"))
+        .parent (this.notificationPopUp)
+        .build ();
     private final Locator palmTreoCameraLens = Locator.buildLocator ()
         .web (By.cssSelector ("#entry_212408 > div > div:nth-child(2)"))
         .build ();
     private final Locator successMessage     = Locator.buildLocator ()
-        .web (By.tagName ("p"))
+        .web (By.cssSelector ("div > div.toast-body > div.align-items-start > p"))
+        .parent (this.notificationPopUp)
         .build ();
 
 }

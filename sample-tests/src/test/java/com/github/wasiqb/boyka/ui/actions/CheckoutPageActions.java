@@ -4,11 +4,9 @@ import static com.github.wasiqb.boyka.actions.DropDownActions.selectByText;
 import static com.github.wasiqb.boyka.actions.ElementActions.textOf;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.MouseActions.hoverOn;
 import static com.github.wasiqb.boyka.ui.pages.CheckoutPage.checkoutPage;
 
 import com.github.wasiqb.boyka.ui.data.BillingData;
-import com.github.wasiqb.boyka.ui.pages.ConfirmOrderPage;
 
 /**
  * @author Faisal Khatri
@@ -20,11 +18,10 @@ public class CheckoutPageActions {
         return new CheckoutPageActions ();
     }
 
-    public ConfirmOrderPage checkoutProduct () {
-        hoverOn (checkoutPage ().getAgreeTermsAndConditionsField ());
+    public ConfirmOrderPageActions checkoutProduct () {
         clickOn (checkoutPage ().getAgreeTermsAndConditionsField ());
         clickOn (checkoutPage ().getContinueBtn ());
-        return ConfirmOrderPage.confirmOrderPage ();
+        return new ConfirmOrderPageActions ();
     }
 
     public CheckoutPageActions setBillingAddress (final BillingData billingData) {
@@ -38,7 +35,7 @@ public class CheckoutPageActions {
         return this;
     }
 
-    public void verifyUnitPriceOfCameraLens () {
-        textOf (checkoutPage ().getGetUnitPriceOfCameraLens ());
+    public String textOfUnitPriceOfCameraLens () {
+        return textOf (checkoutPage ().getGetUnitPriceOfCameraLens ());
     }
 }

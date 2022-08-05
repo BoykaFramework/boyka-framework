@@ -19,7 +19,7 @@ public class RegistrationPage {
     }
 
     private final Locator          agreePrivacyPolicyField = Locator.buildLocator ()
-        .web (By.id ("input-agree"))
+        .web (By.cssSelector ("#input-agree +label"))
         .build ();
     private final Locator          continueBtn             = Locator.buildLocator ()
         .web (By.cssSelector ("input.btn-primary"))
