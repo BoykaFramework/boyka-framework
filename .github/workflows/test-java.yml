@@ -4,12 +4,14 @@ on:
   pull_request:
     branches:
       - develop
+      - staging
     paths:
       - 'core-java/**'
       - '.github/**'
   push:
     branches:
       - develop
+      - staging
     paths:
       - 'core-java/**'
       - '.github/**'

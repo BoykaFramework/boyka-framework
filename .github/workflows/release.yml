@@ -275,7 +275,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ env.PUSH_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         with:
           tag_name: v${{ needs.prepare-release.outputs.new-version }}
