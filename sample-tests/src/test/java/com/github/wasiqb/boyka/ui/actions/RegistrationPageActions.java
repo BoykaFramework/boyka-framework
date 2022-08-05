@@ -28,7 +28,6 @@ public class RegistrationPageActions {
         enterText (registrationPage ().getTelephoneField (), this.registerUserData.getTelephone ());
         enterText (registrationPage ().getPasswordField (), PASSWORD);
         enterText (registrationPage ().getConfirmPasswordField (), PASSWORD);
-        //  hoverOn (registrationPage ().getAgreePrivacyPolicyField ());
         clickOn (registrationPage ().getAgreePrivacyPolicyField ());
         clickOn (registrationPage ().getContinueBtn ());
         return new RegistrationSuccessPageActions ();
