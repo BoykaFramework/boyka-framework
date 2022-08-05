@@ -49,7 +49,7 @@
       "connection_timeout": 1,
       "logging": {
         "request": true,
-        "response": true
+        "response": false
       }
     }
   }
