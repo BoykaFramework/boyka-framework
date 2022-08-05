@@ -3,13 +3,13 @@ name: Test boyka-framework project
 on:
   pull_request:
     branches:
-      - main
+      - develop
     paths:
       - 'core-java/**'
       - '.github/**'
   push:
     branches:
-      - main
+      - develop
     paths:
       - 'core-java/**'
       - '.github/**'
