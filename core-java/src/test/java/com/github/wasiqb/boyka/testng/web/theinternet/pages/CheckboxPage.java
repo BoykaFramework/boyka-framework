@@ -16,34 +16,32 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
-import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
-import static org.openqa.selenium.By.className;
-import static org.openqa.selenium.By.id;
-
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
+import org.openqa.selenium.By;
 
 /**
- * Double click page.
+ * Checkbox page.
  *
  * @author Wasiq Bhamla
- * @since 27-Jul-2022
+ * @since 05-Aug-2022
  */
 @Getter
-public class DoubleClickPage {
+public class CheckboxPage {
     /**
-     * Double click page instance.
+     * Checkbox page instance.
+     *
+     * @return Checkbox page instance
      */
-    public static DoubleClickPage doubleClickPage () {
-        return new DoubleClickPage ();
+    public static CheckboxPage checkboxPage () {
+        return new CheckboxPage ();
     }
 
-    private final Locator clickHold   = buildLocator ().web (id ("click-box"))
+    private final Locator option1 = Locator.buildLocator ()
+        .web (By.cssSelector ("form#checkboxes input"))
         .build ();
-    private final Locator doubleClick = buildLocator ().web (id ("double-click"))
-        .build ();
-    private final Locator hoverButton = buildLocator ().web (className ("dropbtn"))
-        .build ();
-    private final Locator hoverMenu   = buildLocator ().web (className ("dropdown-content"))
+    private final Locator option2 = Locator.buildLocator ()
+        .web (By.cssSelector ("form#checkboxes input"))
+        .index (1)
         .build ();
 }
