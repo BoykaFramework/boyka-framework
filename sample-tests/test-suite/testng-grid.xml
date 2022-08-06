@@ -15,11 +15,19 @@
   ~ copies or substantial portions of the Software.
   -->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Boyka Framework Sample Test Suite">
-    <suite-files>
-        <suite-file path="testng-api.xml"/>
-        <suite-file path="testng-web.xml"/>
-        <suite-file path="testng-cloud.xml"/>
-        <suite-file path="testng-grid.xml"/>
-    </suite-files>
+<suite name="Boyka Web Automation Test Suite" parallel="tests">
+    <test name="Ecommerce Playground tests on LambdaTest Chrome">
+        <parameter name="driverKey" value="test_selenium_grid"/>
+        <classes>
+            <class name="com.github.wasiqb.boyka.ui.EcommerceEndToEndTests">
+                <methods>
+                    <include name="testRegisterUser"/>
+                    <include name="testAddProductToCart"/>
+                    <include name="testCheckoutProduct"/>
+                    <include name="testConfirmOrder"/>
+                    <include name="testOrderSuccess"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite> <!-- Suite -->

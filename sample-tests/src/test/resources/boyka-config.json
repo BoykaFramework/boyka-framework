@@ -1,6 +1,6 @@
 {
   "ui": {
-    "timeout": {
+    "timeouts": {
       "implicit_wait": 10,
       "explicit_wait": 30,
       "page_load_timeout": 30,
@@ -18,6 +18,16 @@
         "headless": true,
         "resize": "CUSTOM"
       },
+      "test_local_firefox": {
+        "browser": "FIREFOX",
+        "headless": true,
+        "resize": "CUSTOM"
+      },
+      "test_local_edge": {
+        "browser": "EDGE",
+        "headless": true,
+        "resize": "CUSTOM"
+      },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
         "cloud": "LAMBDA_TEST",
@@ -29,7 +39,7 @@
           "browserName": "Chrome",
           "version": "99.0",
           "platform": "Windows 10",
-          "resolution": "1920x1080",
+          "resolution": "2560x1440",
           "build": "Test LambdaTest Build",
           "name": "Test LambdaTest Session",
           "network": true,
@@ -37,19 +47,46 @@
           "video": true,
           "console": true
         }
-      }
-    }
-  },
-  "api": {
-    "test_restfulbooker": {
-      "base_uri": "https://restful-booker.herokuapp.com",
-      "base_path": "",
-      "read_timeout": 2,
-      "write_timeout": 2,
-      "connection_timeout": 1,
-      "logging": {
-        "request": true,
-        "response": false
+      },
+      "test_browserstack_chrome": {
+        "browser": "REMOTE",
+        "cloud": "BROWSER_STACK",
+        "protocol": "HTTPS",
+        "host": "hub-cloud.browserstack.com",
+        "user_name": "${env:BS_USER}",
+        "password": "${env:BS_KEY}",
+        "capabilities": {
+          "browser": "Chrome",
+          "browser_version": "latest",
+          "os": "Windows",
+          "os_version": "10",
+          "resolution": "2560x1600",
+          "project": "Test Boyka Project",
+          "build": "Test BrowserStack Build",
+          "name": "Test BrowserStack Session"
+        }
+      },
+      "test_selenium_grid": {
+        "browser": "REMOTE",
+        "cloud": "NONE",
+        "port": "4444",
+        "capabilities": {
+          "browserName": "chrome",
+          "platform": "MAC"
+        }
+      },
+      "api": {
+        "test_restfulbooker": {
+          "base_uri": "https://restful-booker.herokuapp.com",
+          "base_path": "",
+          "read_timeout": 2,
+          "write_timeout": 2,
+          "connection_timeout": 1,
+          "logging": {
+            "request": true,
+            "response": false
+          }
+        }
       }
     }
   }

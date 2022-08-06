@@ -14,6 +14,7 @@ import com.github.wasiqb.boyka.ui.data.BillingData;
 import com.github.wasiqb.boyka.ui.data.TestDataBuilder;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
@@ -26,9 +27,10 @@ public class EcommerceEndToEndTests {
     private String      unitPriceOfCameraLens;
 
     @BeforeClass (description = "Setup test class")
-    public void setupTestClass () {
+    @Parameters ({"driverKey"})
+    public void setupTestClass (String driverKey) {
         final String url = "https://ecommerce-playground.lambdatest.io/";
-        createDriver (ApplicationType.WEB, "test_local_chrome");
+        createDriver (ApplicationType.WEB, driverKey);
         this.billingData = TestDataBuilder.getBillingData ();
         navigateTo (url);
     }
