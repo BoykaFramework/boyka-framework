@@ -27,7 +27,7 @@
     "node": ">=16.15.0"
   },
   "license": "MIT",
-  "packageManager": "yarn@3.2.1",
+  "packageManager": "yarn@3.2.2",
   "private": true,
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
