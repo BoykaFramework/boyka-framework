@@ -1,0 +1,22 @@
+package com.github.wasiqb.boyka.ui.data;
+
+import lombok.Builder;
+import lombok.Getter;
+
+/**
+ * Billing data fields
+ * @author Faisal Khatri
+ * @since 8/3/2022
+ **/
+
+@Builder
+@Getter
+public class BillingData {
+    private String addressLineOne;
+    private String city;
+    private String country;
+    private String firstName;
+    private String lastName;
+    private String postCode;
+    private String state;
+}
