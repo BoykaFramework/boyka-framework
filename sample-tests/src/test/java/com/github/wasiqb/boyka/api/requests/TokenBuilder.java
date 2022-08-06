@@ -1,6 +1,7 @@
 package com.github.wasiqb.boyka.api.requests;
 
 /**
+ * This class provides the data for generating new token.
  * @author Faisal Khatri
  * @since 22/07/2022
  */

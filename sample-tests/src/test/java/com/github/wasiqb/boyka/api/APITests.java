@@ -48,7 +48,7 @@ public class APITests {
     private              Tokencreds         tokenCreds;
     private              BookingData        updatedBooking;
 
-    @BeforeTest
+    @BeforeTest(description = "Setting up the API tests")
     public void setupTest () {
         final BookingDataBuilder builder = new BookingDataBuilder ();
         final TokenBuilder buildToken = new TokenBuilder ();
@@ -58,7 +58,7 @@ public class APITests {
         this.tokenCreds = buildToken.tokenBuilder ();
     }
 
-    @Test
+    @Test(description = "Test for creating new booking with POST request")
     public void testCreateBooking () {
         final var createBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (POST)
@@ -79,7 +79,7 @@ public class APITests {
         this.bookingId = response.getResponseData ("bookingid");
     }
 
-    @Test
+    @Test(description = "Test for Deleting a booking using DELETE request")
     public void testDeleteBooking () {
         final var deleteBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (DELETE)
@@ -94,7 +94,7 @@ public class APITests {
             .isEqualTo (201);
     }
 
-    @Test
+    @Test(description = "Test for checking deleted booking using GET request")
     public void testDeletedBooking () {
         final var getDeletedBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (GET)
@@ -108,7 +108,7 @@ public class APITests {
             .isEqualTo (404);
     }
 
-    @Test
+    @Test(description = "Test for retrieving booking using GET request")
     public void testGetBooking () {
         final var getBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (GET)
@@ -126,7 +126,7 @@ public class APITests {
             .isEqualTo (this.newBooking.getLastname ());
     }
 
-    @Test
+    @Test(description = "Test for Updating booking using PUT request")
     public void testUpdateBooking () {
         final var updateBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (PUT)
@@ -146,7 +146,7 @@ public class APITests {
             .isEqualTo (this.updatedBooking.getLastname ());
     }
 
-    @Test
+    @Test(description = "Test for partial updating booking using PATCH request")
     public void testUpdatePartialBooking () {
         final var partialUpdateBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (PATCH)

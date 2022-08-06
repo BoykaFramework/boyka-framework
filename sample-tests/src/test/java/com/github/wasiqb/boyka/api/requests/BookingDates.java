@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 /**
+ * Fields for booking dates
  * @author Faisal Khatri
  * @since 22/07/2022
  */

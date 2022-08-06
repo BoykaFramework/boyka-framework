@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 import com.github.javafaker.Faker;
 
 /**
+ * This class provides data for booking
  * @author Faisal Khatri
  * @since 22/07/2022
  */

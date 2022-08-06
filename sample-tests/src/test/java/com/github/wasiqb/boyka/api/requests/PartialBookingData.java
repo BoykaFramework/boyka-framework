@@ -20,12 +20,13 @@ import lombok.Builder;
 import lombok.Getter;
 
 /**
+ * Fields for partial booking data
  * @author Faisal Khatri
  * @since 22/07/2022
  */
 @Getter
 @Builder
 public class PartialBookingData {
-    String firstname;
-    int    totalprice;
+    private String firstname;
+    private int    totalprice;
 }
