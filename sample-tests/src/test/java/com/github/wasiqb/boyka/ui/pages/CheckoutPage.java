@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 /**
+ * Checkout page objects
  * @author Faisal Khatri
  * @since 29/07/2022
  */

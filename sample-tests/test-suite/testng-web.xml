@@ -15,7 +15,7 @@
   ~ copies or substantial portions of the Software.
   -->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Boyka Web Automation Test Suite">
+<suite name="Boyka Web Automation Test Suite" parallel="classes" thread-count="3">
     <test name="Ecommerce Playground tests">
         <classes>
             <class name="com.github.wasiqb.boyka.ui.EcommerceEndToEndTests">

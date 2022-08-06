@@ -3,6 +3,12 @@ package com.github.wasiqb.boyka.ui.actions;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.ui.pages.HomePage.homePage;
 
+/**
+ * Home page actions
+ * @author Faisal Khatri
+ * @since 30/07/2022
+ */
+
 public class HomePageActions {
 
     public static HomePageActions homePageActions () {

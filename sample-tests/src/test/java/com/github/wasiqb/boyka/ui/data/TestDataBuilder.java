@@ -3,6 +3,7 @@ package com.github.wasiqb.boyka.ui.data;
 import com.github.javafaker.Faker;
 
 /**
+ * This class builds the data for registering user and setting billing data.
  * @author Faisal Khatri
  * @since 8/3/2022
  **/

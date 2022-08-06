@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 /**
+ * Order success page objects
  * @author Faisal Khatri
  * @since 8/3/2022
  **/
@@ -22,4 +23,3 @@ public class OrderSuccessPage {
         .web (By.tagName ("h1"))
         .build ();
 }
-

@@ -9,6 +9,7 @@ import static com.github.wasiqb.boyka.ui.pages.CheckoutPage.checkoutPage;
 import com.github.wasiqb.boyka.ui.data.BillingData;
 
 /**
+ * Checkoout page actions
  * @author Faisal Khatri
  * @since 30/07/2022
  */

@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 /**
- * Field for new token generation
+ * Fields for new token generation
  * @author Faisal Khatri
  * @since 22/07/2022
  */

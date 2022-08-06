@@ -4,6 +4,7 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.ui.pages.MyAccountPage.myAccountPage;
 
 /**
+ * My account page actions
  * @author Faisal Khatri
  * @since 8/2/2022
  **/

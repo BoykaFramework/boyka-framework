@@ -9,6 +9,7 @@ import com.github.wasiqb.boyka.ui.data.RegisterUserData;
 import com.github.wasiqb.boyka.ui.data.TestDataBuilder;
 
 /**
+ * Registration page actions
  * @author Faisal Khatri
  * @since 8/2/2022
  **/

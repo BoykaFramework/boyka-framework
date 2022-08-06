@@ -9,6 +9,7 @@ import static com.github.wasiqb.boyka.ui.pages.ProductPage.productPage;
 import java.text.MessageFormat;
 
 /**
+ * Product page actions
  * @author Faisal Khatri
  * @since 8/3/2022
  **/

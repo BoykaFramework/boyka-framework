@@ -9,6 +9,7 @@ import java.text.MessageFormat;
 import com.github.wasiqb.boyka.ui.data.BillingData;
 
 /**
+ * Confirm Order page actions
  * @author Faisal Khatri
  * @since 30/07/2022
  */

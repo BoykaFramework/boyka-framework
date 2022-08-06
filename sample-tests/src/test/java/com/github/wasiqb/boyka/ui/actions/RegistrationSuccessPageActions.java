@@ -5,6 +5,7 @@ import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.ui.pages.RegistrationSuccessPage.registrationSuccessPage;
 
 /**
+ * Registration success page actions
  * @author Faisal Khatri
  * @since 8/2/2022
  **/

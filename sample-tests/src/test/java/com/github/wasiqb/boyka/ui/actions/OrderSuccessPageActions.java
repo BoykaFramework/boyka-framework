@@ -8,6 +8,7 @@ import static com.github.wasiqb.boyka.ui.pages.OrderSuccessPage.orderSuccessPage
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
+ * Order success page actions
  * @author Faisal Khatri
  * @since 8/3/2022
  **/

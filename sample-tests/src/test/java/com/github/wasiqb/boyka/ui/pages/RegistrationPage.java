@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 /**
+ * Registration page objects
  * @author Faisal Khatri
  * @since 8/2/2022
  **/
@@ -56,7 +57,7 @@ public class RegistrationPage {
         .parent (this.registrationForm)
         .build ();
 
-    public RegistrationPage () {
+    private RegistrationPage () {
         this.registerUserData = TestDataBuilder.getRegisterUserData ();
     }
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 /**
+ * Confirm order page objects
  * @author Faisal Khatri
  * @since 30/07/2022
  */

@@ -17,6 +17,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
+ * End to End tests for LambdaTest Ecommerce Playground website.
  * @author Faisal Khatri
  * @since 8/4/2022
  **/

@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 /**
+ * Billing data fields
  * @author Faisal Khatri
  * @since 8/3/2022
  **/

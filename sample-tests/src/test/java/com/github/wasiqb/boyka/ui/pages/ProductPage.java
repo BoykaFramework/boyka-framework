@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 /**
+ * Product page objects
  * @author Faisal Khatri
  * @since 8/2/2022
  **/
@@ -34,4 +35,3 @@ public class ProductPage {
         .build ();
 
 }
-

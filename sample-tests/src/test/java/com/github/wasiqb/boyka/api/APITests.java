@@ -34,7 +34,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * Api Tests with RestfulBooker.
+ * API Tests with RestfulBooker APIs.
  *
  * @author Faisal Khatri
  * @since 22/07/2022

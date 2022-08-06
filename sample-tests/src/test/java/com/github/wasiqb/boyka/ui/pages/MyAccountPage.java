@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 /**
+ * My account page objects
  * @author Faisal Khatri
  * @since 8/2/2022
  **/
@@ -20,4 +21,3 @@ public class MyAccountPage {
         .build ();
 
 }
-

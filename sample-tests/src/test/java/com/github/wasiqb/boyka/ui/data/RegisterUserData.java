@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 /**
+ * Register user fields
  * @author Faisal Khatri
  * @since 8/3/2022
  **/

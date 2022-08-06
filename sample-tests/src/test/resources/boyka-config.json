@@ -15,7 +15,7 @@
     "web": {
       "test_local_chrome": {
         "browser": "CHROME",
-        "headless": "true",
+        "headless": true,
         "resize": "CUSTOM"
       },
       "test_lambda_test_chrome": {
