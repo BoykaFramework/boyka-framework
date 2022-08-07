@@ -105,8 +105,6 @@ jobs:
           name: target
           path: |
             ${{ github.workspace }}/core-java/logs
-            ${{ github.workspace }}/core-java/screenshots
-            ${{ github.workspace }}/core-java/test-output
             ${{ github.workspace }}/core-java/selenium-grid.log
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/reports

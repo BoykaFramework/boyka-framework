@@ -18,7 +18,7 @@
 <suite name="Boyka API Test Suite">
     <test name="Restful Booker tests">
         <classes>
-            <class name="com.github.wasiqb.boyka.api.APITests">
+            <class name="com.github.wasiqb.boyka.api.ApiTests">
                 <methods>
                     <include name="testCreateBooking"/>
                     <include name="testGetBooking"/>

@@ -74,19 +74,18 @@
           "browserName": "chrome",
           "platform": "MAC"
         }
-      },
-      "api": {
-        "test_restfulbooker": {
-          "base_uri": "https://restful-booker.herokuapp.com",
-          "base_path": "",
-          "read_timeout": 2,
-          "write_timeout": 2,
-          "connection_timeout": 1,
-          "logging": {
-            "request": true,
-            "response": false
-          }
-        }
+      }
+    }
+  },
+  "api": {
+    "test_restfulbooker": {
+      "base_uri": "https://restful-booker.herokuapp.com",
+      "read_timeout": 2,
+      "write_timeout": 2,
+      "connection_timeout": 1,
+      "logging": {
+        "request": true,
+        "response": false
       }
     }
   }

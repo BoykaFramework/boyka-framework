@@ -23,6 +23,7 @@ import static com.github.wasiqb.boyka.enums.RequestMethod.PATCH;
 import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
 import static com.github.wasiqb.boyka.manager.ApiManager.execute;
+import static java.text.MessageFormat.format;
 
 import com.github.wasiqb.boyka.api.requests.BookingData;
 import com.github.wasiqb.boyka.api.requests.BookingDataBuilder;
@@ -39,7 +40,7 @@ import org.testng.annotations.Test;
  * @author Faisal Khatri
  * @since 22/07/2022
  */
-public class APITests {
+public class ApiTests {
 
     private static final String             API_CONFIG_KEY = "test_restfulbooker";
     private              String             bookingId;
@@ -48,7 +49,7 @@ public class APITests {
     private              Tokencreds         tokenCreds;
     private              BookingData        updatedBooking;
 
-    @BeforeTest(description = "Setting up the API tests")
+    @BeforeTest (description = "Setting up the API tests")
     public void setupTest () {
         final BookingDataBuilder builder = new BookingDataBuilder ();
         final TokenBuilder buildToken = new TokenBuilder ();
@@ -58,12 +59,12 @@ public class APITests {
         this.tokenCreds = buildToken.tokenBuilder ();
     }
 
-    @Test(description = "Test for creating new booking with POST request")
+    @Test (description = "Test for creating new booking with POST request")
     public void testCreateBooking () {
         final var createBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (POST)
             .header ("Accept", "application/json")
-            .path ("/booking")  // FIXME: Needs to make Path optional.
+            .path ("/booking")
             .bodyObject (this.newBooking)
             .create ();
 
@@ -79,12 +80,12 @@ public class APITests {
         this.bookingId = response.getResponseData ("bookingid");
     }
 
-    @Test(description = "Test for Deleting a booking using DELETE request")
+    @Test (description = "Test for Deleting a booking using DELETE request")
     public void testDeleteBooking () {
         final var deleteBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (DELETE)
             .header ("Content-Type", "application/json")
-            .header ("Cookie", "token=" + generateToken ())
+            .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
             .pathParam ("id", this.bookingId)
             .create ();
@@ -94,7 +95,7 @@ public class APITests {
             .isEqualTo (201);
     }
 
-    @Test(description = "Test for checking deleted booking using GET request")
+    @Test (description = "Test for checking deleted booking using GET request")
     public void testDeletedBooking () {
         final var getDeletedBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (GET)
@@ -108,7 +109,7 @@ public class APITests {
             .isEqualTo (404);
     }
 
-    @Test(description = "Test for retrieving booking using GET request")
+    @Test (description = "Test for retrieving booking using GET request")
     public void testGetBooking () {
         final var getBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (GET)
@@ -126,12 +127,12 @@ public class APITests {
             .isEqualTo (this.newBooking.getLastname ());
     }
 
-    @Test(description = "Test for Updating booking using PUT request")
+    @Test (description = "Test for Updating booking using PUT request")
     public void testUpdateBooking () {
         final var updateBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (PUT)
             .header ("Accept", "application/json")
-            .header ("Cookie", "token=" + generateToken ())
+            .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
             .bodyObject (this.updatedBooking)
             .pathParam ("id", this.bookingId)
@@ -146,12 +147,12 @@ public class APITests {
             .isEqualTo (this.updatedBooking.getLastname ());
     }
 
-    @Test(description = "Test for partial updating booking using PATCH request")
+    @Test (description = "Test for partial updating booking using PATCH request")
     public void testUpdatePartialBooking () {
         final var partialUpdateBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
             .method (PATCH)
             .header ("Accept", "application/json")
-            .header ("Cookie", "token=" + generateToken ())
+            .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
             .bodyObject (this.partialUpdateBooking)
             .pathParam ("id", this.bookingId)
