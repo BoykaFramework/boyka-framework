@@ -2,8 +2,6 @@ name: Test boyka-framework release
 
 on:
   push:
-    branches:
-      - issue-*
     tags:
       - 'v*'
 
