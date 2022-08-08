@@ -1,6 +1,6 @@
 ---
 title: 📩 Commit steps
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 We are using [Conventional Commits](https://conventionalcommits.org/) to ensure that our code follows a consistent commit message format. To make sure that we are following the rules, we normally commit our changes with VSCode using the following steps:

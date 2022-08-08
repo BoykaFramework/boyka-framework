@@ -19,9 +19,18 @@ sidebar_position: 2
 
 ## 🤖 GitHub Actions steps
 
-- As soon as the PR is merged to `develop` branch, the new PR will get automatically created from `develop` branch to `staging` branch
+- As soon as the PR is merged to `develop` branch,
+  - The new PR will get automatically created from `develop` branch to `staging` branch
+  - Tests will be triggered to run on core and website projects
 - Once the PR is merged to `staging` branch, the new PR will get automatically created from `staging` branch to `main` branch
-- Also a release candidate will be created from `staging` branch and will be released to Maven Central
-- Once the PR is merged to `main` branch, the final release will be created from `main` branch and published to Maven Central
-- After release to Maven Central, GitHub release will also get created along with Release discussion thread
-- Finally a Tweet will be posted on Twitter informing about the Boyka framework release
+  - Tests will be triggered to run on core and website projects
+  - Also a `release candidate` will be created from `staging` branch and will be released to Maven Central and tag will be created in GitHub
+    - Tests will be triggered to run on sample tests project to run the tests on `release candidate`
+- Once the PR is merged to `main` branch,
+  - The final release will be created from `main` branch and published to Maven Central
+  - After release to Maven Central, GitHub release will also get created along with Release discussion thread
+  - Tag will be created in GitHub
+    - Tests will be triggered to run on sample tests project to run the tests on `release candidate`
+  - Finally a Tweet will be posted on Twitter handle [@WasiqBhamla][twitter], informing about the Boyka framework release
+
+[twitter]: https://twitter.com/WasiqBhamla

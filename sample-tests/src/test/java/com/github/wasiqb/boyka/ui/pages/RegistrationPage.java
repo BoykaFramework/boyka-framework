@@ -30,8 +30,6 @@ import org.openqa.selenium.By;
  **/
 @Getter
 public class RegistrationPage {
-    private static final String PASSWORD = "Password123#";
-
     public static RegistrationPage registrationPage () {
         return new RegistrationPage ();
     }
