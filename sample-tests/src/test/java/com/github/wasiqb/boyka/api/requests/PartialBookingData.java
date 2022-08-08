@@ -21,6 +21,7 @@ import lombok.Getter;
 
 /**
  * Fields for partial booking data
+ *
  * @author Faisal Khatri
  * @since 22/07/2022
  */

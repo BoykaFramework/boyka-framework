@@ -16,14 +16,11 @@
 
 package com.github.wasiqb.boyka.builders;
 
-import static org.apache.logging.log4j.LogManager.getLogger;
-
 import java.util.function.Predicate;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -37,8 +34,6 @@ import org.openqa.selenium.WebElement;
 @Getter
 @Builder (builderMethodName = "buildLocator")
 public class Locator {
-    private static final Logger LOGGER = getLogger ();
-
     private Predicate<WebElement> filter;
     private int                   index;
     private Locator               parent;

@@ -9,12 +9,13 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: 'CodeQL'
+name: 'CodeQL Scannings'
 
 on:
   push:
     branches:
       - develop
+
   pull_request:
     branches:
       - develop

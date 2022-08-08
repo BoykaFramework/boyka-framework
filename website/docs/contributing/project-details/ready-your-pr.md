@@ -1,6 +1,6 @@
 ---
 title: 🤝 Get your PR ready
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 We have PR template in place which you must fill in to get your PR ready.
@@ -36,7 +36,8 @@ Make sure to address the reviewers feedbacks.
 Once you have updated reviewers feedback in your PR. You need to demonstrate your feature development to the Maintainers and Repo owners by showing your worknig code along with the tests.
 
 This Demo would be taking place on [Discord][join-discord]:
-1. Send a message on `#contributor-discussion` channel and schedule a time accordingly to demo your work. 
+
+1. Send a message on `#contributor-discussion` channel and schedule a time accordingly to demo your work.
 2. Once your demo is scheduled, you would be given temporary access to `#open-office` channel on Discord which you can use for demonstrating your work.
 
 ## Merge PR

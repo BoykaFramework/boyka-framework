@@ -37,7 +37,7 @@
         "password": "${env:LT_KEY}",
         "capabilities": {
           "browserName": "Chrome",
-          "version": "99.0",
+          "version": "103.0",
           "platform": "Windows 10",
           "resolution": "2560x1440",
           "build": "Test LambdaTest Build",
@@ -72,21 +72,21 @@
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
-          "platform": "MAC"
+          "platform": "MAC",
+          "resolution": "2560x1600"
         }
-      },
-      "api": {
-        "test_restfulbooker": {
-          "base_uri": "https://restful-booker.herokuapp.com",
-          "base_path": "",
-          "read_timeout": 2,
-          "write_timeout": 2,
-          "connection_timeout": 1,
-          "logging": {
-            "request": true,
-            "response": false
-          }
-        }
+      }
+    }
+  },
+  "api": {
+    "test_restfulbooker": {
+      "base_uri": "https://restful-booker.herokuapp.com",
+      "read_timeout": 2,
+      "write_timeout": 2,
+      "connection_timeout": 1,
+      "logging": {
+        "request": true,
+        "response": false
       }
     }
   }

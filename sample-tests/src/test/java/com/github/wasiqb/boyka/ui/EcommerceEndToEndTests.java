@@ -1,3 +1,19 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2022 Wasiq Bhamla
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 package com.github.wasiqb.boyka.ui;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
@@ -19,6 +35,7 @@ import org.testng.annotations.Test;
 
 /**
  * End to End tests for LambdaTest Ecommerce Playground website.
+ *
  * @author Faisal Khatri
  * @since 8/4/2022
  **/
@@ -27,8 +44,8 @@ public class EcommerceEndToEndTests {
     private String      unitPriceOfCameraLens;
 
     @BeforeClass (description = "Setup test class")
-    @Parameters ({"driverKey"})
-    public void setupTestClass (String driverKey) {
+    @Parameters ({ "driverKey" })
+    public void setupTestClass (final String driverKey) {
         final String url = "https://ecommerce-playground.lambdatest.io/";
         createDriver (ApplicationType.WEB, driverKey);
         this.billingData = TestDataBuilder.getBillingData ();

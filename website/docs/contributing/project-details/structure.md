@@ -12,6 +12,7 @@ Following is the project repository root directory structure:
 - .yarn/
 - assets/
 - core-java/
+- sample-tests/
 - website/
 - .editorconfig
 - .eslintignore
@@ -59,62 +60,70 @@ This directory contains all the assets required by the README file.
 
 This directory contains the core framework Java Maven based project.
 
-### 7. `website/`
+### 7. `sample-tests/`
+
+This directory contains the sample tests for boyka-framework for API and Web.
+
+### 8. `website/`
 
 This directory contains the website documentation for the project.
 
-### 8. `.editorconfig`
+### 9. `.editorconfig`
 
 This file contains the EditorConfig settings for the project.
 
-### 9. `.eslintignore`
+### 10. `.eslintignore`
 
 This file contains the ESLint ignore patterns for the project.
 
-### 10. `.eslintrc.json`
+### 11. `.eslintrc.json`
 
 This file contains the ESLint rules for the project.
 
-### 11. `.gitignore`
+### 12. `.gitignore`
 
 This file contains the Git ignore patterns for the project.
 
-### 12. `.gitpod.yml`
+### 13. `.gitpod.yml`
 
 This file contains the Gitpod settings for the project.
 
-### 13. `.prettierignore`
+### 14. `.nvmrc`
+
+This file contains the Node version for the project.
+
+### 15. `.prettierignore`
 
 This file contains the Prettier ignore patterns for the project.
 
-### 14. `.prettierrc.json`
+### 16. `.prettierrc.json`
 
 This file contains the Prettier rules for the project.
 
-### 15. `.yarnrc.yml`
+### 17. `.yarnrc.yml`
 
 This file contains the Yarn settings for the project.
 
-### 16. `commitlint.config.js`
+### 18. `commitlint.config.js`
 
 This file contains the Commitlint config for the project.
 
-### 17. `lerna.json`
+### 19. `lerna.json`
 
 This file contains the Lerna settings for the project.
 
-### 18. `LICENSE`
+### 20. `LICENSE`
 
 This file contains the license for the project.
 
-### 19. `package.json`
+### 21. `package.json`
 
 This file contains the project package.json settings.
 
-### 20. `README.md`
+### 22. `README.md`
 
 This file contains the project README.md file.
 
-### 21. `yarn.lock`
+### 23. `yarn.lock`
 
 This file contains the project yarn.lock file.
