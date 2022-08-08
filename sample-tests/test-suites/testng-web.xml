@@ -44,7 +44,7 @@
             </class>
         </classes>
     </test>
-    <test name="Ecommerce Playground tests on Local Edge" >
+    <test name="Ecommerce Playground tests on Local Edge">
         <parameter name="driverKey" value="test_local_edge"/>
         <classes>
             <class name="com.github.wasiqb.boyka.ui.EcommerceEndToEndTests">
