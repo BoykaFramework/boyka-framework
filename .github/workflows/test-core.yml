@@ -91,12 +91,7 @@ jobs:
         run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test -Dsuite-xml=test-suites/testng-pr.xml
 
       - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: github.event_name == 'push' && always()
-        with:
-          name: Test Results
-          path: ${{ github.workspace }}/core-java/target/surefire-reports/*.xml
-          reporter: java-junit
+        run: cat ${{ github.workspace }}/core-java/target/surefire-reports/my-report.md > $GITHUB_STEP_SUMMARY
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
