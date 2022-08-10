@@ -35,14 +35,15 @@ jobs:
 
       - name: Create pull request
         if: ${{ steps.pr-exists.outputs.is-pr-already-created == 'false' }}
-        uses: fjenik/create-pull-request@0.0.17
+        uses: repo-sync/pull-request@v2
         with:
-          repo-token: ${{ secrets.PUSH_TOKEN }}
-          target-branch: main
-          source-branch: staging
-          pr-reviewers: boyka-core
-          pr-title: '🎉 PR: New Release'
-          pr-body: |
+          github_token: ${{ secrets.PUSH_TOKEN }}
+          source_branch: staging
+          destination_branch: main
+          pr_reviewer: boyka-core
+          pr_title: '🎉 PR: New Release'
+          pr_draft: true
+          pr_body: |
             _This PR was generated via github actions workflow_
 
             **Don't squash merge this PR**
