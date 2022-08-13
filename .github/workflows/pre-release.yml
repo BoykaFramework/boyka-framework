@@ -62,6 +62,7 @@ jobs:
           name: target
           path: |
             ${{ github.workspace }}/.yarn
+            ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/package.json
             ${{ github.workspace }}/website/package.json
 
@@ -119,6 +120,7 @@ jobs:
           name: target
           path: |
             ${{ github.workspace }}/package.json
+            ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/pom.xml
@@ -178,6 +180,7 @@ jobs:
           name: target
           path: |
             ${{ github.workspace }}/package.json
+            ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/pom.xml
@@ -219,12 +222,13 @@ jobs:
           git_user_signingkey: true
           git_commit_gpgsign: true
 
-      - name: Push updated pom.xml
+      - name: Push updated version files
         uses: EndBug/add-and-commit@v9
         with:
           add: |
             core-java/pom.xml
             package.json
+            lerna.json
             website/package.json
           message: |
             chore(Internal): :bookmark: released latest version to maven central
