@@ -62,7 +62,7 @@ public class TestResultListener implements IReporter {
         final String body = suites.stream ()
             .flatMap (suiteToResults ())
             .collect (joining ());
-        saveReportTemplate (outputDirectory, reportTemplate.replaceFirst ("</tbody>", format ("{0}</tbody>", body)));
+        saveReportTemplate (outputDirectory, reportTemplate.replaceFirst ("<body>", body));
     }
 
     private List<String> generateReportRows (final String testName, final String suiteName,
@@ -76,7 +76,7 @@ public class TestResultListener implements IReporter {
         final byte[] reportTemplate;
         String template = null;
         try {
-            reportTemplate = Files.readAllBytes (Paths.get ("src/test/resources/reportTemplate.html"));
+            reportTemplate = Files.readAllBytes (Paths.get ("src/test/resources/report-template.md"));
             template = new String (reportTemplate, StandardCharsets.UTF_8);
         } catch (final IOException e) {
             LOGGER.error ("Problem initializing template", e);
@@ -107,7 +107,7 @@ public class TestResultListener implements IReporter {
         new File (outputDirectory).mkdirs ();
         try (
             final PrintWriter reportWriter = new PrintWriter (
-                new BufferedWriter (new FileWriter (new File (outputDirectory, "my-report.html"))))) {
+                new BufferedWriter (new FileWriter (new File (outputDirectory, "my-report.md"))))) {
             reportWriter.println (reportTemplate);
             reportWriter.flush ();
         } catch (final IOException e) {
@@ -123,24 +123,24 @@ public class TestResultListener implements IReporter {
     }
 
     private Function<ITestResult, String> testResultToResultRow (final String testName, final String suiteName) {
-        final String ROW_TEMPLATE = "<tr class=\"{0}\"><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>";
+        final String ROW_TEMPLATE = "| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |\n";
         return testResult -> {
             final var testClass = testResult.getTestClass ()
                 .getRealClass ();
             final var index = counter.getAndIncrement ();
             switch (testResult.getStatus ()) {
                 case FAILURE:
-                    return format (ROW_TEMPLATE, "danger", index, suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "FAILED", "NA");
+                    return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
+                        testClass.getSimpleName (), testResult.getName (), "❌", "NA");
 
                 case ITestResult.SUCCESS:
-                    return format (ROW_TEMPLATE, "success", index, suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "PASSED",
+                    return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
+                        testClass.getSimpleName (), testResult.getName (), "✅",
                         String.valueOf (testResult.getEndMillis () - testResult.getStartMillis ()));
 
                 case ITestResult.SKIP:
-                    return format (ROW_TEMPLATE, "warning", index, suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "SKIPPED", "NA");
+                    return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
+                        testClass.getSimpleName (), testResult.getName (), "⛔", "NA");
 
                 default:
                     return "";

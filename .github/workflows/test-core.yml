@@ -3,12 +3,17 @@ name: Test boyka-framework project
 on:
   pull_request:
     branches:
+      - develop
+      - staging
       - main
     paths:
       - 'core-java/**'
       - '.github/**'
+
   push:
     branches:
+      - develop
+      - staging
       - main
     paths:
       - 'core-java/**'
@@ -78,20 +83,15 @@ jobs:
         run: java -jar core-java/libs/selenium-server-4.3.0.jar standalone > core-java/selenium-grid.log &
 
       - name: All Test execution
-        if: github.event_name != 'pull_request'
+        if: github.event_name == 'push'
         run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
 
       - name: PR Test execution
-        if: github.event_name != 'push'
+        if: github.event_name == 'pull_request'
         run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test -Dsuite-xml=test-suites/testng-pr.xml
 
       - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: github.event_name != 'pull_request' && (success() || failure())
-        with:
-          name: Test Results
-          path: ${{ github.workspace }}/core-java/target/surefire-reports/*.xml
-          reporter: java-junit
+        run: cat ${{ github.workspace }}/core-java/target/surefire-reports/my-report.md > $GITHUB_STEP_SUMMARY
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
@@ -100,14 +100,12 @@ jobs:
           name: target
           path: |
             ${{ github.workspace }}/core-java/logs
-            ${{ github.workspace }}/core-java/screenshots
-            ${{ github.workspace }}/core-java/test-output
             ${{ github.workspace }}/core-java/selenium-grid.log
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/reports
 
   analysis:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'push'
     needs:
       - test
     runs-on: ubuntu-latest
