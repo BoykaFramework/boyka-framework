@@ -23,7 +23,6 @@ jobs:
 
     outputs:
       new-version: ${{ steps.version.outputs.version }}
-      previous-version: ${{ steps.version.outputs.previous_version }}
 
     steps:
       - name: Check out Git repository
@@ -41,7 +40,7 @@ jobs:
       - name: Get the previous release version
         id: old_version
         run: |
-          export MVN_OLD_VERSION=$(node -pe "require('./package.json').version")
+          export MVN_OLD_VERSION=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`)
           echo "::set-output name=previous_version::$MVN_OLD_VERSION"
 
       - name: Update release version
@@ -56,12 +55,18 @@ jobs:
       - name: Update the new version to main package.json
         run: yarn version ${{ steps.version.outputs.version }}
 
+      - name: Generate Change log
+        run: |
+          yarn changelog --from ${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
+
       - name: Upload updated package.json to artifacts
         uses: actions/upload-artifact@v3
         with:
           name: target
           path: |
             ${{ github.workspace }}/.yarn
+            ${{ github.workspace }}/lerna.json
+            ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/package.json
             ${{ github.workspace }}/website/package.json
 
@@ -119,6 +124,8 @@ jobs:
           name: target
           path: |
             ${{ github.workspace }}/package.json
+            ${{ github.workspace }}/lerna.json
+            ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/pom.xml
@@ -178,6 +185,8 @@ jobs:
           name: target
           path: |
             ${{ github.workspace }}/package.json
+            ${{ github.workspace }}/lerna.json
+            ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/pom.xml
@@ -225,6 +234,8 @@ jobs:
           add: |
             core-java/pom.xml
             package.json
+            lerna.json
+            CHANGELOG.md
             website/package.json
           message: |
             chore(Internal): :bookmark: released latest version to maven central
@@ -251,19 +262,6 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-
-      - name: Setup Node v16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'yarn'
-
-      - name: Build all the dependencies
-        run: yarn install
-
-      - name: Generate Change log
-        run: |
-          yarn changelog --from v${{ needs.prepare-release.outputs.previous-version }} --next-version v${{ needs.prepare-release.outputs.new-version }} > CHANGELOG.md
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
