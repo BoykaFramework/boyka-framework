@@ -40,7 +40,7 @@ jobs:
       - name: Get the previous release version
         id: old_version
         run: |
-          export MVN_OLD_VERSION=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1 --max-count=1`)
+          export MVN_OLD_VERSION=$(git describe --match "v[0-9].[0-9].[0-9]" --abbrev=0 --tags HEAD)
           echo "::set-output name=previous_version::$MVN_OLD_VERSION"
 
       - name: Update release version
@@ -51,9 +51,6 @@ jobs:
         run: |
           export MVN_VERSION=$(node -pe "require('./website/package.json').version")
           echo "::set-output name=version::$MVN_VERSION"
-
-      - name: Update the new version to main package.json
-        run: yarn version ${{ steps.version.outputs.version }}
 
       - name: Generate Change log
         run: |
@@ -67,7 +64,6 @@ jobs:
             ${{ github.workspace }}/.yarn
             ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/CHANGELOG.md
-            ${{ github.workspace }}/package.json
             ${{ github.workspace }}/website/package.json
 
   release-snapshot:
@@ -123,7 +119,6 @@ jobs:
         with:
           name: target
           path: |
-            ${{ github.workspace }}/package.json
             ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/website/package.json
@@ -184,7 +179,6 @@ jobs:
         with:
           name: target
           path: |
-            ${{ github.workspace }}/package.json
             ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/website/package.json
@@ -233,7 +227,6 @@ jobs:
         with:
           add: |
             core-java/pom.xml
-            package.json
             lerna.json
             CHANGELOG.md
             website/package.json

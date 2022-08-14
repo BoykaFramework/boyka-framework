@@ -53,9 +53,6 @@ jobs:
           export MVN_VERSION=$(node -pe "require('./website/package.json').version")
           echo "::set-output name=version::$MVN_VERSION"
 
-      - name: Update the new version to main package.json
-        run: yarn version ${{ steps.version.outputs.version }}
-
       - name: Upload updated package.json to artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -63,7 +60,6 @@ jobs:
           path: |
             ${{ github.workspace }}/.yarn
             ${{ github.workspace }}/lerna.json
-            ${{ github.workspace }}/package.json
             ${{ github.workspace }}/website/package.json
 
   pre-release-snapshot:
@@ -119,7 +115,6 @@ jobs:
         with:
           name: target
           path: |
-            ${{ github.workspace }}/package.json
             ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
@@ -179,7 +174,6 @@ jobs:
         with:
           name: target
           path: |
-            ${{ github.workspace }}/package.json
             ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
@@ -227,7 +221,6 @@ jobs:
         with:
           add: |
             core-java/pom.xml
-            package.json
             lerna.json
             website/package.json
           message: |
