@@ -198,18 +198,6 @@ jobs:
         with:
           token: ${{ env.PUSH_TOKEN }}
 
-      - name: Install Java and Maven
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-
-      - name: Setup Node v16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'yarn'
-
       - name: Download target folder
         uses: actions/download-artifact@v3
         with:
@@ -242,10 +230,11 @@ jobs:
       - name: Create and Push Tag
         uses: EndBug/add-and-commit@v9
         with:
-          tag: v${{ needs.prepare-release.outputs.new-version }}
+          tag: 'v${{ needs.prepare-release.outputs.new-version }} --force'
           message: 🎉 Released v${{ needs.prepare-release.outputs.new-version }} to Maven central [skip ci]
           default_author: user_info
           push: true
+          tag_push: '--force'
 
   github-release:
     runs-on: ubuntu-latest
