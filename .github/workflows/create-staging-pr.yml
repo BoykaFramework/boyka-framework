@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Create pull request from develop to staging
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
       - name: Detect changes between develop and staging
         id: branch-changes
         uses: fjenik/detect-changes-between-two-branches@0.0.3
