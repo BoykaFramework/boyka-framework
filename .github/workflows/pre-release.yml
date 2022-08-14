@@ -23,7 +23,6 @@ jobs:
 
     outputs:
       new-version: ${{ steps.version.outputs.version }}
-      previous-version: ${{ steps.version.outputs.previous_version }}
 
     steps:
       - name: Check out Git repository
@@ -38,12 +37,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Get the previous release version
-        id: old_version
-        run: |
-          export MVN_OLD_VERSION=$(node -pe "require('./package.json').version")
-          echo "::set-output name=previous_version::$MVN_OLD_VERSION"
-
       - name: Update pre-release version
         run: yarn prerelease
 
@@ -53,7 +46,7 @@ jobs:
           export MVN_VERSION=$(node -pe "require('./website/package.json').version")
           echo "::set-output name=version::$MVN_VERSION"
 
-      - name: Upload updated package.json to artifacts
+      - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v3
         with:
           name: target
@@ -65,7 +58,7 @@ jobs:
   pre-release-snapshot:
     runs-on: ubuntu-latest
     needs: prepare-pre-release
-
+    if: needs.prepare-pre-release.outputs.new-version != null
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
@@ -94,7 +87,7 @@ jobs:
           name: target
 
       - name: Maven command to update snapshot version
-        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-release.outputs.new-version }}-SNAPSHOT versions:commit
+        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-pre-release.outputs.new-version }}-SNAPSHOT versions:commit
 
       - name: Build the artifacts
         run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
@@ -153,7 +146,7 @@ jobs:
           name: target
 
       - name: Maven command to update pre-release version
-        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-release.outputs.new-version }} versions:commit
+        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-pre-release.outputs.new-version }} versions:commit
 
       - name: Build the artifacts
         run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
@@ -234,7 +227,7 @@ jobs:
       - name: Create and Push Tag
         uses: EndBug/add-and-commit@v9
         with:
-          tag: v${{ needs.prepare-release.outputs.new-version }}
+          tag: v${{ needs.prepare-pre-release.outputs.new-version }}
           message: 🎉 Pre-release released to Maven central [skip ci]
           default_author: user_info
           push: true
