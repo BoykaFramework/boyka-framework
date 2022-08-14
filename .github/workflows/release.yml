@@ -53,10 +53,11 @@ jobs:
           echo "::set-output name=version::$MVN_VERSION"
 
       - name: Generate Change log
+        if: steps.version.outputs.version != null
         run: |
           yarn changelog --from ${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
-      - name: Upload updated package.json to artifacts
+      - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v3
         with:
           name: target
@@ -69,7 +70,7 @@ jobs:
   release-snapshot:
     runs-on: ubuntu-latest
     needs: prepare-release
-
+    if: needs.prepare-release.outputs.new-version != null
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
