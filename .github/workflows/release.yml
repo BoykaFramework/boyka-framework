@@ -62,7 +62,6 @@ jobs:
         with:
           name: target
           path: |
-            ${{ github.workspace }}/.yarn
             ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/website/package.json
@@ -74,12 +73,6 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-
-      - name: Setup Node v16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'yarn'
 
       - name: Install Java and Maven
         uses: actions/setup-java@v3
@@ -136,11 +129,6 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'yarn'
-
       - name: Install Java and Maven
         uses: actions/setup-java@v3
         with:
@@ -186,7 +174,7 @@ jobs:
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/pom.xml
 
-  push-pom-tag:
+  push-pom:
     runs-on: ubuntu-latest
     needs:
       - prepare-release
@@ -227,20 +215,11 @@ jobs:
           default_author: user_info
           commit: --no-verify
 
-      - name: Create and Push Tag
-        uses: EndBug/add-and-commit@v9
-        with:
-          tag: 'v${{ needs.prepare-release.outputs.new-version }} --force'
-          message: 🎉 Released v${{ needs.prepare-release.outputs.new-version }} to Maven central [skip ci]
-          default_author: user_info
-          push: true
-          tag_push: '--force'
-
   github-release:
     runs-on: ubuntu-latest
     needs:
       - prepare-release
-      - push-pom-tag
+      - push-pom
 
     steps:
       - name: Check out Git repository
