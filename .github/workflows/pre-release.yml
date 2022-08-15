@@ -1,19 +1,16 @@
-name: Deploy Release to GitHub and Maven Central
+# Auto release pre-release `rc` version to Maven Central and create Tag
+# As soon as PR from develop to staging gets merged and closed.
+name: Deploy Pre-release to Maven Central
 
 on:
-  workflow_dispatch:
-    inputs:
-      release_type:
-        type: choice
-        description: 'Release Type'
-        required: true
-        options:
-          - major
-          - minor
-          - patch
-        default: 'minor'
+  pull_request:
+    branches:
+      - staging
+    types:
+      - closed
 
 env:
+  GITHUB_AUTH: ${{ secrets.PUSH_TOKEN }}
   PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
@@ -21,16 +18,18 @@ env:
   NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
 
 jobs:
-  prepare-release:
+  prepare-pre-release:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
 
     outputs:
       new-version: ${{ steps.version.outputs.version }}
-      previous-version: ${{ steps.version.outputs.previous_version }}
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup Node v16
         uses: actions/setup-node@v3
@@ -39,57 +38,44 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
       - name: Get the previous release version
         id: old_version
         run: |
-          export MVN_OLD_VERSION=$(node -pe "require('./package.json').version")
+          export MVN_OLD_VERSION=$(git describe --tags --abbrev=0)
           echo "::set-output name=previous_version::$MVN_OLD_VERSION"
 
-      - name: Update version major
-        if: ${{ github.event.inputs.release_type == 'major' }}
-        run: yarn run major
+      - name: Update pre-release version
+        run: yarn prerelease
 
-      - name: Update version minor
-        if: ${{ github.event.inputs.release_type == 'minor' }}
-        run: yarn run minor
-
-      - name: Update version patch
-        if: ${{ github.event.inputs.release_type == 'patch' }}
-        run: yarn run patch
-
-      - name: Get the new version
+      - name: Get the new pre-release version
         id: version
         run: |
           export MVN_VERSION=$(node -pe "require('./website/package.json').version")
           echo "::set-output name=version::$MVN_VERSION"
 
-      - name: Update the new version to main package.json
-        run: yarn version ${{ steps.version.outputs.version }}
+      - name: Generate Change log
+        if: steps.version.outputs.version != null
+        run: |
+          yarn changelog --from ${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
-      - name: Upload updated package.json to artifacts
+      - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v3
         with:
           name: target
           path: |
-            ${{ github.workspace }}/.yarn
-            ${{ github.workspace }}/package.json
+            ${{ github.workspace }}/lerna.json
+            ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/website/package.json
 
-  release-snapshot:
+  pre-release-snapshot:
     runs-on: ubuntu-latest
-    needs: prepare-release
-
+    needs: prepare-pre-release
+    if: needs.prepare-pre-release.outputs.new-version != null
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-
-      - name: Setup Node v16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'yarn'
 
       - name: Install Java and Maven
         uses: actions/setup-java@v3
@@ -109,7 +95,7 @@ jobs:
           name: target
 
       - name: Maven command to update snapshot version
-        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-release.outputs.new-version }}-SNAPSHOT versions:commit
+        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-pre-release.outputs.new-version }}-SNAPSHOT versions:commit
 
       - name: Build the artifacts
         run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
@@ -130,25 +116,21 @@ jobs:
         with:
           name: target
           path: |
-            ${{ github.workspace }}/package.json
+            ${{ github.workspace }}/lerna.json
+            ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/pom.xml
 
-  release:
+  pre-release:
     runs-on: ubuntu-latest
     needs:
-      - prepare-release
-      - release-snapshot
+      - prepare-pre-release
+      - pre-release-snapshot
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'yarn'
 
       - name: Install Java and Maven
         uses: actions/setup-java@v3
@@ -167,8 +149,8 @@ jobs:
         with:
           name: target
 
-      - name: Maven command to update release version
-        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-release.outputs.new-version }} versions:commit
+      - name: Maven command to update pre-release version
+        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-pre-release.outputs.new-version }} versions:commit
 
       - name: Build the artifacts
         run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
@@ -189,34 +171,23 @@ jobs:
         with:
           name: target
           path: |
-            ${{ github.workspace }}/package.json
+            ${{ github.workspace }}/lerna.json
+            ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/pom.xml
 
-  push-pom-tag:
+  push-pom:
     runs-on: ubuntu-latest
     needs:
-      - prepare-release
-      - release
+      - prepare-pre-release
+      - pre-release
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
         with:
           token: ${{ env.PUSH_TOKEN }}
-
-      - name: Install Java and Maven
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-
-      - name: Setup Node v16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'yarn'
 
       - name: Download target folder
         uses: actions/download-artifact@v3
@@ -231,12 +202,13 @@ jobs:
           git_user_signingkey: true
           git_commit_gpgsign: true
 
-      - name: Push updated pom.xml
+      - name: Push updated version files
         uses: EndBug/add-and-commit@v9
         with:
           add: |
             core-java/pom.xml
-            package.json
+            lerna.json
+            CHANGELOG.md
             website/package.json
           message: |
             chore(Internal): :bookmark: released latest version to maven central
@@ -246,49 +218,34 @@ jobs:
           default_author: user_info
           commit: --no-verify
 
-      - name: Create and Push Tag
-        uses: EndBug/add-and-commit@v9
-        with:
-          tag: v${{ needs.prepare-release.outputs.new-version }}
-          message: 🎉 Released to Maven central [skip ci]
-          default_author: user_info
-          push: true
-
-  github-release:
+  github-pre-release:
     runs-on: ubuntu-latest
     needs:
-      - prepare-release
-      - push-pom-tag
+      - prepare-pre-release
+      - push-pom
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-
-      - name: Setup Node v16
-        uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          cache: 'yarn'
+          fetch-depth: 0
 
       - name: Download target folder
         uses: actions/download-artifact@v3
         with:
           name: target
 
-      - name: Generate Change log
-        run: echo $(yarn changelog --from v${{ needs.prepare-release.outputs.previous-version }} --next-version v${{ needs.prepare-release.outputs.new-version }}) >> CURRENT_CHANGELOG.md
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ env.PUSH_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         with:
-          tag_name: v${{ needs.prepare-release.outputs.new-version }}
-          name: Version ${{ needs.prepare-release.outputs.new-version }}
-          prerelease: false
+          tag_name: v${{ needs.prepare-pre-release.outputs.new-version }}
+          name: Release Candidate Version ${{ needs.prepare-pre-release.outputs.new-version }}
+          prerelease: true
           draft: false
-          body_path: CURRENT_CHANGELOG.md
+          body_path: CHANGELOG.md
           discussion_category_name: Announcements
           generate_release_notes: false
           files: |

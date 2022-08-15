@@ -17,8 +17,13 @@
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.MouseActions.clickAndHold;
+import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.MouseActions.doubleClickOn;
+import static com.github.wasiqb.boyka.actions.MouseActions.hoverOn;
+import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyStyleOf;
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.DoubleClickPage.doubleClickPage;
@@ -60,11 +65,30 @@ public class DoubleClickTest {
     }
 
     /**
+     * Test click and hold method.
+     */
+    @Test (description = "Verify Click and Hold method")
+    public void testClickAndHold () {
+        clickAndHold (doubleClickPage ().getClickHold ());
+        verifyTextOf (doubleClickPage ().getClickHold ()).isEqualTo ("Well done! keep holding that click now.....");
+    }
+
+    /**
      * Double click test.
      */
     @Test (description = "Double click test")
     public void testDoubleClick () {
         doubleClickOn (doubleClickPage ().getDoubleClick ());
         verifyStyleOf (doubleClickPage ().getDoubleClick (), "background-color").isEqualTo ("rgba(147, 203, 90, 1)");
+    }
+
+    /**
+     * Test hover and click method.
+     */
+    @Test (description = "Verify Click and Hold method")
+    public void testHoverAndClick () {
+        hoverOn (doubleClickPage ().getHoverButton ());
+        clickOn (doubleClickPage ().getHoverMenu ());
+        verifyAcceptAlert ().isEqualTo ("Well done you clicked on the link!");
     }
 }

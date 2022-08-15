@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -37,6 +38,12 @@ public class DoubleClickPage {
         return new DoubleClickPage ();
     }
 
+    private final Locator clickHold   = buildLocator ().web (id ("click-box"))
+        .build ();
     private final Locator doubleClick = buildLocator ().web (id ("double-click"))
+        .build ();
+    private final Locator hoverButton = buildLocator ().web (className ("dropbtn"))
+        .build ();
+    private final Locator hoverMenu   = buildLocator ().web (className ("dropdown-content"))
         .build ();
 }

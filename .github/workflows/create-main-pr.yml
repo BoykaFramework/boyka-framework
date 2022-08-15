@@ -1,0 +1,52 @@
+name: Create pull request from staging to main
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  create-staging-to-main-pr:
+    runs-on: ubuntu-latest
+    name: Create pull request from staging to main
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Detect changes between staging and main
+        id: branch-changes
+        uses: fjenik/detect-changes-between-two-branches@0.0.3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: main
+          source-branch: staging
+
+      - name: Detect changes output
+        run: echo "Output of detect changes ${{ steps.branch-changes.outputs.is-source-branch-ahead }}"
+
+      - name: Check if pr already exists
+        id: pr-exists
+        if: ${{ steps.branch-changes.outputs.is-source-branch-ahead == 'true' }}
+        uses: fjenik/check-if-pr-exists@0.0.3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: main
+          source-branch: staging
+
+      - name: Print output
+        run: echo "Output of pull request already exists ${{ steps.pr-exists.outputs.is-pr-already-created }}"
+
+      - name: Create pull request
+        if: ${{ steps.pr-exists.outputs.is-pr-already-created == 'false' }}
+        uses: repo-sync/pull-request@v2
+        with:
+          github_token: ${{ secrets.PUSH_TOKEN }}
+          source_branch: staging
+          destination_branch: main
+          pr_reviewer: boyka-core
+          pr_title: '🎉 PR: New Release'
+          pr_draft: true
+          pr_body: |
+            _This PR was generated via github actions workflow_
+
+            **Don't squash merge this PR**

@@ -3,6 +3,8 @@ name: Deploy boyka website on GitHub
 on:
   pull_request:
     branches:
+      - develop
+      - staging
       - main
     paths:
       - 'website/**'
@@ -16,7 +18,7 @@ on:
 
 jobs:
   checks:
-    if: github.event_name != 'push'
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +32,7 @@ jobs:
         run: yarn build:site
 
   gh-release:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
