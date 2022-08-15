@@ -230,6 +230,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Download target folder
+        uses: actions/download-artifact@v3
+        with:
+          name: target
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         env:
