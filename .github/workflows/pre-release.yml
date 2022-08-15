@@ -10,6 +10,7 @@ on:
       - closed
 
 env:
+  GITHUB_AUTH: ${{ secrets.PUSH_TOKEN }}
   PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
