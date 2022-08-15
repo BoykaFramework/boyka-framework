@@ -215,10 +215,10 @@ jobs:
           default_author: user_info
           commit: --no-verify
 
-  github-release:
+  github-pre-release:
     runs-on: ubuntu-latest
     needs:
-      - prepare-release
+      - prepare-pre-release
       - push-pom
 
     steps:
