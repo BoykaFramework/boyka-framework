@@ -1,5 +1,5 @@
 
-## v0.8.1-rc.3 (2022-08-15)
+## v0.8.1-rc.4 (2022-08-15)
 
 #### :rocket: New Feature
 * [#149](https://github.com/WasiqBhamla/boyka-framework/pull/149) feat(workflow): :construction_worker: created and pushed change log file when releasing main version ([@WasiqB](https://github.com/WasiqB))
