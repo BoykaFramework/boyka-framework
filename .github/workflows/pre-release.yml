@@ -40,7 +40,7 @@ jobs:
       - name: Get the previous release version
         id: old_version
         run: |
-          export MVN_OLD_VERSION=$(node -pe "require('./website/package.json').version")
+          export MVN_OLD_VERSION=$(git describe --tags --abbrev=0)
           echo "::set-output name=previous_version::$MVN_OLD_VERSION"
 
       - name: Update pre-release version
