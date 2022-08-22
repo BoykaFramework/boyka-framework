@@ -72,7 +72,7 @@ Configuration:
       level: all
       AppenderRef:
         - ref: 'console-log'
-          level: debug
+          level: info
         - ref: 'async'
           level: info
         - ref: 'all-log-appender'
