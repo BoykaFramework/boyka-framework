@@ -12,13 +12,12 @@
 <!-- Badges -->
 <p>
 
-  <a href="https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light" alt="Boyka&#0045;Framework - 🎉&#0032;Ultimate&#0032;test&#0032;automation&#0032;for&#0032;testing&#0032;any&#0032;application&#0032;type | Product Hunt" width="250" height="54" /></a>
+[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light)](https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework)
 
-  <a href="https://gitpod.io/#https://github.com/WasiqBhamla/boyka-framework">
-    <img src="https://gitpod.io/button/open-in-gitpod.svg" alt="open in GitPod">
-  </a>
+[![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/WasiqBhamla/boyka-framework)
+
   <a href="https://discord.gg/dUg8K9DAsR">
-    <img src="https://img.shields.io/discord/950985052769120337?label=Discord&logo=Discord&style=for-the-badge" alt="open in GitPod">
+    <img src="https://img.shields.io/discord/950985052769120337?label=Discord&logo=Discord&style=for-the-badge" alt="Join Discord">
   </a>
   <a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/WasiqBhamla/boyka-framework?style=for-the-badge" alt="contributors" />
@@ -26,14 +25,11 @@
   <a href="https://github.com/WasiqBhamla/boyka-framework/commits/main">
     <img src="https://img.shields.io/github/last-commit/WasiqBhamla/boyka-framework?style=for-the-badge" alt="last update" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-framework/network/members">
-    <img src="https://img.shields.io/github/forks/WasiqBhamla/boyka-framework?style=for-the-badge" alt="forks" />
+  <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
+    <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-framework/stargazers">
-    <img src="https://img.shields.io/github/stars/WasiqBhamla/boyka-framework?style=for-the-badge" alt="stars" />
-  </a>
-  <a href="https://github.com/WasiqBhamla/boyka-framework/issues/">
-    <img src="https://img.shields.io/github/issues/WasiqBhamla/boyka-framework?style=for-the-badge" alt="open issues" />
+  <a href="https://github.com/WasiqBhamla/boyka-framework/releases/tag/v0.8.1">
+    <img src="https://img.shields.io/github/downloads/WasiqBhamla/boyka-framework/v0.8.1/total?color=brightgreen&label=Downloads%20for%20v0.8.1&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/WasiqBhamla/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/WasiqBhamla/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -41,8 +37,6 @@
 </p>
 
   <h4>
-    <a href="#camera-screenshots">View Demo</a>
-  <span> · </span>
     <a href="https://wasiqbhamla.github.io/boyka-framework/">Documentation</a>
   <span> · </span>
     <a href="https://github.com/WasiqBhamla/boyka-framework/issues/new/choose">Report Bug</a>
@@ -53,84 +47,37 @@
 
 <br />
 
-<!-- Table of Contents -->
+## 🤔 Why was Boyka-framework created?
 
-# 📔 Table of Contents
+In my career having vast experience in automating API, Web browsers and Mobile apps, I have seen that people had to use different frameworks for automating API, Web and Mobile applications which created a lot of chaos with respect to maintenance of dependencies and their respective code for test automation.
 
-- [📔 Table of Contents](#-table-of-contents)
-  - [🌟 About the Project](#-about-the-project)
-    - [📷 Screenshots](#-screenshots)
-      - [🛠️ Boyka Config file](#️-boyka-config-file)
-      - [🪢 API Sample](#-api-sample)
-      - [💻 Web Sample](#-web-sample)
-    - [👾 Tech Stack](#-tech-stack)
-      - [🏘️ Boyka Framework](#️-boyka-framework)
-      - [💻 Main project and Website](#-main-project-and-website)
-    - [🎯 Features](#-features)
-  - [👀 Usage](#-usage)
-  - [🧭 Future Road-map](#-future-road-map)
-  - [👋 Contributing](#-contributing)
-    - [📜 Code of Conduct](#-code-of-conduct)
-  - [⚠️ License](#️-license)
-  - [🤝 Contact](#-contact)
-  - [💎 Acknowledgements](#-acknowledgements)
+Also, I never came across a test automation framework which allowed us to write automation test script without any project specific boilerplate code or a mini framework.
 
-<!-- About the Project -->
+In addition to this, there was learning curve involved for learning those individual frameworks which slowed down the team to write automation and thus increased overall automation debt.
 
-## 🌟 About the Project
+This all gave me an idea of having a single framework which could solve all the above mentioned problems and help the QA's to keep the pace up with writing test scripts and reduce the automation debt.
 
-<!-- Screenshots -->
-### 📷 Screenshots
+## 🎯 Features
 
-#### 🛠️ Boyka Config file
+- ✅ Zero boilerplate code
+- ✅ Support Rest API automation with schema validations and response body verification
+- ✅ Supports Web browser automation with support for Chrome, Edge, Firefox and Safari.
+- ✅ Supports execution of Web tests on cloud platforms like BrowserStack and LambdaTest.
+- ✅ Highly configurable via `boyka-config.json`
+- ✅ Micro logging to log events of the test execution
+- ✅ Supports taking screenshots
 
-<div>
-  <img src="assets/config.png" alt="Boyka Config" width="400" height="auto" />
-</div>
+## ⏱️ Coming soon
 
-#### 🪢 API Sample
+Following are the awesome features which will be implemented soon to the frameworks:
 
-<div>
-  <img src="assets/api-schemas.png" alt="API Schemas" width="400" height="auto" />
-  <img src="assets/api.png" alt="API sample" width="400" height="auto" />
-</div>
+- Support for Android automation
+- Support for iOS automation
+- Support for GraphQL and SOAP API automation
+- Support video recording of the tests for Web and Mobile platforms
+- Support for more cloud platforms.
+- Many many more...
 
-#### 💻 Web Sample
-
-<div>
-  <img src="assets/page.png" alt="Web Page object" width="400" height="auto" />
-  <img src="assets/web.png" alt="Web Test" width="400" height="auto" />
-</div>
-
-<!-- TechStack -->
-### 👾 Tech Stack
-
-#### 🏘️ Boyka Framework
-
-<div>
-  <img src="assets/boyka-core-tech-stack.png" alt="Boyka core tech stack" width="400" height="auto" />
-</div>
-
-#### 💻 Main project and Website
-
-<div>
-  <img src="assets/boyka-main-tech-stack.png" alt="Boyka Main project tech stack" width="400" height="auto" />
-</div>
-
-<!-- Features -->
-### 🎯 Features
-
-- Supports Rest API Automation
-- Supports Web Automation
-- Highly configurable
-- Zero boilerplate code for your projects
-- Supports Rest API schema validation testing
-- Supports execution on Cloud platforms like BrowserStack, LambdaTest, etc.
-- Supports Parallel execution
-- Has in-built logging for all the events
-- Has in-built Assertion methods
-
-<!-- Usage -->
 ## 👀 Usage
 
 Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
@@ -143,42 +90,328 @@ Use this space to tell a little more about your project and how it can be used. 
 </dependency>
 ```
 
-<!-- Road-map -->
-## 🧭 Future Road-map
+## 🤓 Sample Code snippets
 
-See our [Road-map project](https://github.com/orgs/WasiqBhamla/projects/4/views/1) for more details.
+<details>
+  <summary>🛠️ Boyka Config file</summary>
 
-<!-- Contributing -->
-## 👋 Contributing
+This is the configuration file for Boyka Framework named `boyka-config.json` stored at `src/test/resources` folder.
 
-[![Contributors](https://contrib.rocks/image?repo=WasiqBhamla/boyka-framework)](https://github.com/WasiqBhamla/boyka-framework/graphs/contributors)
+```json
+{
+  "ui": {
+    "timeout": {
+      "implicit_wait": 10,
+      "explicit_wait": 30,
+      "page_load_timeout": 30,
+      "script_timeout": 10
+    },
+    "screenshot": {
+      "enabled": true,
+      "path": "./screenshots",
+      "extension": "jpeg",
+      "prefix": "SCR"
+    },
+    "web": {
+      "test_local_chrome": {
+        "browser": "CHROME",
+        "resize": "CUSTOM"
+      },
+      "test_local_firefox": {
+        "browser": "FIREFOX"
+      },
+      "test_local_edge": {
+        "browser": "EDGE"
+      },
+      "test_local_safari": {
+        "browser": "SAFARI"
+      },
+      "test_browserstack_chrome": {
+        "browser": "REMOTE",
+        "cloud": "BROWSER_STACK",
+        "protocol": "HTTPS",
+        "host": "hub-cloud.browserstack.com",
+        "user_name": "${env:BS_USER}",
+        "password": "${env:BS_KEY}",
+        "capabilities": {
+          "browser": "Chrome",
+          "browser_version": "latest",
+          "os": "Windows",
+          "os_version": "10",
+          "resolution": "1920x1080",
+          "project": "Test Boyka Project",
+          "build": "Test BrowserStack Build",
+          "name": "Test BrowserStack Session"
+        }
+      },
+      "test_selenium_grid": {
+        "browser": "REMOTE",
+        "cloud": "NONE",
+        "port": "4444",
+        "capabilities": {
+          "browserName": "chrome",
+          "platform": "MAC"
+        }
+      },
+      "test_lambda_test_chrome": {
+        "browser": "REMOTE",
+        "cloud": "LAMBDA_TEST",
+        "protocol": "HTTPS",
+        "host": "hub.lambdatest.com",
+        "user_name": "${env:LT_USER}",
+        "password": "${env:LT_KEY}",
+        "capabilities": {
+          "browserName": "Chrome",
+          "version": "99.0",
+          "platform": "Windows 10",
+          "resolution": "1920x1080",
+          "build": "Test LambdaTest Build",
+          "name": "Test LambdaTest Session",
+          "network": true,
+          "visual": true,
+          "video": true,
+          "console": true
+        }
+      }
+    }
+  },
+  "api": {
+    "test_reqres": {
+      "base_uri": "https://reqres.in",
+      "base_path": "/api",
+      "read_timeout": 2,
+      "write_timeout": 2,
+      "connection_timeout": 1,
+      "logging": {
+        "request": true,
+        "response": true
+      },
+      "schema_path": "schema/"
+    }
+  }
+}
+```
 
-Contributions are always welcome!
+</details>
 
-See [`contributing.md`](./.github/CONTRIBUTING.md) for ways to get started.
+<details>
+  <summary>🪢 API Sample</summary>
 
-<!-- Code of Conduct -->
-### 📜 Code of Conduct
+Add your response schema JSON files at the directory mentioned in config under `src/test/resources` folder.
 
-Please read the [Code of Conduct](./.github/CODE_OF_CONDUCT.md)
+```bash
+-| /src
+ |__ /test
+   |__ /resources
+     |__ /schemas  # This folder path mentioned in config file.
+       |__ create-user-schema.json
+```
 
-<!-- License -->
-## ⚠️ License
+Here's how you can execute the API test and also verify its response.
 
-Distributed under MIT License. See [LICENSE](LICENSE) for more information.
+```java
+// Create request body object
+final User user = User.createUser ()
+  .name ("Wasiq")
+  .job ("Software Engineer")
+  .create ();
 
-<!-- Contact -->
-## 🤝 Contact
+// Compose request
+final ApiRequest request = ApiRequest.createRequest ()
+  .configKey (API_CONFIG_KEY)
+  .method (POST)
+  .path ("/users")
+  .bodyObject (user)
+  .create ();
 
-- Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
-- Open a [new Discussion](https://github.com/WasiqBhamla/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
-- Contact / Follow me on [Twitter @WasiqBhamla](https://twitter.com/WasiqBhamla)
+// Execute request
+final ApiResponse response = ApiManager.execute (request);
 
-<!-- Acknowledgments -->
-## 💎 Acknowledgements
+// Verify response status code
+response.verifyStatusCode ()
+  .isEqualTo (201);
+
+// Verify response schema
+response.verifySchema ("create-user-schema.json");
+
+// Verify response body
+response.verifyTextField ("id")
+  .isNotNull ();
+response.verifyTextField ("name")
+  .isEqualTo (user.getName ());
+response.verifyTextField ("job")
+  .isEqualTo (user.getJob ());
+response.verifyTextField ("createdAt")
+  .isNotNull ();
+```
+
+</details>
+
+<details>
+  <summary>💻 Web Sample</summary>
+
+This is how we can create page object.
+
+```java
+package com.github.wasiqb.boyka.testng.web.saucedemo.pages;
+
+import com.github.wasiqb.boyka.builders.Locator;
+import org.openqa.selenium.By;
+import lombok.Getter;
+
+@Getter
+public class LoginPage {
+  public static LoginPage loginPage () {
+    return new LoginPage ();
+  }
+
+  private final Locator loginBox = Locator.buildLocator ()
+    .web (By.id ("login_button_container"))
+    .build ();
+  private final Locator loginButton = Locator.buildLocator ()
+    .web (By.id ("login-button"))
+    .parent (this.loginBox)
+    .build ();
+  private final Locator password = Locator.buildLocator ()
+    .web (By.id ("password"))
+    .parent (this.loginBox)
+    .build ();
+  private final Locator username = Locator.buildLocator ()
+    .web (By.id ("user-name"))
+    .parent (this.loginBox)
+    .build ();
+
+  private LoginPage () {
+    // Avoid explicit class initialization.
+  }
+}
+```
+
+And later we can use that page object to execute the test.
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
+import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
+import static com.github.wasiqb.boyka.actions.KeyboardActions.pressKey;
+import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
+import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
+import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementEnabled;
+import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
+import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.testng.web.saucedemo.pages.LoginPage.loginPage;
+import static java.text.MessageFormat.format;
+import static org.openqa.selenium.Keys.CONTROL;
+import static org.openqa.selenium.Keys.DELETE;
+. . .
+createDriver (ApplicationType.WEB, "test_local_chrome");
+. . .
+private static final String URL = "https://www.saucedemo.com";
+. . .
+navigateTo (URL);
+verifyBrowserUrl ().startsWith (URL);
+
+enterText (loginPage ().getUsername (), "standard_user");
+pressKey (loginPage ().getUsername (), CONTROL, "a", DELETE);
+enterText (loginPage ().getUsername (), "standard_user");
+enterText (loginPage ().getPassword (), "secret_sauce");
+
+clickOn (loginPage ().getLoginButton ());
+
+verifyBrowserUrl ().isEqualTo (format ("{0}/inventory.html", URL));
+verifyBrowserTitle ().isEqualTo ("Swag Labs");
+
+verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
+verifyElementEnabled (homePage ().getMenuButton ()).isTrue ();
+
+takeScreenshot ();
+. . .
+closeDriver ();
+```
+
+</details>
+
+## ☕ Examples
+
+- API:
+  - [How to configure Boyka for API Automation?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/api/setup-config)
+  - [How to compose a request?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/api/compose-request)
+  - [How to execute a request?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/api/execute-request)
+  - [How to verify the response?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/api/verify-response)
+- Web:
+  - [How to configure Boyka for Web Automation?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/web/setup-config)
+  - [How to create page object?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/web/create-page-object)
+  - [How to write test using the page object?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/web/write-test)
+
+## 👾 Tech Stack
+
+### 🏘️ Boyka Framework
+
+<div>
+  <img
+    src="assets/boyka-core-tech-stack.png"
+    alt="Boyka core tech stack" width="400" height="auto" />
+</div>
+
+### 💻 Main project and Website
+
+<div>
+  <img
+    src="assets/boyka-main-tech-stack.png"
+    alt="Boyka Main project tech stack" width="400" height="auto" />
+</div>
+
+### 💎 Cloud platform supporters
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
 <div>
   <img src="website/static/img/docs/community/our-supporters/org-supporters.png" alt="Our supporters" width="400" height="auto" />
 </div>
+
+#### 🔗 Links to our supporters
+
+Check out the following links to our Cloud platform supporters to try it out, I bet you'll love these platforms:
+
+- [LambdaTest](http://www.lambdatest.com?fp_ref=wasiq95)
+- [BrowserStack](https://www.browserstack.com/)
+
+## 🧭 Project Road-map
+
+Check out our road map to know which features we are cooking,
+
+- [Project Road-map](https://github.com/orgs/WasiqBhamla/projects/4/views/1)
+- [Current Milestone](https://github.com/orgs/WasiqBhamla/projects/4/views/2)
+- [Next Milestone](https://github.com/orgs/WasiqBhamla/projects/4/views/3)
+- [Future planned features](https://github.com/orgs/WasiqBhamla/projects/4/views/4)
+
+## 👋 Contributing
+
+These are our awesome contributors:
+
+[![Contributors](https://contrib.rocks/image?repo=WasiqBhamla/boyka-framework)](https://github.com/WasiqBhamla/boyka-framework/graphs/contributors)
+
+Contributions are always welcome!
+
+Check out [`contributing.md`](./.github/CONTRIBUTING.md) for ways to get started.
+
+## 📜 Code of Conduct
+
+Please read the [Code of Conduct](./.github/CODE_OF_CONDUCT.md)
+
+## ⚠️ License
+
+Distributed under MIT [License](LICENSE).
+
+## 🤝 Contact
+
+- Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
+- Open a [new Discussion](https://github.com/WasiqBhamla/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
+- Contact / Follow me on [Twitter](https://twitter.com/WasiqBhamla), [LinkedIn](https://www.linkedin.com/in/wasiqbhamla/)
+- For more details about the framework, checkout our [website](https://wasiqbhamla.github.io/boyka-framework/)
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=WasiqBhamla/boyka-framework&type=Timeline)](https://star-history.com/#WasiqBhamla/boyka-framework&Timeline)
