@@ -61,6 +61,16 @@ public final class ErrorHandler {
         throw new FrameworkError (format (message.getMessageText (), args), cause);
     }
 
+    /**
+     * Throws framework error with provided message.
+     *
+     * @param message Error message
+     * @param args message args
+     */
+    public static void throwError (final Message message, final Object... args) {
+        throw new FrameworkError (format (message.getMessageText (), args));
+    }
+
     private ErrorHandler () {
         // Utility class.
     }
