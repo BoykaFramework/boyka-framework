@@ -47,6 +47,7 @@
       "test_selenium_grid": {
         "browser": "REMOTE",
         "cloud": "NONE",
+        "host": "localhost",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
