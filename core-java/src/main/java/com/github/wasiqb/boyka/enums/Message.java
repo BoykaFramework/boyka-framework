@@ -39,6 +39,11 @@ public enum Message {
      */
     CAPABILITIES_REQUIRED_FOR_REMOTE ("Capabilities required for remote execution..."),
     /**
+     * Config key is not found.
+     */
+    CONFIG_KEY_NOT_FOUND (
+        "The key [{0}] mentioned is not found in the config file, please provide a valid keys from the following [{1}]..."),
+    /**
      * Content type must be set before setting request body
      */
     CONTENT_TYPE_NOT_SET ("Content type must be set before setting request body..."),
