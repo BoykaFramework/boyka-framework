@@ -121,7 +121,7 @@ public class JsonUtil {
         try {
             final var object = parseString (data).getAsJsonObject ();
             return LOGGER.traceExit (GSON.toJson (object));
-        } catch (IllegalStateException e) {
+        } catch (final IllegalStateException e) {
             return data;
         }
     }

@@ -16,9 +16,11 @@
 
 package com.github.wasiqb.boyka.config;
 
+import static com.github.wasiqb.boyka.enums.Message.CONFIG_KEY_NOT_FOUND;
 import static com.github.wasiqb.boyka.enums.Message.NO_API_SETTINGS_FOUND;
-import static java.text.MessageFormat.format;
-import static java.util.Objects.requireNonNull;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
+import static java.lang.String.join;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
@@ -50,7 +52,10 @@ public class FrameworkSetting {
      */
     public ApiSetting getApiSetting (final String key) {
         LOGGER.traceEntry ("Key: {}", key);
-        return LOGGER.traceExit (
-            requireNonNull (this.api.get (key), format (NO_API_SETTINGS_FOUND.getMessageText (), key)));
+        if (!this.api.containsKey (key)) {
+            final var keys = join (", ", this.api.keySet ());
+            throwError (CONFIG_KEY_NOT_FOUND, key, keys);
+        }
+        return LOGGER.traceExit (requireNonNull (this.api.get (key), NO_API_SETTINGS_FOUND, key));
     }
 }

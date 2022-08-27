@@ -44,6 +44,18 @@ public class DriverManagerTest {
     }
 
     /**
+     * Test method to verify invalid config key.
+     */
+    @Test (description = "Test Web invalid config key", expectedExceptions = FrameworkError.class)
+    public void testInvalidWebConfigKey () {
+        try {
+            createDriver (WEB, "test_lambda_test_no_pa");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
      * Test method to verify null cloud Host.
      */
     @Test (description = "Test Null cloud Host", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Host name is required for remote driver execution...")
