@@ -20,6 +20,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.lang.String.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -34,7 +35,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
@@ -355,8 +355,7 @@ public final class DriverActions {
             try {
                 copyFile (file, new File (fileName));
             } catch (final IOException e) {
-                LOGGER.error (e.getMessage (), e);
-                throw new FrameworkError (ERROR_SAVING_SCREENSHOT.getMessageText (), e);
+                handleAndThrow (ERROR_SAVING_SCREENSHOT, e);
             }
         });
         LOGGER.traceExit ();

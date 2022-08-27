@@ -47,6 +47,7 @@
       "test_selenium_grid": {
         "browser": "REMOTE",
         "cloud": "NONE",
+        "host": "localhost",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
@@ -58,6 +59,63 @@
         "cloud": "LAMBDA_TEST",
         "protocol": "HTTPS",
         "host": "hub.lambdatest.com",
+        "user_name": "${env:LT_USER}",
+        "password": "${env:LT_KEY}",
+        "capabilities": {
+          "browserName": "Chrome",
+          "version": "99.0",
+          "platform": "Windows 10",
+          "resolution": "1920x1080",
+          "build": "Test LambdaTest Build",
+          "name": "Test LambdaTest Session",
+          "network": true,
+          "visual": true,
+          "video": true,
+          "console": true
+        }
+      },
+      "test_lambda_test_no_username": {
+        "browser": "REMOTE",
+        "cloud": "LAMBDA_TEST",
+        "protocol": "HTTPS",
+        "host": "hub.lambdatest.com",
+        "password": "${env:LT_KEY}",
+        "capabilities": {
+          "browserName": "Chrome",
+          "version": "99.0",
+          "platform": "Windows 10",
+          "resolution": "1920x1080",
+          "build": "Test LambdaTest Build",
+          "name": "Test LambdaTest Session",
+          "network": true,
+          "visual": true,
+          "video": true,
+          "console": true
+        }
+      },
+      "test_lambda_test_no_password": {
+        "browser": "REMOTE",
+        "cloud": "LAMBDA_TEST",
+        "protocol": "HTTPS",
+        "host": "hub.lambdatest.com",
+        "user_name": "${env:LT_USER}",
+        "capabilities": {
+          "browserName": "Chrome",
+          "version": "99.0",
+          "platform": "Windows 10",
+          "resolution": "1920x1080",
+          "build": "Test LambdaTest Build",
+          "name": "Test LambdaTest Session",
+          "network": true,
+          "visual": true,
+          "video": true,
+          "console": true
+        }
+      },
+      "test_lambda_test_no_host": {
+        "browser": "REMOTE",
+        "cloud": "LAMBDA_TEST",
+        "protocol": "HTTPS",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
         "capabilities": {

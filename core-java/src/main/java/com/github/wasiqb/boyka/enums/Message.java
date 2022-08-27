@@ -115,6 +115,10 @@ public enum Message {
      */
     NO_JSON_FILE_FOUND ("JSON file [{0}] not found..."),
     /**
+     * Null remote url.
+     */
+    NULL_REMOTE_URL ("Remote URL is null..."),
+    /**
      * Password required for cloud execution
      */
     PASSWORD_REQUIRED_FOR_CLOUD ("Password is required for cloud execution..."),
