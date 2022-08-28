@@ -36,7 +36,7 @@ import org.openqa.selenium.Dimension;
  */
 @Data
 public class WebSetting {
-    private Browser             browser    = Browser.NONE;
+    private Browser             browser    = Browser.CHROME;
     private Map<String, Object> capabilities;
     private CloudProviders      cloud      = CloudProviders.NONE;
     private Dimension           customSize = new Dimension (1920, 1080);
