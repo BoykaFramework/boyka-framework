@@ -52,6 +52,10 @@ public enum Message {
      */
     ELEMENT_NOT_FOUND ("Element not found for locator {0}..."),
     /**
+     * Empty browser is not allowed.
+     */
+    EMPTY_BROWSER_NOT_ALLOWED ("Browser type cannot be empty in the config..."),
+    /**
      * Deselect from dropdown Error.
      */
     ERROR_DESELECT_FROM_DROPDOWN ("Cannot deselect from dropdown, it should be Multi-select box..."),

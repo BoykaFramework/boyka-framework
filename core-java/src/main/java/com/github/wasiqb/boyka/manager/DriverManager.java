@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.Message.APP_TYPE_NOT_SUPPORTED;
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
+import static com.github.wasiqb.boyka.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_QUITTING_DRIVER;
 import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_BROWSER;
@@ -231,7 +232,7 @@ public final class DriverManager {
 
     private void setupWebDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        switch (webSetting.getBrowser ()) {
+        switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
             case CHROME:
                 setDriver (this.applicationType, setupChromeDriver (webSetting), this.setting);
                 break;

@@ -130,6 +130,11 @@
           "video": true,
           "console": true
         }
+      },
+      "test_local_empty_browser": {
+        "browser": "ABC"
+      },
+      "test_local_null_browser": {
       }
     },
     "android": {

@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.testng.others;
 
 import static com.github.wasiqb.boyka.enums.ApplicationType.API;
 import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
+import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.clearSession;
 
@@ -44,6 +45,18 @@ public class DriverManagerTest {
     }
 
     /**
+     * Test method to verify empty browser in config.
+     */
+    @Test (description = "Test Web empty browser in config", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Browser type cannot be empty in the config...")
+    public void testEmptyBrowserInConfig () {
+        try {
+            createDriver (WEB, "test_local_empty_browser");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
      * Test method to verify invalid config key.
      */
     @Test (description = "Test Web invalid config key", expectedExceptions = FrameworkError.class)
@@ -52,6 +65,18 @@ public class DriverManagerTest {
             createDriver (WEB, "test_lambda_test_no_pa");
         } finally {
             clearSession ();
+        }
+    }
+
+    /**
+     * Test method to verify empty browser in config.
+     */
+    @Test (description = "Test Web null browser in config")
+    public void testNullBrowserInConfig () {
+        try {
+            createDriver (WEB, "test_local_null_browser");
+        } finally {
+            closeDriver ();
         }
     }
 
