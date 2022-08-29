@@ -118,8 +118,12 @@ public class JsonUtil {
         if (StringUtils.isEmpty (data)) {
             return StringUtils.EMPTY;
         }
-        final var object = parseString (data).getAsJsonObject ();
-        return LOGGER.traceExit (GSON.toJson (object));
+        try {
+            final var object = parseString (data).getAsJsonObject ();
+            return LOGGER.traceExit (GSON.toJson (object));
+        } catch (final IllegalStateException e) {
+            return data;
+        }
     }
 
     private JsonUtil () {

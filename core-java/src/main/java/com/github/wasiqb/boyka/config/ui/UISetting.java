@@ -16,10 +16,12 @@
 
 package com.github.wasiqb.boyka.config.ui;
 
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
+import com.github.wasiqb.boyka.enums.Message;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 
@@ -44,6 +46,10 @@ public class UISetting {
      */
     public WebSetting getWebSetting (final String key) {
         LOGGER.traceEntry ("Key: {}", key);
+        if (!this.web.containsKey (key)) {
+            final var keys = String.join (", ", this.web.keySet ());
+            throwError (Message.CONFIG_KEY_NOT_FOUND, key, keys);
+        }
         return LOGGER.traceExit (this.web.get (key));
     }
 }

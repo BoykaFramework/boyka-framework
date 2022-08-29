@@ -39,6 +39,11 @@ public enum Message {
      */
     CAPABILITIES_REQUIRED_FOR_REMOTE ("Capabilities required for remote execution..."),
     /**
+     * Config key is not found.
+     */
+    CONFIG_KEY_NOT_FOUND (
+        "The key [{0}] mentioned is not found in the config file, please provide a valid keys from the following [{1}]..."),
+    /**
      * Content type must be set before setting request body
      */
     CONTENT_TYPE_NOT_SET ("Content type must be set before setting request body..."),
@@ -46,6 +51,10 @@ public enum Message {
      * Element not found.
      */
     ELEMENT_NOT_FOUND ("Element not found for locator {0}..."),
+    /**
+     * Empty browser is not allowed.
+     */
+    EMPTY_BROWSER_NOT_ALLOWED ("Browser type cannot be empty in the config..."),
     /**
      * Deselect from dropdown Error.
      */
@@ -114,6 +123,10 @@ public enum Message {
      * No JSON file found
      */
     NO_JSON_FILE_FOUND ("JSON file [{0}] not found..."),
+    /**
+     * Null remote url.
+     */
+    NULL_REMOTE_URL ("Remote URL is null..."),
     /**
      * Password required for cloud execution
      */

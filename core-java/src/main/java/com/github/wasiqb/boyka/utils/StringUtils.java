@@ -44,7 +44,7 @@ public final class StringUtils {
     public static String interpolate (final String value) {
         LOGGER.traceEntry ("Interpolating string: {}", value);
         var result = value;
-        if (value.startsWith ("${")) {
+        if (value != null && value.startsWith ("${")) {
             final var substitute = createInterpolator ();
             substitute.setEnableSubstitutionInVariables (true);
             result = substitute.replace (value);
