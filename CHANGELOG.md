@@ -1,5 +1,5 @@
 
-## v0.8.2-rc.1 (2022-08-29)
+## v0.8.2 (2022-08-29)
 
 #### :bug: Bug Fix
 * [#187](https://github.com/WasiqBhamla/boyka-framework/pull/187) fix(workflow): :bug: fixed issue of test release workflow not getting triggered ([@WasiqB](https://github.com/WasiqB))
