@@ -1,7 +1,8 @@
 
-## v0.8.2-rc.0 (2022-08-29)
+## v0.8.2-rc.1 (2022-08-29)
 
 #### :bug: Bug Fix
+* [#187](https://github.com/WasiqBhamla/boyka-framework/pull/187) fix(workflow): :bug: fixed issue of test release workflow not getting triggered ([@WasiqB](https://github.com/WasiqB))
 * [#183](https://github.com/WasiqBhamla/boyka-framework/pull/183) fix(java): :bug: fixed errors when browser key is missing or empty in config ([@WasiqB](https://github.com/WasiqB))
 * [#182](https://github.com/WasiqBhamla/boyka-framework/pull/182) fix(java): :bug: fixed error handling when config key is not found ([@WasiqB](https://github.com/WasiqB))
 * [#181](https://github.com/WasiqBhamla/boyka-framework/pull/181) fix(java): :bug: fixed error when cloud host and credentials is null ([@WasiqB](https://github.com/WasiqB))
