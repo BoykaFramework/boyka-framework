@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: Eomm/why-don-t-you-tweet@v1
-        if: ${{ !github.event.repository.private }}
+        if: github.event.release.prerelease == false
         with:
           tweet-message: |
             🎊 ✨ Released ${{ github.event.release.tag_name }} for #BoykaFramework
