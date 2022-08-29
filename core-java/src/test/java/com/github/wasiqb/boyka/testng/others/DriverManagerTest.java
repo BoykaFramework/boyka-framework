@@ -17,6 +17,8 @@
 package com.github.wasiqb.boyka.testng.others;
 
 import static com.github.wasiqb.boyka.enums.ApplicationType.API;
+import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
+import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.clearSession;
 
@@ -37,6 +39,78 @@ public class DriverManagerTest {
     public void testCreateDriver () {
         try {
             createDriver (API, "test_local_chrome");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
+     * Test method to verify empty browser in config.
+     */
+    @Test (description = "Test Web empty browser in config", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Browser type cannot be empty in the config...")
+    public void testEmptyBrowserInConfig () {
+        try {
+            createDriver (WEB, "test_local_empty_browser");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
+     * Test method to verify invalid config key.
+     */
+    @Test (description = "Test Web invalid config key", expectedExceptions = FrameworkError.class)
+    public void testInvalidWebConfigKey () {
+        try {
+            createDriver (WEB, "test_lambda_test_no_pa");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
+     * Test method to verify empty browser in config.
+     */
+    @Test (description = "Test Web null browser in config")
+    public void testNullBrowserInConfig () {
+        try {
+            createDriver (WEB, "test_local_null_browser");
+        } finally {
+            closeDriver ();
+        }
+    }
+
+    /**
+     * Test method to verify null cloud Host.
+     */
+    @Test (description = "Test Null cloud Host", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Host name is required for remote driver execution...")
+    public void testNullCloudHost () {
+        try {
+            createDriver (WEB, "test_lambda_test_no_host");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
+     * Test method to verify null cloud password.
+     */
+    @Test (description = "Test Null cloud password", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Password is required for cloud execution...")
+    public void testNullCloudPassword () {
+        try {
+            createDriver (WEB, "test_lambda_test_no_password");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
+     * Test method to verify null cloud username.
+     */
+    @Test (description = "Test Null cloud username", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "User name is required for cloud execution...")
+    public void testNullCloudUsername () {
+        try {
+            createDriver (WEB, "test_lambda_test_no_username");
         } finally {
             clearSession ();
         }

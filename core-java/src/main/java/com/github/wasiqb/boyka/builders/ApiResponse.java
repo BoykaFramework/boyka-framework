@@ -20,17 +20,16 @@ import static com.github.wasiqb.boyka.enums.Message.INVALID_HEADER_KEY;
 import static com.github.wasiqb.boyka.enums.Message.NO_BODY_TO_PARSE;
 import static com.github.wasiqb.boyka.enums.Message.RESPONSE_SCHEMA_NOT_MATCHING;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.google.common.truth.Truth.assertThat;
 import static com.jayway.jsonpath.JsonPath.compile;
 import static com.jayway.jsonpath.JsonPath.parse;
-import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
 import com.github.wasiqb.boyka.config.api.ApiSetting;
-import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.IntegerSubject;
 import com.google.common.truth.StringSubject;
@@ -122,7 +121,7 @@ public class ApiResponse {
         LOGGER.info ("Verifying response Header: {}", key);
         LOGGER.traceExit ();
         if (!getHeaders ().containsKey (key)) {
-            throw new FrameworkError (format (INVALID_HEADER_KEY.getMessageText (), key));
+            throwError (INVALID_HEADER_KEY, key);
         }
         return assertThat (getHeaders ().get (key));
     }

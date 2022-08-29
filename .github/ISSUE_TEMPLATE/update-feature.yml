@@ -19,6 +19,7 @@ body:
         - iOS
         - Workflow
         - Documentations
+        - Dependencies
         - Issues / PR templates
         - NOT APPLICABLE
     validations:

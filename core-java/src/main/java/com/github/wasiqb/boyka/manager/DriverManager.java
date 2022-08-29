@@ -18,10 +18,12 @@ package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.Message.APP_TYPE_NOT_SUPPORTED;
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
+import static com.github.wasiqb.boyka.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_QUITTING_DRIVER;
 import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_BROWSER;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
+import static com.github.wasiqb.boyka.enums.Message.NULL_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
@@ -29,13 +31,14 @@ import static com.github.wasiqb.boyka.sessions.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
+import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
-import static java.util.Objects.requireNonNull;
 import static java.util.Objects.requireNonNullElse;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -46,7 +49,6 @@ import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.config.ui.WebSetting;
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.enums.CloudProviders;
-import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -115,8 +117,7 @@ public final class DriverManager {
 
     private Capabilities getCapabilities (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        final var capabilities = requireNonNull (webSetting.getCapabilities (),
-            CAPABILITIES_REQUIRED_FOR_REMOTE.getMessageText ());
+        final var capabilities = requireNonNull (webSetting.getCapabilities (), CAPABILITIES_REQUIRED_FOR_REMOTE);
         final var remoteCapabilities = new DesiredCapabilities ();
         capabilities.forEach (remoteCapabilities::setCapability);
         return LOGGER.traceExit (remoteCapabilities);
@@ -126,13 +127,11 @@ public final class DriverManager {
         LOGGER.traceEntry ();
         if (requireNonNullElse (webSetting.getCloud (), CloudProviders.NONE) != CloudProviders.NONE) {
             final var hostNamePattern = "{0}:{1}@{2}";
-            return format (hostNamePattern,
-                requireNonNull (webSetting.getUserName (), USER_NAME_REQUIRED_FOR_CLOUD.getMessageText ()),
-                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD.getMessageText ()),
-                requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessageText ()));
+            return format (hostNamePattern, requireNonNull (webSetting.getUserName (), USER_NAME_REQUIRED_FOR_CLOUD),
+                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD),
+                requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE));
         }
-        return LOGGER.traceExit (
-            requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE.getMessageText ()));
+        return LOGGER.traceExit (requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE));
     }
 
     private URL getRemoteUrl (final WebSetting webSetting) {
@@ -143,9 +142,9 @@ public final class DriverManager {
             hostName.append (":")
                 .append (webSetting.getPort ());
         }
-        final var url = format (URL_PATTERN, requireNonNull (webSetting.getProtocol (),
-            format (PROTOCOL_REQUIRED_FOR_HOST.getMessageText (), hostName)).name ()
-            .toLowerCase (), hostName);
+        final var url = format (URL_PATTERN,
+            requireNonNull (webSetting.getProtocol (), PROTOCOL_REQUIRED_FOR_HOST, hostName).name ()
+                .toLowerCase (), hostName);
         try {
             return LOGGER.traceExit (new URL (url));
         } catch (final MalformedURLException e) {
@@ -198,7 +197,7 @@ public final class DriverManager {
                 .getWebSetting (this.driverKey);
             setupWebDriver (webSetting);
         } else {
-            throw new FrameworkError (format (APP_TYPE_NOT_SUPPORTED.getMessageText (), this.applicationType));
+            throwError (APP_TYPE_NOT_SUPPORTED, this.applicationType);
         }
         LOGGER.traceExit ();
     }
@@ -221,8 +220,8 @@ public final class DriverManager {
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (
-            new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting)), getCapabilities (webSetting)));
+        return LOGGER.traceExit (new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
+            getCapabilities (webSetting)));
     }
 
     private WebDriver setupSafariDriver () {
@@ -233,12 +232,13 @@ public final class DriverManager {
 
     private void setupWebDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        switch (webSetting.getBrowser ()) {
+        switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
             case CHROME:
                 setDriver (this.applicationType, setupChromeDriver (webSetting), this.setting);
                 break;
             case NONE:
-                throw new FrameworkError (INVALID_BROWSER.getMessageText ());
+                throwError (INVALID_BROWSER);
+                break;
             case REMOTE:
                 setDriver (this.applicationType, setupRemoteDriver (webSetting), this.setting);
                 break;

@@ -18,6 +18,8 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_DESELECT_FROM_DROPDOWN;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -25,8 +27,6 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.util.List;
 
 import com.github.wasiqb.boyka.builders.Locator;
-import com.github.wasiqb.boyka.enums.Message;
-import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -52,7 +52,7 @@ public final class DropDownActions {
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
-                throw new FrameworkError (Message.ERROR_DESELECT_FROM_DROPDOWN.getMessageText ());
+                throwError (ERROR_DESELECT_FROM_DROPDOWN);
             }
             select.deselectAll ();
         }, locator);
@@ -71,7 +71,7 @@ public final class DropDownActions {
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
-                throw new FrameworkError (Message.ERROR_DESELECT_FROM_DROPDOWN.getMessageText ());
+                throwError (ERROR_DESELECT_FROM_DROPDOWN);
             }
             select.deselectByIndex (index);
         }, locator);
@@ -90,7 +90,7 @@ public final class DropDownActions {
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
-                throw new FrameworkError (Message.ERROR_DESELECT_FROM_DROPDOWN.getMessageText ());
+                throwError (ERROR_DESELECT_FROM_DROPDOWN);
             }
             select.deselectByVisibleText (text);
         }, locator);
@@ -109,7 +109,7 @@ public final class DropDownActions {
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
-                throw new FrameworkError (Message.ERROR_DESELECT_FROM_DROPDOWN.getMessageText ());
+                throwError (ERROR_DESELECT_FROM_DROPDOWN);
             }
             select.deselectByValue (value);
         }, locator);

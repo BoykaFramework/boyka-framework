@@ -24,8 +24,6 @@ import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
 import static com.github.wasiqb.boyka.manager.ApiManager.execute;
 
-import com.github.wasiqb.boyka.builders.ApiRequest;
-import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.testng.api.requests.User;
 import org.testng.annotations.Test;
@@ -42,9 +40,9 @@ public class ApiTest {
     /**
      * Method to test DELETE request.
      */
-    @Test (description = "Test DELETE request", priority = 5)
+    @Test (description = "Test DELETE request", dependsOnMethods = "testPatchUser")
     public void testDeleteUser () {
-        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+        final var request = createRequest ().configKey (API_CONFIG_KEY)
             .method (DELETE)
             .path ("/users/${userId}")
             .pathParam ("userId", "2")
@@ -57,15 +55,16 @@ public class ApiTest {
     /**
      * Method to test GET request.
      */
-    @Test (description = "Test GET request", priority = 2)
+    @Test (description = "Test GET request", dependsOnMethods = "testUserCreation")
     public void testGetUser () {
-        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+        final var request = createRequest ().configKey (API_CONFIG_KEY)
             .method (GET)
             .path ("/users/${userId}")
             .pathParam ("userId", "2")
             .create ();
 
-        final ApiResponse response = execute (request);
+        final var response = execute (request);
+
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifySchema ("get-user-schema.json");
@@ -80,16 +79,17 @@ public class ApiTest {
     /**
      * Method to test GET request with Query params.
      */
-    @Test (description = "Test GET request with Query params", priority = 6, expectedExceptions = FrameworkError.class)
+    @Test (description = "Test GET request with Query params", dependsOnMethods = "testDeleteUser", expectedExceptions = FrameworkError.class)
     public void testGetUserPerPage () {
-        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+        final var request = createRequest ().configKey (API_CONFIG_KEY)
             .method (GET)
             .path ("/users")
             .header ("Content-Type", "application/json")
             .queryParam ("page", "2")
             .create ();
 
-        final ApiResponse response = execute (request);
+        final var response = execute (request);
+
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyIntField ("page")
@@ -107,21 +107,22 @@ public class ApiTest {
     /**
      * Method to test PATCH request.
      */
-    @Test (description = "Test PATCH request", priority = 4)
+    @Test (description = "Test PATCH request", dependsOnMethods = "testPutUser")
     public void testPatchUser () {
-        final User user = User.createUser ()
+        final var user = User.createUser ()
             .name ("Wasiq")
             .job ("Software Engineer")
             .create ();
 
-        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+        final var request = createRequest ().configKey (API_CONFIG_KEY)
             .method (PATCH)
             .path ("/users/${userId}")
             .pathParam ("userId", "2")
             .bodyObject (user)
             .create ();
 
-        final ApiResponse response = execute (request);
+        final var response = execute (request);
+
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyStatusMessage ()
@@ -138,21 +139,22 @@ public class ApiTest {
     /**
      * Method to test PUT request.
      */
-    @Test (description = "Test PUT request", priority = 3)
+    @Test (description = "Test PUT request", dependsOnMethods = "testGetUser")
     public void testPutUser () {
-        final User user = User.createUser ()
+        final var user = User.createUser ()
             .name ("Wasiq")
             .job ("Software Engineer")
             .create ();
 
-        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+        final var request = createRequest ().configKey (API_CONFIG_KEY)
             .method (PUT)
             .path ("/users/${userId}")
             .pathParam ("userId", "2")
             .bodyObject (user)
             .create ();
 
-        final ApiResponse response = execute (request);
+        final var response = execute (request);
+
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifySchema ("put-user-schema.json");
@@ -169,18 +171,19 @@ public class ApiTest {
      */
     @Test (description = "Test POST request for creating a new pet", priority = 1)
     public void testUserCreation () {
-        final User user = User.createUser ()
+        final var user = User.createUser ()
             .name ("Wasiq")
             .job ("Software Engineer")
             .create ();
 
-        final ApiRequest request = createRequest ().configKey (API_CONFIG_KEY)
+        final var request = createRequest ().configKey (API_CONFIG_KEY)
             .method (POST)
             .path ("/users")
             .bodyObject (user)
             .create ();
 
-        final ApiResponse response = execute (request);
+        final var response = execute (request);
+
         response.verifyStatusCode ()
             .isEqualTo (201);
         response.verifySchema ("create-user-schema.json");

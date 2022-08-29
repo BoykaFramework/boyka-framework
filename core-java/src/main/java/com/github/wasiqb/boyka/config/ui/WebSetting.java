@@ -18,7 +18,6 @@ package com.github.wasiqb.boyka.config.ui;
 
 import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.Map;
 
@@ -37,17 +36,17 @@ import org.openqa.selenium.Dimension;
  */
 @Data
 public class WebSetting {
-    private Browser             browser    = Browser.NONE;
+    private Browser             browser    = Browser.CHROME;
     private Map<String, Object> capabilities;
     private CloudProviders      cloud      = CloudProviders.NONE;
     private Dimension           customSize = new Dimension (1920, 1080);
     private boolean             headless   = true;
-    private String              host       = "localhost";
-    private String              password   = EMPTY;
+    private String              host;
+    private String              password;
     private int                 port;
     private Protocol            protocol   = HTTP;
     private WindowResizeType    resize     = WindowResizeType.NORMAL;
-    private String              userName   = EMPTY;
+    private String              userName;
 
     /**
      * Gets cloud password.

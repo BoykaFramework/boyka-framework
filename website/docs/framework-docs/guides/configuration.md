@@ -140,11 +140,11 @@ See the example in [sample configuration file](#config-sample).
 | -------- | ----------- | ---- | ------- |
 | `browser` | Browser name. | [`Browser`](#supported-browsers) | `Browser.NONE` |
 | `protocol` | Protocol type | [`Protocol`](#supported-protocols) | `Protocol.HTTP` |
-| `host` | Remote driver host name | `string` | `localhost` |
+| `host` | Remote driver host name | `string` | `null` |
 | `port` | Remote driver port, if `0`, port will not be considered. | `number` | `0` |
 | `cloud` | Cloud service provider name. | [`CloudProviders`](#supported-cloud-providers) | `CloudProviders.NONE` |
-| `user_name` | User name for cloud service provider. | `string` | `` |
-| `password` | Password / Access key for cloud service provider. | `string` | `` |
+| `user_name` | User name for cloud service provider. | `string` | `null` |
+| `password` | Password / Access key for cloud service provider. | `string` | `null` |
 | `capabilities` | Capabilities for browser. | `Map<String, Object>` | `null` |
 | `headless` | Headless mode for browser. | `boolean` | `true` |
 
