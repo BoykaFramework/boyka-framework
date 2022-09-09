@@ -56,6 +56,10 @@ public enum Message {
      */
     EMPTY_BROWSER_NOT_ALLOWED ("Browser type cannot be empty in the config..."),
     /**
+     * Error deleting log files.
+     */
+    ERROR_DELETING_LOGS ("Error deleting log files..."),
+    /**
      * Deselect from dropdown Error.
      */
     ERROR_DESELECT_FROM_DROPDOWN ("Cannot deselect from dropdown, it should be Multi-select box..."),
@@ -83,6 +87,18 @@ public enum Message {
      * Error while saving screenshot.
      */
     ERROR_SAVING_SCREENSHOT ("Error saving screenshot"),
+    /**
+     * Error due to server not running.
+     */
+    ERROR_SERVER_NOT_RUNNING ("Error occurred, server not running: {0}..."),
+    /**
+     * Error starting Appium server.
+     */
+    ERROR_STARTING_SERVER ("Error occurred starting Appium server: {0}..."),
+    /**
+     * Error stopping Appium server.
+     */
+    ERROR_STOPPING_SERVER ("Error occurred stopping Appium server: {0}..."),
     /**
      * Error writing file
      */
@@ -139,6 +155,10 @@ public enum Message {
      * Schema validation assert failure
      */
     RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),
+    /**
+     * Appium server already running.
+     */
+    SERVER_ALREADY_RUNNING ("Appium server already running..."),
     /**
      * Test Error.
      */
