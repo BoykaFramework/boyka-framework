@@ -99,6 +99,11 @@ jobs:
           avd-name: Pixel_5
           api-level: 29
           target: google_apis
+          cores: 4
+          ram-size: 1536MB
+          heap-size: 256MB
+          disk-size: 6144MB
+          sdcard-path-or-size: 512MB
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
