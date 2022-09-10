@@ -97,7 +97,7 @@ jobs:
           api-level: 29
           target: google_apis
           cores: 4
-          profile: Pixel 5
+          profile: pixel_5
           ram-size: 1536MB
           heap-size: 256MB
           disk-size: 6144MB
