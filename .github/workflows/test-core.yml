@@ -89,8 +89,8 @@ jobs:
             ~/.android/adb*
           key: avd-30
 
-      - name: Check existing AVDs before creating new AVD
-        run: emulator -list-avds
+      - name: Check existing AVD profiles
+        run: avdmanager list device
 
       - name: Create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -100,6 +100,7 @@ jobs:
           api-level: 29
           target: google_apis
           cores: 4
+          profile: Pixel 5
           ram-size: 1536MB
           heap-size: 256MB
           disk-size: 6144MB
