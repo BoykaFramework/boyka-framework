@@ -144,9 +144,7 @@
           "host": "127.0.0.1",
           "port": 4723,
           "base_path": "/wd/hub",
-          "session_override": true,
-          "appium_path": "/Users/wasiqbhamla/.nvm/versions/node/v16.16.0/lib/node_modules/appium/build/lib/main.js",
-          "node_path": "/Users/wasiqbhamla/.nvm/versions/node/v16.16.0/bin/node"
+          "session_override": true
         },
         "device": {
           "os": "ANDROID",
