@@ -17,14 +17,12 @@
 package com.github.wasiqb.boyka.config.ui;
 
 import static com.github.wasiqb.boyka.utils.SettingUtils.getSetting;
-import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Map;
 
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
 import lombok.Data;
-import org.apache.logging.log4j.Logger;
 
 /**
  * @author Wasiq Bhamla
@@ -32,8 +30,6 @@ import org.apache.logging.log4j.Logger;
  */
 @Data
 public class UISetting {
-    private static final Logger LOGGER = getLogger ();
-
     private Map<String, MobileSetting> mobile;
     private ScreenshotSetting          screenshot = new ScreenshotSetting ();
     private TimeoutSetting             timeout    = new TimeoutSetting ();
