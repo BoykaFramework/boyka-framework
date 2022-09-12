@@ -92,25 +92,15 @@ jobs:
             ~/.android/adb*
           key: avd-30
 
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
+      - name: All Test execution
         uses: reactivecircus/android-emulator-runner@v2
+        if: github.event_name == 'push'
         with:
           avd-name: Pixel_5
           api-level: 30
           target: google_apis
           arch: x86_64
           profile: pixel_5
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: echo "Generated AVD snapshot for caching."
-
-      - name: All Test execution
-        uses: reactivecircus/android-emulator-runner@v2
-        if: github.event_name == 'push'
-        with:
-          api-level: 30
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
@@ -120,7 +110,11 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         if: github.event_name == 'pull_request'
         with:
+          avd-name: Pixel_5
           api-level: 30
+          target: google_apis
+          arch: x86_64
+          profile: pixel_5
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
