@@ -154,7 +154,8 @@
           "type": "VIRTUAL",
           "application": {
             "path": "/apps/android/saucedemo.apk",
-            "wait_activity": "com.swaglabsmobileapp.MainActivity"
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 60
           }
         }
       },

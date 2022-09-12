@@ -34,6 +34,7 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
+import static io.appium.java_client.remote.AndroidMobileCapabilityType.DONT_STOP_APP_ON_RESET;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
@@ -182,14 +183,16 @@ public final class DriverManager {
         options.setAppPackage (application.getPackageName ());
         options.setAppActivity (application.getActivityName ());
         options.setAppWaitDuration (ofSeconds (application.getWaitTimeout ()));
+        options.setCapability (DONT_STOP_APP_ON_RESET, application.isNoStopAppOnReset ());
         options.setAndroidInstallTimeout (ofSeconds (application.getInstallTimeout ()));
         if (application.getOtherApps () != null) {
             options.setOtherApps (join (",", application.getOtherApps ()));
         }
     }
 
-    private void setAvdOptions (final UiAutomator2Options options, final VirtualDeviceSetting avd) {
-        if (avd != null) {
+    private void setAvdOptions (final UiAutomator2Options options, final DeviceType type,
+        final VirtualDeviceSetting avd) {
+        if (type == DeviceType.VIRTUAL && avd != null) {
             options.setAvd (avd.getName ());
             options.setAvdArgs (avd.getArgs ());
             options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));
@@ -323,10 +326,12 @@ public final class DriverManager {
             .name ());
         options.setPlatformVersion (deviceSetting.getVersion ());
         options.setDeviceName (deviceSetting.getName ());
+        options.setClearSystemFiles (deviceSetting.isClearFiles ());
+        options.setClearDeviceLogsOnStart (deviceSetting.isClearLogs ());
         setAndroidApplicationOptions (options, deviceSetting.getApplication ());
-        if (deviceSetting.getType () == DeviceType.VIRTUAL) {
-            setAvdOptions (options, deviceSetting.getAvd ());
-        }
+        setAvdOptions (options, deviceSetting.getType (), deviceSetting.getAvd ());
+        options.setNoReset (deviceSetting.isNoReset ());
+        options.setFullReset (deviceSetting.isFullReset ());
         setDriver (this.platformType, new AndroidDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
     }

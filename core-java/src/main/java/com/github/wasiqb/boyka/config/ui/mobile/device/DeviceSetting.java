@@ -39,9 +39,14 @@ public class DeviceSetting {
     private AutomationType       automation = UI_AUTOMATOR;
     private VirtualDeviceSetting avd        = new VirtualDeviceSetting ();
     private Map<String, Object>  capabilities;
+    private boolean              clearFiles;
+    private boolean              clearLogs;
+    private int                  driverLaunchTimeout;
+    private boolean              fullReset;
     private boolean              grantPermission;
     private boolean              ignoreUnimportantViews;
     private String               name;
+    private boolean              noReset;
     private OS                   os         = ANDROID;
     private DeviceType           type       = VIRTUAL;
     private String               version;
