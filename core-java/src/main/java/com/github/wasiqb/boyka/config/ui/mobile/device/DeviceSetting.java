@@ -37,7 +37,7 @@ import lombok.Data;
 public class DeviceSetting {
     private ApplicationSetting   application;
     private AutomationType       automation = UI_AUTOMATOR;
-    private VirtualDeviceSetting avd;
+    private VirtualDeviceSetting avd        = new VirtualDeviceSetting ();
     private Map<String, Object>  capabilities;
     private boolean              grantPermission;
     private boolean              ignoreUnimportantViews;

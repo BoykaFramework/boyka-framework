@@ -148,16 +148,13 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "10",
+          "version": "11",
           "name": "Pixel_5",
           "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
           "application": {
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity"
-          },
-          "avd": {
-            "name": "Pixel_5"
           }
         }
       },

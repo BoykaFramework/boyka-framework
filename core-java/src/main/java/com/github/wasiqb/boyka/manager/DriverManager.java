@@ -189,10 +189,12 @@ public final class DriverManager {
     }
 
     private void setAvdOptions (final UiAutomator2Options options, final VirtualDeviceSetting avd) {
-        options.setAvd (avd.getName ());
-        options.setAvdArgs (avd.getArgs ());
-        options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));
-        options.setAvdReadyTimeout (ofSeconds (avd.getReadyTimeout ()));
+        if (avd != null) {
+            options.setAvd (avd.getName ());
+            options.setAvdArgs (avd.getArgs ());
+            options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));
+            options.setAvdReadyTimeout (ofSeconds (avd.getReadyTimeout ()));
+        }
     }
 
     private void setDriverSize (final WebSetting webSetting) {
