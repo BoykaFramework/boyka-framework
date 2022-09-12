@@ -14,25 +14,14 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.enums;
+package com.github.wasiqb.boyka.config.ui.mobile.device;
 
-import io.appium.java_client.remote.AutomationName;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-/**
- * Automation types for Mobile.
- *
- * @author Wasiq Bhamla
- * @since 06-Sept-2022
- */
-@AllArgsConstructor
-@Getter
-public enum AutomationType {
-    /**
-     * Android Ui Automator 2 driver.
-     */
-    UI_AUTOMATOR (AutomationName.ANDROID_UIAUTOMATOR2);
-
-    private final String name;
+@Data
+public class VirtualDeviceSetting {
+    private String args;
+    private int    launchTimeout = 60;
+    private String name;
+    private int    readyTimeout  = 60;
 }

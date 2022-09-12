@@ -155,6 +155,9 @@
           "application": {
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity"
+          },
+          "avd": {
+            "name": "Pixel_5"
           }
         }
       },

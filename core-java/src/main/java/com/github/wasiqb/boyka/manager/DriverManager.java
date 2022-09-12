@@ -52,6 +52,7 @@ import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.config.ui.TimeoutSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.device.VirtualDeviceSetting;
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
 import com.github.wasiqb.boyka.enums.AutomationType;
 import com.github.wasiqb.boyka.enums.CloudProviders;
@@ -187,6 +188,13 @@ public final class DriverManager {
         }
     }
 
+    private void setAvdOptions (final UiAutomator2Options options, final VirtualDeviceSetting avd) {
+        options.setAvd (avd.getName ());
+        options.setAvdArgs (avd.getArgs ());
+        options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));
+        options.setAvdReadyTimeout (ofSeconds (avd.getReadyTimeout ()));
+    }
+
     private void setDriverSize (final WebSetting webSetting) {
         if (this.platformType == PlatformType.WEB) {
             final var window = getSession ().getDriver ()
@@ -315,7 +323,7 @@ public final class DriverManager {
         options.setDeviceName (deviceSetting.getName ());
         setAndroidApplicationOptions (options, deviceSetting.getApplication ());
         if (deviceSetting.getType () == DeviceType.VIRTUAL) {
-            options.setAvd (deviceSetting.getName ());
+            setAvdOptions (options, deviceSetting.getAvd ());
         }
         setDriver (this.platformType, new AndroidDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));

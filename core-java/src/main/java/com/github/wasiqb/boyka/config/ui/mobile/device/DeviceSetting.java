@@ -35,13 +35,14 @@ import lombok.Data;
  */
 @Data
 public class DeviceSetting {
-    private ApplicationSetting  application;
-    private AutomationType      automation = UI_AUTOMATOR;
-    private Map<String, Object> capabilities;
-    private boolean             grantPermission;
-    private boolean             ignoreUnimportantViews;
-    private String              name;
-    private OS                  os         = ANDROID;
-    private DeviceType          type       = VIRTUAL;
-    private String              version;
+    private ApplicationSetting   application;
+    private AutomationType       automation = UI_AUTOMATOR;
+    private VirtualDeviceSetting avd;
+    private Map<String, Object>  capabilities;
+    private boolean              grantPermission;
+    private boolean              ignoreUnimportantViews;
+    private String               name;
+    private OS                   os         = ANDROID;
+    private DeviceType           type       = VIRTUAL;
+    private String               version;
 }
