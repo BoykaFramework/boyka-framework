@@ -59,6 +59,7 @@ import com.github.wasiqb.boyka.enums.AutomationType;
 import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.DeviceType;
 import com.github.wasiqb.boyka.enums.PlatformType;
+import io.appium.java_client.Setting;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.apache.logging.log4j.Logger;
@@ -246,7 +247,13 @@ public final class DriverManager {
         final var automation = androidDeviceSetting.getAutomation ();
         if (automation == AutomationType.UI_AUTOMATOR) {
             setupUiAutomatorDriver (androidDeviceSetting);
+            setupAndroidSettings (androidDeviceSetting);
         }
+    }
+
+    private void setupAndroidSettings (final DeviceSetting setting) {
+        final AndroidDriver driver = (AndroidDriver) getSession ().getDriver ();
+        driver.setSetting (Setting.IGNORE_UNIMPORTANT_VIEWS, setting.isIgnoreUnimportantViews ());
     }
 
     private void setupAppiumServer () {
@@ -320,6 +327,8 @@ public final class DriverManager {
 
     private void setupUiAutomatorDriver (final DeviceSetting deviceSetting) {
         final UiAutomator2Options options = new UiAutomator2Options ();
+        setAndroidApplicationOptions (options, deviceSetting.getApplication ());
+        setAvdOptions (options, deviceSetting.getType (), deviceSetting.getAvd ());
         options.setAutomationName (deviceSetting.getAutomation ()
             .getName ());
         options.setPlatformName (deviceSetting.getOs ()
@@ -328,10 +337,10 @@ public final class DriverManager {
         options.setDeviceName (deviceSetting.getName ());
         options.setClearSystemFiles (deviceSetting.isClearFiles ());
         options.setClearDeviceLogsOnStart (deviceSetting.isClearLogs ());
-        setAndroidApplicationOptions (options, deviceSetting.getApplication ());
-        setAvdOptions (options, deviceSetting.getType (), deviceSetting.getAvd ());
         options.setNoReset (deviceSetting.isNoReset ());
         options.setFullReset (deviceSetting.isFullReset ());
+        options.setUiautomator2ServerLaunchTimeout (ofSeconds (deviceSetting.getServerLaunchTimeout ()));
+        options.setUiautomator2ServerInstallTimeout (ofSeconds (deviceSetting.getServerInstallTimeout ()));
         setDriver (this.platformType, new AndroidDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
     }

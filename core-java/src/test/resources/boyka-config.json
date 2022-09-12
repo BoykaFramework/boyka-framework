@@ -152,6 +152,8 @@
           "name": "Pixel_5",
           "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
           "application": {
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",

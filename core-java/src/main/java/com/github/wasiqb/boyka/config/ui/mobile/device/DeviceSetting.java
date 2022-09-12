@@ -36,18 +36,19 @@ import lombok.Data;
 @Data
 public class DeviceSetting {
     private ApplicationSetting   application;
-    private AutomationType       automation = UI_AUTOMATOR;
-    private VirtualDeviceSetting avd        = new VirtualDeviceSetting ();
+    private AutomationType       automation             = UI_AUTOMATOR;
+    private VirtualDeviceSetting avd                    = new VirtualDeviceSetting ();
     private Map<String, Object>  capabilities;
-    private boolean              clearFiles;
-    private boolean              clearLogs;
-    private int                  driverLaunchTimeout;
+    private boolean              clearFiles             = true;
+    private boolean              clearLogs              = true;
     private boolean              fullReset;
-    private boolean              grantPermission;
-    private boolean              ignoreUnimportantViews;
+    private boolean              grantPermission        = true;
+    private boolean              ignoreUnimportantViews = true;
     private String               name;
     private boolean              noReset;
-    private OS                   os         = ANDROID;
-    private DeviceType           type       = VIRTUAL;
+    private OS                   os                     = ANDROID;
+    private int                  serverInstallTimeout   = 30;
+    private int                  serverLaunchTimeout    = 30;
+    private DeviceType           type                   = VIRTUAL;
     private String               version;
 }
