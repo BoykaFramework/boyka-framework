@@ -87,10 +87,11 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         if: github.event_name == 'push'
         with:
-          avd-name: Pixel_5
+          avd-name: Nexus_6
           api-level: 29
           target: google_apis
           arch: x86
+          profile: Nexus 6
           ram-size: 2048M
           heap-size: 512M
           disk-size: 2048M
@@ -103,10 +104,11 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         if: github.event_name == 'pull_request'
         with:
-          avd-name: Pixel_5
+          avd-name: Nexus_6
           api-level: 29
           target: google_apis
           arch: x86
+          profile: Nexus 6
           ram-size: 2048M
           heap-size: 512M
           disk-size: 2048M
