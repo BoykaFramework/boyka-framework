@@ -101,8 +101,11 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: pixel_5
+          ram-size: 2048M
+          heap-size: 512M
+          disk-size: 2048M
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
 
@@ -115,8 +118,11 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: pixel_5
+          ram-size: 2048M
+          heap-size: 512M
+          disk-size: 2048M
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test -Dsuite-xml=test-suites/testng-pr.xml
 
