@@ -157,7 +157,7 @@
           "application": {
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
-            "install_timeout": 180
+            "install_timeout": 60
           }
         }
       },
