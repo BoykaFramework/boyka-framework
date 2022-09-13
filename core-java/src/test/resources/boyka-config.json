@@ -148,7 +148,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "10",
           "name": "Pixel_5",
           "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
