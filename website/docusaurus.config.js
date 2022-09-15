@@ -122,7 +122,7 @@ const config = {
       },
       tableOfContents: {
         minHeadingLevel: 2,
-        maxHeadingLevel: 4,
+        maxHeadingLevel: 6,
       },
       navbar: {
         title: 'Boyka-framework',

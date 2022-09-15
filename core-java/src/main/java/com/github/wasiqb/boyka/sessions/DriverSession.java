@@ -16,12 +16,14 @@
 
 package com.github.wasiqb.boyka.sessions;
 
-import static java.time.Duration.ofSeconds;
+import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.PlatformType;
+import com.github.wasiqb.boyka.manager.ServiceManager;
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,43 +36,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Wasiq Bhamla
  * @since 19-Feb-2022
  */
+@Setter
 @Getter
 public class DriverSession<D extends WebDriver> {
     private static final Logger LOGGER = getLogger ();
-
-    private final ApplicationType  applicationType;
-    private final D                driver;
+    private       D                driver;
+    private       PlatformType     platformType;
+    private       ServiceManager   serviceManager;
     private final FrameworkSetting setting;
     private       WebDriverWait    wait;
 
     /**
      * Driver session constructor.
-     *
-     * @param applicationType {@link ApplicationType}
-     * @param driver Generic type of {@link WebDriver}
-     * @param setting {@link FrameworkSetting} instance
      */
-    DriverSession (final ApplicationType applicationType, final D driver, final FrameworkSetting setting) {
-        LOGGER.traceEntry ("Application type: {}, Driver: {}, FrameworkSetting: {}", applicationType, driver, setting);
-        this.applicationType = applicationType;
-        this.setting = setting;
-        this.driver = driver;
-        setDriverWaits ();
-        LOGGER.traceExit ();
-    }
-
-    private void setDriverWaits () {
-        LOGGER.traceEntry ();
-        final var timeoutSetting = this.setting.getUi ()
-            .getTimeout ();
-        final var timeouts = this.driver.manage ()
-            .timeouts ();
-        timeouts.implicitlyWait (ofSeconds (timeoutSetting.getImplicitWait ()));
-        if (this.applicationType == ApplicationType.WEB) {
-            timeouts.pageLoadTimeout (ofSeconds (timeoutSetting.getPageLoadTimeout ()));
-            timeouts.scriptTimeout (ofSeconds (timeoutSetting.getScriptTimeout ()));
-        }
-        this.wait = new WebDriverWait (getDriver (), ofSeconds (timeoutSetting.getExplicitWait ()));
+    DriverSession () {
+        this.setting = loadSetting ();
         LOGGER.traceExit ();
     }
 }

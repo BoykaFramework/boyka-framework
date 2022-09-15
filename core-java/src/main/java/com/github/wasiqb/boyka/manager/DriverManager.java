@@ -32,23 +32,34 @@ import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
-import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
+import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
+import static java.time.Duration.ofSeconds;
 import static java.util.Objects.requireNonNullElse;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
-import com.github.wasiqb.boyka.config.ui.WebSetting;
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.config.ui.TimeoutSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.device.VirtualDeviceSetting;
+import com.github.wasiqb.boyka.config.ui.web.WebSetting;
+import com.github.wasiqb.boyka.enums.AutomationType;
 import com.github.wasiqb.boyka.enums.CloudProviders;
+import com.github.wasiqb.boyka.enums.DeviceType;
+import com.github.wasiqb.boyka.enums.PlatformType;
+import io.appium.java_client.Setting;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -62,6 +73,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Wasiq Bhamla
@@ -79,6 +91,10 @@ public final class DriverManager {
         try {
             getSession ().getDriver ()
                 .quit ();
+            if (getSession ().getPlatformType () != PlatformType.WEB) {
+                getSession ().getServiceManager ()
+                    .stopServer ();
+            }
         } catch (final WebDriverException e) {
             handleAndThrow (ERROR_QUITTING_DRIVER, e);
         } finally {
@@ -90,28 +106,28 @@ public final class DriverManager {
     /**
      * Creates driver instance.
      *
-     * @param applicationType the application type
+     * @param platformType the application type
      * @param driverKey the driver config key
      *
      * @return the driver instance
      */
-    public static DriverManager createDriver (final ApplicationType applicationType, final String driverKey) {
+    public static DriverManager createDriver (final PlatformType platformType, final String driverKey) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Creating Driver Instance for {} and driver key: {}", applicationType, driverKey);
-        final var instance = new DriverManager (applicationType, driverKey);
+        LOGGER.info ("Creating Driver Instance for {} and driver key: {}", platformType, driverKey);
+        final var instance = new DriverManager (platformType, driverKey);
         instance.setupDriver ();
         return LOGGER.traceExit (instance);
     }
 
-    private final ApplicationType  applicationType;
     private final String           driverKey;
+    private final PlatformType     platformType;
     private final FrameworkSetting setting;
 
-    private DriverManager (final ApplicationType applicationType, final String driverKey) {
+    private DriverManager (final PlatformType platformType, final String driverKey) {
         LOGGER.traceEntry ();
-        this.applicationType = applicationType;
+        this.platformType = platformType;
         this.driverKey = driverKey;
-        this.setting = loadSetting ();
+        this.setting = getSession ().getSetting ();
         LOGGER.traceExit ();
     }
 
@@ -153,8 +169,30 @@ public final class DriverManager {
         return null;
     }
 
+    private void setAndroidApplicationOptions (final UiAutomator2Options options,
+        final ApplicationSetting application) {
+        if (!application.isExternal ()) {
+            options.setApp (Path.of (System.getProperty ("user.dir"), "/src/test/resources", application.getPath ())
+                .toString ());
+        } else {
+            options.setApp (interpolate (application.getPath ()));
+        }
+        options.setAppWaitActivity (application.getWaitActivity ());
+        options.setAppWaitDuration (ofSeconds (application.getWaitTimeout ()));
+        options.setAndroidInstallTimeout (ofSeconds (application.getInstallTimeout ()));
+    }
+
+    private void setAvdOptions (final UiAutomator2Options options, final DeviceType type,
+        final VirtualDeviceSetting avd) {
+        if (type == DeviceType.VIRTUAL && avd != null) {
+            options.setAvd (avd.getName ());
+            options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));
+            options.setAvdReadyTimeout (ofSeconds (avd.getReadyTimeout ()));
+        }
+    }
+
     private void setDriverSize (final WebSetting webSetting) {
-        if (this.applicationType == ApplicationType.WEB) {
+        if (this.platformType == PlatformType.WEB) {
             final var window = getSession ().getDriver ()
                 .manage ()
                 .window ();
@@ -178,6 +216,45 @@ public final class DriverManager {
         }
     }
 
+    private void setDriverWaits (final TimeoutSetting timeoutSetting) {
+        LOGGER.traceEntry ();
+        final var driver = getSession ().getDriver ();
+        final var timeouts = driver.manage ()
+            .timeouts ();
+        timeouts.implicitlyWait (ofSeconds (timeoutSetting.getImplicitWait ()));
+        if (this.platformType == PlatformType.WEB) {
+            timeouts.pageLoadTimeout (ofSeconds (timeoutSetting.getPageLoadTimeout ()));
+            timeouts.scriptTimeout (ofSeconds (timeoutSetting.getScriptTimeout ()));
+        }
+        getSession ().setWait (new WebDriverWait (driver, ofSeconds (timeoutSetting.getExplicitWait ())));
+        LOGGER.traceExit ();
+    }
+
+    private void setupAndroidDriver () {
+        final var androidDeviceSetting = this.setting.getUi ()
+            .getMobileSetting (this.driverKey)
+            .getDevice ();
+        final var automation = androidDeviceSetting.getAutomation ();
+        if (automation == AutomationType.UI_AUTOMATOR) {
+            setupUiAutomatorDriver (androidDeviceSetting);
+            setupAndroidSettings (androidDeviceSetting);
+        }
+    }
+
+    private void setupAndroidSettings (final DeviceSetting setting) {
+        final AndroidDriver driver = (AndroidDriver) getSession ().getDriver ();
+        driver.setSetting (Setting.IGNORE_UNIMPORTANT_VIEWS, setting.isIgnoreUnimportantViews ());
+    }
+
+    private void setupAppiumServer () {
+        final var serviceManager = new ServiceManager (this.setting.getUi ()
+            .getMobileSetting (this.driverKey)
+            .getServer ());
+        getSession ().setServiceManager (serviceManager);
+        getSession ().getServiceManager ()
+            .startServer ();
+    }
+
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         chromedriver ().setup ();
@@ -192,12 +269,14 @@ public final class DriverManager {
 
     private void setupDriver () {
         LOGGER.traceEntry ();
-        if (this.applicationType == ApplicationType.WEB) {
-            final var webSetting = this.setting.getUi ()
-                .getWebSetting (this.driverKey);
-            setupWebDriver (webSetting);
+        if (this.platformType == PlatformType.API) {
+            throwError (APP_TYPE_NOT_SUPPORTED, this.platformType);
+        }
+        if (this.platformType == PlatformType.WEB) {
+            setupWebDriver ();
         } else {
-            throwError (APP_TYPE_NOT_SUPPORTED, this.applicationType);
+            setupAppiumServer ();
+            setupMobileDriver ();
         }
         LOGGER.traceExit ();
     }
@@ -218,6 +297,12 @@ public final class DriverManager {
         return LOGGER.traceExit (new FirefoxDriver (options));
     }
 
+    private void setupMobileDriver () {
+        if (this.platformType == PlatformType.ANDROID) {
+            setupAndroidDriver ();
+        }
+    }
+
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         return LOGGER.traceExit (new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
@@ -230,30 +315,54 @@ public final class DriverManager {
         return LOGGER.traceExit (new SafariDriver ());
     }
 
-    private void setupWebDriver (final WebSetting webSetting) {
+    private void setupUiAutomatorDriver (final DeviceSetting deviceSetting) {
+        final UiAutomator2Options options = new UiAutomator2Options ();
+        setAndroidApplicationOptions (options, deviceSetting.getApplication ());
+        setAvdOptions (options, deviceSetting.getType (), deviceSetting.getAvd ());
+        options.setAutomationName (deviceSetting.getAutomation ()
+            .getName ());
+        options.setPlatformName (deviceSetting.getOs ()
+            .name ());
+        options.setPlatformVersion (deviceSetting.getVersion ());
+        options.setDeviceName (deviceSetting.getName ());
+        options.setClearSystemFiles (deviceSetting.isClearFiles ());
+        options.setClearDeviceLogsOnStart (deviceSetting.isClearLogs ());
+        options.setNoReset (deviceSetting.isNoReset ());
+        options.setFullReset (deviceSetting.isFullReset ());
+        options.setUiautomator2ServerLaunchTimeout (ofSeconds (deviceSetting.getServerLaunchTimeout ()));
+        options.setUiautomator2ServerInstallTimeout (ofSeconds (deviceSetting.getServerInstallTimeout ()));
+        setDriver (this.platformType, new AndroidDriver (getSession ().getServiceManager ()
+            .getServiceUrl (), options));
+    }
+
+    private void setupWebDriver () {
         LOGGER.traceEntry ();
+        final var webSetting = this.setting.getUi ()
+            .getWebSetting (this.driverKey);
         switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
             case CHROME:
-                setDriver (this.applicationType, setupChromeDriver (webSetting), this.setting);
+                setDriver (this.platformType, setupChromeDriver (webSetting));
                 break;
             case NONE:
                 throwError (INVALID_BROWSER);
                 break;
             case REMOTE:
-                setDriver (this.applicationType, setupRemoteDriver (webSetting), this.setting);
+                setDriver (this.platformType, setupRemoteDriver (webSetting));
                 break;
             case SAFARI:
-                setDriver (this.applicationType, setupSafariDriver (), this.setting);
+                setDriver (this.platformType, setupSafariDriver ());
                 break;
             case EDGE:
-                setDriver (this.applicationType, setupEdgeDriver (webSetting), this.setting);
+                setDriver (this.platformType, setupEdgeDriver (webSetting));
                 break;
             case FIREFOX:
             default:
-                setDriver (this.applicationType, setupFirefoxDriver (webSetting), this.setting);
+                setDriver (this.platformType, setupFirefoxDriver (webSetting));
                 break;
         }
         setDriverSize (webSetting);
+        setDriverWaits (this.setting.getUi ()
+            .getTimeout ());
         LOGGER.traceExit ();
     }
 }

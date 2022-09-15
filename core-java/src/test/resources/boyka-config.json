@@ -137,38 +137,88 @@
       "test_local_null_browser": {
       }
     },
-    "android": {
-      "test1": {
-        "userName": "",
-        "password": "",
-        "remoteUrl": "",
-        "port": 4723,
-        "settings": {
-          "ignoreUnimportantViews": true
+    "mobile": {
+      "test_local_android": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "127.0.0.1",
+          "port": 4723,
+          "base_path": "/wd/hub",
+          "session_override": true
         },
-        "capabilities": {
-          "platform": "Android",
-          "app": "src/test/resources/apps/android/android-app.apk",
-          "appiumVersion": "1.17.1",
-          "fullReset": "false",
-          "unicodeKeyboard": true,
-          "deviceOrientation": "portrait",
-          "automationName": "uiautomator2"
+        "device": {
+          "os": "ANDROID",
+          "version": "10",
+          "name": "Pixel_5",
+          "automation": "UI_AUTOMATOR",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "application": {
+            "path": "/apps/android/saucedemo.apk",
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          }
         }
-      }
-    },
-    "ios": {
-      "test1": {
-        "capabilities": {
-          "platformName": "iOS",
-          "platformVersion": "15.2",
-          "usePrebuiltWDA": "",
-          "showXcodeLog": true,
-          "showIOSLog": true,
-          "wdaStartupRetries": "3",
-          "noReset": true,
-          "automationName": "XCUITest",
-          "app": "src/test/resources/apps/ios/ios-app.ipa"
+      },
+      "sample_configs": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "localhost",
+          "port": 4723,
+          "session_override": true,
+          "allow_cors": false,
+          "relaxed_security": false,
+          "strict_capabilities": false,
+          "timeout": 20,
+          "callback_ip": "127.0.0.1",
+          "callback_port": 2222,
+          "allow_insecure": [
+            "adb_shell"
+          ],
+          "environments": {
+            "key1": "val1"
+          },
+          "appium_path": "/path/to/appium/main.js",
+          "node_path": "/path/to/node/bin",
+          "node_config": "/path/to/config.json",
+          "cloud": "NONE",
+          "user_name": "${env:BS_USER}",
+          "password": "${env:BS_KEY}",
+          "external": false,
+          "android": {
+            "bootstrap_port": 4724,
+            "reboot": false,
+            "suppress_adb_kill": true,
+            "chrome_driver_path": "/path/to/chrome/driver",
+            "chrome_driver_port": 9999
+          },
+          "ios": {
+            "backend_retires": 3,
+            "default_device": true,
+            "wda_port": 8100,
+            "wkd_proxy_port": 8101,
+            "safari": false,
+            "trace_path": "/path/to/trace",
+            "ipa_path": "/path/to/ipa"
+          },
+          "logs": {
+            "enable": true,
+            "async_trace": true,
+            "debug_spacing": true,
+            "level": "DEBUG",
+            "local_timezone": true,
+            "no_colors": true,
+            "timestamp": true,
+            "path": "/path/to/logs/folder"
+          }
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "10",
+          "name": "Pixel_5",
+          "automation": "UiAutomator2",
+          "type": "Emulator"
         }
       }
     }

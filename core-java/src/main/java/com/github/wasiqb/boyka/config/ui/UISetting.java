@@ -16,14 +16,13 @@
 
 package com.github.wasiqb.boyka.config.ui;
 
-import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
-import static org.apache.logging.log4j.LogManager.getLogger;
+import static com.github.wasiqb.boyka.utils.SettingUtils.getSetting;
 
 import java.util.Map;
 
-import com.github.wasiqb.boyka.enums.Message;
+import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
+import com.github.wasiqb.boyka.config.ui.web.WebSetting;
 import lombok.Data;
-import org.apache.logging.log4j.Logger;
 
 /**
  * @author Wasiq Bhamla
@@ -31,11 +30,21 @@ import org.apache.logging.log4j.Logger;
  */
 @Data
 public class UISetting {
-    private static final Logger LOGGER = getLogger ();
+    private Map<String, MobileSetting> mobile;
+    private ScreenshotSetting          screenshot = new ScreenshotSetting ();
+    private TimeoutSetting             timeout    = new TimeoutSetting ();
+    private Map<String, WebSetting>    web;
 
-    private ScreenshotSetting       screenshot = new ScreenshotSetting ();
-    private TimeoutSetting          timeout    = new TimeoutSetting ();
-    private Map<String, WebSetting> web;
+    /**
+     * Get Mobile settings.
+     *
+     * @param key config key for mobile
+     *
+     * @return the {@link MobileSetting}
+     */
+    public MobileSetting getMobileSetting (final String key) {
+        return getSetting (this.mobile, key);
+    }
 
     /**
      * Gets the web setting.
@@ -45,11 +54,6 @@ public class UISetting {
      * @return the {@link WebSetting}
      */
     public WebSetting getWebSetting (final String key) {
-        LOGGER.traceEntry ("Key: {}", key);
-        if (!this.web.containsKey (key)) {
-            final var keys = String.join (", ", this.web.keySet ());
-            throwError (Message.CONFIG_KEY_NOT_FOUND, key, keys);
-        }
-        return LOGGER.traceExit (this.web.get (key));
+        return getSetting (this.web, key);
     }
 }

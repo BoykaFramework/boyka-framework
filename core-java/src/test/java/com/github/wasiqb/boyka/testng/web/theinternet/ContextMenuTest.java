@@ -25,7 +25,7 @@ import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.ContextMenuPage.contextMenuPage;
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.HomePage.homePage;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -48,7 +48,7 @@ public class ContextMenuTest {
      */
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "appType", "driverKey" })
-    public void setupClass (final ApplicationType appType, final String driverKey) {
+    public void setupClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
         navigateTo (URL);
         clickOn (homePage ().link ("Context Menu"));

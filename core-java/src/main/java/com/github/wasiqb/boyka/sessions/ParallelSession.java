@@ -18,8 +18,7 @@ package com.github.wasiqb.boyka.sessions;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import com.github.wasiqb.boyka.config.FrameworkSetting;
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
@@ -52,21 +51,25 @@ public final class ParallelSession {
     @SuppressWarnings ("unchecked")
     public static <D extends WebDriver> DriverSession<D> getSession () {
         LOGGER.traceEntry ();
+        final var session = SESSION.get ();
+        if (session == null) {
+            SESSION.set (new DriverSession<> ());
+        }
         return LOGGER.traceExit ((DriverSession<D>) SESSION.get ());
     }
 
     /**
      * Sets current session in thread.
      *
-     * @param applicationType the application type
+     * @param platformType the application type
      * @param driver the driver instance
-     * @param setting the setting instance
      * @param <D> the generic WebDriver type
      */
-    public static <D extends WebDriver> void setDriver (final ApplicationType applicationType, final D driver,
-        final FrameworkSetting setting) {
-        LOGGER.traceEntry ("Application Type: {}, Driver: {}, FrameworkSetting: {}", applicationType, driver, setting);
-        SESSION.set (new DriverSession<> (applicationType, driver, setting));
+    public static <D extends WebDriver> void setDriver (final PlatformType platformType, final D driver) {
+        LOGGER.traceEntry ("Application Type: {}, Driver: {}", platformType, driver);
+        final var session = getSession ();
+        session.setPlatformType (platformType);
+        session.setDriver (driver);
         LOGGER.traceExit ();
     }
 

@@ -42,7 +42,7 @@ import static java.text.MessageFormat.format;
 import static org.openqa.selenium.WindowType.TAB;
 import static org.openqa.selenium.support.ui.ExpectedConditions.urlMatches;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -65,7 +65,7 @@ public class WindowTest {
      */
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "appType", "driverKey" })
-    public void setupClass (final ApplicationType appType, final String driverKey) {
+    public void setupClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
         maximize ();
         navigateTo (URL);

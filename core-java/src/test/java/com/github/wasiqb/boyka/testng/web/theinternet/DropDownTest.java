@@ -31,7 +31,7 @@ import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.theinternet.pages.DropDownPage.dropDownPage;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -54,7 +54,7 @@ public class DropDownTest {
      */
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "appType", "driverKey" })
-    public void setupClass (final ApplicationType appType, final String driverKey) {
+    public void setupClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
         navigateTo (URL);
     }
