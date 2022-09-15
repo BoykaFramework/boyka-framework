@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config.ui.mobile.server;
+package com.github.wasiqb.boyka.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -26,26 +26,18 @@ import static com.github.wasiqb.boyka.enums.Message.SERVER_ALREADY_RUNNING;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.BOOTSTRAP_PORT_NUMBER;
-import static io.appium.java_client.service.local.flags.AndroidServerFlag.CHROME_DRIVER_EXECUTABLE;
-import static io.appium.java_client.service.local.flags.AndroidServerFlag.CHROME_DRIVER_PORT;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.REBOOT;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.SUPPRESS_ADB_KILL_SERVER;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.ALLOW_INSECURE;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.ASYNC_TRACE;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.BASEPATH;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.CALLBACK_ADDRESS;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.CALLBACK_PORT;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.CONFIGURATION_FILE;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.DEBUG_LOG_SPACING;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOCAL_TIMEZONE;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_NO_COLORS;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_TIMESTAMP;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.RELAXED_SECURITY;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.STRICT_CAPS;
 import static java.lang.String.join;
+import static java.lang.Thread.currentThread;
+import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
+import static org.apache.commons.io.FileUtils.cleanDirectory;
+import static org.apache.commons.io.FileUtils.isEmptyDirectory;
 import static org.apache.commons.lang3.StringUtils.isNoneEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -57,7 +49,6 @@ import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.URL;
-import java.nio.file.Files;
 
 import com.github.wasiqb.boyka.config.ui.mobile.server.AndroidSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.server.LogSetting;
@@ -155,11 +146,9 @@ public class ServiceManager {
         this.builder.withIPAddress (this.setting.getHost ())
             .withTimeout (ofSeconds (this.setting.getTimeout ()));
         setPort ();
-        setLogFile ();
         setAppiumJS ();
         setNodeExe ();
         setArguments ();
-        setEnvironmentVariables ();
         this.service = AppiumDriverLocalService.buildService (this.builder);
         LOG.trace ("Building Appium Service done...");
     }
@@ -190,9 +179,7 @@ public class ServiceManager {
         final AndroidSetting android = this.setting.getAndroid ();
         if (android != null) {
             setArgument (BOOTSTRAP_PORT_NUMBER, android.getBootstrapPort ());
-            setArgument (CHROME_DRIVER_PORT, android.getChromeDriverPort ());
             setArgument (REBOOT, android.isReboot ());
-            setArgument (CHROME_DRIVER_EXECUTABLE, android.getChromeDriverPath ());
             setArgument (SUPPRESS_ADB_KILL_SERVER, android.isSuppressAdbKill ());
         }
     }
@@ -229,23 +216,11 @@ public class ServiceManager {
     }
 
     private void setCommonArguments () {
-        setArgument (() -> "--allow-cors", this.setting.isAllowCors ());
-        setArgument (STRICT_CAPS, this.setting.isStrictCapabilities ());
         setArgument (BASEPATH, this.setting.getBasePath ());
-        setArgument (RELAXED_SECURITY, this.setting.isRelaxedSecurity ());
         setArgument (SESSION_OVERRIDE, this.setting.isSessionOverride ());
-        setArgument (CONFIGURATION_FILE, this.setting.getNodeConfig ());
-        setArgument (CALLBACK_ADDRESS, this.setting.getCallbackIp ());
-        setArgument (CALLBACK_PORT, this.setting.getCallbackPort ());
         if (this.setting.getAllowInsecure () != null && !this.setting.getAllowInsecure ()
             .isEmpty ()) {
             setArgument (ALLOW_INSECURE, join (",", this.setting.getAllowInsecure ()));
-        }
-    }
-
-    private void setEnvironmentVariables () {
-        if (this.setting.getEnvironments () != null) {
-            this.builder.withEnvironment (this.setting.getEnvironments ());
         }
     }
 
@@ -258,26 +233,23 @@ public class ServiceManager {
             setArgument (LOG_LEVEL, logs.getLevel ()
                 .getLevel ());
         }
-        setArgument (LOG_NO_COLORS, logs.isNoColors ());
-        setArgument (ASYNC_TRACE, logs.isAsyncTrace ());
-        setArgument (DEBUG_LOG_SPACING, logs.isDebugSpacing ());
-        setArgument (LOG_TIMESTAMP, logs.isTimestamp ());
-        setArgument (LOCAL_TIMEZONE, logs.isLocalTimezone ());
+        setLogFile ();
     }
 
     private void setLogFile () {
-        final String logFilePath = this.setting.getLogs ()
+        final String logFolderPath = this.setting.getLogs ()
             .getPath ();
-        if (logFilePath != null) {
-            final File logFile = new File (logFilePath);
+        if (logFolderPath != null) {
+            final File logFolder = new File (logFolderPath);
             try {
-                if (logFile.exists ()) {
-                    Files.delete (logFile.toPath ());
+                if (!isEmptyDirectory (logFolder)) {
+                    cleanDirectory (logFolder);
                 }
             } catch (final IOException e) {
                 handleAndThrow (ERROR_DELETING_LOGS, e);
             }
-            this.builder.withLogFile (logFile);
+            final var filePath = new File (format ("{0}/server-{1}.log", logFolderPath, currentThread ().getId ()));
+            this.builder.withLogFile (filePath);
         }
     }
 

@@ -34,12 +34,10 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
-import static io.appium.java_client.remote.AndroidMobileCapabilityType.DONT_STOP_APP_ON_RESET;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
-import static java.lang.String.join;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.requireNonNullElse;
@@ -180,22 +178,14 @@ public final class DriverManager {
             options.setApp (interpolate (application.getPath ()));
         }
         options.setAppWaitActivity (application.getWaitActivity ());
-        options.setAppWaitPackage (application.getWaitPackage ());
-        options.setAppPackage (application.getPackageName ());
-        options.setAppActivity (application.getActivityName ());
         options.setAppWaitDuration (ofSeconds (application.getWaitTimeout ()));
-        options.setCapability (DONT_STOP_APP_ON_RESET, application.isNoStopAppOnReset ());
         options.setAndroidInstallTimeout (ofSeconds (application.getInstallTimeout ()));
-        if (application.getOtherApps () != null) {
-            options.setOtherApps (join (",", application.getOtherApps ()));
-        }
     }
 
     private void setAvdOptions (final UiAutomator2Options options, final DeviceType type,
         final VirtualDeviceSetting avd) {
         if (type == DeviceType.VIRTUAL && avd != null) {
             options.setAvd (avd.getName ());
-            options.setAvdArgs (avd.getArgs ());
             options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));
             options.setAvdReadyTimeout (ofSeconds (avd.getReadyTimeout ()));
         }

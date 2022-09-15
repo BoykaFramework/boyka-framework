@@ -16,10 +16,9 @@
 
 package com.github.wasiqb.boyka.config.ui.mobile.server;
 
-import static java.lang.System.getProperty;
-import static java.lang.Thread.currentThread;
-import static java.text.MessageFormat.format;
+import static com.github.wasiqb.boyka.enums.LogLevel.DEBUG;
 
+import com.github.wasiqb.boyka.enums.LogLevel;
 import lombok.Data;
 
 /**
@@ -30,14 +29,7 @@ import lombok.Data;
  */
 @Data
 public class LogSetting {
-    private static final String PATH_PATTERN = "{0}/logs/server-{1}.log";
-
-    private boolean  asyncTrace;
-    private boolean  debugSpacing;
     private boolean  enable = true;
-    private LogLevel level;
-    private boolean  localTimezone;
-    private boolean  noColors;
-    private String   path   = format (PATH_PATTERN, getProperty ("user.dir"), currentThread ().getId ());
-    private boolean  timestamp;
+    private LogLevel level  = DEBUG;
+    private String   path   = "./logs";
 }

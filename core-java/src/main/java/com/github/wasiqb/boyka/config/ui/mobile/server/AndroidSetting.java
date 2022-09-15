@@ -27,8 +27,6 @@ import lombok.Data;
 @Data
 public class AndroidSetting {
     private int     bootstrapPort;
-    private String  chromeDriverPath;
-    private int     chromeDriverPort;
     private boolean reboot          = false;
     private boolean suppressAdbKill = true;
 }

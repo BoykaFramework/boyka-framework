@@ -221,41 +221,6 @@
           "type": "Emulator"
         }
       }
-    },
-    "android": {
-      "test1": {
-        "userName": "",
-        "password": "",
-        "remoteUrl": "",
-        "port": 4723,
-        "settings": {
-          "ignoreUnimportantViews": true
-        },
-        "capabilities": {
-          "platform": "Android",
-          "app": "src/test/resources/apps/android/android-app.apk",
-          "appiumVersion": "1.17.1",
-          "fullReset": "false",
-          "unicodeKeyboard": true,
-          "deviceOrientation": "portrait",
-          "automationName": "uiautomator2"
-        }
-      }
-    },
-    "ios": {
-      "test1": {
-        "capabilities": {
-          "platformName": "iOS",
-          "platformVersion": "15.2",
-          "usePrebuiltWDA": "",
-          "showXcodeLog": true,
-          "showIOSLog": true,
-          "wdaStartupRetries": "3",
-          "noReset": true,
-          "automationName": "XCUITest",
-          "app": "src/test/resources/apps/ios/ios-app.ipa"
-        }
-      }
     }
   },
   "api": {

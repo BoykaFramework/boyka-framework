@@ -16,11 +16,11 @@
 
 package com.github.wasiqb.boyka.config.ui.mobile.server;
 
+import static com.github.wasiqb.boyka.enums.CloudProviders.NONE;
 import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 
 import java.util.List;
-import java.util.Map;
 
 import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.Protocol;
@@ -34,28 +34,21 @@ import lombok.Data;
  */
 @Data
 public class ServerSetting {
-    private boolean             allowCors;
-    private List<String>        allowInsecure;
-    private AndroidSetting      android;
-    private String              appiumPath;
-    private String              basePath;
-    private String              callbackIp;
-    private int                 callbackPort;
-    private CloudProviders      cloud    = CloudProviders.NONE;
-    private Map<String, String> environments;
-    private boolean             external;
-    private String              host;
-    private LogSetting          logs     = new LogSetting ();
-    private String              nodeConfig;
-    private String              nodePath;
-    private String              password;
-    private int                 port     = 4723;
-    private Protocol            protocol = HTTP;
-    private boolean             relaxedSecurity;
-    private boolean             sessionOverride;
-    private boolean             strictCapabilities;
-    private int                 timeout  = 30;
-    private String              userName;
+    private List<String>   allowInsecure;
+    private AndroidSetting android;
+    private String         appiumPath;
+    private String         basePath;
+    private CloudProviders cloud           = NONE;
+    private boolean        external;
+    private String         host;
+    private LogSetting     logs            = new LogSetting ();
+    private String         nodePath;
+    private String         password;
+    private int            port            = 4723;
+    private Protocol       protocol        = HTTP;
+    private boolean        sessionOverride = true;
+    private int            timeout         = 30;
+    private String         userName;
 
     /**
      * Gets cloud password.

@@ -24,10 +24,6 @@ package com.github.wasiqb.boyka.enums;
  */
 public enum DeviceType {
     /**
-     * Real physical device.
-     */
-    REAL,
-    /**
      * Virtual device.
      */
     VIRTUAL

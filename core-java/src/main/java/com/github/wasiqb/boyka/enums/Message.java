@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -24,6 +25,7 @@ import lombok.Getter;
  * @author Wasiq Bhamla
  * @since 19-Feb-2022
  */
+@AllArgsConstructor
 @Getter
 public enum Message {
     /**
@@ -169,8 +171,4 @@ public enum Message {
     USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution...");
 
     private final String messageText;
-
-    Message (final String message) {
-        this.messageText = message;
-    }
 }

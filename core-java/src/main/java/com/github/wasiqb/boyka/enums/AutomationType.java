@@ -16,7 +16,8 @@
 
 package com.github.wasiqb.boyka.enums;
 
-import io.appium.java_client.remote.AutomationName;
+import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,7 +33,7 @@ public enum AutomationType {
     /**
      * Android Ui Automator 2 driver.
      */
-    UI_AUTOMATOR (AutomationName.ANDROID_UIAUTOMATOR2);
+    UI_AUTOMATOR (ANDROID_UIAUTOMATOR2);
 
     private final String name;
 }

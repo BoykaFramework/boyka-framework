@@ -16,22 +16,23 @@
 
 package com.github.wasiqb.boyka.config.ui.mobile.device;
 
-import java.util.List;
+import static com.github.wasiqb.boyka.enums.ApplicationType.NATIVE;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
 import lombok.Data;
 
+/**
+ * Application specific settings.
+ *
+ * @author Wasiq Bhamla
+ * @since 13-Sept-2022
+ */
 @Data
 public class ApplicationSetting {
-    private String          activityName;
     private boolean         external;
     private int             installTimeout = 30;
-    private boolean         noStopAppOnReset;
-    private List<String>    otherApps;
-    private String          packageName;
     private String          path;
-    private ApplicationType type           = ApplicationType.NATIVE;
+    private ApplicationType type           = NATIVE;
     private String          waitActivity;
-    private String          waitPackage;
     private int             waitTimeout    = 30;
 }

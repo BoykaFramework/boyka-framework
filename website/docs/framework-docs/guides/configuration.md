@@ -107,8 +107,7 @@ The file name and it's location cannot be modified.
 | `timeout` | Contains timeout configuration. See [Timeout Config below](#timeout-config). | `TimeoutSetting` |  |
 | `screenshot` | Contains screenshot configuration. See [Screenshot Config below](#screenshot-config). | `ScreenshotSetting` |  |
 | `web` | Contains web platform configuration. See [Web Config below](#web-config). | `Map<String, WebSetting>` |  |
-| `android` | Contains Android platform configuration. See [Android Config below](#android-config). | `object` |  |
-| `ios` | Contains iOS platform configuration. See [iOS Config below](#ios-config). | `object` |  |
+| `mobile` | Contains Mobile platform configuration. See [Mobile Config below](#mobile-config). | `object` |  |
 
 :::info Web Configuration
 In `ui` configuration block, you can provide different versions of web settings having different key names under `web` object.
@@ -174,17 +173,88 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | XML XPath | `${xml:src/test/resources/document.xml:/root/path/to/node}` |
 :::
 
-#### Android Configuration {#android-config}
+#### Mobile Configuration {#mobile-config}
 
-:::info
-COMING SOON, STAY TUNED!
-:::
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `server` | Contains Appium Server related configurations | [`ServerSetting`](#server-config) | |
+| `device` | Contains Mobile test device related configurations | [`DeviceSetting`](#device-config) | |
 
-#### iOS Configuration {#ios-config}
+##### Appium Server Configuration {#server-config}
 
-:::info
-COMING SOON, STAY TUNED!
-:::
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `protocol` | Protocol type of the server host | [`Protocol`](#supported-protocols) | `HTTP` |
+| `host` | Host of the server | `string` | |
+| `port` | Port on which server will run | `int` | |
+| `base_path` | Base path of the server, normally its `/wd/hub` which needs to be added in config | `string` | |
+| `external` | Set `true` if using already running server, else framework will start the server automatically | `boolean` | `false` |
+| `session_override` | Enables session override | `boolean` | `true` |
+| `node_path` | Node executable path | `string` | |
+| `appium_path` | Appium executable `main.js` path | `string` | |
+| `cloud` | Cloud service provider name. | [`CloudProviders`](#supported-cloud-providers) | `CloudProviders.NONE` |
+| `user_name` | User name for cloud service provider. | `string` | `null` |
+| `password` | Password / Access key for cloud service provider. | `string` | `null` |
+| `android` | Android specific server settings | [`AndroidServerSetting`](#android-server-config) | |
+| `logs` | Logging specific server settings | [`LogSetting`](#log-config) | |
+| `allow_insecure` | Allow list of features in server considered as insecure | `List<string>` | |
+| `timeout` | Timeout in seconds for server to start | `int` | `30` |
+
+###### Android Server Configuration {#android-server-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `bootstrap_port` | Bootstrap port | `int` | |
+| `reboot` | Should emulator be rebooted? | `boolean` | `false` |
+| `suppress_adb_kill` | Should kill ADB after session completion? | `boolean` | `true` |
+
+###### Server Logs Configuration {#log-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `enable` | Should the logging be saved? | `boolean` | `true` |
+| `level` | Log level which server will capture | [`LogLevel`](#log-level) | `DEBUG` |
+| `path` | Log folder path | `string` | `{root-folder}/logs` |
+
+##### Mobile Device Configuration {#device-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `name` | Device Name | `string` |  |
+| `os` | Device OS type | [`OS`](#supported-os) | `ANDROID` |
+| `version` | Device OS version | `string` | |
+| `type` | Device type | [`DeviceType`](#supported-device-types) | `VIRTUAL` |
+| `automation` | Appium automation type | [`AutomationType`](#supported-automation-types) | `UI_AUTOMATOR` |
+| `capabilities` | Contains cloud specific capabilities | `Map` | |
+| `application` | Contains application related configs | [`ApplicationSetting`](#app-config) | |
+| `avd` | Contains virtual device specific configs | [`VirtualDeviceSetting`](#avd-config) | |
+| `clear_files` | Determines if system files needs to cleared after run completes on a device | `boolean` | `true` |
+| `clear_logs` | Determines if device logs needs to be cleared | `boolean` | `true` |
+| `full_reset` | Determines if full reset needs to be done | `boolean` | |
+| `no_reset` | Determines if there should be no reset | `boolean` | |
+| `grant_permission` | Determines if auto grant permission is needed | `boolean` | `true` |
+| `ignore_unimportant_views` | Determines if unimportant views needs to be ignored | `boolean` | `true` |
+| `server_install_timeout` | Timeout in seconds to wait for Appium server app to get installed | `int` | `30` |
+| `server_launch_timeout` | Timeout in seconds to wait for Appium server app to start | `int` | `30` |
+
+###### Device Application Configurations {#app-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `external` | Is the app saved outside `src/test/resources` folder? | `boolean` | `false` |
+| `path` | Path to the AUT, can also contain environment variables for cloud App URL | `string` | |
+| `type` | Application type | `ApplicationType` | `NATIVE` |
+| `install_timeout` | Timeout in seconds to wait until app gets installed on device | `int` | `30` |
+| `wait_activity` | Wait for the mentioned activity to load | `string` | |
+| `wait_timeout` | Wait timeout in seconds to wait for AUT | `int` | `30` |
+
+###### Virtual Device Configurations {#avd-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `name` | Name of AVD | `string` | |
+| `launch_timeout` | Timeout in seconds to wait until AVD launches | `int` | `60` |
+| `ready_timeout` | Timeout in seconds to wait until AVD is ready | `int` | `60` |
 
 ### API Configuration {#api-config}
 
@@ -237,3 +307,41 @@ We have an enum `CloudProviders` where we maintain the list of supported cloud p
 - `NONE`: No cloud provider will be used.
 - `BROWSER_STACK`: Is used for BrowserStack cloud provider.
 - `LAMBDA_TEST`: Is used for LambdaTest cloud provider.
+
+## Supported Device OS {#supported-os}
+
+We have an enum `OS` where we maintain the list of currently supported device OS types. They are:
+
+- `ANDROID`
+
+## Supported device types {#supported-device-types}
+
+- `REAL`
+- `VIRTUAL`
+
+## Supported Automation types {#supported-automation-types}
+
+- `UI_AUTOMATOR`: Equivalent for `UIAutomator2` in Appium
+
+## Supported Server Log levels {#log-level}
+
+- `DEBUG`
+- `DEBUG_DEBUG`
+- `DEBUG_ERROR`
+- `DEBUG_INFO`
+- `DEBUG_WARN`
+- `ERROR`
+- `ERROR_DEBUG`
+- `ERROR_ERROR`
+- `ERROR_INFO`
+- `ERROR_WARN`
+- `INFO`
+- `INFO_DEBUG`
+- `INFO_ERROR`
+- `INFO_INFO`
+- `INFO_WARN`
+- `WARN`
+- `WARN_DEBUG`
+- `WARN_ERROR`
+- `WARN_INFO`
+- `WARN_WARN`
