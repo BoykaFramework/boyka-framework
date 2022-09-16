@@ -24,6 +24,10 @@ package com.github.wasiqb.boyka.enums;
  */
 public enum DeviceType {
     /**
+     * Cloud device.
+     */
+    CLOUD,
+    /**
      * Virtual device.
      */
     VIRTUAL

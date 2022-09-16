@@ -167,6 +167,9 @@ public class ServiceManager {
             sb.append (":")
                 .append (this.setting.getPort ());
         }
+        if (isNotEmpty (this.setting.getBasePath ())) {
+            sb.append (this.setting.getBasePath ());
+        }
         return sb.toString ();
     }
 
