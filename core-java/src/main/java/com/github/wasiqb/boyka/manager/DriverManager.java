@@ -16,6 +16,11 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.AutomationType.UI_AUTOMATOR;
+import static com.github.wasiqb.boyka.enums.CloudProviders.BROWSER_STACK;
+import static com.github.wasiqb.boyka.enums.CloudProviders.NONE;
+import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
+import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
 import static com.github.wasiqb.boyka.enums.Message.APP_TYPE_NOT_SUPPORTED;
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
@@ -27,6 +32,9 @@ import static com.github.wasiqb.boyka.enums.Message.NULL_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
+import static com.github.wasiqb.boyka.enums.PlatformType.ANDROID;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
+import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
@@ -52,9 +60,8 @@ import com.github.wasiqb.boyka.config.ui.TimeoutSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.VirtualDeviceSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
-import com.github.wasiqb.boyka.enums.AutomationType;
-import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.DeviceType;
 import com.github.wasiqb.boyka.enums.PlatformType;
 import io.appium.java_client.Setting;
@@ -91,7 +98,7 @@ public final class DriverManager {
         try {
             getSession ().getDriver ()
                 .quit ();
-            if (getSession ().getPlatformType () != PlatformType.WEB) {
+            if (getSession ().getPlatformType () != WEB) {
                 getSession ().getServiceManager ()
                     .stopServer ();
             }
@@ -141,7 +148,7 @@ public final class DriverManager {
 
     private String getHostName (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        if (requireNonNullElse (webSetting.getCloud (), CloudProviders.NONE) != CloudProviders.NONE) {
+        if (requireNonNullElse (webSetting.getCloud (), NONE) != NONE) {
             final var hostNamePattern = "{0}:{1}@{2}";
             return format (hostNamePattern, requireNonNull (webSetting.getUserName (), USER_NAME_REQUIRED_FOR_CLOUD),
                 requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD),
@@ -184,15 +191,26 @@ public final class DriverManager {
 
     private void setAvdOptions (final UiAutomator2Options options, final DeviceType type,
         final VirtualDeviceSetting avd) {
-        if (type == DeviceType.VIRTUAL && avd != null) {
+        if (type == VIRTUAL && avd != null) {
             options.setAvd (avd.getName ());
+            options.setIsHeadless (avd.isHeadless ());
             options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));
             options.setAvdReadyTimeout (ofSeconds (avd.getReadyTimeout ()));
         }
     }
 
+    private void setCommonUiAutomatorOptions (final UiAutomator2Options options, final DeviceSetting deviceSetting) {
+        setAndroidApplicationOptions (options, deviceSetting.getApplication ());
+        options.setAutomationName (deviceSetting.getAutomation ()
+            .getName ());
+        options.setPlatformName (deviceSetting.getOs ()
+            .name ());
+        options.setPlatformVersion (deviceSetting.getVersion ());
+        options.setDeviceName (deviceSetting.getName ());
+    }
+
     private void setDriverSize (final WebSetting webSetting) {
-        if (this.platformType == PlatformType.WEB) {
+        if (this.platformType == WEB) {
             final var window = getSession ().getDriver ()
                 .manage ()
                 .window ();
@@ -222,7 +240,7 @@ public final class DriverManager {
         final var timeouts = driver.manage ()
             .timeouts ();
         timeouts.implicitlyWait (ofSeconds (timeoutSetting.getImplicitWait ()));
-        if (this.platformType == PlatformType.WEB) {
+        if (this.platformType == WEB) {
             timeouts.pageLoadTimeout (ofSeconds (timeoutSetting.getPageLoadTimeout ()));
             timeouts.scriptTimeout (ofSeconds (timeoutSetting.getScriptTimeout ()));
         }
@@ -230,15 +248,26 @@ public final class DriverManager {
         LOGGER.traceExit ();
     }
 
+    private void setLocalUiAutomatorOptions (final UiAutomator2Options options, final DeviceSetting deviceSetting) {
+        setAvdOptions (options, deviceSetting.getType (), deviceSetting.getAvd ());
+        options.setClearSystemFiles (deviceSetting.isClearFiles ());
+        options.setClearDeviceLogsOnStart (deviceSetting.isClearLogs ());
+        options.setNoReset (deviceSetting.isNoReset ());
+        options.setFullReset (deviceSetting.isFullReset ());
+        options.setUiautomator2ServerLaunchTimeout (ofSeconds (deviceSetting.getServerLaunchTimeout ()));
+        options.setUiautomator2ServerInstallTimeout (ofSeconds (deviceSetting.getServerInstallTimeout ()));
+    }
+
     private void setupAndroidDriver () {
-        final var androidDeviceSetting = this.setting.getUi ()
-            .getMobileSetting (this.driverKey)
-            .getDevice ();
-        final var automation = androidDeviceSetting.getAutomation ();
-        if (automation == AutomationType.UI_AUTOMATOR) {
-            setupUiAutomatorDriver (androidDeviceSetting);
-            setupAndroidSettings (androidDeviceSetting);
+        final var androidSetting = this.setting.getUi ()
+            .getMobileSetting (this.driverKey);
+        final var serverSetting = androidSetting.getServer ();
+        final var deviceSetting = androidSetting.getDevice ();
+        final var automation = deviceSetting.getAutomation ();
+        if (automation == UI_AUTOMATOR) {
+            setupUiAutomatorDriver (serverSetting, deviceSetting);
         }
+        setupAndroidSettings (deviceSetting);
     }
 
     private void setupAndroidSettings (final DeviceSetting setting) {
@@ -255,6 +284,12 @@ public final class DriverManager {
             .startServer ();
     }
 
+    private void setupBSAndroidDriver (final UiAutomator2Options options, final DeviceSetting deviceSetting) {
+        if (deviceSetting.getCapabilities () != null) {
+            options.setCapability ("bstack:options", deviceSetting.getCapabilities ());
+        }
+    }
+
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         chromedriver ().setup ();
@@ -269,10 +304,10 @@ public final class DriverManager {
 
     private void setupDriver () {
         LOGGER.traceEntry ();
-        if (this.platformType == PlatformType.API) {
+        if (this.platformType == API) {
             throwError (APP_TYPE_NOT_SUPPORTED, this.platformType);
         }
-        if (this.platformType == PlatformType.WEB) {
+        if (this.platformType == WEB) {
             setupWebDriver ();
         } else {
             setupAppiumServer ();
@@ -298,7 +333,7 @@ public final class DriverManager {
     }
 
     private void setupMobileDriver () {
-        if (this.platformType == PlatformType.ANDROID) {
+        if (this.platformType == ANDROID) {
             setupAndroidDriver ();
         }
     }
@@ -315,22 +350,14 @@ public final class DriverManager {
         return LOGGER.traceExit (new SafariDriver ());
     }
 
-    private void setupUiAutomatorDriver (final DeviceSetting deviceSetting) {
+    private void setupUiAutomatorDriver (final ServerSetting serverSetting, final DeviceSetting deviceSetting) {
         final UiAutomator2Options options = new UiAutomator2Options ();
-        setAndroidApplicationOptions (options, deviceSetting.getApplication ());
-        setAvdOptions (options, deviceSetting.getType (), deviceSetting.getAvd ());
-        options.setAutomationName (deviceSetting.getAutomation ()
-            .getName ());
-        options.setPlatformName (deviceSetting.getOs ()
-            .name ());
-        options.setPlatformVersion (deviceSetting.getVersion ());
-        options.setDeviceName (deviceSetting.getName ());
-        options.setClearSystemFiles (deviceSetting.isClearFiles ());
-        options.setClearDeviceLogsOnStart (deviceSetting.isClearLogs ());
-        options.setNoReset (deviceSetting.isNoReset ());
-        options.setFullReset (deviceSetting.isFullReset ());
-        options.setUiautomator2ServerLaunchTimeout (ofSeconds (deviceSetting.getServerLaunchTimeout ()));
-        options.setUiautomator2ServerInstallTimeout (ofSeconds (deviceSetting.getServerInstallTimeout ()));
+        setCommonUiAutomatorOptions (options, deviceSetting);
+        if (deviceSetting.getType () == CLOUD && serverSetting.getCloud () == BROWSER_STACK) {
+            setupBSAndroidDriver (options, deviceSetting);
+        } else {
+            setLocalUiAutomatorOptions (options, deviceSetting);
+        }
         setDriver (this.platformType, new AndroidDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
     }

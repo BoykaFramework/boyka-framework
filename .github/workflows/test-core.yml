@@ -54,7 +54,7 @@ jobs:
       BS_KEY: ${{ secrets.BS_KEY }}
       LT_USER: ${{ secrets.LT_USER }}
       LT_KEY: ${{ secrets.LT_KEY }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      BS_APP_ANDROID: ${{ secrets.BS_APP_ANDROID }}
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3

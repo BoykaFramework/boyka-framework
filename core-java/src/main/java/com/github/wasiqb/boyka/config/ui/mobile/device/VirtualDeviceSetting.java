@@ -26,7 +26,8 @@ import lombok.Data;
  */
 @Data
 public class VirtualDeviceSetting {
-    private int    launchTimeout = 60;
-    private String name;
-    private int    readyTimeout  = 60;
+    private boolean headless      = false;
+    private int     launchTimeout = 60;
+    private String  name;
+    private int     readyTimeout  = 60;
 }

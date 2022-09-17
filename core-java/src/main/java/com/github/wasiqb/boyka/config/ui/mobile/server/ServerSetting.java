@@ -44,7 +44,7 @@ public class ServerSetting {
     private LogSetting     logs            = new LogSetting ();
     private String         nodePath;
     private String         password;
-    private int            port            = 4723;
+    private int            port;
     private Protocol       protocol        = HTTP;
     private boolean        sessionOverride = true;
     private int            timeout         = 30;

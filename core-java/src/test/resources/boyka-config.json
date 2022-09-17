@@ -158,67 +158,44 @@
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
+          },
+          "avd": {
+            "headless": true
           }
         }
       },
-      "sample_configs": {
+      "test_bs_android": {
         "server": {
-          "protocol": "HTTP",
-          "host": "localhost",
-          "port": 4723,
-          "session_override": true,
-          "allow_cors": false,
-          "relaxed_security": false,
-          "strict_capabilities": false,
-          "timeout": 20,
-          "callback_ip": "127.0.0.1",
-          "callback_port": 2222,
-          "allow_insecure": [
-            "adb_shell"
-          ],
-          "environments": {
-            "key1": "val1"
-          },
-          "appium_path": "/path/to/appium/main.js",
-          "node_path": "/path/to/node/bin",
-          "node_config": "/path/to/config.json",
-          "cloud": "NONE",
+          "cloud": "BROWSER_STACK",
+          "protocol": "HTTPS",
+          "host": "hub-cloud.browserstack.com",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "external": false,
-          "android": {
-            "bootstrap_port": 4724,
-            "reboot": false,
-            "suppress_adb_kill": true,
-            "chrome_driver_path": "/path/to/chrome/driver",
-            "chrome_driver_port": 9999
-          },
-          "ios": {
-            "backend_retires": 3,
-            "default_device": true,
-            "wda_port": 8100,
-            "wkd_proxy_port": 8101,
-            "safari": false,
-            "trace_path": "/path/to/trace",
-            "ipa_path": "/path/to/ipa"
-          },
-          "logs": {
-            "enable": true,
-            "async_trace": true,
-            "debug_spacing": true,
-            "level": "DEBUG",
-            "local_timezone": true,
-            "no_colors": true,
-            "timestamp": true,
-            "path": "/path/to/logs/folder"
-          }
+          "base_path": "/wd/hub"
         },
         "device": {
           "os": "ANDROID",
-          "version": "10",
-          "name": "Pixel_5",
-          "automation": "UiAutomator2",
-          "type": "Emulator"
+          "version": "11.0",
+          "name": "Google Pixel 5",
+          "automation": "UI_AUTOMATOR",
+          "type": "CLOUD",
+          "application": {
+            "path": "${env:BS_APP_ANDROID}",
+            "external": true,
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "capabilities": {
+            "projectName": "BrowserStack Android Project",
+            "buildName": "Test BrowserStack Build",
+            "sessionName": "Test BrowserStack Session",
+            "appiumVersion": "1.22.0",
+            "deviceLogs": true,
+            "networkLogs": true,
+            "debug": true,
+            "video": true,
+            "appiumLogs": true
+          }
         }
       }
     }
