@@ -254,6 +254,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | -------- | ----------- | ---- | ------- |
 | `name` | Name of AVD | `string` | |
 | `launch_timeout` | Timeout in seconds to wait until AVD launches | `int` | `60` |
+| `headless` | Determine if required to run in headless mode | `boolean` | `false` |
 | `ready_timeout` | Timeout in seconds to wait until AVD is ready | `int` | `60` |
 
 ### API Configuration {#api-config}
@@ -316,7 +317,7 @@ We have an enum `OS` where we maintain the list of currently supported device OS
 
 ## Supported device types {#supported-device-types}
 
-- `REAL`
+- `CLOUD`
 - `VIRTUAL`
 
 ## Supported Automation types {#supported-automation-types}

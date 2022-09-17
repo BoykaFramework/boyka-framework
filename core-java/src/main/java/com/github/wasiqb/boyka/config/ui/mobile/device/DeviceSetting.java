@@ -43,7 +43,6 @@ public class DeviceSetting {
     private boolean              clearLogs              = true;
     private boolean              fullReset;
     private boolean              grantPermission        = true;
-    private boolean              headless               = false;
     private boolean              ignoreUnimportantViews = true;
     private String               name;
     private boolean              noReset;

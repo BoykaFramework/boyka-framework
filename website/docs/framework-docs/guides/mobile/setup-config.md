@@ -42,13 +42,49 @@ Let's see how to set configuration in the configuration file for API end-points.
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
+          },
+          "avd": {
+            "headless": true
+          }
+        }
+      },
+      "test_bs_android": {
+        "server": {
+          "cloud": "BROWSER_STACK",
+          "protocol": "HTTPS",
+          "host": "hub-cloud.browserstack.com",
+          "user_name": "${env:BS_USER}",
+          "password": "${env:BS_KEY}",
+          "base_path": "/wd/hub"
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11.0",
+          "name": "Google Pixel 5",
+          "automation": "UI_AUTOMATOR",
+          "type": "CLOUD",
+          "application": {
+            "path": "${env:BS_APP_ANDROID}",
+            "external": true,
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "capabilities": {
+            "projectName": "BrowserStack Android Project",
+            "buildName": "Test BrowserStack Build",
+            "sessionName": "Test BrowserStack Session",
+            "appiumVersion": "1.22.0",
+            "deviceLogs": true,
+            "networkLogs": true,
+            "debug": true,
+            "video": true,
+            "appiumLogs": true
           }
         }
       }
     }
   }
 }
-
 ```
 
 :::info

@@ -193,6 +193,7 @@ public final class DriverManager {
         final VirtualDeviceSetting avd) {
         if (type == VIRTUAL && avd != null) {
             options.setAvd (avd.getName ());
+            options.setIsHeadless (avd.isHeadless ());
             options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));
             options.setAvdReadyTimeout (ofSeconds (avd.getReadyTimeout ()));
         }
@@ -252,7 +253,6 @@ public final class DriverManager {
         options.setClearSystemFiles (deviceSetting.isClearFiles ());
         options.setClearDeviceLogsOnStart (deviceSetting.isClearLogs ());
         options.setNoReset (deviceSetting.isNoReset ());
-        options.setIsHeadless (deviceSetting.isHeadless ());
         options.setFullReset (deviceSetting.isFullReset ());
         options.setUiautomator2ServerLaunchTimeout (ofSeconds (deviceSetting.getServerLaunchTimeout ()));
         options.setUiautomator2ServerInstallTimeout (ofSeconds (deviceSetting.getServerInstallTimeout ()));
