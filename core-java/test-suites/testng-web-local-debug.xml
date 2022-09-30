@@ -24,8 +24,8 @@
         <parameter name="appType" value="WEB"/>
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.web.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.web.theinternet"/>
         </packages>
     </test>
 </suite>

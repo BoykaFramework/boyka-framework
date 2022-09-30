@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2022, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -11,32 +11,32 @@
  * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *  copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.builders;
+package com.github.wasiqb.boyka.testng.ui.pages.theinternet;
 
-import java.util.function.Predicate;
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 
-import lombok.Builder;
+import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
-import lombok.ToString;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 /**
- * UI application locator.
+ * Context menu page.
  *
  * @author Wasiq Bhamla
- * @since 25-Feb-2022
+ * @since 26-Jul-2022
  */
-@ToString
 @Getter
-@Builder (builderMethodName = "buildLocator")
-public class Locator {
-    private By                    android;
-    private Predicate<WebElement> filter;
-    private int                   index;
-    private Locator               parent;
-    private By                    web;
+public class ContextMenuPage {
+    /**
+     * Context menu page instance.
+     */
+    public static ContextMenuPage contextMenuPage () {
+        return new ContextMenuPage ();
+    }
+
+    private final Locator hotSpot = buildLocator ().web (By.id ("hot-spot"))
+        .build ();
 }
