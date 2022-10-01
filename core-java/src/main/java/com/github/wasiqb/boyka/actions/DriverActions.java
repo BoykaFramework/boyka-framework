@@ -351,8 +351,8 @@ public final class DriverActions {
     public static void takeScreenshot (final String fileName) {
         LOGGER.traceEntry ();
         performDriverAction (driver -> {
-            final var file = ((TakesScreenshot) driver).getScreenshotAs (FILE);
             try {
+                final var file = ((TakesScreenshot) driver).getScreenshotAs (FILE);
                 copyFile (file, new File (fileName));
             } catch (final IOException e) {
                 handleAndThrow (ERROR_SAVING_SCREENSHOT, e);

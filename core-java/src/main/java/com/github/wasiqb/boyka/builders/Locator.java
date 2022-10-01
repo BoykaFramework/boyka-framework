@@ -16,6 +16,8 @@
 
 package com.github.wasiqb.boyka.builders;
 
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+
 import java.util.function.Predicate;
 
 import lombok.Builder;
@@ -39,4 +41,14 @@ public class Locator {
     private int                   index;
     private Locator               parent;
     private By                    web;
+
+    public By getLocator () {
+        switch (getSession ().getPlatformType ()) {
+            case ANDROID:
+                return getAndroid ();
+            case WEB:
+            default:
+                return getWeb ();
+        }
+    }
 }

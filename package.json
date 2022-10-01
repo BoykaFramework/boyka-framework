@@ -44,7 +44,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.1",
-    "lerna": "^5.6.0",
+    "lerna": "^5.6.1",
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",

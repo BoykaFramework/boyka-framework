@@ -17,12 +17,14 @@
 package com.github.wasiqb.boyka.testng.ui.pages.saucedemo;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static io.appium.java_client.AppiumBy.accessibilityId;
 import static java.text.MessageFormat.format;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.By.xpath;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import io.appium.java_client.AppiumBy;
 import lombok.Getter;
 
 /**
@@ -43,26 +45,38 @@ public class HomePage {
     }
 
     private final Locator logout             = buildLocator ().web (id ("logout_sidebar_link"))
+        .android (accessibilityId ("test-LOGOUT"))
         .build ();
     private final Locator menuButton         = buildLocator ().web (id ("react-burger-menu-btn"))
+        .android (accessibilityId ("test-Menu"))
         .build ();
     private final Locator productParent      = buildLocator ().web (cssSelector ("div.inventory_item"))
+        .android (accessibilityId ("test-PRODUCTS"))
         .build ();
     private final Locator productDescription = buildLocator ().parent (this.productParent)
         .web (cssSelector ("div.inventory_item_desc"))
+        .android (accessibilityId ("test-Item description"))
         .build ();
     private final Locator addToCartButton    = buildLocator ().parent (this.productParent)
         .web (id ("add-to-cart-sauce-labs-backpack"))
+        .android (accessibilityId ("test-ADD TO CART"))
         .build ();
     private final Locator productPrice       = buildLocator ().parent (this.productParent)
         .web (cssSelector ("div.inventory_item_price"))
+        .android (accessibilityId ("test-Price"))
         .build ();
     private final Locator productTitle       = buildLocator ().parent (this.productParent)
         .web (cssSelector ("div.inventory_item_name"))
+        .android (accessibilityId ("test-Item title"))
         .build ();
     private final Locator shoppingCart       = buildLocator ().web (cssSelector ("a.shopping_cart_link"))
+        .android (accessibilityId ("test-Cart"))
         .build ();
     private final Locator shoppingCartCount  = buildLocator ().web (cssSelector ("span.shopping_cart_badge"))
+        .android (AppiumBy.className ("android.widget.TextView"))
+        .parent (this.shoppingCart)
+        .build ();
+    private final Locator viewToggle         = buildLocator ().android (accessibilityId ("test-Toggle"))
         .build ();
 
     private HomePage () {

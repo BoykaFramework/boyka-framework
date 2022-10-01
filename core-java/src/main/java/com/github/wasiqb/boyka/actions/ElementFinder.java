@@ -90,17 +90,17 @@ final class ElementFinder {
         try {
             switch (waitStrategy) {
                 case CLICKABLE:
-                    wait.until (elementToBeClickable (locator.getWeb ()));
+                    wait.until (elementToBeClickable (locator.getLocator ()));
                     break;
                 case VISIBLE:
                 default:
-                    wait.until (visibilityOfElementLocated (locator.getWeb ()));
+                    wait.until (visibilityOfElementLocated (locator.getLocator ()));
             }
         } catch (final TimeoutException e) {
             handleAndThrow (ELEMENT_NOT_FOUND, e);
         }
         return LOGGER.traceExit (
-            parent != null ? parent.findElements (locator.getWeb ()) : driver.findElements (locator.getWeb ()));
+            parent != null ? parent.findElements (locator.getLocator ()) : driver.findElements (locator.getLocator ()));
     }
 
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator,

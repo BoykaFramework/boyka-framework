@@ -313,6 +313,8 @@ public final class DriverManager {
             setupAppiumServer ();
             setupMobileDriver ();
         }
+        setDriverWaits (this.setting.getUi ()
+            .getTimeout ());
         LOGGER.traceExit ();
     }
 
@@ -388,8 +390,6 @@ public final class DriverManager {
                 break;
         }
         setDriverSize (webSetting);
-        setDriverWaits (this.setting.getUi ()
-            .getTimeout ());
         LOGGER.traceExit ();
     }
 }
