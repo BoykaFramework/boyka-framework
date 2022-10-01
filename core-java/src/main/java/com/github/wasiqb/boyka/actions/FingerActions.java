@@ -20,22 +20,24 @@ import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static java.time.Duration.ofMillis;
 import static java.util.Collections.singletonList;
-import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.interactions.PointerInput.Kind.TOUCH;
 import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
 import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import io.appium.java_client.AppiumDriver;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 
+/**
+ * Finger specific gestures.
+ *
+ * @author Wasiq Bhamla
+ * @since 30-Sept-2022
+ */
 public class FingerActions {
-    private static final Logger LOGGER = getLogger ();
-
     public static void tapOn (final Locator locator) {
         final var tapAction = getElementAttribute (element -> {
             final var finger = new PointerInput (TOUCH, "Finger");
@@ -56,5 +58,9 @@ public class FingerActions {
         final var x = location.getX () + (size.getWidth () / 2);
         final var y = location.getY () + (size.getHeight () / 2);
         return new Point (x, y);
+    }
+
+    private FingerActions () {
+        // Utility class,
     }
 }
