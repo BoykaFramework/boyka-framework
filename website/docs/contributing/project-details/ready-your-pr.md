@@ -33,7 +33,7 @@ Make sure to address the reviewers feedbacks.
 
 ## Demo PR
 
-Once you have updated reviewers feedback in your PR. You need to demonstrate your feature development to the Maintainers and Repo owners by showing your worknig code along with the tests.
+Once you have updated reviewers feedback in your PR. You need to demonstrate your feature development to the Maintainers and Repo owners by showing your working code along with the tests.
 
 This Demo would be taking place on [Discord][join-discord]:
 
@@ -45,7 +45,7 @@ This Demo would be taking place on [Discord][join-discord]:
 If everything is fine, wait for `boyka-core` team to merge your PR. Most of the time, we will merge your PR as soon as we approve it. It's very rare that we won't merge your PR immediately after approving it.
 
 :::danger
-Don't merge approved PR yourself. Instead, tag the `boyka-core` team to the PR comments.
+Don't merge approved PR yourself. Instead, tag the `boyka-core` team to the PR comments if it's not merged by the reviewer.
 :::
 
 [join-discord]: https://discord.gg/dUg8K9DAsR

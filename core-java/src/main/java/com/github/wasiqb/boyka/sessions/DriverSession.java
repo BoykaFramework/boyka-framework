@@ -22,8 +22,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.enums.PlatformType;
 import com.github.wasiqb.boyka.manager.ServiceManager;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,10 +35,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Wasiq Bhamla
  * @since 19-Feb-2022
  */
-@Setter
-@Getter
+@Data
 public class DriverSession<D extends WebDriver> {
     private static final Logger LOGGER = getLogger ();
+
     private       D                driver;
     private       PlatformType     platformType;
     private       ServiceManager   serviceManager;
