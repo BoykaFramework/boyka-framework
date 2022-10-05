@@ -153,7 +153,7 @@ Following checks will happen when you commit:
 - ESLint to check if the website code complies with the [ESLint](https://eslint.org/) rules. It will only run if there is change to `.js`, `.jsx`, `.ts` or `.tsx` files.
 - Prettier to check if the website code complies with the [Prettier](https://prettier.io/) rules. It will only run if there is change to `.js`, `.jsx`, `.ts` or `.tsx` files.
 - Build the documentation website to check if the website builds successfully.
-- Build and run tests from the Java project to check if the check style, code compilation is successful and overall code coverage is above `70%`.
+- Build and run check styles from the Java project to check if the check style and code compilation is successful.
 
 ## Push your commit
 
@@ -173,4 +173,8 @@ When you click on the `Push` button, you will see a pop-up asking you to confirm
 
 ## Create draft PR
 
-As soon as you push your commit, you must create a draft PR on GitHub. Because our workflows will only get triggered on PR's that are raised against `main` branch.
+As soon as you push your commit, you must create a draft PR on GitHub. Because our workflows will only get triggered on PR's that are raised against `develop` branch.
+
+## Ping on Discord
+
+Once PR is raised, ping in the `#contributor-discussion` channel on our [Discord server](https://discord.gg/dUg8K9DAsR) to let all the contributors know and you can schedule a demo with the contributors to showcase your changes.

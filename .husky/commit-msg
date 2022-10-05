@@ -3,4 +3,4 @@
 
 yarn lint-staged
 yarn build:site
-mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test -Dsuite-xml=test-suites/testng-local-husky.xml
+mvn clean install -f core-java/pom.xml -DskipTests

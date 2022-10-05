@@ -17,7 +17,6 @@
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.AutomationType.UI_AUTOMATOR;
-import static com.github.wasiqb.boyka.enums.CloudProviders.BROWSER_STACK;
 import static com.github.wasiqb.boyka.enums.CloudProviders.NONE;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
@@ -46,14 +45,17 @@ import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
+import static java.lang.System.getProperty;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.requireNonNullElse;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.config.ui.TimeoutSetting;
@@ -178,11 +180,13 @@ public final class DriverManager {
 
     private void setAndroidApplicationOptions (final UiAutomator2Options options,
         final ApplicationSetting application) {
-        if (!application.isExternal ()) {
-            options.setApp (Path.of (System.getProperty ("user.dir"), "/src/test/resources", application.getPath ())
-                .toString ());
-        } else {
-            options.setApp (interpolate (application.getPath ()));
+        if (isNotEmpty (application.getPath ())) {
+            if (!application.isExternal ()) {
+                options.setApp (Path.of (getProperty ("user.dir"), "/src/test/resources", application.getPath ())
+                    .toString ());
+            } else {
+                options.setApp (interpolate (application.getPath ()));
+            }
         }
         options.setAppWaitActivity (application.getWaitActivity ());
         options.setAppWaitDuration (ofSeconds (application.getWaitTimeout ()));
@@ -284,12 +288,6 @@ public final class DriverManager {
             .startServer ();
     }
 
-    private void setupBSAndroidDriver (final UiAutomator2Options options, final DeviceSetting deviceSetting) {
-        if (deviceSetting.getCapabilities () != null) {
-            options.setCapability ("bstack:options", deviceSetting.getCapabilities ());
-        }
-    }
-
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         chromedriver ().setup ();
@@ -300,6 +298,35 @@ public final class DriverManager {
         options.addArguments ("--disable-dev-shm-usage");
         options.setHeadless (webSetting.isHeadless ());
         return LOGGER.traceExit (new ChromeDriver (options));
+    }
+
+    private void setupCloudAndroidDriver (final UiAutomator2Options options, final ServerSetting serverSetting,
+        final DeviceSetting deviceSetting) {
+        switch (serverSetting.getCloud ()) {
+            case BROWSER_STACK:
+                setupCloudAndroidDriverOptions (options, deviceSetting, "bstack");
+                break;
+            case LAMBDA_TEST:
+            default:
+                setupCloudAndroidDriverOptions (options, deviceSetting, "lt");
+                break;
+        }
+    }
+
+    private void setupCloudAndroidDriverOptions (final UiAutomator2Options options, final DeviceSetting deviceSetting,
+        final String optionPrefix) {
+        final var capabilities = deviceSetting.getCapabilities ();
+        if (capabilities != null) {
+            final var optionCapabilities = new HashMap<String, Object> ();
+            capabilities.forEach ((k, v) -> {
+                if (v instanceof String) {
+                    optionCapabilities.put (k, interpolate (v.toString ()));
+                } else {
+                    optionCapabilities.put (k, v);
+                }
+            });
+            options.setCapability (format ("{0}:options", optionPrefix), optionCapabilities);
+        }
     }
 
     private void setupDriver () {
@@ -355,8 +382,8 @@ public final class DriverManager {
     private void setupUiAutomatorDriver (final ServerSetting serverSetting, final DeviceSetting deviceSetting) {
         final UiAutomator2Options options = new UiAutomator2Options ();
         setCommonUiAutomatorOptions (options, deviceSetting);
-        if (deviceSetting.getType () == CLOUD && serverSetting.getCloud () == BROWSER_STACK) {
-            setupBSAndroidDriver (options, deviceSetting);
+        if (deviceSetting.getType () == CLOUD) {
+            setupCloudAndroidDriver (options, serverSetting, deviceSetting);
         } else {
             setLocalUiAutomatorOptions (options, deviceSetting);
         }

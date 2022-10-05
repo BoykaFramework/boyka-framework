@@ -17,7 +17,6 @@
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.CloudProviders.NONE;
-import static com.github.wasiqb.boyka.enums.Message.ERROR_DELETING_LOGS;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SERVER_NOT_RUNNING;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STARTING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STOPPING_SERVER;
@@ -36,8 +35,6 @@ import static java.lang.String.join;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
-import static org.apache.commons.io.FileUtils.cleanDirectory;
-import static org.apache.commons.io.FileUtils.isEmptyDirectory;
 import static org.apache.commons.lang3.StringUtils.isNoneEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -240,17 +237,9 @@ public class ServiceManager {
     }
 
     private void setLogFile () {
-        final String logFolderPath = this.setting.getLogs ()
+        final var logFolderPath = this.setting.getLogs ()
             .getPath ();
         if (logFolderPath != null) {
-            final File logFolder = new File (logFolderPath);
-            try {
-                if (!isEmptyDirectory (logFolder)) {
-                    cleanDirectory (logFolder);
-                }
-            } catch (final IOException e) {
-                handleAndThrow (ERROR_DELETING_LOGS, e);
-            }
             final var filePath = new File (format ("{0}/server-{1}.log", logFolderPath, currentThread ().getId ()));
             this.builder.withLogFile (filePath);
         }
@@ -258,8 +247,8 @@ public class ServiceManager {
 
     private void setNodeExe () {
         if (this.setting.getNodePath () != null) {
-            final File nde = new File (this.setting.getNodePath ());
-            this.builder.usingDriverExecutable (nde);
+            final var node = new File (this.setting.getNodePath ());
+            this.builder.usingDriverExecutable (node);
         }
     }
 
