@@ -28,4 +28,12 @@
             <package name="com.github.wasiqb.boyka.testng.ui.web.theinternet"/>
         </packages>
     </test>
+    <test name="Test Boyka web on Local Edge">
+        <parameter name="appType" value="WEB"/>
+        <parameter name="driverKey" value="test_local_edge"/>
+        <packages>
+            <package name="com.github.wasiqb.boyka.testng.ui.web.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.web.theinternet"/>
+        </packages>
+    </test>
 </suite>
