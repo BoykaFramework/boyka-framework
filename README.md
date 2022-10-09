@@ -37,7 +37,7 @@
 </p>
 
   <h4>
-    <a href="https://wasiqbhamla.github.io/boyka-framework/">Documentation</a>
+    <a href="https://wasiqbhamla.github.io/boyka-framework/docs/intro">Documentation</a>
   <span> · </span>
     <a href="https://github.com/WasiqBhamla/boyka-framework/issues/new/choose">Report Bug</a>
   <span> · </span>
@@ -86,7 +86,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.8.1</version>
+  <version>0.8.2</version>
 </dependency>
 ```
 
@@ -367,16 +367,11 @@ closeDriver ();
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
-<div>
-  <img src="website/static/img/docs/community/our-supporters/org-supporters.png" alt="Our supporters" width="400" height="auto" />
+<div align="center">
+  <a href="http://www.lambdatest.com?fp_ref=wasiq95" target="_blank" style="outline:none;border:none;"><img src="https://d2gdx5nv84sdx2.cloudfront.net/uploads/n3ufe5o3/marketing_asset/banner/6476/728_x_90.png" alt="lambdatest"/></a>
+  <br/>
+  <a href="http://www.browserstack.com" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/></a>
 </div>
-
-#### 🔗 Links to our supporters
-
-Check out the following links to our Cloud platform supporters to try it out, I bet you'll love these platforms:
-
-- [LambdaTest](http://www.lambdatest.com?fp_ref=wasiq95)
-- [BrowserStack](https://www.browserstack.com/)
 
 ## 🧭 Project Road-map
 
@@ -409,8 +404,7 @@ Distributed under MIT [License](LICENSE).
 
 - Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
 - Open a [new Discussion](https://github.com/WasiqBhamla/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
-- Contact / Follow me on [Twitter](https://twitter.com/WasiqBhamla), [LinkedIn](https://www.linkedin.com/in/wasiqbhamla/)
-- For more details about the framework, checkout our [website](https://wasiqbhamla.github.io/boyka-framework/)
+- Connect with me on [my Linktree](https://linktr.ee/wasiqbhamla)
 
 ## ⭐ Star History
 

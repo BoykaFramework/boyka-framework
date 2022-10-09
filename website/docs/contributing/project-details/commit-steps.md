@@ -5,6 +5,74 @@ sidebar_position: 6
 
 We are using [Conventional Commits](https://conventionalcommits.org/) to ensure that our code follows a consistent commit message format. To make sure that we are following the rules, we normally commit our changes with VSCode using the following steps:
 
+## Setup Auto GPG commit signing
+
+We have branch protection setup in our project which requires that all commits should be GPG signed. Let's walk through how you can sign your commits.
+
+### Install GPG command line
+
+Install the latest GPG command line from [their site](https://www.gnupg.org/download/).
+
+On Mac, you can also install GPG using [Homebrew](https://brew.sh/) by executing `brew install gnupg`.
+
+### Generate GPG keys
+
+To generate a new GPG keys, run the following command:
+
+```shell
+> gpg --full-generate-key
+```
+
+Enter the prompts properly and set a good passphrase.
+
+### Fetch the GPG key
+
+Once the key is created, you need to get the GPG key ID, run the command:
+
+```shell
+> gpg --list-secret-keys --keyid-format=long
+```
+
+You will see the output similar to the following:
+
+```shell
+/Users/username/.gnupg/pubring.kbx
+-------------------------------------
+// highlight-next-line
+sec   rsa4096/AB510283YYYYYYYY 2018-07-03 [SC]
+      XXXXXXXXXX2010DD804CBB15AB510283YYYYYYYY
+uid                 [ unknown] Your Name (Your role) <your.email@gmail.com>
+ssb   rsa4096/XXXXX90AB0B84BE 2018-07-03 [E]
+```
+
+The key you need is marked with `Y` 8 chars in the lines highlighted above.
+
+### Set GPG key in GitHub
+
+Execute the following command to get the GPG public key:
+
+```shell
+> gpg --armor --export <your-8-digit-gpg-id>
+```
+
+Copy the output from the above command,
+
+- Open your [GitHub GPG settings page](https://github.com/settings/keys)
+- Click on `New GPG Key` button
+- Add any suitable `Title`
+- Paste your GPG public key copied from above in `Key` textarea
+- Click on `Add GPG key` button
+
+### Setup Git to Auto sign commits
+
+Setup your Git configuration on your machine to tell it to automatically sign your commits by using the following commands:
+
+```shell
+> git config --global gpg.program gpg
+> git config --global user.signingkey <your-8-digit-gpg-id>
+> git config --global commit.gpgsign true
+```
+
 ## Add Conventional Commits extension
 
 Search for `Conventional Commits` in the VSCode Marketplace and install it.
@@ -85,7 +153,7 @@ Following checks will happen when you commit:
 - ESLint to check if the website code complies with the [ESLint](https://eslint.org/) rules. It will only run if there is change to `.js`, `.jsx`, `.ts` or `.tsx` files.
 - Prettier to check if the website code complies with the [Prettier](https://prettier.io/) rules. It will only run if there is change to `.js`, `.jsx`, `.ts` or `.tsx` files.
 - Build the documentation website to check if the website builds successfully.
-- Build and run tests from the Java project to check if the check style, code compilation is successful and overall code coverage is above `70%`.
+- Build and run check styles from the Java project to check if the check style and code compilation is successful.
 
 ## Push your commit
 
@@ -105,6 +173,8 @@ When you click on the `Push` button, you will see a pop-up asking you to confirm
 
 ## Create draft PR
 
-As soon as you push your commit, you must create a draft PR on GitHub. Because our workflows will only get triggered on PR's that are raised against `main` branch.
+As soon as you push your commit, you must create a draft PR on GitHub. Because our workflows will only get triggered on PR's that are raised against `develop` branch.
 
-[commit-sign]:https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
+## Ping on Discord
+
+Once PR is raised, ping in the `#contributor-discussion` channel on our [Discord server](https://discord.gg/dUg8K9DAsR) to let all the contributors know and you can schedule a demo with the contributors to showcase your changes.

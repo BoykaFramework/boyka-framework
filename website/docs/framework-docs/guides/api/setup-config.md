@@ -1,5 +1,5 @@
 ---
-title: 🪛 Setup Configuration file
+title: 🪛 Setup API Configuration
 sidebar_position: 1
 ---
 

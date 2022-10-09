@@ -16,8 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.others;
 
-import static com.github.wasiqb.boyka.enums.ApplicationType.API;
-import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
+import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.clearSession;

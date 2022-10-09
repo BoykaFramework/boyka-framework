@@ -6,30 +6,7 @@ on:
       - published
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-
-      - name: Install Java and Maven
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-
-      - name: Build the project
-        run: mvn install -f core-java/pom.xml -DskipTests
-
-      - name: Cache local Maven repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: release-${{ runner.os }}-maven-${{ github.sha }}
-
   test:
-    needs:
-      - build
     runs-on: macos-latest
     env:
       BS_USER: ${{ secrets.BS_USER }}
@@ -39,6 +16,8 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Install Java and Maven
         uses: actions/setup-java@v3
@@ -55,11 +34,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Restore local Maven repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: release-${{ runner.os }}-maven-${{ github.sha }}
+      - name: Build the project
+        run: mvn install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
 
       - name: Get the version
         id: version
