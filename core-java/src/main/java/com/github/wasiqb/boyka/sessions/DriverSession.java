@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.sessions;
 
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.openqa.selenium.support.ThreadGuard.protect;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.enums.PlatformType;
@@ -51,5 +52,15 @@ public class DriverSession<D extends WebDriver> {
     DriverSession () {
         this.setting = loadSetting ();
         LOGGER.traceExit ();
+    }
+
+    /**
+     * Set driver with ThreadGuard protection.
+     *
+     * @param driver Driver instance
+     */
+    @SuppressWarnings ("unchecked")
+    public void setDriver (final D driver) {
+        this.driver = (D) protect (driver);
     }
 }

@@ -120,10 +120,11 @@ public final class DriverManager {
      *
      * @return the driver instance
      */
-    public static DriverManager createDriver (final PlatformType platformType, final String driverKey) {
+    public synchronized static DriverManager createDriver (final PlatformType platformType, final String driverKey) {
         LOGGER.traceEntry ();
         LOGGER.info ("Creating Driver Instance for {} and driver key: {}", platformType, driverKey);
-        final var instance = new DriverManager (platformType, driverKey);
+        getSession ().setPlatformType (platformType);
+        final var instance = new DriverManager (driverKey);
         instance.setupDriver ();
         return LOGGER.traceExit (instance);
     }
@@ -132,9 +133,9 @@ public final class DriverManager {
     private final PlatformType     platformType;
     private final FrameworkSetting setting;
 
-    private DriverManager (final PlatformType platformType, final String driverKey) {
+    private DriverManager (final String driverKey) {
         LOGGER.traceEntry ();
-        this.platformType = platformType;
+        this.platformType = getSession ().getPlatformType ();
         this.driverKey = driverKey;
         this.setting = getSession ().getSetting ();
         LOGGER.traceExit ();
@@ -387,7 +388,7 @@ public final class DriverManager {
         } else {
             setLocalUiAutomatorOptions (options, deviceSetting);
         }
-        setDriver (this.platformType, new AndroidDriver (getSession ().getServiceManager ()
+        setDriver (new AndroidDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
     }
 
@@ -397,23 +398,23 @@ public final class DriverManager {
             .getWebSetting (this.driverKey);
         switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
             case CHROME:
-                setDriver (this.platformType, setupChromeDriver (webSetting));
+                setDriver (setupChromeDriver (webSetting));
                 break;
             case NONE:
                 throwError (INVALID_BROWSER);
                 break;
             case REMOTE:
-                setDriver (this.platformType, setupRemoteDriver (webSetting));
+                setDriver (setupRemoteDriver (webSetting));
                 break;
             case SAFARI:
-                setDriver (this.platformType, setupSafariDriver ());
+                setDriver (setupSafariDriver ());
                 break;
             case EDGE:
-                setDriver (this.platformType, setupEdgeDriver (webSetting));
+                setDriver (setupEdgeDriver (webSetting));
                 break;
             case FIREFOX:
             default:
-                setDriver (this.platformType, setupFirefoxDriver (webSetting));
+                setDriver (setupFirefoxDriver (webSetting));
                 break;
         }
         setDriverSize (webSetting);
