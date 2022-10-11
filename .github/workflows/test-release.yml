@@ -35,7 +35,7 @@ jobs:
         run: yarn install
 
       - name: Build the project
-        run: mvn install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
+        run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
 
       - name: Get the version
         id: version
