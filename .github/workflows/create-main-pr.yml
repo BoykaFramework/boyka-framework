@@ -44,7 +44,7 @@ jobs:
           source_branch: staging
           destination_branch: main
           pr_reviewer: boyka-core
-          pr_title: '🎉 PR: New Release'
+          pr_title: 'chore(Internal): :bookmark: new release'
           pr_draft: true
           pr_body: |
             _This PR was generated via github actions workflow_
