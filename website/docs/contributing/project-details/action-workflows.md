@@ -5,6 +5,10 @@ sidebar_position: 4
 
 ## Project workflows
 
+:::tip
+Check out all our project workflows [on GitHub](https://github.com/WasiqBhamla/boyka-framework/actions)
+:::
+
 Following are the GitHub Actions workflows that we have created for our project along with it's trigger condition:
 
 | Workflow | Event Trigger | Path Trigger | Description |

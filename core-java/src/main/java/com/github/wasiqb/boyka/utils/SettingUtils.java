@@ -16,8 +16,13 @@
 
 package com.github.wasiqb.boyka.utils;
 
+import static com.github.wasiqb.boyka.enums.Message.CONFIG_KEY_NOT_FOUND;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.JsonUtil.fromFile;
+import static java.lang.String.join;
 import static org.apache.logging.log4j.LogManager.getLogger;
+
+import java.util.Map;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import org.apache.logging.log4j.Logger;
@@ -32,6 +37,24 @@ public final class SettingUtils {
     private static final Logger LOGGER = getLogger ();
 
     private static FrameworkSetting frameworkSetting;
+
+    /**
+     * Gets the settings object from Map.
+     *
+     * @param settings Settings Map
+     * @param key Setting key
+     * @param <T> Setting object type
+     *
+     * @return Setting object
+     */
+    public static <T> T getSetting (final Map<String, T> settings, final String key) {
+        LOGGER.traceEntry ("Key: {}", key);
+        if (!settings.containsKey (key)) {
+            final var keys = join (", ", settings.keySet ());
+            throwError (CONFIG_KEY_NOT_FOUND, key, keys);
+        }
+        return LOGGER.traceExit (settings.get (key));
+    }
 
     /**
      * Loads the config JSON file only once.

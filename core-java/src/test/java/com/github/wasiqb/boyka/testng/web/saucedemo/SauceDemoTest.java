@@ -39,7 +39,7 @@ import static java.text.MessageFormat.format;
 import static org.openqa.selenium.Keys.CONTROL;
 import static org.openqa.selenium.Keys.DELETE;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -71,7 +71,7 @@ public class SauceDemoTest {
      */
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "appType", "driverKey" })
-    public void setupTestClass (final ApplicationType appType, final String driverKey) {
+    public void setupTestClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
     }
 

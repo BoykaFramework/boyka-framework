@@ -20,39 +20,39 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
-    <version>0.8.2</version>
+    <version>0.9.0-rc.1</version>
     <inceptionYear>2022</inceptionYear>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>🎉 Ultimate test automation for testing any application on any platform</description>
     <url>https://github.com/WasiqBhamla/boyka-framework</url>
 
     <properties>
-        <selenium-webdriver.version>4.4.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.5.0</selenium-webdriver.version>
         <testng.version>7.6.1</testng.version>
-        <appium-java-client.version>8.1.1</appium-java-client.version>
+        <appium-java-client.version>8.2.0</appium-java-client.version>
         <webdrivermanager.version>5.3.0</webdrivermanager.version>
         <okhttp.version>4.10.0</okhttp.version>
         <lombok.version>1.18.24</lombok.version>
         <google-gson.version>2.9.1</google-gson.version>
         <google.guava.version>31.1-jre</google.guava.version>
         <google-truth.version>1.1.3</google-truth.version>
-        <apache-commons-text.version>1.9</apache-commons-text.version>
+        <apache-commons-text.version>1.10.0</apache-commons-text.version>
         <json-path.version>2.7.0</json-path.version>
-        <log4j-core.version>2.18.0</log4j-core.version>
-        <log4j-api.version>2.18.0</log4j-api.version>
-        <jackson-dataformat-yaml.version>2.13.3</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.13.3</jackson-databind.version>
+        <log4j-core.version>2.19.0</log4j-core.version>
+        <log4j-api.version>2.19.0</log4j-api.version>
+        <jackson-dataformat-yaml.version>2.13.4</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.13.4</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <everit-json-schema.version>1.5.1</everit-json-schema.version>
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
-        <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
+        <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.3.2</checkstyle.version>
+        <checkstyle.version>10.3.3</checkstyle.version>
         <suite-xml>test-suites/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <sonar.organization>wasiqbhamla</sonar.organization>
@@ -359,7 +359,8 @@
                 <configuration>
                     <configLocation>${checkstyle.config}</configLocation>
                     <suppressionsLocation>${checkstyle.suppress}</suppressionsLocation>
-                    <encoding>UTF-8</encoding>
+                    <inputEncoding>UTF-8</inputEncoding>
+                    <outputEncoding>UTF-8</outputEncoding>
                     <consoleOutput>true</consoleOutput>
                     <logViolationsToConsole>true</logViolationsToConsole>
                     <failOnViolation>true</failOnViolation>
