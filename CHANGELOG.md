@@ -1,5 +1,5 @@
 
-## v0.9.0-rc.1 (2022-10-11)
+## v0.9.0 (2022-10-12)
 
 #### :rocket: New Feature
 * [#207](https://github.com/WasiqBhamla/boyka-framework/pull/207) feat(Internal): :arrow_up: added dependabot config to enable auto dependency upgrade ([@WasiqB](https://github.com/WasiqB))
