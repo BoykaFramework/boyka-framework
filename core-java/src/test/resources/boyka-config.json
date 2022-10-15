@@ -180,7 +180,7 @@
           "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "application": {
-            "path": "${env:BS_APP_ANDROID}",
+            "path": "AndroidApp",
             "external": true,
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
