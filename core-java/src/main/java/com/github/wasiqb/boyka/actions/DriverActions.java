@@ -266,6 +266,23 @@ public final class DriverActions {
     }
 
     /**
+     * Save all the available logs to files in `logs` folder.
+     */
+    public static void saveLogs () {
+        performDriverAction (d -> {
+            final var logTypes = d.manage ()
+                .logs ()
+                .getAvailableLogTypes ();
+            logTypes.forEach (logType -> {
+                final var logEntries = d.manage ()
+                    .logs ()
+                    .get (logType);
+                logEntries.forEach (System.out::println);
+            });
+        });
+    }
+
+    /**
      * Switch to an iFrame.
      *
      * @param frameName Name of the Iframe.
