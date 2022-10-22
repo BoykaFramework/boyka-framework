@@ -275,29 +275,17 @@ public final class DriverActions {
      */
     public static void saveLogs () {
         performDriverAction (d -> {
+            final var logSetting = getSession ().getMobileSetting ()
+                .getServer ()
+                .getLogs ();
+            if (!logSetting.isEnable ()) {
+                return;
+            }
             try {
                 final var logTypes = d.manage ()
                     .logs ()
                     .getAvailableLogTypes ();
-                logTypes.forEach (logType -> {
-                    final var logEntries = d.manage ()
-                        .logs ()
-                        .get (logType);
-                    final var fileName = format ("{0}/logs/{1}-{2}.log", getProperty ("user.dir"), logType,
-                        currentThread ().getName ());
-                    try (final var writer = new BufferedWriter (new FileWriter (fileName))) {
-                        logEntries.forEach (logEntry -> {
-                            try {
-                                writer.write (logEntry.getMessage ());
-                                writer.write (getProperty ("line.separator"));
-                            } catch (final IOException e) {
-                                throw new RuntimeException (e);
-                            }
-                        });
-                    } catch (final IOException e) {
-                        throw new RuntimeException (e);
-                    }
-                });
+                logTypes.forEach (logType -> saveLogType (d, logType, logSetting.getPath ()));
             } catch (final WebDriverException e) {
                 e.printStackTrace ();
             }
@@ -449,6 +437,26 @@ public final class DriverActions {
         final var handles = getDriverAttribute (WebDriver::getWindowHandles);
         LOGGER.traceExit ();
         return new ArrayList<> (handles);
+    }
+
+    private static <D extends WebDriver> void saveLogType (final D driver, final String logType, final String logPath) {
+        final var logEntries = driver.manage ()
+            .logs ()
+            .get (logType);
+        final var fileName = format ("{0}/{1}/{2}-{3}.log", getProperty ("user.dir"), logPath, logType,
+            currentThread ().getId ());
+        try (final var writer = new BufferedWriter (new FileWriter (fileName))) {
+            logEntries.forEach (logEntry -> {
+                try {
+                    writer.write (logEntry.getMessage ());
+                    writer.write (getProperty ("line.separator"));
+                } catch (final IOException e) {
+                    throw new RuntimeException (e);
+                }
+            });
+        } catch (final IOException e) {
+            throw new RuntimeException (e);
+        }
     }
 
     private DriverActions () {
