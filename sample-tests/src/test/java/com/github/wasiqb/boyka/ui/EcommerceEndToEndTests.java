@@ -25,7 +25,6 @@ import static com.github.wasiqb.boyka.ui.actions.ConfirmOrderPageActions.confirm
 import static com.github.wasiqb.boyka.ui.actions.HomePageActions.homePageActions;
 import static com.github.wasiqb.boyka.ui.actions.OrderSuccessPageActions.orderSuccessPageActions;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.enums.PlatformType;
 import com.github.wasiqb.boyka.ui.data.BillingData;
 import com.github.wasiqb.boyka.ui.data.TestDataBuilder;
