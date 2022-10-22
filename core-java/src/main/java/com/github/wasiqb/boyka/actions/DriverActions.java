@@ -18,7 +18,9 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_CREATING_LOGS;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_WRITING_LOGS;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.lang.System.getProperty;
@@ -287,7 +289,8 @@ public final class DriverActions {
                     .getAvailableLogTypes ();
                 logTypes.forEach (logType -> saveLogType (d, logType, logSetting.getPath ()));
             } catch (final WebDriverException e) {
-                e.printStackTrace ();
+                LOGGER.catching (e);
+                LOGGER.warn ("Error while saving different logs: {}", e.getMessage ());
             }
         });
     }
@@ -451,11 +454,11 @@ public final class DriverActions {
                     writer.write (logEntry.getMessage ());
                     writer.write (getProperty ("line.separator"));
                 } catch (final IOException e) {
-                    throw new RuntimeException (e);
+                    handleAndThrow (ERROR_WRITING_LOGS, e);
                 }
             });
         } catch (final IOException e) {
-            throw new RuntimeException (e);
+            handleAndThrow (ERROR_CREATING_LOGS, e);
         }
     }
 
