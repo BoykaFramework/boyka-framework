@@ -189,7 +189,7 @@
             "projectName": "BrowserStack Android Project",
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
-            "appiumVersion": "1.22.0",
+            "appiumVersion": "2.0.0",
             "deviceLogs": true,
             "networkLogs": true,
             "debug": true,

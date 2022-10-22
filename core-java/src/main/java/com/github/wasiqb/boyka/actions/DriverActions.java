@@ -21,12 +21,16 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
-import static java.lang.String.format;
+import static java.lang.System.getProperty;
+import static java.lang.Thread.currentThread;
+import static java.text.MessageFormat.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.OutputType.FILE;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,6 +44,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WindowType;
 
 /**
@@ -270,15 +275,32 @@ public final class DriverActions {
      */
     public static void saveLogs () {
         performDriverAction (d -> {
-            final var logTypes = d.manage ()
-                .logs ()
-                .getAvailableLogTypes ();
-            logTypes.forEach (logType -> {
-                final var logEntries = d.manage ()
+            try {
+                final var logTypes = d.manage ()
                     .logs ()
-                    .get (logType);
-                logEntries.forEach (System.out::println);
-            });
+                    .getAvailableLogTypes ();
+                logTypes.forEach (logType -> {
+                    final var logEntries = d.manage ()
+                        .logs ()
+                        .get (logType);
+                    final var fileName = format ("{0}/logs/{1}-{2}.log", getProperty ("user.dir"), logType,
+                        currentThread ().getName ());
+                    try (final var writer = new BufferedWriter (new FileWriter (fileName))) {
+                        logEntries.forEach (logEntry -> {
+                            try {
+                                writer.write (logEntry.getMessage ());
+                                writer.write (getProperty ("line.separator"));
+                            } catch (final IOException e) {
+                                throw new RuntimeException (e);
+                            }
+                        });
+                    } catch (final IOException e) {
+                        throw new RuntimeException (e);
+                    }
+                });
+            } catch (final WebDriverException e) {
+                e.printStackTrace ();
+            }
         });
     }
 
@@ -357,7 +379,7 @@ public final class DriverActions {
         final var timeStamp = date.format (Calendar.getInstance ()
             .getTime ());
         final var fileName = "%s/%s-%s.%s";
-        takeScreenshot (format (fileName, path, prefix, timeStamp, extension));
+        takeScreenshot (String.format (fileName, path, prefix, timeStamp, extension));
     }
 
     /**
