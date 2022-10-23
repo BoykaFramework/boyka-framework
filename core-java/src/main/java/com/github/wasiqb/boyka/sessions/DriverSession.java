@@ -18,9 +18,10 @@ package com.github.wasiqb.boyka.sessions;
 
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static org.apache.logging.log4j.LogManager.getLogger;
-import static org.openqa.selenium.support.ThreadGuard.protect;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
+import com.github.wasiqb.boyka.config.ui.web.WebSetting;
 import com.github.wasiqb.boyka.enums.PlatformType;
 import com.github.wasiqb.boyka.manager.ServiceManager;
 import lombok.Data;
@@ -40,6 +41,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DriverSession<D extends WebDriver> {
     private static final Logger LOGGER = getLogger ();
 
+    private       String           configKey;
     private       D                driver;
     private       PlatformType     platformType;
     private       ServiceManager   serviceManager;
@@ -55,12 +57,22 @@ public class DriverSession<D extends WebDriver> {
     }
 
     /**
-     * Set driver with ThreadGuard protection.
+     * Gets Current Mobile settings
      *
-     * @param driver Driver instance
+     * @return Mobile setting
      */
-    @SuppressWarnings ("unchecked")
-    public void setDriver (final D driver) {
-        this.driver = (D) protect (driver);
+    public MobileSetting getMobileSetting () {
+        return this.setting.getUi ()
+            .getMobileSetting (this.configKey);
+    }
+
+    /**
+     * Gets current Web settings
+     *
+     * @return Web Setting
+     */
+    public WebSetting getWebSetting () {
+        return this.setting.getUi ()
+            .getWebSetting (this.configKey);
     }
 }

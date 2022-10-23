@@ -144,7 +144,10 @@
           "host": "127.0.0.1",
           "port": 4723,
           "base_path": "/wd/hub",
-          "session_override": true
+          "session_override": true,
+          "allow_insecure": [
+            "get_server_logs"
+          ]
         },
         "device": {
           "os": "ANDROID",
@@ -180,7 +183,7 @@
           "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "application": {
-            "path": "${env:BS_APP_ANDROID}",
+            "path": "AndroidApp",
             "external": true,
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
@@ -189,7 +192,7 @@
             "projectName": "BrowserStack Android Project",
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
-            "appiumVersion": "1.22.0",
+            "appiumVersion": "2.0.0",
             "deviceLogs": true,
             "networkLogs": true,
             "debug": true,

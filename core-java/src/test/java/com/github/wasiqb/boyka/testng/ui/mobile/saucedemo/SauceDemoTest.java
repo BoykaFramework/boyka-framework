@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.ui.mobile.saucedemo;
 
+import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
 import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.FingerActions.tapOn;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
@@ -76,6 +77,7 @@ public class SauceDemoTest {
      */
     @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
+        saveLogs ();
         closeDriver ();
     }
 

@@ -174,6 +174,16 @@ import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
 refresh ();
 ```
 
+## `saveLogs`
+
+This method will save all the logs captured by the Driver.
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
+. . .
+saveLogs ();
+```
+
 ## `switchToFrame (name)` {#switch-to-frame-name}
 
 This method will switch to the given frame by it's name.
