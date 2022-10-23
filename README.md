@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-framework/releases/tag/v0.8.1">
-    <img src="https://img.shields.io/github/downloads/WasiqBhamla/boyka-framework/v0.8.1/total?color=brightgreen&label=Downloads%20for%20v0.8.1&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/WasiqBhamla/boyka-framework/releases/tag/v0.9.0">
+    <img src="https://img.shields.io/github/downloads/WasiqBhamla/boyka-framework/v0.9.0/total?color=brightgreen&label=Downloads%20for%20v0.9.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/WasiqBhamla/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/WasiqBhamla/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -86,7 +86,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.8.2</version>
+  <version>0.9.0</version>
 </dependency>
 ```
 

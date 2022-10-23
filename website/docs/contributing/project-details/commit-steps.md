@@ -40,9 +40,9 @@ You will see the output similar to the following:
 -------------------------------------
 // highlight-next-line
 sec   rsa4096/AB510283YYYYYYYY 2018-07-03 [SC]
-      XXXXXXXXXX2010DD804CBB15AB510283YYYYYYYY
+      AAAAAAAAAA2010DD804CBB15AB510283YYYYYYYY
 uid                 [ unknown] Your Name (Your role) <your.email@gmail.com>
-ssb   rsa4096/XXXXX90AB0B84BE 2018-07-03 [E]
+ssb   rsa4096/AAAAA90AB0B84BE 2018-07-03 [E]
 ```
 
 The key you need is marked with `Y` 8 chars in the lines highlighted above.

@@ -20,6 +20,8 @@ import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
+import com.github.wasiqb.boyka.config.ui.web.WebSetting;
 import com.github.wasiqb.boyka.enums.PlatformType;
 import com.github.wasiqb.boyka.manager.ServiceManager;
 import lombok.Data;
@@ -39,6 +41,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DriverSession<D extends WebDriver> {
     private static final Logger LOGGER = getLogger ();
 
+    private       String           configKey;
     private       D                driver;
     private       PlatformType     platformType;
     private       ServiceManager   serviceManager;
@@ -51,5 +54,25 @@ public class DriverSession<D extends WebDriver> {
     DriverSession () {
         this.setting = loadSetting ();
         LOGGER.traceExit ();
+    }
+
+    /**
+     * Gets Current Mobile settings
+     *
+     * @return Mobile setting
+     */
+    public MobileSetting getMobileSetting () {
+        return this.setting.getUi ()
+            .getMobileSetting (this.configKey);
+    }
+
+    /**
+     * Gets current Web settings
+     *
+     * @return Web Setting
+     */
+    public WebSetting getWebSetting () {
+        return this.setting.getUi ()
+            .getWebSetting (this.configKey);
     }
 }

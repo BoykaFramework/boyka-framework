@@ -41,7 +41,7 @@
         <log4j-core.version>2.19.0</log4j-core.version>
         <log4j-api.version>2.19.0</log4j-api.version>
         <jackson-dataformat-yaml.version>2.13.4</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.13.4</jackson-databind.version>
+        <jackson-databind.version>2.13.4.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <everit-json-schema.version>1.5.1</everit-json-schema.version>
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>

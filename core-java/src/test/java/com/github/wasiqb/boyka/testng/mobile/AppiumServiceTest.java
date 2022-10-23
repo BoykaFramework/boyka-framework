@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.mobile;
 
+import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
@@ -51,6 +52,7 @@ public class AppiumServiceTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownTestClass () {
+        saveLogs ();
         closeDriver ();
     }
 

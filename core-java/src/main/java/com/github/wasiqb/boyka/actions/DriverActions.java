@@ -18,15 +18,21 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_CREATING_LOGS;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_WRITING_LOGS;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
-import static java.lang.String.format;
+import static java.lang.System.getProperty;
+import static java.lang.Thread.currentThread;
+import static java.text.MessageFormat.format;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.OutputType.FILE;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,6 +46,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WindowType;
 
 /**
@@ -266,6 +273,29 @@ public final class DriverActions {
     }
 
     /**
+     * Save all the available logs to files in `logs` folder.
+     */
+    public static void saveLogs () {
+        performDriverAction (d -> {
+            final var logSetting = getSession ().getMobileSetting ()
+                .getServer ()
+                .getLogs ();
+            if (!logSetting.isEnable ()) {
+                return;
+            }
+            try {
+                final var logTypes = d.manage ()
+                    .logs ()
+                    .getAvailableLogTypes ();
+                logTypes.forEach (logType -> saveLogType (d, logType, logSetting.getPath ()));
+            } catch (final WebDriverException e) {
+                LOGGER.catching (e);
+                LOGGER.warn ("Error while saving different logs: {}", e.getMessage ());
+            }
+        });
+    }
+
+    /**
      * Switch to an iFrame.
      *
      * @param frameName Name of the Iframe.
@@ -340,7 +370,7 @@ public final class DriverActions {
         final var timeStamp = date.format (Calendar.getInstance ()
             .getTime ());
         final var fileName = "%s/%s-%s.%s";
-        takeScreenshot (format (fileName, path, prefix, timeStamp, extension));
+        takeScreenshot (String.format (fileName, path, prefix, timeStamp, extension));
     }
 
     /**
@@ -410,6 +440,26 @@ public final class DriverActions {
         final var handles = getDriverAttribute (WebDriver::getWindowHandles);
         LOGGER.traceExit ();
         return new ArrayList<> (handles);
+    }
+
+    private static <D extends WebDriver> void saveLogType (final D driver, final String logType, final String logPath) {
+        final var logEntries = driver.manage ()
+            .logs ()
+            .get (logType);
+        final var fileName = format ("{0}/{1}/{2}-{3}.log", getProperty ("user.dir"), logPath, logType,
+            currentThread ().getId ());
+        try (final var writer = new BufferedWriter (new FileWriter (fileName))) {
+            logEntries.forEach (logEntry -> {
+                try {
+                    writer.write (logEntry.getMessage ());
+                    writer.write (getProperty ("line.separator"));
+                } catch (final IOException e) {
+                    handleAndThrow (ERROR_WRITING_LOGS, e);
+                }
+            });
+        } catch (final IOException e) {
+            handleAndThrow (ERROR_CREATING_LOGS, e);
+        }
     }
 
     private DriverActions () {
