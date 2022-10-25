@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
 
@@ -39,19 +40,19 @@ public class AlertPage {
         return new AlertPage ();
     }
 
-    private final Locator alertButton   = Locator.buildLocator ()
-        .web (cssSelector ("ul > li > button"))
+    private final Locator alertButton   = buildLocator ().web (cssSelector ("ul > li > button"))
+        .name ("Alert button")
         .index (0)
         .build ();
-    private final Locator confirmButton = Locator.buildLocator ()
-        .web (cssSelector ("ul > li > button"))
+    private final Locator confirmButton = buildLocator ().web (cssSelector ("ul > li > button"))
+        .name ("Confirm Button")
         .index (1)
         .build ();
-    private final Locator promptButton  = Locator.buildLocator ()
-        .web (cssSelector ("ul > li > button"))
+    private final Locator promptButton  = buildLocator ().web (cssSelector ("ul > li > button"))
+        .name ("Prompt Button")
         .index (2)
         .build ();
-    private final Locator result        = Locator.buildLocator ()
-        .web (id ("result"))
+    private final Locator result        = buildLocator ().web (id ("result"))
+        .name ("Result")
         .build ();
 }

@@ -3,31 +3,31 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/'
     target-branch: 'develop'
-    versioning-strategy: widen
     schedule:
       interval: 'weekly'
       day: 'saturday'
+    versioning-strategy: increase
 
   - package-ecosystem: 'maven'
     directory: '/core-java'
     target-branch: 'develop'
-    versioning-strategy: widen
     schedule:
       interval: 'weekly'
       day: 'saturday'
+    versioning-strategy: increase
 
   - package-ecosystem: 'maven'
     directory: '/sample-tests'
     target-branch: 'develop'
-    versioning-strategy: widen
     schedule:
       interval: 'weekly'
       day: 'saturday'
+    versioning-strategy: increase
 
   - package-ecosystem: 'github-actions'
     directory: '/'
     target-branch: 'develop'
-    versioning-strategy: increase-if-necessary
     schedule:
       interval: 'weekly'
       day: 'saturday'
+    versioning-strategy: increase

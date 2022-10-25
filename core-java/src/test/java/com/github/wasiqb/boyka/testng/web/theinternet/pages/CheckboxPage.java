@@ -16,9 +16,11 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.cssSelector;
+
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
-import org.openqa.selenium.By;
 
 /**
  * Checkbox page.
@@ -37,11 +39,11 @@ public class CheckboxPage {
         return new CheckboxPage ();
     }
 
-    private final Locator option1 = Locator.buildLocator ()
-        .web (By.cssSelector ("form#checkboxes input"))
+    private final Locator option1 = buildLocator ().web (cssSelector ("form#checkboxes input"))
+        .name ("Option 1")
         .build ();
-    private final Locator option2 = Locator.buildLocator ()
-        .web (By.cssSelector ("form#checkboxes input"))
+    private final Locator option2 = buildLocator ().web (cssSelector ("form#checkboxes input"))
+        .name ("Option 2")
         .index (1)
         .build ();
 }
