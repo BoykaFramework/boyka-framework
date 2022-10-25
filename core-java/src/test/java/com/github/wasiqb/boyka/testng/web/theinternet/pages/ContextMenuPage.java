@@ -38,5 +38,6 @@ public class ContextMenuPage {
     }
 
     private final Locator hotSpot = buildLocator ().web (By.id ("hot-spot"))
+        .name ("Hot Spot")
         .build ();
 }

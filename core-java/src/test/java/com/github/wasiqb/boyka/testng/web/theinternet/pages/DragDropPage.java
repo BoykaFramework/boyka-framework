@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.By.tagName;
 
@@ -37,14 +38,14 @@ public class DragDropPage {
         return new DragDropPage ();
     }
 
-    private final Locator draggable = Locator.buildLocator ()
-        .web (id ("draggable"))
+    private final Locator draggable = buildLocator ().web (id ("draggable"))
+        .name ("Draggable")
         .build ();
-    private final Locator droppable = Locator.buildLocator ()
-        .web (id ("droppable"))
+    private final Locator droppable = buildLocator ().web (id ("droppable"))
+        .name ("Droppable")
         .build ();
-    private final Locator header    = Locator.buildLocator ()
-        .web (tagName ("b"))
+    private final Locator header    = buildLocator ().web (tagName ("b"))
+        .name ("Header")
         .parent (this.droppable)
         .build ();
 }

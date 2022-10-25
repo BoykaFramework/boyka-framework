@@ -16,9 +16,11 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.tagName;
+
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
-import org.openqa.selenium.By;
 
 /**
  * Nested Frames pages.
@@ -37,8 +39,8 @@ public class NestedFramePage {
         return new NestedFramePage ();
     }
 
-    private final Locator body        = Locator.buildLocator ()
-        .web (By.tagName ("body"))
+    private final Locator body        = buildLocator ().web (tagName ("body"))
+        .name ("Body")
         .build ();
     private final String  frameBottom = "frame-bottom";
     private final String  frameLeft   = "frame-left";

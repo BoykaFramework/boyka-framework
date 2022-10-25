@@ -39,11 +39,15 @@ public class DoubleClickPage {
     }
 
     private final Locator clickHold   = buildLocator ().web (id ("click-box"))
+        .name ("Click Hold")
         .build ();
     private final Locator doubleClick = buildLocator ().web (id ("double-click"))
+        .name ("Double Click")
         .build ();
     private final Locator hoverButton = buildLocator ().web (className ("dropbtn"))
+        .name ("Hover Button")
         .build ();
     private final Locator hoverMenu   = buildLocator ().web (className ("dropdown-content"))
+        .name ("Hover Menu")
         .build ();
 }
