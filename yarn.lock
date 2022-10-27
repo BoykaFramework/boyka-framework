@@ -3609,12 +3609,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/cli@npm:15.0.2":
-  version: 15.0.2
-  resolution: "@nrwl/cli@npm:15.0.2"
+"@nrwl/cli@npm:15.0.3":
+  version: 15.0.3
+  resolution: "@nrwl/cli@npm:15.0.3"
   dependencies:
-    nx: 15.0.2
-  checksum: 9e10d08ce334d6f668ad948720af75de156f63d346d7eb01b482fb310705dcaa1ece9a28d8427b514c9fb30b6279b778bff67e96ebbe52adc68cd1d97dd3cdaa
+    nx: 15.0.3
+  checksum: 5ce4a3a1b745b90aef7c72ff27ecda9848e91be6c8a67f4908bdadc2d7c7f610fb6796a3d150ce43871eebdf59bf24bf07fb9309b5a5551fa8abbe97bfe04617
   languageName: node
   linkType: hard
 
@@ -3644,14 +3644,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/tao@npm:15.0.2":
-  version: 15.0.2
-  resolution: "@nrwl/tao@npm:15.0.2"
+"@nrwl/tao@npm:15.0.3":
+  version: 15.0.3
+  resolution: "@nrwl/tao@npm:15.0.3"
   dependencies:
-    nx: 15.0.2
+    nx: 15.0.3
   bin:
     tao: index.js
-  checksum: 159231a290e45d118cd9087d31c534917be9dac21e9a60987971369706ecb14b6d7aab291fccddef8f140741ae44d8ba3939f3eb1cd0495f85719d2db1b9db27
+  checksum: 5b64088ede1612a121a1ea8d0737616a232232cf8b0aea690abee521dbdbedcd9d274df3e08873a917c83c3a4cb5ae53c4277356794b8968562c735c74824698
   languageName: node
   linkType: hard
 
@@ -4330,10 +4330,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.5":
-  version: 18.11.5
-  resolution: "@types/node@npm:18.11.5"
-  checksum: ac54e9287dd4549ea3dc8aabc0cf7bfa04c52f02925d7fd68414789617ec770f034c8ae2e111e8bd00d446a46fcac42587b5a316a1303e2f6ea094854248c9ff
+"@types/node@npm:^18.11.7":
+  version: 18.11.7
+  resolution: "@types/node@npm:18.11.7"
+  checksum: 69d630825cf6fbf580d08d76a4d4836ef8c34ed4fe0842221ade87d275f517099cbfabe8e22397208e564bd24926db97699ab9db5c091383269a432b336665e2
   languageName: node
   linkType: hard
 
@@ -5566,7 +5566,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.1.2
     "@commitlint/config-conventional": ^17.1.0
-    "@types/node": ^18.11.5
+    "@types/node": ^18.11.7
     "@typescript-eslint/eslint-plugin": ^5.41.0
     "@typescript-eslint/parser": ^5.41.0
     commitlint: ^17.1.2
@@ -5581,7 +5581,7 @@ __metadata:
     lerna: ^6.0.1
     lerna-changelog: ^2.2.0
     lint-staged: ^13.0.3
-    nx: ^15.0.2
+    nx: ^15.0.3
     prettier: ^2.7.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -11642,12 +11642,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nx@npm:15.0.2, nx@npm:^15.0.2":
-  version: 15.0.2
-  resolution: "nx@npm:15.0.2"
+"nx@npm:15.0.3, nx@npm:^15.0.3":
+  version: 15.0.3
+  resolution: "nx@npm:15.0.3"
   dependencies:
-    "@nrwl/cli": 15.0.2
-    "@nrwl/tao": 15.0.2
+    "@nrwl/cli": 15.0.3
+    "@nrwl/tao": 15.0.3
     "@parcel/watcher": 2.0.4
     "@yarnpkg/lockfile": ^1.1.0
     "@yarnpkg/parsers": ^3.0.0-rc.18
@@ -11691,7 +11691,7 @@ __metadata:
       optional: true
   bin:
     nx: bin/nx.js
-  checksum: ca4094eeab1de558256993762d2bfc9cdcdfe9aebe6da5c6c88c275b317718f05a118a836db1f079788796baa5adcb357977d5ca1dc7067e2c44ebfb63dda107
+  checksum: 17f4322025c51df55e06e4d41e6197824ecf449f99a9b5af11c7bd7a99e36d007e5dcaf1bd253f096c3f14e5f001dbd9449881a72a079042ee83b811e18c9102
   languageName: node
   linkType: hard
 

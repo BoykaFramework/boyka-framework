@@ -14,21 +14,36 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.enums;
+package com.github.wasiqb.boyka.testng.ui.saucedemo.pages;
+
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.id;
+
+import com.github.wasiqb.boyka.builders.Locator;
+import lombok.Getter;
 
 /**
- * Element find wait strategy for Auto waiting for element to become intractable.
+ * Cart page.
  *
  * @author Wasiq Bhamla
- * @since 05-Mar-2022
+ * @since 13-Mar-2022
  */
-public enum WaitStrategy {
+@Getter
+public class CartPage {
     /**
-     * Wait for element to become clickable.
+     * Gets Cart page instance.
+     *
+     * @return Cart page instance
      */
-    CLICKABLE,
-    /**
-     * Wait for element to become visible.
-     */
-    VISIBLE
+    public static CartPage cartPage () {
+        return new CartPage ();
+    }
+
+    private final Locator checkout = buildLocator ().web (id ("checkout"))
+        .name ("Checkout")
+        .build ();
+
+    private CartPage () {
+        // Avoid explicit class initialisation
+    }
 }

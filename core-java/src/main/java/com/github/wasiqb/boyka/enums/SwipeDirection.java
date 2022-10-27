@@ -17,18 +17,26 @@
 package com.github.wasiqb.boyka.enums;
 
 /**
- * Element find wait strategy for Auto waiting for element to become intractable.
+ * Swipe direction
  *
  * @author Wasiq Bhamla
- * @since 05-Mar-2022
+ * @since 26-Oct-2022
  */
-public enum WaitStrategy {
+public enum SwipeDirection {
     /**
-     * Wait for element to become clickable.
+     * Down direction: Finger moving from bottom to top
      */
-    CLICKABLE,
+    DOWN,
     /**
-     * Wait for element to become visible.
+     * Left direction: Finger moving from left to right
      */
-    VISIBLE
+    LEFT,
+    /**
+     * Right direction: Finger moving from right to left
+     */
+    RIGHT,
+    /**
+     * Up direction: Finger moving from top to bottom
+     */
+    UP
 }

@@ -14,21 +14,30 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.enums;
+package com.github.wasiqb.boyka.testng.ui.theinternet.pages;
+
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+
+import com.github.wasiqb.boyka.builders.Locator;
+import lombok.Getter;
+import org.openqa.selenium.By;
 
 /**
- * Element find wait strategy for Auto waiting for element to become intractable.
+ * Context menu page.
  *
  * @author Wasiq Bhamla
- * @since 05-Mar-2022
+ * @since 26-Jul-2022
  */
-public enum WaitStrategy {
+@Getter
+public class ContextMenuPage {
     /**
-     * Wait for element to become clickable.
+     * Context menu page instance.
      */
-    CLICKABLE,
-    /**
-     * Wait for element to become visible.
-     */
-    VISIBLE
+    public static ContextMenuPage contextMenuPage () {
+        return new ContextMenuPage ();
+    }
+
+    private final Locator hotSpot = buildLocator ().web (By.id ("hot-spot"))
+        .name ("Hot Spot")
+        .build ();
 }

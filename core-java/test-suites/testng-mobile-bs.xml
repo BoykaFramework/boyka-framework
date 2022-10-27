@@ -21,7 +21,7 @@
         <parameter name="appType" value="ANDROID"/>
         <parameter name="driverKey" value="test_bs_android"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.mobile"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo.android"/>
         </packages>
     </test>
 </suite>

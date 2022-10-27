@@ -52,7 +52,7 @@ public enum Message {
     /**
      * Element not found.
      */
-    ELEMENT_NOT_FOUND ("Element not found for locator {0}..."),
+    ELEMENT_NOT_FOUND ("Element [{0}] not found for platform [{1}]..."),
     /**
      * Empty browser is not allowed.
      */

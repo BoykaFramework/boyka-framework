@@ -16,6 +16,8 @@
 
 package com.github.wasiqb.boyka.builders;
 
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+
 import java.util.function.Predicate;
 
 import lombok.Builder;
@@ -35,10 +37,26 @@ import org.openqa.selenium.WebElement;
 @Getter
 @Builder (builderMethodName = "buildLocator")
 public class Locator {
+    private By                    android;
     private Predicate<WebElement> filter;
     private int                   index;
     @NotNull
     private String                name;
     private Locator               parent;
     private By                    web;
+
+    /**
+     * Gets the platform specific locator
+     *
+     * @return Locator for the element
+     */
+    public By getLocator () {
+        switch (getSession ().getPlatformType ()) {
+            case ANDROID:
+                return this.android;
+            case WEB:
+            default:
+                return this.web;
+        }
+    }
 }

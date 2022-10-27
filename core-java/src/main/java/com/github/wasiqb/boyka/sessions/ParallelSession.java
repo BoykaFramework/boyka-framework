@@ -18,7 +18,6 @@ package com.github.wasiqb.boyka.sessions;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import com.github.wasiqb.boyka.enums.PlatformType;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
@@ -61,14 +60,12 @@ public final class ParallelSession {
     /**
      * Sets current session in thread.
      *
-     * @param platformType the application type
      * @param driver the driver instance
      * @param <D> the generic WebDriver type
      */
-    public static <D extends WebDriver> void setDriver (final PlatformType platformType, final D driver) {
-        LOGGER.traceEntry ("Application Type: {}, Driver: {}", platformType, driver);
+    public static <D extends WebDriver> void setDriver (final D driver) {
         final var session = getSession ();
-        session.setPlatformType (platformType);
+        LOGGER.traceEntry ("Application Type: {}, Driver: {}", session.getPlatformType (), driver);
         session.setDriver (driver);
         LOGGER.traceExit ();
     }

@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.text.MessageFormat.format;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -87,20 +88,24 @@ final class ElementFinder {
         final Locator locator, final WaitStrategy waitStrategy) {
         LOGGER.traceEntry ();
         final var wait = getSession ().getWait ();
+        final var platformLocator = locator.getLocator ();
+        if (platformLocator == null) {
+            throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
+        }
         try {
             switch (waitStrategy) {
                 case CLICKABLE:
-                    wait.until (elementToBeClickable (locator.getWeb ()));
+                    wait.until (elementToBeClickable (locator.getLocator ()));
                     break;
                 case VISIBLE:
                 default:
-                    wait.until (visibilityOfElementLocated (locator.getWeb ()));
+                    wait.until (visibilityOfElementLocated (locator.getLocator ()));
             }
         } catch (final TimeoutException e) {
-            handleAndThrow (ELEMENT_NOT_FOUND, e);
+            handleAndThrow (ELEMENT_NOT_FOUND, e, locator.getName (), getSession ().getPlatformType ());
         }
         return LOGGER.traceExit (
-            parent != null ? parent.findElements (locator.getWeb ()) : driver.findElements (locator.getWeb ()));
+            parent != null ? parent.findElements (locator.getLocator ()) : driver.findElements (locator.getLocator ()));
     }
 
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator,

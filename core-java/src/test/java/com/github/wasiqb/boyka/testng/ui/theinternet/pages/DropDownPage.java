@@ -14,21 +14,33 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.enums;
+package com.github.wasiqb.boyka.testng.ui.theinternet.pages;
+
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static org.openqa.selenium.By.id;
+
+import com.github.wasiqb.boyka.builders.Locator;
+import lombok.Getter;
 
 /**
- * Element find wait strategy for Auto waiting for element to become intractable.
+ * DropDown page.
  *
  * @author Wasiq Bhamla
- * @since 05-Mar-2022
+ * @since 30-Jul-2022
  */
-public enum WaitStrategy {
+@Getter
+public class DropDownPage {
     /**
-     * Wait for element to become clickable.
+     * Drag and drop page instance.
      */
-    CLICKABLE,
-    /**
-     * Wait for element to become visible.
-     */
-    VISIBLE
+    public static DropDownPage dropDownPage () {
+        return new DropDownPage ();
+    }
+
+    private final Locator fruits      = buildLocator ().web (id ("fruits"))
+        .name ("Fruits")
+        .build ();
+    private final Locator superHeroes = buildLocator ().web (id ("superheros"))
+        .name ("Super Heroes")
+        .build ();
 }
