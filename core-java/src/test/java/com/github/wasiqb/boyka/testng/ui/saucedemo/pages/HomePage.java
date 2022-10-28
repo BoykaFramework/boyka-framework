@@ -16,7 +16,6 @@
 
 package com.github.wasiqb.boyka.testng.ui.saucedemo.pages;
 
-import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static io.appium.java_client.AppiumBy.accessibilityId;
 import static io.appium.java_client.AppiumBy.className;
 import static java.text.MessageFormat.format;
@@ -44,47 +43,58 @@ public class HomePage {
         return new HomePage ();
     }
 
-    private final Locator logout             = buildLocator ().web (id ("logout_sidebar_link"))
+    private final Locator logout             = Locator.buildLocator ()
+        .web (id ("logout_sidebar_link"))
         .android (accessibilityId ("test-LOGOUT"))
         .name ("Logout")
         .build ();
-    private final Locator menuButton         = buildLocator ().web (id ("react-burger-menu-btn"))
+    private final Locator menuButton         = Locator.buildLocator ()
+        .web (id ("react-burger-menu-btn"))
         .android (accessibilityId ("test-Menu"))
         .name ("Menu Button")
         .build ();
-    private final Locator productParent      = buildLocator ().web (cssSelector ("div.inventory_item"))
+    private final Locator productParent      = Locator.buildLocator ()
+        .web (cssSelector ("div.inventory_item"))
         .android (accessibilityId ("test-PRODUCTS"))
         .name ("Product Parent")
         .build ();
-    private final Locator productDescription = buildLocator ().parent (this.productParent)
+    private final Locator productDescription = Locator.buildLocator ()
+        .parent (this.productParent)
         .name ("Product description")
         .android (accessibilityId ("test-Item description"))
         .web (cssSelector ("div.inventory_item_desc"))
         .build ();
-    private final Locator addToCartButton    = buildLocator ().parent (this.productParent)
+    private final Locator addToCartButton    = Locator.buildLocator ()
+        .parent (this.productParent)
         .name ("Add to cart button")
         .android (accessibilityId ("test-ADD TO CART"))
         .web (id ("add-to-cart-sauce-labs-backpack"))
         .build ();
-    private final Locator productPrice       = buildLocator ().parent (this.productParent)
+    private final Locator productPrice       = Locator.buildLocator ()
+        .parent (this.productParent)
         .name ("Product price")
         .android (accessibilityId ("test-Price"))
         .web (cssSelector ("div.inventory_item_price"))
         .build ();
-    private final Locator productTitle       = buildLocator ().parent (this.productParent)
+    private final Locator productTitle       = Locator.buildLocator ()
+        .parent (this.productParent)
         .name ("Product title")
         .android (accessibilityId ("test-Item title"))
         .web (cssSelector ("div.inventory_item_name"))
         .build ();
-    private final Locator shoppingCart       = buildLocator ().web (cssSelector ("a.shopping_cart_link"))
+    private final Locator shoppingCart       = Locator.buildLocator ()
+        .web (cssSelector ("a.shopping_cart_link"))
         .android (accessibilityId ("test-Cart"))
         .name ("Shopping Cart")
         .build ();
-    private final Locator shoppingCartCount  = buildLocator ().web (cssSelector ("span.shopping_cart_badge"))
+    private final Locator shoppingCartCount  = Locator.buildLocator ()
+        .web (cssSelector ("span.shopping_cart_badge"))
         .android (className ("android.widget.TextView"))
         .name ("Shopping Cart count")
         .build ();
-    private final Locator viewToggle         = buildLocator ().android (accessibilityId ("test-Toggle"))
+    private final Locator viewToggle         = Locator.buildLocator ()
+        .android (accessibilityId ("test-Toggle"))
+        .name ("View Toggle")
         .build ();
 
     private HomePage () {
@@ -99,7 +109,8 @@ public class HomePage {
      * @return {@link Locator} of product item title
      */
     public Locator productItem (final String productName) {
-        return buildLocator ().web (xpath (format (".//*[text()=\"{0}\"]", productName)))
+        return Locator.buildLocator ()
+            .web (xpath (format (".//*[text()=\"{0}\"]", productName)))
             .name (format ("Product [{0}]", productName))
             .build ();
     }
