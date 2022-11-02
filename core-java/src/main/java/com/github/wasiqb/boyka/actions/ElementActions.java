@@ -17,18 +17,14 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
-import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGestures;
+import static java.util.Collections.singletonList;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import java.util.Collection;
-
 import com.github.wasiqb.boyka.builders.Locator;
-import com.github.wasiqb.boyka.utils.FingerGestureUtils;
-import io.appium.java_client.AppiumDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Sequence;
 
 /**
  * Perform element specific actions.
@@ -138,11 +134,11 @@ public final class ElementActions {
      * @param locator Locator of the element
      */
     public static void tapOn (final Locator locator) {
-        final var sequences = getElementAttribute (element -> FingerGestureUtils.composeGesture ()
+        final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
             .element (element)
             .build ()
             .tapOn (), locator);
-        performMobileGestures (sequences);
+        performMobileGestures (singletonList (sequences));
     }
 
     /**
@@ -156,12 +152,6 @@ public final class ElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting text of element located by: {}", locator.getName ());
         return LOGGER.traceExit (getElementAttribute (WebElement::getText, locator));
-    }
-
-    private static void performMobileGestures (final Collection<Sequence> sequences) {
-        performDriverAction (driver -> {
-            ((AppiumDriver) driver).perform (sequences);
-        });
     }
 
     private ElementActions () {

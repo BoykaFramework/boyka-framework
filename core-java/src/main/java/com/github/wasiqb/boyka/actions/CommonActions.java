@@ -22,13 +22,16 @@ import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.Collection;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import io.appium.java_client.AppiumDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Sequence;
 
 /**
  * Common action methods to perform different actions on devices / browsers and on elements.
@@ -90,6 +93,17 @@ final class CommonActions {
         LOGGER.traceEntry ();
         action.accept (find (locator, CLICKABLE));
         LOGGER.traceExit ();
+    }
+
+    /**
+     * Perform Gestures on Mobile.
+     *
+     * @param sequences Collection of Sequences of gestures.
+     */
+    public static void performMobileGestures (final Collection<Sequence> sequences) {
+        performDriverAction (driver -> {
+            ((AppiumDriver) driver).perform (sequences);
+        });
     }
 
     private CommonActions () {

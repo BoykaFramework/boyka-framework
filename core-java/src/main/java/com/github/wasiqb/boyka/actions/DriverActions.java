@@ -18,14 +18,17 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGestures;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_CREATING_LOGS;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_WRITING_LOGS;
+import static com.github.wasiqb.boyka.enums.SwipeDirection.UP;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.lang.System.getProperty;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
+import static java.util.Collections.singletonList;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.OutputType.FILE;
@@ -293,6 +296,23 @@ public final class DriverActions {
                 LOGGER.warn ("Error while saving different logs: {}", e.getMessage ());
             }
         });
+    }
+
+    /**
+     * Swipe up on the Mobile screen.
+     */
+    public static void swipeUp () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Swiping up on Mobile devices.");
+        final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
+            .direction (UP)
+            .screenSize (driver.manage ()
+                .window ()
+                .getSize ())
+            .build ()
+            .swipe ());
+        performMobileGestures (singletonList (swipeUpSequence));
+        LOGGER.traceExit ();
     }
 
     /**
