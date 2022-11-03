@@ -46,6 +46,7 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -299,16 +300,23 @@ public final class DriverActions {
     }
 
     /**
-     * Swipe up on the Mobile screen.
+     * Swipe up on the Mobile screen starting from center of the screen.
      */
     public static void swipeUp () {
+        swipeUp (20);
+    }
+
+    /**
+     * Swipe up on the Mobile screen starting from center of the screen.
+     *
+     * @param distance Distance to swipe, accepts 1 to 100
+     */
+    public static void swipeUp (final int distance) {
         LOGGER.traceEntry ();
         LOGGER.info ("Swiping up on Mobile devices.");
         final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (UP)
-            .screenSize (driver.manage ()
-                .window ()
-                .getSize ())
+            .distance (distance)
             .build ()
             .swipe ());
         performMobileGestures (singletonList (swipeUpSequence));
@@ -383,6 +391,9 @@ public final class DriverActions {
         final var setting = getSession ().getSetting ()
             .getUi ()
             .getScreenshot ();
+        if (!setting.isEnabled ()) {
+            return;
+        }
         final var path = setting.getPath ();
         final var prefix = setting.getPrefix ();
         final var extension = setting.getExtension ();
@@ -400,6 +411,12 @@ public final class DriverActions {
      */
     public static void takeScreenshot (final String fileName) {
         LOGGER.traceEntry ();
+        final var setting = getSession ().getSetting ()
+            .getUi ()
+            .getScreenshot ();
+        if (!setting.isEnabled ()) {
+            return;
+        }
         performDriverAction (driver -> {
             final var file = ((TakesScreenshot) driver).getScreenshotAs (FILE);
             try {
@@ -431,6 +448,17 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting url of the browser");
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl));
+    }
+
+    /**
+     * Gets the window / device screen size.
+     *
+     * @return Size of the window screen
+     */
+    public static Dimension viewportSize () {
+        return getDriverAttribute (driver -> driver.manage ()
+            .window ()
+            .getSize ());
     }
 
     /**

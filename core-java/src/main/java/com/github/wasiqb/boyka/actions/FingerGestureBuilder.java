@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.actions;
 
+import static com.github.wasiqb.boyka.actions.DriverActions.viewportSize;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.requireNonNull;
@@ -44,6 +45,8 @@ import org.openqa.selenium.interactions.Sequence;
  */
 @Builder (builderMethodName = "init")
 final class FingerGestureBuilder {
+    private static final Dimension SCREEN_SIZE = viewportSize ();
+
     @Builder.Default
     private       SwipeDirection      direction = DOWN;
     @Builder.Default
@@ -53,7 +56,6 @@ final class FingerGestureBuilder {
     private       int                 index     = 0;
     @Builder.Default
     private       String              name      = "Finger";
-    private       Dimension           screenSize;
     private final Duration            stepWait  = ofMillis (50);
     private       WebElement          targetElement;
     private final PointerInput.Origin viewport  = viewport ();
@@ -95,17 +97,16 @@ final class FingerGestureBuilder {
     }
 
     private Point getScreenCenter () {
-        final var x = this.screenSize.getWidth () / 2;
-        final var y = this.screenSize.getHeight () / 2;
+        final var x = SCREEN_SIZE.getWidth () / 2;
+        final var y = SCREEN_SIZE.getHeight () / 2;
         return new Point (x, y);
     }
 
     private Point getSwipeEndPosition () {
-        final var size = this.element != null ? this.element.getSize () : this.screenSize;
         final var location = this.element != null ? this.element.getLocation () : new Point (0, 0);
         final var start = getSwipeStartPosition ();
-        final var x = start.getX () + location.getX () + ((size.getWidth () * this.direction.getX () * this.distance) / 100);
-        final var y = start.getY () + location.getY () + ((size.getHeight () * this.direction.getY () * this.distance) / 100);
+        final var x = start.getX () + location.getX () + ((start.getX () * this.direction.getX () * this.distance) / 100);
+        final var y = start.getY () + location.getY () + ((start.getY () * this.direction.getY () * this.distance) / 100);
         return new Point (x, y);
     }
 
