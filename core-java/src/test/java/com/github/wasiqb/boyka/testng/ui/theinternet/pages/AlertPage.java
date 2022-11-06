@@ -31,13 +31,15 @@ import lombok.Getter;
  */
 @Getter
 public class AlertPage {
+    private static final AlertPage ALERT_PAGE = new AlertPage ();
+
     /**
      * Alert page instance.
      *
      * @return {@link AlertPage}
      */
     public static AlertPage alertPage () {
-        return new AlertPage ();
+        return ALERT_PAGE;
     }
 
     private final Locator alertButton   = buildLocator ().web (cssSelector ("ul > li > button"))

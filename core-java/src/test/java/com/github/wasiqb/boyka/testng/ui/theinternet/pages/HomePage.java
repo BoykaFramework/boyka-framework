@@ -31,13 +31,15 @@ import lombok.Getter;
  */
 @Getter
 public class HomePage {
+    private static final HomePage HOME_PAGE = new HomePage ();
+
     /**
      * Home page instance.
      *
      * @return {@link HomePage}
      */
     public static HomePage homePage () {
-        return new HomePage ();
+        return HOME_PAGE;
     }
 
     /**

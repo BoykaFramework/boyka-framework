@@ -17,10 +17,11 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static io.appium.java_client.AppiumBy.accessibilityId;
+import static org.openqa.selenium.By.cssSelector;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
-import org.openqa.selenium.By;
 
 /**
  * Product details page.
@@ -30,17 +31,20 @@ import org.openqa.selenium.By;
  */
 @Getter
 public class ProductDetailsPage {
+    private static final ProductDetailsPage PRODUCT_DETAILS_PAGE = new ProductDetailsPage ();
+
     /**
      * Gets the product details page instance.
      *
      * @return {@link ProductDetailsPage} instance
      */
     public static ProductDetailsPage productDetailsPage () {
-        return new ProductDetailsPage ();
+        return PRODUCT_DETAILS_PAGE;
     }
 
     private final Locator container = buildLocator ().web (
-            By.cssSelector ("div#inventory_item_container div.inventory_details"))
+            cssSelector ("div#inventory_item_container div.inventory_details"))
+        .android (accessibilityId ("test-Inventory item page"))
         .name ("Container")
         .build ();
 

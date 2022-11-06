@@ -16,11 +16,12 @@
 
 package com.github.wasiqb.boyka.testng.ui.saucedemo.android;
 
+import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
+import static com.github.wasiqb.boyka.actions.DriverActions.swipeDown;
 import static com.github.wasiqb.boyka.actions.DriverActions.swipeUp;
 import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementEnabled;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
@@ -36,7 +37,6 @@ import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -50,7 +50,7 @@ public class SauceDemoTest {
     /**
      * Setup test method to take screenshot after each test method.
      */
-    @AfterMethod
+    @AfterMethod (alwaysRun = true)
     public void afterMethod () {
         takeScreenshot ();
     }
@@ -61,7 +61,7 @@ public class SauceDemoTest {
      * @param appType Application type
      * @param driverKey Driver config key
      */
-    @BeforeClass (description = "Setup test class")
+    @BeforeClass (description = "Setup test class", alwaysRun = true)
     @Parameters ({ "appType", "driverKey" })
     public void setupTestClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
@@ -70,55 +70,47 @@ public class SauceDemoTest {
     /**
      * Tear down test class by closing driver.
      */
-    @AfterClass (description = "Tear down test class")
+    @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
+        saveLogs ();
         closeDriver ();
     }
 
     /**
      * Test add to cart functionality.
      */
-    @Test (description = "Test adding a product to cart", dependsOnMethods = "testLogin")
+    @Test (description = "Test adding a product to cart", dependsOnMethods = "testSwipe")
     public void testAddToCart () {
-        swipeUp (50);
+        tapOn (homePage ().getViewToggle ());
+        verifyElementDisplayed (homePage ().getProductTitle ()).isTrue ();
+        tapOn (homePage ().getAddToCartButton ());
 
-        //        verifyElementDisplayed (homePage ().getProductTitle ()).isTrue ();
-        //        verifyElementDisplayed (homePage ().getProductDescription ()).isTrue ();
-        //        verifyAttributeOf (homePage ().getAddToCartButton (), "data-test").isEqualTo (
-        //            "add-to-cart-sauce-labs-backpack");
-        //        clickOn (homePage ().getAddToCartButton ());
-        //
-        //        verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
-        //        verifyTextOf (homePage ().getShoppingCartCount ()).isEqualTo ("1");
+        verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
+        verifyTextOf (homePage ().getShoppingCartCount ()).isEqualTo ("1");
     }
 
     /**
      * Test checkout page step 1.
      */
-    @Ignore
-    @Test (description = "Test checkout page step 1.", priority = 5)
+    @Test (description = "Test checkout page step 1.", dependsOnMethods = "testProductCartPage")
     public void testCheckoutStep1 () {
-        clickOn (cartPage ().getCheckout ());
+        tapOn (cartPage ().getCheckout ());
 
-        verifyTextOf (checkoutPage ().getTitle ()).isEqualTo ("CHECKOUT: YOUR INFORMATION");
         enterText (checkoutPage ().getFirstName (), "Wasiq");
         enterText (checkoutPage ().getLastName (), "Bhamla");
         enterText (checkoutPage ().getZipCode (), "12345");
-        clickOn (checkoutPage ().getContinueButton ());
-
-        verifyTextOf (checkoutPage ().getTitle ()).isEqualTo ("CHECKOUT: OVERVIEW");
+        tapOn (checkoutPage ().getContinueButton ());
     }
 
     /**
      * Test checkout page step 2.
      */
-    @Ignore
-    @Test (description = "Test checkout page step 2.", priority = 6)
+    @Test (description = "Test checkout page step 2.", dependsOnMethods = "testCheckoutStep1")
     public void testCheckoutStep2 () {
-        clickOn (checkoutPage ().getFinish ());
+        swipeUp ();
+        tapOn (checkoutPage ().getFinish ());
 
-        verifyTextOf (checkoutPage ().getTitle ()).isEqualTo ("CHECKOUT: COMPLETE!");
-        verifyTextOf (checkoutPage ().getCompleteHeader ()).isEqualTo ("THANK YOU FOR YOUR ORDER");
+        verifyTextOf (checkoutPage ().getCompleteHeader ()).isEqualTo ("THANK YOU FOR YOU ORDER");
         verifyTextOf (checkoutPage ().getCompleteText ()).isEqualTo (
             "Your order has been dispatched, and will arrive just as fast as the pony can get there!");
     }
@@ -139,10 +131,9 @@ public class SauceDemoTest {
     /**
      * Test product cart page.
      */
-    @Ignore
-    @Test (description = "Test product cart page", priority = 4)
+    @Test (description = "Test product cart page", dependsOnMethods = "testProductDetailsPage")
     public void testProductCartPage () {
-        clickOn (homePage ().getShoppingCart ());
+        tapOn (homePage ().getShoppingCart ());
 
         verifyElementDisplayed (cartPage ().getCheckout ()).isTrue ();
     }
@@ -150,10 +141,9 @@ public class SauceDemoTest {
     /**
      * Test login functionality.
      */
-    @Ignore
-    @Test (description = "Test product details page", priority = 3)
+    @Test (description = "Test product details page", dependsOnMethods = "testAddToCart")
     public void testProductDetailsPage () {
-        clickOn (homePage ().productItem ("Sauce Labs Backpack"));
+        tapOn (homePage ().productItem ("Sauce Labs Backpack"));
 
         verifyElementDisplayed (productDetailsPage ().getContainer ()).isTrue ();
     }
@@ -161,12 +151,20 @@ public class SauceDemoTest {
     /**
      * Test checkout page step 2.
      */
-    @Ignore
-    @Test (description = "Test Sign out.", priority = 7)
+    @Test (description = "Test Sign out.", dependsOnMethods = "testCheckoutStep2")
     public void testSignOut () {
-        clickOn (homePage ().getMenuButton ());
-        clickOn (homePage ().getLogout ());
+        tapOn (homePage ().getMenuButton ());
+        tapOn (homePage ().getLogout ());
 
         verifyElementDisplayed (loginPage ().getUsername ()).isTrue ();
+    }
+
+    /**
+     * Test Swipe up and down action.
+     */
+    @Test (description = "Test Swipe up and down action", dependsOnMethods = "testLogin")
+    public void testSwipe () {
+        swipeUp ();
+        swipeDown ();
     }
 }

@@ -14,37 +14,36 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.ui.theinternet.pages;
+package com.github.wasiqb.boyka.testng.ui.saucedemo.pages;
 
-import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
-import static org.openqa.selenium.By.id;
+import static io.appium.java_client.AppiumBy.accessibilityId;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
 
 /**
- * DropDown page.
+ * Drawing page screen.
  *
  * @author Wasiq Bhamla
- * @since 30-Jul-2022
+ * @since 05-Nov-2022
  */
 @Getter
-public class DropDownPage {
-    private static final DropDownPage DROP_DOWN_PAGE = new DropDownPage ();
-
+public class DrawingPage {
     /**
-     * Drag and drop page instance.
+     * Drawing page instance
      *
-     * @return {@link DropDownPage}
+     * @return instance of the page
      */
-    public static DropDownPage dropDownPage () {
-        return DROP_DOWN_PAGE;
+    public static DrawingPage drawingPage () {
+        return new DrawingPage ();
     }
 
-    private final Locator fruits      = buildLocator ().web (id ("fruits"))
-        .name ("Fruits")
+    private final Locator clearButton = Locator.buildLocator ()
+        .name ("Clear Button")
+        .android (accessibilityId ("test-CLEAR"))
         .build ();
-    private final Locator superHeroes = buildLocator ().web (id ("superheros"))
-        .name ("Super Heroes")
-        .build ();
+
+    private DrawingPage () {
+        // Utility class.
+    }
 }

@@ -31,11 +31,15 @@ import lombok.Getter;
  */
 @Getter
 public class DoubleClickPage {
+    private static final DoubleClickPage DOUBLE_CLICK_PAGE = new DoubleClickPage ();
+
     /**
      * Double click page instance.
+     *
+     * @return Double click menu
      */
     public static DoubleClickPage doubleClickPage () {
-        return new DoubleClickPage ();
+        return DOUBLE_CLICK_PAGE;
     }
 
     private final Locator clickHold   = buildLocator ().web (id ("click-box"))

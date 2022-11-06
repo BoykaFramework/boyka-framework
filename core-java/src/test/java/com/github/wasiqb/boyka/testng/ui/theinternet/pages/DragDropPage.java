@@ -31,11 +31,15 @@ import lombok.Getter;
  */
 @Getter
 public class DragDropPage {
+    private static final DragDropPage DRAG_DROP_PAGE = new DragDropPage ();
+
     /**
      * Drag and drop page instance.
+     *
+     * @return {@link DragDropPage}
      */
     public static DragDropPage dragDropPage () {
-        return new DragDropPage ();
+        return DRAG_DROP_PAGE;
     }
 
     private final Locator draggable = buildLocator ().web (id ("draggable"))

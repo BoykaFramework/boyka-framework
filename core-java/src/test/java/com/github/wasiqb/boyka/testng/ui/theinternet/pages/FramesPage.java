@@ -30,13 +30,15 @@ import lombok.Getter;
  */
 @Getter
 public class FramesPage {
+    private static final FramesPage FRAMES_PAGE = new FramesPage ();
+
     /**
      * Frames page locators.
      *
      * @return {@link FramesPage} instance
      */
     public static FramesPage framesPage () {
-        return new FramesPage ();
+        return FRAMES_PAGE;
     }
 
     private final Locator frame        = buildLocator ().web (linkText ("iFrame"))

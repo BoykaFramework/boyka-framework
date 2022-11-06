@@ -30,13 +30,15 @@ import lombok.Getter;
  */
 @Getter
 public class CheckboxPage {
+    private static final CheckboxPage CHECKBOX_PAGE = new CheckboxPage ();
+
     /**
      * Checkbox page instance.
      *
-     * @return Checkbox page instance
+     * @return {@link CheckboxPage}
      */
     public static CheckboxPage checkboxPage () {
-        return new CheckboxPage ();
+        return CHECKBOX_PAGE;
     }
 
     private final Locator option1 = buildLocator ().web (cssSelector ("form#checkboxes input"))

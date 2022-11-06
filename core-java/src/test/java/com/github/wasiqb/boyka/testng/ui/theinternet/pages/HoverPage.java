@@ -29,11 +29,15 @@ import com.github.wasiqb.boyka.builders.Locator;
  * @since 26-Jul-2022
  */
 public class HoverPage {
+    private static final HoverPage HOVER_PAGE = new HoverPage ();
+
     /**
      * Hover mouse page instance.
+     *
+     * @return {@link HoverPage}
      */
     public static HoverPage hoverPage () {
-        return new HoverPage ();
+        return HOVER_PAGE;
     }
 
     /**

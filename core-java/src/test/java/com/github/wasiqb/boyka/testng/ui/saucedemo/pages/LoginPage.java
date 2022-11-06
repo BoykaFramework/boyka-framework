@@ -31,13 +31,15 @@ import lombok.Getter;
  */
 @Getter
 public class LoginPage {
+    private static final LoginPage LOGIN_PAGE = new LoginPage ();
+
     /**
      * Login page object.
      *
      * @return {@link LoginPage}
      */
     public static LoginPage loginPage () {
-        return new LoginPage ();
+        return LOGIN_PAGE;
     }
 
     private final Locator loginBox    = buildLocator ().web (id ("login_button_container"))

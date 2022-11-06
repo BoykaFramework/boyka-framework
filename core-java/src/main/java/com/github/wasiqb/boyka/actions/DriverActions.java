@@ -22,6 +22,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGesture
 import static com.github.wasiqb.boyka.enums.Message.ERROR_CREATING_LOGS;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_WRITING_LOGS;
+import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.UP;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
@@ -300,10 +301,34 @@ public final class DriverActions {
     }
 
     /**
+     * Swipe down on the Mobile screen starting from center of the screen.
+     */
+    public static void swipeDown () {
+        swipeDown (25);
+    }
+
+    /**
+     * Swipe down on the Mobile screen starting from center of the screen.
+     *
+     * @param distance Distance to swipe, accepts 1 to 100
+     */
+    public static void swipeDown (final int distance) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Swiping down on Mobile devices.");
+        final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
+            .direction (DOWN)
+            .distance (distance)
+            .build ()
+            .swipe ());
+        performMobileGestures (singletonList (swipeUpSequence));
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Swipe up on the Mobile screen starting from center of the screen.
      */
     public static void swipeUp () {
-        swipeUp (20);
+        swipeUp (25);
     }
 
     /**

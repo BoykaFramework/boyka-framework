@@ -30,11 +30,15 @@ import org.openqa.selenium.By;
  */
 @Getter
 public class ContextMenuPage {
+    private static final ContextMenuPage CONTEXT_MENU_PAGE = new ContextMenuPage ();
+
     /**
      * Context menu page instance.
+     *
+     * @return Context menu page instance
      */
     public static ContextMenuPage contextMenuPage () {
-        return new ContextMenuPage ();
+        return CONTEXT_MENU_PAGE;
     }
 
     private final Locator hotSpot = buildLocator ().web (By.id ("hot-spot"))
