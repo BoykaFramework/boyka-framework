@@ -30,7 +30,7 @@
         <selenium-webdriver.version>4.5.0</selenium-webdriver.version>
         <testng.version>7.6.1</testng.version>
         <appium-java-client.version>8.2.0</appium-java-client.version>
-        <webdrivermanager.version>5.3.0</webdrivermanager.version>
+        <webdrivermanager.version>5.3.1</webdrivermanager.version>
         <okhttp.version>4.10.0</okhttp.version>
         <lombok.version>1.18.24</lombok.version>
         <google-gson.version>2.9.1</google-gson.version>
