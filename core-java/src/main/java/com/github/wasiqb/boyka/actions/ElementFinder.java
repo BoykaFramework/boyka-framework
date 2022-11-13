@@ -97,7 +97,7 @@ final class ElementFinder {
                     wait.until (visibilityOfElementLocated (locator.getWeb ()));
             }
         } catch (final TimeoutException e) {
-            handleAndThrow (ELEMENT_NOT_FOUND, e);
+            handleAndThrow (ELEMENT_NOT_FOUND, e, locator.getName ());
         }
         return LOGGER.traceExit (
             parent != null ? parent.findElements (locator.getWeb ()) : driver.findElements (locator.getWeb ()));

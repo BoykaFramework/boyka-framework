@@ -44,14 +44,24 @@
           "name": "Test BrowserStack Session"
         }
       },
-      "test_selenium_grid": {
+      "test_selenium_grid_chrome": {
         "browser": "REMOTE",
         "cloud": "NONE",
         "host": "localhost",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
-          "platform": "MAC"
+          "platform": "Linux"
+        }
+      },
+      "test_selenium_grid_edge": {
+        "browser": "REMOTE",
+        "cloud": "NONE",
+        "host": "localhost",
+        "port": "4444",
+        "capabilities": {
+          "browserName": "MicrosoftEdge",
+          "platform": "Linux"
         }
       },
       "test_lambda_test_chrome": {
