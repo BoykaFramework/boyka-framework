@@ -16,7 +16,7 @@
 -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Mobile Cloud Suite" verbose="2" parallel="classes">
+<suite name="Boyka Mobile Cloud Suite" verbose="2">
     <test name="Test Boyka Mobile on BrowserStack Android Device">
         <parameter name="appType" value="ANDROID"/>
         <parameter name="driverKey" value="test_bs_android"/>
