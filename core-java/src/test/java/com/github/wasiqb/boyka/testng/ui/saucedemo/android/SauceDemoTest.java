@@ -107,7 +107,8 @@ public class SauceDemoTest {
      */
     @Test (description = "Test checkout page step 2.", dependsOnMethods = "testCheckoutStep1")
     public void testCheckoutStep2 () {
-        swipeUp (40);
+        swipeUp ();
+        swipeUp ();
         tapOn (checkoutPage ().getFinish ());
 
         verifyTextOf (checkoutPage ().getCompleteHeader ()).isEqualTo ("THANK YOU FOR YOU ORDER");
