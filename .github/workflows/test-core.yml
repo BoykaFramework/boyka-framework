@@ -82,6 +82,9 @@ jobs:
         run: |
           npm install -g appium@next
           appium driver install uiautomator2
+      
+      - name: setup-docker
+        uses: docker-practice/actions-setup-docker@latest
 
       - name: Start Selenium Grid
         run: docker compose -f ./compose/docker-compose-selenium-grid.yml up -d
