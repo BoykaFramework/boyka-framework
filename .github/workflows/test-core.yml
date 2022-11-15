@@ -117,7 +117,7 @@ jobs:
       - name: Stop docker compose for Selenium Grid
         if: always()
         run: docker-compose -f ./compose/docker-compose-selenium-grid.yml down --remove-orphans
-l̥
+        
       - name: Test Report
         if: always()
         run: cat ${{ github.workspace }}/core-java/target/surefire-reports/my-report.md > $GITHUB_STEP_SUMMARY
