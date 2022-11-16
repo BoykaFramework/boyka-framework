@@ -16,16 +16,21 @@
 
 package com.github.wasiqb.boyka.actions;
 
+import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
+import static com.github.wasiqb.boyka.actions.DriverActions.pause;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static java.text.MessageFormat.format;
+import static java.time.Duration.ofMillis;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,7 +43,8 @@ import org.openqa.selenium.WebElement;
  */
 @SuppressWarnings ("unchecked")
 final class CommonActions {
-    private static final Logger LOGGER = getLogger ();
+    private static final String HIGHLIGHT_STYLE = "highlight.style";
+    private static final Logger LOGGER          = getLogger ();
 
     /**
      * Gets driver specific attributes.
@@ -65,7 +71,11 @@ final class CommonActions {
      */
     public static <E> E getElementAttribute (final Function<WebElement, E> action, final Locator locator) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (action.apply (find (locator, VISIBLE)));
+        final var element = find (locator, VISIBLE);
+        highlight ("green", element);
+        pause (ofMillis (100));
+        unhighlight (element);
+        return LOGGER.traceExit (action.apply (element));
     }
 
     /**
@@ -88,8 +98,33 @@ final class CommonActions {
      */
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
         LOGGER.traceEntry ();
-        action.accept (find (locator, CLICKABLE));
+        final var element = find (locator, CLICKABLE);
+        highlight ("red", element);
+        unhighlight (element);
+        action.accept (element);
         LOGGER.traceExit ();
+    }
+
+    private static void highlight (final String color, final WebElement element) {
+        if (getSession ().getPlatformType () == PlatformType.WEB && getSession ().getWebSetting ()
+            .isHighlight ()) {
+            final var style = element.getAttribute ("style");
+            getSession ().setSharedData (HIGHLIGHT_STYLE, style);
+            executeScript ("arguments[0].setAttribute('style', arguments[1] + arguments[2]);", element, style,
+                format ("color: {0}; border: 3px solid {0};", color));
+            pause (ofMillis (getSession ().getSetting ()
+                .getUi ()
+                .getTimeout ()
+                .getHighlightDelay ()));
+        }
+    }
+
+    private static void unhighlight (final WebElement element) {
+        if (getSession ().getPlatformType () == PlatformType.WEB && getSession ().getWebSetting ()
+            .isHighlight ()) {
+            final var style = getSession ().getSharedData (HIGHLIGHT_STYLE);
+            executeScript ("arguments[0].setAttribute('style', arguments[1]);", element, style);
+        }
     }
 
     private CommonActions () {
