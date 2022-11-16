@@ -92,7 +92,7 @@ jobs:
       #   uses: docker-practice/actions-setup-docker@1.0.11
         
       - name: Start Selenium Grid
-        run: docker compose -f ./compose/docker-compose-selenium-grid.yml up -d
+        run: docker-compose -f ./compose/docker-compose-selenium-grid.yml up -d
 
       - name: All Test execution
         uses: reactivecircus/android-emulator-runner@v2
