@@ -82,9 +82,11 @@ jobs:
         run: |
           npm install -g appium@next
           appium driver install uiautomator2
-      
-      - name: setup-docker
-        uses: docker-practice/actions-setup-docker@1.0.11
+
+      - name: Start colima
+        run: colima start
+      # - name: setup-docker
+      #   uses: docker-practice/actions-setup-docker@1.0.11
         
       - name: Start Selenium Grid
         run: docker compose -f ./compose/docker-compose-selenium-grid.yml up -d
@@ -119,7 +121,9 @@ jobs:
 
       - name: Stop docker compose for Selenium Grid
         if: always()
-        run: docker-compose -f ./compose/docker-compose-selenium-grid.yml down --remove-orphans
+        run: |
+          docker-compose -f ./compose/docker-compose-selenium-grid.yml down --remove-orphans
+          colima stop
         
       - name: Test Report
         if: always()
