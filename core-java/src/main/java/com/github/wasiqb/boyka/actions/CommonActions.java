@@ -73,7 +73,6 @@ final class CommonActions {
         LOGGER.traceEntry ();
         final var element = find (locator, VISIBLE);
         highlight ("green", element);
-        pause (ofMillis (100));
         unhighlight (element);
         return LOGGER.traceExit (action.apply (element));
     }

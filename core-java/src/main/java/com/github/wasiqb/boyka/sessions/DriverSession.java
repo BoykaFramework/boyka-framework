@@ -40,6 +40,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Wasiq Bhamla
  * @since 19-Feb-2022
  */
+@SuppressWarnings ("unchecked")
 @Data
 public class DriverSession<D extends WebDriver> {
     private static final Logger LOGGER = getLogger ();
@@ -62,6 +63,13 @@ public class DriverSession<D extends WebDriver> {
     }
 
     /**
+     * Clears all the shared data for the session
+     */
+    public void clearSharedData () {
+        this.sharedData.clear ();
+    }
+
+    /**
      * Gets Current Mobile settings
      *
      * @return Mobile setting
@@ -79,7 +87,6 @@ public class DriverSession<D extends WebDriver> {
      *
      * @return Saved data
      */
-    @SuppressWarnings ("unchecked")
     public <T> T getSharedData (final String key) {
         return (T) this.sharedData.get (key);
     }
@@ -92,6 +99,18 @@ public class DriverSession<D extends WebDriver> {
     public WebSetting getWebSetting () {
         return this.setting.getUi ()
             .getWebSetting (this.configKey);
+    }
+
+    /**
+     * Removes the shared data.
+     *
+     * @param key Key to shared data
+     * @param <T> Type of shared data
+     *
+     * @return Data which is now removed
+     */
+    public <T> T removeSharedData (final String key) {
+        return (T) this.sharedData.remove (key);
     }
 
     /**
