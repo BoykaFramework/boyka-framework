@@ -24,7 +24,7 @@
     <inceptionYear>2022</inceptionYear>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>🎉 Ultimate test automation for testing any application on any platform</description>
-    <url>https://github.com/WasiqBhamla/boyka-framework</url>
+    <url>https://github.com/BoykaFramework/boyka-framework</url>
 
     <properties>
         <selenium-webdriver.version>4.6.0</selenium-webdriver.version>
@@ -55,7 +55,7 @@
         <checkstyle.version>10.4</checkstyle.version>
         <suite-xml>test-suites/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
-        <sonar.organization>wasiqbhamla</sonar.organization>
+        <sonar.organization>BoykaFramework</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>WasiqBhamla_boyka-framework</sonar.projectKey>
         <checkstyle.config>checkstyles/checkstyle.xml</checkstyle.config>
@@ -84,7 +84,7 @@
 
     <organization>
         <name>Wasiq Bhamla</name>
-        <url>https://github.com/WasiqBhamla</url>
+        <url>https://github.com/BoykaFramework</url>
     </organization>
 
     <licenses>
@@ -111,18 +111,18 @@
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/WasiqBhamla/boyka-framework/issues</url>
+        <url>https://github.com/BoykaFramework/boyka-framework/issues</url>
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:WasiqBhamla/boyka-framework.git</connection>
-        <developerConnection>scm:git:git@github.com:WasiqBhamla/boyka-framework.git</developerConnection>
-        <url>https://github.com/WasiqBhamla/boyka-framework</url>
+        <connection>scm:git:git@github.com:BoykaFramework/boyka-framework.git</connection>
+        <developerConnection>scm:git:git@github.com:BoykaFramework/boyka-framework.git</developerConnection>
+        <url>https://github.com/BoykaFramework/boyka-framework</url>
     </scm>
 
     <ciManagement>
         <system>GitHub Actions</system>
-        <url>https://github.com/WasiqBhamla/boyka-framework/actions</url>
+        <url>https://github.com/BoykaFramework/boyka-framework/actions</url>
     </ciManagement>
 
     <dependencies>

@@ -31,6 +31,6 @@ sidebar_position: 2
   - After release to Maven Central, GitHub release will also get created along with Release discussion thread
   - Tag will be created in GitHub
     - Tests will be triggered to run on sample tests project to run the tests on `release candidate`
-  - Finally a Tweet will be posted on Twitter handle [@WasiqBhamla][twitter], informing about the Boyka framework release
+  - Finally a Tweet will be posted on Twitter handle [@BoykaFramework][twitter], informing about the Boyka framework release
 
-[twitter]: https://twitter.com/WasiqBhamla
+[twitter]: https://twitter.com/BoykaFramework

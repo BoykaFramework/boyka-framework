@@ -29,7 +29,7 @@ You can also download the JAR files from the [GitHub Releases page][release].
 
 After downloading the jar, you can add it to your class path.
 
-[release]: https://github.com/WasiqBhamla/boyka-framework/releases/latest
+[release]: https://github.com/BoykaFramework/boyka-framework/releases/latest
 
 ## ☕ Examples
 

@@ -16,9 +16,9 @@
       "email": "mohammadfaisalkhatri@gmail.com"
     }
   ],
-  "homepage": "https://github.com/WasiqBhamla/boyka-framework",
+  "homepage": "https://github.com/BoykaFramework/boyka-framework",
   "bugs": {
-    "url": "https://github.com/WasiqBhamla/boyka-framework/issues"
+    "url": "https://github.com/BoykaFramework/boyka-framework/issues"
   },
   "workspaces": [
     "website"
@@ -36,18 +36,18 @@
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "commitlint": "^17.2.0",
-    "eslint": "^8.27.0",
+    "eslint": "^8.28.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react": "^7.31.11",
     "husky": "^8.0.2",
     "lerna": "^6.0.3",
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^13.0.3",
-    "nx": "^15.1.1",
+    "nx": "^15.2.1",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -14,34 +14,34 @@
 
 [![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light)](https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework)
 
-[![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/WasiqBhamla/boyka-framework)
+[![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/BoykaFramework/boyka-framework)
 
   <a href="https://discord.gg/dUg8K9DAsR">
     <img src="https://img.shields.io/discord/950985052769120337?label=Discord&logo=Discord&style=for-the-badge" alt="Join Discord">
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-framework/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/WasiqBhamla/boyka-framework?style=for-the-badge" alt="contributors" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/BoykaFramework/boyka-framework?style=for-the-badge" alt="contributors" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-framework/commits/main">
-    <img src="https://img.shields.io/github/last-commit/WasiqBhamla/boyka-framework?style=for-the-badge" alt="last update" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/commits/main">
+    <img src="https://img.shields.io/github/last-commit/BoykaFramework/boyka-framework?style=for-the-badge" alt="last update" />
   </a>
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-framework/releases/tag/v0.9.0">
-    <img src="https://img.shields.io/github/downloads/WasiqBhamla/boyka-framework/v0.9.0/total?color=brightgreen&label=Downloads%20for%20v0.9.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.9.0">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.9.0/total?color=brightgreen&label=Downloads%20for%20v0.9.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
-  <a href="https://github.com/WasiqBhamla/boyka-framework/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/WasiqBhamla/boyka-framework.svg?style=for-the-badge" alt="license" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
   </a>
 </p>
 
   <h4>
-    <a href="https://wasiqbhamla.github.io/boyka-framework/docs/intro">Documentation</a>
+    <a href="https://BoykaFramework.github.io/boyka-framework/docs/intro">Documentation</a>
   <span> · </span>
-    <a href="https://github.com/WasiqBhamla/boyka-framework/issues/new/choose">Report Bug</a>
+    <a href="https://github.com/BoykaFramework/boyka-framework/issues/new/choose">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/WasiqBhamla/boyka-framework/issues/new/choose">Request Feature</a>
+    <a href="https://github.com/BoykaFramework/boyka-framework/issues/new/choose">Request Feature</a>
   </h4>
 </div>
 
@@ -336,14 +336,14 @@ closeDriver ();
 ## ☕ Examples
 
 - API:
-  - [How to configure Boyka for API Automation?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/api/setup-config)
-  - [How to compose a request?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/api/compose-request)
-  - [How to execute a request?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/api/execute-request)
-  - [How to verify the response?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/api/verify-response)
+  - [How to configure Boyka for API Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/setup-config)
+  - [How to compose a request?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/compose-request)
+  - [How to execute a request?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/execute-request)
+  - [How to verify the response?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/verify-response)
 - Web:
-  - [How to configure Boyka for Web Automation?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/web/setup-config)
-  - [How to create page object?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/web/create-page-object)
-  - [How to write test using the page object?](https://wasiqbhamla.github.io/boyka-framework/docs/guides/web/write-test)
+  - [How to configure Boyka for Web Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/setup-config)
+  - [How to create page object?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/create-page-object)
+  - [How to write test using the page object?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/write-test)
 
 ## 👾 Tech Stack
 
@@ -377,16 +377,16 @@ Big thanks to the following organizations for their support to the project with 
 
 Check out our road map to know which features we are cooking,
 
-- [Project Road-map](https://github.com/orgs/WasiqBhamla/projects/4/views/1)
-- [Current Milestone](https://github.com/orgs/WasiqBhamla/projects/4/views/2)
-- [Next Milestone](https://github.com/orgs/WasiqBhamla/projects/4/views/3)
-- [Future planned features](https://github.com/orgs/WasiqBhamla/projects/4/views/4)
+- [Project Road-map](https://github.com/orgs/BoykaFramework/projects/4/views/1)
+- [Current Milestone](https://github.com/orgs/BoykaFramework/projects/4/views/2)
+- [Next Milestone](https://github.com/orgs/BoykaFramework/projects/4/views/3)
+- [Future planned features](https://github.com/orgs/BoykaFramework/projects/4/views/4)
 
 ## 👋 Contributing
 
 These are our awesome contributors:
 
-[![Contributors](https://contrib.rocks/image?repo=WasiqBhamla/boyka-framework)](https://github.com/WasiqBhamla/boyka-framework/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=BoykaFramework/boyka-framework)](https://github.com/BoykaFramework/boyka-framework/graphs/contributors)
 
 Contributions are always welcome!
 
@@ -403,9 +403,9 @@ Distributed under MIT [License](LICENSE).
 ## 🤝 Contact
 
 - Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
-- Open a [new Discussion](https://github.com/WasiqBhamla/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
-- Connect with me on [my Linktree](https://linktr.ee/wasiqbhamla)
+- Open a [new Discussion](https://github.com/BoykaFramework/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
+- Connect with me on [my Linktree](https://linktr.ee/BoykaFramework)
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=WasiqBhamla/boyka-framework&type=Timeline)](https://star-history.com/#WasiqBhamla/boyka-framework&Timeline)
+[![Star History Chart](https://api.star-history.com/svg?repos=BoykaFramework/boyka-framework&type=Timeline)](https://star-history.com/#BoykaFramework/boyka-framework&Timeline)
