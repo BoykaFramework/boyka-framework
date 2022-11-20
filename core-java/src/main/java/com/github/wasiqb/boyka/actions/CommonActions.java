@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
 import static com.github.wasiqb.boyka.actions.DriverActions.pause;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
+import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
@@ -30,7 +31,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.github.wasiqb.boyka.builders.Locator;
-import com.github.wasiqb.boyka.enums.PlatformType;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -105,7 +105,7 @@ final class CommonActions {
     }
 
     private static void highlight (final String color, final WebElement element) {
-        if (getSession ().getPlatformType () == PlatformType.WEB && getSession ().getWebSetting ()
+        if (getSession ().getPlatformType () == WEB && getSession ().getWebSetting ()
             .isHighlight ()) {
             final var style = element.getAttribute ("style");
             getSession ().setSharedData (HIGHLIGHT_STYLE, style);
@@ -119,10 +119,11 @@ final class CommonActions {
     }
 
     private static void unhighlight (final WebElement element) {
-        if (getSession ().getPlatformType () == PlatformType.WEB && getSession ().getWebSetting ()
+        if (getSession ().getPlatformType () == WEB && getSession ().getWebSetting ()
             .isHighlight ()) {
             final var style = getSession ().getSharedData (HIGHLIGHT_STYLE);
             executeScript ("arguments[0].setAttribute('style', arguments[1]);", element, style);
+            getSession ().removeSharedData (HIGHLIGHT_STYLE);
         }
     }
 
