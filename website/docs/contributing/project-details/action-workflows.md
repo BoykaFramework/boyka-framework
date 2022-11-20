@@ -6,7 +6,7 @@ sidebar_position: 4
 ## Project workflows
 
 :::tip
-Check out all our project workflows [on GitHub](https://github.com/WasiqBhamla/boyka-framework/actions)
+Check out all our project workflows [on GitHub](https://github.com/BoykaFramework/boyka-framework/actions)
 :::
 
 Following are the GitHub Actions workflows that we have created for our project along with it's trigger condition:
@@ -23,7 +23,7 @@ Following are the GitHub Actions workflows that we have created for our project 
 | `pre-release` | `PR -> staging -> merged` | `all` | Will deploy release candidate for the framework to Maven central and create a tag in GitHub. |
 | `release` | `PR -> main -> merged` | `all` | Will deploy the framework to Maven central, create a tag and release on GitHub. |
 | `test-core` | `push (develop, staging, main)`, `PR -> (develop, staging, main)` | `core-java/`, `.github/` | Will run check code styles, run tests and SonarCloud code analysis. Code analysis will only run on `push(main)` event trigger |
-| `tweet-release` | `release -> (published)` | `all` | Will tweet about the release on Twitter handle [@WasiqBhamla][twitter]. |
+| `tweet-release` | `release -> (published)` | `all` | Will tweet about the release on Twitter handle [@BoykaFramework][twitter]. |
 
 [commit]: https://conventionalcommits.org/
-[twitter]: https://twitter.com/WasiqBhamla
+[twitter]: https://twitter.com/BoykaFramework

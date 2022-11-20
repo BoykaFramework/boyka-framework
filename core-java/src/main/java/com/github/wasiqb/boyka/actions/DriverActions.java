@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -48,6 +49,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WindowType;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Device / Browser specific actions.
@@ -259,6 +261,22 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Navigating to url: {}", url);
         performDriverAction (driver -> driver.get (url));
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Pause for the specified time.
+     *
+     * @param time Duration to pause.
+     */
+    public static void pause (final Duration time) {
+        LOGGER.traceEntry ();
+        performDriverAction (driver -> {
+            final var action = new Actions (driver);
+            action.pause (time)
+                .build ()
+                .perform ();
+        });
         LOGGER.traceExit ();
     }
 

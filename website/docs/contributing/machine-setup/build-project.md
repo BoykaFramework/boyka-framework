@@ -10,19 +10,19 @@ The first step to take before you start contributing to this project is to Clone
 Run the following command if you want to clone using `SSH`:
 
 ```shell
-> git clone git@github.com:WasiqBhamla/boyka-framework.git
+> git clone git@github.com:BoykaFramework/boyka-framework.git
 ```
 
 Run the following command if you want to clone using `HTTPS`:
 
 ```shell
-> git clone https://github.com/WasiqBhamla/boyka-framework.git
+> git clone https://github.com/BoykaFramework/boyka-framework.git
 ```
 
 Run the following command if you want to clone using [Github CLI][github_cli]:
 
 ```shell
-> git clone gh repo clone WasiqBhamla/boyka-framework
+> git clone gh repo clone BoykaFramework/boyka-framework
 ```
 
 The above URLs for `SSH`, `HTTPS` and `Github CLI` can be found on the github repo main page as well.

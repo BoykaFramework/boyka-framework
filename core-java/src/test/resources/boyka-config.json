@@ -4,7 +4,8 @@
       "implicit_wait": 10,
       "explicit_wait": 30,
       "page_load_timeout": 30,
-      "script_timeout": 10
+      "script_timeout": 10,
+      "highlight_delay": 100
     },
     "screenshot": {
       "enabled": true,
@@ -15,6 +16,8 @@
     "web": {
       "test_local_chrome": {
         "browser": "CHROME",
+        "highlight": true,
+        "headless": false,
         "resize": "CUSTOM"
       },
       "test_local_firefox": {

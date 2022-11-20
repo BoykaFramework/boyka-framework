@@ -164,6 +164,17 @@ import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
 navigateTo ("https://google.com");
 ```
 
+## `pause` {#pause}
+
+This method is used to navigate to the given URL.
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.pause;
+import static java.time.Duration.ofMillis;
+. . .
+pause (ofMillis (100));
+```
+
 ## `refresh`
 
 This method will refresh the browser window.

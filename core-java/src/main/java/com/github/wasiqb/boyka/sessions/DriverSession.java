@@ -19,6 +19,9 @@ package com.github.wasiqb.boyka.sessions;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
@@ -37,23 +40,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Wasiq Bhamla
  * @since 19-Feb-2022
  */
+@SuppressWarnings ("unchecked")
 @Data
 public class DriverSession<D extends WebDriver> {
     private static final Logger LOGGER = getLogger ();
 
-    private       String           configKey;
-    private       D                driver;
-    private       PlatformType     platformType;
-    private       ServiceManager   serviceManager;
-    private final FrameworkSetting setting;
-    private       WebDriverWait    wait;
+    private       String              configKey;
+    private       D                   driver;
+    private       PlatformType        platformType;
+    private       ServiceManager      serviceManager;
+    private final FrameworkSetting    setting;
+    private       Map<String, Object> sharedData;
+    private       WebDriverWait       wait;
 
     /**
      * Driver session constructor.
      */
     DriverSession () {
         this.setting = loadSetting ();
+        this.sharedData = new HashMap<> ();
         LOGGER.traceExit ();
+    }
+
+    /**
+     * Clears all the shared data for the session
+     */
+    public void clearSharedData () {
+        this.sharedData.clear ();
     }
 
     /**
@@ -67,6 +80,18 @@ public class DriverSession<D extends WebDriver> {
     }
 
     /**
+     * Gets the shared data.
+     *
+     * @param key Key of data to be retrieved
+     * @param <T> Type of data
+     *
+     * @return Saved data
+     */
+    public <T> T getSharedData (final String key) {
+        return (T) this.sharedData.get (key);
+    }
+
+    /**
      * Gets current Web settings
      *
      * @return Web Setting
@@ -74,5 +99,28 @@ public class DriverSession<D extends WebDriver> {
     public WebSetting getWebSetting () {
         return this.setting.getUi ()
             .getWebSetting (this.configKey);
+    }
+
+    /**
+     * Removes the shared data.
+     *
+     * @param key Key to shared data
+     * @param <T> Type of shared data
+     *
+     * @return Data which is now removed
+     */
+    public <T> T removeSharedData (final String key) {
+        return (T) this.sharedData.remove (key);
+    }
+
+    /**
+     * Save shared data.
+     *
+     * @param key Key of data
+     * @param data Data to be saved
+     * @param <T> Type of data
+     */
+    public <T> void setSharedData (final String key, final T data) {
+        this.sharedData.put (key, data);
     }
 }

@@ -37,6 +37,6 @@
 
 ## Reviewers
 
-### @WasiqBhamla/boyka-core
+### @BoykaFramework/boyka-core
 
 > IMPORTANT: Make sure to check the `Allow edits from maintainers` box below this window

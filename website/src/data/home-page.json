@@ -14,7 +14,7 @@
       "id": 2,
       "text": "View on GitHub",
       "type": "button--info",
-      "href": "https://github.com/WasiqBhamla/boyka-framework",
+      "href": "https://github.com/BoykaFramework/boyka-framework",
       "target": "_self"
     },
     {
@@ -28,25 +28,25 @@
   "gitButtons": [
     {
       "id": 1,
-      "userId": "WasiqBhamla",
+      "userId": "BoykaFramework",
       "repoName": "boyka-framework",
       "type": "Star"
     },
     {
       "id": 2,
-      "userId": "WasiqBhamla",
+      "userId": "BoykaFramework",
       "repoName": "boyka-framework",
       "type": "Watch"
     },
     {
       "id": 3,
-      "userId": "WasiqBhamla",
+      "userId": "BoykaFramework",
       "repoName": "boyka-framework",
       "type": "Fork"
     },
     {
       "id": 4,
-      "userId": "WasiqB"
+      "userId": "BoykaFramework"
     }
   ],
   "features": [
