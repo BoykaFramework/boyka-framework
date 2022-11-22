@@ -7,4 +7,4 @@ You can get support by:
 
 [discord]: https://discord.gg/dUg8K9DAsR
 
-[discussion]: https://github.com/WasiqBhamla/boyka-framework/discussions/new
+[discussion]: https://github.com/BoykaFramework/boyka-framework/discussions/new

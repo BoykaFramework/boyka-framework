@@ -16,6 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static java.text.MessageFormat.format;
 import static org.openqa.selenium.By.linkText;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -46,8 +48,8 @@ public class HomePage {
      * @return link locator
      */
     public Locator link (final String linkText) {
-        return Locator.buildLocator ()
-            .web (linkText (linkText))
+        return buildLocator ().web (linkText (linkText))
+            .name (format ("Link [{0}]", linkText))
             .build ();
     }
 }

@@ -40,7 +40,9 @@ public class FramesPage {
     }
 
     private final Locator frame        = buildLocator ().web (linkText ("iFrame"))
+        .name ("Frame")
         .build ();
     private final Locator nestedFrames = buildLocator ().web (linkText ("Nested Frames"))
+        .name ("Nested Frames")
         .build ();
 }

@@ -49,7 +49,7 @@ public final class VerifyElementActions {
      */
     public static StringSubject verifyAttributeOf (final Locator locator, final String attribute) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Verifying attribute of {}", locator);
+        LOGGER.info ("Verifying attribute of {}", locator.getName ());
         LOGGER.traceExit ();
         return assertThat (attributeOf (locator, attribute));
     }
@@ -63,7 +63,7 @@ public final class VerifyElementActions {
      */
     public static BooleanSubject verifyElementDisplayed (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Verifying element {} is displayed", locator);
+        LOGGER.info ("Verifying element {} is displayed", locator.getName ());
         LOGGER.traceExit ();
         return assertThat (isDisplayed (locator));
     }
@@ -77,7 +77,7 @@ public final class VerifyElementActions {
      */
     public static BooleanSubject verifyElementEnabled (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Verifying element {} is enabled", locator);
+        LOGGER.info ("Verifying element {} is enabled", locator.getName ());
         LOGGER.traceExit ();
         return assertThat (isEnabled (locator));
     }
@@ -91,7 +91,7 @@ public final class VerifyElementActions {
      */
     public static BooleanSubject verifyElementSelected (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Verifying element {} is selected", locator);
+        LOGGER.info ("Verifying element {} is selected", locator.getName ());
         LOGGER.traceExit ();
         return assertThat (isSelected (locator));
     }
@@ -106,7 +106,7 @@ public final class VerifyElementActions {
      */
     public static StringSubject verifyStyleOf (final Locator locator, final String attribute) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Verifying style of {}", locator);
+        LOGGER.info ("Verifying style of {}", locator.getName ());
         LOGGER.traceExit ();
         return assertThat (styleOf (locator, attribute));
     }
@@ -120,7 +120,7 @@ public final class VerifyElementActions {
      */
     public static StringSubject verifyTextOf (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Verifying text of {}", locator);
+        LOGGER.info ("Verifying text of {}", locator.getName ());
         LOGGER.traceExit ();
         return assertThat (textOf (locator));
     }

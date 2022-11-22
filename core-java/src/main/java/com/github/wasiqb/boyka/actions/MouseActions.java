@@ -44,7 +44,7 @@ public final class MouseActions {
      */
     public static void clickAndHold (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Click and hold on element: {}", locator);
+        LOGGER.info ("Click and hold on element: {}", locator.getName ());
         performElementAction (element -> {
             final Actions actions = new Actions (getSession ().getDriver ());
             actions.clickAndHold (element)
@@ -60,7 +60,7 @@ public final class MouseActions {
      */
     public static void clickOn (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Clicking on element: {}", locator);
+        LOGGER.info ("Clicking on element: {}", locator.getName ());
         performElementAction (WebElement::click, locator);
         LOGGER.traceExit ();
     }
@@ -72,7 +72,7 @@ public final class MouseActions {
      */
     public static void doubleClickOn (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Double Click on element: {}", locator);
+        LOGGER.info ("Double Click on element: {}", locator.getName ());
         performElementAction (element -> {
             final Actions actions = new Actions (getSession ().getDriver ());
             actions.doubleClick (element)
@@ -89,7 +89,7 @@ public final class MouseActions {
      */
     public static void dragDropTo (final Locator source, final Locator destination) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Drag and Drop on element: {} , {}", source, destination);
+        LOGGER.info ("Drag and Drop on element: {} , {}", source.getName (), destination.getName ());
         performElementAction (element -> {
             final var actions = new Actions (getSession ().getDriver ());
             actions.dragAndDrop (element, find (destination, VISIBLE))
@@ -105,7 +105,7 @@ public final class MouseActions {
      */
     public static void hoverOn (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Hover on element: {}", locator);
+        LOGGER.info ("Hover on element: {}", locator.getName ());
         performElementAction (element -> {
             final Actions actions = new Actions (getSession ().getDriver ());
             actions.moveToElement (element)
@@ -121,7 +121,7 @@ public final class MouseActions {
      */
     public static void rightClickOn (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Right Click on element: {}", locator);
+        LOGGER.info ("Right Click on element: {}", locator.getName ());
         new Actions (getSession ().getDriver ()).contextClick (find (locator, CLICKABLE))
             .perform ();
         LOGGER.traceExit ();

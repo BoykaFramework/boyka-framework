@@ -1,9 +1,9 @@
 {
-  "version": "0.9.0-rc.1",
+  "version": "0.9.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "changelog": {
-    "repo": "WasiqBhamla/boyka-framework",
+    "repo": "BoykaFramework/boyka-framework",
     "labels": {
       ":boom: pr: breaking change": ":boom: Breaking Change",
       ":rocket: pr: new feature": ":rocket: New Feature",

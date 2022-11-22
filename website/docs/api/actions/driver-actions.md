@@ -164,6 +164,17 @@ import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
 navigateTo ("https://google.com");
 ```
 
+## `pause` {#pause}
+
+This method is used to navigate to the given URL.
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.pause;
+import static java.time.Duration.ofMillis;
+. . .
+pause (ofMillis (100));
+```
+
 ## `refresh`
 
 This method will refresh the browser window.
@@ -172,6 +183,16 @@ This method will refresh the browser window.
 import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
 . . .
 refresh ();
+```
+
+## `saveLogs`
+
+This method will save all the logs captured by the Driver.
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
+. . .
+saveLogs ();
 ```
 
 ## `switchToFrame (name)` {#switch-to-frame-name}

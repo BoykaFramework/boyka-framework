@@ -48,7 +48,7 @@ public final class DropDownActions {
      */
     public static void deselectAll (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Deselecting element located by: {}", locator);
+        LOGGER.info ("Deselecting element located by: {}", locator.getName ());
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
@@ -67,7 +67,7 @@ public final class DropDownActions {
      */
     public static void deselectByIndex (final Locator locator, final int index) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Deselecting element located by: {} by index: {}", locator, index);
+        LOGGER.info ("Deselecting element located by: {} by index: {}", locator.getName (), index);
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
@@ -86,7 +86,7 @@ public final class DropDownActions {
      */
     public static void deselectByText (final Locator locator, final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Deselecting element located by: {} by visible text: {}", locator, text);
+        LOGGER.info ("Deselecting element located by: {} by visible text: {}", locator.getName (), text);
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
@@ -105,7 +105,7 @@ public final class DropDownActions {
      */
     public static void deselectByValue (final Locator locator, final String value) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Deselecting element located by: {} by value: {}", locator, value);
+        LOGGER.info ("Deselecting element located by: {} by value: {}", locator.getName (), value);
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
@@ -124,7 +124,7 @@ public final class DropDownActions {
      */
     public static void selectByIndex (final Locator locator, final int index) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Selecting element located by: {} by index: {}", locator, index);
+        LOGGER.info ("Selecting element located by: {} by index: {}", locator.getName (), index);
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByIndex (index);
@@ -140,7 +140,7 @@ public final class DropDownActions {
      */
     public static void selectByText (final Locator locator, final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Selecting element located by: {} by text: {}", locator, text);
+        LOGGER.info ("Selecting element located by: {} by text: {}", locator.getName (), text);
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByVisibleText (text);
@@ -156,7 +156,7 @@ public final class DropDownActions {
      */
     public static void selectByValue (final Locator locator, final String value) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Selecting element located by: {} by value: {}", locator, value);
+        LOGGER.info ("Selecting element located by: {} by value: {}", locator.getName (), value);
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByValue (value);
@@ -173,7 +173,7 @@ public final class DropDownActions {
      */
     public static String selectedItem (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting selected option from element located by: {}", locator);
+        LOGGER.info ("Getting selected option from element located by: {}", locator.getName ());
         return getElementAttribute (element -> {
             final var select = new Select (element);
             try {
@@ -194,7 +194,7 @@ public final class DropDownActions {
      */
     public static List<String> selectedItems (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting all selected options from element located by: {}", locator);
+        LOGGER.info ("Getting all selected options from element located by: {}", locator.getName ());
         return getElementAttribute (e -> {
             final var select = new Select (e);
             return select.getAllSelectedOptions ()

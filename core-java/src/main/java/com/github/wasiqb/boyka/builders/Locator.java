@@ -21,6 +21,7 @@ import java.util.function.Predicate;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -36,6 +37,8 @@ import org.openqa.selenium.WebElement;
 public class Locator {
     private Predicate<WebElement> filter;
     private int                   index;
+    @NotNull
+    private String                name;
     private Locator               parent;
     private By                    web;
 }

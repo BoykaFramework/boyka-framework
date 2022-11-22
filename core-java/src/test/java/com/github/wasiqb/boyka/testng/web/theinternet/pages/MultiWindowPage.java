@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet.pages;
 
+import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static org.openqa.selenium.By.linkText;
 import static org.openqa.selenium.By.tagName;
 
@@ -39,10 +40,10 @@ public class MultiWindowPage {
         return new MultiWindowPage ();
     }
 
-    private final Locator clickHere = Locator.buildLocator ()
-        .web (linkText ("Click Here"))
+    private final Locator clickHere = buildLocator ().web (linkText ("Click Here"))
+        .name ("Click Here")
         .build ();
-    private final Locator title     = Locator.buildLocator ()
-        .web (tagName ("h3"))
+    private final Locator title     = buildLocator ().web (tagName ("h3"))
+        .name ("Title")
         .build ();
 }

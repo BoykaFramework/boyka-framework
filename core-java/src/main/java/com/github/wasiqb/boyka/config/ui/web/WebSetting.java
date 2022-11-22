@@ -41,6 +41,7 @@ public class WebSetting {
     private CloudProviders      cloud      = CloudProviders.NONE;
     private Dimension           customSize = new Dimension (1920, 1080);
     private boolean             headless   = true;
+    private boolean             highlight  = false;
     private String              host;
     private String              password;
     private int                 port;

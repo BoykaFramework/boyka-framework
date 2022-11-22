@@ -44,11 +44,8 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.net.URL;
 
-import com.github.wasiqb.boyka.config.ui.mobile.server.AndroidSetting;
-import com.github.wasiqb.boyka.config.ui.mobile.server.LogSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
@@ -77,6 +74,11 @@ public class ServiceManager {
         }
     }
 
+    /**
+     * Determines if the server is running.
+     *
+     * @return true, if server is running, else false.
+     */
     public boolean isRunning () {
         if (isCloud ()) {
             return true;
@@ -85,7 +87,7 @@ public class ServiceManager {
             LOG.trace ("Checking if Appium Service is running...");
             return this.service.isRunning ();
         }
-        final SocketAddress address = new InetSocketAddress (this.setting.getHost (), this.setting.getPort ());
+        final var address = new InetSocketAddress (this.setting.getHost (), this.setting.getPort ());
         try (final Socket socket = new Socket ()) {
             socket.connect (address, 2000);
         } catch (final IOException e) {
@@ -151,7 +153,7 @@ public class ServiceManager {
     }
 
     private String getUrl () {
-        final StringBuilder sb = new StringBuilder (this.setting.getProtocol ()
+        final var sb = new StringBuilder (this.setting.getProtocol ()
             .name ()).append ("://");
         if (isCloud ()) {
             sb.append (this.setting.getUserName ())
@@ -176,7 +178,7 @@ public class ServiceManager {
     }
 
     private void setAndroidArguments () {
-        final AndroidSetting android = this.setting.getAndroid ();
+        final var android = this.setting.getAndroid ();
         if (android != null) {
             setArgument (BOOTSTRAP_PORT_NUMBER, android.getBootstrapPort ());
             setArgument (REBOOT, android.isReboot ());
@@ -186,7 +188,7 @@ public class ServiceManager {
 
     private void setAppiumJS () {
         if (this.setting.getAppiumPath () != null) {
-            final File appJs = new File (this.setting.getAppiumPath ());
+            final var appJs = new File (this.setting.getAppiumPath ());
             this.builder.withAppiumJS (appJs);
         }
     }
@@ -225,7 +227,7 @@ public class ServiceManager {
     }
 
     private void setLogArguments () {
-        final LogSetting logs = this.setting.getLogs ();
+        final var logs = this.setting.getLogs ();
         if (!logs.isEnable ()) {
             return;
         }

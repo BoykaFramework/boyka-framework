@@ -41,6 +41,7 @@ public class ProductDetailsPage {
 
     private final Locator container = buildLocator ().web (
             By.cssSelector ("div#inventory_item_container div.inventory_details"))
+        .name ("Container")
         .build ();
 
     private ProductDetailsPage () {
