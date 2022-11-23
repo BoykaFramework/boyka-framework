@@ -40,6 +40,7 @@ public class CartPage {
     }
 
     private final Locator checkout = buildLocator ().web (id ("checkout"))
+        .name ("Checkout")
         .build ();
 
     private CartPage () {

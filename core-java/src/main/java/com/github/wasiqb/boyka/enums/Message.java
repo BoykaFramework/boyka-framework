@@ -58,6 +58,10 @@ public enum Message {
      */
     EMPTY_BROWSER_NOT_ALLOWED ("Browser type cannot be empty in the config..."),
     /**
+     * Error while creating log file for a log type.
+     */
+    ERROR_CREATING_LOGS ("Error occurred while creating log file for log type: {}..."),
+    /**
      * Error deleting log files.
      */
     ERROR_DELETING_LOGS ("Error deleting log files..."),
@@ -105,6 +109,10 @@ public enum Message {
      * Error writing file
      */
     ERROR_WRITING_FILE ("Error occurred writing file [{0}]..."),
+    /**
+     * Error while writing logs to file.
+     */
+    ERROR_WRITING_LOGS ("Error occurred while writing logs..."),
     /**
      * Host name is required for Remote execution
      */

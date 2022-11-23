@@ -43,26 +43,35 @@ public class HomePage {
     }
 
     private final Locator logout             = buildLocator ().web (id ("logout_sidebar_link"))
+        .name ("Logout")
         .build ();
     private final Locator menuButton         = buildLocator ().web (id ("react-burger-menu-btn"))
+        .name ("Menu Button")
         .build ();
     private final Locator productParent      = buildLocator ().web (cssSelector ("div.inventory_item"))
+        .name ("Product Parent")
         .build ();
     private final Locator productDescription = buildLocator ().parent (this.productParent)
+        .name ("Product description")
         .web (cssSelector ("div.inventory_item_desc"))
         .build ();
     private final Locator addToCartButton    = buildLocator ().parent (this.productParent)
+        .name ("Add to cart button")
         .web (id ("add-to-cart-sauce-labs-backpack"))
         .build ();
     private final Locator productPrice       = buildLocator ().parent (this.productParent)
+        .name ("Product price")
         .web (cssSelector ("div.inventory_item_price"))
         .build ();
     private final Locator productTitle       = buildLocator ().parent (this.productParent)
+        .name ("Product title")
         .web (cssSelector ("div.inventory_item_name"))
         .build ();
     private final Locator shoppingCart       = buildLocator ().web (cssSelector ("a.shopping_cart_link"))
+        .name ("Shopping Cart")
         .build ();
     private final Locator shoppingCartCount  = buildLocator ().web (cssSelector ("span.shopping_cart_badge"))
+        .name ("Shopping Cart count")
         .build ();
 
     private HomePage () {
@@ -78,6 +87,7 @@ public class HomePage {
      */
     public Locator productItem (final String productName) {
         return buildLocator ().web (xpath (format (".//*[text()=\"{0}\"]", productName)))
+            .name (format ("Product [{0}]", productName))
             .build ();
     }
 }

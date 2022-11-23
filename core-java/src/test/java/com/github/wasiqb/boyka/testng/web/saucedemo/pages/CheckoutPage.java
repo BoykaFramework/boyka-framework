@@ -41,20 +41,28 @@ public class CheckoutPage {
     }
 
     private final Locator completeHeader = buildLocator ().web (cssSelector ("h2.complete-header"))
+        .name ("Complete Header")
         .build ();
     private final Locator completeText   = buildLocator ().web (cssSelector ("div.complete-text"))
+        .name ("Complete Text")
         .build ();
     private final Locator continueButton = buildLocator ().web (id ("continue"))
+        .name ("Continue Button")
         .build ();
     private final Locator finish         = buildLocator ().web (id ("finish"))
+        .name ("Finish")
         .build ();
     private final Locator firstName      = buildLocator ().web (id ("first-name"))
+        .name ("First Name")
         .build ();
     private final Locator lastName       = buildLocator ().web (id ("last-name"))
+        .name ("Last Name")
         .build ();
     private final Locator title          = buildLocator ().web (cssSelector ("span.title"))
+        .name ("Title")
         .build ();
     private final Locator zipCode        = buildLocator ().web (id ("postal-code"))
+        .name ("Zip Code")
         .build ();
 
     private CheckoutPage () {

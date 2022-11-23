@@ -43,7 +43,7 @@ public final class ElementActions {
      */
     public static String attributeOf (final Locator locator, final String attribute) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator);
+        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator.getName ());
         LOGGER.traceExit ();
         return getElementAttribute (e -> e.getAttribute (attribute), locator);
     }
@@ -55,7 +55,7 @@ public final class ElementActions {
      */
     public static void clear (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Clearing element located by: {}", locator);
+        LOGGER.info ("Clearing element located by: {}", locator.getName ());
         performElementAction (WebElement::clear, locator);
         LOGGER.traceExit ();
     }
@@ -69,7 +69,7 @@ public final class ElementActions {
      */
     public static boolean isDisplayed (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Checking if element located by: {} is displayed", locator);
+        LOGGER.info ("Checking if element located by: {} is displayed", locator.getName ());
         return LOGGER.traceExit (getElementAttribute (WebElement::isDisplayed, locator));
     }
 
@@ -82,7 +82,7 @@ public final class ElementActions {
      */
     public static boolean isEnabled (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Checking if element located by: {} is enabled", locator);
+        LOGGER.info ("Checking if element located by: {} is enabled", locator.getName ());
         return LOGGER.traceExit (getElementAttribute (WebElement::isEnabled, locator));
     }
 
@@ -95,7 +95,7 @@ public final class ElementActions {
      */
     public static boolean isSelected (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Checking if element located by: {} is selected", locator);
+        LOGGER.info ("Checking if element located by: {} is selected", locator.getName ());
         return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, locator));
     }
 
@@ -109,7 +109,7 @@ public final class ElementActions {
      */
     public static String styleOf (final Locator locator, final String attribute) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator);
+        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator.getName ());
         LOGGER.traceExit ();
         return getElementAttribute (e -> e.getCssValue (attribute), locator);
     }
@@ -121,7 +121,7 @@ public final class ElementActions {
      */
     public static void submit (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Submitting element located by: {}", locator);
+        LOGGER.info ("Submitting element located by: {}", locator.getName ());
         performElementAction (WebElement::submit, locator);
         LOGGER.traceExit ();
     }
@@ -135,7 +135,7 @@ public final class ElementActions {
      */
     public static String textOf (final Locator locator) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting text of element located by: {}", locator);
+        LOGGER.info ("Getting text of element located by: {}", locator.getName ());
         return LOGGER.traceExit (getElementAttribute (WebElement::getText, locator));
     }
 

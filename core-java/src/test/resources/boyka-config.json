@@ -4,7 +4,8 @@
       "implicit_wait": 10,
       "explicit_wait": 30,
       "page_load_timeout": 30,
-      "script_timeout": 10
+      "script_timeout": 10,
+      "highlight_delay": 100
     },
     "screenshot": {
       "enabled": true,
@@ -15,6 +16,8 @@
     "web": {
       "test_local_chrome": {
         "browser": "CHROME",
+        "highlight": true,
+        "headless": false,
         "resize": "CUSTOM"
       },
       "test_local_firefox": {
@@ -144,7 +147,10 @@
           "host": "127.0.0.1",
           "port": 4723,
           "base_path": "/wd/hub",
-          "session_override": true
+          "session_override": true,
+          "allow_insecure": [
+            "get_server_logs"
+          ]
         },
         "device": {
           "os": "ANDROID",
@@ -180,7 +186,7 @@
           "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "application": {
-            "path": "${env:BS_APP_ANDROID}",
+            "path": "AndroidApp",
             "external": true,
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
@@ -189,7 +195,7 @@
             "projectName": "BrowserStack Android Project",
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
-            "appiumVersion": "1.22.0",
+            "appiumVersion": "2.0.0",
             "deviceLogs": true,
             "networkLogs": true,
             "debug": true,

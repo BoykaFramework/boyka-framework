@@ -1,0 +1,29 @@
+name: 'Upload app to BrowserStack'
+
+on:
+  schedule:
+    - cron: '0 21 25 * *'
+  workflow_dispatch:
+
+env:
+  BS_USER: ${{ secrets.BS_USER }}
+  BS_KEY: ${{ secrets.BS_KEY }}
+
+jobs:
+  upload-app:
+    name: 'Upload App to BrowserStack'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Upload Android App
+        id: android_app_upload
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: https://api-cloud.browserstack.com/app-automate/upload
+          method: POST
+          username: ${{ env.BS_USER }}
+          password: ${{ env.BS_KEY }}
+          data: '{ "custom_id": "AndroidApp" }'
+          files: '{ "file": "${{ github.workspace }}/core-java/src/test/resources/apps/android/saucedemo.apk" }'

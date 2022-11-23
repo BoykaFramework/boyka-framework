@@ -57,7 +57,6 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.HashMap;
 
-import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.config.ui.TimeoutSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
@@ -128,15 +127,12 @@ public final class DriverManager {
         return LOGGER.traceExit (instance);
     }
 
-    private final String           driverKey;
-    private final PlatformType     platformType;
-    private final FrameworkSetting setting;
+    private final PlatformType platformType;
 
     private DriverManager (final PlatformType platformType, final String driverKey) {
         LOGGER.traceEntry ();
         this.platformType = platformType;
-        this.driverKey = driverKey;
-        this.setting = getSession ().getSetting ();
+        getSession ().setConfigKey (driverKey);
         LOGGER.traceExit ();
     }
 
@@ -263,8 +259,7 @@ public final class DriverManager {
     }
 
     private void setupAndroidDriver () {
-        final var androidSetting = this.setting.getUi ()
-            .getMobileSetting (this.driverKey);
+        final var androidSetting = getSession ().getMobileSetting ();
         final var serverSetting = androidSetting.getServer ();
         final var deviceSetting = androidSetting.getDevice ();
         final var automation = deviceSetting.getAutomation ();
@@ -280,8 +275,7 @@ public final class DriverManager {
     }
 
     private void setupAppiumServer () {
-        final var serviceManager = new ServiceManager (this.setting.getUi ()
-            .getMobileSetting (this.driverKey)
+        final var serviceManager = new ServiceManager (getSession ().getMobileSetting ()
             .getServer ());
         getSession ().setServiceManager (serviceManager);
         getSession ().getServiceManager ()
@@ -391,8 +385,7 @@ public final class DriverManager {
 
     private void setupWebDriver () {
         LOGGER.traceEntry ();
-        final var webSetting = this.setting.getUi ()
-            .getWebSetting (this.driverKey);
+        final var webSetting = getSession ().getWebSetting ();
         switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
             case CHROME:
                 setDriver (this.platformType, setupChromeDriver (webSetting));
@@ -415,7 +408,8 @@ public final class DriverManager {
                 break;
         }
         setDriverSize (webSetting);
-        setDriverWaits (this.setting.getUi ()
+        setDriverWaits (getSession ().getSetting ()
+            .getUi ()
             .getTimeout ());
         LOGGER.traceExit ();
     }

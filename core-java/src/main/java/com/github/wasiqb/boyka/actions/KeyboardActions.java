@@ -42,7 +42,7 @@ public final class KeyboardActions {
      */
     public static void appendText (final Locator locator, final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Appending text {} to element {}", text, locator);
+        LOGGER.info ("Appending text {} to element {}", text, locator.getName ());
         performElementAction (e -> e.sendKeys (text), locator);
         LOGGER.traceExit ();
     }
@@ -55,7 +55,7 @@ public final class KeyboardActions {
      */
     public static void enterText (final Locator locator, final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Entering text {} in element {}", text, locator);
+        LOGGER.info ("Entering text {} in element {}", text, locator.getName ());
         clear (locator);
         appendText (locator, text);
         LOGGER.traceExit ();
@@ -69,7 +69,7 @@ public final class KeyboardActions {
      */
     public static void pressKey (final Locator locator, final CharSequence... keys) {
         LOGGER.traceEntry ();
-        stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, locator));
+        stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, locator.getName ()));
         performElementAction (e -> e.sendKeys (chord (keys)), locator);
         LOGGER.traceExit ();
     }

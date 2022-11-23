@@ -23,7 +23,7 @@
     <suite-files>
         <suite-file path="testng-api.xml"/>
         <suite-file path="testng-web-pr.xml"/>
-        <suite-file path="testng-mobile.xml"/>
+        <suite-file path="testng-mobile-pr.xml"/>
         <suite-file path="testng-others.xml"/>
     </suite-files>
 </suite>

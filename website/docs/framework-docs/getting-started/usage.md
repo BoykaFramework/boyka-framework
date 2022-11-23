@@ -11,7 +11,7 @@ You can start by adding the following dependency to your `pom.xml` file:
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.8.2</version>
+  <version>0.9.0</version>
 </dependency>
 ```
 
@@ -20,7 +20,7 @@ You can start by adding the following dependency to your `pom.xml` file:
 You can start by adding the following dependency to your `build.gradle` file:
 
 ```groovy title=build.gradle
-compile "com.github.wasiqb.boyka:boyka-framework:0.8.2"
+compile "com.github.wasiqb.boyka:boyka-framework:0.9.0"
 ```
 
 ## ⬇️ Download the jar
@@ -29,7 +29,7 @@ You can also download the JAR files from the [GitHub Releases page][release].
 
 After downloading the jar, you can add it to your class path.
 
-[release]: https://github.com/WasiqBhamla/boyka-framework/releases/latest
+[release]: https://github.com/BoykaFramework/boyka-framework/releases/latest
 
 ## ☕ Examples
 

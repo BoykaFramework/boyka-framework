@@ -46,6 +46,7 @@ public class HoverPage {
     public Locator userImage (final int index) {
         return buildLocator ().web (className ("figure"))
             .index (index)
+            .name ("User Image")
             .build ();
     }
 
@@ -58,6 +59,7 @@ public class HoverPage {
      */
     public Locator userName (final int index) {
         return buildLocator ().web (cssSelector ("div.figcaption h5"))
+            .name ("User Name")
             .parent (userImage (index))
             .build ();
     }
