@@ -4,8 +4,8 @@
   <ShortName>Boyka-framework</ShortName>
   <Description>Search Boyka-framework</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://wasiqbhamla.github.io/boyka-framework/img/Boyka.png</Image>
-  <Url type="text/html" method="get" template="https://wasiqbhamla.github.io/boyka-framework/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://wasiqbhamla.github.io/boyka-framework/opensearch.xml" />
-  <moz:SearchForm>https://wasiqbhamla.github.io/boyka-framework/</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://BoykaFramework.github.io/boyka-framework/img/Boyka.png</Image>
+  <Url type="text/html" method="get" template="https://BoykaFramework.github.io/boyka-framework/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://BoykaFramework.github.io/boyka-framework/opensearch.xml" />
+  <moz:SearchForm>https://BoykaFramework.github.io/boyka-framework/</moz:SearchForm>
 </OpenSearchDescription>

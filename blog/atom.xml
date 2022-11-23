@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://wasiqbhamla.github.io/boyka-framework/blog</id>
+    <id>https://BoykaFramework.github.io/boyka-framework/blog</id>
     <title>Boyka-framework Blog</title>
     <updated>2022-04-03T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://wasiqbhamla.github.io/boyka-framework/blog"/>
+    <link rel="alternate" href="https://BoykaFramework.github.io/boyka-framework/blog"/>
     <subtitle>Boyka-framework Blog</subtitle>
-    <icon>https://wasiqbhamla.github.io/boyka-framework/img/Boyka.png</icon>
+    <icon>https://BoykaFramework.github.io/boyka-framework/img/Boyka.png</icon>
     <entry>
         <title type="html"><![CDATA[Welcome to Boyka!]]></title>
         <id>welcome</id>
-        <link href="https://wasiqbhamla.github.io/boyka-framework/blog/welcome"/>
+        <link href="https://BoykaFramework.github.io/boyka-framework/blog/welcome"/>
         <updated>2022-04-03T00:00:00.000Z</updated>
         <author>
             <name>Wasiq Bhamla</name>

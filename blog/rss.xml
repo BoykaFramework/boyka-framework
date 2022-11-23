@@ -2,7 +2,7 @@
 <rss version="2.0">
     <channel>
         <title>Boyka-framework Blog</title>
-        <link>https://wasiqbhamla.github.io/boyka-framework/blog</link>
+        <link>https://BoykaFramework.github.io/boyka-framework/blog</link>
         <description>Boyka-framework Blog</description>
         <lastBuildDate>Sun, 03 Apr 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -10,7 +10,7 @@
         <language>en</language>
         <item>
             <title><![CDATA[Welcome to Boyka!]]></title>
-            <link>https://wasiqbhamla.github.io/boyka-framework/blog/welcome</link>
+            <link>https://BoykaFramework.github.io/boyka-framework/blog/welcome</link>
             <guid>welcome</guid>
             <pubDate>Sun, 03 Apr 2022 00:00:00 GMT</pubDate>
         </item>
