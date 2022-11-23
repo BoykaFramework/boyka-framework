@@ -43,8 +43,8 @@ jobs:
       - name: Get the previous release version
         id: old_version
         run: |
-          export MVN_OLD_VERSION=$(git describe --tags --abbrev=0)
-          echo "::set-output name=previous_version::$MVN_OLD_VERSION"
+          export MVN_OLD_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo "previous_version=$MVN_OLD_VERSION" >> $GITHUB_OUTPUT
 
       - name: Update pre-release version
         run: yarn prerelease
@@ -53,7 +53,7 @@ jobs:
         id: version
         run: |
           export MVN_VERSION=$(node -pe "require('./website/package.json').version")
-          echo "::set-output name=version::$MVN_VERSION"
+          echo "version=$MVN_VERSION" >> $GITHUB_OUTPUT
 
       - name: Generate Change log
         if: steps.version.outputs.version != null
