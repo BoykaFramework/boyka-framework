@@ -1653,12 +1653,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^17.2.0":
-  version: 17.2.0
-  resolution: "@commitlint/config-conventional@npm:17.2.0"
+"@commitlint/config-conventional@npm:^17.3.0":
+  version: 17.3.0
+  resolution: "@commitlint/config-conventional@npm:17.3.0"
   dependencies:
     conventional-changelog-conventionalcommits: ^5.0.0
-  checksum: c91f8f4aac263d907f94c0ddba482f5d5a590bbbc8466c1afcb94bb0a2dfc891561647d8544744a4d0ae4c80034aa9e931197a6cdf2fb1c64f8f9e5e25c01e81
+  checksum: cf11a2b5388167f90e339f8b31f4b869c6cdb2a3830343d688f3f6dde7bc2feb794f45a746765823c5d64b835b03736d54b8f393480ebaabbf635709f9c4c172
   languageName: node
   linkType: hard
 
@@ -5592,7 +5592,7 @@ __metadata:
   resolution: "boyka-framework@workspace:."
   dependencies:
     "@commitlint/cli": ^17.2.0
-    "@commitlint/config-conventional": ^17.2.0
+    "@commitlint/config-conventional": ^17.3.0
     "@types/node": ^18.11.9
     "@typescript-eslint/eslint-plugin": ^5.43.0
     "@typescript-eslint/parser": ^5.43.0
