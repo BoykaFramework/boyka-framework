@@ -34,7 +34,7 @@
     "@commitlint/config-conventional": "^17.2.0",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
+    "@typescript-eslint/parser": "^5.45.0",
     "commitlint": "^17.2.0",
     "eslint": "^8.28.0",
     "eslint-config-google": "^0.14.0",
