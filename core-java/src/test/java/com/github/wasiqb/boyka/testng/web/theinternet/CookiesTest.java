@@ -21,7 +21,7 @@ import static com.github.wasiqb.boyka.actions.DriverActions.cookies;
 import static com.github.wasiqb.boyka.actions.DriverActions.deleteAllCookies;
 import static com.github.wasiqb.boyka.actions.DriverActions.deleteCookie;
 import static com.github.wasiqb.boyka.actions.DriverActions.minimize;
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
@@ -54,7 +54,7 @@ public class CookiesTest {
     public void setupClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
         minimize ();
-        navigateTo (URL);
+        navigate ().to (URL);
         clickOn (homePage ().link ("JavaScript Alerts"));
     }
 

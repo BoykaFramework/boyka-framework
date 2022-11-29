@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.DriverActions.switchToFrame;
 import static com.github.wasiqb.boyka.actions.DriverActions.switchToParentFrame;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
@@ -52,7 +52,7 @@ public class FramesTest {
     @Parameters ({ "appType", "driverKey" })
     public void setupClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
-        navigateTo (URL);
+        navigate ().to (URL);
         clickOn (homePage ().link ("Frames"));
     }
 

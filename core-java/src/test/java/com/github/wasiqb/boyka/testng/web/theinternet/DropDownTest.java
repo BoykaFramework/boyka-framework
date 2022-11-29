@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.DropDownActions.deselectAll;
 import static com.github.wasiqb.boyka.actions.DropDownActions.deselectByIndex;
 import static com.github.wasiqb.boyka.actions.DropDownActions.deselectByText;
@@ -56,7 +56,7 @@ public class DropDownTest {
     @Parameters ({ "appType", "driverKey" })
     public void setupClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
-        navigateTo (URL);
+        navigate ().to (URL);
     }
 
     /**

@@ -19,11 +19,8 @@ package com.github.wasiqb.boyka.testng.web.theinternet;
 import static com.github.wasiqb.boyka.actions.DriverActions.closeWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.currentWindowHandle;
 import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
-import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
-import static com.github.wasiqb.boyka.actions.DriverActions.goForward;
 import static com.github.wasiqb.boyka.actions.DriverActions.maximize;
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
-import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.DriverActions.switchToNewWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.switchToWindow;
 import static com.github.wasiqb.boyka.actions.DriverActions.waitUntil;
@@ -68,7 +65,7 @@ public class WindowTest {
     public void setupClass (final PlatformType appType, final String driverKey) {
         createDriver (appType, driverKey);
         maximize ();
-        navigateTo (URL);
+        navigate ().to (URL);
         clickOn (homePage ().link ("Multiple Windows"));
     }
 
@@ -85,7 +82,7 @@ public class WindowTest {
      */
     @Test (description = "Test browser back navigation")
     public void testBackNavigation () {
-        goBack ();
+        navigate ().back ();
         verifyBrowserUrl ().isEqualTo (URL);
     }
 
@@ -104,7 +101,7 @@ public class WindowTest {
      */
     @Test (description = "Test browser forward navigation")
     public void testForwardNavigation () {
-        goForward ();
+        navigate ().forward ();
         verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
     }
 
@@ -146,7 +143,7 @@ public class WindowTest {
      */
     @Test (description = "Test to verify page refresh")
     public void testRefreshPage () {
-        refresh ();
+        navigate ().refresh ();
         verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
     }
 }
