@@ -4,23 +4,47 @@ updates:
     directory: '/'
     target-branch: 'develop'
     versioning-strategy: increase
+    open-pull-requests-limit: 100
+    labels:
+      - ':house: pr: internal'
+    reviewers:
+      - 'boyka-core'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
+      timezone: 'Asia/Calcutta'
 
   - package-ecosystem: 'maven'
     directory: '/core-java'
     target-branch: 'develop'
+    open-pull-requests-limit: 100
+    labels:
+      - ':house: pr: internal'
+    reviewers:
+      - 'boyka-core'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
+      timezone: 'Asia/Calcutta'
 
   - package-ecosystem: 'maven'
     directory: '/sample-tests'
     target-branch: 'develop'
+    open-pull-requests-limit: 100
+    labels:
+      - ':house: pr: internal'
+    reviewers:
+      - 'boyka-core'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
+      timezone: 'Asia/Calcutta'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
     target-branch: 'develop'
+    open-pull-requests-limit: 100
+    labels:
+      - ':house: pr: internal'
+    reviewers:
+      - 'boyka-core'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
+      timezone: 'Asia/Calcutta'

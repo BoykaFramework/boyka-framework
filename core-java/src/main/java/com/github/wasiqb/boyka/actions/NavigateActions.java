@@ -73,17 +73,6 @@ public class NavigateActions {
     }
 
     /**
-     * Title of the browser.
-     *
-     * @return title of the browser
-     */
-    public String title () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting title of the browser");
-        return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle));
-    }
-
-    /**
      * Navigate to url on browser.
      *
      * @param url url to navigate to

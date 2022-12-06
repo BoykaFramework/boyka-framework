@@ -46,13 +46,13 @@ public class CookiesTest {
     /**
      * Setup test class by initialising driver.
      *
-     * @param appType Application type
+     * @param platformType Application type
      * @param driverKey Driver config key
      */
     @BeforeClass (description = "Setup test class")
-    @Parameters ({ "appType", "driverKey" })
-    public void setupClass (final PlatformType appType, final String driverKey) {
-        createDriver (appType, driverKey);
+    @Parameters ({ "platformType", "driverKey" })
+    public void setupClass (final PlatformType platformType, final String driverKey) {
+        createDriver (platformType, driverKey);
         minimize ();
         navigate ().to (URL);
         clickOn (homePage ().link ("JavaScript Alerts"));

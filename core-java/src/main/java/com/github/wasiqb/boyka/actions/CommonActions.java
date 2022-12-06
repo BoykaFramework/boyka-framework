@@ -27,6 +27,7 @@ import static java.text.MessageFormat.format;
 import static java.time.Duration.ofMillis;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -98,9 +99,23 @@ final class CommonActions {
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
         LOGGER.traceEntry ();
         final var element = find (locator, CLICKABLE);
-        highlight ("red", element);
-        unhighlight (element);
+        prepareElementAction (element);
         action.accept (element);
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Perform element specific action with Driver.
+     *
+     * @param action action to perform
+     * @param locator locator to find element
+     */
+    public static <D extends WebDriver> void performElementAction (final BiConsumer<D, WebElement> action,
+        final Locator locator) {
+        LOGGER.traceEntry ();
+        final var element = find (locator, CLICKABLE);
+        prepareElementAction (element);
+        action.accept ((D) getSession ().getDriver (), element);
         LOGGER.traceExit ();
     }
 
@@ -116,6 +131,11 @@ final class CommonActions {
                 .getTimeout ()
                 .getHighlightDelay ()));
         }
+    }
+
+    private static void prepareElementAction (final WebElement element) {
+        highlight ("red", element);
+        unhighlight (element);
     }
 
     private static void unhighlight (final WebElement element) {
