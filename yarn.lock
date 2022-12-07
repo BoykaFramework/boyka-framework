@@ -3615,12 +3615,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/cli@npm:15.2.4":
-  version: 15.2.4
-  resolution: "@nrwl/cli@npm:15.2.4"
+"@nrwl/cli@npm:15.3.0":
+  version: 15.3.0
+  resolution: "@nrwl/cli@npm:15.3.0"
   dependencies:
-    nx: 15.2.4
-  checksum: 81813c83d8f77c40d5e148e1bb83414d2070857cfa6ddef3679014e3a4ed5cc499e6e409f07cccb6952fc263c0349f211d5fe7d0df8bc9d3026be80d467e7410
+    nx: 15.3.0
+  checksum: 36b4d734b926ef595666a3f1545112a65129514480c8aa04a1f31e8150a71f0fd93a74be8042adae056eb3af4aca13f3cd337a8f1371d621de4c35f0625763f0
   languageName: node
   linkType: hard
 
@@ -3650,14 +3650,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/tao@npm:15.2.4":
-  version: 15.2.4
-  resolution: "@nrwl/tao@npm:15.2.4"
+"@nrwl/tao@npm:15.3.0":
+  version: 15.3.0
+  resolution: "@nrwl/tao@npm:15.3.0"
   dependencies:
-    nx: 15.2.4
+    nx: 15.3.0
   bin:
     tao: index.js
-  checksum: 11adf56cf102f11379223e2260320ea46a1a3fda8995ac81b78b368c3f7577bfdf164091befce90ce02809a62768226c17f330a42ef886e87c5eabe3009d3868
+  checksum: de5f288bc262332767fdbd9df4f2c74522c1bc0d31f8166f05caa39b3cca1dd6854c1ac2ed49e94bf59c457e20b2d268af075cc145cde34db80ff399c87a3928
   languageName: node
   linkType: hard
 
@@ -5614,7 +5614,7 @@ __metadata:
     lerna: ^6.1.0
     lerna-changelog: ^2.2.0
     lint-staged: ^13.1.0
-    nx: ^15.2.4
+    nx: ^15.3.0
     prettier: ^2.8.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -11732,12 +11732,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nx@npm:15.2.4, nx@npm:^15.2.4":
-  version: 15.2.4
-  resolution: "nx@npm:15.2.4"
+"nx@npm:15.3.0, nx@npm:^15.3.0":
+  version: 15.3.0
+  resolution: "nx@npm:15.3.0"
   dependencies:
-    "@nrwl/cli": 15.2.4
-    "@nrwl/tao": 15.2.4
+    "@nrwl/cli": 15.3.0
+    "@nrwl/tao": 15.3.0
     "@parcel/watcher": 2.0.4
     "@yarnpkg/lockfile": ^1.1.0
     "@yarnpkg/parsers": ^3.0.0-rc.18
@@ -11781,7 +11781,7 @@ __metadata:
       optional: true
   bin:
     nx: bin/nx.js
-  checksum: a189eaeae80550c2c344f1ea7bc49bff065cbd7779692d0f51891ee7f89f6d882cc33772d7b795a06843e61c01a6b504fe2112dfb48c8963f66b844779d86bb3
+  checksum: f6b1bcc0216b7ca44e6abe24959ecce0e18a6402a465bfd8b7ebb11465ac1a9728ef722c8debcb9a7098595a7ca83eb2807be05c87c33f3ad354ff11c32460f8
   languageName: node
   linkType: hard
 
