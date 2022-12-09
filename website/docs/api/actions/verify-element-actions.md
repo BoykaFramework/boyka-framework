@@ -1,6 +1,6 @@
 ---
 title: VerifyElementActions
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 ## `verifyAttributeOf (locator, attribute)` {#verify-attribute-of}

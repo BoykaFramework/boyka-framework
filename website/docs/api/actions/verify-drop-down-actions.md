@@ -1,6 +1,6 @@
 ---
 title: VerifyDropDownActions
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 ## `verifySelectedItem (locator)` {#verify-selected-item-locator}
