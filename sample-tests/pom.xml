@@ -33,7 +33,7 @@
         <suite-xml>test-suites/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <boyka.version>0.10.0</boyka.version>
-        <testng.version>7.6.1</testng.version>
+        <testng.version>7.7.0</testng.version>
         <lombok.version>1.18.24</lombok.version>
         <java.faker.version>1.0.2</java.faker.version>
     </properties>
