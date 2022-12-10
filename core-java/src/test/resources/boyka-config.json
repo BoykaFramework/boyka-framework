@@ -154,8 +154,8 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "10",
-          "name": "Pixel_5",
+          "version": "11",
+          "name": "Pixel_6_Pro",
           "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
