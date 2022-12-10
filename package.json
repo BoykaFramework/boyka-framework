@@ -71,13 +71,13 @@
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "yarn lint",
-      "yarn format",
-      "yarn format-fix"
+      "yarn format-fix",
+      "yarn format"
     ],
     "**/*.{js,jsx}": [
       "yarn lint",
-      "yarn format",
-      "yarn format-fix"
+      "yarn format-fix",
+      "yarn format"
     ]
   }
 }

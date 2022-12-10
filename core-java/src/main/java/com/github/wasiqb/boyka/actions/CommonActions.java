@@ -27,6 +27,8 @@ import static java.text.MessageFormat.format;
 import static java.time.Duration.ofMillis;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.Collection;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -120,6 +122,15 @@ final class CommonActions {
         LOGGER.traceExit ();
     }
 
+    /**
+     * Perform Gestures on Mobile.
+     *
+     * @param sequences Collection of Sequences of gestures.
+     */
+    public static void performMobileGestures (final Collection<Sequence> sequences) {
+        performDriverAction (driver -> ((AppiumDriver) driver).perform (sequences));
+    }
+
     private static void highlight (final String color, final WebElement element) {
         if (getSession ().getPlatformType () == WEB && getSession ().getWebSetting ()
             .isHighlight ()) {
@@ -146,17 +157,6 @@ final class CommonActions {
             executeScript ("arguments[0].setAttribute('style', arguments[1]);", element, style);
             getSession ().removeSharedData (HIGHLIGHT_STYLE);
         }
-    }
-
-    /**
-     * Perform Gestures on Mobile.
-     *
-     * @param sequences Collection of Sequences of gestures.
-     */
-    public static void performMobileGestures (final Collection<Sequence> sequences) {
-        performDriverAction (driver -> {
-            ((AppiumDriver) driver).perform (sequences);
-        });
     }
 
     private CommonActions () {
