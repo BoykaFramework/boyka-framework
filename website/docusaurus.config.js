@@ -9,12 +9,12 @@ const config = {
   title: 'Boyka-framework',
   tagline:
     'Ultimate test automation framework for automating Web, Android, iOS and API applications',
-  url: 'https://wasiqbhamla.github.io',
+  url: 'https://BoykaFramework.github.io',
   baseUrl: '/boyka-framework/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/Boyka.png',
-  organizationName: 'WasiqBhamla', // Usually your GitHub org/user name.
+  organizationName: 'BoykaFramework', // Usually your GitHub org/user name.
   projectName: 'boyka-framework', // Usually your repo name.
 
   plugins: [
@@ -25,7 +25,7 @@ const config = {
         id: 'api',
         path: './docs/api',
         routeBasePath: 'api',
-        editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
+        editUrl: 'https://github.com/BoykaFramework/boyka-framework/edit/main/website/',
         editCurrentVersion: true,
         sidebarPath: require.resolve('./docs/api/sidebars.js'),
         showLastUpdateAuthor: true,
@@ -39,7 +39,7 @@ const config = {
         id: 'contributing',
         path: './docs/contributing',
         routeBasePath: 'contributing',
-        editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
+        editUrl: 'https://github.com/BoykaFramework/boyka-framework/edit/main/website/',
         editCurrentVersion: true,
         sidebarPath: require.resolve('./docs/contributing/sidebars.js'),
         showLastUpdateAuthor: true,
@@ -53,7 +53,7 @@ const config = {
         id: 'community',
         path: './docs/community',
         routeBasePath: 'community',
-        editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
+        editUrl: 'https://github.com/BoykaFramework/boyka-framework/edit/main/website/',
         editCurrentVersion: true,
         sidebarPath: require.resolve('./docs/community/sidebars.js'),
         showLastUpdateAuthor: true,
@@ -72,13 +72,13 @@ const config = {
           path: './docs/framework-docs',
           routeBasePath: '/docs',
           sidebarPath: require.resolve('./docs/framework-docs/sidebars.js'),
-          editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/',
+          editUrl: 'https://github.com/BoykaFramework/boyka-framework/edit/main/website/',
         },
         blog: {
           showReadingTime: true,
           postsPerPage: 10,
           sortPosts: 'ascending',
-          editUrl: 'https://github.com/WasiqBhamla/boyka-framework/edit/main/website/blog/',
+          editUrl: 'https://github.com/BoykaFramework/boyka-framework/edit/main/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -105,7 +105,7 @@ const config = {
       announcementBar: {
         id: 'star-the-repo',
         content:
-          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/WasiqBhamla/boyka-framework">GitHub</a> ⭐ | 🤝 Support us by Sponsoring us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/WasiqB">GitHub Sponsors</a> 🤝',
+          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/BoykaFramework/boyka-framework">GitHub</a> ⭐ | 🤝 Support us by Sponsoring us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/WasiqB">GitHub Sponsors</a> 🤝',
         backgroundColor: '#ffb600',
         textColor: '#000000',
         isCloseable: false,
@@ -154,7 +154,7 @@ const config = {
           },
           { to: '/blog', label: 'Blogs' },
           {
-            href: 'https://github.com/WasiqBhamla/boyka-framework',
+            href: 'https://github.com/BoykaFramework/boyka-framework',
             label: 'GitHub',
           },
         ],
@@ -196,7 +196,7 @@ const config = {
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/WasiqBhamla',
+                href: 'https://twitter.com/BoykaFramework',
               },
             ],
           },
@@ -209,7 +209,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/WasiqBhamla/boyka-framework',
+                href: 'https://github.com/BoykaFramework/boyka-framework',
               },
             ],
           },

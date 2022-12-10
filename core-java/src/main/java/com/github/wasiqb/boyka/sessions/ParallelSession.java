@@ -36,6 +36,8 @@ public final class ParallelSession {
      */
     public static void clearSession () {
         LOGGER.traceEntry ();
+        SESSION.get ()
+            .clearSharedData ();
         SESSION.remove ();
         LOGGER.traceExit ();
     }

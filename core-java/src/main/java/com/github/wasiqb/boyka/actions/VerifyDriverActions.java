@@ -18,8 +18,8 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.acceptAlert;
 import static com.github.wasiqb.boyka.actions.DriverActions.dismissAlert;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.DriverActions.title;
-import static com.github.wasiqb.boyka.actions.DriverActions.url;
 import static com.google.common.truth.Truth.assertThat;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -82,7 +82,7 @@ public class VerifyDriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying browser url");
         LOGGER.traceExit ();
-        return assertThat (url ());
+        return assertThat (navigate ().url ());
     }
 
     /**

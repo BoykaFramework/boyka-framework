@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.ui.saucedemo.web;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.ElementActions.submit;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
@@ -66,13 +66,13 @@ public class SauceDemoTest {
     /**
      * Setup test class by initialising driver.
      *
-     * @param appType Application type
+     * @param platformType Application type
      * @param driverKey Driver config key
      */
     @BeforeClass (description = "Setup test class")
-    @Parameters ({ "appType", "driverKey" })
-    public void setupTestClass (final PlatformType appType, final String driverKey) {
-        createDriver (appType, driverKey);
+    @Parameters ({ "platformType", "driverKey" })
+    public void setupTestClass (final PlatformType platformType, final String driverKey) {
+        createDriver (platformType, driverKey);
     }
 
     /**
@@ -134,7 +134,7 @@ public class SauceDemoTest {
      */
     @Test (description = "Test login functionality", priority = 1)
     public void testLogin () {
-        navigateTo (URL);
+        navigate ().to (URL);
         verifyBrowserUrl ().startsWith (URL);
         enterText (loginPage ().getUsername (), "standard_user");
         pressKey (loginPage ().getUsername (), CONTROL, "a", DELETE);

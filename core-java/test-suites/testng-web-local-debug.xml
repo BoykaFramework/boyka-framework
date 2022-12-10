@@ -21,7 +21,7 @@
         <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
     </listeners>
     <test name="Test Boyka web on Local Chrome">
-        <parameter name="appType" value="WEB"/>
+        <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo.web"/>

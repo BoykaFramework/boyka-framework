@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -53,6 +54,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WindowType;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Device / Browser specific actions.
@@ -214,26 +216,6 @@ public final class DriverActions {
     }
 
     /**
-     * Navigate back to previous page on browser.
-     */
-    public static void goBack () {
-        LOGGER.traceEntry ();
-        performDriverAction (driver -> driver.navigate ()
-            .back ());
-        LOGGER.traceExit ();
-    }
-
-    /**
-     * Navigate forward to next page on browser.
-     */
-    public static void goForward () {
-        LOGGER.traceEntry ();
-        performDriverAction (driver -> driver.navigate ()
-            .forward ());
-        LOGGER.traceExit ();
-    }
-
-    /**
      * Makes browser window maximized.
      */
     public static void maximize () {
@@ -256,24 +238,28 @@ public final class DriverActions {
     }
 
     /**
-     * Navigate to url on browser.
+     * Navigation related actions.
      *
-     * @param url url to navigate to
+     * @return Instance of {@link NavigateActions}
      */
-    public static void navigateTo (final String url) {
+    public static NavigateActions navigate () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Navigating to url: {}", url);
-        performDriverAction (driver -> driver.get (url));
-        LOGGER.traceExit ();
+        return LOGGER.traceExit (NavigateActions.navigateActions ());
     }
 
     /**
-     * Refreshes browser page.
+     * Pause for the specified time.
+     *
+     * @param time Duration to pause.
      */
-    public static void refresh () {
+    public static void pause (final Duration time) {
         LOGGER.traceEntry ();
-        performDriverAction (driver -> driver.navigate ()
-            .refresh ());
+        performDriverAction (driver -> {
+            final var action = new Actions (driver);
+            action.pause (time)
+                .build ()
+                .perform ();
+        });
         LOGGER.traceExit ();
     }
 
@@ -462,17 +448,6 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting title of the browser");
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle));
-    }
-
-    /**
-     * Get current url of the browser.
-     *
-     * @return current url of the browser
-     */
-    public static String url () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting url of the browser");
-        return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl));
     }
 
     /**

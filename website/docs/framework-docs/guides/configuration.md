@@ -26,7 +26,8 @@ The file name and it's location cannot be modified.
       "implicit_wait": 10,
       "explicit_wait": 30,
       "page_load_timeout": 30,
-      "script_timeout": 10
+      "script_timeout": 10,
+      "highlight_delay": 100
     },
     "screenshot": {
       "enabled": true,
@@ -36,7 +37,8 @@ The file name and it's location cannot be modified.
     },
     "web": {
       "test_local_chrome": {
-        "browser": "CHROME"
+        "browser": "CHROME",
+        "highlight": true
       },
       "test_local_firefox": {
         "browser": "FIREFOX"
@@ -123,6 +125,7 @@ See the example in [sample configuration file](#config-sample).
 | `explicit_wait` | Explicit wait for finding the elements on UI (in seconds). | `number` | `1` |
 | `page_load_timeout` | Page load timeout for waiting for page to load (in seconds). | `number` | `30` |
 | `script_timeout` | Script timeout for waiting for page to load (in seconds). | `number` | `30` |
+| `highlight_delay` | Delay for element getting highlighted | `long` | `100`
 
 #### Screenshot Configuration {#screenshot-config}
 
@@ -146,6 +149,7 @@ See the example in [sample configuration file](#config-sample).
 | `password` | Password / Access key for cloud service provider. | `string` | `null` |
 | `capabilities` | Capabilities for browser. | `Map<String, Object>` | `null` |
 | `headless` | Headless mode for browser. | `boolean` | `true` |
+| `highlight` | Highlight element on interaction, if `true` | `boolean` | `false` |
 
 :::info
 For fields `user_name` and `password`, you can use placeholder variables in the following format:

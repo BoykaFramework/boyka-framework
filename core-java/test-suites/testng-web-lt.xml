@@ -18,7 +18,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Web LambdaTest Suite" verbose="2" parallel="classes">
     <test name="Test Boyka web on LambdaTest">
-        <parameter name="appType" value="WEB"/>
+        <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_lambda_test_chrome"/>
         <packages>
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo.web"/>
