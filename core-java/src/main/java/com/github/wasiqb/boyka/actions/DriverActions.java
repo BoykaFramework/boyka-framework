@@ -267,23 +267,34 @@ public final class DriverActions {
      * Save all the available logs to files in `logs` folder.
      */
     public static void saveLogs () {
+        LOGGER.traceEntry ();
         performDriverAction (d -> {
             final var logSetting = getSession ().getMobileSetting ()
                 .getServer ()
                 .getLogs ();
             if (!logSetting.isEnable ()) {
+                LOGGER.warn ("Cannot save different logs to file, logging is disabled...");
                 return;
             }
             try {
                 final var logTypes = d.manage ()
                     .logs ()
                     .getAvailableLogTypes ();
-                logTypes.forEach (logType -> saveLogType (d, logType, logSetting.getPath ()));
+                logTypes.forEach (logType -> {
+                    LOGGER.info ("Saving [{}] logs to a file...", logType);
+                    if (logSetting.getExcludeLogs () == null || !logSetting.getExcludeLogs ()
+                        .contains (logType)) {
+                        saveLogType (d, logType, logSetting.getPath ());
+                    } else {
+                        LOGGER.info ("Skipped saving [{}] logs to a file...", logType);
+                    }
+                });
             } catch (final WebDriverException e) {
                 LOGGER.catching (e);
                 LOGGER.warn ("Error while saving different logs: {}", e.getMessage ());
             }
         });
+        LOGGER.traceExit ();
     }
 
     /**

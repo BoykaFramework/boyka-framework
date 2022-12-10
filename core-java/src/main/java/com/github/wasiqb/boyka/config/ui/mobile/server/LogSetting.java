@@ -18,6 +18,8 @@ package com.github.wasiqb.boyka.config.ui.mobile.server;
 
 import static com.github.wasiqb.boyka.enums.LogLevel.DEBUG;
 
+import java.util.List;
+
 import com.github.wasiqb.boyka.enums.LogLevel;
 import lombok.Data;
 
@@ -29,7 +31,8 @@ import lombok.Data;
  */
 @Data
 public class LogSetting {
-    private boolean  enable = true;
-    private LogLevel level  = DEBUG;
-    private String   path   = "./logs";
+    private boolean      enable = true;
+    private List<String> excludeLogs;
+    private LogLevel     level  = DEBUG;
+    private String       path   = "./logs";
 }

@@ -150,7 +150,12 @@
           "session_override": true,
           "allow_insecure": [
             "get_server_logs"
-          ]
+          ],
+          "logs": {
+            "exclude_logs": [
+              "bugreport"
+            ]
+          }
         },
         "device": {
           "os": "ANDROID",
