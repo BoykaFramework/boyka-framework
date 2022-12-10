@@ -211,26 +211,6 @@ public final class DriverActions {
     }
 
     /**
-     * Navigate back to previous page on browser.
-     */
-    public static void goBack () {
-        LOGGER.traceEntry ();
-        performDriverAction (driver -> driver.navigate ()
-            .back ());
-        LOGGER.traceExit ();
-    }
-
-    /**
-     * Navigate forward to next page on browser.
-     */
-    public static void goForward () {
-        LOGGER.traceEntry ();
-        performDriverAction (driver -> driver.navigate ()
-            .forward ());
-        LOGGER.traceExit ();
-    }
-
-    /**
      * Makes browser window maximized.
      */
     public static void maximize () {
@@ -253,15 +233,13 @@ public final class DriverActions {
     }
 
     /**
-     * Navigate to url on browser.
+     * Navigation related actions.
      *
-     * @param url url to navigate to
+     * @return Instance of {@link NavigateActions}
      */
-    public static void navigateTo (final String url) {
+    public static NavigateActions navigate () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Navigating to url: {}", url);
-        performDriverAction (driver -> driver.get (url));
-        LOGGER.traceExit ();
+        return LOGGER.traceExit (NavigateActions.navigateActions ());
     }
 
     /**
@@ -277,16 +255,6 @@ public final class DriverActions {
                 .build ()
                 .perform ();
         });
-        LOGGER.traceExit ();
-    }
-
-    /**
-     * Refreshes browser page.
-     */
-    public static void refresh () {
-        LOGGER.traceEntry ();
-        performDriverAction (driver -> driver.navigate ()
-            .refresh ());
         LOGGER.traceExit ();
     }
 
@@ -418,17 +386,6 @@ public final class DriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting title of the browser");
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle));
-    }
-
-    /**
-     * Get current url of the browser.
-     *
-     * @return current url of the browser
-     */
-    public static String url () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting url of the browser");
-        return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl));
     }
 
     /**

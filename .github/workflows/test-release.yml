@@ -1,6 +1,7 @@
 name: Test boyka-framework release
 
 on:
+  workflow_dispatch:
   release:
     types:
       - published
@@ -44,7 +45,7 @@ jobs:
           echo "version=$MVN_VERSION" >> $GITHUB_OUTPUT
 
       - name: Start Selenium Grid
-        run: java -jar core-java/libs/selenium-server-4.4.0.jar standalone > sample-tests/selenium-grid.log &
+        run: java -jar core-java/libs/selenium-server-4.7.0.jar standalone > sample-tests/selenium-grid.log &
 
       - name: All Test execution
         run: mvn clean test -f sample-tests/pom.xml -Dboyka.version=${{ steps.version.outputs.version }}

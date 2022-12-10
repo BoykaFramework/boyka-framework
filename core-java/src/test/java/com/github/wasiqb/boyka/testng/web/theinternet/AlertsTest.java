@@ -17,8 +17,7 @@
 package com.github.wasiqb.boyka.testng.web.theinternet;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.fullScreen;
-import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
@@ -47,15 +46,15 @@ public class AlertsTest {
     /**
      * Setup test class by initialising driver.
      *
-     * @param appType Application type
+     * @param platformType Application type
      * @param driverKey Driver config key
      */
     @BeforeClass (description = "Setup test class")
-    @Parameters ({ "appType", "driverKey" })
-    public void setupClass (final PlatformType appType, final String driverKey) {
-        createDriver (appType, driverKey);
+    @Parameters ({ "platformType", "driverKey" })
+    public void setupClass (final PlatformType platformType, final String driverKey) {
+        createDriver (platformType, driverKey);
         fullScreen ();
-        navigateTo (URL);
+        navigate ().to (URL);
         clickOn (homePage ().link ("JavaScript Alerts"));
     }
 
@@ -64,7 +63,7 @@ public class AlertsTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        goBack ();
+        navigate ().back ();
         verifyBrowserUrl ().isEqualTo (URL);
         closeDriver ();
     }

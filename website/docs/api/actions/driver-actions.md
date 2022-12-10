@@ -114,26 +114,6 @@ import static com.github.wasiqb.boyka.actions.DriverActions.fullScreen;
 fullScreen ();
 ```
 
-## `goBack` {#go-back}
-
-This method will go back to the previous page.
-
-```java
-import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
-. . .
-goBack ();
-```
-
-## `goForward` {#go-forward}
-
-This method will go forward to the next page.
-
-```java
-import static com.github.wasiqb.boyka.actions.DriverActions.goForward;
-. . .
-goForward ();
-```
-
 ## `maximize`
 
 This method will maximize the browser window.
@@ -154,14 +134,14 @@ import static com.github.wasiqb.boyka.actions.DriverActions.minimize;
 minimize ();
 ```
 
-## `navigateTo` {#navigate-to}
+## `navigate`
 
-This method is used to navigate to the given URL.
+This method is used to perform navigation related actions.
 
 ```java
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 . . .
-navigateTo ("https://google.com");
+navigate ().to ("https://google.com");
 ```
 
 ## `pause` {#pause}
@@ -173,16 +153,6 @@ import static com.github.wasiqb.boyka.actions.DriverActions.pause;
 import static java.time.Duration.ofMillis;
 . . .
 pause (ofMillis (100));
-```
-
-## `refresh`
-
-This method will refresh the browser window.
-
-```java
-import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
-. . .
-refresh ();
 ```
 
 ## `saveLogs`
@@ -278,16 +248,6 @@ This method will get the title of the browser window.
 import static com.github.wasiqb.boyka.actions.DriverActions.title;
 . . .
 System.out.println (title ());
-```
-
-## `url`
-
-This method will get the URL of the browser window.
-
-```java
-import static com.github.wasiqb.boyka.actions.DriverActions.url;
-. . .
-System.out.println (url ());
 ```
 
 ## `waitUntil` {#wait-until}

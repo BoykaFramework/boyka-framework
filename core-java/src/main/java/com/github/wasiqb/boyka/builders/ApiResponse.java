@@ -38,7 +38,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.apache.logging.log4j.Logger;
-import org.everit.json.schema.Schema;
 import org.everit.json.schema.ValidationException;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
@@ -149,7 +148,7 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying Response Schema");
         try {
-            final Schema schema = SchemaLoader.load (new JSONObject (new JSONTokener (requireNonNull (
+            final var schema = SchemaLoader.load (new JSONObject (new JSONTokener (requireNonNull (
                 getClass ().getClassLoader ()
                     .getResourceAsStream (this.apiSetting.getSchemaPath () + schemaName)))));
             schema.validate (new JSONObject (getBody ()));

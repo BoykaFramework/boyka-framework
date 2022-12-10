@@ -290,7 +290,7 @@ public class LoginPage {
 And later we can use that page object to execute the test.
 
 ```java
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.pressKey;
@@ -310,7 +310,7 @@ createDriver (ApplicationType.WEB, "test_local_chrome");
 . . .
 private static final String URL = "https://www.saucedemo.com";
 . . .
-navigateTo (URL);
+navigate ().to (URL);
 verifyBrowserUrl ().startsWith (URL);
 
 enterText (loginPage ().getUsername (), "standard_user");

@@ -159,7 +159,7 @@ public final class ApiManager {
     private ApiResponse getResponse (final Map<String, String> queryParams, final String path) {
         LOGGER.traceEntry ("Parameters: {}", path);
         try {
-            final HttpUrl.Builder urlBuilder = requireNonNull (HttpUrl.parse (getUrl (path))).newBuilder ();
+            final var urlBuilder = requireNonNull (HttpUrl.parse (getUrl (path))).newBuilder ();
             queryParams.forEach (urlBuilder::addQueryParameter);
             this.response = parseResponse (this.client.newCall (this.request.url (urlBuilder.build ())
                     .build ())

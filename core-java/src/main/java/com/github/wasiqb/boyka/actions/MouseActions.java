@@ -18,9 +18,7 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
-import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -45,8 +43,8 @@ public final class MouseActions {
     public static void clickAndHold (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Click and hold on element: {}", locator.getName ());
-        performElementAction (element -> {
-            final Actions actions = new Actions (getSession ().getDriver ());
+        performElementAction ((driver, element) -> {
+            final var actions = new Actions (driver);
             actions.clickAndHold (element)
                 .perform ();
         }, locator);
@@ -73,8 +71,8 @@ public final class MouseActions {
     public static void doubleClickOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Double Click on element: {}", locator.getName ());
-        performElementAction (element -> {
-            final Actions actions = new Actions (getSession ().getDriver ());
+        performElementAction ((driver, element) -> {
+            final var actions = new Actions (driver);
             actions.doubleClick (element)
                 .perform ();
         }, locator);
@@ -90,8 +88,8 @@ public final class MouseActions {
     public static void dragDropTo (final Locator source, final Locator destination) {
         LOGGER.traceEntry ();
         LOGGER.info ("Drag and Drop on element: {} , {}", source.getName (), destination.getName ());
-        performElementAction (element -> {
-            final var actions = new Actions (getSession ().getDriver ());
+        performElementAction ((driver, element) -> {
+            final var actions = new Actions (driver);
             actions.dragAndDrop (element, find (destination, VISIBLE))
                 .perform ();
         }, source);
@@ -106,8 +104,8 @@ public final class MouseActions {
     public static void hoverOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Hover on element: {}", locator.getName ());
-        performElementAction (element -> {
-            final Actions actions = new Actions (getSession ().getDriver ());
+        performElementAction ((driver, element) -> {
+            final var actions = new Actions (driver);
             actions.moveToElement (element)
                 .perform ();
         }, locator);
@@ -122,8 +120,11 @@ public final class MouseActions {
     public static void rightClickOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Right Click on element: {}", locator.getName ());
-        new Actions (getSession ().getDriver ()).contextClick (find (locator, CLICKABLE))
-            .perform ();
+        performElementAction ((driver, element) -> {
+            final var actions = new Actions (driver);
+            actions.contextClick (element)
+                .perform ();
+        }, locator);
         LOGGER.traceExit ();
     }
 
