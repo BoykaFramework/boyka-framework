@@ -2,7 +2,7 @@
   "ui": {
     "timeout": {
       "implicit_wait": 10,
-      "explicit_wait": 30,
+      "explicit_wait": 40,
       "page_load_timeout": 30,
       "script_timeout": 10,
       "highlight_delay": 100
@@ -165,6 +165,7 @@
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
           "application": {
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
@@ -190,6 +191,7 @@
           "name": "Google Pixel 5",
           "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
+          "ignore_unimportant_views": true,
           "application": {
             "path": "AndroidApp",
             "external": true,
@@ -225,6 +227,7 @@
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
+          "ignore_unimportant_views": true,
           "capabilities": {
             "platformName": "Android",
             "deviceName": "Pixel 5",

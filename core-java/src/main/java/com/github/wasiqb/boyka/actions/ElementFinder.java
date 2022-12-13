@@ -22,8 +22,6 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.text.MessageFormat.format;
 import static org.apache.logging.log4j.LogManager.getLogger;
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 import java.util.List;
 
@@ -95,11 +93,21 @@ final class ElementFinder {
         try {
             switch (waitStrategy) {
                 case CLICKABLE:
-                    wait.until (elementToBeClickable (locator.getLocator ()));
+                    wait.until (d -> {
+                        final var element = parent != null
+                                            ? parent.findElement (locator.getLocator ())
+                                            : driver.findElement (locator.getLocator ());
+                        return element.isEnabled ();
+                    });
                     break;
                 case VISIBLE:
                 default:
-                    wait.until (visibilityOfElementLocated (locator.getLocator ()));
+                    wait.until (d -> {
+                        final var element = parent != null
+                                            ? parent.findElement (locator.getLocator ())
+                                            : driver.findElement (locator.getLocator ());
+                        return element.isDisplayed ();
+                    });
             }
         } catch (final TimeoutException e) {
             handleAndThrow (ELEMENT_NOT_FOUND, e, locator.getName (), getSession ().getPlatformType ());
