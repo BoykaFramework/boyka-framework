@@ -19,8 +19,10 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
 import static com.github.wasiqb.boyka.actions.DriverActions.pause;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
+import static com.github.wasiqb.boyka.enums.Message.DRIVER_ERROR_OCCURRED;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofMillis;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -35,6 +37,7 @@ import com.github.wasiqb.boyka.exception.FrameworkError;
 import io.appium.java_client.AppiumDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Sequence;
 
@@ -97,7 +100,11 @@ final class CommonActions {
      */
     public static <D extends WebDriver> void performDriverAction (final Consumer<D> action) {
         LOGGER.traceEntry ();
-        action.accept ((D) getSession ().getDriver ());
+        try {
+            action.accept ((D) getSession ().getDriver ());
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
         LOGGER.traceExit ();
     }
 
@@ -109,8 +116,12 @@ final class CommonActions {
      */
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
         LOGGER.traceEntry ();
-        prepareElementAction (find (locator));
-        action.accept (find (locator));
+        try {
+            prepareElementAction (find (locator));
+            action.accept (find (locator));
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
         LOGGER.traceExit ();
     }
 
@@ -123,8 +134,12 @@ final class CommonActions {
     public static <D extends WebDriver> void performElementAction (final BiConsumer<D, WebElement> action,
         final Locator locator) {
         LOGGER.traceEntry ();
-        prepareElementAction (find (locator));
-        action.accept ((D) getSession ().getDriver (), find (locator));
+        try {
+            prepareElementAction (find (locator));
+            action.accept ((D) getSession ().getDriver (), find (locator));
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
         LOGGER.traceExit ();
     }
 
@@ -134,7 +149,13 @@ final class CommonActions {
      * @param sequences Collection of Sequences of gestures.
      */
     public static void performMobileGestures (final Collection<Sequence> sequences) {
-        performDriverAction (driver -> ((AppiumDriver) driver).perform (sequences));
+        LOGGER.traceEntry ();
+        try {
+            performDriverAction (driver -> ((AppiumDriver) driver).perform (sequences));
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
+        LOGGER.traceExit ();
     }
 
     private static void highlight (final String color, final WebElement element) {
