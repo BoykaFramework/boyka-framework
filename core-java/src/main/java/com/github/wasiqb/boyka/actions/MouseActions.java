@@ -18,7 +18,6 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
-import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -90,7 +89,7 @@ public final class MouseActions {
         LOGGER.info ("Drag and Drop on element: {} , {}", source.getName (), destination.getName ());
         performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
-            actions.dragAndDrop (element, find (destination, VISIBLE))
+            actions.dragAndDrop (element, find (destination))
                 .perform ();
         }, source);
         LOGGER.traceExit ();

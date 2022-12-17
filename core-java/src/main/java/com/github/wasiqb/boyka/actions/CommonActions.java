@@ -20,8 +20,6 @@ import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
 import static com.github.wasiqb.boyka.actions.DriverActions.pause;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
-import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
-import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofMillis;
@@ -33,6 +31,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import io.appium.java_client.AppiumDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -54,14 +53,19 @@ final class CommonActions {
      * Gets driver specific attributes.
      *
      * @param action action to get driver specific attributes
+     * @param defaultValue default value if any error occurred
      * @param <D> driver type
      * @param <E> attribute type
      *
      * @return driver specific attribute.
      */
-    public static <D extends WebDriver, E> E getDriverAttribute (final Function<D, E> action) {
+    public static <D extends WebDriver, E> E getDriverAttribute (final Function<D, E> action, final E defaultValue) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (action.apply ((D) getSession ().getDriver ()));
+        try {
+            return LOGGER.traceExit (action.apply ((D) getSession ().getDriver ()));
+        } catch (final FrameworkError e) {
+            return defaultValue;
+        }
     }
 
     /**
@@ -69,16 +73,20 @@ final class CommonActions {
      *
      * @param action action to get element specific attributes
      * @param locator locator to find element
+     * @param defaultValue default value if any error occurred
      * @param <E> attribute type
      *
      * @return element specific attribute.
      */
-    public static <E> E getElementAttribute (final Function<WebElement, E> action, final Locator locator) {
+    public static <E> E getElementAttribute (final Function<WebElement, E> action, final Locator locator,
+        final E defaultValue) {
         LOGGER.traceEntry ();
-        final var element = find (locator, VISIBLE);
-        highlight ("green", element);
-        unhighlight (element);
-        return LOGGER.traceExit (action.apply (element));
+        try {
+            prepareElementAction (find (locator));
+            return LOGGER.traceExit (action.apply (find (locator)));
+        } catch (final FrameworkError e) {
+            return defaultValue;
+        }
     }
 
     /**
@@ -101,9 +109,8 @@ final class CommonActions {
      */
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
         LOGGER.traceEntry ();
-        final var element = find (locator, CLICKABLE);
-        prepareElementAction (element);
-        action.accept (element);
+        prepareElementAction (find (locator));
+        action.accept (find (locator));
         LOGGER.traceExit ();
     }
 
@@ -116,9 +123,8 @@ final class CommonActions {
     public static <D extends WebDriver> void performElementAction (final BiConsumer<D, WebElement> action,
         final Locator locator) {
         LOGGER.traceEntry ();
-        final var element = find (locator, CLICKABLE);
-        prepareElementAction (element);
-        action.accept ((D) getSession ().getDriver (), element);
+        prepareElementAction (find (locator));
+        action.accept ((D) getSession ().getDriver (), find (locator));
         LOGGER.traceExit ();
     }
 

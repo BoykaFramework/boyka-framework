@@ -16,10 +16,12 @@
 
 package com.github.wasiqb.boyka.builders;
 
+import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 
 import java.util.function.Predicate;
 
+import com.github.wasiqb.boyka.enums.WaitStrategy;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -43,6 +45,8 @@ public class Locator {
     @NotNull
     private String                name;
     private Locator               parent;
+    @Builder.Default
+    private WaitStrategy          waitStrategy = VISIBLE;
     private By                    web;
 
     /**
