@@ -16,7 +16,7 @@
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
@@ -61,6 +61,7 @@
         <checkstyle.config>checkstyles/checkstyle.xml</checkstyle.config>
         <checkstyle.suppress>checkstyles/checkstyle-suppressions.xml</checkstyle.suppress>
         <sonar.report>${project.basedir}/reports/jacoco.exec</sonar.report>
+        <maven-enforcer.version>3.1.0</maven-enforcer.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
@@ -235,6 +236,26 @@
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.8</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>

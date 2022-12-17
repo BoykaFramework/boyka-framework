@@ -2,7 +2,7 @@
   "ui": {
     "timeout": {
       "implicit_wait": 10,
-      "explicit_wait": 40,
+      "explicit_wait": 10,
       "page_load_timeout": 30,
       "script_timeout": 10,
       "highlight_delay": 100
@@ -166,6 +166,10 @@
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
           "application": {
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
@@ -183,7 +187,12 @@
           "host": "hub-cloud.browserstack.com",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub"
+          "base_path": "/wd/hub",
+          "logs": {
+            "exclude_logs": [
+              "bugreport"
+            ]
+          }
         },
         "device": {
           "os": "ANDROID",
@@ -218,7 +227,12 @@
           "host": "mobile-hub.lambdatest.com",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
-          "base_path": "/wd/hub"
+          "base_path": "/wd/hub",
+          "logs": {
+            "exclude_logs": [
+              "bugreport"
+            ]
+          }
         },
         "device": {
           "automation": "UI_AUTOMATOR",

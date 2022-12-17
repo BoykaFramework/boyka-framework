@@ -17,8 +17,7 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo.android;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
-import static com.github.wasiqb.boyka.actions.DriverActions.swipeDown;
-import static com.github.wasiqb.boyka.actions.DriverActions.swipeUp;
+import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
 import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
@@ -107,8 +106,6 @@ public class SauceDemoTest {
      */
     @Test (description = "Test checkout page step 2.", dependsOnMethods = "testCheckoutStep1")
     public void testCheckoutStep2 () {
-        swipeUp ();
-        swipeUp ();
         tapOn (checkoutPage ().getFinish ());
 
         verifyTextOf (checkoutPage ().getCompleteHeader ()).isEqualTo ("THANK YOU FOR YOU ORDER");
@@ -165,7 +162,7 @@ public class SauceDemoTest {
      */
     @Test (description = "Test Swipe up and down action", dependsOnMethods = "testLogin")
     public void testSwipe () {
-        swipeUp ();
-        swipeDown ();
+        swipe ().up ();
+        swipe ().down ();
     }
 }

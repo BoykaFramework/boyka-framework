@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.DriverActions.viewportSize;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.requireNonNull;
 import static java.time.Duration.ZERO;
 import static java.time.Duration.ofMillis;
@@ -49,8 +50,6 @@ final class FingerGestureBuilder {
 
     @Builder.Default
     private       SwipeDirection      direction = DOWN;
-    @Builder.Default
-    private       int                 distance  = 20;
     private       WebElement          element;
     @Builder.Default
     private       int                 index     = 0;
@@ -103,10 +102,14 @@ final class FingerGestureBuilder {
     }
 
     private Point getSwipeEndPosition () {
+        final var distance = getSession ().getMobileSetting ()
+            .getDevice ()
+            .getSwipe ()
+            .getDistance ();
         final var location = this.element != null ? this.element.getLocation () : new Point (0, 0);
         final var start = getSwipeStartPosition ();
-        final var x = start.getX () + location.getX () + ((start.getX () * this.direction.getX () * this.distance) / 100);
-        final var y = start.getY () + location.getY () + ((start.getY () * this.direction.getY () * this.distance) / 100);
+        final var x = start.getX () + location.getX () + ((start.getX () * this.direction.getX () * distance) / 100);
+        final var y = start.getY () + location.getY () + ((start.getY () * this.direction.getY () * distance) / 100);
         return new Point (x, y);
     }
 
