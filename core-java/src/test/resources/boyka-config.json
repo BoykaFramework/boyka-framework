@@ -1,4 +1,9 @@
 {
+  "logs": {
+    "exclude_logs": [
+      "bugreport"
+    ]
+  },
   "ui": {
     "timeout": {
       "implicit_wait": 10,
@@ -150,12 +155,7 @@
           "session_override": true,
           "allow_insecure": [
             "get_server_logs"
-          ],
-          "logs": {
-            "exclude_logs": [
-              "bugreport"
-            ]
-          }
+          ]
         },
         "device": {
           "os": "ANDROID",
@@ -187,12 +187,7 @@
           "host": "hub-cloud.browserstack.com",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
-          "logs": {
-            "exclude_logs": [
-              "bugreport"
-            ]
-          }
+          "base_path": "/wd/hub"
         },
         "device": {
           "os": "ANDROID",
@@ -227,12 +222,7 @@
           "host": "mobile-hub.lambdatest.com",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
-          "base_path": "/wd/hub",
-          "logs": {
-            "exclude_logs": [
-              "bugreport"
-            ]
-          }
+          "base_path": "/wd/hub"
         },
         "device": {
           "automation": "UI_AUTOMATOR",
@@ -270,10 +260,6 @@
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,
-      "logging": {
-        "request": true,
-        "response": true
-      },
       "schema_path": "schema/"
     }
   }

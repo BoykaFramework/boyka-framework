@@ -22,6 +22,7 @@ import static com.github.wasiqb.boyka.enums.Message.CONTENT_TYPE_NOT_SET;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_EXECUTING_REQUEST;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_REQUEST_BODY;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_RESPONSE_BODY;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
@@ -189,7 +190,8 @@ public final class ApiManager {
 
     private void logRequest () {
         LOGGER.traceEntry ();
-        if (this.apiSetting.getLogging ()
+        if (getSession ().getSetting ()
+            .getLogs ()
             .isRequest ()) {
             final var req = this.response.getRequest ();
             LOGGER.info ("Request URL: {}", req.getPath ());
@@ -208,7 +210,8 @@ public final class ApiManager {
 
     private void logResponse () {
         LOGGER.traceEntry ();
-        if (this.apiSetting.getLogging ()
+        if (getSession ().getSetting ()
+            .getLogs ()
             .isResponse ()) {
             LOGGER.info ("Status Code: {}", this.response.getStatusCode ());
             if (isNotEmpty (this.response.getBody ())) {

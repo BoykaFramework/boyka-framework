@@ -21,7 +21,7 @@
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_android"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo.android"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
         </packages>
     </test>
 </suite>

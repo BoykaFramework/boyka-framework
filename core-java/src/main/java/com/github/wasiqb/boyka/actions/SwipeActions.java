@@ -3,7 +3,10 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGestures;
 import static com.github.wasiqb.boyka.actions.ElementActions.isDisplayed;
+import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
+import static com.github.wasiqb.boyka.enums.SwipeDirection.LEFT;
+import static com.github.wasiqb.boyka.enums.SwipeDirection.RIGHT;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.UP;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
@@ -12,7 +15,6 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import com.github.wasiqb.boyka.config.ui.mobile.device.SwipeSetting;
-import com.github.wasiqb.boyka.enums.Message;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -57,6 +59,34 @@ public final class SwipeActions {
     }
 
     /**
+     * Swipe left on the Mobile screen starting from center of the screen.
+     */
+    public void left () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Swiping up on Mobile devices.");
+        final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
+            .direction (LEFT)
+            .build ()
+            .swipe (), null);
+        performMobileGestures (singletonList (swipeUpSequence));
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Swipe right on the Mobile screen starting from center of the screen.
+     */
+    public void right () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Swiping up on Mobile devices.");
+        final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
+            .direction (RIGHT)
+            .build ()
+            .swipe (), null);
+        performMobileGestures (singletonList (swipeUpSequence));
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Swipe up on the Mobile screen starting from center of the screen.
      */
     public void up () {
@@ -82,7 +112,7 @@ public final class SwipeActions {
             up ();
         }
         if (!isDisplayed (locator)) {
-            throwError (Message.ELEMENT_NOT_FOUND, locator, getSession ().getPlatformType ());
+            throwError (ELEMENT_NOT_FOUND, locator, getSession ().getPlatformType ());
         }
     }
 }

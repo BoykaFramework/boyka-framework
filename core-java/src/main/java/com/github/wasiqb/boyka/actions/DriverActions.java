@@ -269,8 +269,7 @@ public final class DriverActions {
     public static void saveLogs () {
         LOGGER.traceEntry ();
         performDriverAction (d -> {
-            final var logSetting = getSession ().getMobileSetting ()
-                .getServer ()
+            final var logSetting = getSession ().getSetting ()
                 .getLogs ();
             if (!logSetting.isEnable ()) {
                 LOGGER.warn ("Cannot save different logs to file, logging is disabled...");

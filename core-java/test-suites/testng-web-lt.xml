@@ -21,7 +21,7 @@
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_lambda_test_chrome"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo.web"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
             <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
         </packages>
     </test>

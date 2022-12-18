@@ -73,7 +73,7 @@ public class HomePage {
         .name ("Menu Button")
         .build ();
     private final Locator productParent       = Locator.buildLocator ()
-        .web (cssSelector ("div.inventory_item"))
+        .web (cssSelector ("div#inventory_container"))
         .android (accessibilityId ("test-PRODUCTS"))
         .name ("Product Parent")
         .build ();

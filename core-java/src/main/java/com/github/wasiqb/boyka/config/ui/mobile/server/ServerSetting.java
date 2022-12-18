@@ -41,7 +41,6 @@ public class ServerSetting {
     private CloudProviders cloud           = NONE;
     private boolean        external;
     private String         host;
-    private LogSetting     logs            = new LogSetting ();
     private String         nodePath;
     private String         password;
     private int            port;
