@@ -87,6 +87,24 @@ public final class SwipeActions {
     }
 
     /**
+     * Swipe up until element is displayed.
+     *
+     * @param locator Element locator
+     */
+    public void till (final Locator locator) {
+        LOGGER.traceEntry ();
+        final var maxSwipe = this.setting.getMaxSwipeUntilFound ();
+        var swipeCounts = 0;
+        while (!isDisplayed (locator) && swipeCounts++ < maxSwipe) {
+            up ();
+        }
+        if (!isDisplayed (locator)) {
+            throwError (ELEMENT_NOT_FOUND, locator, getSession ().getPlatformType ());
+        }
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Swipe up on the Mobile screen starting from center of the screen.
      */
     public void up () {
@@ -98,21 +116,5 @@ public final class SwipeActions {
             .swipe (), null);
         performMobileGestures (singletonList (swipeUpSequence));
         LOGGER.traceExit ();
-    }
-
-    /**
-     * Swipe up until element is displayed.
-     *
-     * @param locator Element locator
-     */
-    public void upTill (final Locator locator) {
-        final var maxSwipe = this.setting.getMaxSwipeUntilFound ();
-        var swipeCounts = 0;
-        while (!isDisplayed (locator) && swipeCounts++ < maxSwipe) {
-            up ();
-        }
-        if (!isDisplayed (locator)) {
-            throwError (ELEMENT_NOT_FOUND, locator, getSession ().getPlatformType ());
-        }
     }
 }

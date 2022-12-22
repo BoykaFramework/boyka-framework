@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config;
+package com.github.wasiqb.boyka.config.ui;
 
 import static com.github.wasiqb.boyka.enums.LogLevel.DEBUG;
 
@@ -31,10 +31,8 @@ import lombok.Data;
  */
 @Data
 public class LogSetting {
-    private boolean      enable   = true;
+    private boolean      enable = true;
     private List<String> excludeLogs;
-    private LogLevel     level    = DEBUG;
-    private String       path     = "./logs";
-    private boolean      request  = true;
-    private boolean      response = true;
+    private LogLevel     level  = DEBUG;
+    private String       path   = "./logs";
 }

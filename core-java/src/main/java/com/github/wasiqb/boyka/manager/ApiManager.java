@@ -44,6 +44,7 @@ import java.util.Map;
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
+import com.github.wasiqb.boyka.config.api.LogSetting;
 import com.github.wasiqb.boyka.enums.ContentType;
 import com.github.wasiqb.boyka.enums.RequestMethod;
 import com.github.wasiqb.boyka.utils.JsonUtil;
@@ -91,6 +92,7 @@ public final class ApiManager {
 
     private final ApiSetting          apiSetting;
     private final OkHttpClient        client;
+    private final LogSetting          logSetting;
     private       MediaType           mediaType;
     private final Map<String, String> pathParams;
     private final Request.Builder     request;
@@ -105,6 +107,8 @@ public final class ApiManager {
             .readTimeout (ofSeconds (this.apiSetting.getReadTimeout ()))
             .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()))
             .build ();
+        this.logSetting = getSession ().getApiSetting ()
+            .getLogging ();
         this.request = new Request.Builder ();
         LOGGER.traceExit ();
     }
@@ -190,9 +194,7 @@ public final class ApiManager {
 
     private void logRequest () {
         LOGGER.traceEntry ();
-        if (getSession ().getSetting ()
-            .getLogs ()
-            .isRequest ()) {
+        if (this.logSetting.isEnable () && this.logSetting.isRequest ()) {
             final var req = this.response.getRequest ();
             LOGGER.info ("Request URL: {}", req.getPath ());
             req.getHeaders ()
@@ -210,9 +212,7 @@ public final class ApiManager {
 
     private void logResponse () {
         LOGGER.traceEntry ();
-        if (getSession ().getSetting ()
-            .getLogs ()
-            .isResponse ()) {
+        if (this.logSetting.isEnable () && this.logSetting.isResponse ()) {
             LOGGER.info ("Status Code: {}", this.response.getStatusCode ());
             if (isNotEmpty (this.response.getBody ())) {
                 LOGGER.info ("Status Message: {}", this.response.getStatusMessage ());

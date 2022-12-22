@@ -136,12 +136,14 @@ public final class ElementActions {
      * @param locator Locator of the element
      */
     public static void tapOn (final Locator locator) {
-        swipe ().upTill (locator);
+        LOGGER.traceEntry ();
+        swipe ().till (locator);
         final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
             .element (element)
             .build ()
             .tapOn (), locator, null);
         performMobileGestures (singletonList (sequences));
+        LOGGER.traceExit ();
     }
 
     /**

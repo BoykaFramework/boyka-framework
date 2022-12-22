@@ -229,7 +229,8 @@ public class ServiceManager {
 
     private void setLogArguments () {
         final var logs = getSession ().getSetting ()
-            .getLogs ();
+            .getUi ()
+            .getLogging ();
         if (!logs.isEnable ()) {
             return;
         }
@@ -242,7 +243,8 @@ public class ServiceManager {
 
     private void setLogFile () {
         final var logFolderPath = getSession ().getSetting ()
-            .getLogs ()
+            .getUi ()
+            .getLogging ()
             .getPath ();
         if (logFolderPath != null) {
             final var filePath = new File (format ("{0}/server-{1}.log", logFolderPath, currentThread ().getId ()));

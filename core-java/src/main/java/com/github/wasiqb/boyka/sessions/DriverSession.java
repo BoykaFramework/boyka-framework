@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
+import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
 import com.github.wasiqb.boyka.enums.PlatformType;
@@ -67,6 +68,15 @@ public class DriverSession<D extends WebDriver> {
      */
     public void clearSharedData () {
         this.sharedData.clear ();
+    }
+
+    /**
+     * Gets API specific settings
+     *
+     * @return
+     */
+    public ApiSetting getApiSetting () {
+        return this.setting.getApiSetting (this.configKey);
     }
 
     /**

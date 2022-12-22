@@ -1,9 +1,4 @@
 {
-  "logs": {
-    "exclude_logs": [
-      "bugreport"
-    ]
-  },
   "ui": {
     "timeout": {
       "implicit_wait": 10,
@@ -11,6 +6,11 @@
       "page_load_timeout": 30,
       "script_timeout": 10,
       "highlight_delay": 100
+    },
+    "logging": {
+      "exclude_logs": [
+        "bugreport"
+      ]
     },
     "screenshot": {
       "enabled": true,
@@ -260,7 +260,11 @@
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,
-      "schema_path": "schema/"
+      "schema_path": "schema/",
+      "logging": {
+        "request": true,
+        "response": true
+      }
     }
   }
 }
