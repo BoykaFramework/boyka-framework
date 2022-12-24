@@ -79,6 +79,7 @@ public final class ApiManager {
     public static ApiResponse execute (final ApiRequest request) {
         LOGGER.traceEntry ();
         LOGGER.info ("Executing API request: {}", request);
+        getSession ().setConfigKey (request.getConfigKey ());
         final var manager = new ApiManager (request.getConfigKey ());
         requireNonNullElse (request.getHeaders (), new HashMap<String, String> ()).forEach (manager::addHeader);
         requireNonNullElse (request.getPathParams (), new HashMap<String, String> ()).forEach (manager::pathParam);

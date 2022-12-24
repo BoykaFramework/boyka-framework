@@ -73,7 +73,7 @@ public class DriverSession<D extends WebDriver> {
     /**
      * Gets API specific settings
      *
-     * @return
+     * @return {@link ApiSetting} instance
      */
     public ApiSetting getApiSetting () {
         return this.setting.getApiSetting (this.configKey);
