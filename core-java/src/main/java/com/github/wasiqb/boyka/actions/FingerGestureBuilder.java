@@ -73,7 +73,7 @@ final class FingerGestureBuilder {
 
     Sequence tapOn () {
         return composeSequence ((finger, steps) -> {
-            final var start = getElementCenter ();
+            final var start = getElementCenter (this.element);
             steps.addAction (finger.createPointerMove (this.stepWait, this.viewport, start.getX (), start.getY ()));
             steps.addAction (finger.createPointerDown (LEFT.asArg ()));
             steps.addAction (finger.createPointerUp (LEFT.asArg ()));
@@ -87,9 +87,9 @@ final class FingerGestureBuilder {
         return steps.apply (finger, sequence);
     }
 
-    private Point getElementCenter () {
-        final var location = requireNonNull (this.element, ELEMENT_CANNOT_BE_NULL).getLocation ();
-        final var size = this.element.getSize ();
+    private Point getElementCenter (final WebElement webElement) {
+        final var location = requireNonNull (webElement, ELEMENT_CANNOT_BE_NULL).getLocation ();
+        final var size = webElement.getSize ();
         final var x = location.getX () + (size.getWidth () / 2);
         final var y = location.getY () + (size.getHeight () / 2);
         return new Point (x, y);
@@ -102,6 +102,9 @@ final class FingerGestureBuilder {
     }
 
     private Point getSwipeEndPosition () {
+        if (this.targetElement != null) {
+            return getElementCenter (this.targetElement);
+        }
         final var distance = getSession ().getMobileSetting ()
             .getDevice ()
             .getSwipe ()
@@ -114,10 +117,9 @@ final class FingerGestureBuilder {
     }
 
     private Point getSwipeStartPosition () {
-        var start = getScreenCenter ();
         if (this.element != null) {
-            start = getElementCenter ();
+            return getElementCenter (this.element);
         }
-        return start;
+        return getScreenCenter ();
     }
 }

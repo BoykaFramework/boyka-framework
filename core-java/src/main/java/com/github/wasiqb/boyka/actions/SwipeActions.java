@@ -3,6 +3,7 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGestures;
 import static com.github.wasiqb.boyka.actions.ElementActions.isDisplayed;
+import static com.github.wasiqb.boyka.actions.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.LEFT;
@@ -55,6 +56,24 @@ public final class SwipeActions {
             .build ()
             .swipe (), null);
         performMobileGestures (singletonList (swipeUpSequence));
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Drag one element to another element.
+     *
+     * @param source Source element
+     * @param destination Target element
+     */
+    public void dragTo (final Locator source, final Locator destination) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Dragging [{}] to [{}] on Mobile devices.", source.getName (), destination.getName ());
+        final var dragSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
+            .element (find (source))
+            .targetElement (find (destination))
+            .build ()
+            .swipe (), null);
+        performMobileGestures (singletonList (dragSequence));
         LOGGER.traceExit ();
     }
 

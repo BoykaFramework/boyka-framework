@@ -4,6 +4,8 @@ import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
 import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.google.common.truth.Truth.assertThat;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
 import com.github.wasiqb.boyka.testng.ui.saucedemo.actions.SauceDemoActions;
@@ -13,6 +15,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+/**
+ * Sauce Demo Test class
+ *
+ * @author Wasiq Bhamla
+ * @since 18-Dec-2022
+ */
 public class SauceDemoTest {
     private SauceDemoActions sauceDemo;
 
@@ -75,6 +83,10 @@ public class SauceDemoTest {
      */
     @Test (description = "Test login functionality")
     public void testLogin () {
+        if (getSession ().getPlatformType () != PlatformType.WEB) {
+            assertThat (getSession ().getServiceManager ()
+                .isRunning ()).isTrue ();
+        }
         this.sauceDemo.verifyLogin ("standard_user", "secret_sauce");
     }
 

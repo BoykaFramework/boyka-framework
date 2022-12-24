@@ -146,7 +146,7 @@
       }
     },
     "mobile": {
-      "test_local_android": {
+      "test_local_sauce_android": {
         "server": {
           "protocol": "HTTP",
           "host": "127.0.0.1",
@@ -173,6 +173,40 @@
           "application": {
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "avd": {
+            "headless": true
+          }
+        }
+      },
+      "test_local_wdio_android": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "127.0.0.1",
+          "port": 4723,
+          "base_path": "/wd/hub",
+          "session_override": true,
+          "allow_insecure": [
+            "get_server_logs"
+          ]
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11",
+          "name": "Pixel_6_Pro",
+          "automation": "UI_AUTOMATOR",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
+          "application": {
+            "path": "/apps/android/wdio-demo.apk",
+            "wait_activity": "com.wdiodemoapp.MainActivity",
             "install_timeout": 180
           },
           "avd": {
