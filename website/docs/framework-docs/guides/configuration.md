@@ -29,6 +29,11 @@ The file name and it's location cannot be modified.
       "script_timeout": 10,
       "highlight_delay": 100
     },
+    "logging": {
+      "exclude_logs": [
+        "bugreport"
+      ]
+    },
     "screenshot": {
       "enabled": true,
       "path": "./screenshots",
@@ -76,6 +81,77 @@ The file name and it's location cannot be modified.
           "platform": "MAC"
         }
       }
+    },
+    "mobile": {
+      "test_local_sauce_android": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "127.0.0.1",
+          "port": 4723,
+          "base_path": "/wd/hub",
+          "session_override": true,
+          "allow_insecure": [
+            "get_server_logs"
+          ]
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11",
+          "name": "Pixel_6_Pro",
+          "automation": "UI_AUTOMATOR",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
+          "application": {
+            "path": "/apps/android/saucedemo.apk",
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "avd": {
+            "headless": true
+          }
+        }
+      },
+      "test_bs_android": {
+        "server": {
+          "cloud": "BROWSER_STACK",
+          "protocol": "HTTPS",
+          "host": "hub-cloud.browserstack.com",
+          "user_name": "${env:BS_USER}",
+          "password": "${env:BS_KEY}",
+          "base_path": "/wd/hub"
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11.0",
+          "name": "Google Pixel 5",
+          "automation": "UI_AUTOMATOR",
+          "type": "CLOUD",
+          "ignore_unimportant_views": true,
+          "application": {
+            "path": "AndroidApp",
+            "external": true,
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "capabilities": {
+            "projectName": "BrowserStack Android Project",
+            "buildName": "Test BrowserStack Build",
+            "sessionName": "Test BrowserStack Session",
+            "appiumVersion": "2.0.0",
+            "deviceLogs": true,
+            "networkLogs": true,
+            "debug": true,
+            "video": true,
+            "appiumLogs": true
+          }
+        }
+      }
     }
   },
   "api": {
@@ -107,6 +183,7 @@ The file name and it's location cannot be modified.
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | `timeout` | Contains timeout configuration. See [Timeout Config below](#timeout-config). | `TimeoutSetting` |  |
+| `logging` | Contains logging specific configuration. See [Logging Config below](#ui-logging-config) | `LoggingSetting` | |
 | `screenshot` | Contains screenshot configuration. See [Screenshot Config below](#screenshot-config). | `ScreenshotSetting` |  |
 | `web` | Contains web platform configuration. See [Web Config below](#web-config). | `Map<String, WebSetting>` |  |
 | `mobile` | Contains Mobile platform configuration. See [Mobile Config below](#mobile-config). | `object` |  |
@@ -125,7 +202,16 @@ See the example in [sample configuration file](#config-sample).
 | `explicit_wait` | Explicit wait for finding the elements on UI (in seconds). | `number` | `1` |
 | `page_load_timeout` | Page load timeout for waiting for page to load (in seconds). | `number` | `30` |
 | `script_timeout` | Script timeout for waiting for page to load (in seconds). | `number` | `30` |
-| `highlight_delay` | Delay for element getting highlighted | `long` | `100`
+| `highlight_delay` | Delay for element getting highlighted | `long` | `100` |
+
+#### UI Logging Configuration {#ui-logging-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `enable` | Enable / Disable logging for UI logging | `boolean` | `true` |
+| `exclude_logs` | Exclude any specific logs which is supported by Drivers | `null` |
+| `level` | Log a specific type of logging | [`LogLevel`](#log-level) | `DEBUG` |
+| `path` | Path where the logs will be saved | `string` | `{root-folder}/logs` |
 
 #### Screenshot Configuration {#screenshot-config}
 
@@ -200,7 +286,6 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `user_name` | User name for cloud service provider. | `string` | `null` |
 | `password` | Password / Access key for cloud service provider. | `string` | `null` |
 | `android` | Android specific server settings | [`AndroidServerSetting`](#android-server-config) | |
-| `logs` | Logging specific server settings | [`LogSetting`](#log-config) | |
 | `allow_insecure` | Allow list of features in server considered as insecure | `List<string>` | |
 | `timeout` | Timeout in seconds for server to start | `int` | `30` |
 
@@ -211,14 +296,6 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `bootstrap_port` | Bootstrap port | `int` | |
 | `reboot` | Should emulator be rebooted? | `boolean` | `false` |
 | `suppress_adb_kill` | Should kill ADB after session completion? | `boolean` | `true` |
-
-###### Server Logs Configuration {#log-config}
-
-| Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
-| `enable` | Should the logging be saved? | `boolean` | `true` |
-| `level` | Log level which server will capture | [`LogLevel`](#log-level) | `DEBUG` |
-| `path` | Log folder path | `string` | `{root-folder}/logs` |
 
 ##### Mobile Device Configuration {#device-config}
 
@@ -240,6 +317,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `ignore_unimportant_views` | Determines if unimportant views needs to be ignored | `boolean` | `true` |
 | `server_install_timeout` | Timeout in seconds to wait for Appium server app to get installed | `int` | `30` |
 | `server_launch_timeout` | Timeout in seconds to wait for Appium server app to start | `int` | `30` |
+| `swipe` | Swipe specific setting | [SwipeSetting](#swipe-setting) | |
 
 ###### Device Application Configurations {#app-config}
 
@@ -260,6 +338,13 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `launch_timeout` | Timeout in seconds to wait until AVD launches | `int` | `60` |
 | `headless` | Determine if required to run in headless mode | `boolean` | `false` |
 | `ready_timeout` | Timeout in seconds to wait until AVD is ready | `int` | `60` |
+
+##### Swipe Configuration {#swipe-setting}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `distance` | Amount of distance to swipe from the center of the screen to the edge of the screen or element | `int` | `25` |
+| `max_swipe_until_found` | Maximum amount of time to swipe until an element is found on the screen | `int` | `5` |
 
 ### API Configuration {#api-config}
 

@@ -33,7 +33,7 @@ public final class SwipeActions {
      *
      * @return instance of {@link SwipeActions}
      */
-    public static SwipeActions swipeActions () {
+    static SwipeActions swipeActions () {
         return INSTANCE;
     }
 
@@ -82,7 +82,7 @@ public final class SwipeActions {
      */
     public void left () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Swiping up on Mobile devices.");
+        LOGGER.info ("Swiping left on Mobile devices.");
         final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (LEFT)
             .build ()
@@ -96,7 +96,7 @@ public final class SwipeActions {
      */
     public void right () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Swiping up on Mobile devices.");
+        LOGGER.info ("Swiping right on Mobile devices.");
         final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (RIGHT)
             .build ()

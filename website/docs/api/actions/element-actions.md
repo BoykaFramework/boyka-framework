@@ -73,6 +73,16 @@ import static com.github.wasiqb.boyka.actions.ElementActions.submit;
 submit (locator);
 ```
 
+## `tapOn (locator)` {#tapOn}
+
+This method will tap on element on the Mobile screen using W3C actions.
+
+```java
+import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
+. . .
+tapOn (locator);
+```
+
 ## `textOf (locator)` {#textOf}
 
 This method is used to get the text of the given element.

@@ -165,6 +165,16 @@ import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
 saveLogs ();
 ```
 
+## `swipe`
+
+This method will return Swipe class instance which can be used to perform swipe gesture
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
+. . .
+swipe ().up ();
+```
+
 ## `switchToFrame (name)` {#switch-to-frame-name}
 
 This method will switch to the given frame by it's name.
@@ -248,6 +258,17 @@ This method will get the title of the browser window.
 import static com.github.wasiqb.boyka.actions.DriverActions.title;
 . . .
 System.out.println (title ());
+```
+
+## `viewportSize` {#viewport-size}
+
+This method will the size dimension of the screen viewport for Mobile screen or Browser window.
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.viewportSize;
+import org.openqa.selenium.Dimension;
+. . .
+Dimension size = viewportSize ();
 ```
 
 ## `waitUntil` {#wait-until}

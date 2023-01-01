@@ -39,7 +39,7 @@ public class NavigateActions {
      *
      * @return Immutable instance
      */
-    public static NavigateActions navigateActions () {
+    static NavigateActions navigateActions () {
         return INSTANCE;
     }
 
