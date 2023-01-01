@@ -28,7 +28,7 @@
 
     <properties>
         <selenium-webdriver.version>4.7.2</selenium-webdriver.version>
-        <testng.version>7.7.0</testng.version>
+        <testng.version>7.7.1</testng.version>
         <appium-java-client.version>8.3.0</appium-java-client.version>
         <webdrivermanager.version>5.3.1</webdrivermanager.version>
         <okhttp.version>4.10.0</okhttp.version>
