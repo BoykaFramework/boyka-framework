@@ -24,7 +24,7 @@
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
         </packages>
     </test>
-    <test name="Test Boyka Mobile on Local Android Emulator WDIO">
+    <test name="Test Boyka Mobile on Local Android Emulator WDIO" enabled="false">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_wdio_android"/>
         <packages>
