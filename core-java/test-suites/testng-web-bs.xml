@@ -16,13 +16,13 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Web BrowserStack Suite" verbose="2" parallel="classes">
+<suite name="Boyka Web BrowserStack Suite" verbose="2">
     <test name="Test Boyka web on BrowserStack">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_browserstack_chrome"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo.web"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
         </packages>
     </test>
 </suite>

@@ -22,6 +22,7 @@ import static com.github.wasiqb.boyka.enums.Message.CONTENT_TYPE_NOT_SET;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_EXECUTING_REQUEST;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_REQUEST_BODY;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_RESPONSE_BODY;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
@@ -43,6 +44,7 @@ import java.util.Map;
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
+import com.github.wasiqb.boyka.config.api.LogSetting;
 import com.github.wasiqb.boyka.enums.ContentType;
 import com.github.wasiqb.boyka.enums.RequestMethod;
 import com.github.wasiqb.boyka.utils.JsonUtil;
@@ -77,6 +79,7 @@ public final class ApiManager {
     public static ApiResponse execute (final ApiRequest request) {
         LOGGER.traceEntry ();
         LOGGER.info ("Executing API request: {}", request);
+        getSession ().setConfigKey (request.getConfigKey ());
         final var manager = new ApiManager (request.getConfigKey ());
         requireNonNullElse (request.getHeaders (), new HashMap<String, String> ()).forEach (manager::addHeader);
         requireNonNullElse (request.getPathParams (), new HashMap<String, String> ()).forEach (manager::pathParam);
@@ -90,6 +93,7 @@ public final class ApiManager {
 
     private final ApiSetting          apiSetting;
     private final OkHttpClient        client;
+    private final LogSetting          logSetting;
     private       MediaType           mediaType;
     private final Map<String, String> pathParams;
     private final Request.Builder     request;
@@ -104,6 +108,8 @@ public final class ApiManager {
             .readTimeout (ofSeconds (this.apiSetting.getReadTimeout ()))
             .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()))
             .build ();
+        this.logSetting = getSession ().getApiSetting ()
+            .getLogging ();
         this.request = new Request.Builder ();
         LOGGER.traceExit ();
     }
@@ -189,8 +195,7 @@ public final class ApiManager {
 
     private void logRequest () {
         LOGGER.traceEntry ();
-        if (this.apiSetting.getLogging ()
-            .isRequest ()) {
+        if (this.logSetting.isEnable () && this.logSetting.isRequest ()) {
             final var req = this.response.getRequest ();
             LOGGER.info ("Request URL: {}", req.getPath ());
             req.getHeaders ()
@@ -208,8 +213,7 @@ public final class ApiManager {
 
     private void logResponse () {
         LOGGER.traceEntry ();
-        if (this.apiSetting.getLogging ()
-            .isResponse ()) {
+        if (this.logSetting.isEnable () && this.logSetting.isResponse ()) {
             LOGGER.info ("Status Code: {}", this.response.getStatusCode ());
             if (isNotEmpty (this.response.getBody ())) {
                 LOGGER.info ("Status Message: {}", this.response.getStatusMessage ());

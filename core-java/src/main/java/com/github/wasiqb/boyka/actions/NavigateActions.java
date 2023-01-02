@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import org.apache.logging.log4j.Logger;
@@ -38,7 +39,7 @@ public class NavigateActions {
      *
      * @return Immutable instance
      */
-    public static NavigateActions navigateActions () {
+    static NavigateActions navigateActions () {
         return INSTANCE;
     }
 
@@ -92,6 +93,6 @@ public class NavigateActions {
     public String url () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting url of the browser");
-        return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl));
+        return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl, EMPTY));
     }
 }

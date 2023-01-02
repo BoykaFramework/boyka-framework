@@ -17,11 +17,14 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
-import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
+import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -59,7 +62,11 @@ public final class MouseActions {
     public static void clickOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Clicking on element: {}", locator.getName ());
-        performElementAction (WebElement::click, locator);
+        if (getSession ().getPlatformType () == PlatformType.WEB) {
+            performElementAction (WebElement::click, locator);
+        } else {
+            tapOn (locator);
+        }
         LOGGER.traceExit ();
     }
 
@@ -90,7 +97,7 @@ public final class MouseActions {
         LOGGER.info ("Drag and Drop on element: {} , {}", source.getName (), destination.getName ());
         performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
-            actions.dragAndDrop (element, find (destination, VISIBLE))
+            actions.dragAndDrop (element, find (destination, CLICKABLE))
                 .perform ();
         }, source);
         LOGGER.traceExit ();

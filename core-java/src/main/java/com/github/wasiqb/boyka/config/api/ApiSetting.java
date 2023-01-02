@@ -26,12 +26,12 @@ import lombok.Data;
  */
 @Data
 public class ApiSetting {
-    private String         basePath          = "";
-    private String         baseUri;
-    private int            connectionTimeout = 5;
-    private LoggingSetting logging           = new LoggingSetting ();
-    private int            port;
-    private int            readTimeout       = 5;
-    private String         schemaPath        = "";
-    private int            writeTimeout      = 5;
+    private String     basePath          = "";
+    private String     baseUri;
+    private int        connectionTimeout = 5;
+    private LogSetting logging           = new LogSetting ();
+    private int        port;
+    private int        readTimeout       = 5;
+    private String     schemaPath        = "";
+    private int        writeTimeout      = 5;
 }

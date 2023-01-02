@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.text.MessageFormat.format;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -47,66 +48,75 @@ final class ElementFinder {
      * Find single element on UI.
      *
      * @param locator {@link Locator} to find element
-     * @param waitStrategy {@link WaitStrategy} to wait for element
      *
      * @return {@link WebElement}
      */
     public static WebElement find (final Locator locator, final WaitStrategy waitStrategy) {
         LOGGER.traceEntry ();
+        final var elements = finds (locator, waitStrategy);
+        if (elements.isEmpty ()) {
+            throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
+        }
         if (locator.getFilter () != null) {
-            return finds (locator, waitStrategy).stream ()
+            return elements.stream ()
                 .filter (locator.getFilter ())
                 .findFirst ()
                 .orElseThrow (() -> new FrameworkError (format (ELEMENT_NOT_FOUND.getMessageText (), locator)));
         }
-        return finds (locator, waitStrategy).get (locator.getIndex ());
+        return elements.get (locator.getIndex ());
     }
 
     /**
      * Find all elements on UI.
      *
      * @param locator {@link Locator} to find elements
-     * @param waitStrategy {@link WaitStrategy} to wait for element
      *
      * @return {@link List} of {@link WebElement}
      */
     public static List<WebElement> finds (final Locator locator, final WaitStrategy waitStrategy) {
         LOGGER.traceEntry ();
         final var driver = getSession ().getDriver ();
-        final List<WebElement> element;
+        final List<WebElement> elements;
         if (locator.getParent () != null) {
             final var parent = find (locator.getParent (), waitStrategy);
-            element = finds (driver, parent, locator, waitStrategy);
+            elements = finds (driver, parent, locator);
         } else {
-            element = finds (driver, locator, waitStrategy);
+            waitForElement (locator, waitStrategy);
+            elements = finds (driver, locator);
         }
-        return LOGGER.traceExit (element);
+        return LOGGER.traceExit (elements);
     }
 
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final WebElement parent,
-        final Locator locator, final WaitStrategy waitStrategy) {
+        final Locator locator) {
         LOGGER.traceEntry ();
-        final var wait = getSession ().getWait ();
+        final var platformLocator = locator.getLocator ();
+        if (platformLocator == null) {
+            throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
+        }
+        return LOGGER.traceExit (
+            parent != null ? parent.findElements (locator.getLocator ()) : driver.findElements (locator.getLocator ()));
+    }
+
+    private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator) {
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (finds (driver, null, locator));
+    }
+
+    private static void waitForElement (final Locator locator, final WaitStrategy waitStrategy) {
         try {
+            final var wait = getSession ().getWait ();
             switch (waitStrategy) {
                 case CLICKABLE:
-                    wait.until (elementToBeClickable (locator.getWeb ()));
+                    wait.until (elementToBeClickable (locator.getLocator ()));
                     break;
                 case VISIBLE:
                 default:
-                    wait.until (visibilityOfElementLocated (locator.getWeb ()));
+                    wait.until (visibilityOfElementLocated (locator.getLocator ()));
             }
         } catch (final TimeoutException e) {
-            handleAndThrow (ELEMENT_NOT_FOUND, e, locator.getName ());
+            handleAndThrow (ELEMENT_NOT_FOUND, e, locator.getName (), getSession ().getPlatformType ());
         }
-        return LOGGER.traceExit (
-            parent != null ? parent.findElements (locator.getWeb ()) : driver.findElements (locator.getWeb ()));
-    }
-
-    private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator,
-        final WaitStrategy waitStrategy) {
-        LOGGER.traceEntry ();
-        return LOGGER.traceExit (finds (driver, null, locator, waitStrategy));
     }
 
     private ElementFinder () {

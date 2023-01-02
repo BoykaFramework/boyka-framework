@@ -16,37 +16,37 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Web Local Suite" verbose="2" parallel="classes">
+<suite name="Boyka Web Local Suite" verbose="2">
     <test name="Test Boyka web on Local Chrome">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
         </packages>
     </test>
     <test name="Test Boyka web on Local Firefox" enabled="false">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_firefox"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
         </packages>
     </test>
     <test name="Test Boyka web on Local Edge">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_edge"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
         </packages>
     </test>
     <test name="Test Boyka web on Local Safari" enabled="false">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_safari"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.web.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.web.theinternet"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
         </packages>
     </test>
 </suite>

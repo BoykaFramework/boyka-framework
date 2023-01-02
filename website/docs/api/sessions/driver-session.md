@@ -14,6 +14,16 @@ import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 getSession ().clearSharedData ();
 ```
 
+## `getApiSetting` {#get-api-setting}
+
+This method gets the API settings for the current session.
+
+```java
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+. . .
+var apiSetting = getSession ().getApiSetting ();
+```
+
 ## `getMobileSetting` {#get-mobile-setting}
 
 This method gets the Mobile settings for the current session.

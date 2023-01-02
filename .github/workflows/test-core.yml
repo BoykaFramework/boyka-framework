@@ -91,7 +91,7 @@ jobs:
         if: github.event_name == 'push'
         with:
           avd-name: Nexus_6
-          api-level: 29
+          api-level: 30
           target: google_apis
           arch: x86
           profile: Nexus 6
@@ -105,7 +105,7 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           avd-name: Nexus_6
-          api-level: 29
+          api-level: 30
           target: google_apis
           arch: x86
           profile: Nexus 6

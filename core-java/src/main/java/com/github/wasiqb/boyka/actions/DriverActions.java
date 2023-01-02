@@ -18,6 +18,8 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.actions.NavigateActions.navigateActions;
+import static com.github.wasiqb.boyka.actions.SwipeActions.swipeActions;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_CREATING_LOGS;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_WRITING_LOGS;
@@ -26,7 +28,9 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.lang.System.getProperty;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
+import static java.util.Collections.emptyList;
 import static org.apache.commons.io.FileUtils.copyFile;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.OutputType.FILE;
 
@@ -44,6 +48,7 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -73,7 +78,7 @@ public final class DriverActions {
             final var message = alert.getText ();
             alert.accept ();
             return message;
-        });
+        }, EMPTY);
     }
 
     /**
@@ -92,7 +97,7 @@ public final class DriverActions {
             alert.sendKeys (text);
             alert.accept ();
             return message;
-        });
+        }, EMPTY);
     }
 
     /**
@@ -116,7 +121,7 @@ public final class DriverActions {
     public static Cookie cookie (final String name) {
         LOGGER.traceEntry ();
         return getDriverAttribute (driver -> driver.manage ()
-            .getCookieNamed (name));
+            .getCookieNamed (name), null);
     }
 
     /**
@@ -130,7 +135,7 @@ public final class DriverActions {
             .getCookies ()
             .stream ()
             .map (Cookie::getName)
-            .collect (Collectors.toList ()));
+            .collect (Collectors.toList ()), emptyList ());
     }
 
     /**
@@ -140,7 +145,7 @@ public final class DriverActions {
      */
     public static String currentWindowHandle () {
         LOGGER.traceEntry ();
-        final String handle = getDriverAttribute (WebDriver::getWindowHandle);
+        final String handle = getDriverAttribute (WebDriver::getWindowHandle, EMPTY);
         LOGGER.traceExit ();
         return handle;
     }
@@ -180,7 +185,7 @@ public final class DriverActions {
             final var message = alert.getText ();
             alert.dismiss ();
             return message;
-        });
+        }, EMPTY);
     }
 
     /**
@@ -196,7 +201,7 @@ public final class DriverActions {
     public static <T> T executeScript (final String script, final Object... args) {
         LOGGER.traceEntry ();
         LOGGER.info ("Executing script");
-        return (T) getDriverAttribute (driver -> ((JavascriptExecutor) driver).executeScript (script, args));
+        return (T) getDriverAttribute (driver -> ((JavascriptExecutor) driver).executeScript (script, args), null);
     }
 
     /**
@@ -239,7 +244,7 @@ public final class DriverActions {
      */
     public static NavigateActions navigate () {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (NavigateActions.navigateActions ());
+        return LOGGER.traceExit (navigateActions ());
     }
 
     /**
@@ -262,23 +267,44 @@ public final class DriverActions {
      * Save all the available logs to files in `logs` folder.
      */
     public static void saveLogs () {
+        LOGGER.traceEntry ();
         performDriverAction (d -> {
-            final var logSetting = getSession ().getMobileSetting ()
-                .getServer ()
-                .getLogs ();
+            final var logSetting = getSession ().getSetting ()
+                .getUi ()
+                .getLogging ();
             if (!logSetting.isEnable ()) {
+                LOGGER.warn ("Cannot save different logs to file, logging is disabled...");
                 return;
             }
             try {
                 final var logTypes = d.manage ()
                     .logs ()
                     .getAvailableLogTypes ();
-                logTypes.forEach (logType -> saveLogType (d, logType, logSetting.getPath ()));
+                logTypes.forEach (logType -> {
+                    LOGGER.info ("Saving [{}] logs to a file...", logType);
+                    if (logSetting.getExcludeLogs () == null || !logSetting.getExcludeLogs ()
+                        .contains (logType)) {
+                        saveLogType (d, logType, logSetting.getPath ());
+                    } else {
+                        LOGGER.info ("Skipped saving [{}] logs to a file...", logType);
+                    }
+                });
             } catch (final WebDriverException e) {
                 LOGGER.catching (e);
                 LOGGER.warn ("Error while saving different logs: {}", e.getMessage ());
             }
         });
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Handle swipe actions
+     *
+     * @return Swipe action
+     */
+    public static SwipeActions swipe () {
+        LOGGER.traceEntry ();
+        return LOGGER.traceExit (swipeActions ());
     }
 
     /**
@@ -349,6 +375,9 @@ public final class DriverActions {
         final var setting = getSession ().getSetting ()
             .getUi ()
             .getScreenshot ();
+        if (!setting.isEnabled ()) {
+            return;
+        }
         final var path = setting.getPath ();
         final var prefix = setting.getPrefix ();
         final var extension = setting.getExtension ();
@@ -366,6 +395,12 @@ public final class DriverActions {
      */
     public static void takeScreenshot (final String fileName) {
         LOGGER.traceEntry ();
+        final var setting = getSession ().getSetting ()
+            .getUi ()
+            .getScreenshot ();
+        if (!setting.isEnabled ()) {
+            return;
+        }
         performDriverAction (driver -> {
             final var file = ((TakesScreenshot) driver).getScreenshotAs (FILE);
             try {
@@ -385,7 +420,18 @@ public final class DriverActions {
     public static String title () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting title of the browser");
-        return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle));
+        return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle, EMPTY));
+    }
+
+    /**
+     * Gets the window / device screen size.
+     *
+     * @return Size of the window screen
+     */
+    public static Dimension viewportSize () {
+        return getDriverAttribute (driver -> driver.manage ()
+            .window ()
+            .getSize (), new Dimension (0, 0));
     }
 
     /**
@@ -402,7 +448,7 @@ public final class DriverActions {
         return getDriverAttribute (driver -> {
             final var wait = getSession ().getWait ();
             return wait.until (condition);
-        });
+        }, null);
     }
 
     /**
@@ -412,7 +458,7 @@ public final class DriverActions {
      */
     public static List<String> windowHandles () {
         LOGGER.traceEntry ();
-        final var handles = getDriverAttribute (WebDriver::getWindowHandles);
+        final var handles = getDriverAttribute (WebDriver::getWindowHandles, new ArrayList<String> ());
         LOGGER.traceExit ();
         return new ArrayList<> (handles);
     }
