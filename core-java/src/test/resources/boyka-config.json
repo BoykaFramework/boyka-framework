@@ -2,10 +2,15 @@
   "ui": {
     "timeout": {
       "implicit_wait": 10,
-      "explicit_wait": 30,
+      "explicit_wait": 10,
       "page_load_timeout": 30,
       "script_timeout": 10,
       "highlight_delay": 100
+    },
+    "logging": {
+      "exclude_logs": [
+        "bugreport"
+      ]
     },
     "screenshot": {
       "enabled": true,
@@ -141,7 +146,7 @@
       }
     },
     "mobile": {
-      "test_local_android": {
+      "test_local_sauce_android": {
         "server": {
           "protocol": "HTTP",
           "host": "127.0.0.1",
@@ -154,15 +159,54 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "10",
-          "name": "Pixel_5",
+          "version": "11",
+          "name": "Pixel_6_Pro",
           "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
           "application": {
             "path": "/apps/android/saucedemo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "avd": {
+            "headless": true
+          }
+        }
+      },
+      "test_local_wdio_android": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "127.0.0.1",
+          "port": 4723,
+          "base_path": "/wd/hub",
+          "session_override": true,
+          "allow_insecure": [
+            "get_server_logs"
+          ]
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11",
+          "name": "Pixel_6_Pro",
+          "automation": "UI_AUTOMATOR",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
+          "application": {
+            "path": "/apps/android/wdio-demo.apk",
+            "wait_activity": "com.wdiodemoapp.MainActivity",
             "install_timeout": 180
           },
           "avd": {
@@ -185,6 +229,7 @@
           "name": "Google Pixel 5",
           "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
+          "ignore_unimportant_views": true,
           "application": {
             "path": "AndroidApp",
             "external": true,
@@ -220,6 +265,7 @@
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
+          "ignore_unimportant_views": true,
           "capabilities": {
             "platformName": "Android",
             "deviceName": "Pixel 5",
@@ -248,11 +294,11 @@
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,
+      "schema_path": "schema/",
       "logging": {
         "request": true,
         "response": true
-      },
-      "schema_path": "schema/"
+      }
     }
   }
 }

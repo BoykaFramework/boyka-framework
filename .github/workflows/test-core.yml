@@ -84,14 +84,14 @@ jobs:
           appium driver install uiautomator2
 
       - name: Start Selenium Grid
-        run: java -jar core-java/libs/selenium-server-4.4.0.jar standalone > core-java/selenium-grid.log &
+        run: java -jar core-java/libs/selenium-server-4.7.0.jar standalone > core-java/selenium-grid.log &
 
       - name: All Test execution
         uses: reactivecircus/android-emulator-runner@v2
         if: github.event_name == 'push'
         with:
           avd-name: Nexus_6
-          api-level: 29
+          api-level: 30
           target: google_apis
           arch: x86
           profile: Nexus 6
@@ -105,7 +105,7 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           avd-name: Nexus_6
-          api-level: 29
+          api-level: 30
           target: google_apis
           arch: x86
           profile: Nexus 6

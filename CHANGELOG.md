@@ -1,5 +1,5 @@
 
-## v0.10.0-rc.0 (2022-11-23)
+## v0.10.0 (2022-11-23)
 
 #### :rocket: New Feature
 * [#267](https://github.com/BoykaFramework/boyka-framework/pull/267) feat(java): :sparkles: provide highlight element on interaction for web ([@WasiqB](https://github.com/WasiqB))

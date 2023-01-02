@@ -18,6 +18,10 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGestures;
+import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
+import static java.util.Collections.singletonList;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -45,7 +49,7 @@ public final class ElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator.getName ());
         LOGGER.traceExit ();
-        return getElementAttribute (e -> e.getAttribute (attribute), locator);
+        return getElementAttribute (e -> e.getAttribute (attribute), locator, EMPTY);
     }
 
     /**
@@ -70,7 +74,7 @@ public final class ElementActions {
     public static boolean isDisplayed (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Checking if element located by: {} is displayed", locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::isDisplayed, locator));
+        return LOGGER.traceExit (getElementAttribute (WebElement::isDisplayed, locator, false));
     }
 
     /**
@@ -83,7 +87,7 @@ public final class ElementActions {
     public static boolean isEnabled (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Checking if element located by: {} is enabled", locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::isEnabled, locator));
+        return LOGGER.traceExit (getElementAttribute (WebElement::isEnabled, locator, false));
     }
 
     /**
@@ -96,7 +100,7 @@ public final class ElementActions {
     public static boolean isSelected (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Checking if element located by: {} is selected", locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, locator));
+        return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, locator, false));
     }
 
     /**
@@ -111,7 +115,7 @@ public final class ElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator.getName ());
         LOGGER.traceExit ();
-        return getElementAttribute (e -> e.getCssValue (attribute), locator);
+        return getElementAttribute (e -> e.getCssValue (attribute), locator, EMPTY);
     }
 
     /**
@@ -127,6 +131,22 @@ public final class ElementActions {
     }
 
     /**
+     * Taps on an element.
+     *
+     * @param locator Locator of the element
+     */
+    public static void tapOn (final Locator locator) {
+        LOGGER.traceEntry ();
+        swipe ().till (locator);
+        final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
+            .element (element)
+            .build ()
+            .tapOn (), locator, null);
+        performMobileGestures (singletonList (sequences));
+        LOGGER.traceExit ();
+    }
+
+    /**
      * Gets the text of the element.
      *
      * @param locator locator of the element
@@ -136,7 +156,7 @@ public final class ElementActions {
     public static String textOf (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting text of element located by: {}", locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::getText, locator));
+        return LOGGER.traceExit (getElementAttribute (WebElement::getText, locator, EMPTY));
     }
 
     private ElementActions () {

@@ -20,6 +20,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_DESELECT_FROM_DROPDOWN;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -182,7 +183,7 @@ public final class DropDownActions {
             } catch (final NoSuchElementException e) {
                 return EMPTY;
             }
-        }, locator);
+        }, locator, EMPTY);
     }
 
     /**
@@ -201,7 +202,7 @@ public final class DropDownActions {
                 .stream ()
                 .map (WebElement::getText)
                 .collect (toList ());
-        }, locator);
+        }, locator, emptyList ());
     }
 
     private DropDownActions () {

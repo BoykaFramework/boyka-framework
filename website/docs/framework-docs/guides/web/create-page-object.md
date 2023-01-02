@@ -20,19 +20,22 @@ public class LoginPage {
     }
 
     private final Locator loginBox = Locator.buildLocator ()
-        .web (By.id ("login_button_container"))
+        .web (id ("login_button_container"))
+        .name ("Login Box")
         .build ();
-
     private final Locator loginButton = Locator.buildLocator ()
-        .web (By.id ("login-button"))
+        .web (id ("login-button"))
+        .name ("Login Button")
         .parent (this.loginBox)
         .build ();
     private final Locator password = Locator.buildLocator ()
-        .web (By.id ("password"))
+        .web (id ("password"))
+        .name ("Password")
         .parent (this.loginBox)
         .build ();
     private final Locator username = Locator.buildLocator ()
-        .web (By.id ("user-name"))
+        .web (id ("user-name"))
+        .name ("User Name")
         .parent (this.loginBox)
         .build ();
 

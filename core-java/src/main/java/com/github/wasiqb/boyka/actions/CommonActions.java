@@ -19,21 +19,29 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
 import static com.github.wasiqb.boyka.actions.DriverActions.pause;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
+import static com.github.wasiqb.boyka.enums.Message.DRIVER_ERROR_OCCURRED;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofMillis;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.Collection;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.exception.FrameworkError;
+import io.appium.java_client.AppiumDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Sequence;
 
 /**
  * Common action methods to perform different actions on devices / browsers and on elements.
@@ -50,14 +58,19 @@ final class CommonActions {
      * Gets driver specific attributes.
      *
      * @param action action to get driver specific attributes
+     * @param defaultValue default value if any error occurred
      * @param <D> driver type
      * @param <E> attribute type
      *
      * @return driver specific attribute.
      */
-    public static <D extends WebDriver, E> E getDriverAttribute (final Function<D, E> action) {
+    public static <D extends WebDriver, E> E getDriverAttribute (final Function<D, E> action, final E defaultValue) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (action.apply ((D) getSession ().getDriver ()));
+        try {
+            return LOGGER.traceExit (action.apply ((D) getSession ().getDriver ()));
+        } catch (final FrameworkError e) {
+            return defaultValue;
+        }
     }
 
     /**
@@ -65,16 +78,20 @@ final class CommonActions {
      *
      * @param action action to get element specific attributes
      * @param locator locator to find element
+     * @param defaultValue default value if any error occurred
      * @param <E> attribute type
      *
      * @return element specific attribute.
      */
-    public static <E> E getElementAttribute (final Function<WebElement, E> action, final Locator locator) {
+    public static <E> E getElementAttribute (final Function<WebElement, E> action, final Locator locator,
+        final E defaultValue) {
         LOGGER.traceEntry ();
-        final var element = find (locator, VISIBLE);
-        highlight ("green", element);
-        unhighlight (element);
-        return LOGGER.traceExit (action.apply (element));
+        try {
+            prepareElementAction (find (locator, VISIBLE), "green");
+            return LOGGER.traceExit (action.apply (find (locator, VISIBLE)));
+        } catch (final FrameworkError e) {
+            return defaultValue;
+        }
     }
 
     /**
@@ -85,7 +102,11 @@ final class CommonActions {
      */
     public static <D extends WebDriver> void performDriverAction (final Consumer<D> action) {
         LOGGER.traceEntry ();
-        action.accept ((D) getSession ().getDriver ());
+        try {
+            action.accept ((D) getSession ().getDriver ());
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
         LOGGER.traceExit ();
     }
 
@@ -97,10 +118,45 @@ final class CommonActions {
      */
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
         LOGGER.traceEntry ();
-        final var element = find (locator, CLICKABLE);
-        highlight ("red", element);
-        unhighlight (element);
-        action.accept (element);
+        try {
+            prepareElementAction (find (locator, CLICKABLE), "red");
+            action.accept (find (locator, CLICKABLE));
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Perform element specific action with Driver.
+     *
+     * @param action action to perform
+     * @param locator locator to find element
+     */
+    public static <D extends WebDriver> void performElementAction (final BiConsumer<D, WebElement> action,
+        final Locator locator) {
+        LOGGER.traceEntry ();
+        try {
+            prepareElementAction (find (locator, CLICKABLE), "red");
+            action.accept ((D) getSession ().getDriver (), find (locator, CLICKABLE));
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Perform Gestures on Mobile.
+     *
+     * @param sequences Collection of Sequences of gestures.
+     */
+    public static void performMobileGestures (final Collection<Sequence> sequences) {
+        LOGGER.traceEntry ();
+        try {
+            performDriverAction (driver -> ((AppiumDriver) driver).perform (sequences));
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
         LOGGER.traceExit ();
     }
 
@@ -118,6 +174,11 @@ final class CommonActions {
         }
     }
 
+    private static void prepareElementAction (final WebElement element, final String color) {
+        highlight (color, element);
+        unhighlight (element);
+    }
+
     private static void unhighlight (final WebElement element) {
         if (getSession ().getPlatformType () == WEB && getSession ().getWebSetting ()
             .isHighlight ()) {
@@ -131,3 +192,4 @@ final class CommonActions {
         // Utility class
     }
 }
+

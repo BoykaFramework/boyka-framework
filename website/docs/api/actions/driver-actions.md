@@ -114,26 +114,6 @@ import static com.github.wasiqb.boyka.actions.DriverActions.fullScreen;
 fullScreen ();
 ```
 
-## `goBack` {#go-back}
-
-This method will go back to the previous page.
-
-```java
-import static com.github.wasiqb.boyka.actions.DriverActions.goBack;
-. . .
-goBack ();
-```
-
-## `goForward` {#go-forward}
-
-This method will go forward to the next page.
-
-```java
-import static com.github.wasiqb.boyka.actions.DriverActions.goForward;
-. . .
-goForward ();
-```
-
 ## `maximize`
 
 This method will maximize the browser window.
@@ -154,14 +134,14 @@ import static com.github.wasiqb.boyka.actions.DriverActions.minimize;
 minimize ();
 ```
 
-## `navigateTo` {#navigate-to}
+## `navigate`
 
-This method is used to navigate to the given URL.
+This method is used to perform navigation related actions.
 
 ```java
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 . . .
-navigateTo ("https://google.com");
+navigate ().to ("https://google.com");
 ```
 
 ## `pause` {#pause}
@@ -175,16 +155,6 @@ import static java.time.Duration.ofMillis;
 pause (ofMillis (100));
 ```
 
-## `refresh`
-
-This method will refresh the browser window.
-
-```java
-import static com.github.wasiqb.boyka.actions.DriverActions.refresh;
-. . .
-refresh ();
-```
-
 ## `saveLogs`
 
 This method will save all the logs captured by the Driver.
@@ -193,6 +163,16 @@ This method will save all the logs captured by the Driver.
 import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
 . . .
 saveLogs ();
+```
+
+## `swipe`
+
+This method will return Swipe class instance which can be used to perform swipe gesture
+
+```java
+import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
+. . .
+swipe ().up ();
 ```
 
 ## `switchToFrame (name)` {#switch-to-frame-name}
@@ -280,14 +260,15 @@ import static com.github.wasiqb.boyka.actions.DriverActions.title;
 System.out.println (title ());
 ```
 
-## `url`
+## `viewportSize` {#viewport-size}
 
-This method will get the URL of the browser window.
+This method will the size dimension of the screen viewport for Mobile screen or Browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.DriverActions.url;
+import static com.github.wasiqb.boyka.actions.DriverActions.viewportSize;
+import org.openqa.selenium.Dimension;
 . . .
-System.out.println (url ());
+Dimension size = viewportSize ();
 ```
 
 ## `waitUntil` {#wait-until}
