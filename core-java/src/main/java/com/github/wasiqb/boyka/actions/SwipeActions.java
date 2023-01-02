@@ -9,6 +9,7 @@ import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.LEFT;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.RIGHT;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.UP;
+import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.util.Collections.singletonList;
@@ -69,8 +70,8 @@ public final class SwipeActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Dragging [{}] to [{}] on Mobile devices.", source.getName (), destination.getName ());
         final var dragSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
-            .element (find (source))
-            .targetElement (find (destination))
+            .element (find (source, CLICKABLE))
+            .targetElement (find (destination, CLICKABLE))
             .build ()
             .swipe (), null);
         performMobileGestures (singletonList (dragSequence));

@@ -28,6 +28,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 import java.util.List;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.enums.WaitStrategy;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.TimeoutException;
@@ -50,9 +51,9 @@ final class ElementFinder {
      *
      * @return {@link WebElement}
      */
-    public static WebElement find (final Locator locator) {
+    public static WebElement find (final Locator locator, final WaitStrategy waitStrategy) {
         LOGGER.traceEntry ();
-        final var elements = finds (locator);
+        final var elements = finds (locator, waitStrategy);
         if (elements.isEmpty ()) {
             throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
         }
@@ -72,15 +73,15 @@ final class ElementFinder {
      *
      * @return {@link List} of {@link WebElement}
      */
-    public static List<WebElement> finds (final Locator locator) {
+    public static List<WebElement> finds (final Locator locator, final WaitStrategy waitStrategy) {
         LOGGER.traceEntry ();
         final var driver = getSession ().getDriver ();
         final List<WebElement> elements;
         if (locator.getParent () != null) {
-            final var parent = find (locator.getParent ());
+            final var parent = find (locator.getParent (), waitStrategy);
             elements = finds (driver, parent, locator);
         } else {
-            waitForElement (locator);
+            waitForElement (locator, waitStrategy);
             elements = finds (driver, locator);
         }
         return LOGGER.traceExit (elements);
@@ -102,10 +103,10 @@ final class ElementFinder {
         return LOGGER.traceExit (finds (driver, null, locator));
     }
 
-    private static void waitForElement (final Locator locator) {
+    private static void waitForElement (final Locator locator, final WaitStrategy waitStrategy) {
         try {
             final var wait = getSession ().getWait ();
-            switch (locator.getWaitStrategy ()) {
+            switch (waitStrategy) {
                 case CLICKABLE:
                     wait.until (elementToBeClickable (locator.getLocator ()));
                     break;

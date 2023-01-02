@@ -21,6 +21,8 @@ import static com.github.wasiqb.boyka.actions.DriverActions.pause;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.Message.DRIVER_ERROR_OCCURRED;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
+import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
+import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.text.MessageFormat.format;
@@ -85,8 +87,8 @@ final class CommonActions {
         final E defaultValue) {
         LOGGER.traceEntry ();
         try {
-            prepareElementAction (find (locator));
-            return LOGGER.traceExit (action.apply (find (locator)));
+            prepareElementAction (find (locator, VISIBLE), "green");
+            return LOGGER.traceExit (action.apply (find (locator, VISIBLE)));
         } catch (final FrameworkError e) {
             return defaultValue;
         }
@@ -117,8 +119,8 @@ final class CommonActions {
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
         LOGGER.traceEntry ();
         try {
-            prepareElementAction (find (locator));
-            action.accept (find (locator));
+            prepareElementAction (find (locator, CLICKABLE), "red");
+            action.accept (find (locator, CLICKABLE));
         } catch (final WebDriverException e) {
             handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
         }
@@ -135,8 +137,8 @@ final class CommonActions {
         final Locator locator) {
         LOGGER.traceEntry ();
         try {
-            prepareElementAction (find (locator));
-            action.accept ((D) getSession ().getDriver (), find (locator));
+            prepareElementAction (find (locator, CLICKABLE), "red");
+            action.accept ((D) getSession ().getDriver (), find (locator, CLICKABLE));
         } catch (final WebDriverException e) {
             handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
         }
@@ -172,8 +174,8 @@ final class CommonActions {
         }
     }
 
-    private static void prepareElementAction (final WebElement element) {
-        highlight ("red", element);
+    private static void prepareElementAction (final WebElement element, final String color) {
+        highlight (color, element);
         unhighlight (element);
     }
 
