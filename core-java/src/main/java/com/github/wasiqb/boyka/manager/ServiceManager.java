@@ -22,6 +22,7 @@ import static com.github.wasiqb.boyka.enums.Message.ERROR_STARTING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STOPPING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.SERVER_ALREADY_RUNNING;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.BOOTSTRAP_PORT_NUMBER;
@@ -227,7 +228,9 @@ public class ServiceManager {
     }
 
     private void setLogArguments () {
-        final var logs = this.setting.getLogs ();
+        final var logs = getSession ().getSetting ()
+            .getUi ()
+            .getLogging ();
         if (!logs.isEnable ()) {
             return;
         }
@@ -239,7 +242,9 @@ public class ServiceManager {
     }
 
     private void setLogFile () {
-        final var logFolderPath = this.setting.getLogs ()
+        final var logFolderPath = getSession ().getSetting ()
+            .getUi ()
+            .getLogging ()
             .getPath ();
         if (logFolderPath != null) {
             final var filePath = new File (format ("{0}/server-{1}.log", logFolderPath, currentThread ().getId ()));

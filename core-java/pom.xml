@@ -4,32 +4,38 @@
   ~
   ~ Copyright (c) 2022 Wasiq Bhamla
   ~
-  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
-  ~ of this software and associated documentation files (the "Software"), to deal
-  ~ in the Software without restriction, including without limitation the rights
+  ~ Permission is hereby granted,
+free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation
+files (the "Software"), to deal
+  ~ in the Software without restriction, including without
+limitation the rights
   ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  ~ copies of the Software, and to permit persons to whom the Software is
-  ~ furnished to do so, subject to the following conditions:
+~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so,
+subject to the following conditions:
   ~
-  ~ The above copyright notice and this permission notice shall be included in all
+  ~ The above copyright notice and this permission notice
+shall be included in all
   ~ copies or substantial portions of the Software.
   -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
-    <version>0.10.0</version>
+    <version>0.11.0-rc.0</version>
     <inceptionYear>2022</inceptionYear>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>🎉 Ultimate test automation for testing any application on any platform</description>
     <url>https://github.com/BoykaFramework/boyka-framework</url>
 
     <properties>
-        <selenium-webdriver.version>4.6.0</selenium-webdriver.version>
-        <testng.version>7.6.1</testng.version>
-        <appium-java-client.version>8.2.0</appium-java-client.version>
+        <selenium-webdriver.version>4.7.2</selenium-webdriver.version>
+        <testng.version>7.7.1</testng.version>
+        <appium-java-client.version>8.3.0</appium-java-client.version>
         <webdrivermanager.version>5.3.1</webdrivermanager.version>
         <okhttp.version>4.10.0</okhttp.version>
         <lombok.version>1.18.24</lombok.version>
@@ -40,19 +46,19 @@
         <json-path.version>2.7.0</json-path.version>
         <log4j-core.version>2.19.0</log4j-core.version>
         <log4j-api.version>2.19.0</log4j-api.version>
-        <jackson-dataformat-yaml.version>2.14.0</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.14.0</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.14.1</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.14.1</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <everit-json-schema.version>1.5.1</everit-json-schema.version>
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
-        <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.4.0</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.4</checkstyle.version>
+        <checkstyle.version>10.6.0</checkstyle.version>
         <suite-xml>test-suites/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <sonar.organization>boykaframework</sonar.organization>
@@ -61,6 +67,7 @@
         <checkstyle.config>checkstyles/checkstyle.xml</checkstyle.config>
         <checkstyle.suppress>checkstyles/checkstyle-suppressions.xml</checkstyle.suppress>
         <sonar.report>${project.basedir}/reports/jacoco.exec</sonar.report>
+        <maven-enforcer.version>3.1.0</maven-enforcer.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
@@ -206,7 +213,8 @@
             <artifactId>log4j-api</artifactId>
             <version>${log4j-api.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+        <!--
+        https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
@@ -235,6 +243,26 @@
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.8</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>

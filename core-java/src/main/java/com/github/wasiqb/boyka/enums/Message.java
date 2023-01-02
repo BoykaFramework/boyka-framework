@@ -50,9 +50,17 @@ public enum Message {
      */
     CONTENT_TYPE_NOT_SET ("Content type must be set before setting request body..."),
     /**
+     * WebDriver's error occurred.
+     */
+    DRIVER_ERROR_OCCURRED ("Error encountered by Driver: {0}"),
+    /**
+     * Element cannot be null.
+     */
+    ELEMENT_CANNOT_BE_NULL ("Element cannot be null, set an element to perform action on it..."),
+    /**
      * Element not found.
      */
-    ELEMENT_NOT_FOUND ("Element not found for locator {0}..."),
+    ELEMENT_NOT_FOUND ("Element [{0}] not found for platform [{1}]..."),
     /**
      * Empty browser is not allowed.
      */

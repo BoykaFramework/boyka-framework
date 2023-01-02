@@ -102,6 +102,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          name: 'google-site-verification',
+          content: 'i3x-x1g3IFyNUzu6z4EMXpwviY9o7FrCYkBXDNq90wE',
+        },
+      ],
       announcementBar: {
         id: 'star-the-repo',
         content:

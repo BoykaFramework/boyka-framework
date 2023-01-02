@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.9.0">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.9.0/total?color=brightgreen&label=Downloads%20for%20v0.9.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.10.0">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.10.0/total?color=brightgreen&label=Downloads%20for%20v0.10.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -38,9 +38,9 @@
 
   <h4>
     <a href="https://BoykaFramework.github.io/boyka-framework/docs/intro">Documentation</a>
-  <span> · </span>
+  <span> | </span>
     <a href="https://github.com/BoykaFramework/boyka-framework/issues/new/choose">Report Bug</a>
-  <span> · </span>
+  <span> | </span>
     <a href="https://github.com/BoykaFramework/boyka-framework/issues/new/choose">Request Feature</a>
   </h4>
 </div>
@@ -62,6 +62,7 @@ This all gave me an idea of having a single framework which could solve all the 
 - ✅ Zero boilerplate code
 - ✅ Support Rest API automation with schema validations and response body verification
 - ✅ Supports Web browser automation with support for Chrome, Edge, Firefox and Safari.
+- ✅ Supports Android native apps automation
 - ✅ Supports execution of Web tests on cloud platforms like BrowserStack and LambdaTest.
 - ✅ Highly configurable via `boyka-config.json`
 - ✅ Micro logging to log events of the test execution
@@ -71,7 +72,6 @@ This all gave me an idea of having a single framework which could solve all the 
 
 Following are the awesome features which will be implemented soon to the frameworks:
 
-- Support for Android automation
 - Support for iOS automation
 - Support for GraphQL and SOAP API automation
 - Support video recording of the tests for Web and Mobile platforms
@@ -86,7 +86,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.9.0</version>
+  <version>0.10.0</version>
 </dependency>
 ```
 
@@ -105,6 +105,11 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       "explicit_wait": 30,
       "page_load_timeout": 30,
       "script_timeout": 10
+    },
+    "logging": {
+      "exclude_logs": [
+        "bugreport"
+      ]
     },
     "screenshot": {
       "enabled": true,
@@ -290,7 +295,7 @@ public class LoginPage {
 And later we can use that page object to execute the test.
 
 ```java
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.pressKey;
@@ -310,7 +315,7 @@ createDriver (ApplicationType.WEB, "test_local_chrome");
 . . .
 private static final String URL = "https://www.saucedemo.com";
 . . .
-navigateTo (URL);
+navigate ().to (URL);
 verifyBrowserUrl ().startsWith (URL);
 
 enterText (loginPage ().getUsername (), "standard_user");

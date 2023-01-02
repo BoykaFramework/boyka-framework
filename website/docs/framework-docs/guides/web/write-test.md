@@ -21,7 +21,7 @@ Check out all the available static methods to interact with the page in your tes
 ## Example
 
 ```java
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
@@ -52,7 +52,7 @@ public class TestWeb {
 
     @Test (description = "Test login functionality")
     public void testLogin () {
-        navigateTo (URL);
+        navigate ().to (URL);
         verifyBrowserUrl ().startsWith (URL);
         enterText (loginPage ().getUsername (), "standard_user");
         enterText (loginPage ().getPassword (), "secret_sauce");

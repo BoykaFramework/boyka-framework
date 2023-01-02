@@ -49,6 +49,7 @@ public class DeviceSetting {
     private OS                   os                     = ANDROID;
     private int                  serverInstallTimeout   = 30;
     private int                  serverLaunchTimeout    = 30;
+    private SwipeSetting         swipe                  = new SwipeSetting ();
     private DeviceType           type                   = VIRTUAL;
     private String               version;
 }

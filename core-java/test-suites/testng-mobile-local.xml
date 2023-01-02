@@ -17,11 +17,18 @@
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Mobile Local Suite" verbose="2">
-    <test name="Test Boyka Mobile on Local Android Emulator">
-        <parameter name="appType" value="ANDROID"/>
-        <parameter name="driverKey" value="test_local_android"/>
+    <test name="Test Boyka Mobile on Local Android Emulator Sauce Demo app">
+        <parameter name="platformType" value="ANDROID"/>
+        <parameter name="driverKey" value="test_local_sauce_android"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.mobile"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
+        </packages>
+    </test>
+    <test name="Test Boyka Mobile on Local Android Emulator WDIO" enabled="false">
+        <parameter name="platformType" value="ANDROID"/>
+        <parameter name="driverKey" value="test_local_wdio_android"/>
+        <packages>
+            <package name="com.github.wasiqb.boyka.testng.ui.wdio"/>
         </packages>
     </test>
 </suite>
