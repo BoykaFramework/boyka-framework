@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.ui;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigateTo;
+import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
@@ -49,7 +49,7 @@ public class EcommerceEndToEndTests {
         final String url = "https://ecommerce-playground.lambdatest.io/";
         createDriver (PlatformType.WEB, driverKey);
         this.billingData = TestDataBuilder.getBillingData ();
-        navigateTo (url);
+        navigate ().to (url);
     }
 
     @AfterClass (description = "Tear down test class")
@@ -78,7 +78,7 @@ public class EcommerceEndToEndTests {
     }
 
     @Test (dependsOnMethods = "testCheckoutProduct")
-    public void testConfirmOrder () throws InterruptedException {
+    public void testConfirmOrder () {
         confirmOrderPageActions ().verifyPageHeader ()
             .verifyProductName ()
             .verifyUnitPrice (this.unitPriceOfCameraLens)
