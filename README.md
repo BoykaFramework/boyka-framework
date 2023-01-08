@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.10.0">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.10.0/total?color=brightgreen&label=Downloads%20for%20v0.10.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.11.0">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.11.0/total?color=brightgreen&label=Downloads%20for%20v0.11.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -86,7 +86,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.10.0</version>
+  <version>0.11.0</version>
 </dependency>
 ```
 
@@ -102,9 +102,10 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
   "ui": {
     "timeout": {
       "implicit_wait": 10,
-      "explicit_wait": 30,
+      "explicit_wait": 10,
       "page_load_timeout": 30,
-      "script_timeout": 10
+      "script_timeout": 10,
+      "highlight_delay": 100
     },
     "logging": {
       "exclude_logs": [
@@ -120,6 +121,8 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
     "web": {
       "test_local_chrome": {
         "browser": "CHROME",
+        "highlight": true,
+        "headless": false,
         "resize": "CUSTOM"
       },
       "test_local_firefox": {
@@ -152,6 +155,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       "test_selenium_grid": {
         "browser": "REMOTE",
         "cloud": "NONE",
+        "host": "localhost",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
@@ -178,6 +182,78 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "console": true
         }
       }
+    },
+    "mobile": {
+      "test_local_sauce_android": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "127.0.0.1",
+          "port": 4723,
+          "base_path": "/wd/hub",
+          "session_override": true,
+          "allow_insecure": [
+            "get_server_logs"
+          ]
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11",
+          "name": "Pixel_6_Pro",
+          "automation": "UI_AUTOMATOR",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
+          "application": {
+            "path": "/apps/android/saucedemo.apk",
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "avd": {
+            "name": "Pixel_6_Pro",
+            "headless": false
+          }
+        }
+      },
+      "test_bs_android": {
+        "server": {
+          "cloud": "BROWSER_STACK",
+          "protocol": "HTTPS",
+          "host": "hub-cloud.browserstack.com",
+          "user_name": "${env:BS_USER}",
+          "password": "${env:BS_KEY}",
+          "base_path": "/wd/hub"
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11.0",
+          "name": "Google Pixel 5",
+          "automation": "UI_AUTOMATOR",
+          "type": "CLOUD",
+          "ignore_unimportant_views": true,
+          "application": {
+            "path": "AndroidApp",
+            "external": true,
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "capabilities": {
+            "projectName": "BrowserStack Android Project",
+            "buildName": "Test BrowserStack Build",
+            "sessionName": "Test BrowserStack Session",
+            "appiumVersion": "2.0.0",
+            "deviceLogs": true,
+            "networkLogs": true,
+            "debug": true,
+            "video": true,
+            "appiumLogs": true
+          }
+        }
+      }
     }
   },
   "api": {
@@ -187,11 +263,11 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,
+      "schema_path": "schema/",
       "logging": {
         "request": true,
         "response": true
-      },
-      "schema_path": "schema/"
+      }
     }
   }
 }
@@ -253,36 +329,46 @@ response.verifyTextField ("createdAt")
 </details>
 
 <details>
-  <summary>💻 Web Sample</summary>
+  <summary>💻 Common Page Object for Web and Android</summary>
 
-This is how we can create page object.
+This is how you can create a common page object for both Web and Android.
 
 ```java
-package com.github.wasiqb.boyka.testng.web.saucedemo.pages;
+import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.By;
 
 import com.github.wasiqb.boyka.builders.Locator;
-import org.openqa.selenium.By;
 import lombok.Getter;
 
 @Getter
 public class LoginPage {
+  private static final LoginPage LOGIN_PAGE = new LoginPage ();
+
   public static LoginPage loginPage () {
-    return new LoginPage ();
+    return LOGIN_PAGE;
   }
 
   private final Locator loginBox = Locator.buildLocator ()
     .web (By.id ("login_button_container"))
+    .android (AppiumBy.accessibilityId ("test-Login"))
+    .name ("Login Box")
     .build ();
   private final Locator loginButton = Locator.buildLocator ()
     .web (By.id ("login-button"))
+    .android (AppiumBy.accessibilityId ("test-LOGIN"))
+    .name ("Login Button")
     .parent (this.loginBox)
     .build ();
   private final Locator password = Locator.buildLocator ()
     .web (By.id ("password"))
+    .android (AppiumBy.accessibilityId ("test-Password"))
+    .name ("Password")
     .parent (this.loginBox)
     .build ();
   private final Locator username = Locator.buildLocator ()
     .web (By.id ("user-name"))
+    .android (AppiumBy.accessibilityId ("test-Username"))
+    .name ("User Name")
     .parent (this.loginBox)
     .build ();
 
@@ -292,48 +378,109 @@ public class LoginPage {
 }
 ```
 
-And later we can use that page object to execute the test.
+</details>
+
+<details>
+  <summary>✅ Common Test flow for Web and Android</summary>
+
+This is how you can write common actions class for Web and Android together for the app which has similar flows on both the platforms.
 
 ```java
 import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
-import static com.github.wasiqb.boyka.actions.KeyboardActions.pressKey;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementEnabled;
+import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
+import static java.text.MessageFormat.format;
+
+import com.github.wasiqb.boyka.enums.PlatformType;
+
+public class SauceDemoActions {
+  private static final String URL = "https://www.saucedemo.com";
+
+  private final PlatformType platformType;
+
+  public SauceDemoActions () {
+    this.platformType = getSession ().getPlatformType ();
+  }
+
+  public void verifyLogin (final String userName, final String password) {
+    verifyNavigateToSite ();
+    enterText (loginPage ().getUsername (), userName);
+    enterText (loginPage ().getPassword (), password);
+    clickOn (loginPage ().getLoginButton ());
+    verifyLoggedIn ();
+  }
+
+  private void verifyNavigateToSite () {
+    if (this.platformType == WEB) {
+      navigate ().to (URL);
+      verifyBrowserUrl ().startsWith (URL);
+    }
+  }
+
+  private void verifyLoggedIn () {
+    if (this.platformType == WEB) {
+      verifyBrowserUrl ().isEqualTo (format ("{0}/inventory.html", URL));
+      verifyBrowserTitle ().isEqualTo ("Swag Labs");
+    }
+    verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
+    verifyElementEnabled (homePage ().getMenuButton ()).isTrue ();
+  }
+}
+```
+
+Now, you can use this actions class in your test as shown below:
+
+```java
+package com.github.wasiqb.boyka.testng.ui.saucedemo;
+
+import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
+import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
-import static com.github.wasiqb.boyka.testng.web.saucedemo.pages.LoginPage.loginPage;
-import static java.text.MessageFormat.format;
-import static org.openqa.selenium.Keys.CONTROL;
-import static org.openqa.selenium.Keys.DELETE;
-. . .
-createDriver (ApplicationType.WEB, "test_local_chrome");
-. . .
-private static final String URL = "https://www.saucedemo.com";
-. . .
-navigate ().to (URL);
-verifyBrowserUrl ().startsWith (URL);
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.google.common.truth.Truth.assertThat;
 
-enterText (loginPage ().getUsername (), "standard_user");
-pressKey (loginPage ().getUsername (), CONTROL, "a", DELETE);
-enterText (loginPage ().getUsername (), "standard_user");
-enterText (loginPage ().getPassword (), "secret_sauce");
+import com.github.wasiqb.boyka.enums.PlatformType;
+import com.github.wasiqb.boyka.testng.ui.saucedemo.actions.SauceDemoActions;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-clickOn (loginPage ().getLoginButton ());
+public class SauceDemoTest {
+  private SauceDemoActions sauceDemo;
 
-verifyBrowserUrl ().isEqualTo (format ("{0}/inventory.html", URL));
-verifyBrowserTitle ().isEqualTo ("Swag Labs");
+  @AfterMethod (alwaysRun = true)
+  public void afterMethod () {
+    takeScreenshot ();
+  }
 
-verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
-verifyElementEnabled (homePage ().getMenuButton ()).isTrue ();
+  @BeforeClass (description = "Setup test class", alwaysRun = true)
+  @Parameters ({ "platformType", "driverKey" })
+  public void setupTestClass (final PlatformType platformType, final String driverKey) {
+    createDriver (platformType, driverKey);
+    this.sauceDemo = new SauceDemoActions ();
+  }
 
-takeScreenshot ();
-. . .
-closeDriver ();
+  @AfterClass (description = "Tear down test class", alwaysRun = true)
+  public void tearDownTestClass () {
+    saveLogs ();
+    closeDriver ();
+  }
+
+  @Test (description = "Test login functionality")
+  public void testLogin () {
+    this.sauceDemo.verifyLogin ("standard_user", "secret_sauce");
+  }
+}
 ```
 
 </details>
@@ -349,6 +496,10 @@ closeDriver ();
   - [How to configure Boyka for Web Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/setup-config)
   - [How to create page object?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/create-page-object)
   - [How to write test using the page object?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/write-test)
+- Mobile:
+  - [How to configure Boyka for Web Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/mobile/setup-config)
+  - [How to create page object?](https://boykaframework.github.io/boyka-framework/docs/guides/mobile/create-page-object)
+  - [How to write test using the page object?](https://boykaframework.github.io/boyka-framework/docs/guides/mobile/write-test)
 
 ## 👾 Tech Stack
 

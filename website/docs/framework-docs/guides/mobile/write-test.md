@@ -13,6 +13,8 @@ Check out all the available static methods to interact with the page in your tes
 - [`ElementActions`](/api/actions/element-actions): Contains all element related actions
 - [`KeyboardActions`](/api/actions/keyboard-actions): Contains all keyboard related actions
 - [`MouseActions`](/api/actions/mouse-actions): Contains all mouse related actions
+- [`NavigateActions`](/api/actions/navigate-actions): Contains all web navigation related actions
+- [`SwipeActions`](/api/actions/swipe-actions): Contains all mobile swipe related actions
 - [`VerifyDriverActions`](/api/actions/verify-driver-actions): Contains all verification methods for driver related actions
 - [`VerifyDropDownActions`](/api/actions/verify-drop-down-actions): Contains all verification methods for drop down related actions
 - [`VerifyElementActions`](/api/actions/verify-element-actions): Contains all verification methods for element related actions
@@ -22,14 +24,14 @@ Check out all the available static methods to interact with the page in your tes
 
 ```java
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
-import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
+import static com.github.wasiqb.boyka.actions.ElementActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementEnabled;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -37,7 +39,7 @@ import org.testng.annotations.Test;
 public class TestAndroid {
     @BeforeClass (description = "Setup test class")
     public void setupTestClass () {
-        createDriver (ApplicationType.ANDROID, "test_local_chrome");
+        createDriver (PlatformType.ANDROID, "test_local_sauce_android");
     }
 
     @AfterClass (description = "Tear down test class")
@@ -49,7 +51,7 @@ public class TestAndroid {
     public void testLogin () {
         enterText (loginPage ().getUsername (), "standard_user");
         enterText (loginPage ().getPassword (), "secret_sauce");
-        tapOn (loginPage ().getLoginButton ());
+        clickOn (loginPage ().getLoginButton ());
 
         verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
         verifyElementEnabled (homePage ().getMenuButton ()).isTrue ();
