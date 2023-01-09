@@ -13,6 +13,8 @@ Check out all the available static methods to interact with the page in your tes
 - [`ElementActions`](/api/actions/element-actions): Contains all element related actions
 - [`KeyboardActions`](/api/actions/keyboard-actions): Contains all keyboard related actions
 - [`MouseActions`](/api/actions/mouse-actions): Contains all mouse related actions
+- [`NavigateActions`](/api/actions/navigate-actions): Contains all web navigation related actions
+- [`SwipeActions`](/api/actions/swipe-actions): Contains all mobile swipe related actions
 - [`VerifyDriverActions`](/api/actions/verify-driver-actions): Contains all verification methods for driver related actions
 - [`VerifyDropDownActions`](/api/actions/verify-drop-down-actions): Contains all verification methods for drop down related actions
 - [`VerifyElementActions`](/api/actions/verify-element-actions): Contains all verification methods for element related actions
@@ -32,7 +34,7 @@ import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.web.pages.LoginPage.loginPage;
 
-import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -42,7 +44,7 @@ public class TestWeb {
 
     @BeforeClass (description = "Setup test class")
     public void setupTestClass () {
-        createDriver (ApplicationType.WEB, "test_local_chrome");
+        createDriver (PlatformType.WEB, "test_local_chrome");
     }
 
     @AfterClass (description = "Tear down test class")
@@ -54,9 +56,11 @@ public class TestWeb {
     public void testLogin () {
         navigate ().to (URL);
         verifyBrowserUrl ().startsWith (URL);
+        
         enterText (loginPage ().getUsername (), "standard_user");
         enterText (loginPage ().getPassword (), "secret_sauce");
         clickOn (loginPage ().getLoginButton ());
+        
         verifyBrowserTitle ().isEqualTo ("Swag Labs");
         verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
         verifyElementEnabled (homePage ().getMenuButton ()).isTrue ();
