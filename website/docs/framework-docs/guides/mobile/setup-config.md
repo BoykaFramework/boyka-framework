@@ -81,6 +81,42 @@ Let's see how to set configuration in the configuration file for API end-points.
             "appiumLogs": true
           }
         }
+      },
+      "test_lt_android": {
+        "server": {
+          "cloud": "LAMBDA_TEST",
+          "protocol": "HTTPS",
+          "host": "mobile-hub.lambdatest.com",
+          "user_name": "${env:LT_USER}",
+          "password": "${env:LT_KEY}",
+          "base_path": "/wd/hub"
+        },
+        "device": {
+          "automation": "UI_AUTOMATOR",
+          "type": "CLOUD",
+          "application": {
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180
+          },
+          "ignore_unimportant_views": true,
+          "capabilities": {
+            "platformName": "Android",
+            "deviceName": "Pixel 5",
+            "platformVersion": "11",
+            "app": "${env:LT_APP_ANDROID}",
+            "project": "LambdaTest Android Project",
+            "build": "Test LambdaTest Build",
+            "name": "Test LambdaTest Session",
+            "devicelog": true,
+            "network": true,
+            "visual": true,
+            "video": true,
+            "autoGrantPermissions": true,
+            "autoAcceptAlerts": true,
+            "isRealMobile": true,
+            "w3c": true
+          }
+        }
       }
     }
   }
