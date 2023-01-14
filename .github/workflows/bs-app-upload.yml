@@ -27,3 +27,14 @@ jobs:
           password: ${{ env.BS_KEY }}
           data: '{ "custom_id": "AndroidApp" }'
           files: '{ "file": "${{ github.workspace }}/core-java/src/test/resources/apps/android/saucedemo.apk" }'
+
+      - name: Upload iOS App
+        id: ios_app_upload
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: https://api-cloud.browserstack.com/app-automate/upload
+          method: POST
+          username: ${{ env.BS_USER }}
+          password: ${{ env.BS_KEY }}
+          data: '{ "custom_id": "IOSApp" }'
+          files: '{ "file": "${{ github.workspace }}/core-java/src/test/resources/apps/ios/saucedemo.ipa" }'
