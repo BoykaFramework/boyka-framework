@@ -44,12 +44,15 @@ public class CartPage {
 
     private final Locator checkout = buildLocator ().web (id ("checkout"))
         .android (accessibilityId ("test-CHECKOUT"))
+        .ios (accessibilityId ("test-CHECKOUT"))
         .name ("Checkout")
         .build ();
     private final Locator delete   = buildLocator ().android (accessibilityId ("test-Delete"))
+        .ios (accessibilityId ("test-Delete"))
         .name ("Delete")
         .build ();
     private final Locator remove   = buildLocator ().android (accessibilityId ("test-REMOVE"))
+        .ios (accessibilityId ("test-REMOVE"))
         .name ("Remove")
         .build ();
 

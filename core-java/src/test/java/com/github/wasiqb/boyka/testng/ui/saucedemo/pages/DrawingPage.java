@@ -41,6 +41,7 @@ public class DrawingPage {
     private final Locator clearButton = Locator.buildLocator ()
         .name ("Clear Button")
         .android (accessibilityId ("test-CLEAR"))
+        .ios (accessibilityId ("test-CLEAR"))
         .build ();
 
     private DrawingPage () {

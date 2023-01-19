@@ -153,6 +153,7 @@
           "port": 4723,
           "base_path": "/wd/hub",
           "session_override": true,
+          "driver": "uiautomator2",
           "allow_insecure": [
             "get_server_logs"
           ]
@@ -188,6 +189,7 @@
           "port": 4723,
           "base_path": "/wd/hub",
           "session_override": true,
+          "driver": "uiautomator2",
           "allow_insecure": [
             "get_server_logs"
           ]
@@ -294,15 +296,17 @@
           "port": 4724,
           "base_path": "/wd/hub",
           "session_override": true,
+          "driver": "xcuitest",
+          "appium_path": "/Users/wasiqbhamla/.nvm/versions/node/v16.19.0/lib/node_modules/appium/build/lib/main.js",
           "allow_insecure": [
             "get_server_logs"
           ]
         },
         "device": {
           "os": "IOS",
-          "version": "15",
-          "name": "iPhone 14 Pro",
-          "automation": "UI_AUTOMATOR",
+          "version": "16.2",
+          "name": "iPhone 14 Pro Max",
+          "automation": "XCUI",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -312,7 +316,6 @@
           },
           "application": {
             "path": "/apps/ios/saucedemo.zip",
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           }
         }

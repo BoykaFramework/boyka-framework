@@ -14,31 +14,17 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.enums;
+package com.github.wasiqb.boyka.config.ui.mobile.server;
 
-import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
-import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
 /**
- * Automation types for Mobile.
+ * iOS specific server settings
  *
  * @author Wasiq Bhamla
- * @since 06-Sept-2022
+ * @since 15-Jan-2023
  */
-@AllArgsConstructor
-@Getter
-public enum AutomationType {
-    /**
-     * Android Ui Automator 2 driver.
-     */
-    UI_AUTOMATOR (ANDROID_UIAUTOMATOR2),
-    /**
-     * iOS XCUITest driver.
-     */
-    XCUI (IOS_XCUI_TEST);
-
-    private final String name;
+@Data
+public class IOSSetting {
+    private int webkitProxyPort = 27753;
 }

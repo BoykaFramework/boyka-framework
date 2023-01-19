@@ -3,6 +3,7 @@ package com.github.wasiqb.boyka.testng.ui.saucedemo.actions;
 import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.MouseActions.dragDropTo;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
@@ -33,7 +34,7 @@ public class SauceDemoActions {
             clickOn (homePage ().getViewToggle ());
         }
         verifyElementDisplayed (homePage ().getProductTitle ()).isTrue ();
-        clickOn (homePage ().getAddToCartButton ());
+        dragDropTo (homePage ().getAddToCartDragHandle (), homePage ().getCartDropZone ());
 
         verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
         verifyTextOf (homePage ().getShoppingCartCount ()).isEqualTo ("1");

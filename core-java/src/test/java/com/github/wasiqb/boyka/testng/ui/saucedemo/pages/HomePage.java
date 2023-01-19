@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.testng.ui.saucedemo.pages;
 import static io.appium.java_client.AppiumBy.accessibilityId;
 import static io.appium.java_client.AppiumBy.androidUIAutomator;
 import static io.appium.java_client.AppiumBy.className;
+import static io.appium.java_client.AppiumBy.iOSNsPredicateString;
 import static java.text.MessageFormat.format;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
@@ -48,84 +49,102 @@ public class HomePage {
 
     private final Locator allItemsMenu        = Locator.buildLocator ()
         .android (accessibilityId ("test-ALL ITEMS"))
+        .ios (accessibilityId ("test-ALL ITEMS"))
         .name ("All Items Menu")
         .build ();
     private final Locator cartDropZone        = Locator.buildLocator ()
         .name ("Cart drop zone")
         .android (accessibilityId ("test-Cart drop zone"))
+        .ios (accessibilityId ("test-Cart drop zone"))
         .build ();
     private final Locator drawingMenu         = Locator.buildLocator ()
         .android (accessibilityId ("test-DRAWING"))
+        .ios (accessibilityId ("test-DRAWING"))
         .name ("Drawing Menu")
         .build ();
     private final Locator geoMenu             = Locator.buildLocator ()
         .android (accessibilityId ("test-GEO LOCATION"))
+        .ios (accessibilityId ("test-GEO LOCATION"))
         .name ("Geo Location Menu")
         .build ();
     private final Locator logout              = Locator.buildLocator ()
         .web (id ("logout_sidebar_link"))
         .android (accessibilityId ("test-LOGOUT"))
+        .ios (accessibilityId ("test-LOGOUT"))
         .name ("Logout")
         .build ();
     private final Locator menuButton          = Locator.buildLocator ()
         .web (id ("react-burger-menu-btn"))
         .android (accessibilityId ("test-Menu"))
+        .ios (accessibilityId ("test-Menu"))
         .name ("Menu Button")
         .build ();
     private final Locator productParent       = Locator.buildLocator ()
         .web (cssSelector ("div#inventory_container"))
         .android (accessibilityId ("test-PRODUCTS"))
+        .ios (accessibilityId ("test-PRODUCTS"))
         .name ("Product Parent")
         .build ();
     private final Locator productDescription  = Locator.buildLocator ()
         .parent (this.productParent)
         .name ("Product description")
         .android (accessibilityId ("test-Item description"))
+        .ios (accessibilityId ("test-Item description"))
         .web (cssSelector ("div.inventory_item_desc"))
         .build ();
     private final Locator addToCartButton     = Locator.buildLocator ()
         .parent (this.productParent)
         .name ("Add to cart button")
         .android (accessibilityId ("test-ADD TO CART"))
+        .ios (accessibilityId ("test-ADD TO CART"))
         .web (id ("add-to-cart-sauce-labs-backpack"))
         .build ();
     private final Locator addToCartDragHandle = Locator.buildLocator ()
         .parent (this.productParent)
         .android (accessibilityId ("test-Drag Handle"))
+        .ios (accessibilityId ("test-Drag Handle"))
         .name ("Add to cart handle")
         .build ();
     private final Locator productPrice        = Locator.buildLocator ()
         .parent (this.productParent)
         .name ("Product price")
         .android (accessibilityId ("test-Price"))
+        .ios (accessibilityId ("test-Price"))
         .web (cssSelector ("div.inventory_item_price"))
         .build ();
     private final Locator productTitle        = Locator.buildLocator ()
         .parent (this.productParent)
         .name ("Product title")
         .android (accessibilityId ("test-Item title"))
+        .ios (accessibilityId ("test-Item title"))
         .web (cssSelector ("div.inventory_item_name"))
         .build ();
     private final Locator qrCodeMenu          = Locator.buildLocator ()
         .android (accessibilityId ("test-QR CODE SCANNER"))
+        .ios (accessibilityId ("test-QR CODE SCANNER"))
         .name ("QR Code Menu")
         .build ();
     private final Locator shoppingCart        = Locator.buildLocator ()
         .web (cssSelector ("a.shopping_cart_link"))
         .android (accessibilityId ("test-Cart"))
+        .ios (accessibilityId ("test-Cart"))
         .name ("Shopping Cart")
         .build ();
     private final Locator shoppingCartCount   = Locator.buildLocator ()
         .web (cssSelector ("span.shopping_cart_badge"))
         .android (className ("android.widget.TextView"))
+        .ios (className ("XCUIElementTypeOther"))
+        .parent (this.shoppingCart)
         .name ("Shopping Cart count")
         .build ();
     private final Locator viewToggle          = Locator.buildLocator ()
         .android (accessibilityId ("test-Toggle"))
+        .ios (accessibilityId ("test-Toggle"))
         .name ("View Toggle")
         .build ();
     private final Locator webViewMenu         = Locator.buildLocator ()
         .android (accessibilityId ("test-WEBVIEW"))
+        .ios (accessibilityId ("test-WEBVIEW"))
         .name ("Web Menu")
         .build ();
 
@@ -144,6 +163,8 @@ public class HomePage {
         return Locator.buildLocator ()
             .web (xpath (format (".//*[text()=\"{0}\"]", productName)))
             .android (androidUIAutomator (format ("new UiSelector().textContains(\"{0}\")", productName)))
+            .ios (iOSNsPredicateString (
+                format ("label CONTAINS \"{0}\" AND type == \"XCUIElementTypeStaticText\"", productName)))
             .name (format ("Product [{0}]", productName))
             .build ();
     }

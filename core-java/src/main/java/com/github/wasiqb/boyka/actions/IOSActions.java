@@ -14,31 +14,19 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.enums;
+package com.github.wasiqb.boyka.actions;
 
-import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
-import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
+import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.HideKeyboardStrategy;
 
-/**
- * Automation types for Mobile.
- *
- * @author Wasiq Bhamla
- * @since 06-Sept-2022
- */
-@AllArgsConstructor
-@Getter
-public enum AutomationType {
-    /**
-     * Android Ui Automator 2 driver.
-     */
-    UI_AUTOMATOR (ANDROID_UIAUTOMATOR2),
-    /**
-     * iOS XCUITest driver.
-     */
-    XCUI (IOS_XCUI_TEST);
+public final class IOSActions {
+    public static void hideKeyboard () {
+        performDriverAction ((IOSDriver d) -> d.hideKeyboard (HideKeyboardStrategy.TAP_OUTSIDE, "return"));
+    }
 
-    private final String name;
+    private IOSActions () {
+        // Utility class.
+    }
 }

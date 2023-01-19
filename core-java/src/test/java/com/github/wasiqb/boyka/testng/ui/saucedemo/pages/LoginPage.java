@@ -42,24 +42,20 @@ public class LoginPage {
         return LOGIN_PAGE;
     }
 
-    private final Locator loginBox    = buildLocator ().web (id ("login_button_container"))
-        .android (accessibilityId ("test-Login"))
-        .name ("Login Box")
-        .build ();
     private final Locator loginButton = buildLocator ().web (id ("login-button"))
         .android (accessibilityId ("test-LOGIN"))
+        .ios (accessibilityId ("test-LOGIN"))
         .name ("Login Button")
-        .parent (this.loginBox)
         .build ();
     private final Locator password    = buildLocator ().web (id ("password"))
         .android (accessibilityId ("test-Password"))
+        .ios (accessibilityId ("test-Password"))
         .name ("Password")
-        .parent (this.loginBox)
         .build ();
     private final Locator username    = buildLocator ().web (id ("user-name"))
         .android (accessibilityId ("test-Username"))
+        .ios (accessibilityId ("test-Username"))
         .name ("User Name")
-        .parent (this.loginBox)
         .build ();
 
     private LoginPage () {

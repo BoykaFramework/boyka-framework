@@ -39,8 +39,10 @@ public class ServerSetting {
     private String         appiumPath;
     private String         basePath;
     private CloudProviders cloud           = NONE;
+    private String         driver;
     private boolean        external;
     private String         host;
+    private IOSSetting     ios;
     private String         nodePath;
     private String         password;
     private int            port;

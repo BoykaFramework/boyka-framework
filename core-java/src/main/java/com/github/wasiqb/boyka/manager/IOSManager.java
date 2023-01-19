@@ -1,3 +1,19 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2023, Wasiq Bhamla
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
@@ -25,6 +41,12 @@ public class IOSManager implements IDriverManager {
             setupCloudMobileDriver (options, this.mobileSetting.getServer ()
                 .getCloud (), this.settings);
         } else {
+            options.setAutomationName (this.settings.getAutomation ()
+                .getName ());
+            options.setPlatformName (this.settings.getOs ()
+                .name ());
+            options.setPlatformVersion (this.settings.getVersion ());
+            options.setDeviceName (this.settings.getName ());
             options.setAutoAcceptAlerts (this.settings.isGrantPermission ());
             options.setAutoDismissAlerts (!this.settings.isGrantPermission ());
             setupApplicationOptions (this.settings.getApplication (), options);
