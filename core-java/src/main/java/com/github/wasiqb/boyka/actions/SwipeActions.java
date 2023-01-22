@@ -119,7 +119,7 @@ public final class SwipeActions {
             up ();
         }
         if (!isDisplayed (locator)) {
-            throwError (ELEMENT_NOT_FOUND, locator, getSession ().getPlatformType ());
+            throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
         }
         LOGGER.traceExit ();
     }

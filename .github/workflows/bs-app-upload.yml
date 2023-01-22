@@ -26,7 +26,7 @@ jobs:
           username: ${{ env.BS_USER }}
           password: ${{ env.BS_KEY }}
           data: '{ "custom_id": "AndroidApp" }'
-          files: '{ "file": "${{ github.workspace }}/core-java/src/test/resources/apps/android/saucedemo.apk" }'
+          files: '{ "file": "${{ github.workspace }}/core-java/src/test/resources/apps/android/sauce-demo.apk" }'
 
       - name: Upload iOS App
         id: ios_app_upload
@@ -37,4 +37,4 @@ jobs:
           username: ${{ env.BS_USER }}
           password: ${{ env.BS_KEY }}
           data: '{ "custom_id": "IOSApp" }'
-          files: '{ "file": "${{ github.workspace }}/core-java/src/test/resources/apps/ios/saucedemo.ipa" }'
+          files: '{ "file": "${{ github.workspace }}/core-java/src/test/resources/apps/ios/sauce-demo.ipa" }'
