@@ -1,5 +1,6 @@
 package com.github.wasiqb.boyka.testng.ui.mydemo.actions;
 
+import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
 import static com.github.wasiqb.boyka.actions.ElementActions.textOf;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.hideKeyboard;
@@ -76,6 +77,7 @@ public class SauceDemoActions {
             .city ());
         enterText (checkoutPage ().getState (), faker.address ()
             .state ());
+        swipe ().till (checkoutPage ().getZipCode ());
         enterText (checkoutPage ().getZipCode (), faker.address ()
             .zipCode ());
         enterText (checkoutPage ().getCountry (), faker.address ()
