@@ -50,6 +50,7 @@ public class IOSManager implements IDriverManager {
             options.setAutoAcceptAlerts (this.settings.isGrantPermission ());
             options.setAutoDismissAlerts (!this.settings.isGrantPermission ());
             setupApplicationOptions (this.settings.getApplication (), options);
+            options.setConnectHardwareKeyboard (this.settings.isConnectKeyboard ());
             options.setBundleId (this.settings.getApplication ()
                 .getBundleId ());
         }

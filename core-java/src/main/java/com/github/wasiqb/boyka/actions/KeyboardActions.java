@@ -16,13 +16,25 @@
 
 package com.github.wasiqb.boyka.actions;
 
+import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
+import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.ElementActions.clear;
+import static com.github.wasiqb.boyka.enums.Message.NO_KEYBOARD_ERROR;
+import static com.github.wasiqb.boyka.enums.PlatformType.ANDROID;
+import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
+import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static io.appium.java_client.remote.HideKeyboardStrategy.TAP_OUTSIDE;
 import static java.util.Arrays.stream;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.Keys.chord;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import io.appium.java_client.HasOnScreenKeyboard;
+import io.appium.java_client.HidesKeyboard;
+import io.appium.java_client.ios.IOSDriver;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -59,6 +71,36 @@ public final class KeyboardActions {
         clear (locator);
         appendText (locator, text);
         LOGGER.traceExit ();
+    }
+
+    /**
+     * Hides the keyboard if visible.
+     */
+    public static void hideKeyboard () {
+        final var platform = getSession ().getPlatformType ();
+        if (platform == WEB) {
+            throwError (NO_KEYBOARD_ERROR);
+        }
+        if (isKeyboardVisible ()) {
+            if (platform == IOS) {
+                performDriverAction ((final IOSDriver d) -> d.hideKeyboard (TAP_OUTSIDE, "return"));
+            } else if (platform == ANDROID) {
+                performDriverAction (HidesKeyboard::hideKeyboard);
+            }
+        }
+    }
+
+    /**
+     * Gets the keyboard state whether it is visible or not.
+     *
+     * @return true, if visible.
+     */
+    public static boolean isKeyboardVisible () {
+        final var platform = getSession ().getPlatformType ();
+        if (platform == WEB) {
+            throwError (NO_KEYBOARD_ERROR);
+        }
+        return getDriverAttribute (HasOnScreenKeyboard::isKeyboardShown, false);
     }
 
     /**

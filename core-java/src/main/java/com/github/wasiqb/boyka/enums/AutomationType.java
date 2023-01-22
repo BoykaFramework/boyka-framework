@@ -34,11 +34,12 @@ public enum AutomationType {
     /**
      * Android Ui Automator 2 driver.
      */
-    UI_AUTOMATOR (ANDROID_UIAUTOMATOR2),
+    UI_AUTOMATOR ("uiautomator2", ANDROID_UIAUTOMATOR2),
     /**
      * iOS XCUITest driver.
      */
-    XCUI (IOS_XCUI_TEST);
+    XCUI ("xcuitest", IOS_XCUI_TEST);
 
+    private final String driverName;
     private final String name;
 }

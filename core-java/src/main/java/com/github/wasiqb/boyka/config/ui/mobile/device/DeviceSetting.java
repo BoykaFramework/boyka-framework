@@ -41,6 +41,7 @@ public class DeviceSetting {
     private Map<String, Object>  capabilities;
     private boolean              clearFiles             = true;
     private boolean              clearLogs              = true;
+    private boolean              connectKeyboard        = true;
     private boolean              fullReset;
     private boolean              grantPermission        = true;
     private boolean              ignoreUnimportantViews = true;

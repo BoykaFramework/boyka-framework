@@ -158,6 +158,10 @@ public enum Message {
      */
     NO_JSON_FILE_FOUND ("JSON file [{0}] not found..."),
     /**
+     * No virtual keyboard for Web platform.
+     */
+    NO_KEYBOARD_ERROR ("There is no virtual keyboard for Web..."),
+    /**
      * Null remote url.
      */
     NULL_REMOTE_URL ("Remote URL is null..."),

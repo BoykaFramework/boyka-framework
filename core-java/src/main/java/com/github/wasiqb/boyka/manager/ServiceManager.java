@@ -224,7 +224,8 @@ public class ServiceManager {
     private void setCommonArguments () {
         setArgument (BASEPATH, this.setting.getBasePath ());
         setArgument (SESSION_OVERRIDE, this.setting.isSessionOverride ());
-        setArgument (USE_DRIVERS, this.setting.getDriver ());
+        setArgument (USE_DRIVERS, this.setting.getDriver ()
+            .getDriverName ());
         if (this.setting.getAllowInsecure () != null && !this.setting.getAllowInsecure ()
             .isEmpty ()) {
             setArgument (ALLOW_INSECURE, join (",", this.setting.getAllowInsecure ()));
