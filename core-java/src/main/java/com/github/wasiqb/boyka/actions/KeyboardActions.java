@@ -21,12 +21,10 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.ElementActions.clear;
 import static com.github.wasiqb.boyka.enums.Message.NO_KEYBOARD_ERROR;
-import static com.github.wasiqb.boyka.enums.PlatformType.ANDROID;
 import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
-import static io.appium.java_client.remote.HideKeyboardStrategy.TAP_OUTSIDE;
 import static java.util.Arrays.stream;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.Keys.chord;
@@ -34,7 +32,6 @@ import static org.openqa.selenium.Keys.chord;
 import com.github.wasiqb.boyka.builders.Locator;
 import io.appium.java_client.HasOnScreenKeyboard;
 import io.appium.java_client.HidesKeyboard;
-import io.appium.java_client.ios.IOSDriver;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -55,7 +52,12 @@ public final class KeyboardActions {
     public static void appendText (final Locator locator, final String text) {
         LOGGER.traceEntry ();
         LOGGER.info ("Appending text {} to element {}", text, locator.getName ());
-        performElementAction (e -> e.sendKeys (text), locator);
+        performElementAction (e -> {
+            e.sendKeys (text);
+            if (getSession ().getPlatformType () == IOS) {
+                e.sendKeys ("\n");
+            }
+        }, locator);
         LOGGER.traceExit ();
     }
 
@@ -82,11 +84,7 @@ public final class KeyboardActions {
             throwError (NO_KEYBOARD_ERROR);
         }
         if (isKeyboardVisible ()) {
-            if (platform == IOS) {
-                performDriverAction ((final IOSDriver d) -> d.hideKeyboard (TAP_OUTSIDE, "return"));
-            } else if (platform == ANDROID) {
-                performDriverAction (HidesKeyboard::hideKeyboard);
-            }
+            performDriverAction (HidesKeyboard::hideKeyboard);
         }
     }
 

@@ -24,4 +24,11 @@
             <package name="com.github.wasiqb.boyka.testng.ui.mydemo"/>
         </packages>
     </test>
+    <test name="Test Boyka Mobile on BrowserStack iOS Device">
+        <parameter name="platformType" value="IOS"/>
+        <parameter name="driverKey" value="test_bs_ios"/>
+        <packages>
+            <package name="com.github.wasiqb.boyka.testng.ui.mydemo"/>
+        </packages>
+    </test>
 </suite>

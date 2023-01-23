@@ -236,7 +236,6 @@
           "application": {
             "path": "AndroidApp",
             "external": true,
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "capabilities": {
@@ -265,7 +264,6 @@
           "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "application": {
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "ignore_unimportant_views": true,
@@ -296,7 +294,6 @@
           "base_path": "/wd/hub",
           "session_override": true,
           "driver": "XCUI",
-          "appium_path": "/Users/wasiqbhamla/.nvm/versions/node/v16.19.0/lib/node_modules/appium/build/lib/main.js",
           "allow_insecure": [
             "get_server_logs"
           ]
@@ -317,6 +314,74 @@
           "application": {
             "path": "/apps/ios/sauce-demo.zip",
             "install_timeout": 180
+          }
+        }
+      },
+      "test_bs_ios": {
+        "server": {
+          "cloud": "BROWSER_STACK",
+          "protocol": "HTTPS",
+          "host": "hub-cloud.browserstack.com",
+          "user_name": "${env:BS_USER}",
+          "password": "${env:BS_KEY}",
+          "base_path": "/wd/hub"
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16",
+          "name": "iPhone 14 Pro",
+          "automation": "XCUI",
+          "type": "CLOUD",
+          "application": {
+            "path": "IOSApp",
+            "external": true,
+            "install_timeout": 180
+          },
+          "capabilities": {
+            "projectName": "BrowserStack iOS Project",
+            "buildName": "Test BrowserStack Build",
+            "sessionName": "Test BrowserStack Session",
+            "appiumVersion": "2.0.0",
+            "deviceLogs": true,
+            "networkLogs": true,
+            "debug": true,
+            "video": true,
+            "appiumLogs": true
+          }
+        }
+      },
+      "test_lt_ios": {
+        "server": {
+          "cloud": "LAMBDA_TEST",
+          "protocol": "HTTPS",
+          "host": "mobile-hub.lambdatest.com",
+          "user_name": "${env:LT_USER}",
+          "password": "${env:LT_KEY}",
+          "base_path": "/wd/hub"
+        },
+        "device": {
+          "automation": "XCUI",
+          "type": "CLOUD",
+          "application": {
+            "install_timeout": 180
+          },
+          "ignore_unimportant_views": true,
+          "capabilities": {
+            "platformName": "iOS",
+            "deviceName": "iPhone 14 Pro",
+            "platformVersion": "16",
+            "app": "${env:LT_APP_IOS}",
+            "project": "LambdaTest iOS Project",
+            "build": "Test LambdaTest Build",
+            "name": "Test LambdaTest Session",
+            "devicelog": true,
+            "network": true,
+            "visual": true,
+            "video": true,
+            "autoGrantPermissions": true,
+            "autoAcceptAlerts": true,
+            "isRealMobile": true,
+            "w3c": true
           }
         }
       }
