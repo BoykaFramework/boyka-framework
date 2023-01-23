@@ -65,7 +65,7 @@ class AndroidManager implements IDriverManager {
     }
 
     private void setLocalUiAutomatorOptions (final UiAutomator2Options options) {
-        setAvdOptions (options, this.settings.getType (), this.settings.getAvd ());
+        setAvdOptions (options, this.settings.getType (), this.settings.getVirtualDevice ());
         options.setClearSystemFiles (this.settings.isClearFiles ());
         options.setClearDeviceLogsOnStart (this.settings.isClearLogs ());
         options.setNoReset (this.settings.isNoReset ());

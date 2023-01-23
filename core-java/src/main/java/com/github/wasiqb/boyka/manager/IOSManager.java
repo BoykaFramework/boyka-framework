@@ -17,11 +17,15 @@
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
+import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
+import static java.time.Duration.ofSeconds;
 
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.device.VirtualDeviceSetting;
+import com.github.wasiqb.boyka.enums.DeviceType;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 
@@ -50,11 +54,21 @@ public class IOSManager implements IDriverManager {
             options.setAutoAcceptAlerts (this.settings.isGrantPermission ());
             options.setAutoDismissAlerts (!this.settings.isGrantPermission ());
             setupApplicationOptions (this.settings.getApplication (), options);
-            options.setConnectHardwareKeyboard (this.settings.isConnectKeyboard ());
+            setupVirtualDeviceSetting (this.settings.getType (), this.settings.getVirtualDevice (), options);
             options.setBundleId (this.settings.getApplication ()
                 .getBundleId ());
+            options.setClearSystemFiles (this.settings.isClearFiles ());
         }
         setDriver (new IOSDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
+    }
+
+    private void setupVirtualDeviceSetting (final DeviceType deviceType, final VirtualDeviceSetting virtualDevice,
+        final XCUITestOptions options) {
+        if (deviceType == VIRTUAL) {
+            options.setConnectHardwareKeyboard (virtualDevice.isConnectKeyboard ());
+            options.setSimulatorStartupTimeout (ofSeconds (virtualDevice.getLaunchTimeout ()));
+            options.setIsHeadless (virtualDevice.isHeadless ());
+        }
     }
 }

@@ -26,8 +26,9 @@ import lombok.Data;
  */
 @Data
 public class VirtualDeviceSetting {
-    private boolean headless      = false;
-    private int     launchTimeout = 60;
+    private boolean connectKeyboard = true;
+    private boolean headless        = false;
+    private int     launchTimeout   = 120;
     private String  name;
-    private int     readyTimeout  = 60;
+    private int     readyTimeout    = 60;
 }

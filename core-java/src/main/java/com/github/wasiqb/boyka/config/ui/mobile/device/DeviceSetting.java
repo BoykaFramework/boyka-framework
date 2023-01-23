@@ -37,11 +37,9 @@ import lombok.Data;
 public class DeviceSetting {
     private ApplicationSetting   application;
     private AutomationType       automation             = UI_AUTOMATOR;
-    private VirtualDeviceSetting avd                    = new VirtualDeviceSetting ();
     private Map<String, Object>  capabilities;
     private boolean              clearFiles             = true;
     private boolean              clearLogs              = true;
-    private boolean              connectKeyboard        = true;
     private boolean              fullReset;
     private boolean              grantPermission        = true;
     private boolean              ignoreUnimportantViews = true;
@@ -53,4 +51,5 @@ public class DeviceSetting {
     private SwipeSetting         swipe                  = new SwipeSetting ();
     private DeviceType           type                   = VIRTUAL;
     private String               version;
+    private VirtualDeviceSetting virtualDevice          = new VirtualDeviceSetting ();
 }

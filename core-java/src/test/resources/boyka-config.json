@@ -175,7 +175,7 @@
             "path": "/apps/android/sauce-demo.apk",
             "install_timeout": 180
           },
-          "avd": {
+          "virtual_device": {
             "name": "Pixel_6_Pro",
             "headless": false
           }
@@ -211,7 +211,7 @@
             "wait_activity": "com.wdiodemoapp.MainActivity",
             "install_timeout": 180
           },
-          "avd": {
+          "virtual_device": {
             "name": "Pixel_6_Pro",
             "headless": true
           }
@@ -310,6 +310,10 @@
           "swipe": {
             "distance": 25,
             "max_swipe_until_found": 5
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
           },
           "application": {
             "path": "/apps/ios/sauce-demo.zip",
