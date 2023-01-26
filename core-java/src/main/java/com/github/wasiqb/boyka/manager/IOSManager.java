@@ -20,12 +20,18 @@ import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
+import static io.appium.java_client.remote.IOSMobileCapabilityType.XCODE_ORG_ID;
+import static io.appium.java_client.remote.IOSMobileCapabilityType.XCODE_SIGNING_ID;
 import static java.time.Duration.ofSeconds;
+
+import java.util.Optional;
+import java.util.function.Consumer;
 
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.VirtualDeviceSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.device.WDASetting;
 import com.github.wasiqb.boyka.enums.DeviceType;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
@@ -54,6 +60,7 @@ public class IOSManager implements IDriverManager {
             options.setBundleId (this.settings.getApplication ()
                 .getBundleId ());
             options.setClearSystemFiles (this.settings.isClearFiles ());
+            setWdaOptions (this.settings.getWda (), options);
         }
         setDriver (new IOSDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
@@ -72,6 +79,37 @@ public class IOSManager implements IDriverManager {
         options.setPlatformVersion (this.settings.getVersion ());
         options.setDeviceName (this.settings.getName ());
         setApplicationCapabilities (options, this.settings.getApplication ());
+    }
+
+    private <T> void setOptionIfPresent (final T value, final Consumer<T> action) {
+        if (value != null) {
+            if (value instanceof Integer) {
+                Optional.of (value)
+                    .filter (i -> (Integer) i > 0)
+                    .ifPresent (action);
+            } else {
+                Optional.of (value)
+                    .ifPresent (action);
+            }
+        }
+    }
+
+    private void setWdaOptions (final WDASetting wda, final XCUITestOptions options) {
+        if (wda != null) {
+            setOptionIfPresent (wda.getLocalPort (), options::setWdaLocalPort);
+            options.setUseNewWDA (wda.isUseNew ());
+            setOptionIfPresent (wda.getLaunchTimeout (), v -> options.setWdaLaunchTimeout (ofSeconds (v)));
+            setOptionIfPresent (wda.getStartupRetries (), options::setWdaStartupRetries);
+            setOptionIfPresent (wda.getConnectionTimeout (), i -> options.setWdaConnectionTimeout (ofSeconds (i)));
+            setOptionIfPresent (wda.getStartupRetryInterval (),
+                i -> options.setWdaStartupRetryInterval (ofSeconds (i)));
+            options.setUsePrebuiltWda (wda.isUsePrebuilt ());
+            setOptionIfPresent (wda.getUpdateBundleId (), options::setUpdatedWdaBundleId);
+            setOptionIfPresent (wda.getTeamId (), v -> options.setCapability (XCODE_ORG_ID, v));
+            setOptionIfPresent (wda.getSigningId (), v -> options.setCapability (XCODE_SIGNING_ID, v));
+            setOptionIfPresent (wda.getAgentPath (), v -> options.setCapability ("agentPath", v));
+            setOptionIfPresent (wda.getBootstrapPath (), v -> options.setCapability ("bootstrapPath", v));
+        }
     }
 
     private void setupVirtualDeviceSetting (final DeviceType deviceType, final VirtualDeviceSetting virtualDevice,

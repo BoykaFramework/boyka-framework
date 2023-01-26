@@ -52,4 +52,5 @@ public class DeviceSetting {
     private DeviceType           type                   = VIRTUAL;
     private String               version;
     private VirtualDeviceSetting virtualDevice          = new VirtualDeviceSetting ();
+    private WDASetting           wda;
 }
