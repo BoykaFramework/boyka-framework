@@ -23,6 +23,7 @@ import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
 import static java.time.Duration.ofSeconds;
 
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
+import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.VirtualDeviceSetting;
 import com.github.wasiqb.boyka.enums.DeviceType;
@@ -41,16 +42,11 @@ public class IOSManager implements IDriverManager {
     @Override
     public void setupDriver () {
         final var options = new XCUITestOptions ();
+        setCommonCapabilities (options);
         if (this.settings.getType () == CLOUD) {
             setupCloudMobileDriver (options, this.mobileSetting.getServer ()
                 .getCloud (), this.settings);
         } else {
-            options.setAutomationName (this.settings.getAutomation ()
-                .getName ());
-            options.setPlatformName (this.settings.getOs ()
-                .name ());
-            options.setPlatformVersion (this.settings.getVersion ());
-            options.setDeviceName (this.settings.getName ());
             options.setAutoAcceptAlerts (this.settings.isGrantPermission ());
             options.setAutoDismissAlerts (!this.settings.isGrantPermission ());
             setupApplicationOptions (this.settings.getApplication (), options);
@@ -61,6 +57,21 @@ public class IOSManager implements IDriverManager {
         }
         setDriver (new IOSDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
+    }
+
+    private void setApplicationCapabilities (final XCUITestOptions options, final ApplicationSetting application) {
+        setupApplicationOptions (application, options);
+        options.setBundleId (application.getBundleId ());
+    }
+
+    private void setCommonCapabilities (final XCUITestOptions options) {
+        options.setAutomationName (this.settings.getAutomation ()
+            .getName ());
+        options.setPlatformName (this.settings.getOs ()
+            .name ());
+        options.setPlatformVersion (this.settings.getVersion ());
+        options.setDeviceName (this.settings.getName ());
+        setApplicationCapabilities (options, this.settings.getApplication ());
     }
 
     private void setupVirtualDeviceSetting (final DeviceType deviceType, final VirtualDeviceSetting virtualDevice,

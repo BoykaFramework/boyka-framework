@@ -44,6 +44,7 @@ public class SauceDemoActions {
         this.totalAmount = this.price * quantity;
 
         clickOn (productDetailsPage ().getColor (color));
+        swipe ().up ();
         for (int i = 1; i < quantity; i++) {
             clickOn (productDetailsPage ().getAddQuantity ());
         }

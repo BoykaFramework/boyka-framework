@@ -346,6 +346,7 @@
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
             "appiumVersion": "2.0.0",
+            "automationVersion": "latest",
             "deviceLogs": true,
             "networkLogs": true,
             "debug": true,
