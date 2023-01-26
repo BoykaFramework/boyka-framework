@@ -36,11 +36,11 @@ import com.github.wasiqb.boyka.enums.DeviceType;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 
-public class IOSManager implements IDriverManager {
+class IOSManager implements IDriverManager {
     private final MobileSetting mobileSetting;
     private final DeviceSetting settings;
 
-    public IOSManager () {
+    IOSManager () {
         this.mobileSetting = getSession ().getMobileSetting ();
         this.settings = this.mobileSetting.getDevice ();
     }
@@ -60,6 +60,7 @@ public class IOSManager implements IDriverManager {
             options.setBundleId (this.settings.getApplication ()
                 .getBundleId ());
             options.setClearSystemFiles (this.settings.isClearFiles ());
+            options.setMaxTypingFrequency (this.settings.getTypingSpeed ());
             setWdaOptions (this.settings.getWda (), options);
         }
         setDriver (new IOSDriver (getSession ().getServiceManager ()
@@ -72,7 +73,8 @@ public class IOSManager implements IDriverManager {
     }
 
     private void setCommonCapabilities (final XCUITestOptions options) {
-        options.setAutomationName (this.settings.getAutomation ()
+        options.setAutomationName (this.mobileSetting.getServer ()
+            .getDriver ()
             .getName ());
         options.setPlatformName (this.settings.getOs ()
             .name ());

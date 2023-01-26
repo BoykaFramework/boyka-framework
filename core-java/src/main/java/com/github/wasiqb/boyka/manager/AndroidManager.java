@@ -28,7 +28,8 @@ class AndroidManager implements IDriverManager {
 
     @Override
     public void setupDriver () {
-        final var automation = this.settings.getAutomation ();
+        final var automation = this.mobileSetting.getServer ()
+            .getDriver ();
         if (automation == UI_AUTOMATOR) {
             setupUiAutomatorDriver (this.mobileSetting.getServer ()
                 .getCloud ());
@@ -56,7 +57,8 @@ class AndroidManager implements IDriverManager {
 
     private void setCommonUiAutomatorOptions (final UiAutomator2Options options) {
         setAndroidApplicationOptions (options, this.settings.getApplication ());
-        options.setAutomationName (this.settings.getAutomation ()
+        options.setAutomationName (this.mobileSetting.getServer ()
+            .getDriver ()
             .getName ());
         options.setPlatformName (this.settings.getOs ()
             .name ());

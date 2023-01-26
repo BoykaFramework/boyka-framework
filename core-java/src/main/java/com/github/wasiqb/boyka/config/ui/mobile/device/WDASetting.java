@@ -20,6 +20,12 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import lombok.Data;
 
+/**
+ * iOS WebDriverAgent related settings.
+ *
+ * @author Wasiq Bhamla
+ * @since 26-Jan-2023
+ */
 @Data
 public class WDASetting {
     private String  agentPath            = EMPTY;

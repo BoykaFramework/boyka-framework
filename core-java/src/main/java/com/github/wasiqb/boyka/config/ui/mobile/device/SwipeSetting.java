@@ -3,7 +3,10 @@ package com.github.wasiqb.boyka.config.ui.mobile.device;
 import lombok.Data;
 
 /**
- * Swipe
+ * Swipe related settings
+ *
+ * @author Wasiq Bhamla
+ * @since 02-Jan-2023
  */
 @Data
 public class SwipeSetting {
