@@ -68,3 +68,4 @@ jobs:
             ${{ github.workspace }}/sample-tests/selenium-grid.log
             ${{ github.workspace }}/sample-tests/target
             ${{ github.workspace }}/sample-tests/reports
+            ${{ github.workspace }}/sample-java/screenshots

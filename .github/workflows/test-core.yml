@@ -137,6 +137,7 @@ jobs:
             ${{ github.workspace }}/core-java/selenium-grid.log
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/reports
+            ${{ github.workspace }}/core-java/screenshots
 
   analysis:
     if: github.event_name == 'push'
