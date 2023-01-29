@@ -176,7 +176,7 @@
           },
           "virtual_device": {
             "name": "Pixel_6_Pro",
-            "headless": true
+            "headless": false
           }
         }
       },
@@ -308,7 +308,7 @@
             "max_swipe_until_found": 5
           },
           "virtual_device": {
-            "headless": true,
+            "headless": false,
             "launch_timeout": 180
           },
           "wda": {
