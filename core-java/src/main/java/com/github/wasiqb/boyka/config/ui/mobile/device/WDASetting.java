@@ -16,8 +16,6 @@
 
 package com.github.wasiqb.boyka.config.ui.mobile.device;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-
 import lombok.Data;
 
 /**
@@ -28,16 +26,14 @@ import lombok.Data;
  */
 @Data
 public class WDASetting {
-    private String  agentPath            = EMPTY;
-    private String  bootstrapPath        = EMPTY;
     private int     connectionTimeout    = 60;
     private int     launchTimeout        = 60;
     private int     localPort            = 8100;
-    private String  signingId            = EMPTY;
+    private String  signingId;
     private int     startupRetries       = 2;
     private int     startupRetryInterval = 10;
-    private String  teamId               = EMPTY;
-    private String  updateBundleId       = EMPTY;
+    private String  teamId;
+    private String  updateBundleId;
     private boolean useNew;
     private boolean usePrebuilt;
 }

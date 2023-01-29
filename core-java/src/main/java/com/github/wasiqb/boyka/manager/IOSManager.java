@@ -53,15 +53,7 @@ class IOSManager implements IDriverManager {
             setupCloudMobileDriver (options, this.mobileSetting.getServer ()
                 .getCloud (), this.settings);
         } else {
-            options.setAutoAcceptAlerts (this.settings.isGrantPermission ());
-            options.setAutoDismissAlerts (!this.settings.isGrantPermission ());
-            setupApplicationOptions (this.settings.getApplication (), options);
-            setupVirtualDeviceSetting (this.settings.getType (), this.settings.getVirtualDevice (), options);
-            options.setBundleId (this.settings.getApplication ()
-                .getBundleId ());
-            options.setClearSystemFiles (this.settings.isClearFiles ());
-            options.setMaxTypingFrequency (this.settings.getTypingSpeed ());
-            setWdaOptions (this.settings.getWda (), options);
+            setupLocalSimulatorOptions (options);
         }
         setDriver (new IOSDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
@@ -109,9 +101,21 @@ class IOSManager implements IDriverManager {
             setOptionIfPresent (wda.getUpdateBundleId (), options::setUpdatedWdaBundleId);
             setOptionIfPresent (wda.getTeamId (), v -> options.setCapability (XCODE_ORG_ID, v));
             setOptionIfPresent (wda.getSigningId (), v -> options.setCapability (XCODE_SIGNING_ID, v));
-            setOptionIfPresent (wda.getAgentPath (), v -> options.setCapability ("agentPath", v));
-            setOptionIfPresent (wda.getBootstrapPath (), v -> options.setCapability ("bootstrapPath", v));
         }
+    }
+
+    private void setupLocalSimulatorOptions (final XCUITestOptions options) {
+        options.setAutoAcceptAlerts (this.settings.isGrantPermission ());
+        options.setAutoDismissAlerts (!this.settings.isGrantPermission ());
+        setupApplicationOptions (this.settings.getApplication (), options);
+        setupVirtualDeviceSetting (this.settings.getType (), this.settings.getVirtualDevice (), options);
+        options.setBundleId (this.settings.getApplication ()
+            .getBundleId ());
+        options.setClearSystemFiles (this.settings.isClearFiles ());
+        options.setNoReset (this.settings.isNoReset ());
+        options.setFullReset (this.settings.isFullReset ());
+        options.setMaxTypingFrequency (this.settings.getTypingSpeed ());
+        setWdaOptions (this.settings.getWda (), options);
     }
 
     private void setupVirtualDeviceSetting (final DeviceType deviceType, final VirtualDeviceSetting virtualDevice,
