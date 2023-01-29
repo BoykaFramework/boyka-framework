@@ -26,5 +26,9 @@ public enum OS {
     /**
      * Android platform.
      */
-    ANDROID
+    ANDROID,
+    /**
+     * iOS platform.
+     */
+    IOS
 }

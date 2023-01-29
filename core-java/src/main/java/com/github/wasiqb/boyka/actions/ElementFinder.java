@@ -61,7 +61,8 @@ final class ElementFinder {
             return elements.stream ()
                 .filter (locator.getFilter ())
                 .findFirst ()
-                .orElseThrow (() -> new FrameworkError (format (ELEMENT_NOT_FOUND.getMessageText (), locator)));
+                .orElseThrow (() -> new FrameworkError (format (ELEMENT_NOT_FOUND.getMessageText (), locator.getName (),
+                    getSession ().getPlatformType ())));
         }
         return elements.get (locator.getIndex ());
     }

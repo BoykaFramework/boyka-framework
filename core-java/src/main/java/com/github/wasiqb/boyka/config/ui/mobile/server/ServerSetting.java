@@ -22,6 +22,7 @@ import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 
 import java.util.List;
 
+import com.github.wasiqb.boyka.enums.AutomationType;
 import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.Protocol;
 import lombok.Data;
@@ -39,8 +40,10 @@ public class ServerSetting {
     private String         appiumPath;
     private String         basePath;
     private CloudProviders cloud           = NONE;
+    private AutomationType driver;
     private boolean        external;
     private String         host;
+    private IOSSetting     ios;
     private String         nodePath;
     private String         password;
     private int            port;

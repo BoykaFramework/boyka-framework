@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,7 @@ import static io.appium.java_client.service.local.flags.GeneralServerFlag.ALLOW_
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.BASEPATH;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.USE_DRIVERS;
 import static java.lang.String.join;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
@@ -51,6 +52,7 @@ import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.IOSServerFlag;
 import io.appium.java_client.service.local.flags.ServerArgument;
 import org.apache.logging.log4j.Logger;
 
@@ -214,6 +216,7 @@ public class ServiceManager {
 
     private void setArguments () {
         setAndroidArguments ();
+        setIOSArguments ();
         setLogArguments ();
         setCommonArguments ();
     }
@@ -221,9 +224,18 @@ public class ServiceManager {
     private void setCommonArguments () {
         setArgument (BASEPATH, this.setting.getBasePath ());
         setArgument (SESSION_OVERRIDE, this.setting.isSessionOverride ());
+        setArgument (USE_DRIVERS, this.setting.getDriver ()
+            .getDriverName ());
         if (this.setting.getAllowInsecure () != null && !this.setting.getAllowInsecure ()
             .isEmpty ()) {
             setArgument (ALLOW_INSECURE, join (",", this.setting.getAllowInsecure ()));
+        }
+    }
+
+    private void setIOSArguments () {
+        final var ios = this.setting.getIos ();
+        if (ios != null) {
+            setArgument (IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, ios.getWebkitProxyPort ());
         }
     }
 

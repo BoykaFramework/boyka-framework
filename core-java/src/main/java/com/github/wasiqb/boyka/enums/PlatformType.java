@@ -32,7 +32,12 @@ public enum PlatformType {
      */
     API,
     /**
+     * iOS application.
+     */
+    IOS,
+    /**
      * Web application.
      */
     WEB
+
 }

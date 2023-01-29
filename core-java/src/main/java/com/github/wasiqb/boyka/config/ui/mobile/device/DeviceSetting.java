@@ -16,13 +16,11 @@
 
 package com.github.wasiqb.boyka.config.ui.mobile.device;
 
-import static com.github.wasiqb.boyka.enums.AutomationType.UI_AUTOMATOR;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
 import static com.github.wasiqb.boyka.enums.OS.ANDROID;
 
 import java.util.Map;
 
-import com.github.wasiqb.boyka.enums.AutomationType;
 import com.github.wasiqb.boyka.enums.DeviceType;
 import com.github.wasiqb.boyka.enums.OS;
 import lombok.Data;
@@ -36,8 +34,6 @@ import lombok.Data;
 @Data
 public class DeviceSetting {
     private ApplicationSetting   application;
-    private AutomationType       automation             = UI_AUTOMATOR;
-    private VirtualDeviceSetting avd                    = new VirtualDeviceSetting ();
     private Map<String, Object>  capabilities;
     private boolean              clearFiles             = true;
     private boolean              clearLogs              = true;
@@ -51,5 +47,8 @@ public class DeviceSetting {
     private int                  serverLaunchTimeout    = 30;
     private SwipeSetting         swipe                  = new SwipeSetting ();
     private DeviceType           type                   = VIRTUAL;
+    private int                  typingSpeed            = 60;
     private String               version;
+    private VirtualDeviceSetting virtualDevice          = new VirtualDeviceSetting ();
+    private WDASetting           wda;
 }
