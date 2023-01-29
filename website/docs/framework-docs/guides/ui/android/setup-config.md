@@ -1,11 +1,11 @@
 ---
-title: 🪛 Setup Mobile Configuration
+title: 🪛 Setup Configuration
 sidebar_position: 1
 ---
 
-We can set multiple configurations in the configuration file with different key name for different end points.
+You can set multiple configurations in the configuration file with different key name for different Android devices.
 
-Let's see how to set configuration in the configuration file for API end-points.
+Let's see how to set configuration in the configuration file for Android application to run on different devices.
 
 ```json title="src/test/resources/boyka-config.json"
 {
@@ -16,6 +16,11 @@ Let's see how to set configuration in the configuration file for API end-points.
       "page_load_timeout": 30,
       "script_timeout": 10
     },
+    "logging": {
+      "exclude_logs": [
+        "bugreport"
+      ]
+    },
     "screenshot": {
       "enabled": true,
       "path": "./screenshots",
@@ -23,27 +28,36 @@ Let's see how to set configuration in the configuration file for API end-points.
       "prefix": "SCR"
     },
     "mobile": {
-      "test_local_android": {
+      "test_local_sauce_android": {
         "server": {
           "protocol": "HTTP",
           "host": "127.0.0.1",
           "port": 4723,
-          "session_override": true
+          "base_path": "/wd/hub",
+          "session_override": true,
+          "driver": "UI_AUTOMATOR",
+          "allow_insecure": [
+            "get_server_logs"
+          ]
         },
         "device": {
           "os": "ANDROID",
-          "version": "10",
-          "name": "Pixel_5",
-          "automation": "UI_AUTOMATOR",
+          "version": "11",
+          "name": "Pixel_6_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
           "application": {
-            "path": "/apps/android/saucedemo.apk",
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "path": "/apps/android/sauce-demo.apk",
             "install_timeout": 180
           },
-          "avd": {
+          "virtual_device": {
+            "name": "Pixel_6_Pro",
             "headless": true
           }
         }
@@ -55,25 +69,26 @@ Let's see how to set configuration in the configuration file for API end-points.
           "host": "hub-cloud.browserstack.com",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub"
+          "base_path": "/wd/hub",
+          "driver": "UI_AUTOMATOR"
         },
         "device": {
           "os": "ANDROID",
           "version": "11.0",
           "name": "Google Pixel 5",
-          "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
+          "ignore_unimportant_views": true,
           "application": {
-            "path": "${env:BS_APP_ANDROID}",
+            "path": "AndroidApp",
             "external": true,
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "capabilities": {
             "projectName": "BrowserStack Android Project",
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
-            "appiumVersion": "1.22.0",
+            "appiumVersion": "2.0.0",
+            "automationVersion": "latest",
             "deviceLogs": true,
             "networkLogs": true,
             "debug": true,
@@ -89,13 +104,12 @@ Let's see how to set configuration in the configuration file for API end-points.
           "host": "mobile-hub.lambdatest.com",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
-          "base_path": "/wd/hub"
+          "base_path": "/wd/hub",
+          "driver": "UI_AUTOMATOR"
         },
         "device": {
-          "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "application": {
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "ignore_unimportant_views": true,
@@ -126,5 +140,11 @@ Let's see how to set configuration in the configuration file for API end-points.
 :::info
 For more information about API configurations, please refer to [Mobile configuration guide][mobile-config].
 :::
+
+## Details of each Android configurations {#android-config-details}
+
+- `test_local_sauce_android`: This is the configuration for running the test on local Android Emulator.
+- `test_bs_android`: This is the configuration for running the test on the BrowserStack cloud Android device.
+- `test_lt_android`: This is the configuration for running the test on the LambdaTest cloud Android device.
 
 [mobile-config]: /docs/guides/configuration#mobile-config

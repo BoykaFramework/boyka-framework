@@ -47,7 +47,7 @@
     "lerna": "^6.4.1",
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^13.1.0",
-    "nx": "^15.6.2",
+    "nx": "^15.6.3",
     "prettier": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -8,6 +8,7 @@ import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import com.github.wasiqb.boyka.enums.PlatformType;
 import com.github.wasiqb.boyka.testng.ui.mydemo.actions.SauceDemoActions;
 import com.github.wasiqb.boyka.testng.ui.mydemo.pages.ProductDetailsPage;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -27,8 +28,10 @@ public class SauceDemoTest {
      * Setup test method to take screenshot after each test method.
      */
     @AfterMethod (alwaysRun = true)
-    public void afterMethod () {
-        takeScreenshot ();
+    public void afterMethod (final ITestResult result) {
+        if (!result.isSuccess ()) {
+            takeScreenshot ();
+        }
     }
 
     /**

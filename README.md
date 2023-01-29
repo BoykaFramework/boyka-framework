@@ -37,7 +37,7 @@
 </p>
 
   <h4>
-    <a href="https://BoykaFramework.github.io/boyka-framework/docs/intro">Documentation</a>
+    <a href="https://boykaframework.github.io/boyka-framework/docs/intro">Documentation</a>
   <span> | </span>
     <a href="https://github.com/BoykaFramework/boyka-framework/issues/new/choose">Report Bug</a>
   <span> | </span>
@@ -63,6 +63,7 @@ This all gave me an idea of having a single framework which could solve all the 
 - ✅ Support Rest API automation with schema validations and response body verification
 - ✅ Supports Web browser automation with support for Chrome, Edge, Firefox and Safari.
 - ✅ Supports Android native apps automation
+- ✅ Supports iOS native apps automation
 - ✅ Supports execution of Web tests on cloud platforms like BrowserStack and LambdaTest.
 - ✅ Highly configurable via `boyka-config.json`
 - ✅ Micro logging to log events of the test execution
@@ -72,7 +73,6 @@ This all gave me an idea of having a single framework which could solve all the 
 
 Following are the awesome features which will be implemented soon to the frameworks:
 
-- Support for iOS automation
 - Support for GraphQL and SOAP API automation
 - Support video recording of the tests for Web and Mobile platforms
 - Support for more cloud platforms.
@@ -191,6 +191,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "port": 4723,
           "base_path": "/wd/hub",
           "session_override": true,
+          "driver": "UI_AUTOMATOR",
           "allow_insecure": [
             "get_server_logs"
           ]
@@ -199,7 +200,6 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "os": "ANDROID",
           "version": "11",
           "name": "Pixel_6_Pro",
-          "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -209,13 +209,12 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
             "max_swipe_until_found": 5
           },
           "application": {
-            "path": "/apps/android/saucedemo.apk",
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "path": "/apps/android/sauce-demo.apk",
             "install_timeout": 180
           },
-          "avd": {
+          "virtual_device": {
             "name": "Pixel_6_Pro",
-            "headless": false
+            "headless": true
           }
         }
       },
@@ -226,19 +225,18 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "host": "hub-cloud.browserstack.com",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub"
+          "base_path": "/wd/hub",
+          "driver": "UI_AUTOMATOR"
         },
         "device": {
           "os": "ANDROID",
           "version": "11.0",
           "name": "Google Pixel 5",
-          "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "ignore_unimportant_views": true,
           "application": {
             "path": "AndroidApp",
             "external": true,
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "capabilities": {
@@ -246,6 +244,80 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
             "appiumVersion": "2.0.0",
+            "automationVersion": "latest",
+            "deviceLogs": true,
+            "networkLogs": true,
+            "debug": true,
+            "video": true,
+            "appiumLogs": true
+          }
+        }
+      },
+      "test_local_sauce_ios": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "127.0.0.1",
+          "port": 4724,
+          "base_path": "/wd/hub",
+          "session_override": true,
+          "driver": "XCUI",
+          "allow_insecure": [
+            "get_server_logs"
+          ]
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16.2",
+          "name": "iPhone 14 Pro Max",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "connect_keyboard": false,
+          "typing_speed": 30,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
+          },
+          "wda": {
+            "launch_timeout": 120,
+            "connection_timeout": 120
+          },
+          "application": {
+            "path": "/apps/ios/sauce-demo.zip",
+            "install_timeout": 180
+          }
+        }
+      },
+      "test_bs_ios": {
+        "server": {
+          "cloud": "BROWSER_STACK",
+          "protocol": "HTTPS",
+          "host": "hub-cloud.browserstack.com",
+          "user_name": "${env:BS_USER}",
+          "password": "${env:BS_KEY}",
+          "base_path": "/wd/hub",
+          "driver": "XCUI"
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16",
+          "name": "iPhone 14 Pro",
+          "type": "CLOUD",
+          "application": {
+            "path": "IOSApp",
+            "external": true,
+            "install_timeout": 180
+          },
+          "capabilities": {
+            "projectName": "BrowserStack iOS Project",
+            "buildName": "Test BrowserStack Build",
+            "sessionName": "Test BrowserStack Session",
+            "appiumVersion": "2.0.0",
+            "automationVersion": "latest",
             "deviceLogs": true,
             "networkLogs": true,
             "debug": true,
@@ -329,9 +401,9 @@ response.verifyTextField ("createdAt")
 </details>
 
 <details>
-  <summary>💻 Common Page Object for Web and Android</summary>
+  <summary>💻 Common Page Object for Web, Android and iOS</summary>
 
-This is how you can create a common page object for both Web and Android.
+This is how you can create a common page object for all Web, Android and iOS.
 
 ```java
 import io.appium.java_client.AppiumBy;
@@ -348,28 +420,23 @@ public class LoginPage {
     return LOGIN_PAGE;
   }
 
-  private final Locator loginBox = Locator.buildLocator ()
-    .web (By.id ("login_button_container"))
-    .android (AppiumBy.accessibilityId ("test-Login"))
-    .name ("Login Box")
-    .build ();
   private final Locator loginButton = Locator.buildLocator ()
     .web (By.id ("login-button"))
     .android (AppiumBy.accessibilityId ("test-LOGIN"))
+    .ios (AppiumBy.accessibilityId ("test-LOGIN"))
     .name ("Login Button")
-    .parent (this.loginBox)
     .build ();
   private final Locator password = Locator.buildLocator ()
     .web (By.id ("password"))
     .android (AppiumBy.accessibilityId ("test-Password"))
+    .ios (AppiumBy.accessibilityId ("test-Password"))
     .name ("Password")
-    .parent (this.loginBox)
     .build ();
   private final Locator username = Locator.buildLocator ()
     .web (By.id ("user-name"))
     .android (AppiumBy.accessibilityId ("test-Username"))
+    .ios (AppiumBy.accessibilityId ("test-Username"))
     .name ("User Name")
-    .parent (this.loginBox)
     .build ();
 
   private LoginPage () {
@@ -381,9 +448,9 @@ public class LoginPage {
 </details>
 
 <details>
-  <summary>✅ Common Test flow for Web and Android</summary>
+  <summary>✅ Common Test flow for Web, Android and iOS</summary>
 
-This is how you can write common actions class for Web and Android together for the app which has similar flows on both the platforms.
+This is how you can write common actions class for Web, Android and iOS together for the app which has similar flows on both the platforms.
 
 ```java
 import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
@@ -488,18 +555,22 @@ public class SauceDemoTest {
 ## ☕ Examples
 
 - API:
-  - [How to configure Boyka for API Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/setup-config)
-  - [How to compose a request?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/compose-request)
-  - [How to execute a request?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/execute-request)
-  - [How to verify the response?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/verify-response)
-- Web:
-  - [How to configure Boyka for Web Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/setup-config)
-  - [How to create page object?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/create-page-object)
-  - [How to write test using the page object?](https://BoykaFramework.github.io/boyka-framework/docs/guides/web/write-test)
-- Mobile:
-  - [How to configure Boyka for Web Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/mobile/setup-config)
-  - [How to create page object?](https://boykaframework.github.io/boyka-framework/docs/guides/mobile/create-page-object)
-  - [How to write test using the page object?](https://boykaframework.github.io/boyka-framework/docs/guides/mobile/write-test)
+  - [How to configure Boyka for API Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/api/setup-config)
+  - [How to compose a request?](https://boykaframework.github.io/boyka-framework/docs/guides/api/compose-request)
+  - [How to execute a request?](https://boykaframework.github.io/boyka-framework/docs/guides/api/execute-request)
+  - [How to verify the response?](https://boykaframework.github.io/boyka-framework/docs/guides/api/verify-response)
+- UI:
+  - Web:
+    - [How to configure Boyka for Web Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/web/setup-config)
+    - [How to create page object for Web?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/web/create-page-object)
+  - Android:
+    - [How to configure Boyka for Android Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/android/setup-config)
+    - [How to update existing page object with Android locators?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/android/create-page-object)
+  - iOS:
+    - [How to configure Boyka for iOS Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/ios/setup-config)
+    - [How to update existing page object for iOS locators?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/ios/create-page-object)
+  - [How to create common application action class?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/page-action)
+  - [How to write test class using common action class?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/write-test)
 
 ## 👾 Tech Stack
 
@@ -560,7 +631,7 @@ Distributed under MIT [License](LICENSE).
 
 - Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
 - Open a [new Discussion](https://github.com/BoykaFramework/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
-- Connect with me on [my Linktree](https://linktr.ee/BoykaFramework)
+- Connect with me on [my LinkFree links](https://linkfree.eddiehub.io/WasiqB)
 
 ## ⭐ Star History
 

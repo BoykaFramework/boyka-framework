@@ -292,10 +292,7 @@
           "port": 4724,
           "base_path": "/wd/hub",
           "session_override": true,
-          "driver": "XCUI",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "driver": "XCUI"
         },
         "device": {
           "os": "IOS",
@@ -305,7 +302,7 @@
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "connect_keyboard": false,
-          "typing_speed": 30,
+          "typing_speed": 35,
           "swipe": {
             "distance": 25,
             "max_swipe_until_found": 5

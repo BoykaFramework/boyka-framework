@@ -8,6 +8,7 @@ import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.enums.PlatformType.ANDROID;
+import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.testng.ui.mydemo.pages.CartPage.cartPage;
 import static com.github.wasiqb.boyka.testng.ui.mydemo.pages.CheckoutPage.checkoutPage;
@@ -89,9 +90,13 @@ public class SauceDemoActions {
 
     public void verifyLogin (final String userName, final String password) {
         verifyElementDisplayed (loginPage ().getLoginButton ()).isTrue ();
-        enterText (loginPage ().getUsername (), userName);
-        enterText (loginPage ().getPassword (), password);
-        hideKeyboard ();
+        if (getSession ().getPlatformType () == IOS) {
+            clickOn (loginPage ().getLoginUser ());
+        } else {
+            enterText (loginPage ().getUsername (), userName);
+            enterText (loginPage ().getPassword (), password);
+            hideKeyboard ();
+        }
         clickOn (loginPage ().getLoginButton ());
     }
 

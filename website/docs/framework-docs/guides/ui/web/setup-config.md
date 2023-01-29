@@ -1,5 +1,5 @@
 ---
-title: 🪛 Setup Configuration file
+title: 🪛 Setup Configuration
 sidebar_position: 1
 ---
 
@@ -13,6 +13,11 @@ Before starting to automate Web applications, we need to first setup the configu
       "explicit_wait": 30,
       "page_load_timeout": 30,
       "script_timeout": 10
+    },
+    "logging": {
+      "exclude_logs": [
+        "bugreport"
+      ]
     },
     "screenshot": {
       "enabled": true,

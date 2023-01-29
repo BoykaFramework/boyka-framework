@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.testng.ui.mydemo.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
 import static io.appium.java_client.AppiumBy.accessibilityId;
+import static io.appium.java_client.AppiumBy.iOSNsPredicateString;
 import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -46,6 +47,9 @@ public class LoginPage {
         .android (accessibilityId ("Login button"))
         .ios (accessibilityId ("Login button"))
         .name ("Login Button")
+        .build ();
+    private final Locator loginUser   = buildLocator ().ios (iOSNsPredicateString ("label == \"bob@example.com\""))
+        .name ("Login User")
         .build ();
     private final Locator password    = buildLocator ().web (id ("password"))
         .android (accessibilityId ("Password input field"))
