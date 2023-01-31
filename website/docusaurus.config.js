@@ -60,6 +60,12 @@ const config = {
         showLastUpdateTime: true,
       }),
     ],
+    [
+      '@docusaurus/plugin-google-tag-manager',
+      {
+        containerId: 'GTM-MV7JWTN',
+      },
+    ],
   ],
   presets: [
     [

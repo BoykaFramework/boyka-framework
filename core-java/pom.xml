@@ -4,29 +4,24 @@
   ~
   ~ Copyright (c) 2022 Wasiq Bhamla
   ~
-  ~ Permission is hereby granted,
-free of charge, to any person obtaining a copy
-  ~ of this software and associated documentation
-files (the "Software"), to deal
-  ~ in the Software without restriction, including without
-limitation the rights
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
   ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-~ copies of the Software, and to permit persons to whom the Software is
-  ~ furnished to do so,
-subject to the following conditions:
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
   ~
-  ~ The above copyright notice and this permission notice
-shall be included in all
+  ~ The above copyright notice and this permission notice shall be included in all
   ~ copies or substantial portions of the Software.
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
-    <version>0.11.0</version>
+    <version>0.12.0-rc.0</version>
     <inceptionYear>2022</inceptionYear>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>🎉 Ultimate test automation for testing any application on any platform</description>
@@ -46,6 +41,7 @@ shall be included in all
         <json-path.version>2.7.0</json-path.version>
         <log4j-core.version>2.19.0</log4j-core.version>
         <log4j-api.version>2.19.0</log4j-api.version>
+        <faker.version>1.7.0</faker.version>
         <jackson-dataformat-yaml.version>2.14.1</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.14.1</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
@@ -213,8 +209,7 @@ shall be included in all
             <artifactId>log4j-api</artifactId>
             <version>${log4j-api.version}</version>
         </dependency>
-        <!--
-        https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
@@ -237,6 +232,13 @@ shall be included in all
             <groupId>org.everit.json</groupId>
             <artifactId>org.everit.json.schema</artifactId>
             <version>${everit-json-schema.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>${faker.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

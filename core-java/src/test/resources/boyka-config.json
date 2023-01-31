@@ -153,6 +153,7 @@
           "port": 4723,
           "base_path": "/wd/hub",
           "session_override": true,
+          "driver": "UI_AUTOMATOR",
           "allow_insecure": [
             "get_server_logs"
           ]
@@ -161,7 +162,6 @@
           "os": "ANDROID",
           "version": "11",
           "name": "Pixel_6_Pro",
-          "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -171,11 +171,11 @@
             "max_swipe_until_found": 5
           },
           "application": {
-            "path": "/apps/android/saucedemo.apk",
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "path": "/apps/android/sauce-demo.apk",
             "install_timeout": 180
           },
-          "avd": {
+          "virtual_device": {
+            "name": "Pixel_6_Pro",
             "headless": true
           }
         }
@@ -187,6 +187,7 @@
           "port": 4723,
           "base_path": "/wd/hub",
           "session_override": true,
+          "driver": "UI_AUTOMATOR",
           "allow_insecure": [
             "get_server_logs"
           ]
@@ -195,7 +196,6 @@
           "os": "ANDROID",
           "version": "11",
           "name": "Pixel_6_Pro",
-          "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -209,7 +209,8 @@
             "wait_activity": "com.wdiodemoapp.MainActivity",
             "install_timeout": 180
           },
-          "avd": {
+          "virtual_device": {
+            "name": "Pixel_6_Pro",
             "headless": true
           }
         }
@@ -221,19 +222,18 @@
           "host": "hub-cloud.browserstack.com",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub"
+          "base_path": "/wd/hub",
+          "driver": "UI_AUTOMATOR"
         },
         "device": {
           "os": "ANDROID",
           "version": "11.0",
           "name": "Google Pixel 5",
-          "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "ignore_unimportant_views": true,
           "application": {
             "path": "AndroidApp",
             "external": true,
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "capabilities": {
@@ -241,6 +241,7 @@
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
             "appiumVersion": "2.0.0",
+            "automationVersion": "latest",
             "deviceLogs": true,
             "networkLogs": true,
             "debug": true,
@@ -256,13 +257,12 @@
           "host": "mobile-hub.lambdatest.com",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
-          "base_path": "/wd/hub"
+          "base_path": "/wd/hub",
+          "driver": "UI_AUTOMATOR"
         },
         "device": {
-          "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "application": {
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "ignore_unimportant_views": true,
@@ -272,6 +272,111 @@
             "platformVersion": "11",
             "app": "${env:LT_APP_ANDROID}",
             "project": "LambdaTest Android Project",
+            "build": "Test LambdaTest Build",
+            "name": "Test LambdaTest Session",
+            "devicelog": true,
+            "network": true,
+            "visual": true,
+            "video": true,
+            "autoGrantPermissions": true,
+            "autoAcceptAlerts": true,
+            "isRealMobile": true,
+            "w3c": true
+          }
+        }
+      },
+      "test_local_sauce_ios": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "127.0.0.1",
+          "port": 4724,
+          "base_path": "/wd/hub",
+          "session_override": true,
+          "driver": "XCUI"
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16.2",
+          "name": "iPhone 14 Pro Max",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "connect_keyboard": false,
+          "typing_speed": 35,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
+          },
+          "wda": {
+            "launch_timeout": 120,
+            "connection_timeout": 120
+          },
+          "application": {
+            "path": "/apps/ios/sauce-demo.zip",
+            "install_timeout": 180
+          }
+        }
+      },
+      "test_bs_ios": {
+        "server": {
+          "cloud": "BROWSER_STACK",
+          "protocol": "HTTPS",
+          "host": "hub-cloud.browserstack.com",
+          "user_name": "${env:BS_USER}",
+          "password": "${env:BS_KEY}",
+          "base_path": "/wd/hub",
+          "driver": "XCUI"
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16",
+          "name": "iPhone 14 Pro",
+          "type": "CLOUD",
+          "application": {
+            "path": "IOSApp",
+            "external": true,
+            "install_timeout": 180
+          },
+          "capabilities": {
+            "projectName": "BrowserStack iOS Project",
+            "buildName": "Test BrowserStack Build",
+            "sessionName": "Test BrowserStack Session",
+            "appiumVersion": "2.0.0",
+            "automationVersion": "latest",
+            "deviceLogs": true,
+            "networkLogs": true,
+            "debug": true,
+            "video": true,
+            "appiumLogs": true
+          }
+        }
+      },
+      "test_lt_ios": {
+        "server": {
+          "cloud": "LAMBDA_TEST",
+          "protocol": "HTTPS",
+          "host": "mobile-hub.lambdatest.com",
+          "user_name": "${env:LT_USER}",
+          "password": "${env:LT_KEY}",
+          "base_path": "/wd/hub",
+          "driver": "XCUI"
+        },
+        "device": {
+          "type": "CLOUD",
+          "application": {
+            "install_timeout": 180
+          },
+          "ignore_unimportant_views": true,
+          "capabilities": {
+            "platformName": "iOS",
+            "deviceName": "iPhone 14 Pro",
+            "platformVersion": "16",
+            "app": "${env:LT_APP_IOS}",
+            "project": "LambdaTest iOS Project",
             "build": "Test LambdaTest Build",
             "name": "Test LambdaTest Session",
             "devicelog": true,

@@ -37,11 +37,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.testng.IReporter;
 import org.testng.ISuite;
 import org.testng.ISuiteResult;
-import org.testng.ITestContext;
+import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
 
@@ -58,8 +59,8 @@ public class TestResultListener implements IReporter {
     @Override
     public void generateReport (final List<XmlSuite> xmlSuites, final List<ISuite> suites,
         final String outputDirectory) {
-        final String reportTemplate = initReportTemplate ();
-        final String body = suites.stream ()
+        final var reportTemplate = initReportTemplate ();
+        final var body = suites.stream ()
             .flatMap (suiteToResults ())
             .collect (joining ());
         saveReportTemplate (outputDirectory, reportTemplate.replaceFirst ("<body>", body));
@@ -86,27 +87,27 @@ public class TestResultListener implements IReporter {
 
     private Function<Map.Entry<String, ISuiteResult>, Stream<? extends String>> resultsToRows (final ISuite suite) {
         return e -> {
-            final ITestContext testContext = e.getValue ()
+            final var testContext = e.getValue ()
                 .getTestContext ();
 
-            final Set<ITestResult> failedTests = testContext.getFailedTests ()
+            final var failedTests = testContext.getFailedTests ()
                 .getAllResults ();
-            final Set<ITestResult> passedTests = testContext.getPassedTests ()
+            final var passedTests = testContext.getPassedTests ()
                 .getAllResults ();
-            final Set<ITestResult> skippedTests = testContext.getSkippedTests ()
+            final var skippedTests = testContext.getSkippedTests ()
                 .getAllResults ();
 
-            final String suiteName = suite.getName ();
+            final var suiteName = suite.getName ();
 
             return Stream.of (failedTests, passedTests, skippedTests)
-                .flatMap (results -> generateReportRows (e.getKey (), suiteName, results).stream ());
+                .flatMap (result -> generateReportRows (e.getKey (), suiteName, result).stream ());
         };
     }
 
     private void saveReportTemplate (final String outputDirectory, final String reportTemplate) {
         new File (outputDirectory).mkdirs ();
         try (
-            final PrintWriter reportWriter = new PrintWriter (
+            final var reportWriter = new PrintWriter (
                 new BufferedWriter (new FileWriter (new File (outputDirectory, "my-report.md"))))) {
             reportWriter.println (reportTemplate);
             reportWriter.flush ();
@@ -123,7 +124,7 @@ public class TestResultListener implements IReporter {
     }
 
     private Function<ITestResult, String> testResultToResultRow (final String testName, final String suiteName) {
-        final String ROW_TEMPLATE = "| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |\n";
+        final var ROW_TEMPLATE = "| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} |\n";
         return testResult -> {
             final var testClass = testResult.getTestClass ()
                 .getRealClass ();
@@ -131,16 +132,20 @@ public class TestResultListener implements IReporter {
             switch (testResult.getStatus ()) {
                 case FAILURE:
                     return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "❌", "NA");
+                        testClass.getSimpleName (), testResult.getName (), "❌", "NA", testResult.getThrowable ()
+                            .getMessage ());
 
                 case ITestResult.SUCCESS:
                     return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
                         testClass.getSimpleName (), testResult.getName (), "✅",
-                        String.valueOf (testResult.getEndMillis () - testResult.getStartMillis ()));
+                        String.valueOf (testResult.getEndMillis () - testResult.getStartMillis ()), StringUtils.EMPTY);
 
                 case ITestResult.SKIP:
                     return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "⛔", "NA");
+                        testClass.getSimpleName (), testResult.getName (), "⛔", "NA", testResult.getSkipCausedBy ()
+                            .stream ()
+                            .map (ITestNGMethod::getMethodName)
+                            .collect (joining ()));
 
                 default:
                     return "";

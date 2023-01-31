@@ -5,3 +5,4 @@ website/build
 /core-java
 .pnp.*
 *.md*
+*.xml

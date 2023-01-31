@@ -24,7 +24,7 @@ The file name and it's location cannot be modified.
   "ui": {
     "timeout": {
       "implicit_wait": 10,
-      "explicit_wait": 30,
+      "explicit_wait": 10,
       "page_load_timeout": 30,
       "script_timeout": 10,
       "highlight_delay": 100
@@ -43,7 +43,9 @@ The file name and it's location cannot be modified.
     "web": {
       "test_local_chrome": {
         "browser": "CHROME",
-        "highlight": true
+        "highlight": true,
+        "headless": false,
+        "resize": "CUSTOM"
       },
       "test_local_firefox": {
         "browser": "FIREFOX"
@@ -59,8 +61,8 @@ The file name and it's location cannot be modified.
         "cloud": "BROWSER_STACK",
         "protocol": "HTTPS",
         "host": "hub-cloud.browserstack.com",
-        "user_name": "${env:CLOUD_USER}",
-        "password": "${env:CLOUD_KEY}",
+        "user_name": "${env:BS_USER}",
+        "password": "${env:BS_KEY}",
         "capabilities": {
           "browser": "Chrome",
           "browser_version": "latest",
@@ -75,10 +77,31 @@ The file name and it's location cannot be modified.
       "test_selenium_grid": {
         "browser": "REMOTE",
         "cloud": "NONE",
+        "host": "localhost",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
           "platform": "MAC"
+        }
+      },
+      "test_lambda_test_chrome": {
+        "browser": "REMOTE",
+        "cloud": "LAMBDA_TEST",
+        "protocol": "HTTPS",
+        "host": "hub.lambdatest.com",
+        "user_name": "${env:LT_USER}",
+        "password": "${env:LT_KEY}",
+        "capabilities": {
+          "browserName": "Chrome",
+          "version": "99.0",
+          "platform": "Windows 10",
+          "resolution": "1920x1080",
+          "build": "Test LambdaTest Build",
+          "name": "Test LambdaTest Session",
+          "network": true,
+          "visual": true,
+          "video": true,
+          "console": true
         }
       }
     },
@@ -90,6 +113,7 @@ The file name and it's location cannot be modified.
           "port": 4723,
           "base_path": "/wd/hub",
           "session_override": true,
+          "driver": "UI_AUTOMATOR",
           "allow_insecure": [
             "get_server_logs"
           ]
@@ -98,7 +122,6 @@ The file name and it's location cannot be modified.
           "os": "ANDROID",
           "version": "11",
           "name": "Pixel_6_Pro",
-          "automation": "UI_AUTOMATOR",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -108,11 +131,11 @@ The file name and it's location cannot be modified.
             "max_swipe_until_found": 5
           },
           "application": {
-            "path": "/apps/android/saucedemo.apk",
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "path": "/apps/android/sauce-demo.apk",
             "install_timeout": 180
           },
-          "avd": {
+          "virtual_device": {
+            "name": "Pixel_6_Pro",
             "headless": true
           }
         }
@@ -124,19 +147,18 @@ The file name and it's location cannot be modified.
           "host": "hub-cloud.browserstack.com",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub"
+          "base_path": "/wd/hub",
+          "driver": "UI_AUTOMATOR"
         },
         "device": {
           "os": "ANDROID",
           "version": "11.0",
           "name": "Google Pixel 5",
-          "automation": "UI_AUTOMATOR",
           "type": "CLOUD",
           "ignore_unimportant_views": true,
           "application": {
             "path": "AndroidApp",
             "external": true,
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "capabilities": {
@@ -144,6 +166,80 @@ The file name and it's location cannot be modified.
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
             "appiumVersion": "2.0.0",
+            "automationVersion": "latest",
+            "deviceLogs": true,
+            "networkLogs": true,
+            "debug": true,
+            "video": true,
+            "appiumLogs": true
+          }
+        }
+      },
+      "test_local_sauce_ios": {
+        "server": {
+          "protocol": "HTTP",
+          "host": "127.0.0.1",
+          "port": 4724,
+          "base_path": "/wd/hub",
+          "session_override": true,
+          "driver": "XCUI",
+          "allow_insecure": [
+            "get_server_logs"
+          ]
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16.2",
+          "name": "iPhone 14 Pro Max",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "connect_keyboard": false,
+          "typing_speed": 30,
+          "swipe": {
+            "distance": 25,
+            "max_swipe_until_found": 5
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
+          },
+          "wda": {
+            "launch_timeout": 120,
+            "connection_timeout": 120
+          },
+          "application": {
+            "path": "/apps/ios/sauce-demo.zip",
+            "install_timeout": 180
+          }
+        }
+      },
+      "test_bs_ios": {
+        "server": {
+          "cloud": "BROWSER_STACK",
+          "protocol": "HTTPS",
+          "host": "hub-cloud.browserstack.com",
+          "user_name": "${env:BS_USER}",
+          "password": "${env:BS_KEY}",
+          "base_path": "/wd/hub",
+          "driver": "XCUI"
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16",
+          "name": "iPhone 14 Pro",
+          "type": "CLOUD",
+          "application": {
+            "path": "IOSApp",
+            "external": true,
+            "install_timeout": 180
+          },
+          "capabilities": {
+            "projectName": "BrowserStack iOS Project",
+            "buildName": "Test BrowserStack Build",
+            "sessionName": "Test BrowserStack Session",
+            "appiumVersion": "2.0.0",
+            "automationVersion": "latest",
             "deviceLogs": true,
             "networkLogs": true,
             "debug": true,
@@ -161,11 +257,11 @@ The file name and it's location cannot be modified.
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,
+      "schema_path": "schema/",
       "logging": {
         "request": true,
         "response": true
-      },
-      "schema_path": "schema/"
+      }
     }
   }
 }
@@ -286,8 +382,10 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `user_name` | User name for cloud service provider. | `string` | `null` |
 | `password` | Password / Access key for cloud service provider. | `string` | `null` |
 | `android` | Android specific server settings | [`AndroidServerSetting`](#android-server-config) | |
+| `ios` | iOS specific server settings | [`IOSSetting`](#ios-server-config) | |
 | `allow_insecure` | Allow list of features in server considered as insecure | `List<string>` | |
 | `timeout` | Timeout in seconds for server to start | `int` | `30` |
+| `driver` | Appium automation driver type | [`AutomationType`](#supported-automation-types) | `null` |
 
 ###### Android Server Configuration {#android-server-config}
 
@@ -297,6 +395,12 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `reboot` | Should emulator be rebooted? | `boolean` | `false` |
 | `suppress_adb_kill` | Should kill ADB after session completion? | `boolean` | `true` |
 
+###### iOS Server Configuration {#ios-server-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `webkit_proxy_port` | Port for Webkit debug proxy for iOS | `int` | `27753` |
+
 ##### Mobile Device Configuration {#device-config}
 
 | Property | Description | Type | Default |
@@ -305,10 +409,9 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `os` | Device OS type | [`OS`](#supported-os) | `ANDROID` |
 | `version` | Device OS version | `string` | |
 | `type` | Device type | [`DeviceType`](#supported-device-types) | `VIRTUAL` |
-| `automation` | Appium automation type | [`AutomationType`](#supported-automation-types) | `UI_AUTOMATOR` |
 | `capabilities` | Contains cloud specific capabilities | `Map` | |
 | `application` | Contains application related configs | [`ApplicationSetting`](#app-config) | |
-| `avd` | Contains virtual device specific configs | [`VirtualDeviceSetting`](#avd-config) | |
+| `virtual_device` | Contains virtual device specific configs | [`VirtualDeviceSetting`](#avd-config) | |
 | `clear_files` | Determines if system files needs to cleared after run completes on a device | `boolean` | `true` |
 | `clear_logs` | Determines if device logs needs to be cleared | `boolean` | `true` |
 | `full_reset` | Determines if full reset needs to be done | `boolean` | |
@@ -317,7 +420,9 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `ignore_unimportant_views` | Determines if unimportant views needs to be ignored | `boolean` | `true` |
 | `server_install_timeout` | Timeout in seconds to wait for Appium server app to get installed | `int` | `30` |
 | `server_launch_timeout` | Timeout in seconds to wait for Appium server app to start | `int` | `30` |
-| `swipe` | Swipe specific setting | [SwipeSetting](#swipe-setting) | |
+| `swipe` | Swipe specific setting | [`SwipeSetting`](#swipe-setting) | |
+| `wda` | WebDriverAgent specific settings for iOS | [`WDASetting`](#wda-config) | |
+| `typing_speed` | Max typing speed for iOS | `int` | `60` |
 
 ###### Device Application Configurations {#app-config}
 
@@ -329,6 +434,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `install_timeout` | Timeout in seconds to wait until app gets installed on device | `int` | `30` |
 | `wait_activity` | Wait for the mentioned activity to load | `string` | |
 | `wait_timeout` | Wait timeout in seconds to wait for AUT | `int` | `30` |
+| `bundle_id` | iOS application bundle id | `string` | `null` |
 
 ###### Virtual Device Configurations {#avd-config}
 
@@ -338,6 +444,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `launch_timeout` | Timeout in seconds to wait until AVD launches | `int` | `60` |
 | `headless` | Determine if required to run in headless mode | `boolean` | `false` |
 | `ready_timeout` | Timeout in seconds to wait until AVD is ready | `int` | `60` |
+| `connect_keyboard` | Should iOS simulator connect to hardware keyboard? | `boolean` | `false` |
 
 ##### Swipe Configuration {#swipe-setting}
 
@@ -345,6 +452,21 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | -------- | ----------- | ---- | ------- |
 | `distance` | Amount of distance to swipe from the center of the screen to the edge of the screen or element | `int` | `25` |
 | `max_swipe_until_found` | Maximum amount of time to swipe until an element is found on the screen | `int` | `5` |
+
+##### WebDriverAgent Configuration {##wda-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `local_port` | This value, if specified, will be used to forward traffic from Mac host to real ios devices over USB. Default value is the same as the port number used by WDA on the device under test | `int` | `8100` |
+| `use_new` | If true, forces uninstall of any existing WebDriverAgent app on device | `boolean` | `false` |
+| `launch_timeout` | Timeout to wait for WebDriverAgent to be pingable | `int` | `60` |
+| `startup_retries` | Number of times to try to build and launch WebDriverAgent onto the device | `int` | `2` |
+| `connection_timeout` | Connection timeout to wait for a response from WebDriverAgent | `int` | `60` |
+| `startup_retry_interval` | Time interval to wait between tries to build and launch WebDriverAgent | `int` | `10` |
+| `use_prebuilt` | If true, uses existing WebDriverAgent app on device | `boolean` | `false` |
+| `update_bundle_id` | Bundle id to update WDA to before building and launching on real devices. This bundle id must be associated with a valid provisioning profile | `string` | `null` |
+| `team_id` | Apple developer team identifier string. Must be used in conjunction with xcodeSigningId to take effect. e.g., JWL241K123 | `string` | `null` |
+| `signing_id` | String representing a signing certificate. Must be used in conjunction with xcodeOrgId. This is usually just iPhone Developer | `string` | `null` |
 
 ### API Configuration {#api-config}
 
