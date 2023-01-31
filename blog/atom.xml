@@ -9,7 +9,7 @@
     <icon>https://BoykaFramework.github.io/boyka-framework/img/Boyka.png</icon>
     <entry>
         <title type="html"><![CDATA[Welcome to Boyka!]]></title>
-        <id>welcome</id>
+        <id>https://BoykaFramework.github.io/boyka-framework/blog/welcome</id>
         <link href="https://BoykaFramework.github.io/boyka-framework/blog/welcome"/>
         <updated>2022-04-03T00:00:00.000Z</updated>
         <author>
