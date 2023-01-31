@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.enums;
 
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
+import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +34,12 @@ public enum AutomationType {
     /**
      * Android Ui Automator 2 driver.
      */
-    UI_AUTOMATOR (ANDROID_UIAUTOMATOR2);
+    UI_AUTOMATOR ("uiautomator2", ANDROID_UIAUTOMATOR2),
+    /**
+     * iOS XCUITest driver.
+     */
+    XCUI ("xcuitest", IOS_XCUI_TEST);
 
+    private final String driverName;
     private final String name;
 }

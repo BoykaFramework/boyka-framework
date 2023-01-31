@@ -25,7 +25,7 @@
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
         </packages>
     </test>
 </suite>

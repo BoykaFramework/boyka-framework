@@ -22,7 +22,7 @@
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
         </packages>
     </test>
     <test name="Test Boyka web on Local Firefox" enabled="false">
@@ -30,7 +30,7 @@
         <parameter name="driverKey" value="test_local_firefox"/>
         <packages>
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
         </packages>
     </test>
     <test name="Test Boyka web on Local Edge">
@@ -38,7 +38,7 @@
         <parameter name="driverKey" value="test_local_edge"/>
         <packages>
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
         </packages>
     </test>
     <test name="Test Boyka web on Local Safari" enabled="false">
@@ -46,7 +46,7 @@
         <parameter name="driverKey" value="test_local_safari"/>
         <packages>
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
         </packages>
     </test>
 </suite>

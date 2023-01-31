@@ -1,5 +1,5 @@
 
-## v0.11.0-rc.0 (2023-01-02)
+## v0.11.0 (2023-01-02)
 
 #### :rocket: New Feature
 * [#243](https://github.com/BoykaFramework/boyka-framework/pull/243) feat(java): :sparkles: added finger gestures for android ([@WasiqB](https://github.com/WasiqB))

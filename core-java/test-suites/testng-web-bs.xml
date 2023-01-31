@@ -21,8 +21,8 @@
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_browserstack_chrome"/>
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo.web"/>
-            <package name="com.github.wasiqb.boyka.testng.ui.theinternet.web"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
         </packages>
     </test>
 </suite>

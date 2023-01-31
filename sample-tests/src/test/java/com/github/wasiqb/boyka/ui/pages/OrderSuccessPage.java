@@ -28,15 +28,19 @@ import org.openqa.selenium.By;
  **/
 @Getter
 public class OrderSuccessPage {
+    private static final OrderSuccessPage INSTANCE = new OrderSuccessPage ();
+
     public static OrderSuccessPage orderSuccessPage () {
-        return new OrderSuccessPage ();
+        return INSTANCE;
     }
 
     private final Locator continueBtn = Locator.buildLocator ()
-        .web ((By.cssSelector ("#content > div > a")))
+        .name ("Continue Button")
+        .web (By.cssSelector ("#content > div > a"))
         .build ();
 
     private final Locator successMessage = Locator.buildLocator ()
+        .name ("Success Message")
         .web (By.tagName ("h1"))
         .build ();
 }

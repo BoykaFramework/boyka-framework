@@ -29,6 +29,7 @@ import lombok.Data;
  */
 @Data
 public class ApplicationSetting {
+    private String          bundleId;
     private boolean         external;
     private int             installTimeout = 30;
     private String          path;
