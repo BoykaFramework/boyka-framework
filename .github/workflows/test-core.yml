@@ -97,7 +97,6 @@ jobs:
 
       - name: All Test execution
         uses: reactivecircus/android-emulator-runner@v2
-        if: github.event_name == 'push'
         with:
           avd-name: Pixel_6_Pro
           api-level: 30
@@ -109,38 +108,30 @@ jobs:
           disable-animations: false
           script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
 
-      - name: PR Test execution
-        uses: reactivecircus/android-emulator-runner@v2
-        if: github.event_name == 'pull_request'
-        with:
-          avd-name: Pixel_6_Pro
-          api-level: 30
-          target: google_apis
-          arch: x86
-          profile: Nexus 6
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test -Dsuite-xml=test-suites/testng-pr.xml
-
       - name: Test Report
-        if: always()
+        if: failure()
         run: cat ${{ github.workspace }}/core-java/target/surefire-reports/my-report.md > $GITHUB_STEP_SUMMARY
+
+      - name: Upload reports folder
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: reports
+          path: |
+            ${{ github.workspace }}/core-java/reports
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: target
           path: |
             ${{ github.workspace }}/core-java/logs
             ${{ github.workspace }}/core-java/selenium-grid.log
             ${{ github.workspace }}/core-java/target
-            ${{ github.workspace }}/core-java/reports
             ${{ github.workspace }}/core-java/screenshots
 
   analysis:
-    if: github.event_name == 'push'
     needs:
       - test
     runs-on: ubuntu-latest
@@ -165,7 +156,7 @@ jobs:
       - name: Download target folder
         uses: actions/download-artifact@v3
         with:
-          name: target
+          name: reports
           path: ${{ github.workspace }}/core-java
 
       - name: Build and analyze
