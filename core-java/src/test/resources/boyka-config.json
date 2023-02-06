@@ -161,7 +161,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_6_Pro",
+          "name": "Nexus_6",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -175,7 +175,7 @@
             "install_timeout": 180
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Nexus_6",
             "headless": true
           }
         }
@@ -184,7 +184,7 @@
         "server": {
           "protocol": "HTTP",
           "host": "127.0.0.1",
-          "port": 4723,
+          "port": 4724,
           "base_path": "/wd/hub",
           "session_override": true,
           "driver": "UI_AUTOMATOR",
@@ -195,7 +195,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_6_Pro",
+          "name": "Nexus_6",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -210,7 +210,7 @@
             "install_timeout": 180
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Nexus_6",
             "headless": true
           }
         }
