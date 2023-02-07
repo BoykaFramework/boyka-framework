@@ -20,14 +20,14 @@
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_sauce_android"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.mydemo.SauceDemoTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
         </classes>
     </test>
     <test name="Test Boyka Mobile on Local iOS Simulator Sauce Demo app" enabled="false">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_local_sauce_ios"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.mydemo.SauceDemoTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
         </classes>
     </test>
     <test name="Test Boyka Mobile on Local Android Emulator WDIO" enabled="false">
