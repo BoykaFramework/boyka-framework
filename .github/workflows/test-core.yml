@@ -48,7 +48,7 @@ jobs:
   test:
     needs:
       - build
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     env:
       BS_USER: ${{ secrets.BS_USER }}
       BS_KEY: ${{ secrets.BS_KEY }}
