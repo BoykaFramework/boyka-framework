@@ -18,7 +18,7 @@ import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.HomePage.homePag
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.ProductDetailsPage.productDetailsPage;
 import static java.text.MessageFormat.format;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
 
@@ -33,7 +33,7 @@ public class SauceDemoActions {
     public void verifyAddToCart () {
         if (this.platformType != WEB) {
             clickOn (homePage ().getViewToggle ());
-            waitUntil (visibilityOfElementLocated (homePage ().getAddToCartDragHandle ()
+            waitUntil (elementToBeClickable (homePage ().getAddToCartDragHandle ()
                 .getLocator ()));
             swipe ().dragTo (homePage ().getAddToCartDragHandle (), homePage ().getCartDropZone ());
         } else {
