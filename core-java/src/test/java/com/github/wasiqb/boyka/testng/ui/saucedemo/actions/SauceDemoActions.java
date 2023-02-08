@@ -36,6 +36,8 @@ public class SauceDemoActions {
             waitUntil (visibilityOfElementLocated (homePage ().getAddToCartDragHandle ()
                 .getLocator ()));
             swipe ().dragTo (homePage ().getAddToCartDragHandle (), homePage ().getCartDropZone ());
+        } else {
+            clickOn (homePage ().getAddToCartButton ());
         }
 
         verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
