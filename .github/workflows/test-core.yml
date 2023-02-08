@@ -119,13 +119,6 @@ jobs:
           name: reports
           path: |
             ${{ github.workspace }}/core-java/reports
-
-      - name: Upload target folder
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: target
-          path: |
             ${{ github.workspace }}/core-java/logs
             ${{ github.workspace }}/core-java/selenium-grid.log
             ${{ github.workspace }}/core-java/target
