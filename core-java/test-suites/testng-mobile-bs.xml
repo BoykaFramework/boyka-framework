@@ -20,15 +20,15 @@
     <test name="Test Boyka Mobile on BrowserStack Android Device">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_bs_android"/>
-        <packages>
-            <package name="com.github.wasiqb.boyka.testng.ui.mydemo"/>
-        </packages>
+        <classes>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
+        </classes>
     </test>
     <test name="Test Boyka Mobile on BrowserStack iOS Device">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_bs_ios"/>
-        <packages>
-            <package name="com.github.wasiqb.boyka.testng.ui.mydemo"/>
-        </packages>
+        <classes>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
+        </classes>
     </test>
 </suite>
