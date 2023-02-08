@@ -1,8 +1,6 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo.actions;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
-import static com.github.wasiqb.boyka.actions.DriverActions.waitUntil;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
@@ -18,7 +16,6 @@ import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.HomePage.homePag
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.ProductDetailsPage.productDetailsPage;
 import static java.text.MessageFormat.format;
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
 
@@ -31,14 +28,7 @@ public class SauceDemoActions {
     }
 
     public void verifyAddToCart () {
-        if (this.platformType != WEB) {
-            clickOn (homePage ().getViewToggle ());
-            waitUntil (elementToBeClickable (homePage ().getAddToCartDragHandle ()
-                .getLocator ()));
-            swipe ().dragTo (homePage ().getAddToCartDragHandle (), homePage ().getCartDropZone ());
-        } else {
-            clickOn (homePage ().getAddToCartButton ());
-        }
+        clickOn (homePage ().getAddToCartButton ());
 
         verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
         verifyTextOf (homePage ().getShoppingCartCount ()).isEqualTo ("1");
