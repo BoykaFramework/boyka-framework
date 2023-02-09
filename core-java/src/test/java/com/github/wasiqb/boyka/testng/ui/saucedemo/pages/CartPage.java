@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static io.appium.java_client.AppiumBy.accessibilityId;
 import static org.openqa.selenium.By.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -42,6 +43,8 @@ public class CartPage {
     }
 
     private final Locator checkout = buildLocator ().web (id ("checkout"))
+        .android (accessibilityId ("test-CHECKOUT"))
+        .ios (accessibilityId ("test-CHECKOUT"))
         .name ("Checkout")
         .build ();
 
