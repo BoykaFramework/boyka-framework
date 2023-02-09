@@ -8,6 +8,8 @@ on:
       - main
     types:
       - closed
+    paths:
+      - 'core-java/**'
 
 env:
   GITHUB_AUTH: ${{ secrets.PUSH_TOKEN }}
@@ -24,6 +26,7 @@ jobs:
 
     outputs:
       new-version: ${{ steps.version.outputs.version }}
+      old-version: ${{ steps.old_version.outputs.previous_version }}
 
     steps:
       - name: Check out Git repository
@@ -63,10 +66,10 @@ jobs:
       - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: target
+          name: version-files
           path: |
-            ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/CHANGELOG.md
+            ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/website/package.json
 
   release-snapshot:
@@ -89,16 +92,8 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ github.sha }}
 
-      - name: Download artifacts data
-        uses: actions/download-artifact@v3
-        with:
-          name: target
-
       - name: Maven command to update snapshot version
         run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-release.outputs.new-version }}-SNAPSHOT versions:commit
-
-      - name: Build the artifacts
-        run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
 
       - name: Release snapshot to Maven central
         uses: samuelmeuli/action-maven-publish@v1
@@ -110,17 +105,6 @@ jobs:
           maven_profiles: release
           server_id: ossrh
           maven_args: --settings ${{ github.workspace }}/core-java/setting/settings.xml -f core-java/pom.xml -DskipTests -Dcheckstyle.skip -B
-
-      - name: Upload target folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: target
-          path: |
-            ${{ github.workspace }}/lerna.json
-            ${{ github.workspace }}/CHANGELOG.md
-            ${{ github.workspace }}/website/package.json
-            ${{ github.workspace }}/core-java/target
-            ${{ github.workspace }}/core-java/pom.xml
 
   release:
     runs-on: ubuntu-latest
@@ -144,16 +128,8 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ github.sha }}
 
-      - name: Download artifacts data
-        uses: actions/download-artifact@v3
-        with:
-          name: target
-
       - name: Maven command to update release version
         run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare-release.outputs.new-version }} versions:commit
-
-      - name: Build the artifacts
-        run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
 
       - name: Release to Maven central
         uses: samuelmeuli/action-maven-publish@v1
@@ -171,10 +147,13 @@ jobs:
         with:
           name: target
           path: |
-            ${{ github.workspace }}/lerna.json
-            ${{ github.workspace }}/CHANGELOG.md
-            ${{ github.workspace }}/website/package.json
             ${{ github.workspace }}/core-java/target
+
+      - name: Upload version files folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: version-files
+          path: |
             ${{ github.workspace }}/core-java/pom.xml
 
   push-pom:
@@ -189,10 +168,21 @@ jobs:
         with:
           token: ${{ env.PUSH_TOKEN }}
 
-      - name: Download target folder
+      - name: Download Version files
         uses: actions/download-artifact@v3
         with:
-          name: target
+          name: version-files
+
+      - name: Update new version
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: ${{ needs.prepare-release.outputs.old-version }}
+          replace: ${{ needs.prepare-release.outputs.new-version }}
+          regex: false
+          include: |
+            README.md
+            package.json
+            website/docs/framework-docs/getting-started/usage.md
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v5
@@ -210,6 +200,9 @@ jobs:
             lerna.json
             CHANGELOG.md
             website/package.json
+            README.md
+            package.json
+            website/docs/framework-docs/getting-started/usage.md
           message: |
             chore(Internal): :bookmark: released latest version to maven central
           push: true
