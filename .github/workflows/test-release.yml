@@ -50,22 +50,13 @@ jobs:
       - name: All Test execution
         run: mvn clean test -f sample-tests/pom.xml -Dboyka.version=${{ steps.version.outputs.version }}
 
-      - name: Test Report
-        if: always()
-        uses: dorny/test-reporter@v1
-        with:
-          name: Test Results
-          path: ${{ github.workspace }}/sample-tests/target/surefire-reports/*.xml
-          reporter: java-junit
-
       - name: Upload target folder
         uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: target
           path: |
             ${{ github.workspace }}/sample-tests/logs
             ${{ github.workspace }}/sample-tests/selenium-grid.log
             ${{ github.workspace }}/sample-tests/target
-            ${{ github.workspace }}/sample-tests/reports
             ${{ github.workspace }}/sample-java/screenshots
