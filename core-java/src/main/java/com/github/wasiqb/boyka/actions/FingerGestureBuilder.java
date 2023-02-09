@@ -55,7 +55,7 @@ final class FingerGestureBuilder {
     private       int                 index     = 0;
     @Builder.Default
     private       String              name      = "Finger";
-    private final Duration            stepWait  = ofMillis (500);
+    private final Duration            stepWait  = ofMillis (600);
     private       WebElement          targetElement;
     private final PointerInput.Origin viewport  = viewport ();
 
