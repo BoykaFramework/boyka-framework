@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo.pages;
 
 import static com.github.wasiqb.boyka.builders.Locator.buildLocator;
+import static io.appium.java_client.AppiumBy.accessibilityId;
 import static org.openqa.selenium.By.cssSelector;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -43,6 +44,8 @@ public class ProductDetailsPage {
 
     private final Locator container = buildLocator ().web (
             cssSelector ("div#inventory_item_container div.inventory_details"))
+        .android (accessibilityId ("test-Inventory item page"))
+        .ios (accessibilityId ("test-Inventory item page"))
         .name ("Container")
         .build ();
 
