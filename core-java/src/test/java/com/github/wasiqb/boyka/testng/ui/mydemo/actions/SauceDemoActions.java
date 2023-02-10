@@ -79,7 +79,7 @@ public class SauceDemoActions {
             .city ());
         enterText (checkoutPage ().getState (), faker.address ()
             .state ());
-        swipe ().till (checkoutPage ().getZipCode ());
+        swipe ().up ();
         enterText (checkoutPage ().getZipCode (), faker.address ()
             .zipCode ());
         enterText (checkoutPage ().getCountry (), faker.address ()
