@@ -84,14 +84,14 @@ class WebDriverManager implements IDriverManager {
 
     private String getHostName (final WebSetting webSetting, final TargetProviders target) {
         LOGGER.traceEntry ();
-        final var host = requireNonNullElse (webSetting.getHost (), target.getHost ());
+        final var host = requireNonNullElse (webSetting.getHost (),
+            requireNonNull (target, HOSTNAME_REQUIRED_FOR_REMOTE).getHost ());
         if (requireNonNullElse (webSetting.getTarget (), LOCAL) != LOCAL) {
             final var hostNamePattern = "{0}:{1}@{2}";
             return format (hostNamePattern, requireNonNull (webSetting.getUserName (), USER_NAME_REQUIRED_FOR_CLOUD),
-                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD),
-                requireNonNull (host, HOSTNAME_REQUIRED_FOR_REMOTE));
+                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD), host);
         }
-        return LOGGER.traceExit (requireNonNull (host, HOSTNAME_REQUIRED_FOR_REMOTE));
+        return LOGGER.traceExit (host);
     }
 
     private URL getRemoteUrl (final WebSetting webSetting) {

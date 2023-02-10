@@ -17,7 +17,6 @@
 package com.github.wasiqb.boyka.config.ui.web;
 
 import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
-import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 
 import java.util.Map;
@@ -47,7 +46,7 @@ public class WebSetting {
     private int                 port;
     private Protocol            protocol   = HTTP;
     private WindowResizeType    resize     = WindowResizeType.NORMAL;
-    private TargetProviders     target     = LOCAL;
+    private TargetProviders     target;
     private String              userName;
 
     /**
