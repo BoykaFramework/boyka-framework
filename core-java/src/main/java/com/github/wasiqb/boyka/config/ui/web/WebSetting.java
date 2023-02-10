@@ -17,13 +17,14 @@
 package com.github.wasiqb.boyka.config.ui.web;
 
 import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
+import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 
 import java.util.Map;
 
 import com.github.wasiqb.boyka.enums.Browser;
-import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.Protocol;
+import com.github.wasiqb.boyka.enums.TargetProviders;
 import com.github.wasiqb.boyka.enums.WindowResizeType;
 import lombok.Data;
 import org.openqa.selenium.Dimension;
@@ -38,7 +39,6 @@ import org.openqa.selenium.Dimension;
 public class WebSetting {
     private Browser             browser    = Browser.CHROME;
     private Map<String, Object> capabilities;
-    private CloudProviders      cloud      = CloudProviders.NONE;
     private Dimension           customSize = new Dimension (1920, 1080);
     private boolean             headless   = true;
     private boolean             highlight  = false;
@@ -47,6 +47,7 @@ public class WebSetting {
     private int                 port;
     private Protocol            protocol   = HTTP;
     private WindowResizeType    resize     = WindowResizeType.NORMAL;
+    private TargetProviders     target     = LOCAL;
     private String              userName;
 
     /**

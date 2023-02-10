@@ -37,8 +37,6 @@
       "test_browserstack_chrome": {
         "browser": "REMOTE",
         "cloud": "BROWSER_STACK",
-        "protocol": "HTTPS",
-        "host": "hub-cloud.browserstack.com",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
         "capabilities": {
@@ -64,9 +62,7 @@
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
-        "protocol": "HTTPS",
-        "host": "hub.lambdatest.com",
+        "cloud": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
         "capabilities": {
@@ -84,7 +80,7 @@
       },
       "test_lambda_test_no_username": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
+        "cloud": "LAMBDA_TEST_WEB",
         "protocol": "HTTPS",
         "host": "hub.lambdatest.com",
         "password": "${env:LT_KEY}",
@@ -103,7 +99,7 @@
       },
       "test_lambda_test_no_password": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
+        "cloud": "LAMBDA_TEST_WEB",
         "protocol": "HTTPS",
         "host": "hub.lambdatest.com",
         "user_name": "${env:LT_USER}",
@@ -122,7 +118,7 @@
       },
       "test_lambda_test_no_host": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
+        "cloud": "LAMBDA_TEST_WEB",
         "protocol": "HTTPS",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
@@ -148,10 +144,8 @@
     "mobile": {
       "test_local_sauce_android": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4723,
-          "base_path": "/wd/hub",
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
@@ -183,10 +177,8 @@
       },
       "test_local_wdio_android": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4724,
-          "base_path": "/wd/hub",
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
@@ -218,12 +210,9 @@
       },
       "test_bs_android": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
           "driver": "UI_AUTOMATOR"
         },
         "device": {
@@ -254,12 +243,9 @@
       },
       "test_lt_android": {
         "server": {
-          "cloud": "LAMBDA_TEST",
-          "protocol": "HTTPS",
-          "host": "mobile-hub.lambdatest.com",
+          "target": "LAMBDA_TEST_MOBILE",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
-          "base_path": "/wd/hub",
           "driver": "UI_AUTOMATOR"
         },
         "device": {
@@ -290,10 +276,8 @@
       },
       "test_local_sauce_ios": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4724,
-          "base_path": "/wd/hub",
           "session_override": true,
           "driver": "XCUI"
         },
@@ -326,12 +310,9 @@
       },
       "test_bs_ios": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
           "driver": "XCUI"
         },
         "device": {
@@ -360,12 +341,9 @@
       },
       "test_lt_ios": {
         "server": {
-          "cloud": "LAMBDA_TEST",
-          "protocol": "HTTPS",
-          "host": "mobile-hub.lambdatest.com",
+          "target": "LAMBDA_TEST_MOBILE",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
-          "base_path": "/wd/hub",
           "driver": "XCUI"
         },
         "device": {

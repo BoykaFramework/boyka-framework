@@ -51,7 +51,7 @@ class IOSManager implements IDriverManager {
         setCommonCapabilities (options);
         if (this.settings.getType () == CLOUD) {
             setupCloudMobileDriver (options, this.mobileSetting.getServer ()
-                .getCloud (), this.settings);
+                .getTarget (), this.settings);
         } else {
             setupLocalSimulatorOptions (options);
         }

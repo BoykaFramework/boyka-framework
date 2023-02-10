@@ -16,12 +16,12 @@
 
 package com.github.wasiqb.boyka.manager;
 
-import static com.github.wasiqb.boyka.enums.CloudProviders.NONE;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SERVER_NOT_RUNNING;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STARTING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STOPPING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.SERVER_ALREADY_RUNNING;
+import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
@@ -37,6 +37,7 @@ import static java.lang.String.join;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
+import static java.util.Objects.requireNonNullElse;
 import static org.apache.commons.lang3.StringUtils.isNoneEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -156,15 +157,16 @@ public class ServiceManager {
     }
 
     private String getUrl () {
-        final var sb = new StringBuilder (this.setting.getProtocol ()
-            .name ()).append ("://");
+        final var target = this.setting.getTarget ();
+        final var sb = new StringBuilder (
+            requireNonNullElse (this.setting.getProtocol (), target.getProtocol ()).name ()).append ("://");
         if (isCloud ()) {
             sb.append (this.setting.getUserName ())
                 .append (":")
                 .append (this.setting.getPassword ())
                 .append ("@");
         }
-        sb.append (this.setting.getHost ());
+        sb.append (requireNonNullElse (this.setting.getHost (), target.getHost ()));
         if (this.setting.getPort () > 0) {
             sb.append (":")
                 .append (this.setting.getPort ());
@@ -176,7 +178,7 @@ public class ServiceManager {
     }
 
     private boolean isCloud () {
-        return this.setting.getCloud () != NONE && isNotEmpty (this.setting.getUserName ()) && isNotEmpty (
+        return this.setting.getTarget () != LOCAL && isNotEmpty (this.setting.getUserName ()) && isNotEmpty (
             this.setting.getPassword ());
     }
 
