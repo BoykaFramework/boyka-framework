@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - develop
+      - staging
   pull_request_target:
     types: [opened, synchronize, reopened]
 
