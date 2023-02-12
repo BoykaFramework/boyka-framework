@@ -146,7 +146,8 @@ public class ServiceManager {
 
     private void buildService () {
         LOG.trace ("Building Appium Service started...");
-        this.builder.withIPAddress (this.setting.getHost ())
+        final var target = this.setting.getTarget ();
+        this.builder.withIPAddress (requireNonNullElse (this.setting.getHost (), target.getHost ()))
             .withTimeout (ofSeconds (this.setting.getTimeout ()));
         setPort ();
         setAppiumJS ();

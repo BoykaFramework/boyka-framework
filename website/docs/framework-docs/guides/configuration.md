@@ -378,7 +378,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `session_override` | Enables session override | `boolean` | `true` |
 | `node_path` | Node executable path | `string` | |
 | `appium_path` | Appium executable `main.js` path | `string` | |
-| `cloud` | Cloud service provider name. | [`CloudProviders`](#supported-cloud-providers) | `CloudProviders.NONE` |
+| `target` | Target provider name. | [`TargetProviders`](#target-providers) | `TargetProviders.LOCAL` |
 | `user_name` | User name for cloud service provider. | `string` | `null` |
 | `password` | Password / Access key for cloud service provider. | `string` | `null` |
 | `android` | Android specific server settings | [`AndroidServerSetting`](#android-server-config) | |
@@ -512,13 +512,18 @@ We have an enum `Protocol` where we maintain the list of supported protocols. Th
 - `HTTP`: Is used for HTTP protocol.
 - `HTTPS`: Is used for HTTPS protocol.
 
-## Supported Cloud Providers {#supported-cloud-providers}
+## Target Providers {#target-providers}
 
-We have an enum `CloudProviders` where we maintain the list of supported cloud providers. They are:
+We have an enum `TargetProviders` where we maintain the list of supported target providers. They are:
 
-- `NONE`: No cloud provider will be used.
+- `LOCAL`: Local provider will be used.
 - `BROWSER_STACK`: Is used for BrowserStack cloud provider.
-- `LAMBDA_TEST`: Is used for LambdaTest cloud provider.
+- `LAMBDA_TEST_WEB`: Is used for LambdaTest cloud provider to run on Web browsers.
+- `LAMBDA_TEST_MOBILE`: Is used for LambdaTest cloud provider to run on Mobile devices.
+
+:::tip
+Host name from the settings will be used by default, if that is not provided, the host name from the `TargetProviders` name.
+:::
 
 ## Supported Device OS {#supported-os}
 
