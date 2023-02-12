@@ -136,9 +136,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       },
       "test_browserstack_chrome": {
         "browser": "REMOTE",
-        "cloud": "BROWSER_STACK",
-        "protocol": "HTTPS",
-        "host": "hub-cloud.browserstack.com",
+        "target": "BROWSER_STACK",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
         "capabilities": {
@@ -154,8 +152,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       },
       "test_selenium_grid": {
         "browser": "REMOTE",
-        "cloud": "NONE",
-        "host": "localhost",
+        "target": "LOCAL",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
@@ -164,9 +161,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
-        "protocol": "HTTPS",
-        "host": "hub.lambdatest.com",
+        "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
         "capabilities": {
@@ -186,10 +181,8 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
     "mobile": {
       "test_local_sauce_android": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4723,
-          "base_path": "/wd/hub",
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
@@ -220,12 +213,9 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       },
       "test_bs_android": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
           "driver": "UI_AUTOMATOR"
         },
         "device": {
@@ -253,12 +243,43 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           }
         }
       },
+      "test_lt_android": {
+        "server": {
+          "target": "LAMBDA_TEST_MOBILE",
+          "user_name": "${env:LT_USER}",
+          "password": "${env:LT_KEY}",
+          "driver": "UI_AUTOMATOR"
+        },
+        "device": {
+          "type": "CLOUD",
+          "application": {
+            "install_timeout": 180,
+            "wait_activity": "com.swaglabsmobileapp.MainActivity"
+          },
+          "ignore_unimportant_views": true,
+          "capabilities": {
+            "platformName": "Android",
+            "deviceName": "Pixel 5",
+            "platformVersion": "11",
+            "app": "${env:LT_APP_ANDROID}",
+            "project": "LambdaTest Android Project",
+            "build": "Test LambdaTest Build",
+            "name": "Test LambdaTest Session",
+            "devicelog": true,
+            "network": true,
+            "visual": true,
+            "video": true,
+            "autoGrantPermissions": true,
+            "autoAcceptAlerts": true,
+            "isRealMobile": true,
+            "w3c": true
+          }
+        }
+      },
       "test_local_sauce_ios": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4724,
-          "base_path": "/wd/hub",
           "session_override": true,
           "driver": "XCUI",
           "allow_insecure": [
@@ -294,12 +315,9 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       },
       "test_bs_ios": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
           "driver": "XCUI"
         },
         "device": {
@@ -323,6 +341,38 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
             "debug": true,
             "video": true,
             "appiumLogs": true
+          }
+        }
+      },
+      "test_lt_ios": {
+        "server": {
+          "target": "LAMBDA_TEST_MOBILE",
+          "user_name": "${env:LT_USER}",
+          "password": "${env:LT_KEY}",
+          "driver": "XCUI"
+        },
+        "device": {
+          "type": "CLOUD",
+          "application": {
+            "install_timeout": 180
+          },
+          "ignore_unimportant_views": true,
+          "capabilities": {
+            "platformName": "iOS",
+            "deviceName": "iPhone 14",
+            "platformVersion": "16",
+            "app": "${env:LT_APP_IOS}",
+            "project": "LambdaTest iOS Project",
+            "build": "Test LambdaTest Build",
+            "name": "Test LambdaTest Session",
+            "devicelog": true,
+            "network": true,
+            "visual": true,
+            "video": true,
+            "autoGrantPermissions": true,
+            "autoAcceptAlerts": true,
+            "isRealMobile": true,
+            "w3c": true
           }
         }
       }
