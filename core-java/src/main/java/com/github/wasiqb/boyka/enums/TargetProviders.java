@@ -16,23 +16,38 @@
 
 package com.github.wasiqb.boyka.enums;
 
+import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
+import static com.github.wasiqb.boyka.enums.Protocol.HTTPS;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * Supported cloud providers.
  *
  * @author Wasiq Bhamla
  * @since 24-Feb-2022
  */
-public enum CloudProviders {
+@Getter
+@AllArgsConstructor
+public enum TargetProviders {
     /**
      * BrowserStack.
      */
-    BROWSER_STACK,
+    BROWSER_STACK ("hub-cloud.browserstack.com", HTTPS),
     /**
      * None.
      */
-    NONE,
+    LOCAL ("127.0.0.1", HTTP),
     /**
-     * Lambda Test.
+     * Lambda Test for Web.
      */
-    LAMBDA_TEST
+    LAMBDA_TEST_WEB ("hub.lambdatest.com", HTTPS),
+    /**
+     * Lambda Test for Mobile.
+     */
+    LAMBDA_TEST_MOBILE ("mobile-hub.lambdatest.com", HTTPS);
+
+    private final String   host;
+    private final Protocol protocol;
 }
