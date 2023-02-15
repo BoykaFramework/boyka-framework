@@ -16,9 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.MouseActions.rightClickOn;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
@@ -50,8 +49,9 @@ public class ContextMenuTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        navigate ().to (URL);
-        clickOn (homePage ().link ("Context Menu"));
+        withDriver ().navigate ()
+            .to (URL);
+        withMouse ().clickOn (homePage ().link ("Context Menu"));
     }
 
     /**
@@ -67,7 +67,7 @@ public class ContextMenuTest {
      */
     @Test (description = "Test context menu")
     public void testContextMenu () {
-        rightClickOn (contextMenuPage ().getHotSpot ());
+        withMouse ().rightClickOn (contextMenuPage ().getHotSpot ());
         verifyAcceptAlert ().isEqualTo ("You selected a context menu");
     }
 }

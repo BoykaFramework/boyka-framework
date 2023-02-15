@@ -36,14 +36,19 @@ import org.openqa.selenium.interactions.Actions;
  * @since 24-Feb-2022
  */
 public final class MouseActions {
-    private static final Logger LOGGER = getLogger ();
+    private static final Logger       LOGGER        = getLogger ();
+    private static final MouseActions MOUSE_ACTIONS = new MouseActions ();
+
+    public static MouseActions withMouse () {
+        return MOUSE_ACTIONS;
+    }
 
     /**
      * LongPress on element
      *
      * @param locator {@link Locator} of element
      */
-    public static void clickAndHold (final Locator locator) {
+    public void clickAndHold (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Click and hold on element: {}", locator.getName ());
         performElementAction ((driver, element) -> {
@@ -59,7 +64,7 @@ public final class MouseActions {
      *
      * @param locator {@link Locator} of element
      */
-    public static void clickOn (final Locator locator) {
+    public void clickOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Clicking on element: {}", locator.getName ());
         if (getSession ().getPlatformType () == WEB) {
@@ -75,7 +80,7 @@ public final class MouseActions {
      *
      * @param locator {@link Locator} of element
      */
-    public static void doubleClickOn (final Locator locator) {
+    public void doubleClickOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Double Click on element: {}", locator.getName ());
         performElementAction ((driver, element) -> {
@@ -92,7 +97,7 @@ public final class MouseActions {
      * @param source {@link Locator} of element
      * @param destination {@link Locator} of element
      */
-    public static void dragDropTo (final Locator source, final Locator destination) {
+    public void dragDropTo (final Locator source, final Locator destination) {
         LOGGER.traceEntry ();
         LOGGER.info ("Drag and Drop on element: {} , {}", source.getName (), destination.getName ());
         performElementAction ((driver, element) -> {
@@ -108,7 +113,7 @@ public final class MouseActions {
      *
      * @param locator {@link Locator} of element
      */
-    public static void hoverOn (final Locator locator) {
+    public void hoverOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Hover on element: {}", locator.getName ());
         performElementAction ((driver, element) -> {
@@ -124,7 +129,7 @@ public final class MouseActions {
      *
      * @param locator {@link Locator} of element
      */
-    public static void rightClickOn (final Locator locator) {
+    public void rightClickOn (final Locator locator) {
         LOGGER.traceEntry ();
         LOGGER.info ("Right Click on element: {}", locator.getName ());
         performElementAction ((driver, element) -> {
@@ -133,9 +138,5 @@ public final class MouseActions {
                 .perform ();
         }, locator);
         LOGGER.traceExit ();
-    }
-
-    private MouseActions () {
-        // Utility class
     }
 }

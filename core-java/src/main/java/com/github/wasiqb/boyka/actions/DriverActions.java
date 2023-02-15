@@ -63,14 +63,19 @@ import org.openqa.selenium.interactions.Actions;
  * @since 24-Feb-2022
  */
 public final class DriverActions {
-    private static final Logger LOGGER = getLogger ();
+    private static final DriverActions DRIVER_ACTIONS = new DriverActions ();
+    private static final Logger        LOGGER         = getLogger ();
+
+    public static DriverActions withDriver () {
+        return DRIVER_ACTIONS;
+    }
 
     /**
      * Accepts browser alert.
      *
      * @return the alert message
      */
-    public static String acceptAlert () {
+    public String acceptAlert () {
         LOGGER.traceEntry ();
         return getDriverAttribute (driver -> {
             final var alert = driver.switchTo ()
@@ -88,7 +93,7 @@ public final class DriverActions {
      *
      * @return the alert message
      */
-    public static String acceptAlert (final String text) {
+    public String acceptAlert (final String text) {
         LOGGER.traceEntry ();
         return getDriverAttribute (driver -> {
             final var alert = driver.switchTo ()
@@ -103,7 +108,7 @@ public final class DriverActions {
     /**
      * Close browser window.
      */
-    public static void closeWindow () {
+    public void closeWindow () {
         LOGGER.traceEntry ();
         LOGGER.info ("Closing window");
         performDriverAction (WebDriver::close);
@@ -118,7 +123,7 @@ public final class DriverActions {
      *
      * @return {@link Cookie}
      */
-    public static Cookie cookie (final String name) {
+    public Cookie cookie (final String name) {
         LOGGER.traceEntry ();
         return getDriverAttribute (driver -> driver.manage ()
             .getCookieNamed (name), null);
@@ -129,7 +134,7 @@ public final class DriverActions {
      *
      * @return List of cookie names.
      */
-    public static List<String> cookies () {
+    public List<String> cookies () {
         LOGGER.traceEntry ();
         return getDriverAttribute (driver -> driver.manage ()
             .getCookies ()
@@ -143,7 +148,7 @@ public final class DriverActions {
      *
      * @return the current window handle
      */
-    public static String currentWindowHandle () {
+    public String currentWindowHandle () {
         LOGGER.traceEntry ();
         final String handle = getDriverAttribute (WebDriver::getWindowHandle, EMPTY);
         LOGGER.traceExit ();
@@ -153,7 +158,7 @@ public final class DriverActions {
     /**
      * Deletes all browser cookies.
      */
-    public static void deleteAllCookies () {
+    public void deleteAllCookies () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
             .deleteAllCookies ());
@@ -165,7 +170,7 @@ public final class DriverActions {
      *
      * @param name cookie name
      */
-    public static void deleteCookie (final String name) {
+    public void deleteCookie (final String name) {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
             .deleteCookieNamed (name));
@@ -177,7 +182,7 @@ public final class DriverActions {
      *
      * @return the alert message
      */
-    public static String dismissAlert () {
+    public String dismissAlert () {
         LOGGER.traceEntry ();
         return getDriverAttribute (driver -> {
             final var alert = driver.switchTo ()
@@ -198,7 +203,7 @@ public final class DriverActions {
      * @return the result of the script
      */
     @SuppressWarnings ("unchecked")
-    public static <T> T executeScript (final String script, final Object... args) {
+    public <T> T executeScript (final String script, final Object... args) {
         LOGGER.traceEntry ();
         LOGGER.info ("Executing script");
         return (T) getDriverAttribute (driver -> ((JavascriptExecutor) driver).executeScript (script, args), null);
@@ -207,7 +212,7 @@ public final class DriverActions {
     /**
      * Switch browser window to full screen.
      */
-    public static void fullScreen () {
+    public void fullScreen () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
             .window ()
@@ -218,7 +223,7 @@ public final class DriverActions {
     /**
      * Makes browser window maximized.
      */
-    public static void maximize () {
+    public void maximize () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
             .window ()
@@ -229,7 +234,7 @@ public final class DriverActions {
     /**
      * Makes browser window minimized.
      */
-    public static void minimize () {
+    public void minimize () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.manage ()
             .window ()
@@ -242,7 +247,7 @@ public final class DriverActions {
      *
      * @return Instance of {@link NavigateActions}
      */
-    public static NavigateActions navigate () {
+    public NavigateActions navigate () {
         LOGGER.traceEntry ();
         return LOGGER.traceExit (navigateActions ());
     }
@@ -252,7 +257,7 @@ public final class DriverActions {
      *
      * @param time Duration to pause.
      */
-    public static void pause (final Duration time) {
+    public void pause (final Duration time) {
         LOGGER.traceEntry ();
         performDriverAction (driver -> {
             final var action = new Actions (driver);
@@ -266,7 +271,7 @@ public final class DriverActions {
     /**
      * Save all the available logs to files in `logs` folder.
      */
-    public static void saveLogs () {
+    public void saveLogs () {
         LOGGER.traceEntry ();
         performDriverAction (d -> {
             final var logSetting = getSession ().getSetting ()
@@ -302,7 +307,7 @@ public final class DriverActions {
      *
      * @return Swipe action
      */
-    public static SwipeActions swipe () {
+    public SwipeActions swipe () {
         LOGGER.traceEntry ();
         return LOGGER.traceExit (swipeActions ());
     }
@@ -312,7 +317,7 @@ public final class DriverActions {
      *
      * @param frameName Name of the Iframe.
      */
-    public static void switchToFrame (final String frameName) {
+    public void switchToFrame (final String frameName) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to frame: {}", frameName);
         performDriverAction (driver -> driver.switchTo ()
@@ -323,7 +328,7 @@ public final class DriverActions {
     /**
      * Switch to main window.
      */
-    public static void switchToMainWindow () {
+    public void switchToMainWindow () {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to main window");
         performDriverAction (driver -> driver.switchTo ()
@@ -336,7 +341,7 @@ public final class DriverActions {
      *
      * @param type type of window
      */
-    public static void switchToNewWindow (final WindowType type) {
+    public void switchToNewWindow (final WindowType type) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to new tab");
         performDriverAction (driver -> driver.switchTo ()
@@ -347,7 +352,7 @@ public final class DriverActions {
     /**
      * Switch to Parent Frame.
      */
-    public static void switchToParentFrame () {
+    public void switchToParentFrame () {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to main frame...");
         performDriverAction (driver -> driver.switchTo ()
@@ -360,7 +365,7 @@ public final class DriverActions {
      *
      * @param nameOrHandle name or handle of the window
      */
-    public static void switchToWindow (final String nameOrHandle) {
+    public void switchToWindow (final String nameOrHandle) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to window: {}", nameOrHandle);
         performDriverAction (driver -> driver.switchTo ()
@@ -371,7 +376,7 @@ public final class DriverActions {
     /**
      * Takes screenshot of browser.
      */
-    public static void takeScreenshot () {
+    public void takeScreenshot () {
         final var setting = getSession ().getSetting ()
             .getUi ()
             .getScreenshot ();
@@ -393,7 +398,7 @@ public final class DriverActions {
      *
      * @param fileName file name
      */
-    public static void takeScreenshot (final String fileName) {
+    public void takeScreenshot (final String fileName) {
         LOGGER.traceEntry ();
         final var setting = getSession ().getSetting ()
             .getUi ()
@@ -417,7 +422,7 @@ public final class DriverActions {
      *
      * @return title of the browser
      */
-    public static String title () {
+    public String title () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting title of the browser");
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle, EMPTY));
@@ -428,7 +433,7 @@ public final class DriverActions {
      *
      * @return Size of the window screen
      */
-    public static Dimension viewportSize () {
+    public Dimension viewportSize () {
         return getDriverAttribute (driver -> driver.manage ()
             .window ()
             .getSize (), new Dimension (0, 0));
@@ -442,7 +447,7 @@ public final class DriverActions {
      *
      * @return value of the condition
      */
-    public static <T> T waitUntil (final Function<WebDriver, T> condition) {
+    public <T> T waitUntil (final Function<WebDriver, T> condition) {
         LOGGER.traceEntry ();
         LOGGER.info ("Waiting for condition...");
         return getDriverAttribute (driver -> {
@@ -456,14 +461,14 @@ public final class DriverActions {
      *
      * @return all open window handles
      */
-    public static List<String> windowHandles () {
+    public List<String> windowHandles () {
         LOGGER.traceEntry ();
         final var handles = getDriverAttribute (WebDriver::getWindowHandles, new ArrayList<String> ());
         LOGGER.traceExit ();
         return new ArrayList<> (handles);
     }
 
-    private static <D extends WebDriver> void saveLogType (final D driver, final String logType, final String logPath) {
+    private <D extends WebDriver> void saveLogType (final D driver, final String logType, final String logPath) {
         final var logEntries = driver.manage ()
             .logs ()
             .get (logType);
@@ -481,9 +486,5 @@ public final class DriverActions {
         } catch (final IOException e) {
             handleAndThrow (ERROR_CREATING_LOGS, e);
         }
-    }
-
-    private DriverActions () {
-        // Utility class.
     }
 }

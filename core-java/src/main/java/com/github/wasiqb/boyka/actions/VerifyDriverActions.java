@@ -16,10 +16,7 @@
 
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.acceptAlert;
-import static com.github.wasiqb.boyka.actions.DriverActions.dismissAlert;
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.DriverActions.title;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
 import static com.google.common.truth.Truth.assertThat;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -44,7 +41,7 @@ public class VerifyDriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying accept alert");
         LOGGER.traceExit ();
-        return assertThat (acceptAlert ());
+        return assertThat (withDriver ().acceptAlert ());
     }
 
     /**
@@ -58,7 +55,7 @@ public class VerifyDriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying accept prompt");
         LOGGER.traceExit ();
-        return assertThat (acceptAlert (text));
+        return assertThat (withDriver ().acceptAlert (text));
     }
 
     /**
@@ -70,7 +67,7 @@ public class VerifyDriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying browser title");
         LOGGER.traceExit ();
-        return assertThat (title ());
+        return assertThat (withDriver ().title ());
     }
 
     /**
@@ -82,7 +79,8 @@ public class VerifyDriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying browser url");
         LOGGER.traceExit ();
-        return assertThat (navigate ().url ());
+        return assertThat (withDriver ().navigate ()
+            .url ());
     }
 
     /**
@@ -94,7 +92,7 @@ public class VerifyDriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying alert message and dismissing the alert");
         LOGGER.traceExit ();
-        return assertThat (dismissAlert ());
+        return assertThat (withDriver ().dismissAlert ());
     }
 
     private VerifyDriverActions () {

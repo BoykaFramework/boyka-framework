@@ -1,8 +1,6 @@
 package com.github.wasiqb.boyka.testng.ui.wdio;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
-import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
-import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
@@ -31,7 +29,7 @@ public class WdioDemoTest {
     @AfterMethod (alwaysRun = true)
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
-            takeScreenshot ();
+            withDriver ().takeScreenshot ();
         }
     }
 
@@ -52,7 +50,7 @@ public class WdioDemoTest {
      */
     @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
-        saveLogs ();
+        withDriver ().saveLogs ();
         closeDriver ();
     }
 
@@ -63,9 +61,12 @@ public class WdioDemoTest {
     public void testDragDrop () {
         tapOn (wdioHomePage ().getDragTab ());
         for (var index = 1; index <= 3; index++) {
-            swipe ().dragTo (dragDropPage ().leftSourceTile (index), dragDropPage ().leftTargetTile (index));
-            swipe ().dragTo (dragDropPage ().centerSourceTile (index), dragDropPage ().centerTargetTile (index));
-            swipe ().dragTo (dragDropPage ().rightSourceTile (index), dragDropPage ().rightTargetTile (index));
+            withDriver ().swipe ()
+                .dragTo (dragDropPage ().leftSourceTile (index), dragDropPage ().leftTargetTile (index));
+            withDriver ().swipe ()
+                .dragTo (dragDropPage ().centerSourceTile (index), dragDropPage ().centerTargetTile (index));
+            withDriver ().swipe ()
+                .dragTo (dragDropPage ().rightSourceTile (index), dragDropPage ().rightTargetTile (index));
         }
         verifyTextOf (dragDropPage ().getTitle ()).isEqualTo ("Congratulations");
         verifyTextOf (dragDropPage ().getDescription ()).isEqualTo (

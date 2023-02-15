@@ -20,6 +20,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_DESELECT_FROM_DROPDOWN;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static com.google.common.truth.Truth.assertThat;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -28,6 +29,9 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.util.List;
 
 import com.github.wasiqb.boyka.builders.Locator;
+import com.google.common.truth.IterableSubject;
+import com.google.common.truth.StringSubject;
+import lombok.Setter;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -39,142 +43,148 @@ import org.openqa.selenium.support.ui.Select;
  * @author Wasiq Bhamla
  * @since 30-Jul-2022
  */
+@Setter
 public final class DropDownActions {
-    private static final Logger LOGGER = getLogger ();
+    private static final DropDownActions DROP_DOWN_ACTIONS = new DropDownActions ();
+    private static final Logger          LOGGER            = getLogger ();
+
+    /**
+     * Interact with drop down element.
+     *
+     * @param locator {@link Locator} of the dropdown
+     *
+     * @return action instance to interact with dropdown
+     */
+    public static DropDownActions onDropDown (final Locator locator) {
+        DROP_DOWN_ACTIONS.setLocator (locator);
+        return DROP_DOWN_ACTIONS;
+    }
+
+    private Locator locator;
 
     /**
      * Deselects all the selected values.
-     *
-     * @param locator {@link Locator} of drop down
      */
-    public static void deselectAll (final Locator locator) {
+    public void deselectAll () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Deselecting element located by: {}", locator.getName ());
+        LOGGER.info ("Deselecting element located by: {}", this.locator.getName ());
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
                 throwError (ERROR_DESELECT_FROM_DROPDOWN);
             }
             select.deselectAll ();
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
     /**
      * Deselects the option from the dropdown based on its index.
      *
-     * @param locator {@link Locator} of dropdown
      * @param index index of the option to deselect
      */
-    public static void deselectByIndex (final Locator locator, final int index) {
+    public void deselectByIndex (final int index) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Deselecting element located by: {} by index: {}", locator.getName (), index);
+        LOGGER.info ("Deselecting element located by: {} by index: {}", this.locator.getName (), index);
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
                 throwError (ERROR_DESELECT_FROM_DROPDOWN);
             }
             select.deselectByIndex (index);
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
     /**
      * Deselects the option from the dropdown based on its visible text.
      *
-     * @param locator {@link Locator} of dropdown
      * @param text visible text of the option to deselect
      */
-    public static void deselectByText (final Locator locator, final String text) {
+    public void deselectByText (final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Deselecting element located by: {} by visible text: {}", locator.getName (), text);
+        LOGGER.info ("Deselecting element located by: {} by visible text: {}", this.locator.getName (), text);
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
                 throwError (ERROR_DESELECT_FROM_DROPDOWN);
             }
             select.deselectByVisibleText (text);
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
     /**
      * Deselects the option from the dropdown based on its value.
      *
-     * @param locator {@link Locator} of dropdown
      * @param value value of the option to deselect
      */
-    public static void deselectByValue (final Locator locator, final String value) {
+    public void deselectByValue (final String value) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Deselecting element located by: {} by value: {}", locator.getName (), value);
+        LOGGER.info ("Deselecting element located by: {} by value: {}", this.locator.getName (), value);
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
                 throwError (ERROR_DESELECT_FROM_DROPDOWN);
             }
             select.deselectByValue (value);
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
     /**
      * Selects the value from dropdown based on index.
      *
-     * @param locator locator of the dropdown
      * @param index index to be selected
      */
-    public static void selectByIndex (final Locator locator, final int index) {
+    public void selectByIndex (final int index) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Selecting element located by: {} by index: {}", locator.getName (), index);
+        LOGGER.info ("Selecting element located by: {} by index: {}", this.locator.getName (), index);
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByIndex (index);
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
     /**
      * Selects the value from dropdown based on visible text.
      *
-     * @param locator locator of the dropdown
      * @param text text to be selected
      */
-    public static void selectByText (final Locator locator, final String text) {
+    public void selectByText (final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Selecting element located by: {} by text: {}", locator.getName (), text);
+        LOGGER.info ("Selecting element located by: {} by text: {}", this.locator.getName (), text);
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByVisibleText (text);
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
     /**
      * Selects the value from dropdown based on value.
      *
-     * @param locator locator of the dropdown
      * @param value value to be selected
      */
-    public static void selectByValue (final Locator locator, final String value) {
+    public void selectByValue (final String value) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Selecting element located by: {} by value: {}", locator.getName (), value);
+        LOGGER.info ("Selecting element located by: {} by value: {}", this.locator.getName (), value);
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByValue (value);
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
     /**
      * Returns the first selected value from dropdown.
      *
-     * @param locator locator of the dropdown
-     *
      * @return first selected value
      */
-    public static String selectedItem (final Locator locator) {
+    public String selectedItem () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting selected option from element located by: {}", locator.getName ());
+        LOGGER.info ("Getting selected option from element located by: {}", this.locator.getName ());
         return getElementAttribute (element -> {
             final var select = new Select (element);
             try {
@@ -183,29 +193,41 @@ public final class DropDownActions {
             } catch (final NoSuchElementException e) {
                 return EMPTY;
             }
-        }, locator, EMPTY);
+        }, this.locator, EMPTY);
     }
 
     /**
      * Gets all the selected values from the dropdown.
      *
-     * @param locator locator of the dropdown
-     *
      * @return list of selected values
      */
-    public static List<String> selectedItems (final Locator locator) {
+    public List<String> selectedItems () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting all selected options from element located by: {}", locator.getName ());
+        LOGGER.info ("Getting all selected options from element located by: {}", this.locator.getName ());
         return getElementAttribute (e -> {
             final var select = new Select (e);
             return select.getAllSelectedOptions ()
                 .stream ()
                 .map (WebElement::getText)
                 .collect (toList ());
-        }, locator, emptyList ());
+        }, this.locator, emptyList ());
     }
 
-    private DropDownActions () {
-        // Utility class.
+    /**
+     * Verify selected item.
+     *
+     * @return {@link StringSubject} of selected item
+     */
+    public StringSubject verifySelectedItem () {
+        return assertThat (selectedItem ());
+    }
+
+    /**
+     * Verify selected items.
+     *
+     * @return {@link IterableSubject} of selected items
+     */
+    public IterableSubject verifySelectedItems () {
+        return assertThat (selectedItems ());
     }
 }

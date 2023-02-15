@@ -16,16 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.DropDownActions.deselectAll;
-import static com.github.wasiqb.boyka.actions.DropDownActions.deselectByIndex;
-import static com.github.wasiqb.boyka.actions.DropDownActions.deselectByText;
-import static com.github.wasiqb.boyka.actions.DropDownActions.deselectByValue;
-import static com.github.wasiqb.boyka.actions.DropDownActions.selectByIndex;
-import static com.github.wasiqb.boyka.actions.DropDownActions.selectByText;
-import static com.github.wasiqb.boyka.actions.DropDownActions.selectByValue;
-import static com.github.wasiqb.boyka.actions.VerifyDropDownActions.verifySelectedItem;
-import static com.github.wasiqb.boyka.actions.VerifyDropDownActions.verifySelectedItems;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.DropDownActions.onDropDown;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.DropDownPage.dropDownPage;
@@ -56,7 +48,8 @@ public class DropDownTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        navigate ().to (URL);
+        withDriver ().navigate ()
+            .to (URL);
     }
 
     /**
@@ -72,11 +65,13 @@ public class DropDownTest {
      */
     @Test (description = "Verify deselect all dropdown values")
     public void testDeselectAll () {
-        selectByIndex (dropDownPage ().getSuperHeroes (), 3);
-        selectByIndex (dropDownPage ().getSuperHeroes (), 4);
-        verifySelectedItems (dropDownPage ().getSuperHeroes ()).containsExactly ("Batman", "Batwoman");
-        deselectAll (dropDownPage ().getSuperHeroes ());
-        verifySelectedItems (dropDownPage ().getSuperHeroes ()).isEmpty ();
+        onDropDown (dropDownPage ().getSuperHeroes ()).selectByIndex (3);
+        onDropDown (dropDownPage ().getSuperHeroes ()).selectByIndex (4);
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItems ()
+            .containsExactly ("Batman", "Batwoman");
+        onDropDown (dropDownPage ().getSuperHeroes ()).deselectAll ();
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItems ()
+            .isEmpty ();
     }
 
     /**
@@ -84,10 +79,12 @@ public class DropDownTest {
      */
     @Test (description = "Verify deselect dropdown value by index")
     public void testDeselectByIndex () {
-        selectByIndex (dropDownPage ().getSuperHeroes (), 4);
-        verifySelectedItem (dropDownPage ().getSuperHeroes ()).isEqualTo ("Batwoman");
-        deselectByIndex (dropDownPage ().getSuperHeroes (), 4);
-        verifySelectedItem (dropDownPage ().getSuperHeroes ()).isEqualTo (EMPTY);
+        onDropDown (dropDownPage ().getSuperHeroes ()).selectByIndex (4);
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItem ()
+            .isEqualTo ("Batwoman");
+        onDropDown (dropDownPage ().getSuperHeroes ()).deselectByIndex (4);
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItem ()
+            .isEqualTo (EMPTY);
     }
 
     /**
@@ -95,10 +92,12 @@ public class DropDownTest {
      */
     @Test (description = "Verify deselect dropdown value by text")
     public void testDeselectByText () {
-        selectByText (dropDownPage ().getSuperHeroes (), "Aquaman");
-        verifySelectedItem (dropDownPage ().getSuperHeroes ()).isEqualTo ("Aquaman");
-        deselectByText (dropDownPage ().getSuperHeroes (), "Aquaman");
-        verifySelectedItem (dropDownPage ().getSuperHeroes ()).isEqualTo (EMPTY);
+        onDropDown (dropDownPage ().getSuperHeroes ()).selectByText ("Aquaman");
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItem ()
+            .isEqualTo ("Aquaman");
+        onDropDown (dropDownPage ().getSuperHeroes ()).deselectByText ("Aquaman");
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItem ()
+            .isEqualTo (EMPTY);
     }
 
     /**
@@ -106,10 +105,12 @@ public class DropDownTest {
      */
     @Test (description = "Verify deselect dropdown value by value")
     public void testDeselectByValue () {
-        selectByValue (dropDownPage ().getSuperHeroes (), "bt");
-        verifySelectedItem (dropDownPage ().getSuperHeroes ()).isEqualTo ("Batman");
-        deselectByValue (dropDownPage ().getSuperHeroes (), "bt");
-        verifySelectedItem (dropDownPage ().getSuperHeroes ()).isEqualTo (EMPTY);
+        onDropDown (dropDownPage ().getSuperHeroes ()).selectByValue ("bt");
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItem ()
+            .isEqualTo ("Batman");
+        onDropDown (dropDownPage ().getSuperHeroes ()).deselectByValue ("bt");
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItem ()
+            .isEqualTo (EMPTY);
     }
 
     /**
@@ -117,11 +118,11 @@ public class DropDownTest {
      */
     @Test (description = "Verify multi select dropdown values")
     public void testMultiSelect () {
-        selectByValue (dropDownPage ().getSuperHeroes (), "ta");
-        selectByIndex (dropDownPage ().getSuperHeroes (), 3);
-        selectByText (dropDownPage ().getSuperHeroes (), "Black Panther");
-        verifySelectedItems (dropDownPage ().getSuperHeroes ()).containsExactly ("The Avengers", "Batman",
-            "Black Panther");
+        onDropDown (dropDownPage ().getSuperHeroes ()).selectByValue ("ta");
+        onDropDown (dropDownPage ().getSuperHeroes ()).selectByIndex (3);
+        onDropDown (dropDownPage ().getSuperHeroes ()).selectByText ("Black Panther");
+        onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItems ()
+            .containsExactly ("The Avengers", "Batman", "Black Panther");
     }
 
     /**
@@ -129,8 +130,9 @@ public class DropDownTest {
      */
     @Test (description = "Verify select dropdown value by index")
     public void testSelectByIndex () {
-        selectByIndex (dropDownPage ().getFruits (), 3);
-        verifySelectedItem (dropDownPage ().getFruits ()).isEqualTo ("Orange");
+        onDropDown (dropDownPage ().getFruits ()).selectByIndex (3);
+        onDropDown (dropDownPage ().getFruits ()).verifySelectedItem ()
+            .isEqualTo ("Orange");
     }
 
     /**
@@ -138,8 +140,9 @@ public class DropDownTest {
      */
     @Test (description = "Verify select dropdown value by text")
     public void testSelectByText () {
-        selectByText (dropDownPage ().getFruits (), "Apple");
-        verifySelectedItem (dropDownPage ().getFruits ()).isEqualTo ("Apple");
+        onDropDown (dropDownPage ().getFruits ()).selectByText ("Apple");
+        onDropDown (dropDownPage ().getFruits ()).verifySelectedItem ()
+            .isEqualTo ("Apple");
     }
 
     /**
@@ -147,7 +150,8 @@ public class DropDownTest {
      */
     @Test (description = "Verify select dropdown value by value")
     public void testSelectByValue () {
-        selectByValue (dropDownPage ().getFruits (), "1");
-        verifySelectedItem (dropDownPage ().getFruits ()).isEqualTo ("Mango");
+        onDropDown (dropDownPage ().getFruits ()).selectByValue ("1");
+        onDropDown (dropDownPage ().getFruits ()).verifySelectedItem ()
+            .isEqualTo ("Mango");
     }
 }

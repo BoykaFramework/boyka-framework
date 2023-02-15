@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.viewportSize;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
@@ -46,7 +46,7 @@ import org.openqa.selenium.interactions.Sequence;
  */
 @Builder (builderMethodName = "init")
 final class FingerGestureBuilder {
-    private static final Dimension SCREEN_SIZE = viewportSize ();
+    private static final Dimension SCREEN_SIZE = withDriver ().viewportSize ();
 
     @Builder.Default
     private       SwipeDirection      direction = DOWN;

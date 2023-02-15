@@ -1,8 +1,8 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo.actions;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
 import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
@@ -28,7 +28,7 @@ public class SauceDemoActions {
     }
 
     public void verifyAddToCart () {
-        clickOn (homePage ().getAddToCartButton ());
+        withMouse ().clickOn (homePage ().getAddToCartButton ());
 
         verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
         verifyTextOf (homePage ().getShoppingCartCount ()).isEqualTo ("1");
@@ -38,7 +38,7 @@ public class SauceDemoActions {
     }
 
     public void verifyCheckoutStep1 () {
-        clickOn (cartPage ().getCheckout ());
+        withMouse ().clickOn (cartPage ().getCheckout ());
         if (this.platformType == WEB) {
             verifyBrowserUrl ().isEqualTo (format ("{0}/checkout-step-one.html", URL));
             verifyTextOf (checkoutPage ().getTitle ()).isEqualTo ("CHECKOUT: YOUR INFORMATION");
@@ -48,12 +48,12 @@ public class SauceDemoActions {
         enterText (checkoutPage ().getLastName (), "Bhamla");
         enterText (checkoutPage ().getZipCode (), "12345");
 
-        clickOn (checkoutPage ().getContinueButton ());
+        withMouse ().clickOn (checkoutPage ().getContinueButton ());
         verifyTextOf (checkoutPage ().getTitle ()).isEqualTo ("CHECKOUT: OVERVIEW");
     }
 
     public void verifyCheckoutStep2 () {
-        clickOn (checkoutPage ().getFinish ());
+        withMouse ().clickOn (checkoutPage ().getFinish ());
 
         if (this.platformType != WEB) {
             verifyTextOf (checkoutPage ().getCompleteHeader ()).isEqualTo ("THANK YOU FOR YOU ORDER");
@@ -71,13 +71,13 @@ public class SauceDemoActions {
         verifyNavigateToSite ();
         enterText (loginPage ().getUsername (), userName);
         enterText (loginPage ().getPassword (), password);
-        clickOn (loginPage ().getLoginButton ());
+        withMouse ().clickOn (loginPage ().getLoginButton ());
         verifyLoggedIn ();
     }
 
     public void verifySignOut () {
-        clickOn (homePage ().getMenuButton ());
-        clickOn (homePage ().getLogout ());
+        withMouse ().clickOn (homePage ().getMenuButton ());
+        withMouse ().clickOn (homePage ().getLogout ());
         if (this.platformType == WEB) {
             verifyBrowserUrl ().startsWith (URL);
         }
@@ -95,13 +95,14 @@ public class SauceDemoActions {
 
     private void verifyNavigateToSite () {
         if (this.platformType == WEB) {
-            navigate ().to (URL);
+            withDriver ().navigate ()
+                .to (URL);
             verifyBrowserUrl ().startsWith (URL);
         }
     }
 
     private void verifyProductCartPage () {
-        clickOn (homePage ().getShoppingCart ());
+        withMouse ().clickOn (homePage ().getShoppingCart ());
         if (this.platformType == WEB) {
             verifyBrowserUrl ().isEqualTo (format ("{0}/cart.html", URL));
         }
@@ -109,7 +110,7 @@ public class SauceDemoActions {
     }
 
     private void verifyProductDetailPage () {
-        clickOn (homePage ().productItem ("Sauce Labs Backpack"));
+        withMouse ().clickOn (homePage ().productItem ("Sauce Labs Backpack"));
         if (this.platformType == WEB) {
             verifyBrowserUrl ().startsWith (format ("{0}/inventory-item.html?id=", URL));
         }

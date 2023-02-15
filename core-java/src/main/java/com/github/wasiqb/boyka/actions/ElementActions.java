@@ -19,7 +19,7 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGestures;
-import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -137,7 +137,8 @@ public final class ElementActions {
      */
     public static void tapOn (final Locator locator) {
         LOGGER.traceEntry ();
-        swipe ().till (locator);
+        withDriver ().swipe ()
+            .till (locator);
         final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
             .element (element)
             .build ()

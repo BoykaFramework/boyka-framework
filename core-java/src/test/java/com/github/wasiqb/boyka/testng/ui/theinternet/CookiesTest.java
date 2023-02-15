@@ -16,13 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.cookie;
-import static com.github.wasiqb.boyka.actions.DriverActions.cookies;
-import static com.github.wasiqb.boyka.actions.DriverActions.deleteAllCookies;
-import static com.github.wasiqb.boyka.actions.DriverActions.deleteCookie;
-import static com.github.wasiqb.boyka.actions.DriverActions.minimize;
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
@@ -53,9 +48,10 @@ public class CookiesTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        minimize ();
-        navigate ().to (URL);
-        clickOn (homePage ().link ("JavaScript Alerts"));
+        withDriver ().minimize ();
+        withDriver ().navigate ()
+            .to (URL);
+        withMouse ().clickOn (homePage ().link ("JavaScript Alerts"));
     }
 
     /**
@@ -71,8 +67,9 @@ public class CookiesTest {
      */
     @Test (description = "Verify delete all cookies", priority = 3)
     public void testDeleteAllCookies () {
-        deleteAllCookies ();
-        assertThat (cookies ().size ()).isEqualTo (0);
+        withDriver ().deleteAllCookies ();
+        assertThat (withDriver ().cookies ()
+            .size ()).isEqualTo (0);
     }
 
     /**
@@ -80,10 +77,11 @@ public class CookiesTest {
      */
     @Test (description = "Tests delete of single cookie", priority = 2)
     public void testDeleteSingleCookie () {
-        final var cookies = cookies ();
+        final var cookies = withDriver ().cookies ();
         final var cookieCount = cookies.size ();
-        deleteCookie (cookies.get (0));
-        assertThat (cookies ().size ()).isEqualTo (cookieCount - 1);
+        withDriver ().deleteCookie (cookies.get (0));
+        assertThat (withDriver ().cookies ()
+            .size ()).isEqualTo (cookieCount - 1);
     }
 
     /**
@@ -91,7 +89,9 @@ public class CookiesTest {
      */
     @Test (description = "Test get cookie", priority = 1)
     public void testGetCookie () {
-        final var cookie = cookies ().get (0);
-        assertThat (cookie (cookie).getName ()).isEqualTo (cookie);
+        final var cookie = withDriver ().cookies ()
+            .get (0);
+        assertThat (withDriver ().cookie (cookie)
+            .getName ()).isEqualTo (cookie);
     }
 }

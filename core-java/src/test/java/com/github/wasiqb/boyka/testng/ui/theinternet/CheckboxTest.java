@@ -16,8 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementSelected;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
@@ -42,7 +42,8 @@ public class CheckboxTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        navigate ().to (URL);
+        withDriver ().navigate ()
+            .to (URL);
     }
 
     /**
@@ -60,7 +61,7 @@ public class CheckboxTest {
     public void testCheckOption () {
         verifyElementSelected (checkboxPage ().getOption1 ()).isFalse ();
         verifyElementSelected (checkboxPage ().getOption2 ()).isTrue ();
-        clickOn (checkboxPage ().getOption1 ());
+        withMouse ().clickOn (checkboxPage ().getOption1 ());
         verifyElementSelected (checkboxPage ().getOption1 ()).isTrue ();
     }
 }

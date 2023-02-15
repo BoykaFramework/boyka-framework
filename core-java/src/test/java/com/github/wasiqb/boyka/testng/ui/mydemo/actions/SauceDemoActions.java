@@ -1,10 +1,10 @@
 package com.github.wasiqb.boyka.testng.ui.mydemo.actions;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.ElementActions.textOf;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
 import static com.github.wasiqb.boyka.actions.KeyboardActions.hideKeyboard;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.enums.PlatformType.ANDROID;
@@ -36,7 +36,7 @@ public class SauceDemoActions {
     private double                   totalAmount;
 
     public void verifyAddToCart (final String productName, final int quantity, final ProductDetailsPage.Color color) {
-        clickOn (homePage ().productItem (productName));
+        withMouse ().clickOn (homePage ().productItem (productName));
         verifyElementDisplayed (productDetailsPage ().getAddToCart ()).isTrue ();
 
         this.color = color;
@@ -44,12 +44,13 @@ public class SauceDemoActions {
         this.price = getPrice (textOf (productDetailsPage ().getPrice ()));
         this.totalAmount = this.price * quantity;
 
-        clickOn (productDetailsPage ().getColor (color));
-        swipe ().up ();
+        withMouse ().clickOn (productDetailsPage ().getColor (color));
+        withDriver ().swipe ()
+            .up ();
         for (int i = 1; i < quantity; i++) {
-            clickOn (productDetailsPage ().getAddQuantity ());
+            withMouse ().clickOn (productDetailsPage ().getAddQuantity ());
         }
-        clickOn (productDetailsPage ().getAddToCart ());
+        withMouse ().clickOn (productDetailsPage ().getAddToCart ());
         if (getSession ().getPlatformType () == ANDROID) {
             verifyTextOf (homePage ().getShoppingCartCount ()).isEqualTo (Integer.toString (quantity));
         } else {
@@ -58,12 +59,12 @@ public class SauceDemoActions {
     }
 
     public void verifyCartPage () {
-        clickOn (homePage ().getShoppingCart ());
+        withMouse ().clickOn (homePage ().getShoppingCart ());
         verifyTextOf (cartPage ().getProductPrice ()).isEqualTo (getPrice (this.price));
         verifyTextOf (cartPage ().getTotalPrice ()).isEqualTo (getPrice (this.totalAmount));
         verifyTextOf (cartPage ().getTotalItems ()).contains (Integer.toString (this.items));
         verifyElementDisplayed (cartPage ().getColor (this.color)).isTrue ();
-        clickOn (cartPage ().getCheckout ());
+        withMouse ().clickOn (cartPage ().getCheckout ());
     }
 
     public void verifyCheckout () {
@@ -79,30 +80,31 @@ public class SauceDemoActions {
             .city ());
         enterText (checkoutPage ().getState (), faker.address ()
             .state ());
-        swipe ().up ();
+        withDriver ().swipe ()
+            .up ();
         enterText (checkoutPage ().getZipCode (), faker.address ()
             .zipCode ());
         enterText (checkoutPage ().getCountry (), faker.address ()
             .country ());
         hideKeyboard ();
-        clickOn (checkoutPage ().getPayment ());
+        withMouse ().clickOn (checkoutPage ().getPayment ());
     }
 
     public void verifyLogin (final String userName, final String password) {
         verifyElementDisplayed (loginPage ().getLoginButton ()).isTrue ();
         if (getSession ().getPlatformType () == IOS) {
-            clickOn (loginPage ().getLoginUser ());
+            withMouse ().clickOn (loginPage ().getLoginUser ());
         } else {
             enterText (loginPage ().getUsername (), userName);
             enterText (loginPage ().getPassword (), password);
             hideKeyboard ();
         }
-        clickOn (loginPage ().getLoginButton ());
+        withMouse ().clickOn (loginPage ().getLoginButton ());
     }
 
     public void verifyOrderReview () {
         verifyElementDisplayed (reviewOrderPage ().getPlaceOrder ()).isTrue ();
-        clickOn (reviewOrderPage ().getPlaceOrder ());
+        withMouse ().clickOn (reviewOrderPage ().getPlaceOrder ());
 
         verifyTextOf (orderSuccessPage ().getMessageMatching ("Checkout Complete")).isEqualTo ("Checkout Complete");
         verifyTextOf (orderSuccessPage ().getMessageMatching ("Thank you")).isEqualTo ("Thank you for your order");
@@ -110,7 +112,7 @@ public class SauceDemoActions {
             "Your new swag is on its way");
         verifyTextOf (orderSuccessPage ().getMessageMatching ("Your order has been dispatched")).isEqualTo (
             " Your order has been dispatched and will arrive as fast as the pony gallops!");
-        clickOn (orderSuccessPage ().getContinueShopping ());
+        withMouse ().clickOn (orderSuccessPage ().getContinueShopping ());
     }
 
     public void verifyPayment () {
@@ -122,7 +124,7 @@ public class SauceDemoActions {
         enterText (paymentPage ().getExpiryDate (), getExpiry ());
         enterText (paymentPage ().getSecurityCode (), faker.number ()
             .digits (3));
-        clickOn (paymentPage ().getReviewOrder ());
+        withMouse ().clickOn (paymentPage ().getReviewOrder ());
     }
 
     private String getExpiry () {

@@ -16,10 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.DriverActions.switchToFrame;
-import static com.github.wasiqb.boyka.actions.DriverActions.switchToParentFrame;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
+import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
 import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
@@ -52,8 +50,9 @@ public class FramesTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        navigate ().to (URL);
-        clickOn (homePage ().link ("Frames"));
+        withDriver ().navigate ()
+            .to (URL);
+        withMouse ().clickOn (homePage ().link ("Frames"));
     }
 
     /**
@@ -70,11 +69,11 @@ public class FramesTest {
     @Test
     public void testNestedBottomFrame () {
         try {
-            clickOn (framesPage ().getNestedFrames ());
-            switchToFrame (nestedFramePage ().getFrameBottom ());
+            withMouse ().clickOn (framesPage ().getNestedFrames ());
+            withDriver ().switchToFrame (nestedFramePage ().getFrameBottom ());
             verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("BOTTOM");
         } finally {
-            switchToParentFrame ();
+            withDriver ().switchToParentFrame ();
         }
     }
 
@@ -84,12 +83,12 @@ public class FramesTest {
     @Test
     public void testNestedLeftFrame () {
         try {
-            switchToFrame (nestedFramePage ().getFrameTop ());
-            switchToFrame (nestedFramePage ().getFrameLeft ());
+            withDriver ().switchToFrame (nestedFramePage ().getFrameTop ());
+            withDriver ().switchToFrame (nestedFramePage ().getFrameLeft ());
             verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("LEFT");
         } finally {
-            switchToParentFrame ();
-            switchToParentFrame ();
+            withDriver ().switchToParentFrame ();
+            withDriver ().switchToParentFrame ();
         }
     }
 
@@ -99,12 +98,12 @@ public class FramesTest {
     @Test
     public void testNestedMiddleFrame () {
         try {
-            switchToFrame (nestedFramePage ().getFrameTop ());
-            switchToFrame (nestedFramePage ().getFrameMiddle ());
+            withDriver ().switchToFrame (nestedFramePage ().getFrameTop ());
+            withDriver ().switchToFrame (nestedFramePage ().getFrameMiddle ());
             verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("MIDDLE");
         } finally {
-            switchToParentFrame ();
-            switchToParentFrame ();
+            withDriver ().switchToParentFrame ();
+            withDriver ().switchToParentFrame ();
         }
     }
 
@@ -114,12 +113,12 @@ public class FramesTest {
     @Test
     public void testNestedRightFrame () {
         try {
-            switchToFrame (nestedFramePage ().getFrameTop ());
-            switchToFrame (nestedFramePage ().getFrameRight ());
+            withDriver ().switchToFrame (nestedFramePage ().getFrameTop ());
+            withDriver ().switchToFrame (nestedFramePage ().getFrameRight ());
             verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("RIGHT");
         } finally {
-            switchToParentFrame ();
-            switchToParentFrame ();
+            withDriver ().switchToParentFrame ();
+            withDriver ().switchToParentFrame ();
         }
     }
 }
