@@ -16,9 +16,10 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.FrameActions.onFrame;
+import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.FramesPage.framesPage;
@@ -50,9 +51,8 @@ public class FramesTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        withDriver ().navigate ()
-            .to (URL);
-        withMouse ().clickOn (homePage ().link ("Frames"));
+        navigate ().to (URL);
+        withMouse (homePage ().link ("Frames")).clickOn ();
     }
 
     /**
@@ -69,11 +69,12 @@ public class FramesTest {
     @Test
     public void testNestedBottomFrame () {
         try {
-            withMouse ().clickOn (framesPage ().getNestedFrames ());
-            withDriver ().switchToFrame (nestedFramePage ().getFrameBottom ());
-            verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("BOTTOM");
+            withMouse (framesPage ().getNestedFrames ()).clickOn ();
+            onFrame ().switchTo (nestedFramePage ().getFrameBottom ());
+            onElement (nestedFramePage ().getBody ()).verifyTextOf ()
+                .isEqualTo ("BOTTOM");
         } finally {
-            withDriver ().switchToParentFrame ();
+            onFrame ().switchToParent ();
         }
     }
 
@@ -83,12 +84,13 @@ public class FramesTest {
     @Test
     public void testNestedLeftFrame () {
         try {
-            withDriver ().switchToFrame (nestedFramePage ().getFrameTop ());
-            withDriver ().switchToFrame (nestedFramePage ().getFrameLeft ());
-            verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("LEFT");
+            onFrame ().switchTo (nestedFramePage ().getFrameTop ());
+            onFrame ().switchTo (nestedFramePage ().getFrameLeft ());
+            onElement (nestedFramePage ().getBody ()).verifyTextOf ()
+                .isEqualTo ("LEFT");
         } finally {
-            withDriver ().switchToParentFrame ();
-            withDriver ().switchToParentFrame ();
+            onFrame ().switchToParent ();
+            onFrame ().switchToParent ();
         }
     }
 
@@ -98,12 +100,13 @@ public class FramesTest {
     @Test
     public void testNestedMiddleFrame () {
         try {
-            withDriver ().switchToFrame (nestedFramePage ().getFrameTop ());
-            withDriver ().switchToFrame (nestedFramePage ().getFrameMiddle ());
-            verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("MIDDLE");
+            onFrame ().switchTo (nestedFramePage ().getFrameTop ());
+            onFrame ().switchTo (nestedFramePage ().getFrameMiddle ());
+            onElement (nestedFramePage ().getBody ()).verifyTextOf ()
+                .isEqualTo ("MIDDLE");
         } finally {
-            withDriver ().switchToParentFrame ();
-            withDriver ().switchToParentFrame ();
+            onFrame ().switchToParent ();
+            onFrame ().switchToParent ();
         }
     }
 
@@ -113,12 +116,13 @@ public class FramesTest {
     @Test
     public void testNestedRightFrame () {
         try {
-            withDriver ().switchToFrame (nestedFramePage ().getFrameTop ());
-            withDriver ().switchToFrame (nestedFramePage ().getFrameRight ());
-            verifyTextOf (nestedFramePage ().getBody ()).isEqualTo ("RIGHT");
+            onFrame ().switchTo (nestedFramePage ().getFrameTop ());
+            onFrame ().switchTo (nestedFramePage ().getFrameRight ());
+            onElement (nestedFramePage ().getBody ()).verifyTextOf ()
+                .isEqualTo ("RIGHT");
         } finally {
-            withDriver ().switchToParentFrame ();
-            withDriver ().switchToParentFrame ();
+            onFrame ().switchToParent ();
+            onFrame ().switchToParent ();
         }
     }
 }

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,126 +17,106 @@
 package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
-import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
 import static com.github.wasiqb.boyka.actions.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import com.github.wasiqb.boyka.actions.interfaces.elements.IClickableActions;
 import com.github.wasiqb.boyka.builders.Locator;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-/**
- * Perform Mouse actions on UI elements.
- *
- * @author Wasiq Bhamla
- * @since 24-Feb-2022
- */
-public final class MouseActions {
-    private static final Logger       LOGGER        = getLogger ();
-    private static final MouseActions MOUSE_ACTIONS = new MouseActions ();
+public class ClickableActions extends FingersActions implements IClickableActions {
+    private static final Logger LOGGER = getLogger ();
 
-    public static MouseActions withMouse () {
-        return MOUSE_ACTIONS;
+    public static IClickableActions withMouse (final Locator locator) {
+        return new ClickableActions (locator);
     }
 
-    /**
-     * LongPress on element
-     *
-     * @param locator {@link Locator} of element
-     */
-    public void clickAndHold (final Locator locator) {
+    ClickableActions (final Locator locator) {
+        super (locator);
+    }
+
+    @Override
+    public void clickAndHold () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Click and hold on element: {}", locator.getName ());
+        LOGGER.info ("Click and hold on element: {}", this.locator.getName ());
         performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.clickAndHold (element)
                 .perform ();
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
-    /**
-     * Click on element
-     *
-     * @param locator {@link Locator} of element
-     */
-    public void clickOn (final Locator locator) {
+    @Override
+    public void clickOn () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Clicking on element: {}", locator.getName ());
+        LOGGER.info ("Clicking on element: {}", this.locator.getName ());
         if (getSession ().getPlatformType () == WEB) {
-            performElementAction (WebElement::click, locator);
+            performElementAction (WebElement::click, this.locator);
         } else {
-            tapOn (locator);
+            tapOn ();
         }
         LOGGER.traceExit ();
     }
 
-    /**
-     * DoubleClick on element
-     *
-     * @param locator {@link Locator} of element
-     */
-    public void doubleClickOn (final Locator locator) {
+    @Override
+    public void doubleClickOn () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Double Click on element: {}", locator.getName ());
+        LOGGER.info ("Double Click on element: {}", this.locator.getName ());
         performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.doubleClick (element)
                 .perform ();
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
-    /**
-     * DragAndDrop on element
-     *
-     * @param source {@link Locator} of element
-     * @param destination {@link Locator} of element
-     */
-    public void dragDropTo (final Locator source, final Locator destination) {
+    @Override
+    public void dragTo (final Locator destination) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Drag and Drop on element: {} , {}", source.getName (), destination.getName ());
+        LOGGER.info ("Drag and Drop on element: {} , {}", this.locator.getName (), destination.getName ());
         performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.dragAndDrop (element, find (destination, CLICKABLE))
                 .perform ();
-        }, source);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
-    /**
-     * Hover on element
-     *
-     * @param locator {@link Locator} of element
-     */
-    public void hoverOn (final Locator locator) {
+    @Override
+    public void hoverOn () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Hover on element: {}", locator.getName ());
+        LOGGER.info ("Hover on element: {}", this.locator.getName ());
         performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.moveToElement (element)
                 .perform ();
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
-    /**
-     * RightClick on element
-     *
-     * @param locator {@link Locator} of element
-     */
-    public void rightClickOn (final Locator locator) {
+    @Override
+    public void rightClickOn () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Right Click on element: {}", locator.getName ());
+        LOGGER.info ("Right Click on element: {}", this.locator.getName ());
         performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.contextClick (element)
                 .perform ();
-        }, locator);
+        }, this.locator);
+        LOGGER.traceExit ();
+    }
+
+    @Override
+    public void submit () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Submitting element located by: {}", this.locator.getName ());
+        performElementAction (WebElement::submit, this.locator);
         LOGGER.traceExit ();
     }
 }

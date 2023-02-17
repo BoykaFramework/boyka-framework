@@ -16,12 +16,11 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyDismissAlert;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.AlertActions.onAlert;
+import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.AlertPage.alertPage;
@@ -52,10 +51,9 @@ public class AlertsTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        withDriver ().fullScreen ();
-        withDriver ().navigate ()
-            .to (URL);
-        withMouse ().clickOn (homePage ().link ("JavaScript Alerts"));
+        onWindow ().fullScreen ();
+        navigate ().to (URL);
+        withMouse (homePage ().link ("JavaScript Alerts")).clickOn ();
     }
 
     /**
@@ -63,9 +61,9 @@ public class AlertsTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        withDriver ().navigate ()
-            .back ();
-        verifyBrowserUrl ().isEqualTo (URL);
+        navigate ().back ();
+        navigate ().verifyUrl ()
+            .isEqualTo (URL);
         closeDriver ();
     }
 
@@ -74,9 +72,11 @@ public class AlertsTest {
      */
     @Test (description = "Tests Accept alert")
     public void testAcceptAlert () {
-        withMouse ().clickOn (alertPage ().getAlertButton ());
-        verifyAcceptAlert ().isEqualTo ("I am a JS Alert");
-        verifyTextOf (alertPage ().getResult ()).isEqualTo ("You successfully clicked an alert");
+        withMouse (alertPage ().getAlertButton ()).clickOn ();
+        onAlert ().verifyAccept ()
+            .isEqualTo ("I am a JS Alert");
+        onElement (alertPage ().getResult ()).verifyTextOf ()
+            .isEqualTo ("You successfully clicked an alert");
     }
 
     /**
@@ -84,9 +84,11 @@ public class AlertsTest {
      */
     @Test (description = "Tests Accept confirm alert")
     public void testAcceptConfirmAlert () {
-        withMouse ().clickOn (alertPage ().getConfirmButton ());
-        verifyAcceptAlert ().isEqualTo ("I am a JS Confirm");
-        verifyTextOf (alertPage ().getResult ()).isEqualTo ("You clicked: Ok");
+        withMouse (alertPage ().getConfirmButton ()).clickOn ();
+        onAlert ().verifyAccept ()
+            .isEqualTo ("I am a JS Confirm");
+        onElement (alertPage ().getResult ()).verifyTextOf ()
+            .isEqualTo ("You clicked: Ok");
     }
 
     /**
@@ -94,9 +96,11 @@ public class AlertsTest {
      */
     @Test (description = "Tests Dismiss confirm alert")
     public void testDismissConfirmAlert () {
-        withMouse ().clickOn (alertPage ().getConfirmButton ());
-        verifyDismissAlert ().isEqualTo ("I am a JS Confirm");
-        verifyTextOf (alertPage ().getResult ()).isEqualTo ("You clicked: Cancel");
+        withMouse (alertPage ().getConfirmButton ()).clickOn ();
+        onAlert ().verifyDismiss ()
+            .isEqualTo ("I am a JS Confirm");
+        onElement (alertPage ().getResult ()).verifyTextOf ()
+            .isEqualTo ("You clicked: Cancel");
     }
 
     /**
@@ -104,8 +108,10 @@ public class AlertsTest {
      */
     @Test (description = "Tests Dismiss prompt alert")
     public void testDismissPromptAlert () {
-        withMouse ().clickOn (alertPage ().getPromptButton ());
-        verifyAcceptAlert ("Wasiq").isEqualTo ("I am a JS prompt");
-        verifyTextOf (alertPage ().getResult ()).isEqualTo ("You entered: Wasiq");
+        withMouse (alertPage ().getPromptButton ()).clickOn ();
+        onAlert ().verifyAccept ("Wasiq")
+            .isEqualTo ("I am a JS prompt");
+        onElement (alertPage ().getResult ()).verifyTextOf ()
+            .isEqualTo ("You entered: Wasiq");
     }
 }

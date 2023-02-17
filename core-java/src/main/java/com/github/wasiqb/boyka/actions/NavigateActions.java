@@ -18,9 +18,12 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.google.common.truth.Truth.assertThat;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import com.github.wasiqb.boyka.actions.interfaces.drivers.INavigateActions;
+import com.google.common.truth.StringSubject;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
@@ -30,22 +33,20 @@ import org.openqa.selenium.WebDriver;
  * @author Wasiq Bhamla
  * @since 29-Nov-2022
  */
-public class NavigateActions {
-    private static final NavigateActions INSTANCE = new NavigateActions ();
-    private static final Logger          LOGGER   = getLogger ();
+public class NavigateActions implements INavigateActions {
+    private static final Logger           LOGGER           = getLogger ();
+    private static final INavigateActions NAVIGATE_ACTIONS = new NavigateActions ();
 
     /**
-     * Gets the singleton instance of the class.
+     * Navigation related actions.
      *
-     * @return Immutable instance
+     * @return Instance of {@link NavigateActions}
      */
-    static NavigateActions navigateActions () {
-        return INSTANCE;
+    public static INavigateActions navigate () {
+        return NAVIGATE_ACTIONS;
     }
 
-    /**
-     * Navigate back to previous page on browser.
-     */
+    @Override
     public void back () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.navigate ()
@@ -53,9 +54,7 @@ public class NavigateActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Navigate forward to next page on browser.
-     */
+    @Override
     public void forward () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.navigate ()
@@ -63,9 +62,7 @@ public class NavigateActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Refreshes browser page.
-     */
+    @Override
     public void refresh () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.navigate ()
@@ -73,11 +70,7 @@ public class NavigateActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Navigate to url on browser.
-     *
-     * @param url url to navigate to
-     */
+    @Override
     public void to (final String url) {
         LOGGER.traceEntry ();
         LOGGER.info ("Navigating to url: {}", url);
@@ -85,14 +78,18 @@ public class NavigateActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Get current url of the browser.
-     *
-     * @return current url of the browser
-     */
+    @Override
     public String url () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting url of the browser");
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl, EMPTY));
+    }
+
+    @Override
+    public StringSubject verifyUrl () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying browser url");
+        LOGGER.traceExit ();
+        return assertThat (url ());
     }
 }

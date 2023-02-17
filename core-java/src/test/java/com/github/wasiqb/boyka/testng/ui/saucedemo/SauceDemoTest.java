@@ -1,6 +1,7 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 
@@ -28,7 +29,7 @@ public class SauceDemoTest {
     @AfterMethod (alwaysRun = true)
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
-            withDriver ().takeScreenshot ();
+            onWindow ().takeScreenshot ();
         }
     }
 

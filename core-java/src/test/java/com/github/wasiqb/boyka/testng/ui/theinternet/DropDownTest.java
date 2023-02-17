@@ -16,8 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.DropDownActions.onDropDown;
+import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.DropDownPage.dropDownPage;
@@ -48,8 +48,7 @@ public class DropDownTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        withDriver ().navigate ()
-            .to (URL);
+        navigate ().to (URL);
     }
 
     /**

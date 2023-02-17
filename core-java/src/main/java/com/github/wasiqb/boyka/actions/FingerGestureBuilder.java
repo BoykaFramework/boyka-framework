@@ -16,7 +16,8 @@
 
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.ElementFinder.find;
+import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
@@ -30,11 +31,12 @@ import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
 import java.time.Duration;
 import java.util.function.BiFunction;
 
+import com.github.wasiqb.boyka.builders.Locator;
 import com.github.wasiqb.boyka.enums.SwipeDirection;
+import com.github.wasiqb.boyka.enums.WaitStrategy;
 import lombok.Builder;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 
@@ -46,17 +48,17 @@ import org.openqa.selenium.interactions.Sequence;
  */
 @Builder (builderMethodName = "init")
 final class FingerGestureBuilder {
-    private static final Dimension SCREEN_SIZE = withDriver ().viewportSize ();
+    private static final Dimension SCREEN_SIZE = onWindow ().viewportSize ();
 
     @Builder.Default
     private       SwipeDirection      direction = DOWN;
-    private       WebElement          element;
+    private       Locator             element;
     @Builder.Default
     private       int                 index     = 0;
     @Builder.Default
     private       String              name      = "Finger";
     private final Duration            stepWait  = ofMillis (600);
-    private       WebElement          targetElement;
+    private       Locator             targetElement;
     private final PointerInput.Origin viewport  = viewport ();
 
     Sequence swipe () {
@@ -87,8 +89,9 @@ final class FingerGestureBuilder {
         return steps.apply (finger, sequence);
     }
 
-    private Point getElementCenter (final WebElement webElement) {
-        final var location = requireNonNull (webElement, ELEMENT_CANNOT_BE_NULL).getLocation ();
+    private Point getElementCenter (final Locator element) {
+        final var webElement = find (requireNonNull (element, ELEMENT_CANNOT_BE_NULL), WaitStrategy.CLICKABLE);
+        final var location = webElement.getLocation ();
         final var size = webElement.getSize ();
         final var x = location.getX () + (size.getWidth () / 2);
         final var y = location.getY () + (size.getHeight () / 2);
@@ -109,7 +112,11 @@ final class FingerGestureBuilder {
             .getDevice ()
             .getSwipe ()
             .getDistance ();
-        final var location = this.element != null ? this.element.getLocation () : new Point (0, 0);
+        var location = new Point (0, 0);
+        if (this.element != null) {
+            final var webElement = find (this.element, WaitStrategy.CLICKABLE);
+            location = webElement.getLocation ();
+        }
         final var start = getSwipeStartPosition ();
         final var x = start.getX () + location.getX () + ((start.getX () * this.direction.getX () * distance) / 100);
         final var y = start.getY () + location.getY () + ((start.getY () * this.direction.getY () * distance) / 100);

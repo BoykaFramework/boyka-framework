@@ -18,13 +18,16 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
-import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGestures;
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static java.util.Collections.singletonList;
+import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.google.common.truth.Truth.assertThat;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import com.github.wasiqb.boyka.actions.interfaces.elements.IElementActions;
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.config.ui.mobile.device.SwipeSetting;
+import com.google.common.truth.BooleanSubject;
+import com.google.common.truth.StringSubject;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
@@ -34,133 +37,120 @@ import org.openqa.selenium.WebElement;
  * @author Wasiq Bhamla
  * @since 09-Mar-2022
  */
-public final class ElementActions {
+public class ElementActions implements IElementActions {
     private static final Logger LOGGER = getLogger ();
 
-    /**
-     * Gets the value of the attribute of the element.
-     *
-     * @param locator locator of the element
-     * @param attribute attribute of the element
-     *
-     * @return value of the attribute of the element
-     */
-    public static String attributeOf (final Locator locator, final String attribute) {
+    public static IElementActions onElement (final Locator locator) {
+        return new ElementActions (locator);
+    }
+
+    protected final Locator      locator;
+    protected final SwipeSetting swipeSetting;
+
+    ElementActions (final Locator locator) {
+        this.locator = locator;
+        this.swipeSetting = getSession ().getMobileSetting ()
+            .getDevice ()
+            .getSwipe ();
+    }
+
+    @Override
+    public String attributeOf (final String attribute) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator.getName ());
+        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, this.locator.getName ());
         LOGGER.traceExit ();
-        return getElementAttribute (e -> e.getAttribute (attribute), locator, EMPTY);
+        return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
     }
 
-    /**
-     * Clear text, selection of element.
-     *
-     * @param locator {@link Locator} of text field
-     */
-    public static void clear (final Locator locator) {
+    @Override
+    public void clear () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Clearing element located by: {}", locator.getName ());
-        performElementAction (WebElement::clear, locator);
-        LOGGER.traceExit ();
-    }
-
-    /**
-     * Gets the value if the element is displayed.
-     *
-     * @param locator locator of the element
-     *
-     * @return true if the element is displayed, false otherwise
-     */
-    public static boolean isDisplayed (final Locator locator) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Checking if element located by: {} is displayed", locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::isDisplayed, locator, false));
-    }
-
-    /**
-     * Gets the value if the element is enabled.
-     *
-     * @param locator locator of the element
-     *
-     * @return true if the element is enabled, false otherwise
-     */
-    public static boolean isEnabled (final Locator locator) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Checking if element located by: {} is enabled", locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::isEnabled, locator, false));
-    }
-
-    /**
-     * Gets the value if the element is selected.
-     *
-     * @param locator locator of the element
-     *
-     * @return true if the element is selected, false otherwise
-     */
-    public static boolean isSelected (final Locator locator) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Checking if element located by: {} is selected", locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, locator, false));
-    }
-
-    /**
-     * Gets the styling attribute of the element.
-     *
-     * @param locator locator of the element
-     * @param attribute attribute of the element
-     *
-     * @return value of the styling attribute of the element
-     */
-    public static String styleOf (final Locator locator, final String attribute) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, locator.getName ());
-        LOGGER.traceExit ();
-        return getElementAttribute (e -> e.getCssValue (attribute), locator, EMPTY);
-    }
-
-    /**
-     * Submit the element.
-     *
-     * @param locator {@link Locator} of element
-     */
-    public static void submit (final Locator locator) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Submitting element located by: {}", locator.getName ());
-        performElementAction (WebElement::submit, locator);
+        LOGGER.info ("Clearing element located by: {}", this.locator.getName ());
+        performElementAction (WebElement::clear, this.locator);
         LOGGER.traceExit ();
     }
 
-    /**
-     * Taps on an element.
-     *
-     * @param locator Locator of the element
-     */
-    public static void tapOn (final Locator locator) {
+    @Override
+    public boolean isDisplayed () {
         LOGGER.traceEntry ();
-        withDriver ().swipe ()
-            .till (locator);
-        final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
-            .element (element)
-            .build ()
-            .tapOn (), locator, null);
-        performMobileGestures (singletonList (sequences));
+        LOGGER.info ("Checking if element located by: {} is displayed", this.locator.getName ());
+        return LOGGER.traceExit (getElementAttribute (WebElement::isDisplayed, this.locator, false));
+    }
+
+    @Override
+    public boolean isEnabled () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Checking if element located by: {} is enabled", this.locator.getName ());
+        return LOGGER.traceExit (getElementAttribute (WebElement::isEnabled, this.locator, false));
+    }
+
+    @Override
+    public boolean isSelected () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Checking if element located by: {} is selected", this.locator.getName ());
+        return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, this.locator, false));
+    }
+
+    @Override
+    public String styleOf (final String attribute) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, this.locator.getName ());
         LOGGER.traceExit ();
+        return getElementAttribute (e -> e.getCssValue (attribute), this.locator, EMPTY);
     }
 
-    /**
-     * Gets the text of the element.
-     *
-     * @param locator locator of the element
-     *
-     * @return text of the element
-     */
-    public static String textOf (final Locator locator) {
+    @Override
+    public String textOf () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting text of element located by: {}", locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::getText, locator, EMPTY));
+        LOGGER.info ("Getting text of element located by: {}", this.locator.getName ());
+        return LOGGER.traceExit (getElementAttribute (WebElement::getText, this.locator, EMPTY));
     }
 
-    private ElementActions () {
-        // Utility class
+    @Override
+    public StringSubject verifyAttributeOf (final String attribute) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying attribute of {}", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (attributeOf (attribute));
+    }
+
+    @Override
+    public BooleanSubject verifyElementDisplayed () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying element {} is displayed", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (isDisplayed ());
+    }
+
+    @Override
+    public BooleanSubject verifyElementEnabled () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying element {} is enabled", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (isEnabled ());
+    }
+
+    @Override
+    public BooleanSubject verifyElementSelected () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying element {} is selected", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (isSelected ());
+    }
+
+    @Override
+    public StringSubject verifyStyleOf (final String attribute) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying style of {}", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (styleOf (attribute));
+    }
+
+    @Override
+    public StringSubject verifyTextOf () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying text of {}", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (textOf ());
     }
 }

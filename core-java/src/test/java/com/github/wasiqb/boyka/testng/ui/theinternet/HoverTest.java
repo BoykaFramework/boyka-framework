@@ -16,9 +16,9 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
@@ -50,9 +50,8 @@ public class HoverTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        withDriver ().navigate ()
-            .to (URL);
-        withMouse ().clickOn (homePage ().link ("Hovers"));
+        navigate ().to (URL);
+        withMouse (homePage ().link ("Hovers")).clickOn ();
     }
 
     /**
@@ -69,7 +68,8 @@ public class HoverTest {
     @Test (description = "Hover mouse test")
     public void testMouseHover () {
         final var expectedUserName = "name: user1";
-        withMouse ().hoverOn (hoverPage ().userImage (0));
-        verifyTextOf (hoverPage ().userName (0)).isEqualTo (format (expectedUserName, 1));
+        withMouse (hoverPage ().userImage (0)).hoverOn ();
+        onElement (hoverPage ().userName (0)).verifyTextOf ()
+            .isEqualTo (format (expectedUserName, 1));
     }
 }

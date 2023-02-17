@@ -16,11 +16,10 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyStyleOf;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.AlertActions.onAlert;
+import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.DoubleClickPage.doubleClickPage;
@@ -50,8 +49,7 @@ public class DoubleClickTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        withDriver ().navigate ()
-            .to (URL);
+        navigate ().to (URL);
     }
 
     /**
@@ -67,8 +65,9 @@ public class DoubleClickTest {
      */
     @Test (description = "Verify Click and Hold method")
     public void testClickAndHold () {
-        withMouse ().clickAndHold (doubleClickPage ().getClickHold ());
-        verifyTextOf (doubleClickPage ().getClickHold ()).isEqualTo ("Well done! keep holding that click now.....");
+        withMouse (doubleClickPage ().getClickHold ()).clickAndHold ();
+        onElement (doubleClickPage ().getClickHold ()).verifyTextOf ()
+            .isEqualTo ("Well done! keep holding that click now.....");
     }
 
     /**
@@ -76,8 +75,9 @@ public class DoubleClickTest {
      */
     @Test (description = "Double click test")
     public void testDoubleClick () {
-        withMouse ().doubleClickOn (doubleClickPage ().getDoubleClick ());
-        verifyStyleOf (doubleClickPage ().getDoubleClick (), "background-color").isEqualTo ("rgba(147, 203, 90, 1)");
+        withMouse (doubleClickPage ().getDoubleClick ()).doubleClickOn ();
+        onElement (doubleClickPage ().getDoubleClick ()).verifyStyleOf ("background-color")
+            .isEqualTo ("rgba(147, 203, 90, 1)");
     }
 
     /**
@@ -85,8 +85,9 @@ public class DoubleClickTest {
      */
     @Test (description = "Verify Click and Hold method")
     public void testHoverAndClick () {
-        withMouse ().hoverOn (doubleClickPage ().getHoverButton ());
-        withMouse ().clickOn (doubleClickPage ().getHoverMenu ());
-        verifyAcceptAlert ().isEqualTo ("Well done you clicked on the link!");
+        withMouse (doubleClickPage ().getHoverButton ()).hoverOn ();
+        withMouse (doubleClickPage ().getHoverMenu ()).clickOn ();
+        onAlert ().verifyAccept ()
+            .isEqualTo ("Well done you clicked on the link!");
     }
 }

@@ -1,8 +1,9 @@
 package com.github.wasiqb.boyka.testng.ui.wdio;
 
 import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.FingerActions.withFinger;
+import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.DragDropPage.dragDropPage;
@@ -29,7 +30,7 @@ public class WdioDemoTest {
     @AfterMethod (alwaysRun = true)
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
-            withDriver ().takeScreenshot ();
+            onWindow ().takeScreenshot ();
         }
     }
 
@@ -59,17 +60,15 @@ public class WdioDemoTest {
      */
     @Test
     public void testDragDrop () {
-        tapOn (wdioHomePage ().getDragTab ());
+        withFinger (wdioHomePage ().getDragTab ()).tapOn ();
         for (var index = 1; index <= 3; index++) {
-            withDriver ().swipe ()
-                .dragTo (dragDropPage ().leftSourceTile (index), dragDropPage ().leftTargetTile (index));
-            withDriver ().swipe ()
-                .dragTo (dragDropPage ().centerSourceTile (index), dragDropPage ().centerTargetTile (index));
-            withDriver ().swipe ()
-                .dragTo (dragDropPage ().rightSourceTile (index), dragDropPage ().rightTargetTile (index));
+            withFinger (dragDropPage ().leftSourceTile (index)).dragTo (dragDropPage ().leftTargetTile (index));
+            withFinger (dragDropPage ().centerSourceTile (index)).dragTo (dragDropPage ().centerTargetTile (index));
+            withFinger (dragDropPage ().rightSourceTile (index)).dragTo (dragDropPage ().rightTargetTile (index));
         }
-        verifyTextOf (dragDropPage ().getTitle ()).isEqualTo ("Congratulations");
-        verifyTextOf (dragDropPage ().getDescription ()).isEqualTo (
-            "You made it, click retry if you want to try it again.");
+        onElement (dragDropPage ().getTitle ()).verifyTextOf ()
+            .isEqualTo ("Congratulations");
+        onElement (dragDropPage ().getDescription ()).verifyTextOf ()
+            .isEqualTo ("You made it, click retry if you want to try it again.");
     }
 }

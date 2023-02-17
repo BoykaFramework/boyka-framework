@@ -28,6 +28,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.List;
 
+import com.github.wasiqb.boyka.actions.interfaces.elements.IDropDownActions;
 import com.github.wasiqb.boyka.builders.Locator;
 import com.google.common.truth.IterableSubject;
 import com.google.common.truth.StringSubject;
@@ -44,9 +45,8 @@ import org.openqa.selenium.support.ui.Select;
  * @since 30-Jul-2022
  */
 @Setter
-public final class DropDownActions {
-    private static final DropDownActions DROP_DOWN_ACTIONS = new DropDownActions ();
-    private static final Logger          LOGGER            = getLogger ();
+public class DropDownActions extends ClickableActions implements IDropDownActions {
+    private static final Logger LOGGER = getLogger ();
 
     /**
      * Interact with drop down element.
@@ -56,15 +56,14 @@ public final class DropDownActions {
      * @return action instance to interact with dropdown
      */
     public static DropDownActions onDropDown (final Locator locator) {
-        DROP_DOWN_ACTIONS.setLocator (locator);
-        return DROP_DOWN_ACTIONS;
+        return new DropDownActions (locator);
     }
 
-    private Locator locator;
+    DropDownActions (final Locator locator) {
+        super (locator);
+    }
 
-    /**
-     * Deselects all the selected values.
-     */
+    @Override
     public void deselectAll () {
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {}", this.locator.getName ());
@@ -78,11 +77,7 @@ public final class DropDownActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Deselects the option from the dropdown based on its index.
-     *
-     * @param index index of the option to deselect
-     */
+    @Override
     public void deselectByIndex (final int index) {
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by index: {}", this.locator.getName (), index);
@@ -96,11 +91,7 @@ public final class DropDownActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Deselects the option from the dropdown based on its visible text.
-     *
-     * @param text visible text of the option to deselect
-     */
+    @Override
     public void deselectByText (final String text) {
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by visible text: {}", this.locator.getName (), text);
@@ -114,11 +105,7 @@ public final class DropDownActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Deselects the option from the dropdown based on its value.
-     *
-     * @param value value of the option to deselect
-     */
+    @Override
     public void deselectByValue (final String value) {
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by value: {}", this.locator.getName (), value);
@@ -132,11 +119,7 @@ public final class DropDownActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Selects the value from dropdown based on index.
-     *
-     * @param index index to be selected
-     */
+    @Override
     public void selectByIndex (final int index) {
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by index: {}", this.locator.getName (), index);
@@ -147,11 +130,7 @@ public final class DropDownActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Selects the value from dropdown based on visible text.
-     *
-     * @param text text to be selected
-     */
+    @Override
     public void selectByText (final String text) {
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by text: {}", this.locator.getName (), text);
@@ -162,11 +141,7 @@ public final class DropDownActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Selects the value from dropdown based on value.
-     *
-     * @param value value to be selected
-     */
+    @Override
     public void selectByValue (final String value) {
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by value: {}", this.locator.getName (), value);
@@ -177,11 +152,7 @@ public final class DropDownActions {
         LOGGER.traceExit ();
     }
 
-    /**
-     * Returns the first selected value from dropdown.
-     *
-     * @return first selected value
-     */
+    @Override
     public String selectedItem () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting selected option from element located by: {}", this.locator.getName ());
@@ -196,11 +167,7 @@ public final class DropDownActions {
         }, this.locator, EMPTY);
     }
 
-    /**
-     * Gets all the selected values from the dropdown.
-     *
-     * @return list of selected values
-     */
+    @Override
     public List<String> selectedItems () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting all selected options from element located by: {}", this.locator.getName ());
@@ -213,20 +180,12 @@ public final class DropDownActions {
         }, this.locator, emptyList ());
     }
 
-    /**
-     * Verify selected item.
-     *
-     * @return {@link StringSubject} of selected item
-     */
+    @Override
     public StringSubject verifySelectedItem () {
         return assertThat (selectedItem ());
     }
 
-    /**
-     * Verify selected items.
-     *
-     * @return {@link IterableSubject} of selected items
-     */
+    @Override
     public IterableSubject verifySelectedItems () {
         return assertThat (selectedItems ());
     }

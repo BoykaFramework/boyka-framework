@@ -1,13 +1,10 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo.actions;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
-import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementEnabled;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.TextBoxActions.onTextBox;
+import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.CartPage.cartPage;
@@ -28,92 +25,111 @@ public class SauceDemoActions {
     }
 
     public void verifyAddToCart () {
-        withMouse ().clickOn (homePage ().getAddToCartButton ());
+        withMouse (homePage ().getAddToCartButton ()).clickOn ();
 
-        verifyTextOf (homePage ().getProductPrice ()).isEqualTo ("$29.99");
-        verifyTextOf (homePage ().getShoppingCartCount ()).isEqualTo ("1");
+        onElement (homePage ().getProductPrice ()).verifyTextOf ()
+            .isEqualTo ("$29.99");
+        onElement (homePage ().getShoppingCartCount ()).verifyTextOf ()
+            .isEqualTo ("1");
 
         verifyProductDetailPage ();
         verifyProductCartPage ();
     }
 
     public void verifyCheckoutStep1 () {
-        withMouse ().clickOn (cartPage ().getCheckout ());
+        withMouse (cartPage ().getCheckout ()).clickOn ();
         if (this.platformType == WEB) {
-            verifyBrowserUrl ().isEqualTo (format ("{0}/checkout-step-one.html", URL));
-            verifyTextOf (checkoutPage ().getTitle ()).isEqualTo ("CHECKOUT: YOUR INFORMATION");
+            navigate ().verifyUrl ()
+                .isEqualTo (format ("{0}/checkout-step-one.html", URL));
+            onElement (checkoutPage ().getTitle ()).verifyTextOf ()
+                .isEqualTo ("CHECKOUT: YOUR INFORMATION");
         }
 
-        enterText (checkoutPage ().getFirstName (), "Wasiq");
-        enterText (checkoutPage ().getLastName (), "Bhamla");
-        enterText (checkoutPage ().getZipCode (), "12345");
+        onTextBox (checkoutPage ().getFirstName ()).enterText ("Wasiq");
+        onTextBox (checkoutPage ().getLastName ()).enterText ("Bhamla");
+        onTextBox (checkoutPage ().getZipCode ()).enterText ("12345");
 
-        withMouse ().clickOn (checkoutPage ().getContinueButton ());
-        verifyTextOf (checkoutPage ().getTitle ()).isEqualTo ("CHECKOUT: OVERVIEW");
+        withMouse (checkoutPage ().getContinueButton ()).clickOn ();
+        onElement (checkoutPage ().getTitle ()).verifyTextOf ()
+            .isEqualTo ("CHECKOUT: OVERVIEW");
     }
 
     public void verifyCheckoutStep2 () {
-        withMouse ().clickOn (checkoutPage ().getFinish ());
+        withMouse (checkoutPage ().getFinish ()).clickOn ();
 
         if (this.platformType != WEB) {
-            verifyTextOf (checkoutPage ().getCompleteHeader ()).isEqualTo ("THANK YOU FOR YOU ORDER");
+            onElement (checkoutPage ().getCompleteHeader ()).verifyTextOf ()
+                .isEqualTo ("THANK YOU FOR YOU ORDER");
         } else {
-            verifyBrowserUrl ().isEqualTo (format ("{0}/checkout-complete.html", URL));
-            verifyTextOf (checkoutPage ().getTitle ()).isEqualTo ("CHECKOUT: COMPLETE!");
-            verifyTextOf (checkoutPage ().getCompleteHeader ()).isEqualTo ("THANK YOU FOR YOUR ORDER");
+            navigate ().verifyUrl ()
+                .isEqualTo (format ("{0}/checkout-complete.html", URL));
+            onElement (checkoutPage ().getTitle ()).verifyTextOf ()
+                .isEqualTo ("CHECKOUT: COMPLETE!");
+            onElement (checkoutPage ().getCompleteHeader ()).verifyTextOf ()
+                .isEqualTo ("THANK YOU FOR YOUR ORDER");
         }
 
-        verifyTextOf (checkoutPage ().getCompleteText ()).isEqualTo (
-            "Your order has been dispatched, and will arrive just as fast as the pony can get there!");
+        onElement (checkoutPage ().getCompleteText ()).verifyTextOf ()
+            .isEqualTo ("Your order has been dispatched, and will arrive just as fast as the pony can get there!");
     }
 
     public void verifyLogin (final String userName, final String password) {
         verifyNavigateToSite ();
-        enterText (loginPage ().getUsername (), userName);
-        enterText (loginPage ().getPassword (), password);
-        withMouse ().clickOn (loginPage ().getLoginButton ());
+        onTextBox (loginPage ().getUsername ()).enterText (userName);
+        onTextBox (loginPage ().getPassword ()).enterText (password);
+        withMouse (loginPage ().getLoginButton ()).clickOn ();
         verifyLoggedIn ();
     }
 
     public void verifySignOut () {
-        withMouse ().clickOn (homePage ().getMenuButton ());
-        withMouse ().clickOn (homePage ().getLogout ());
+        withMouse (homePage ().getMenuButton ()).clickOn ();
+        withMouse (homePage ().getLogout ()).clickOn ();
         if (this.platformType == WEB) {
-            verifyBrowserUrl ().startsWith (URL);
+            navigate ().verifyUrl ()
+                .startsWith (URL);
         }
-        verifyElementDisplayed (loginPage ().getUsername ()).isTrue ();
+        onElement (loginPage ().getUsername ()).verifyElementDisplayed ()
+            .isTrue ();
     }
 
     private void verifyLoggedIn () {
         if (this.platformType == WEB) {
-            verifyBrowserUrl ().isEqualTo (format ("{0}/inventory.html", URL));
-            verifyBrowserTitle ().isEqualTo ("Swag Labs");
+            navigate ().verifyUrl ()
+                .isEqualTo (format ("{0}/inventory.html", URL));
+            onWindow ().verifyTitle ()
+                .isEqualTo ("Swag Labs");
         }
-        verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
-        verifyElementEnabled (homePage ().getMenuButton ()).isTrue ();
+        onElement (homePage ().getMenuButton ()).verifyElementDisplayed ()
+            .isTrue ();
+        onElement (homePage ().getMenuButton ()).verifyElementEnabled ()
+            .isTrue ();
     }
 
     private void verifyNavigateToSite () {
         if (this.platformType == WEB) {
-            withDriver ().navigate ()
-                .to (URL);
-            verifyBrowserUrl ().startsWith (URL);
+            navigate ().to (URL);
+            navigate ().verifyUrl ()
+                .startsWith (URL);
         }
     }
 
     private void verifyProductCartPage () {
-        withMouse ().clickOn (homePage ().getShoppingCart ());
+        withMouse (homePage ().getShoppingCart ()).clickOn ();
         if (this.platformType == WEB) {
-            verifyBrowserUrl ().isEqualTo (format ("{0}/cart.html", URL));
+            navigate ().verifyUrl ()
+                .isEqualTo (format ("{0}/cart.html", URL));
         }
-        verifyElementDisplayed (cartPage ().getCheckout ()).isTrue ();
+        onElement (cartPage ().getCheckout ()).verifyElementDisplayed ()
+            .isTrue ();
     }
 
     private void verifyProductDetailPage () {
-        withMouse ().clickOn (homePage ().productItem ("Sauce Labs Backpack"));
+        withMouse (homePage ().productItem ("Sauce Labs Backpack")).clickOn ();
         if (this.platformType == WEB) {
-            verifyBrowserUrl ().startsWith (format ("{0}/inventory-item.html?id=", URL));
+            navigate ().verifyUrl ()
+                .startsWith (format ("{0}/inventory-item.html?id=", URL));
         }
-        verifyElementDisplayed (productDetailsPage ().getContainer ()).isTrue ();
+        onElement (productDetailsPage ().getContainer ()).verifyElementDisplayed ()
+            .isTrue ();
     }
 }

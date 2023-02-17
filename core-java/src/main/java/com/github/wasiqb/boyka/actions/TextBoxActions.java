@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,6 @@ package com.github.wasiqb.boyka.actions;
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
-import static com.github.wasiqb.boyka.actions.ElementActions.clear;
 import static com.github.wasiqb.boyka.enums.Message.NO_KEYBOARD_ERROR;
 import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
@@ -29,56 +28,60 @@ import static java.util.Arrays.stream;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.Keys.chord;
 
+import com.github.wasiqb.boyka.actions.interfaces.elements.ITextBoxActions;
 import com.github.wasiqb.boyka.builders.Locator;
 import io.appium.java_client.HasOnScreenKeyboard;
 import io.appium.java_client.HidesKeyboard;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Perform Keyboard actions.
+ * All text box related actions
  *
  * @author Wasiq Bhamla
- * @since 24-Feb-2022
+ * @since 17-Feb-2023
  */
-public final class KeyboardActions {
+public class TextBoxActions extends ClickableActions implements ITextBoxActions {
     private static final Logger LOGGER = getLogger ();
 
     /**
-     * Append text in text field.
+     * Gets instance for text box actions class
      *
-     * @param locator {@link Locator} of text field
-     * @param text text to append
+     * @param locator Locator of the element
+     *
+     * @return Instance of Text box actions class
      */
-    public static void appendText (final Locator locator, final String text) {
+    public static ITextBoxActions onTextBox (final Locator locator) {
+        return new TextBoxActions (locator);
+    }
+
+    TextBoxActions (final Locator locator) {
+        super (locator);
+    }
+
+    @Override
+    public void appendText (final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Appending text {} to element {}", text, locator.getName ());
+        LOGGER.info ("Appending text {} to element {}", text, this.locator.getName ());
         performElementAction (e -> {
             e.sendKeys (text);
             if (getSession ().getPlatformType () == IOS) {
                 e.sendKeys ("\n");
             }
-        }, locator);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 
-    /**
-     * Enter text in text field.
-     *
-     * @param locator {@link Locator} of text field
-     * @param text text to enter
-     */
-    public static void enterText (final Locator locator, final String text) {
+    @Override
+    public void enterText (final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Entering text {} in element {}", text, locator.getName ());
-        clear (locator);
-        appendText (locator, text);
+        LOGGER.info ("Entering text {} in element {}", text, this.locator.getName ());
+        clear ();
+        appendText (text);
         LOGGER.traceExit ();
     }
 
-    /**
-     * Hides the keyboard if visible.
-     */
-    public static void hideKeyboard () {
+    @Override
+    public void hideKeyboard () {
         final var platform = getSession ().getPlatformType ();
         if (platform == WEB) {
             throwError (NO_KEYBOARD_ERROR);
@@ -88,12 +91,8 @@ public final class KeyboardActions {
         }
     }
 
-    /**
-     * Gets the keyboard state whether it is visible or not.
-     *
-     * @return true, if visible.
-     */
-    public static boolean isKeyboardVisible () {
+    @Override
+    public boolean isKeyboardVisible () {
         final var platform = getSession ().getPlatformType ();
         if (platform == WEB) {
             throwError (NO_KEYBOARD_ERROR);
@@ -101,20 +100,11 @@ public final class KeyboardActions {
         return getDriverAttribute (HasOnScreenKeyboard::isKeyboardShown, false);
     }
 
-    /**
-     * Press specified keys in text field.
-     *
-     * @param locator {@link Locator} of text field
-     * @param keys keys to press
-     */
-    public static void pressKey (final Locator locator, final CharSequence... keys) {
+    @Override
+    public void pressKey (final CharSequence... keys) {
         LOGGER.traceEntry ();
-        stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, locator.getName ()));
-        performElementAction (e -> e.sendKeys (chord (keys)), locator);
+        stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, this.locator.getName ()));
+        performElementAction (e -> e.sendKeys (chord (keys)), this.locator);
         LOGGER.traceExit ();
-    }
-
-    private KeyboardActions () {
-        // Utility class
     }
 }

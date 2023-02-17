@@ -16,9 +16,9 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.MouseActions.withMouse;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementSelected;
+import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.CheckboxPage.checkboxPage;
@@ -42,8 +42,7 @@ public class CheckboxTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        withDriver ().navigate ()
-            .to (URL);
+        navigate ().to (URL);
     }
 
     /**
@@ -59,9 +58,12 @@ public class CheckboxTest {
      */
     @Test (description = "Verify select checkbox")
     public void testCheckOption () {
-        verifyElementSelected (checkboxPage ().getOption1 ()).isFalse ();
-        verifyElementSelected (checkboxPage ().getOption2 ()).isTrue ();
-        withMouse ().clickOn (checkboxPage ().getOption1 ());
-        verifyElementSelected (checkboxPage ().getOption1 ()).isTrue ();
+        onElement (checkboxPage ().getOption1 ()).verifyElementSelected ()
+            .isFalse ();
+        onElement (checkboxPage ().getOption2 ()).verifyElementSelected ()
+            .isTrue ();
+        withMouse (checkboxPage ().getOption1 ()).clickOn ();
+        onElement (checkboxPage ().getOption1 ()).verifyElementSelected ()
+            .isTrue ();
     }
 }
