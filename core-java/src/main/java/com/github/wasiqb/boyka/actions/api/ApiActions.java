@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.manager;
+package com.github.wasiqb.boyka.actions.api;
 
 import static com.github.wasiqb.boyka.enums.ContentType.JSON;
 import static com.github.wasiqb.boyka.enums.Message.AUTH_PASSWORD_REQUIRED;
@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.wasiqb.boyka.actions.interfaces.api.IApiActions;
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
@@ -66,11 +67,11 @@ import org.apache.logging.log4j.Logger;
  * @author Wasiq Bhamla
  * @since 17-Feb-2022
  */
-public final class ApiManager implements IApiManager {
+public final class ApiActions implements IApiActions {
     private static final Logger LOGGER = getLogger ();
 
-    public static IApiManager withRequest (final ApiRequest request) {
-        return new ApiManager (request);
+    public static IApiActions withRequest (final ApiRequest request) {
+        return new ApiActions (request);
     }
 
     private final ApiRequest          apiRequest;
@@ -83,7 +84,7 @@ public final class ApiManager implements IApiManager {
     private       RequestBody         requestBody;
     private       ApiResponse         response;
 
-    private ApiManager (final ApiRequest apiRequest) {
+    private ApiActions (final ApiRequest apiRequest) {
         LOGGER.traceEntry ("Parameter : {}", apiRequest.getConfigKey ());
         getSession ().setConfigKey (apiRequest.getConfigKey ());
         this.apiRequest = apiRequest;
@@ -102,7 +103,7 @@ public final class ApiManager implements IApiManager {
     @Override
     public ApiResponse execute () {
         LOGGER.traceEntry ();
-        final var manager = new ApiManager (this.apiRequest);
+        final var manager = new ApiActions (this.apiRequest);
         requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<String, String> ()).forEach (manager::addHeader);
         requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<String, String> ()).forEach (
             manager::pathParam);
@@ -120,7 +121,7 @@ public final class ApiManager implements IApiManager {
         LOGGER.traceExit ();
     }
 
-    private ApiManager basicAuth (final String userName, final String password) {
+    private ApiActions basicAuth (final String userName, final String password) {
         if (userName != null) {
             LOGGER.traceEntry ("Parameters: userName={}", userName);
             final var credentials = basic (userName,
@@ -130,7 +131,7 @@ public final class ApiManager implements IApiManager {
         return LOGGER.traceExit (this);
     }
 
-    private <T> ApiManager body (final T body) {
+    private <T> ApiActions body (final T body) {
         LOGGER.traceEntry ();
         if (body != null) {
             this.requestBody = create (JsonUtil.toString (body),
@@ -139,13 +140,13 @@ public final class ApiManager implements IApiManager {
         return LOGGER.traceExit (this);
     }
 
-    private ApiManager body (final String body) {
+    private ApiActions body (final String body) {
         LOGGER.traceEntry ();
         this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
         return LOGGER.traceExit (this);
     }
 
-    private ApiManager contentType (final ContentType contentType) {
+    private ApiActions contentType (final ContentType contentType) {
         LOGGER.traceEntry ("Parameter : {}", contentType);
         this.mediaType = parse (requireNonNullElse (contentType, JSON).getType ());
         return LOGGER.traceExit (this);
@@ -228,7 +229,7 @@ public final class ApiManager implements IApiManager {
         LOGGER.traceExit ();
     }
 
-    private ApiManager method (final RequestMethod method) {
+    private ApiActions method (final RequestMethod method) {
         LOGGER.traceEntry ("Parameter: {}", method);
         if (method != RequestMethod.GET) {
             this.request.method (method.name (), requireNonNull (this.requestBody));

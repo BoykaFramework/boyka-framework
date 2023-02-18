@@ -16,9 +16,9 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
-import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
-import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;

@@ -16,10 +16,10 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
-import static com.github.wasiqb.boyka.actions.CookieActions.withCookies;
-import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
-import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.drivers.CookieActions.withCookies;
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;

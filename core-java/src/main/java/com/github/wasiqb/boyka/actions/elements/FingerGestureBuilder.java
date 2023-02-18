@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,10 +14,10 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions;
+package com.github.wasiqb.boyka.actions.elements;
 
-import static com.github.wasiqb.boyka.actions.ElementFinder.find;
-import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.elements.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;

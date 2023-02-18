@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions;
+package com.github.wasiqb.boyka.actions.drivers;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;

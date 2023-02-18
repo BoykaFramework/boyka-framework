@@ -1,9 +1,9 @@
 package com.github.wasiqb.boyka.testng.ui.wdio;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
-import static com.github.wasiqb.boyka.actions.FingerActions.withFinger;
-import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.DragDropPage.dragDropPage;

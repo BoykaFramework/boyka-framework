@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.manager;
+package com.github.wasiqb.boyka.actions.interfaces.api;
 
 import com.github.wasiqb.boyka.builders.ApiResponse;
 
@@ -24,7 +24,7 @@ import com.github.wasiqb.boyka.builders.ApiResponse;
  * @author Wasiq Bhamla
  * @since 18-Feb-2023
  */
-public interface IApiManager {
+public interface IApiActions {
     /**
      * Execute API request
      *

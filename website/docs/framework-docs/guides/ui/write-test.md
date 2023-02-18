@@ -25,8 +25,8 @@ Check out all the available static methods to interact with the page in your tes
 ```java
 package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
-import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
@@ -45,7 +45,7 @@ public class SauceDemoTest {
 
   @AfterMethod (alwaysRun = true)
   public void afterMethod () {
-    takeScreenshot ();
+    onWindow ().takeScreenshot ();
   }
 
   @BeforeClass (description = "Setup test class", alwaysRun = true)
@@ -57,7 +57,7 @@ public class SauceDemoTest {
 
   @AfterClass (description = "Tear down test class", alwaysRun = true)
   public void tearDownTestClass () {
-    saveLogs ();
+    withDriver ().saveLogs ();
     closeDriver ();
   }
 

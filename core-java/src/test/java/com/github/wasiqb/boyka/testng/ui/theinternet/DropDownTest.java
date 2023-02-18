@@ -16,8 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DropDownActions.onDropDown;
-import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.DropDownPage.dropDownPage;

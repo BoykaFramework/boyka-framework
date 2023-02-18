@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions;
+package com.github.wasiqb.boyka.actions.elements;
 
 import com.github.wasiqb.boyka.actions.interfaces.elements.IFingersActions;
 import com.github.wasiqb.boyka.builders.Locator;

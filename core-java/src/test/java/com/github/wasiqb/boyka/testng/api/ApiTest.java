@@ -16,13 +16,13 @@
 
 package com.github.wasiqb.boyka.testng.api;
 
+import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
 import static com.github.wasiqb.boyka.enums.RequestMethod.DELETE;
 import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PATCH;
 import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
-import static com.github.wasiqb.boyka.manager.ApiManager.withRequest;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.testng.api.requests.User;

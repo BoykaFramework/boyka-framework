@@ -12,8 +12,10 @@ Check out complete documentation for [ApiManager](/api/api/api-manager).
 ## Example
 
 ```java
+import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
+. . .
 // Using request created in previous example.
-final ApiResponse response = ApiManager.execute (request);
+final ApiResponse response = withRequest (request).execute ();
 ```
 
 ## API Response class

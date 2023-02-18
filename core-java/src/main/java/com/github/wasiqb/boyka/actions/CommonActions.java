@@ -16,8 +16,8 @@
 
 package com.github.wasiqb.boyka.actions;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.ElementFinder.find;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.elements.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.Message.DRIVER_ERROR_OCCURRED;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
@@ -49,7 +49,7 @@ import org.openqa.selenium.interactions.Sequence;
  * @since 25-Feb-2022
  */
 @SuppressWarnings ("unchecked")
-final class CommonActions {
+public final class CommonActions {
     private static final String HIGHLIGHT_STYLE = "highlight.style";
     private static final Logger LOGGER          = getLogger ();
 
@@ -131,6 +131,7 @@ final class CommonActions {
      *
      * @param action action to perform
      * @param locator locator to find element
+     * @param <D> Type of Driver
      */
     public static <D extends WebDriver> void performElementAction (final BiConsumer<D, WebElement> action,
         final Locator locator) {

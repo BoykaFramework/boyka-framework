@@ -16,9 +16,9 @@
 
 package com.github.wasiqb.boyka.testng.others;
 
+import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
 import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
-import static com.github.wasiqb.boyka.manager.ApiManager.withRequest;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.testng.annotations.Test;

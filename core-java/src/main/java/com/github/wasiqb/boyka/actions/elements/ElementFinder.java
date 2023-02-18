@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions;
+package com.github.wasiqb.boyka.actions.elements;
 
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
@@ -41,13 +41,14 @@ import org.openqa.selenium.WebElement;
  * @author Wasiq Bhamla
  * @since 24-Feb-2022
  */
-final class ElementFinder {
+public final class ElementFinder {
     private static final Logger LOGGER = getLogger ();
 
     /**
      * Find single element on UI.
      *
      * @param locator {@link Locator} to find element
+     * @param waitStrategy {@link WaitStrategy} for finding the element
      *
      * @return {@link WebElement}
      */
@@ -71,6 +72,7 @@ final class ElementFinder {
      * Find all elements on UI.
      *
      * @param locator {@link Locator} to find elements
+     * @param waitStrategy {@link WaitStrategy} for finding the element
      *
      * @return {@link List} of {@link WebElement}
      */

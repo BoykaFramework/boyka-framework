@@ -14,10 +14,10 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions;
+package com.github.wasiqb.boyka.actions.elements;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
-import static com.github.wasiqb.boyka.actions.ElementFinder.find;
+import static com.github.wasiqb.boyka.actions.elements.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;

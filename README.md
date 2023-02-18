@@ -413,6 +413,8 @@ Add your response schema JSON files at the directory mentioned in config under `
 Here's how you can execute the API test and also verify its response.
 
 ```java
+import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
+. . .
 // Create request body object
 final User user = User.createUser ()
   .name ("Wasiq")
@@ -428,7 +430,7 @@ final ApiRequest request = ApiRequest.createRequest ()
   .create ();
 
 // Execute request
-final ApiResponse response = ApiManager.execute (request);
+final ApiResponse response = withRequest (request).execute ();
 
 // Verify response status code
 response.verifyStatusCode ()
@@ -503,13 +505,11 @@ public class LoginPage {
 This is how you can write common actions class for Web, Android and iOS together for the app which has similar flows on both the platforms.
 
 ```java
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementDisplayed;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyElementEnabled;
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
+import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
@@ -528,26 +528,31 @@ public class SauceDemoActions {
 
   public void verifyLogin (final String userName, final String password) {
     verifyNavigateToSite ();
-    enterText (loginPage ().getUsername (), userName);
-    enterText (loginPage ().getPassword (), password);
-    clickOn (loginPage ().getLoginButton ());
+    onTextBox (loginPage ().getUsername ()).enterText (userName);
+    onTextBox (loginPage ().getPassword ()).enterText (password);
+    withMouse (loginPage ().getLoginButton ()).click ();
     verifyLoggedIn ();
   }
 
   private void verifyNavigateToSite () {
     if (this.platformType == WEB) {
       navigate ().to (URL);
-      verifyBrowserUrl ().startsWith (URL);
+      navigate ().verifyUrl ()
+        .startsWith (URL);
     }
   }
 
   private void verifyLoggedIn () {
     if (this.platformType == WEB) {
-      verifyBrowserUrl ().isEqualTo (format ("{0}/inventory.html", URL));
-      verifyBrowserTitle ().isEqualTo ("Swag Labs");
+      navigate ().verifyUrl ()
+        .isEqualTo (format ("{0}/inventory.html", URL));
+      onWindow ().verifyTitle ()
+        .isEqualTo ("Swag Labs");
     }
-    verifyElementDisplayed (homePage ().getMenuButton ()).isTrue ();
-    verifyElementEnabled (homePage ().getMenuButton ()).isTrue ();
+    onElement (homePage ().getMenuButton ()).verifyIsDisplayed ()
+      .isTrue ();
+    onElement (homePage ().getMenuButton ()).verifyIsEnabled ()
+      .isTrue ();
   }
 }
 ```
@@ -557,8 +562,8 @@ Now, you can use this actions class in your test as shown below:
 ```java
 package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
-import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
@@ -577,7 +582,7 @@ public class SauceDemoTest {
 
   @AfterMethod (alwaysRun = true)
   public void afterMethod () {
-    takeScreenshot ();
+    onWindow ().takeScreenshot ();
   }
 
   @BeforeClass (description = "Setup test class", alwaysRun = true)
@@ -589,7 +594,7 @@ public class SauceDemoTest {
 
   @AfterClass (description = "Tear down test class", alwaysRun = true)
   public void tearDownTestClass () {
-    saveLogs ();
+    withDriver ().saveLogs ();
     closeDriver ();
   }
 

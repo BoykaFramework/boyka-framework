@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions;
+package com.github.wasiqb.boyka.actions.drivers;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static org.apache.logging.log4j.LogManager.getLogger;
