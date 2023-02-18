@@ -41,6 +41,18 @@ public class ClickableActions extends FingersActions implements IClickableAction
     }
 
     @Override
+    public void click () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Clicking on element: {}", this.locator.getName ());
+        if (getSession ().getPlatformType () == WEB) {
+            performElementAction (WebElement::click, this.locator);
+        } else {
+            tap ();
+        }
+        LOGGER.traceExit ();
+    }
+
+    @Override
     public void clickAndHold () {
         LOGGER.traceEntry ();
         LOGGER.info ("Click and hold on element: {}", this.locator.getName ());
@@ -53,19 +65,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
     }
 
     @Override
-    public void clickOn () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Clicking on element: {}", this.locator.getName ());
-        if (getSession ().getPlatformType () == WEB) {
-            performElementAction (WebElement::click, this.locator);
-        } else {
-            tapOn ();
-        }
-        LOGGER.traceExit ();
-    }
-
-    @Override
-    public void doubleClickOn () {
+    public void doubleClick () {
         LOGGER.traceEntry ();
         LOGGER.info ("Double Click on element: {}", this.locator.getName ());
         performElementAction ((driver, element) -> {
@@ -89,7 +89,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
     }
 
     @Override
-    public void hoverOn () {
+    public void hover () {
         LOGGER.traceEntry ();
         LOGGER.info ("Hover on element: {}", this.locator.getName ());
         performElementAction ((driver, element) -> {
@@ -101,7 +101,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
     }
 
     @Override
-    public void rightClickOn () {
+    public void rightClick () {
         LOGGER.traceEntry ();
         LOGGER.info ("Right Click on element: {}", this.locator.getName ());
         performElementAction ((driver, element) -> {

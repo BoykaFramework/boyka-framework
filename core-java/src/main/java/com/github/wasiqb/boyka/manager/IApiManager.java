@@ -14,42 +14,21 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.elements;
+package com.github.wasiqb.boyka.manager;
+
+import com.github.wasiqb.boyka.builders.ApiResponse;
 
 /**
- * All Clickable actions
+ * Execute API
  *
  * @author Wasiq Bhamla
- * @since 15-Feb-2023
+ * @since 18-Feb-2023
  */
-public interface IClickableActions extends IFingersActions {
+public interface IApiManager {
     /**
-     * Click on element
+     * Execute API request
+     *
+     * @return {@link ApiResponse} from the executed request
      */
-    void click ();
-
-    /**
-     * LongPress on element
-     */
-    void clickAndHold ();
-
-    /**
-     * DoubleClick on element
-     */
-    void doubleClick ();
-
-    /**
-     * Hover on element
-     */
-    void hover ();
-
-    /**
-     * RightClick on element
-     */
-    void rightClick ();
-
-    /**
-     * Submit the element.
-     */
-    void submit ();
+    ApiResponse execute ();
 }

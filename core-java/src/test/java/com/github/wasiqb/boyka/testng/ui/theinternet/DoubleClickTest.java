@@ -66,7 +66,7 @@ public class DoubleClickTest {
     @Test (description = "Verify Click and Hold method")
     public void testClickAndHold () {
         withMouse (doubleClickPage ().getClickHold ()).clickAndHold ();
-        onElement (doubleClickPage ().getClickHold ()).verifyTextOf ()
+        onElement (doubleClickPage ().getClickHold ()).verifyText ()
             .isEqualTo ("Well done! keep holding that click now.....");
     }
 
@@ -75,8 +75,8 @@ public class DoubleClickTest {
      */
     @Test (description = "Double click test")
     public void testDoubleClick () {
-        withMouse (doubleClickPage ().getDoubleClick ()).doubleClickOn ();
-        onElement (doubleClickPage ().getDoubleClick ()).verifyStyleOf ("background-color")
+        withMouse (doubleClickPage ().getDoubleClick ()).doubleClick ();
+        onElement (doubleClickPage ().getDoubleClick ()).verifyStyle ("background-color")
             .isEqualTo ("rgba(147, 203, 90, 1)");
     }
 
@@ -85,8 +85,8 @@ public class DoubleClickTest {
      */
     @Test (description = "Verify Click and Hold method")
     public void testHoverAndClick () {
-        withMouse (doubleClickPage ().getHoverButton ()).hoverOn ();
-        withMouse (doubleClickPage ().getHoverMenu ()).clickOn ();
+        withMouse (doubleClickPage ().getHoverButton ()).hover ();
+        withMouse (doubleClickPage ().getHoverMenu ()).click ();
         onAlert ().verifyAccept ()
             .isEqualTo ("Well done you clicked on the link!");
     }

@@ -51,7 +51,7 @@ public class HoverTest {
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
         navigate ().to (URL);
-        withMouse (homePage ().link ("Hovers")).clickOn ();
+        withMouse (homePage ().link ("Hovers")).click ();
     }
 
     /**
@@ -68,8 +68,8 @@ public class HoverTest {
     @Test (description = "Hover mouse test")
     public void testMouseHover () {
         final var expectedUserName = "name: user1";
-        withMouse (hoverPage ().userImage (0)).hoverOn ();
-        onElement (hoverPage ().userName (0)).verifyTextOf ()
+        withMouse (hoverPage ().userImage (0)).hover ();
+        onElement (hoverPage ().userName (0)).verifyText ()
             .isEqualTo (format (expectedUserName, 1));
     }
 }

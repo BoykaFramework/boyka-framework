@@ -52,7 +52,7 @@ public class CookiesTest {
         createDriver (platformType, driverKey);
         onWindow ().minimize ();
         navigate ().to (URL);
-        withMouse (homePage ().link ("JavaScript Alerts")).clickOn ();
+        withMouse (homePage ().link ("JavaScript Alerts")).click ();
     }
 
     /**

@@ -60,15 +60,15 @@ public class WdioDemoTest {
      */
     @Test
     public void testDragDrop () {
-        withFinger (wdioHomePage ().getDragTab ()).tapOn ();
+        withFinger (wdioHomePage ().getDragTab ()).tap ();
         for (var index = 1; index <= 3; index++) {
             withFinger (dragDropPage ().leftSourceTile (index)).dragTo (dragDropPage ().leftTargetTile (index));
             withFinger (dragDropPage ().centerSourceTile (index)).dragTo (dragDropPage ().centerTargetTile (index));
             withFinger (dragDropPage ().rightSourceTile (index)).dragTo (dragDropPage ().rightTargetTile (index));
         }
-        onElement (dragDropPage ().getTitle ()).verifyTextOf ()
+        onElement (dragDropPage ().getTitle ()).verifyText ()
             .isEqualTo ("Congratulations");
-        onElement (dragDropPage ().getDescription ()).verifyTextOf ()
+        onElement (dragDropPage ().getDescription ()).verifyText ()
             .isEqualTo ("You made it, click retry if you want to try it again.");
     }
 }

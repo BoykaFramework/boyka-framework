@@ -24,13 +24,6 @@ package com.github.wasiqb.boyka.actions.interfaces.elements;
  */
 public interface ITextBoxActions extends IClickableActions {
     /**
-     * Append text in text field.
-     *
-     * @param text text to append
-     */
-    void appendText (final String text);
-
-    /**
      * Enter text in text field.
      *
      * @param text text to enter

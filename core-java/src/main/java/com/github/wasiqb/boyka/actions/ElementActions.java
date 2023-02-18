@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.actions;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -45,21 +46,15 @@ public class ElementActions implements IElementActions {
     }
 
     protected final Locator      locator;
-    protected final SwipeSetting swipeSetting;
+    protected       SwipeSetting swipeSetting;
 
     ElementActions (final Locator locator) {
         this.locator = locator;
-        this.swipeSetting = getSession ().getMobileSetting ()
-            .getDevice ()
-            .getSwipe ();
-    }
-
-    @Override
-    public String attributeOf (final String attribute) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, this.locator.getName ());
-        LOGGER.traceExit ();
-        return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
+        if (getSession ().getPlatformType () != WEB) {
+            this.swipeSetting = getSession ().getMobileSetting ()
+                .getDevice ()
+                .getSwipe ();
+        }
     }
 
     @Override
@@ -68,6 +63,29 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Clearing element located by: {}", this.locator.getName ());
         performElementAction (WebElement::clear, this.locator);
         LOGGER.traceExit ();
+    }
+
+    @Override
+    public String getAttribute (final String attribute) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, this.locator.getName ());
+        LOGGER.traceExit ();
+        return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
+    }
+
+    @Override
+    public String getStyle (final String styleName) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting attribute: {} of element located by: {}", styleName, this.locator.getName ());
+        LOGGER.traceExit ();
+        return getElementAttribute (e -> e.getCssValue (styleName), this.locator, EMPTY);
+    }
+
+    @Override
+    public String getText () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting text of element located by: {}", this.locator.getName ());
+        return LOGGER.traceExit (getElementAttribute (WebElement::getText, this.locator, EMPTY));
     }
 
     @Override
@@ -92,42 +110,11 @@ public class ElementActions implements IElementActions {
     }
 
     @Override
-    public String styleOf (final String attribute) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, this.locator.getName ());
-        LOGGER.traceExit ();
-        return getElementAttribute (e -> e.getCssValue (attribute), this.locator, EMPTY);
-    }
-
-    @Override
-    public String textOf () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting text of element located by: {}", this.locator.getName ());
-        return LOGGER.traceExit (getElementAttribute (WebElement::getText, this.locator, EMPTY));
-    }
-
-    @Override
-    public StringSubject verifyAttributeOf (final String attribute) {
+    public StringSubject verifyAttribute (final String attribute) {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying attribute of {}", this.locator.getName ());
         LOGGER.traceExit ();
-        return assertThat (attributeOf (attribute));
-    }
-
-    @Override
-    public BooleanSubject verifyElementDisplayed () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Verifying element {} is displayed", this.locator.getName ());
-        LOGGER.traceExit ();
-        return assertThat (isDisplayed ());
-    }
-
-    @Override
-    public BooleanSubject verifyElementEnabled () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Verifying element {} is enabled", this.locator.getName ());
-        LOGGER.traceExit ();
-        return assertThat (isEnabled ());
+        return assertThat (getAttribute (attribute));
     }
 
     @Override
@@ -139,18 +126,34 @@ public class ElementActions implements IElementActions {
     }
 
     @Override
-    public StringSubject verifyStyleOf (final String attribute) {
+    public BooleanSubject verifyIsDisplayed () {
         LOGGER.traceEntry ();
-        LOGGER.info ("Verifying style of {}", this.locator.getName ());
+        LOGGER.info ("Verifying element {} is displayed", this.locator.getName ());
         LOGGER.traceExit ();
-        return assertThat (styleOf (attribute));
+        return assertThat (isDisplayed ());
     }
 
     @Override
-    public StringSubject verifyTextOf () {
+    public BooleanSubject verifyIsEnabled () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying element {} is enabled", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (isEnabled ());
+    }
+
+    @Override
+    public StringSubject verifyStyle (final String styleName) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying style of {}", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (getStyle (styleName));
+    }
+
+    @Override
+    public StringSubject verifyText () {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying text of {}", this.locator.getName ());
         LOGGER.traceExit ();
-        return assertThat (textOf ());
+        return assertThat (getText ());
     }
 }

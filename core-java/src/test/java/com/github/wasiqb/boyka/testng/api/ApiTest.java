@@ -22,7 +22,7 @@ import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PATCH;
 import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
-import static com.github.wasiqb.boyka.manager.ApiManager.execute;
+import static com.github.wasiqb.boyka.manager.ApiManager.withRequest;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.testng.api.requests.User;
@@ -48,7 +48,8 @@ public class ApiTest {
             .pathParam ("userId", "2")
             .create ();
 
-        execute (request).verifyStatusCode ()
+        withRequest (request).execute ()
+            .verifyStatusCode ()
             .isEqualTo (204);
     }
 
@@ -63,7 +64,7 @@ public class ApiTest {
             .pathParam ("userId", "2")
             .create ();
 
-        final var response = execute (request);
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
@@ -88,7 +89,7 @@ public class ApiTest {
             .queryParam ("page", "2")
             .create ();
 
-        final var response = execute (request);
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
@@ -121,7 +122,7 @@ public class ApiTest {
             .bodyObject (user)
             .create ();
 
-        final var response = execute (request);
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
@@ -153,7 +154,7 @@ public class ApiTest {
             .bodyObject (user)
             .create ();
 
-        final var response = execute (request);
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
@@ -182,7 +183,7 @@ public class ApiTest {
             .bodyObject (user)
             .create ();
 
-        final var response = execute (request);
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (201);

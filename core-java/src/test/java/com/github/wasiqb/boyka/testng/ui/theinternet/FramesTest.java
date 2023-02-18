@@ -52,7 +52,7 @@ public class FramesTest {
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
         navigate ().to (URL);
-        withMouse (homePage ().link ("Frames")).clickOn ();
+        withMouse (homePage ().link ("Frames")).click ();
     }
 
     /**
@@ -69,9 +69,9 @@ public class FramesTest {
     @Test
     public void testNestedBottomFrame () {
         try {
-            withMouse (framesPage ().getNestedFrames ()).clickOn ();
+            withMouse (framesPage ().getNestedFrames ()).click ();
             onFrame ().switchTo (nestedFramePage ().getFrameBottom ());
-            onElement (nestedFramePage ().getBody ()).verifyTextOf ()
+            onElement (nestedFramePage ().getBody ()).verifyText ()
                 .isEqualTo ("BOTTOM");
         } finally {
             onFrame ().switchToParent ();
@@ -86,7 +86,7 @@ public class FramesTest {
         try {
             onFrame ().switchTo (nestedFramePage ().getFrameTop ());
             onFrame ().switchTo (nestedFramePage ().getFrameLeft ());
-            onElement (nestedFramePage ().getBody ()).verifyTextOf ()
+            onElement (nestedFramePage ().getBody ()).verifyText ()
                 .isEqualTo ("LEFT");
         } finally {
             onFrame ().switchToParent ();
@@ -102,7 +102,7 @@ public class FramesTest {
         try {
             onFrame ().switchTo (nestedFramePage ().getFrameTop ());
             onFrame ().switchTo (nestedFramePage ().getFrameMiddle ());
-            onElement (nestedFramePage ().getBody ()).verifyTextOf ()
+            onElement (nestedFramePage ().getBody ()).verifyText ()
                 .isEqualTo ("MIDDLE");
         } finally {
             onFrame ().switchToParent ();
@@ -118,7 +118,7 @@ public class FramesTest {
         try {
             onFrame ().switchTo (nestedFramePage ().getFrameTop ());
             onFrame ().switchTo (nestedFramePage ().getFrameRight ());
-            onElement (nestedFramePage ().getBody ()).verifyTextOf ()
+            onElement (nestedFramePage ().getBody ()).verifyText ()
                 .isEqualTo ("RIGHT");
         } finally {
             onFrame ().switchToParent ();

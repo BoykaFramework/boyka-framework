@@ -108,7 +108,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     }
 
     @Override
-    public void tapOn () {
+    public void tap () {
         LOGGER.traceEntry ();
         final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
             .element (this.locator)

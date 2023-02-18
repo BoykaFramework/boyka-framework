@@ -47,6 +47,13 @@ public interface IWindowActions {
     void fullScreen ();
 
     /**
+     * Title of the browser.
+     *
+     * @return title of the browser
+     */
+    String getTitle ();
+
+    /**
      * Gets all open window handles.
      *
      * @return all open window handles
@@ -71,12 +78,12 @@ public interface IWindowActions {
     void switchTo (final String nameOrHandle);
 
     /**
-     * Switch to main window.
+     * Switch to default first window.
      */
-    void switchToMain ();
+    void switchToDefault ();
 
     /**
-     * Switch to new tab window.
+     * Switch to new window.
      *
      * @param type type of window
      */
@@ -93,13 +100,6 @@ public interface IWindowActions {
      * @param fileName file name
      */
     void takeScreenshot (final String fileName);
-
-    /**
-     * Title of the browser.
-     *
-     * @return title of the browser
-     */
-    String title ();
 
     /**
      * Verify browser title.

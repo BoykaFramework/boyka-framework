@@ -50,7 +50,7 @@ public class ContextMenuTest {
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
         navigate ().to (URL);
-        withMouse (homePage ().link ("Context Menu")).clickOn ();
+        withMouse (homePage ().link ("Context Menu")).click ();
     }
 
     /**
@@ -66,7 +66,7 @@ public class ContextMenuTest {
      */
     @Test (description = "Test context menu")
     public void testContextMenu () {
-        withMouse (contextMenuPage ().getHotSpot ()).rightClickOn ();
+        withMouse (contextMenuPage ().getHotSpot ()).rightClick ();
         onAlert ().verifyAccept ()
             .isEqualTo ("You selected a context menu");
     }

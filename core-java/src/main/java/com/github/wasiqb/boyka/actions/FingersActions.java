@@ -30,11 +30,11 @@ public class FingersActions extends FingerActions implements IFingersActions {
 
     @Override
     public void zoomIn () {
-
+        // TODO: need to implement.
     }
 
     @Override
     public void zoomOut () {
-
+        // TODO: need to implement.
     }
 }

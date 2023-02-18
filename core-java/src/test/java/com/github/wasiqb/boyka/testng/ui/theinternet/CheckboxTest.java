@@ -62,7 +62,7 @@ public class CheckboxTest {
             .isFalse ();
         onElement (checkboxPage ().getOption2 ()).verifyElementSelected ()
             .isTrue ();
-        withMouse (checkboxPage ().getOption1 ()).clickOn ();
+        withMouse (checkboxPage ().getOption1 ()).click ();
         onElement (checkboxPage ().getOption1 ()).verifyElementSelected ()
             .isTrue ();
     }

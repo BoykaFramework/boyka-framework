@@ -63,6 +63,13 @@ public class NavigateActions implements INavigateActions {
     }
 
     @Override
+    public String getUrl () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting url of the browser");
+        return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl, EMPTY));
+    }
+
+    @Override
     public void refresh () {
         LOGGER.traceEntry ();
         performDriverAction (driver -> driver.navigate ()
@@ -79,17 +86,10 @@ public class NavigateActions implements INavigateActions {
     }
 
     @Override
-    public String url () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting url of the browser");
-        return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl, EMPTY));
-    }
-
-    @Override
     public StringSubject verifyUrl () {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying browser url");
         LOGGER.traceExit ();
-        return assertThat (url ());
+        return assertThat (getUrl ());
     }
 }

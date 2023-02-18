@@ -25,11 +25,11 @@ public class SauceDemoActions {
     }
 
     public void verifyAddToCart () {
-        withMouse (homePage ().getAddToCartButton ()).clickOn ();
+        withMouse (homePage ().getAddToCartButton ()).click ();
 
-        onElement (homePage ().getProductPrice ()).verifyTextOf ()
+        onElement (homePage ().getProductPrice ()).verifyText ()
             .isEqualTo ("$29.99");
-        onElement (homePage ().getShoppingCartCount ()).verifyTextOf ()
+        onElement (homePage ().getShoppingCartCount ()).verifyText ()
             .isEqualTo ("1");
 
         verifyProductDetailPage ();
@@ -37,11 +37,11 @@ public class SauceDemoActions {
     }
 
     public void verifyCheckoutStep1 () {
-        withMouse (cartPage ().getCheckout ()).clickOn ();
+        withMouse (cartPage ().getCheckout ()).click ();
         if (this.platformType == WEB) {
             navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/checkout-step-one.html", URL));
-            onElement (checkoutPage ().getTitle ()).verifyTextOf ()
+            onElement (checkoutPage ().getTitle ()).verifyText ()
                 .isEqualTo ("CHECKOUT: YOUR INFORMATION");
         }
 
@@ -49,27 +49,27 @@ public class SauceDemoActions {
         onTextBox (checkoutPage ().getLastName ()).enterText ("Bhamla");
         onTextBox (checkoutPage ().getZipCode ()).enterText ("12345");
 
-        withMouse (checkoutPage ().getContinueButton ()).clickOn ();
-        onElement (checkoutPage ().getTitle ()).verifyTextOf ()
+        withMouse (checkoutPage ().getContinueButton ()).click ();
+        onElement (checkoutPage ().getTitle ()).verifyText ()
             .isEqualTo ("CHECKOUT: OVERVIEW");
     }
 
     public void verifyCheckoutStep2 () {
-        withMouse (checkoutPage ().getFinish ()).clickOn ();
+        withMouse (checkoutPage ().getFinish ()).click ();
 
         if (this.platformType != WEB) {
-            onElement (checkoutPage ().getCompleteHeader ()).verifyTextOf ()
+            onElement (checkoutPage ().getCompleteHeader ()).verifyText ()
                 .isEqualTo ("THANK YOU FOR YOU ORDER");
         } else {
             navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/checkout-complete.html", URL));
-            onElement (checkoutPage ().getTitle ()).verifyTextOf ()
+            onElement (checkoutPage ().getTitle ()).verifyText ()
                 .isEqualTo ("CHECKOUT: COMPLETE!");
-            onElement (checkoutPage ().getCompleteHeader ()).verifyTextOf ()
+            onElement (checkoutPage ().getCompleteHeader ()).verifyText ()
                 .isEqualTo ("THANK YOU FOR YOUR ORDER");
         }
 
-        onElement (checkoutPage ().getCompleteText ()).verifyTextOf ()
+        onElement (checkoutPage ().getCompleteText ()).verifyText ()
             .isEqualTo ("Your order has been dispatched, and will arrive just as fast as the pony can get there!");
     }
 
@@ -77,18 +77,18 @@ public class SauceDemoActions {
         verifyNavigateToSite ();
         onTextBox (loginPage ().getUsername ()).enterText (userName);
         onTextBox (loginPage ().getPassword ()).enterText (password);
-        withMouse (loginPage ().getLoginButton ()).clickOn ();
+        withMouse (loginPage ().getLoginButton ()).click ();
         verifyLoggedIn ();
     }
 
     public void verifySignOut () {
-        withMouse (homePage ().getMenuButton ()).clickOn ();
-        withMouse (homePage ().getLogout ()).clickOn ();
+        withMouse (homePage ().getMenuButton ()).click ();
+        withMouse (homePage ().getLogout ()).click ();
         if (this.platformType == WEB) {
             navigate ().verifyUrl ()
                 .startsWith (URL);
         }
-        onElement (loginPage ().getUsername ()).verifyElementDisplayed ()
+        onElement (loginPage ().getUsername ()).verifyIsDisplayed ()
             .isTrue ();
     }
 
@@ -99,9 +99,9 @@ public class SauceDemoActions {
             onWindow ().verifyTitle ()
                 .isEqualTo ("Swag Labs");
         }
-        onElement (homePage ().getMenuButton ()).verifyElementDisplayed ()
+        onElement (homePage ().getMenuButton ()).verifyIsDisplayed ()
             .isTrue ();
-        onElement (homePage ().getMenuButton ()).verifyElementEnabled ()
+        onElement (homePage ().getMenuButton ()).verifyIsEnabled ()
             .isTrue ();
     }
 
@@ -114,22 +114,22 @@ public class SauceDemoActions {
     }
 
     private void verifyProductCartPage () {
-        withMouse (homePage ().getShoppingCart ()).clickOn ();
+        withMouse (homePage ().getShoppingCart ()).click ();
         if (this.platformType == WEB) {
             navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/cart.html", URL));
         }
-        onElement (cartPage ().getCheckout ()).verifyElementDisplayed ()
+        onElement (cartPage ().getCheckout ()).verifyIsDisplayed ()
             .isTrue ();
     }
 
     private void verifyProductDetailPage () {
-        withMouse (homePage ().productItem ("Sauce Labs Backpack")).clickOn ();
+        withMouse (homePage ().productItem ("Sauce Labs Backpack")).click ();
         if (this.platformType == WEB) {
             navigate ().verifyUrl ()
                 .startsWith (format ("{0}/inventory-item.html?id=", URL));
         }
-        onElement (productDetailsPage ().getContainer ()).verifyElementDisplayed ()
+        onElement (productDetailsPage ().getContainer ()).verifyIsDisplayed ()
             .isTrue ();
     }
 }

@@ -58,7 +58,7 @@ public class WindowTest {
         createDriver (platformType, driverKey);
         onWindow ().maximize ();
         navigate ().to (URL);
-        withMouse (homePage ().link ("Multiple Windows")).clickOn ();
+        withMouse (homePage ().link ("Multiple Windows")).click ();
     }
 
     /**
@@ -122,7 +122,7 @@ public class WindowTest {
     @Test
     public void testOpenWindow () {
         final var currentWindow = onWindow ().currentHandle ();
-        withMouse (multiWindowPage ().getClickHere ()).clickOn ();
+        withMouse (multiWindowPage ().getClickHere ()).click ();
         final var newWindow = onWindow ().handles ()
             .stream ()
             .filter (handle -> !handle.equals (currentWindow))
@@ -132,7 +132,7 @@ public class WindowTest {
         withDriver ().waitUntil (urlMatches (format ("{0}windows/new", URL)));
         navigate ().verifyUrl ()
             .isEqualTo (format ("{0}windows/new", URL));
-        onElement (multiWindowPage ().getTitle ()).verifyTextOf ()
+        onElement (multiWindowPage ().getTitle ()).verifyText ()
             .isEqualTo ("New Window");
         onWindow ().close ();
         navigate ().verifyUrl ()

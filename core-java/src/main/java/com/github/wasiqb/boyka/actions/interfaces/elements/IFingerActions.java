@@ -50,5 +50,5 @@ public interface IFingerActions extends IElementActions {
     /**
      * Taps on an element.
      */
-    void tapOn ();
+    void tap ();
 }

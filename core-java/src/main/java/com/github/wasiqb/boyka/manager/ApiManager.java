@@ -66,31 +66,14 @@ import org.apache.logging.log4j.Logger;
  * @author Wasiq Bhamla
  * @since 17-Feb-2022
  */
-public final class ApiManager {
+public final class ApiManager implements IApiManager {
     private static final Logger LOGGER = getLogger ();
 
-    /**
-     * Execute API request.
-     *
-     * @param request {@link ApiRequest} created instance
-     *
-     * @return {@link ApiResponse}
-     */
-    public static ApiResponse execute (final ApiRequest request) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Executing API request: {}", request);
-        getSession ().setConfigKey (request.getConfigKey ());
-        final var manager = new ApiManager (request.getConfigKey ());
-        requireNonNullElse (request.getHeaders (), new HashMap<String, String> ()).forEach (manager::addHeader);
-        requireNonNullElse (request.getPathParams (), new HashMap<String, String> ()).forEach (manager::pathParam);
-        return LOGGER.traceExit (manager.contentType (request.getContentType ())
-            .basicAuth (request.getUserName (), request.getPassword ())
-            .body (requireNonNullElse (request.getBody (), EMPTY))
-            .body (request.getBodyObject ())
-            .method (request.getMethod ())
-            .getResponse (request.getQueryParams (), request.getPath ()));
+    public static IApiManager withRequest (final ApiRequest request) {
+        return new ApiManager (request);
     }
 
+    private final ApiRequest          apiRequest;
     private final ApiSetting          apiSetting;
     private final OkHttpClient        client;
     private final LogSetting          logSetting;
@@ -100,10 +83,12 @@ public final class ApiManager {
     private       RequestBody         requestBody;
     private       ApiResponse         response;
 
-    private ApiManager (final String apiKey) {
-        LOGGER.traceEntry ("Parameter : {}", apiKey);
+    private ApiManager (final ApiRequest apiRequest) {
+        LOGGER.traceEntry ("Parameter : {}", apiRequest.getConfigKey ());
+        getSession ().setConfigKey (apiRequest.getConfigKey ());
+        this.apiRequest = apiRequest;
         this.pathParams = new HashMap<> ();
-        this.apiSetting = loadSetting ().getApiSetting (apiKey);
+        this.apiSetting = loadSetting ().getApiSetting (apiRequest.getConfigKey ());
         this.client = new OkHttpClient.Builder ().connectTimeout (ofSeconds (this.apiSetting.getConnectionTimeout ()))
             .readTimeout (ofSeconds (this.apiSetting.getReadTimeout ()))
             .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()))
@@ -112,6 +97,21 @@ public final class ApiManager {
             .getLogging ();
         this.request = new Request.Builder ();
         LOGGER.traceExit ();
+    }
+
+    @Override
+    public ApiResponse execute () {
+        LOGGER.traceEntry ();
+        final var manager = new ApiManager (this.apiRequest);
+        requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<String, String> ()).forEach (manager::addHeader);
+        requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<String, String> ()).forEach (
+            manager::pathParam);
+        return LOGGER.traceExit (manager.contentType (this.apiRequest.getContentType ())
+            .basicAuth (this.apiRequest.getUserName (), this.apiRequest.getPassword ())
+            .body (requireNonNullElse (this.apiRequest.getBody (), EMPTY))
+            .body (this.apiRequest.getBodyObject ())
+            .method (this.apiRequest.getMethod ())
+            .getResponse (this.apiRequest.getQueryParams (), this.apiRequest.getPath ()));
     }
 
     private void addHeader (final String name, final String value) {

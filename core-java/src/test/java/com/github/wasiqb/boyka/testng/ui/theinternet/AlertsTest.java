@@ -53,7 +53,7 @@ public class AlertsTest {
         createDriver (platformType, driverKey);
         onWindow ().fullScreen ();
         navigate ().to (URL);
-        withMouse (homePage ().link ("JavaScript Alerts")).clickOn ();
+        withMouse (homePage ().link ("JavaScript Alerts")).click ();
     }
 
     /**
@@ -72,10 +72,10 @@ public class AlertsTest {
      */
     @Test (description = "Tests Accept alert")
     public void testAcceptAlert () {
-        withMouse (alertPage ().getAlertButton ()).clickOn ();
+        withMouse (alertPage ().getAlertButton ()).click ();
         onAlert ().verifyAccept ()
             .isEqualTo ("I am a JS Alert");
-        onElement (alertPage ().getResult ()).verifyTextOf ()
+        onElement (alertPage ().getResult ()).verifyText ()
             .isEqualTo ("You successfully clicked an alert");
     }
 
@@ -84,10 +84,10 @@ public class AlertsTest {
      */
     @Test (description = "Tests Accept confirm alert")
     public void testAcceptConfirmAlert () {
-        withMouse (alertPage ().getConfirmButton ()).clickOn ();
+        withMouse (alertPage ().getConfirmButton ()).click ();
         onAlert ().verifyAccept ()
             .isEqualTo ("I am a JS Confirm");
-        onElement (alertPage ().getResult ()).verifyTextOf ()
+        onElement (alertPage ().getResult ()).verifyText ()
             .isEqualTo ("You clicked: Ok");
     }
 
@@ -96,10 +96,10 @@ public class AlertsTest {
      */
     @Test (description = "Tests Dismiss confirm alert")
     public void testDismissConfirmAlert () {
-        withMouse (alertPage ().getConfirmButton ()).clickOn ();
+        withMouse (alertPage ().getConfirmButton ()).click ();
         onAlert ().verifyDismiss ()
             .isEqualTo ("I am a JS Confirm");
-        onElement (alertPage ().getResult ()).verifyTextOf ()
+        onElement (alertPage ().getResult ()).verifyText ()
             .isEqualTo ("You clicked: Cancel");
     }
 
@@ -108,10 +108,10 @@ public class AlertsTest {
      */
     @Test (description = "Tests Dismiss prompt alert")
     public void testDismissPromptAlert () {
-        withMouse (alertPage ().getPromptButton ()).clickOn ();
+        withMouse (alertPage ().getPromptButton ()).click ();
         onAlert ().verifyAccept ("Wasiq")
             .isEqualTo ("I am a JS prompt");
-        onElement (alertPage ().getResult ()).verifyTextOf ()
+        onElement (alertPage ().getResult ()).verifyText ()
             .isEqualTo ("You entered: Wasiq");
     }
 }

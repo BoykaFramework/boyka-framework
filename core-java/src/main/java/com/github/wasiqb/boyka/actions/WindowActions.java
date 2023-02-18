@@ -55,7 +55,7 @@ public class WindowActions implements IWindowActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Closing window");
         performDriverAction (WebDriver::close);
-        switchToMain ();
+        switchToDefault ();
         LOGGER.traceExit ();
     }
 
@@ -74,6 +74,13 @@ public class WindowActions implements IWindowActions {
             .window ()
             .fullscreen ());
         LOGGER.traceExit ();
+    }
+
+    @Override
+    public String getTitle () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting title of the browser");
+        return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle, EMPTY));
     }
 
     @Override
@@ -112,7 +119,7 @@ public class WindowActions implements IWindowActions {
     }
 
     @Override
-    public void switchToMain () {
+    public void switchToDefault () {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to main window");
         performDriverAction (driver -> driver.switchTo ()
@@ -168,18 +175,11 @@ public class WindowActions implements IWindowActions {
     }
 
     @Override
-    public String title () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Getting title of the browser");
-        return LOGGER.traceExit (getDriverAttribute (WebDriver::getTitle, EMPTY));
-    }
-
-    @Override
     public StringSubject verifyTitle () {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying browser title");
         LOGGER.traceExit ();
-        return assertThat (title ());
+        return assertThat (getTitle ());
     }
 
     @Override

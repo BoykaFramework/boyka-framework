@@ -59,7 +59,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
     }
 
     @Override
-    public void appendText (final String text) {
+    public void enterText (final String text) {
         LOGGER.traceEntry ();
         LOGGER.info ("Appending text {} to element {}", text, this.locator.getName ());
         performElementAction (e -> {
@@ -68,15 +68,6 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
                 e.sendKeys ("\n");
             }
         }, this.locator);
-        LOGGER.traceExit ();
-    }
-
-    @Override
-    public void enterText (final String text) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Entering text {} in element {}", text, this.locator.getName ());
-        clear ();
-        appendText (text);
         LOGGER.traceExit ();
     }
 

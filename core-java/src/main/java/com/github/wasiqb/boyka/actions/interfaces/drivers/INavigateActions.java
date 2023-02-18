@@ -36,6 +36,13 @@ public interface INavigateActions {
     void forward ();
 
     /**
+     * Get current url of the browser.
+     *
+     * @return current url of the browser
+     */
+    String getUrl ();
+
+    /**
      * Refreshes browser page.
      */
     void refresh ();
@@ -46,13 +53,6 @@ public interface INavigateActions {
      * @param url url to navigate to
      */
     void to (final String url);
-
-    /**
-     * Get current url of the browser.
-     *
-     * @return current url of the browser
-     */
-    String url ();
 
     /**
      * Verify browser url.

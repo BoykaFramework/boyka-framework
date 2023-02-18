@@ -27,18 +27,34 @@ import com.google.common.truth.StringSubject;
  */
 public interface IElementActions {
     /**
+     * Clear text, selection of element.
+     */
+    void clear ();
+
+    /**
      * Gets the value of the attribute of the element.
      *
      * @param attribute attribute of the element
      *
      * @return value of the attribute of the element
      */
-    String attributeOf (final String attribute);
+    String getAttribute (final String attribute);
 
     /**
-     * Clear text, selection of element.
+     * Gets the styling attribute of the element.
+     *
+     * @param styleName attribute of the element
+     *
+     * @return value of the styling attribute of the element
      */
-    void clear ();
+    String getStyle (final String styleName);
+
+    /**
+     * Gets the text of the element.
+     *
+     * @return text of the element
+     */
+    String getText ();
 
     /**
      * Gets the value if the element is displayed.
@@ -62,43 +78,13 @@ public interface IElementActions {
     boolean isSelected ();
 
     /**
-     * Gets the styling attribute of the element.
-     *
-     * @param attribute attribute of the element
-     *
-     * @return value of the styling attribute of the element
-     */
-    String styleOf (final String attribute);
-
-    /**
-     * Gets the text of the element.
-     *
-     * @return text of the element
-     */
-    String textOf ();
-
-    /**
      * Verify attribute of element.
      *
      * @param attribute attribute to verify
      *
      * @return {@link StringSubject} to verify the result
      */
-    StringSubject verifyAttributeOf (final String attribute);
-
-    /**
-     * Verify if element is displayed.
-     *
-     * @return {@link BooleanSubject} to verify the result
-     */
-    BooleanSubject verifyElementDisplayed ();
-
-    /**
-     * Verify if element is enabled.
-     *
-     * @return {@link BooleanSubject} to verify the result
-     */
-    BooleanSubject verifyElementEnabled ();
+    StringSubject verifyAttribute (final String attribute);
 
     /**
      * Verify if element is selected.
@@ -108,18 +94,32 @@ public interface IElementActions {
     BooleanSubject verifyElementSelected ();
 
     /**
+     * Verify if element is displayed.
+     *
+     * @return {@link BooleanSubject} to verify the result
+     */
+    BooleanSubject verifyIsDisplayed ();
+
+    /**
+     * Verify if element is enabled.
+     *
+     * @return {@link BooleanSubject} to verify the result
+     */
+    BooleanSubject verifyIsEnabled ();
+
+    /**
      * Verify style of element.
      *
-     * @param attribute attribute to verify
+     * @param styleName attribute to verify
      *
      * @return {@link StringSubject} to verify the result
      */
-    StringSubject verifyStyleOf (final String attribute);
+    StringSubject verifyStyle (final String styleName);
 
     /**
      * Verify text of element.
      *
      * @return {@link StringSubject} to verify the result
      */
-    StringSubject verifyTextOf ();
+    StringSubject verifyText ();
 }

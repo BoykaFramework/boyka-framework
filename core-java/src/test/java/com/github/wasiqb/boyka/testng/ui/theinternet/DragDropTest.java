@@ -65,7 +65,7 @@ public class DragDropTest {
     @Test (description = "Drag Drop test")
     public void testDragDrop () {
         withMouse (dragDropPage ().getDraggable ()).dragTo (dragDropPage ().getDroppable ());
-        onElement (dragDropPage ().getHeader ()).verifyTextOf ()
+        onElement (dragDropPage ().getHeader ()).verifyText ()
             .isEqualTo ("Dropped!");
     }
 }
