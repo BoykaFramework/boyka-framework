@@ -61,7 +61,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
     @Override
     public void enterText (final String text) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Appending text {} to element {}", text, this.locator.getName ());
+        LOGGER.info ("Entering text {} to element {}", text, this.locator.getName ());
         performElementAction (e -> {
             e.sendKeys (text);
             if (getSession ().getPlatformType () == IOS) {

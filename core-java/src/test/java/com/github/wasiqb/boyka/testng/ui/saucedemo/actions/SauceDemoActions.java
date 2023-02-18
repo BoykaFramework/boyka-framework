@@ -2,10 +2,12 @@ package com.github.wasiqb.boyka.testng.ui.saucedemo.actions;
 
 import static com.github.wasiqb.boyka.actions.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.FingerActions.withFinger;
 import static com.github.wasiqb.boyka.actions.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.TextBoxActions.onTextBox;
 import static com.github.wasiqb.boyka.actions.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
+import static com.github.wasiqb.boyka.enums.SwipeDirection.UP;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.CartPage.cartPage;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.CheckoutPage.checkoutPage;
@@ -55,6 +57,10 @@ public class SauceDemoActions {
     }
 
     public void verifyCheckoutStep2 () {
+        if (this.platformType != WEB) {
+            withFinger ().swipe (UP);
+            withFinger ().swipe (UP);
+        }
         withMouse (checkoutPage ().getFinish ()).click ();
 
         if (this.platformType != WEB) {
