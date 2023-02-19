@@ -22,10 +22,21 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import com.github.wasiqb.boyka.actions.interfaces.drivers.IFrameActions;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Handle all frame related actions
+ *
+ * @author Wasiq Bhamla
+ * @since 16-Feb-2023
+ */
 public class FrameActions implements IFrameActions {
     private static final IFrameActions FRAME_ACTIONS = new FrameActions ();
     private static final Logger        LOGGER        = getLogger ();
 
+    /**
+     * Handles all frames related actions
+     *
+     * @return {@link IFrameActions} instance object
+     */
     public static IFrameActions onFrame () {
         return FRAME_ACTIONS;
     }

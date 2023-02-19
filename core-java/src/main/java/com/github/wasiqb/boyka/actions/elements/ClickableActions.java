@@ -29,9 +29,22 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+/**
+ * Handles all mouse related actions
+ *
+ * @author Wasiq Bhamla
+ * @since 16-Feb-2023
+ */
 public class ClickableActions extends FingersActions implements IClickableActions {
     private static final Logger LOGGER = getLogger ();
 
+    /**
+     * Handles all mouse related actions.
+     *
+     * @param locator Locator of the elements.
+     *
+     * @return {@link IClickableActions} instance object
+     */
     public static IClickableActions withMouse (final Locator locator) {
         return new ClickableActions (locator);
     }

@@ -50,7 +50,12 @@ public class DriverActions implements IDriverActions {
     private static final DriverActions DRIVER_ACTIONS = new DriverActions ();
     private static final Logger        LOGGER         = getLogger ();
 
-    public static DriverActions withDriver () {
+    /**
+     * Handles all other driver related actions
+     *
+     * @return {@link IDriverActions} instance object
+     */
+    public static IDriverActions withDriver () {
         return DRIVER_ACTIONS;
     }
 

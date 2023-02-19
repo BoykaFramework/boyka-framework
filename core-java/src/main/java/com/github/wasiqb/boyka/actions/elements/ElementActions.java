@@ -41,6 +41,13 @@ import org.openqa.selenium.WebElement;
 public class ElementActions implements IElementActions {
     private static final Logger LOGGER = getLogger ();
 
+    /**
+     * Handle all other element actions
+     *
+     * @param locator Locator of the element
+     *
+     * @return {@link IElementActions} instance objects
+     */
     public static IElementActions onElement (final Locator locator) {
         return new ElementActions (locator);
     }
@@ -118,14 +125,6 @@ public class ElementActions implements IElementActions {
     }
 
     @Override
-    public BooleanSubject verifyElementSelected () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Verifying element {} is selected", this.locator.getName ());
-        LOGGER.traceExit ();
-        return assertThat (isSelected ());
-    }
-
-    @Override
     public BooleanSubject verifyIsDisplayed () {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying element {} is displayed", this.locator.getName ());
@@ -139,6 +138,14 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Verifying element {} is enabled", this.locator.getName ());
         LOGGER.traceExit ();
         return assertThat (isEnabled ());
+    }
+
+    @Override
+    public BooleanSubject verifyIsSelected () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying element {} is selected", this.locator.getName ());
+        LOGGER.traceExit ();
+        return assertThat (isSelected ());
     }
 
     @Override

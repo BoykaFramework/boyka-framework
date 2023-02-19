@@ -83,7 +83,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     @Override
     public void swipe (final SwipeDirection direction) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Swiping down on Mobile devices.");
+        LOGGER.info ("Swiping {} on Mobile devices.", direction);
         final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (direction)
             .element (this.locator)
@@ -98,10 +98,12 @@ public class FingerActions extends ElementActions implements IFingerActions {
         LOGGER.traceEntry ();
         final var maxSwipe = this.swipeSetting.getMaxSwipeUntilFound ();
         var swipeCounts = 0;
-        while (!isDisplayed () && swipeCounts++ < maxSwipe) {
-            swipe (direction);
+        final var element = onElement (this.locator);
+        final var finger = withFinger ();
+        while (!element.isDisplayed () && swipeCounts++ < maxSwipe) {
+            finger.swipe (direction);
         }
-        if (!isDisplayed ()) {
+        if (!element.isDisplayed ()) {
             throwError (ELEMENT_NOT_FOUND, this.locator.getName (), getSession ().getPlatformType ());
         }
         LOGGER.traceExit ();

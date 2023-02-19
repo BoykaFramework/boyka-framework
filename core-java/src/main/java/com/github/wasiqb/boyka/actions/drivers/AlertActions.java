@@ -25,10 +25,21 @@ import com.github.wasiqb.boyka.actions.interfaces.drivers.IAlertActions;
 import com.google.common.truth.StringSubject;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * All Alert related actions
+ *
+ * @author Wasiq Bhamla
+ * @since 16-Feb-2023
+ */
 public class AlertActions implements IAlertActions {
     private static final IAlertActions ALERT_ACTIONS = new AlertActions ();
     private static final Logger        LOGGER        = getLogger ();
 
+    /**
+     * Handle all Alert related actions
+     *
+     * @return {@link IAlertActions} instance object
+     */
     public static IAlertActions onAlert () {
         return ALERT_ACTIONS;
     }

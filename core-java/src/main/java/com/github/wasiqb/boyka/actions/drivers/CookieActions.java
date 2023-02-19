@@ -28,10 +28,21 @@ import com.github.wasiqb.boyka.actions.interfaces.drivers.ICookieActions;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
 
+/**
+ * Class with all methods to handle cookies
+ *
+ * @author Wasiq Bhamla
+ * @since 16-Feb-2023
+ */
 public class CookieActions implements ICookieActions {
     private static final ICookieActions COOKIE_ACTIONS = new CookieActions ();
     private static final Logger         LOGGER         = getLogger ();
 
+    /**
+     * Handles all cookies related actions
+     *
+     * @return {@link ICookieActions} instance object
+     */
     public static ICookieActions withCookies () {
         return COOKIE_ACTIONS;
     }

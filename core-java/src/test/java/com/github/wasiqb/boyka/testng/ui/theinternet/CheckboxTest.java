@@ -58,12 +58,12 @@ public class CheckboxTest {
      */
     @Test (description = "Verify select checkbox")
     public void testCheckOption () {
-        onElement (checkboxPage ().getOption1 ()).verifyElementSelected ()
+        onElement (checkboxPage ().getOption1 ()).verifyIsSelected ()
             .isFalse ();
-        onElement (checkboxPage ().getOption2 ()).verifyElementSelected ()
+        onElement (checkboxPage ().getOption2 ()).verifyIsSelected ()
             .isTrue ();
         withMouse (checkboxPage ().getOption1 ()).click ();
-        onElement (checkboxPage ().getOption1 ()).verifyElementSelected ()
+        onElement (checkboxPage ().getOption1 ()).verifyIsSelected ()
             .isTrue ();
     }
 }

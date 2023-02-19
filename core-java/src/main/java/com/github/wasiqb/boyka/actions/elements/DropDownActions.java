@@ -55,7 +55,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
      *
      * @return action instance to interact with dropdown
      */
-    public static DropDownActions onDropDown (final Locator locator) {
+    public static IDropDownActions onDropDown (final Locator locator) {
         return new DropDownActions (locator);
     }
 

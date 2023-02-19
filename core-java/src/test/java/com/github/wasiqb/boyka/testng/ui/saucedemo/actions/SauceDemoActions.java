@@ -58,8 +58,7 @@ public class SauceDemoActions {
 
     public void verifyCheckoutStep2 () {
         if (this.platformType != WEB) {
-            withFinger ().swipe (UP);
-            withFinger ().swipe (UP);
+            withFinger (checkoutPage ().getFinish ()).swipeTill (UP);
         }
         withMouse (checkoutPage ().getFinish ()).click ();
 

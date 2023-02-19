@@ -42,10 +42,21 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 
+/**
+ * Handles all windows related actions
+ *
+ * @author Wasiq Bhamla
+ * @since 16-Feb-2023
+ */
 public class WindowActions implements IWindowActions {
     private static final Logger         LOGGER         = getLogger ();
     private static final IWindowActions WINDOW_ACTIONS = new WindowActions ();
 
+    /**
+     * Handles windows related actions
+     *
+     * @return {@link IWindowActions} instance object
+     */
     public static IWindowActions onWindow () {
         return WINDOW_ACTIONS;
     }

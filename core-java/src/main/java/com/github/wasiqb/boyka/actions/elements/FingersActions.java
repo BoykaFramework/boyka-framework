@@ -19,7 +19,20 @@ package com.github.wasiqb.boyka.actions.elements;
 import com.github.wasiqb.boyka.actions.interfaces.elements.IFingersActions;
 import com.github.wasiqb.boyka.builders.Locator;
 
+/**
+ * Handles all multi-fingers related actions
+ *
+ * @author Wasiq Bhamla
+ * @since 15-Feb-2023
+ */
 public class FingersActions extends FingerActions implements IFingersActions {
+    /**
+     * Handles all multi-fingers related actions
+     *
+     * @param locator Locator of the element
+     *
+     * @return {@link IFingersActions} instance object
+     */
     public static IFingersActions withFingers (final Locator locator) {
         return new FingersActions (locator);
     }

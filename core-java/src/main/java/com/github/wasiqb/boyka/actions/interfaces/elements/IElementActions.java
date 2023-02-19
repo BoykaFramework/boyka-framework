@@ -87,13 +87,6 @@ public interface IElementActions {
     StringSubject verifyAttribute (final String attribute);
 
     /**
-     * Verify if element is selected.
-     *
-     * @return {@link BooleanSubject} to verify the result
-     */
-    BooleanSubject verifyElementSelected ();
-
-    /**
      * Verify if element is displayed.
      *
      * @return {@link BooleanSubject} to verify the result
@@ -106,6 +99,13 @@ public interface IElementActions {
      * @return {@link BooleanSubject} to verify the result
      */
     BooleanSubject verifyIsEnabled ();
+
+    /**
+     * Verify if element is selected.
+     *
+     * @return {@link BooleanSubject} to verify the result
+     */
+    BooleanSubject verifyIsSelected ();
 
     /**
      * Verify style of element.

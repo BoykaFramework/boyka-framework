@@ -70,6 +70,13 @@ import org.apache.logging.log4j.Logger;
 public final class ApiActions implements IApiActions {
     private static final Logger LOGGER = getLogger ();
 
+    /**
+     * Handle API request
+     *
+     * @param request {@link ApiRequest} object to handle
+     *
+     * @return {@link IApiActions} implementation instance
+     */
     public static IApiActions withRequest (final ApiRequest request) {
         return new ApiActions (request);
     }
