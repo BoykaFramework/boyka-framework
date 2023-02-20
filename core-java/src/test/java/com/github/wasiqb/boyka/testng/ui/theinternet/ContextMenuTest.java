@@ -16,10 +16,9 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.MouseActions.rightClickOn;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
+import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.ContextMenuPage.contextMenuPage;
@@ -51,7 +50,7 @@ public class ContextMenuTest {
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
         navigate ().to (URL);
-        clickOn (homePage ().link ("Context Menu"));
+        withMouse (homePage ().link ("Context Menu")).click ();
     }
 
     /**
@@ -67,7 +66,8 @@ public class ContextMenuTest {
      */
     @Test (description = "Test context menu")
     public void testContextMenu () {
-        rightClickOn (contextMenuPage ().getHotSpot ());
-        verifyAcceptAlert ().isEqualTo ("You selected a context menu");
+        withMouse (contextMenuPage ().getHotSpot ()).rightClick ();
+        onAlert ().verifyAccept ()
+            .isEqualTo ("You selected a context menu");
     }
 }

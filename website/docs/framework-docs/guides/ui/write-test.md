@@ -8,16 +8,22 @@ Once the page object class is created with locators for all the platforms and th
 :::tip
 Check out all the available static methods to interact with the page in your tests. Following are the available action classes:
 
-- [`DriverActions`](/api/actions/driver-actions): Contains all driver related actions
-- [`DropDownActions`](/api/actions/drop-down-actions): Contains all drop down related actions
-- [`ElementActions`](/api/actions/element-actions): Contains all element related actions
-- [`KeyboardActions`](/api/actions/keyboard-actions): Contains all keyboard related actions
-- [`MouseActions`](/api/actions/mouse-actions): Contains all mouse related actions
-- [`NavigateActions`](/api/actions/navigate-actions): Contains all web navigation related actions
-- [`SwipeActions`](/api/actions/swipe-actions): Contains all mobile swipe related actions
-- [`VerifyDriverActions`](/api/actions/verify-driver-actions): Contains all verification methods for driver related actions
-- [`VerifyDropDownActions`](/api/actions/verify-drop-down-actions): Contains all verification methods for drop down related actions
-- [`VerifyElementActions`](/api/actions/verify-element-actions): Contains all verification methods for element related actions
+## Driver actions
+
+- [`AlertActions`](/api/actions/drivers/alert-actions): Contains all Alert related actions
+- [`CookieActions`](/api/actions/drivers/cookie-actions): Contains all cookies related actions
+- [`DriverActions`](/api/actions/drivers/driver-actions): Contains all other driver related actions
+- [`FrameActions`](/api/actions/drivers/frame-actions): Contains all Frames related actions
+- [`NavigateActions`](/api/actions/drivers/navigate-actions): Contains all navigate related actions
+- [`WindowActions`](/api/actions/drivers/window-actions): Contains all windows related actions
+
+## Element Actions
+
+- [`ClickableActions`](/api/actions/elements/clickable-actions): Contains all clickable element related actions
+- [`DropDownActions`](/api/actions/elements/drop-down-actions): Contains all drop down element related actions
+- [`ElementActions`](/api/actions/elements/element-actions): Contains all common methods for element related actions
+- [`FingerActions`](/api/actions/elements/finger-actions): Contains all methods for single finger on element / screen related actions
+- [`TextBoxActions`](/api/actions/elements/textbox-actions): Contains all text box related actions methods
 :::
 
 ## Example
@@ -25,8 +31,8 @@ Check out all the available static methods to interact with the page in your tes
 ```java
 package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
-import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
@@ -45,7 +51,7 @@ public class SauceDemoTest {
 
   @AfterMethod (alwaysRun = true)
   public void afterMethod () {
-    takeScreenshot ();
+    onWindow ().takeScreenshot ();
   }
 
   @BeforeClass (description = "Setup test class", alwaysRun = true)
@@ -57,7 +63,7 @@ public class SauceDemoTest {
 
   @AfterClass (description = "Tear down test class", alwaysRun = true)
   public void tearDownTestClass () {
-    saveLogs ();
+    withDriver ().saveLogs ();
     closeDriver ();
   }
 

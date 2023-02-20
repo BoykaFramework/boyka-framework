@@ -16,9 +16,9 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.MouseActions.dragDropTo;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.DragDropPage.dragDropPage;
@@ -64,7 +64,8 @@ public class DragDropTest {
      */
     @Test (description = "Drag Drop test")
     public void testDragDrop () {
-        dragDropTo (dragDropPage ().getDraggable (), dragDropPage ().getDroppable ());
-        verifyTextOf (dragDropPage ().getHeader ()).isEqualTo ("Dropped!");
+        withMouse (dragDropPage ().getDraggable ()).dragTo (dragDropPage ().getDroppable ());
+        onElement (dragDropPage ().getHeader ()).verifyText ()
+            .isEqualTo ("Dropped!");
     }
 }
