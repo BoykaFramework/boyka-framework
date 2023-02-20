@@ -1,10 +1,9 @@
 package com.github.wasiqb.boyka.testng.ui.wdio;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
-import static com.github.wasiqb.boyka.actions.DriverActions.swipe;
-import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
-import static com.github.wasiqb.boyka.actions.ElementActions.tapOn;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.DragDropPage.dragDropPage;
@@ -31,7 +30,7 @@ public class WdioDemoTest {
     @AfterMethod (alwaysRun = true)
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
-            takeScreenshot ();
+            onWindow ().takeScreenshot ();
         }
     }
 
@@ -52,7 +51,7 @@ public class WdioDemoTest {
      */
     @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
-        saveLogs ();
+        withDriver ().saveLogs ();
         closeDriver ();
     }
 
@@ -61,14 +60,15 @@ public class WdioDemoTest {
      */
     @Test
     public void testDragDrop () {
-        tapOn (wdioHomePage ().getDragTab ());
+        withFinger (wdioHomePage ().getDragTab ()).tap ();
         for (var index = 1; index <= 3; index++) {
-            swipe ().dragTo (dragDropPage ().leftSourceTile (index), dragDropPage ().leftTargetTile (index));
-            swipe ().dragTo (dragDropPage ().centerSourceTile (index), dragDropPage ().centerTargetTile (index));
-            swipe ().dragTo (dragDropPage ().rightSourceTile (index), dragDropPage ().rightTargetTile (index));
+            withFinger (dragDropPage ().leftSourceTile (index)).dragTo (dragDropPage ().leftTargetTile (index));
+            withFinger (dragDropPage ().centerSourceTile (index)).dragTo (dragDropPage ().centerTargetTile (index));
+            withFinger (dragDropPage ().rightSourceTile (index)).dragTo (dragDropPage ().rightTargetTile (index));
         }
-        verifyTextOf (dragDropPage ().getTitle ()).isEqualTo ("Congratulations");
-        verifyTextOf (dragDropPage ().getDescription ()).isEqualTo (
-            "You made it, click retry if you want to try it again.");
+        onElement (dragDropPage ().getTitle ()).verifyText ()
+            .isEqualTo ("Congratulations");
+        onElement (dragDropPage ().getDescription ()).verifyText ()
+            .isEqualTo ("You made it, click retry if you want to try it again.");
     }
 }

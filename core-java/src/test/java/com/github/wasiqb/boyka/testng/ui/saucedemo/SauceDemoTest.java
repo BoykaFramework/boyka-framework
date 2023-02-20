@@ -1,7 +1,7 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.saveLogs;
-import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 
@@ -29,7 +29,7 @@ public class SauceDemoTest {
     @AfterMethod (alwaysRun = true)
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
-            takeScreenshot ();
+            onWindow ().takeScreenshot ();
         }
     }
 
@@ -51,7 +51,7 @@ public class SauceDemoTest {
      */
     @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
-        saveLogs ();
+        withDriver ().saveLogs ();
         closeDriver ();
     }
 

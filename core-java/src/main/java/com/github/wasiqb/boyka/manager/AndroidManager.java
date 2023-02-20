@@ -12,8 +12,8 @@ import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.VirtualDeviceSetting;
-import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.DeviceType;
+import com.github.wasiqb.boyka.enums.TargetProviders;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 
@@ -32,7 +32,7 @@ class AndroidManager implements IDriverManager {
             .getDriver ();
         if (automation == UI_AUTOMATOR) {
             setupUiAutomatorDriver (this.mobileSetting.getServer ()
-                .getCloud ());
+                .getTarget ());
         }
         setupAndroidSettings ();
     }
@@ -77,15 +77,15 @@ class AndroidManager implements IDriverManager {
     }
 
     private void setupAndroidSettings () {
-        final AndroidDriver driver = (AndroidDriver) getSession ().getDriver ();
+        final var driver = (AndroidDriver) getSession ().getDriver ();
         driver.setSetting (IGNORE_UNIMPORTANT_VIEWS, this.settings.isIgnoreUnimportantViews ());
     }
 
-    private void setupUiAutomatorDriver (final CloudProviders cloudProviders) {
-        final UiAutomator2Options options = new UiAutomator2Options ();
+    private void setupUiAutomatorDriver (final TargetProviders targetProviders) {
+        final var options = new UiAutomator2Options ();
         setCommonUiAutomatorOptions (options);
         if (this.settings.getType () == CLOUD) {
-            setupCloudMobileDriver (options, cloudProviders, this.settings);
+            setupCloudMobileDriver (options, targetProviders, this.settings);
         } else {
             setLocalUiAutomatorOptions (options);
         }

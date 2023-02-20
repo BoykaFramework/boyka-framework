@@ -16,20 +16,12 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.closeWindow;
-import static com.github.wasiqb.boyka.actions.DriverActions.currentWindowHandle;
-import static com.github.wasiqb.boyka.actions.DriverActions.executeScript;
-import static com.github.wasiqb.boyka.actions.DriverActions.maximize;
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.DriverActions.switchToNewWindow;
-import static com.github.wasiqb.boyka.actions.DriverActions.switchToWindow;
-import static com.github.wasiqb.boyka.actions.DriverActions.waitUntil;
-import static com.github.wasiqb.boyka.actions.DriverActions.windowHandles;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyAcceptAlert;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserTitle;
-import static com.github.wasiqb.boyka.actions.VerifyDriverActions.verifyBrowserUrl;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
@@ -64,9 +56,9 @@ public class WindowTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createDriver (platformType, driverKey);
-        maximize ();
+        onWindow ().maximize ();
         navigate ().to (URL);
-        clickOn (homePage ().link ("Multiple Windows"));
+        withMouse (homePage ().link ("Multiple Windows")).click ();
     }
 
     /**
@@ -83,7 +75,8 @@ public class WindowTest {
     @Test (description = "Test browser back navigation")
     public void testBackNavigation () {
         navigate ().back ();
-        verifyBrowserUrl ().isEqualTo (URL);
+        navigate ().verifyUrl ()
+            .isEqualTo (URL);
     }
 
     /**
@@ -92,8 +85,9 @@ public class WindowTest {
     @Test (description = "Test execute script method")
     public void testExecuteScript () {
         final String script = "alert('Hello World');";
-        executeScript (script);
-        verifyAcceptAlert ().isEqualTo ("Hello World");
+        withDriver ().executeScript (script);
+        onAlert ().verifyAccept ()
+            .isEqualTo ("Hello World");
     }
 
     /**
@@ -102,7 +96,8 @@ public class WindowTest {
     @Test (description = "Test browser forward navigation")
     public void testForwardNavigation () {
         navigate ().forward ();
-        verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
+        navigate ().verifyUrl ()
+            .isEqualTo (format ("{0}windows", URL));
     }
 
     /**
@@ -111,11 +106,13 @@ public class WindowTest {
     @Test (description = "Test to verify opening new tab")
     public void testOpenNewTab () {
         try {
-            switchToNewWindow (TAB);
-            verifyBrowserTitle ().isEmpty ();
-            verifyBrowserUrl ().isEqualTo ("about:blank");
+            onWindow ().switchToNew (TAB);
+            onWindow ().verifyTitle ()
+                .isEmpty ();
+            navigate ().verifyUrl ()
+                .isEqualTo ("about:blank");
         } finally {
-            closeWindow ();
+            onWindow ().close ();
         }
     }
 
@@ -124,18 +121,22 @@ public class WindowTest {
      */
     @Test
     public void testOpenWindow () {
-        final var currentWindow = currentWindowHandle ();
-        clickOn (multiWindowPage ().getClickHere ());
-        final var newWindow = windowHandles ().stream ()
+        final var currentWindow = onWindow ().currentHandle ();
+        withMouse (multiWindowPage ().getClickHere ()).click ();
+        final var newWindow = onWindow ().handles ()
+            .stream ()
             .filter (handle -> !handle.equals (currentWindow))
             .findFirst ();
         assertThat (newWindow.isPresent ()).isTrue ();
-        switchToWindow (newWindow.get ());
-        waitUntil (urlMatches (format ("{0}windows/new", URL)));
-        verifyBrowserUrl ().isEqualTo (format ("{0}windows/new", URL));
-        verifyTextOf (multiWindowPage ().getTitle ()).isEqualTo ("New Window");
-        closeWindow ();
-        verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
+        onWindow ().switchTo (newWindow.get ());
+        withDriver ().waitUntil (urlMatches (format ("{0}windows/new", URL)));
+        navigate ().verifyUrl ()
+            .isEqualTo (format ("{0}windows/new", URL));
+        onElement (multiWindowPage ().getTitle ()).verifyText ()
+            .isEqualTo ("New Window");
+        onWindow ().close ();
+        navigate ().verifyUrl ()
+            .isEqualTo (format ("{0}windows", URL));
     }
 
     /**
@@ -144,6 +145,7 @@ public class WindowTest {
     @Test (description = "Test to verify page refresh")
     public void testRefreshPage () {
         navigate ().refresh ();
-        verifyBrowserUrl ().isEqualTo (format ("{0}windows", URL));
+        navigate ().verifyUrl ()
+            .isEqualTo (format ("{0}windows", URL));
     }
 }

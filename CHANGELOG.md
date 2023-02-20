@@ -1,5 +1,5 @@
 
-## v0.12.0-rc.0 (2023-01-31)
+## v0.12.0 (2023-01-31)
 
 #### :rocket: New Feature
 * [#346](https://github.com/BoykaFramework/boyka-framework/pull/346) feat(java): :sparkles: added ios support ([@WasiqB](https://github.com/WasiqB))

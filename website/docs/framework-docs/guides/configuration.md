@@ -58,9 +58,7 @@ The file name and it's location cannot be modified.
       },
       "test_browserstack_chrome": {
         "browser": "REMOTE",
-        "cloud": "BROWSER_STACK",
-        "protocol": "HTTPS",
-        "host": "hub-cloud.browserstack.com",
+        "target": "BROWSER_STACK",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
         "capabilities": {
@@ -76,8 +74,7 @@ The file name and it's location cannot be modified.
       },
       "test_selenium_grid": {
         "browser": "REMOTE",
-        "cloud": "NONE",
-        "host": "localhost",
+        "target": "LOCAL",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
@@ -86,9 +83,7 @@ The file name and it's location cannot be modified.
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
-        "protocol": "HTTPS",
-        "host": "hub.lambdatest.com",
+        "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
         "capabilities": {
@@ -108,10 +103,8 @@ The file name and it's location cannot be modified.
     "mobile": {
       "test_local_sauce_android": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4723,
-          "base_path": "/wd/hub",
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
@@ -142,12 +135,9 @@ The file name and it's location cannot be modified.
       },
       "test_bs_android": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
           "driver": "UI_AUTOMATOR"
         },
         "device": {
@@ -172,6 +162,39 @@ The file name and it's location cannot be modified.
             "debug": true,
             "video": true,
             "appiumLogs": true
+          }
+        }
+      },
+      "test_lt_android": {
+        "server": {
+          "target": "LAMBDA_TEST_MOBILE",
+          "user_name": "${env:LT_USER}",
+          "password": "${env:LT_KEY}",
+          "driver": "UI_AUTOMATOR"
+        },
+        "device": {
+          "type": "CLOUD",
+          "application": {
+            "install_timeout": 180,
+            "wait_activity": "com.swaglabsmobileapp.MainActivity"
+          },
+          "ignore_unimportant_views": true,
+          "capabilities": {
+            "platformName": "Android",
+            "deviceName": "Pixel 5",
+            "platformVersion": "11",
+            "app": "${env:LT_APP_ANDROID}",
+            "project": "LambdaTest Android Project",
+            "build": "Test LambdaTest Build",
+            "name": "Test LambdaTest Session",
+            "devicelog": true,
+            "network": true,
+            "visual": true,
+            "video": true,
+            "autoGrantPermissions": true,
+            "autoAcceptAlerts": true,
+            "isRealMobile": true,
+            "w3c": true
           }
         }
       },
@@ -245,6 +268,38 @@ The file name and it's location cannot be modified.
             "debug": true,
             "video": true,
             "appiumLogs": true
+          }
+        }
+      },
+      "test_lt_ios": {
+        "server": {
+          "target": "LAMBDA_TEST_MOBILE",
+          "user_name": "${env:LT_USER}",
+          "password": "${env:LT_KEY}",
+          "driver": "XCUI"
+        },
+        "device": {
+          "type": "CLOUD",
+          "application": {
+            "install_timeout": 180
+          },
+          "ignore_unimportant_views": true,
+          "capabilities": {
+            "platformName": "iOS",
+            "deviceName": "iPhone 14",
+            "platformVersion": "16",
+            "app": "${env:LT_APP_IOS}",
+            "project": "LambdaTest iOS Project",
+            "build": "Test LambdaTest Build",
+            "name": "Test LambdaTest Session",
+            "devicelog": true,
+            "network": true,
+            "visual": true,
+            "video": true,
+            "autoGrantPermissions": true,
+            "autoAcceptAlerts": true,
+            "isRealMobile": true,
+            "w3c": true
           }
         }
       }
@@ -378,7 +433,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `session_override` | Enables session override | `boolean` | `true` |
 | `node_path` | Node executable path | `string` | |
 | `appium_path` | Appium executable `main.js` path | `string` | |
-| `cloud` | Cloud service provider name. | [`CloudProviders`](#supported-cloud-providers) | `CloudProviders.NONE` |
+| `target` | Target provider name. | [`TargetProviders`](#target-providers) | `TargetProviders.LOCAL` |
 | `user_name` | User name for cloud service provider. | `string` | `null` |
 | `password` | Password / Access key for cloud service provider. | `string` | `null` |
 | `android` | Android specific server settings | [`AndroidServerSetting`](#android-server-config) | |
@@ -512,13 +567,18 @@ We have an enum `Protocol` where we maintain the list of supported protocols. Th
 - `HTTP`: Is used for HTTP protocol.
 - `HTTPS`: Is used for HTTPS protocol.
 
-## Supported Cloud Providers {#supported-cloud-providers}
+## Target Providers {#target-providers}
 
-We have an enum `CloudProviders` where we maintain the list of supported cloud providers. They are:
+We have an enum `TargetProviders` where we maintain the list of supported target providers. They are:
 
-- `NONE`: No cloud provider will be used.
+- `LOCAL`: Local provider will be used.
 - `BROWSER_STACK`: Is used for BrowserStack cloud provider.
-- `LAMBDA_TEST`: Is used for LambdaTest cloud provider.
+- `LAMBDA_TEST_WEB`: Is used for LambdaTest cloud provider to run on Web browsers.
+- `LAMBDA_TEST_MOBILE`: Is used for LambdaTest cloud provider to run on Mobile devices.
+
+:::tip
+Host name from the settings will be used by default, if that is not provided, the host name from the `TargetProviders` name.
+:::
 
 ## Supported Device OS {#supported-os}
 

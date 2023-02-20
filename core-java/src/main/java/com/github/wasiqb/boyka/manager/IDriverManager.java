@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
-import com.github.wasiqb.boyka.enums.CloudProviders;
+import com.github.wasiqb.boyka.enums.TargetProviders;
 import io.appium.java_client.remote.options.BaseOptions;
 import io.appium.java_client.remote.options.SupportsAppOption;
 
@@ -60,12 +60,13 @@ interface IDriverManager {
     }
 
     default <E extends BaseOptions<E>> void setupCloudMobileDriver (final E options,
-        final CloudProviders cloudProviders, final DeviceSetting deviceSetting) {
-        switch (cloudProviders) {
+        final TargetProviders targetProviders, final DeviceSetting deviceSetting) {
+        switch (targetProviders) {
             case BROWSER_STACK:
                 setupCloudDriverOptions (options, deviceSetting, "bstack");
                 break;
-            case LAMBDA_TEST:
+            case LAMBDA_TEST_MOBILE:
+            case LAMBDA_TEST_WEB:
             default:
                 setupCloudDriverOptions (options, deviceSetting, "lt");
                 break;
