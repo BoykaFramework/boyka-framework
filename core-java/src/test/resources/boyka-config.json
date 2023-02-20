@@ -36,9 +36,7 @@
       },
       "test_browserstack_chrome": {
         "browser": "REMOTE",
-        "cloud": "BROWSER_STACK",
-        "protocol": "HTTPS",
-        "host": "hub-cloud.browserstack.com",
+        "target": "BROWSER_STACK",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
         "capabilities": {
@@ -54,8 +52,7 @@
       },
       "test_selenium_grid": {
         "browser": "REMOTE",
-        "cloud": "NONE",
-        "host": "localhost",
+        "target": "LOCAL",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
@@ -64,9 +61,7 @@
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
-        "protocol": "HTTPS",
-        "host": "hub.lambdatest.com",
+        "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
         "capabilities": {
@@ -84,7 +79,7 @@
       },
       "test_lambda_test_no_username": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
+        "target": "LAMBDA_TEST_WEB",
         "protocol": "HTTPS",
         "host": "hub.lambdatest.com",
         "password": "${env:LT_KEY}",
@@ -103,7 +98,7 @@
       },
       "test_lambda_test_no_password": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
+        "target": "LAMBDA_TEST_WEB",
         "protocol": "HTTPS",
         "host": "hub.lambdatest.com",
         "user_name": "${env:LT_USER}",
@@ -122,7 +117,6 @@
       },
       "test_lambda_test_no_host": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
         "protocol": "HTTPS",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
@@ -148,10 +142,8 @@
     "mobile": {
       "test_local_sauce_android": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4723,
-          "base_path": "/wd/hub",
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
@@ -161,7 +153,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_6_Pro",
+          "name": "Nexus_6",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -172,20 +164,19 @@
           },
           "application": {
             "path": "/apps/android/sauce-demo.apk",
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Nexus_6",
             "headless": true
           }
         }
       },
       "test_local_wdio_android": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
-          "port": 4723,
-          "base_path": "/wd/hub",
+          "target": "LOCAL",
+          "port": 4724,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
@@ -195,7 +186,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_6_Pro",
+          "name": "Nexus_6",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -210,19 +201,16 @@
             "install_timeout": 180
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Nexus_6",
             "headless": true
           }
         }
       },
       "test_bs_android": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
           "driver": "UI_AUTOMATOR"
         },
         "device": {
@@ -233,6 +221,7 @@
           "ignore_unimportant_views": true,
           "application": {
             "path": "AndroidApp",
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "external": true,
             "install_timeout": 180
           },
@@ -252,18 +241,16 @@
       },
       "test_lt_android": {
         "server": {
-          "cloud": "LAMBDA_TEST",
-          "protocol": "HTTPS",
-          "host": "mobile-hub.lambdatest.com",
+          "target": "LAMBDA_TEST_MOBILE",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
-          "base_path": "/wd/hub",
           "driver": "UI_AUTOMATOR"
         },
         "device": {
           "type": "CLOUD",
           "application": {
-            "install_timeout": 180
+            "install_timeout": 180,
+            "wait_activity": "com.swaglabsmobileapp.MainActivity"
           },
           "ignore_unimportant_views": true,
           "capabilities": {
@@ -287,24 +274,22 @@
       },
       "test_local_sauce_ios": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4724,
-          "base_path": "/wd/hub",
           "session_override": true,
           "driver": "XCUI"
         },
         "device": {
           "os": "IOS",
           "version": "16.2",
-          "name": "iPhone 14 Pro Max",
+          "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "connect_keyboard": false,
           "typing_speed": 35,
           "swipe": {
-            "distance": 25,
+            "distance": 100,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -323,18 +308,15 @@
       },
       "test_bs_ios": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
           "driver": "XCUI"
         },
         "device": {
           "os": "IOS",
           "version": "16",
-          "name": "iPhone 14 Pro",
+          "name": "iPhone 14",
           "type": "CLOUD",
           "application": {
             "path": "IOSApp",
@@ -357,12 +339,9 @@
       },
       "test_lt_ios": {
         "server": {
-          "cloud": "LAMBDA_TEST",
-          "protocol": "HTTPS",
-          "host": "mobile-hub.lambdatest.com",
+          "target": "LAMBDA_TEST_MOBILE",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
-          "base_path": "/wd/hub",
           "driver": "XCUI"
         },
         "device": {
@@ -373,7 +352,7 @@
           "ignore_unimportant_views": true,
           "capabilities": {
             "platformName": "iOS",
-            "deviceName": "iPhone 14 Pro",
+            "deviceName": "iPhone 14",
             "platformVersion": "16",
             "app": "${env:LT_APP_IOS}",
             "project": "LambdaTest iOS Project",

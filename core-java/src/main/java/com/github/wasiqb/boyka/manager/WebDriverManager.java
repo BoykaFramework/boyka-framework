@@ -1,6 +1,5 @@
 package com.github.wasiqb.boyka.manager;
 
-import static com.github.wasiqb.boyka.enums.CloudProviders.NONE;
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
 import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
@@ -10,6 +9,7 @@ import static com.github.wasiqb.boyka.enums.Message.NULL_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
+import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
@@ -27,6 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
+import com.github.wasiqb.boyka.enums.TargetProviders;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -41,7 +42,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 class WebDriverManager implements IDriverManager {
-    private static final Logger LOGGER = getLogger ();
+    private static final String HEADLESS = "--headless=new";
+    private static final Logger LOGGER   = getLogger ();
 
     @Override
     public void setupDriver () {
@@ -80,27 +82,30 @@ class WebDriverManager implements IDriverManager {
         return LOGGER.traceExit (remoteCapabilities);
     }
 
-    private String getHostName (final WebSetting webSetting) {
+    private String getHostName (final WebSetting webSetting, final TargetProviders target) {
         LOGGER.traceEntry ();
-        if (requireNonNullElse (webSetting.getCloud (), NONE) != NONE) {
+        final var host = requireNonNullElse (webSetting.getHost (),
+            requireNonNull (target, HOSTNAME_REQUIRED_FOR_REMOTE).getHost ());
+        if (requireNonNullElse (webSetting.getTarget (), LOCAL) != LOCAL) {
             final var hostNamePattern = "{0}:{1}@{2}";
             return format (hostNamePattern, requireNonNull (webSetting.getUserName (), USER_NAME_REQUIRED_FOR_CLOUD),
-                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD),
-                requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE));
+                requireNonNull (webSetting.getPassword (), PASSWORD_REQUIRED_FOR_CLOUD), host);
         }
-        return LOGGER.traceExit (requireNonNull (webSetting.getHost (), HOSTNAME_REQUIRED_FOR_REMOTE));
+        return LOGGER.traceExit (host);
     }
 
     private URL getRemoteUrl (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         final var URL_PATTERN = "{0}://{1}/wd/hub";
-        final var hostName = new StringBuilder (getHostName (webSetting));
+        final var target = webSetting.getTarget ();
+        final var hostName = new StringBuilder (getHostName (webSetting, target));
         if (webSetting.getPort () != 0) {
             hostName.append (":")
                 .append (webSetting.getPort ());
         }
         final var url = format (URL_PATTERN,
-            requireNonNull (webSetting.getProtocol (), PROTOCOL_REQUIRED_FOR_HOST, hostName).name ()
+            requireNonNull (requireNonNullElse (webSetting.getProtocol (), target.getProtocol ()),
+                PROTOCOL_REQUIRED_FOR_HOST, hostName).name ()
                 .toLowerCase (), hostName);
         try {
             return LOGGER.traceExit (new URL (url));
@@ -141,7 +146,9 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
-        options.setHeadless (webSetting.isHeadless ());
+        if (webSetting.isHeadless ()) {
+            options.addArguments (HEADLESS);
+        }
         return LOGGER.traceExit (new ChromeDriver (options));
     }
 
@@ -149,7 +156,9 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         edgedriver ().setup ();
         final var options = new EdgeOptions ();
-        options.setHeadless (webSetting.isHeadless ());
+        if (webSetting.isHeadless ()) {
+            options.addArguments (HEADLESS);
+        }
         return LOGGER.traceExit (new EdgeDriver (options));
     }
 
@@ -157,7 +166,9 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         firefoxdriver ().setup ();
         final var options = new FirefoxOptions ();
-        options.setHeadless (webSetting.isHeadless ());
+        if (webSetting.isHeadless ()) {
+            options.addArguments (HEADLESS);
+        }
         return LOGGER.traceExit (new FirefoxDriver (options));
     }
 

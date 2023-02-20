@@ -90,16 +90,15 @@ jobs:
       - name: Launch iOS Simulator
         uses: futureware-tech/simulator-action@v2
         with:
-          model: 'iPhone 14 Pro Max'
+          model: 'iPhone 14'
           os: 'iOS'
           os_version: 16.2
           shutdown_after_job: true
 
       - name: All Test execution
         uses: reactivecircus/android-emulator-runner@v2
-        if: github.event_name == 'push'
         with:
-          avd-name: Pixel_6_Pro
+          avd-name: Nexus_6
           api-level: 30
           target: google_apis
           arch: x86
@@ -109,38 +108,23 @@ jobs:
           disable-animations: false
           script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
 
-      - name: PR Test execution
-        uses: reactivecircus/android-emulator-runner@v2
-        if: github.event_name == 'pull_request'
-        with:
-          avd-name: Pixel_6_Pro
-          api-level: 30
-          target: google_apis
-          arch: x86
-          profile: Nexus 6
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test -Dsuite-xml=test-suites/testng-pr.xml
-
       - name: Test Report
-        if: always()
+        if: failure()
         run: cat ${{ github.workspace }}/core-java/target/surefire-reports/my-report.md > $GITHUB_STEP_SUMMARY
 
-      - name: Upload target folder
+      - name: Upload reports folder
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: target
+          name: reports
           path: |
+            ${{ github.workspace }}/core-java/reports
             ${{ github.workspace }}/core-java/logs
             ${{ github.workspace }}/core-java/selenium-grid.log
             ${{ github.workspace }}/core-java/target
-            ${{ github.workspace }}/core-java/reports
             ${{ github.workspace }}/core-java/screenshots
 
   analysis:
-    if: github.event_name == 'push'
     needs:
       - test
     runs-on: ubuntu-latest
@@ -165,7 +149,7 @@ jobs:
       - name: Download target folder
         uses: actions/download-artifact@v3
         with:
-          name: target
+          name: reports
           path: ${{ github.workspace }}/core-java
 
       - name: Build and analyze

@@ -16,15 +16,14 @@
 
 package com.github.wasiqb.boyka.config.ui.mobile.server;
 
-import static com.github.wasiqb.boyka.enums.CloudProviders.NONE;
-import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
+import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 
 import java.util.List;
 
 import com.github.wasiqb.boyka.enums.AutomationType;
-import com.github.wasiqb.boyka.enums.CloudProviders;
 import com.github.wasiqb.boyka.enums.Protocol;
+import com.github.wasiqb.boyka.enums.TargetProviders;
 import lombok.Data;
 
 /**
@@ -35,22 +34,22 @@ import lombok.Data;
  */
 @Data
 public class ServerSetting {
-    private List<String>   allowInsecure;
-    private AndroidSetting android;
-    private String         appiumPath;
-    private String         basePath;
-    private CloudProviders cloud           = NONE;
-    private AutomationType driver;
-    private boolean        external;
-    private String         host;
-    private IOSSetting     ios;
-    private String         nodePath;
-    private String         password;
-    private int            port;
-    private Protocol       protocol        = HTTP;
-    private boolean        sessionOverride = true;
-    private int            timeout         = 30;
-    private String         userName;
+    private List<String>    allowInsecure;
+    private AndroidSetting  android;
+    private String          appiumPath;
+    private String          basePath        = "/wd/hub";
+    private AutomationType  driver;
+    private boolean         external;
+    private String          host;
+    private IOSSetting      ios;
+    private String          nodePath;
+    private String          password;
+    private int             port;
+    private Protocol        protocol;
+    private boolean         sessionOverride = true;
+    private TargetProviders target          = LOCAL;
+    private int             timeout         = 30;
+    private String          userName;
 
     /**
      * Gets cloud password.
