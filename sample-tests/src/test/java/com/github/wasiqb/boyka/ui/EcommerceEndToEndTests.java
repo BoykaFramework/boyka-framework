@@ -16,8 +16,8 @@
 
 package com.github.wasiqb.boyka.ui;
 
-import static com.github.wasiqb.boyka.actions.DriverActions.navigate;
-import static com.github.wasiqb.boyka.actions.DriverActions.takeScreenshot;
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.ui.actions.CheckoutPageActions.checkoutPageActions;
@@ -65,7 +65,7 @@ public class EcommerceEndToEndTests {
                 .verifySuccessMessage ()
                 .checkoutProduct ();
         } finally {
-            takeScreenshot ();
+            onWindow ().takeScreenshot ();
         }
     }
 
