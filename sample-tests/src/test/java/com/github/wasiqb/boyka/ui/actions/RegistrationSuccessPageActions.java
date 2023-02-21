@@ -16,8 +16,8 @@
 
 package com.github.wasiqb.boyka.ui.actions;
 
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.ui.pages.RegistrationSuccessPage.registrationSuccessPage;
 
 /**
@@ -27,14 +27,14 @@ import static com.github.wasiqb.boyka.ui.pages.RegistrationSuccessPage.registrat
  * @since 8/2/2022
  **/
 public class RegistrationSuccessPageActions {
-
     public MyAccountPageActions continueToMyAccount () {
-        clickOn (registrationSuccessPage ().getContinueBtn ());
+        withMouse (registrationSuccessPage ().getContinueBtn ()).click ();
         return new MyAccountPageActions ();
     }
 
     public RegistrationSuccessPageActions verifySuccessfulRegistration () {
-        verifyTextOf (registrationSuccessPage ().getPageHeader ()).isEqualTo ("Your Account Has Been Created!");
+        onElement (registrationSuccessPage ().getPageHeader ()).verifyText ()
+            .isEqualTo ("Your Account Has Been Created!");
         return this;
     }
 }

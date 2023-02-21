@@ -16,9 +16,9 @@
 
 package com.github.wasiqb.boyka.ui.actions;
 
-import static com.github.wasiqb.boyka.actions.KeyboardActions.enterText;
-import static com.github.wasiqb.boyka.actions.MouseActions.clickOn;
-import static com.github.wasiqb.boyka.actions.VerifyElementActions.verifyTextOf;
+import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
+import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 import static com.github.wasiqb.boyka.ui.pages.RegistrationPage.registrationPage;
 
 import com.github.wasiqb.boyka.ui.data.RegisterUserData;
@@ -31,7 +31,6 @@ import com.github.wasiqb.boyka.ui.data.TestDataBuilder;
  * @since 8/2/2022
  **/
 public class RegistrationPageActions {
-
     private static final String           PASSWORD = "Password@123";
     private final        RegisterUserData registerUserData;
 
@@ -40,19 +39,20 @@ public class RegistrationPageActions {
     }
 
     public RegistrationSuccessPageActions registerUser () {
-        enterText (registrationPage ().getFirstNameField (), this.registerUserData.getFirstName ());
-        enterText (registrationPage ().getLastNameField (), this.registerUserData.getLastName ());
-        enterText (registrationPage ().getEmailField (), this.registerUserData.getEmail ());
-        enterText (registrationPage ().getTelephoneField (), this.registerUserData.getTelephone ());
-        enterText (registrationPage ().getPasswordField (), PASSWORD);
-        enterText (registrationPage ().getConfirmPasswordField (), PASSWORD);
-        clickOn (registrationPage ().getAgreePrivacyPolicyField ());
-        clickOn (registrationPage ().getContinueBtn ());
+        onTextBox (registrationPage ().getFirstNameField ()).enterText (this.registerUserData.getFirstName ());
+        onTextBox (registrationPage ().getLastNameField ()).enterText (this.registerUserData.getLastName ());
+        onTextBox (registrationPage ().getEmailField ()).enterText (this.registerUserData.getEmail ());
+        onTextBox (registrationPage ().getTelephoneField ()).enterText (this.registerUserData.getTelephone ());
+        onTextBox (registrationPage ().getPasswordField ()).enterText (PASSWORD);
+        onTextBox (registrationPage ().getConfirmPasswordField ()).enterText (PASSWORD);
+        withMouse (registrationPage ().getAgreePrivacyPolicyField ()).click ();
+        withMouse (registrationPage ().getContinueBtn ()).click ();
         return new RegistrationSuccessPageActions ();
     }
 
     public RegistrationPageActions verifyPageHeader () {
-        verifyTextOf (registrationPage ().getPageHeader ()).isEqualTo ("Register Account");
+        onElement (registrationPage ().getPageHeader ()).verifyText ()
+            .isEqualTo ("Register Account");
         return this;
     }
 }

@@ -46,7 +46,7 @@ jobs:
       - name: Get the previous release version
         id: old_version
         run: |
-          export MVN_OLD_VERSION=$(git describe --match "v[0-9].[0-9].[0-9]" --abbrev=0 --tags HEAD)
+          export MVN_OLD_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
           echo "previous_version=$MVN_OLD_VERSION" >> $GITHUB_OUTPUT
 
       - name: Update release version
@@ -142,6 +142,9 @@ jobs:
           server_id: ossrh
           maven_args: --settings ${{ github.workspace }}/core-java/setting/settings.xml -f core-java/pom.xml -DskipTests -Dcheckstyle.skip -B
 
+      - name: Build the project JAR files
+        run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
+
       - name: Upload target folder
         uses: actions/upload-artifact@v3
         with:
@@ -225,6 +228,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: target
+
+      - name: Download Version files
+        uses: actions/download-artifact@v3
+        with:
+          name: version-files
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
