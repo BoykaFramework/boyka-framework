@@ -19,7 +19,16 @@
 <suite name="Boyka API Suite" verbose="2">
     <test name="Test Boyka API">
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.api.ApiTest"/>
+            <class name="com.github.wasiqb.boyka.testng.api.RestfulBookerEndToEndTests">
+                <methods>
+                    <include name="testCreateBooking"/>
+                    <include name="testGetBooking"/>
+                    <include name="testUpdateBooking"/>
+                    <include name="testUpdatePartialBooking"/>
+                    <include name="testDeleteBooking"/>
+                    <include name="testDeletedBooking"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
