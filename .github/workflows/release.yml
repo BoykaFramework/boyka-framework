@@ -177,7 +177,7 @@ jobs:
           name: version-files
 
       - name: Update new version
-        uses: jacobtomlinson/gha-find-replace@v2
+        uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: ${{ needs.prepare-release.outputs.old-version }}
           replace: ${{ needs.prepare-release.outputs.new-version }}
