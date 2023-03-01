@@ -158,6 +158,12 @@ jobs:
           name: reports
           path: ${{ github.workspace }}/core-java
 
+      - name: Download target folder
+        uses: actions/download-artifact@v3
+        with:
+          name: target
+          path: ${{ github.workspace }}/core-java
+
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
