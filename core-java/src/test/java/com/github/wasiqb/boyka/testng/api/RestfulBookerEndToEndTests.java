@@ -47,11 +47,17 @@ public class RestfulBookerEndToEndTests {
 
         response.verifyStatusCode ()
             .isEqualTo (200);
+        response.verifyStatusMessage ()
+            .isEqualTo ("OK");
         response.verifySchema ("create-booking-schema.json");
         response.verifyTextField ("bookingid")
             .isNotNull ();
         response.verifyTextField ("booking.firstname")
             .isEqualTo (this.newBooking.getFirstname ());
+        response.verifyBooleanField ("booking.depositpaid")
+            .isTrue ();
+        response.verifyHeader ("Content-Type")
+            .isEqualTo ("application/json; charset=utf-8");
         this.bookingId = response.getResponseData ("bookingid");
     }
 
