@@ -372,9 +372,8 @@
     }
   },
   "api": {
-    "test_reqres": {
-      "base_uri": "https://reqres.in",
-      "base_path": "/api",
+    "test_restfulbooker": {
+      "base_uri": "https://restful-booker.herokuapp.com",
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,

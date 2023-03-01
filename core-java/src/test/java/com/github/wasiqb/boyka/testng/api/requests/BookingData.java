@@ -20,14 +20,18 @@ import lombok.Builder;
 import lombok.Getter;
 
 /**
- * User class.
+ * Booking data class.
  *
  * @author Wasiq Bhamla
- * @since 04-Mar-2022
+ * @since 28-Feb-2023
  */
 @Getter
-@Builder (builderMethodName = "createUser", buildMethodName = "create")
-public class User {
-    private final String job;
-    private final String name;
+@Builder
+public class BookingData {
+    private String       additionalneeds;
+    private BookingDates bookingdates;
+    private boolean      depositpaid;
+    private String       firstname;
+    private String       lastname;
+    private int          totalprice;
 }
