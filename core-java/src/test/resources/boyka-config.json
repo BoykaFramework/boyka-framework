@@ -377,6 +377,7 @@
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,
+      "schema_path": "schema/",
       "logging": {
         "request": true,
         "response": true

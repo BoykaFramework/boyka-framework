@@ -47,6 +47,7 @@ public class RestfulBookerEndToEndTests {
 
         response.verifyStatusCode ()
             .isEqualTo (200);
+        response.verifySchema ("create-booking-schema.json");
         response.verifyTextField ("bookingid")
             .isNotNull ();
         response.verifyTextField ("booking.firstname")
