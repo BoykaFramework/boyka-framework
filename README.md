@@ -120,6 +120,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
     },
     "web": {
       "test_local_chrome": {
+        "base_url": "http://the-internet.herokuapp.com/",
         "browser": "CHROME",
         "highlight": true,
         "headless": false,

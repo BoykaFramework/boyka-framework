@@ -1,5 +1,6 @@
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
 import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
@@ -21,6 +22,7 @@ import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNullElse;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.net.MalformedURLException;
@@ -71,6 +73,7 @@ class WebDriverManager implements IDriverManager {
                 break;
         }
         setDriverSize (webSetting);
+        navigateToBaseUrl (webSetting.getBaseUrl ());
         LOGGER.traceExit ();
     }
 
@@ -113,6 +116,12 @@ class WebDriverManager implements IDriverManager {
             handleAndThrow (INVALID_REMOTE_URL, e);
         }
         return null;
+    }
+
+    private void navigateToBaseUrl (final String baseUrl) {
+        if (isNotEmpty (baseUrl)) {
+            navigate ().to (baseUrl);
+        }
     }
 
     private void setDriverSize (final WebSetting webSetting) {

@@ -78,6 +78,11 @@ public interface IElementActions {
     boolean isSelected ();
 
     /**
+     * Scroll the element into view.
+     */
+    void scrollIntoView ();
+
+    /**
      * Verify attribute of element.
      *
      * @param attribute attribute to verify

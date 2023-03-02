@@ -17,7 +17,7 @@ IClickableActions mouseActions = ClickableActions.withMouse ();
 
 ### `click`
 
-This method is used to click on the given element if it's a Web application or will perform `tap` action if the element is on Mobile.
+This method is used to click on the given element if it's a Web application or will perform `tap` action if the element is on Mobile. It will also scroll the element into view before clicking on it (in Web application)
 
 ```java
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;

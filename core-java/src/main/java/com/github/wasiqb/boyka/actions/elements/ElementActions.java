@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.actions.elements;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
@@ -114,6 +115,12 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Checking if element located by: {} is selected", this.locator.getName ());
         return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, this.locator, false));
+    }
+
+    @Override
+    public void scrollIntoView () {
+        LOGGER.info ("Scrolling element located by: [{}] into view", this.locator.getName ());
+        performElementAction (e -> withDriver ().executeScript ("arguments[0].scrollIntoView(true);", e), this.locator);
     }
 
     @Override
