@@ -42,6 +42,7 @@ The file name and it's location cannot be modified.
     },
     "web": {
       "test_local_chrome": {
+        "base_url": "http://the-internet.herokuapp.com/",
         "browser": "CHROME",
         "highlight": true,
         "headless": false,
@@ -377,6 +378,7 @@ See the example in [sample configuration file](#config-sample).
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
+| `base_url` | Base URL to navigate to by default | `string` | `null` |
 | `browser` | Browser name. | [`Browser`](#supported-browsers) | `Browser.NONE` |
 | `protocol` | Protocol type | [`Protocol`](#supported-protocols) | `Protocol.HTTP` |
 | `host` | Remote driver host name | `string` | `null` |

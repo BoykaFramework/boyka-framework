@@ -65,6 +65,16 @@ import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 boolean selected = onElement (locator).isSelected ();
 ```
 
+### `scrollIntoView` {#scroll-into-view}
+
+This method will scroll the element into the viewport.
+
+```java
+import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
+. . .
+onElement (locator).scrollIntoView ();
+```
+
 ### `getStyle (attribute)` {#get-style}
 
 This method will return the style of the given element for the given attribute.
