@@ -50,6 +50,10 @@ public enum Message {
      */
     CONTENT_TYPE_NOT_SET ("Content type must be set before setting request body..."),
     /**
+     * Error when driver is null.
+     */
+    DRIVER_CANNOT_BE_NULL ("Driver cannot be null, make sure you started the session correctly.."),
+    /**
      * WebDriver's error occurred.
      */
     DRIVER_ERROR_OCCURRED ("Error encountered by Driver: {0}"),
@@ -181,6 +185,10 @@ public enum Message {
      * Appium server already running.
      */
     SERVER_ALREADY_RUNNING ("Appium server already running..."),
+    /**
+     * Error when starting session.
+     */
+    SESSION_NOT_STARTED ("Session could not be started..."),
     /**
      * Test Error.
      */

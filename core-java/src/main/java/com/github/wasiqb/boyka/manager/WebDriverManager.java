@@ -29,9 +29,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
+import com.github.wasiqb.boyka.enums.Message;
 import com.github.wasiqb.boyka.enums.TargetProviders;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -51,26 +53,30 @@ class WebDriverManager implements IDriverManager {
     public void setupDriver () {
         LOGGER.traceEntry ();
         final var webSetting = getSession ().getWebSetting ();
-        switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
-            case CHROME:
-                setDriver (setupChromeDriver (webSetting));
-                break;
-            case NONE:
-                throwError (INVALID_BROWSER);
-                break;
-            case REMOTE:
-                setDriver (setupRemoteDriver (webSetting));
-                break;
-            case SAFARI:
-                setDriver (setupSafariDriver ());
-                break;
-            case EDGE:
-                setDriver (setupEdgeDriver (webSetting));
-                break;
-            case FIREFOX:
-            default:
-                setDriver (setupFirefoxDriver (webSetting));
-                break;
+        try {
+            switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
+                case CHROME:
+                    setDriver (setupChromeDriver (webSetting));
+                    break;
+                case NONE:
+                    throwError (INVALID_BROWSER);
+                    break;
+                case REMOTE:
+                    setDriver (setupRemoteDriver (webSetting));
+                    break;
+                case SAFARI:
+                    setDriver (setupSafariDriver ());
+                    break;
+                case EDGE:
+                    setDriver (setupEdgeDriver (webSetting));
+                    break;
+                case FIREFOX:
+                default:
+                    setDriver (setupFirefoxDriver (webSetting));
+                    break;
+            }
+        } catch (final SessionNotCreatedException e) {
+            handleAndThrow (Message.SESSION_NOT_STARTED, e);
         }
         setDriverSize (webSetting);
         navigateToBaseUrl (webSetting.getBaseUrl ());

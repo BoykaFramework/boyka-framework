@@ -18,9 +18,11 @@ package com.github.wasiqb.boyka.actions.drivers;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.enums.Message.DRIVER_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.requireNonNull;
 import static com.google.common.truth.Truth.assertThat;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -175,7 +177,7 @@ public class WindowActions implements IWindowActions {
             return;
         }
         performDriverAction (driver -> {
-            final var file = ((TakesScreenshot) driver).getScreenshotAs (FILE);
+            final var file = ((TakesScreenshot) requireNonNull (driver, DRIVER_CANNOT_BE_NULL)).getScreenshotAs (FILE);
             try {
                 copyFile (file, new File (fileName));
             } catch (final IOException e) {
