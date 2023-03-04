@@ -244,9 +244,7 @@ The file name and it's location cannot be modified.
       },
       "test_bs_ios": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
           "base_path": "/wd/hub",
