@@ -30,8 +30,7 @@ Let's see how to set configuration in the configuration file for Android applica
     "mobile": {
       "test_local_sauce_android": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
+          "target": "LOCAL",
           "port": 4723,
           "base_path": "/wd/hub",
           "session_override": true,
@@ -64,9 +63,7 @@ Let's see how to set configuration in the configuration file for Android applica
       },
       "test_bs_android": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
           "base_path": "/wd/hub",
@@ -99,9 +96,7 @@ Let's see how to set configuration in the configuration file for Android applica
       },
       "test_lt_android": {
         "server": {
-          "cloud": "LAMBDA_TEST",
-          "protocol": "HTTPS",
-          "host": "mobile-hub.lambdatest.com",
+          "target": "LAMBDA_TEST_MOBILE",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
           "base_path": "/wd/hub",

@@ -124,7 +124,11 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
         "browser": "CHROME",
         "highlight": true,
         "headless": false,
-        "resize": "CUSTOM"
+        "resize": "CUSTOM",
+        "custom_size": {
+          "width": 1580,
+          "height": 1080
+        }
       },
       "test_local_firefox": {
         "browser": "FIREFOX"
