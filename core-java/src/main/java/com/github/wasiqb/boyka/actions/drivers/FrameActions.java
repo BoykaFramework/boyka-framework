@@ -51,6 +51,15 @@ public class FrameActions implements IFrameActions {
     }
 
     @Override
+    public void switchTo (final int index) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Switching to frame index: {}", index);
+        performDriverAction (driver -> driver.switchTo ()
+            .frame (index));
+        LOGGER.traceExit ();
+    }
+
+    @Override
     public void switchToParent () {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to main frame...");
