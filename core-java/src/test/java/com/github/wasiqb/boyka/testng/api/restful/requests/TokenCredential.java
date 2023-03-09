@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,24 +14,20 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.requests;
+package com.github.wasiqb.boyka.testng.api.restful.requests;
 
 import lombok.Builder;
 import lombok.Getter;
 
 /**
- * Booking data class.
+ * Token credential class
  *
  * @author Wasiq Bhamla
  * @since 28-Feb-2023
  */
 @Getter
 @Builder
-public class BookingData {
-    private String       additionalneeds;
-    private BookingDates bookingdates;
-    private boolean      depositpaid;
-    private String       firstname;
-    private String       lastname;
-    private int          totalprice;
+public class TokenCredential {
+    private String password;
+    private String username;
 }
