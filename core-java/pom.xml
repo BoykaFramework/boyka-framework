@@ -72,6 +72,7 @@
         <surefire-version>3.0.0-M9</surefire-version>
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.0.1</maven.gpg.version>
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     </properties>
 
     <distributionManagement>
@@ -342,6 +343,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

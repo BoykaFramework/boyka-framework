@@ -19,7 +19,7 @@
 <suite name="Boyka API Suite" verbose="2">
     <test name="Test Boyka API">
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.api.RestfulBookerEndToEndTests">
+            <class name="com.github.wasiqb.boyka.testng.api.restful.RestfulBookerEndToEndTests">
                 <methods>
                     <include name="testCreateBooking"/>
                     <include name="testGetBooking"/>
@@ -27,6 +27,11 @@
                     <include name="testUpdatePartialBooking"/>
                     <include name="testDeleteBooking"/>
                     <include name="testDeletedBooking"/>
+                </methods>
+            </class>
+            <class name="com.github.wasiqb.boyka.testng.api.postman.ApiPostmanTest">
+                <methods>
+                    <include name="testFormBodyRequest"/>
                 </methods>
             </class>
         </classes>

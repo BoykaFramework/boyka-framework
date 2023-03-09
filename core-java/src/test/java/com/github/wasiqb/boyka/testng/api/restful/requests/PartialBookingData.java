@@ -14,20 +14,20 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.requests;
+package com.github.wasiqb.boyka.testng.api.restful.requests;
 
 import lombok.Builder;
 import lombok.Getter;
 
 /**
- * Token credential class
+ * Partial Booking data class
  *
  * @author Wasiq Bhamla
  * @since 28-Feb-2023
  */
 @Getter
 @Builder
-public class TokenCredential {
-    private String password;
-    private String username;
+public class PartialBookingData {
+    private String firstname;
+    private int    totalprice;
 }

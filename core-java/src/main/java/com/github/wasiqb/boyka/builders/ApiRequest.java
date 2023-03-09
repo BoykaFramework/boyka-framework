@@ -40,6 +40,8 @@ public class ApiRequest {
     private String              configKey;
     private ContentType         contentType;
     @Singular
+    private Map<String, String> formBodies;
+    @Singular
     private Map<String, String> headers;
     private RequestMethod       method;
     private String              password;

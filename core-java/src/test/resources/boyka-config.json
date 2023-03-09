@@ -387,6 +387,17 @@
         "request": true,
         "response": true
       }
+    },
+    "test_postman": {
+      "base_uri": "https://postman-echo.com",
+      "read_timeout": 2,
+      "write_timeout": 2,
+      "connection_timeout": 1,
+      "schema_path": "schema/",
+      "logging": {
+        "request": true,
+        "response": true
+      }
     }
   }
 }
