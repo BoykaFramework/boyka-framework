@@ -17,12 +17,26 @@ IFrameActions frameActions = FrameActions.onFrame ();
 
 ### `switchTo (name)` {#switch-to}
 
-This method will switch to the given frame by it's name.
+This method will switch to the given frame by it's name / ID.
 
 ```java
 import static com.github.wasiqb.boyka.actions.drivers.FrameActions.onFrame;
 . . .
-onFrame ().switchTo ("frame-name");
+onFrame ().switchTo ("frame-name-or-id");
+```
+
+:::tip
+In order to come out of this frame, use [`switchToParent`](#switch-to-parent) method.
+:::
+
+### `switchTo (index)` {#switch-to-index}
+
+This method will switch to the given frame by it's index.
+
+```java
+import static com.github.wasiqb.boyka.actions.drivers.FrameActions.onFrame;
+. . .
+onFrame ().switchTo (1);
 ```
 
 :::tip
