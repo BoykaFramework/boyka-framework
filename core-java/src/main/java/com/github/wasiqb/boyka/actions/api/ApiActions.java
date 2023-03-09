@@ -26,6 +26,7 @@ import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
+import static java.lang.String.join;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.requireNonNull;
@@ -38,6 +39,7 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -118,6 +120,7 @@ public final class ApiActions implements IApiActions {
             .basicAuth (this.apiRequest.getUserName (), this.apiRequest.getPassword ())
             .body (requireNonNullElse (this.apiRequest.getBody (), EMPTY))
             .body (this.apiRequest.getBodyObject ())
+            .body (this.apiRequest.getFormBodies ())
             .method (this.apiRequest.getMethod ())
             .getResponse (this.apiRequest.getQueryParams (), this.apiRequest.getPath ()));
     }
@@ -150,6 +153,17 @@ public final class ApiActions implements IApiActions {
     private ApiActions body (final String body) {
         LOGGER.traceEntry ();
         this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
+        return LOGGER.traceExit (this);
+    }
+
+    private ApiActions body (final Map<String, String> bodyMap) {
+        LOGGER.traceEntry ();
+        final var body = new ArrayList<String> ();
+        bodyMap.forEach ((k, v) -> body.add (format ("{0}={1}", k, v)));
+        if (!body.isEmpty ()) {
+            this.requestBody = create (join ("&", body),
+                requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
+        }
         return LOGGER.traceExit (this);
     }
 

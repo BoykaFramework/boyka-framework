@@ -156,6 +156,21 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
     .create ();
 ```
 
+## `formBody`
+
+This method is used to set the Form body of the request using key and value pairs.
+
+```java
+final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
+    .method (POST)
+    .path ("/users")
+// highlight-start
+    .formBody ("strange", "boom")
+    .formBody ("test", "abc")
+// highlight-end
+    .create ();
+```
+
 ## `method`
 
 This method is used to set the method of the request. Following are the allowed values:

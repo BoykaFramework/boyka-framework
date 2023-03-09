@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,13 +14,13 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api;
+package com.github.wasiqb.boyka.testng.api.restful;
 
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 
-import com.github.wasiqb.boyka.testng.api.requests.BookingData;
-import com.github.wasiqb.boyka.testng.api.requests.BookingDataBuilder;
-import com.github.wasiqb.boyka.testng.api.requests.BookingRequest;
+import com.github.wasiqb.boyka.testng.api.restful.requests.BookingData;
+import com.github.wasiqb.boyka.testng.api.restful.requests.BookingDataBuilder;
+import com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 

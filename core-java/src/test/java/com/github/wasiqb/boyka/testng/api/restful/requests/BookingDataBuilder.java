@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.requests;
+package com.github.wasiqb.boyka.testng.api.restful.requests;
 
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
