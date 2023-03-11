@@ -24,8 +24,14 @@ public class WDIOHomePage {
         return WDIO_HOME_PAGE;
     }
 
-    private final Locator dragTab = Locator.buildLocator ()
+    private final Locator dragTab    = Locator.buildLocator ()
         .android (accessibilityId ("Drag"))
+        .ios (accessibilityId ("Drag"))
+        .name ("Drag Tab")
+        .build ();
+    private final Locator webViewTab = Locator.buildLocator ()
+        .android (accessibilityId ("Webview"))
+        .ios (accessibilityId ("Webview"))
         .name ("Drag Tab")
         .build ();
 }

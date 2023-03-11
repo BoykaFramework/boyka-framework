@@ -1,13 +1,16 @@
 package com.github.wasiqb.boyka.testng.ui.wdio;
 
+import static com.github.wasiqb.boyka.actions.drivers.ContextActions.withContext;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.DragDropPage.dragDropPage;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.WDIOHomePage.wdioHomePage;
+import static com.github.wasiqb.boyka.testng.ui.wdio.pages.WebViewPage.webViewPage;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.ITestResult;
@@ -70,5 +73,30 @@ public class WdioDemoTest {
             .isEqualTo ("Congratulations");
         onElement (dragDropPage ().getDescription ()).verifyText ()
             .isEqualTo ("You made it, click retry if you want to try it again.");
+    }
+
+    /**
+     * Test web view screen.
+     */
+    @Test (description = "Test WebView screen")
+    public void testWebView () {
+        verifyWebView ();
+    }
+
+    private void verifyWebView () {
+        withMouse (wdioHomePage ().getWebViewTab ()).click ();
+
+        withDriver ().waitUntil (d -> withContext ().contexts ()
+            .size () > 1);
+
+        withContext ().switchToWebView ();
+
+        onElement (webViewPage ().getPageTitle ()).verifyText ()
+            .isEqualTo ("Next-gen browser and mobile automation test framework for Node.js");
+
+        withContext ().switchToNative ();
+
+        onElement (wdioHomePage ().getWebViewTab ()).verifyIsDisplayed ()
+            .isTrue ();
     }
 }

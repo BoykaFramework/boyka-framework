@@ -68,7 +68,11 @@ public final class CommonActions {
         try {
             return LOGGER.traceExit (action.apply ((D) getSession ().getDriver ()));
         } catch (final FrameworkError e) {
-            return defaultValue;
+            if (defaultValue != null) {
+                return defaultValue;
+            } else {
+                throw e;
+            }
         }
     }
 

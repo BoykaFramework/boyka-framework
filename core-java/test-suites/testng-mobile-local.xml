@@ -20,27 +20,26 @@
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_sauce_android"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
-                <methods>
-                    <include name="testLogin"/>
-                </methods>
-            </class>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
         </classes>
     </test>
     <test name="Test Boyka Mobile on Local iOS Simulator Sauce Demo app">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_local_sauce_ios"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
-                <methods>
-                    <include name="testLogin"/>
-                </methods>
-            </class>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
         </classes>
     </test>
-    <test name="Test Boyka Mobile on Local Android Emulator WDIO" enabled="false">
+    <test name="Test Boyka Mobile on Local Android Emulator WDIO">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_wdio_android"/>
+        <classes>
+            <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest"/>
+        </classes>
+    </test>
+    <test name="Test Boyka Mobile on Local iOS Simulator WDIO">
+        <parameter name="platformType" value="IOS"/>
+        <parameter name="driverKey" value="test_local_wdio_ios"/>
         <classes>
             <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest"/>
         </classes>

@@ -161,6 +161,7 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
+        options.addArguments ("--remote-allow-origins=*");
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }

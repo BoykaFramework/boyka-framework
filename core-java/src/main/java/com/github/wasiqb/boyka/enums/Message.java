@@ -146,6 +146,10 @@ public enum Message {
      */
     INVALID_REMOTE_URL ("Invalid remote url generated..."),
     /**
+     * Swipe distance Error.
+     */
+    INVALID_SWIPE_DISTANCE ("Swipe Distance should be greater than 0% and less than 100%..."),
+    /**
      * Malformed JSON syntax error.
      */
     JSON_SYNTAX_ERROR ("JSON syntax error..."),
