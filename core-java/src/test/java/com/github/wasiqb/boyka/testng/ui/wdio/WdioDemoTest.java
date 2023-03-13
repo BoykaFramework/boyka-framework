@@ -86,9 +86,6 @@ public class WdioDemoTest {
     private void verifyWebView () {
         withMouse (wdioHomePage ().getWebViewTab ()).click ();
 
-        withDriver ().waitUntil (d -> withContext ().contexts ()
-            .size () > 1);
-
         withContext ().switchToWebView ();
 
         onElement (webViewPage ().getPageTitle ()).verifyText ()

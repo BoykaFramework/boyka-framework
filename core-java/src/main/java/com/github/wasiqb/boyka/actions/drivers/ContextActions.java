@@ -19,8 +19,10 @@ package com.github.wasiqb.boyka.actions.drivers;
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
+import static com.github.wasiqb.boyka.enums.ApplicationType.HYBRID;
+import static com.github.wasiqb.boyka.enums.Message.CONTEXT_SWITCHING_NOT_ALLOWED;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.ArrayList;
@@ -71,7 +73,6 @@ public class ContextActions implements IContextActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching context to NATIVE_APP...");
         switchToWebView ("NATIVE_APP");
-        getSession ().setPlatformType (this.platformType);
         LOGGER.traceExit ();
     }
 
@@ -79,9 +80,14 @@ public class ContextActions implements IContextActions {
     public void switchToWebView (final String contextName) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching context to [{}]...", contextName);
+        final var applicationType = getSession ().getMobileSetting ()
+            .getDevice ()
+            .getApplication ()
+            .getType ();
+        if (applicationType != HYBRID) {
+            throwError (CONTEXT_SWITCHING_NOT_ALLOWED, applicationType);
+        }
         performDriverAction ((SupportsContextSwitching d) -> d.context (contextName));
-        this.platformType = getSession ().getPlatformType ();
-        getSession ().setPlatformType (WEB);
         LOGGER.traceExit ();
     }
 

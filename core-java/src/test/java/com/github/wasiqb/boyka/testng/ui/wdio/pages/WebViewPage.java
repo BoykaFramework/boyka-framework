@@ -31,6 +31,7 @@ public class WebViewPage {
 
     private final Locator pageTitle = Locator.buildLocator ()
         .name ("Page Title")
-        .web (cssSelector ("h1 + p"))
+        .android (cssSelector ("h1 + p"))
+        .ios (cssSelector ("h1 + p"))
         .build ();
 }

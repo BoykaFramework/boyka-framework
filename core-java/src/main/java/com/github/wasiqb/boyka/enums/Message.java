@@ -50,6 +50,11 @@ public enum Message {
      */
     CONTENT_TYPE_NOT_SET ("Content type must be set before setting request body..."),
     /**
+     * Context switching not allowed for apps other than Hybrid app.
+     */
+    CONTEXT_SWITCHING_NOT_ALLOWED (
+        "Context switching is not allowed for application other than Hybrid, current application type is [{0}]..."),
+    /**
      * Error when driver is null.
      */
     DRIVER_CANNOT_BE_NULL ("Driver cannot be null, make sure you started the session correctly.."),

@@ -205,6 +205,7 @@
           "application": {
             "path": "/apps/android/wdio-demo.apk",
             "wait_activity": "com.wdiodemoapp.MainActivity",
+            "type": "HYBRID",
             "install_timeout": 180
           },
           "virtual_device": {
@@ -334,7 +335,7 @@
             "max_swipe_until_found": 5
           },
           "virtual_device": {
-            "headless": false,
+            "headless": true,
             "launch_timeout": 180
           },
           "wda": {
@@ -343,6 +344,7 @@
           },
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",
+            "type": "HYBRID",
             "install_timeout": 180
           }
         }
