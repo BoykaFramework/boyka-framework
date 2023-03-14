@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.wasiqb.boyka.actions.interfaces.drivers.IContextActions;
-import com.github.wasiqb.boyka.enums.PlatformType;
 import io.appium.java_client.remote.SupportsContextSwitching;
 import org.apache.logging.log4j.Logger;
 
@@ -51,8 +50,6 @@ public class ContextActions implements IContextActions {
     public static IContextActions withContext () {
         return CONTEXT_ACTIONS;
     }
-
-    private PlatformType platformType;
 
     @Override
     public List<String> contexts () {
