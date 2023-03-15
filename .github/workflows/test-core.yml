@@ -101,7 +101,7 @@ jobs:
           avd-name: Nexus_6
           api-level: 31
           target: google_apis
-          arch: x86
+          arch: x86_64
           profile: Nexus 6
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
