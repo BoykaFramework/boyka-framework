@@ -54,3 +54,13 @@ import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 . . .
 onTextBox (locator).hideKeyboard ();
 ```
+
+### `uploadFile` {#upload-file}
+
+This method is used to enter file path on File input element to upload the file.
+
+```java
+import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
+. . .
+onTextBox (locator).uploadFile (filePath);
+```

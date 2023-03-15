@@ -48,4 +48,11 @@ public interface ITextBoxActions extends IClickableActions {
      * @param keys keys to press
      */
     void pressKey (final CharSequence... keys);
+
+    /**
+     * Enter File path on File upload pop-up when called against File input Element.
+     *
+     * @param filePath Local File path
+     */
+    void uploadFile (String filePath);
 }

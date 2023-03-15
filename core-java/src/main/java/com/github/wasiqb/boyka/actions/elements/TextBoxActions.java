@@ -33,6 +33,8 @@ import com.github.wasiqb.boyka.builders.Locator;
 import io.appium.java_client.HasOnScreenKeyboard;
 import io.appium.java_client.HidesKeyboard;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 /**
  * All text box related actions
@@ -96,6 +98,17 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
         LOGGER.traceEntry ();
         stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, this.locator.getName ()));
         performElementAction (e -> e.sendKeys (chord (keys)), this.locator);
+        LOGGER.traceExit ();
+    }
+
+    @Override
+    public void uploadFile (final String filePath) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Entering File path [{}] to element {}", filePath, this.locator.getName ());
+        performElementAction (e -> {
+            ((RemoteWebElement) e).setFileDetector (new LocalFileDetector ());
+            enterText (filePath);
+        }, this.locator);
         LOGGER.traceExit ();
     }
 }
