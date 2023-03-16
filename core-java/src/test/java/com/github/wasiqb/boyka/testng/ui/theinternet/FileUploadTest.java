@@ -33,6 +33,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+/**
+ * Test File Upload feature.
+ *
+ * @author Wasiq Bhamla
+ * @since 14-Mar-2023
+ */
 public class FileUploadTest {
     private static final String URL = "http://the-internet.herokuapp.com/upload";
 

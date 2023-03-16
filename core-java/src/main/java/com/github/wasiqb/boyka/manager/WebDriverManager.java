@@ -80,8 +80,6 @@ class WebDriverManager implements IDriverManager {
             handleAndThrow (Message.SESSION_NOT_STARTED, e);
         }
         setDriverSize (webSetting);
-        final var driver = (RemoteWebDriver) getSession ().getDriver ();
-        driver.setFileDetector (new LocalFileDetector ());
         navigateToBaseUrl (webSetting.getBaseUrl ());
         LOGGER.traceExit ();
     }
@@ -193,8 +191,11 @@ class WebDriverManager implements IDriverManager {
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
-            getCapabilities (webSetting)));
+
+        final var driver = new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
+            getCapabilities (webSetting));
+        driver.setFileDetector (new LocalFileDetector ());
+        return LOGGER.traceExit (driver);
     }
 
     private WebDriver setupSafariDriver () {
