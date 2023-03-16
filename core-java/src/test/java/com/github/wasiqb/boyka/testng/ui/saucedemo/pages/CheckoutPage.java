@@ -61,7 +61,8 @@ public class CheckoutPage {
         .name ("Continue Button")
         .build ();
     private final Locator finish         = buildLocator ().web (id ("finish"))
-        .android (accessibilityId ("test-FINISH"))
+        .android (accessibilityId (
+            "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description(\"test-FINISH\"))"))
         .ios (accessibilityId ("test-FINISH"))
         .name ("Finish")
         .build ();
