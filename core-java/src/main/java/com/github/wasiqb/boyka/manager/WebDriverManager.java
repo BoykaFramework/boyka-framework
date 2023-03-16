@@ -42,6 +42,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -79,6 +80,8 @@ class WebDriverManager implements IDriverManager {
             handleAndThrow (Message.SESSION_NOT_STARTED, e);
         }
         setDriverSize (webSetting);
+        final var driver = (RemoteWebDriver) getSession ().getDriver ();
+        driver.setFileDetector (new LocalFileDetector ());
         navigateToBaseUrl (webSetting.getBaseUrl ());
         LOGGER.traceExit ();
     }

@@ -61,7 +61,7 @@ public class FileUploadTest {
     public void testFileUpload () {
         final var filePath = Path.of (getProperty ("user.dir"), "src/test/resources/test-file.txt")
             .toFile ();
-        onTextBox (fileUploadPage ().getFileUploadInput ()).uploadFile (filePath.getPath ());
+        onTextBox (fileUploadPage ().getFileUploadInput ()).enterText (filePath.getPath ());
 
         withMouse (fileUploadPage ().getFileSubmit ()).click ();
         onElement (fileUploadPage ().getSuccessTitle ()).verifyText ()
