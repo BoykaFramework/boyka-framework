@@ -164,6 +164,7 @@
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
+          "full_reset": true,
           "swipe": {
             "distance": 50,
             "max_swipe_until_found": 5
@@ -171,7 +172,8 @@
           "application": {
             "path": "/apps/android/sauce-demo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
-            "install_timeout": 180
+            "install_timeout": 180,
+            "wait_timeout": 60
           },
           "virtual_device": {
             "name": "Nexus_6",
@@ -198,6 +200,7 @@
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
+          "full_reset": true,
           "swipe": {
             "distance": 50,
             "max_swipe_until_found": 5
@@ -206,7 +209,8 @@
             "path": "/apps/android/wdio-demo.apk",
             "wait_activity": "com.wdiodemoapp.MainActivity",
             "type": "HYBRID",
-            "install_timeout": 180
+            "install_timeout": 180,
+            "wait_timeout": 60
           },
           "virtual_device": {
             "name": "Nexus_6",
