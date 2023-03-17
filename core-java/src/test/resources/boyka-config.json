@@ -299,7 +299,7 @@
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "connect_keyboard": false,
-          "typing_speed": 35,
+          "typing_speed": 25,
           "swipe": {
             "distance": 50,
             "max_swipe_until_found": 5
