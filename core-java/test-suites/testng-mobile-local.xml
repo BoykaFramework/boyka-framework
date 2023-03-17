@@ -34,7 +34,11 @@
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_wdio_android"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest">
+                <methods>
+                    <include name="testDragDrop"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="Test Boyka Mobile on Local iOS Simulator WDIO">
