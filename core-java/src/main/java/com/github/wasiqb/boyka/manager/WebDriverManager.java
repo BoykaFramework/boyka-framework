@@ -42,6 +42,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -161,6 +162,7 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
+        options.addArguments ("--remote-allow-origins=*");
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -189,8 +191,11 @@ class WebDriverManager implements IDriverManager {
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
-            getCapabilities (webSetting)));
+
+        final var driver = new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
+            getCapabilities (webSetting));
+        driver.setFileDetector (new LocalFileDetector ());
+        return LOGGER.traceExit (driver);
     }
 
     private WebDriver setupSafariDriver () {

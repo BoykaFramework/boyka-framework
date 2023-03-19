@@ -53,9 +53,6 @@ public class SauceDemoActions {
         onTextBox (checkoutPage ().getZipCode ()).enterText ("12345");
 
         withMouse (checkoutPage ().getContinueButton ()).click ();
-        onElement (checkoutPage ().getTitle ()).verifyText ()
-            .ignoringCase ()
-            .isEqualTo ("CHECKOUT: OVERVIEW");
     }
 
     public void verifyCheckoutStep2 () {

@@ -152,7 +152,8 @@
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
-            "get_server_logs"
+            "get_server_logs",
+            "chromedriver_autodownload"
           ]
         },
         "device": {
@@ -163,14 +164,16 @@
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
+          "full_reset": true,
           "swipe": {
-            "distance": 25,
+            "distance": 50,
             "max_swipe_until_found": 5
           },
           "application": {
             "path": "/apps/android/sauce-demo.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
-            "install_timeout": 180
+            "install_timeout": 180,
+            "wait_timeout": 120
           },
           "virtual_device": {
             "name": "Nexus_6",
@@ -185,25 +188,29 @@
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
-            "get_server_logs"
+            "get_server_logs",
+            "chromedriver_autodownload"
           ]
         },
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Nexus_6",
+          "name": "Pixel_6_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
+          "full_reset": true,
           "swipe": {
-            "distance": 25,
+            "distance": 50,
             "max_swipe_until_found": 5
           },
           "application": {
             "path": "/apps/android/wdio-demo.apk",
             "wait_activity": "com.wdiodemoapp.MainActivity",
-            "install_timeout": 180
+            "type": "HYBRID",
+            "install_timeout": 180,
+            "wait_timeout": 120
           },
           "virtual_device": {
             "name": "Nexus_6",
@@ -280,7 +287,41 @@
       "test_local_sauce_ios": {
         "server": {
           "target": "LOCAL",
-          "port": 4724,
+          "port": 4725,
+          "session_override": true,
+          "driver": "XCUI"
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16.2",
+          "name": "iPhone 14",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "connect_keyboard": false,
+          "typing_speed": 25,
+          "swipe": {
+            "distance": 50,
+            "max_swipe_until_found": 5
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
+          },
+          "wda": {
+            "launch_timeout": 120,
+            "connection_timeout": 120
+          },
+          "application": {
+            "path": "/apps/ios/sauce-demo.zip",
+            "install_timeout": 180
+          }
+        }
+      },
+      "test_local_wdio_ios": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4726,
           "session_override": true,
           "driver": "XCUI"
         },
@@ -294,7 +335,7 @@
           "connect_keyboard": false,
           "typing_speed": 35,
           "swipe": {
-            "distance": 100,
+            "distance": 50,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -306,7 +347,8 @@
             "connection_timeout": 120
           },
           "application": {
-            "path": "/apps/ios/sauce-demo.zip",
+            "path": "/apps/ios/wdio-demo.app.zip",
+            "type": "HYBRID",
             "install_timeout": 180
           }
         }
