@@ -1,5 +1,5 @@
 
-## v0.14.0-rc.0 (2023-03-19)
+## v0.14.0 (2023-03-19)
 
 #### :rocket: New Feature
 * [#411](https://github.com/BoykaFramework/boyka-framework/pull/411) feat(java): :sparkles: added hybrid app support ([@WasiqB](https://github.com/WasiqB))
