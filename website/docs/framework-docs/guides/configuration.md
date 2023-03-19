@@ -42,10 +42,15 @@ The file name and it's location cannot be modified.
     },
     "web": {
       "test_local_chrome": {
+        "base_url": "http://the-internet.herokuapp.com/",
         "browser": "CHROME",
         "highlight": true,
         "headless": false,
-        "resize": "CUSTOM"
+        "resize": "CUSTOM",
+        "custom_size": {
+          "width": 1580,
+          "height": 1080
+        }
       },
       "test_local_firefox": {
         "browser": "FIREFOX"
@@ -239,9 +244,7 @@ The file name and it's location cannot be modified.
       },
       "test_bs_ios": {
         "server": {
-          "cloud": "BROWSER_STACK",
-          "protocol": "HTTPS",
-          "host": "hub-cloud.browserstack.com",
+          "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
           "base_path": "/wd/hub",
@@ -377,16 +380,19 @@ See the example in [sample configuration file](#config-sample).
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
+| `base_url` | Base URL to navigate to by default | `string` | `null` |
 | `browser` | Browser name. | [`Browser`](#supported-browsers) | `Browser.NONE` |
-| `protocol` | Protocol type | [`Protocol`](#supported-protocols) | `Protocol.HTTP` |
-| `host` | Remote driver host name | `string` | `null` |
+| `protocol` | Protocol type, will override Host provided by Target provider | [`Protocol`](#supported-protocols) | `Protocol.HTTP` |
+| `host` | Remote driver host name, will override Host provided by Target provider | `string` | `null` |
 | `port` | Remote driver port, if `0`, port will not be considered. | `number` | `0` |
-| `cloud` | Cloud service provider name. | [`CloudProviders`](#supported-cloud-providers) | `CloudProviders.NONE` |
+| `target` | Target provider name. | [`TargetProviders`](#target-providers) | `TargetProviders.LOCAL` |
 | `user_name` | User name for cloud service provider. | `string` | `null` |
 | `password` | Password / Access key for cloud service provider. | `string` | `null` |
 | `capabilities` | Capabilities for browser. | `Map<String, Object>` | `null` |
 | `headless` | Headless mode for browser. | `boolean` | `true` |
 | `highlight` | Highlight element on interaction, if `true` | `boolean` | `false` |
+| `resize` | How to resize the window initial state | [`WindowResizeType`](#window-resize-type) | `WindowResizeType.NORMAL` |
+| `custom_size` | Custom window size, when `resize` option is selected as `CUSTOM` | `Dimension` | `1920x1080` |
 
 :::info
 For fields `user_name` and `password`, you can use placeholder variables in the following format:
@@ -585,6 +591,7 @@ Host name from the settings will be used by default, if that is not provided, th
 We have an enum `OS` where we maintain the list of currently supported device OS types. They are:
 
 - `ANDROID`
+- `IOS`
 
 ## Supported device types {#supported-device-types}
 
@@ -594,6 +601,7 @@ We have an enum `OS` where we maintain the list of currently supported device OS
 ## Supported Automation types {#supported-automation-types}
 
 - `UI_AUTOMATOR`: Equivalent for `UIAutomator2` in Appium
+- `XCUI`: Equivalent for `XCuiTest` in Appium
 
 ## Supported Server Log levels {#log-level}
 
@@ -617,3 +625,11 @@ We have an enum `OS` where we maintain the list of currently supported device OS
 - `WARN_ERROR`
 - `WARN_INFO`
 - `WARN_WARN`
+
+## Window Resize Types {#window-resize-type}
+
+- `CUSTOM`: You can define custom window size
+- `FULL_SCREEN`: Opens the window in full screen mode
+- `MAXIMIZED`: Opens the window maximized (if supported by your platform)
+- `MINIMIZED`: Opens the window minimized
+- `NORMAL`: Opens the window in default state

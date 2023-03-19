@@ -26,9 +26,16 @@ public interface IFrameActions {
     /**
      * Switch to an iFrame.
      *
-     * @param frameName Name of the Iframe.
+     * @param frameNameOrId Name / ID of the Iframe.
      */
-    void switchTo (final String frameName);
+    void switchTo (final String frameNameOrId);
+
+    /**
+     * Switch to an iFrame.
+     *
+     * @param index Index of the frame.
+     */
+    void switchTo (int index);
 
     /**
      * Switch to Parent Frame.

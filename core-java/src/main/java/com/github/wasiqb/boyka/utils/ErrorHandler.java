@@ -73,7 +73,7 @@ public final class ErrorHandler {
      */
     public static <T> T requireNonNull (final T subject, final Message throwMessage, final Object... args) {
         if (subject == null) {
-            throw new FrameworkError (format (throwMessage.getMessageText (), args));
+            throwError (throwMessage, args);
         }
         return subject;
     }

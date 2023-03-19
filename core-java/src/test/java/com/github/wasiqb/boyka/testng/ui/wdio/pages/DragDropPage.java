@@ -1,7 +1,8 @@
 package com.github.wasiqb.boyka.testng.ui.wdio.pages;
 
 import static io.appium.java_client.AppiumBy.accessibilityId;
-import static io.appium.java_client.AppiumBy.className;
+import static io.appium.java_client.AppiumBy.androidUIAutomator;
+import static io.appium.java_client.AppiumBy.iOSNsPredicateString;
 import static java.text.MessageFormat.format;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -28,21 +29,24 @@ public class DragDropPage {
 
     private final Locator screen      = Locator.buildLocator ()
         .android (accessibilityId ("Drag-drop-screen"))
+        .ios (accessibilityId ("Drag-drop-screen"))
         .name ("Drag Drop screen")
         .build ();
     private final Locator retryButton = Locator.buildLocator ()
         .parent (this.screen)
         .name ("Retry Button")
         .android (accessibilityId ("button-Retry"))
+        .ios (accessibilityId ("button-Retry"))
         .build ();
     private final Locator description = Locator.buildLocator ()
-        .android (className ("android.widget.TextView"))
+        .android (androidUIAutomator ("new UiSelector ().textStartsWith (\"You made it\")"))
+        .ios (iOSNsPredicateString ("type == 'XCUIElementTypeStaticText' AND label BEGINSWITH 'You made it'"))
         .parent (this.screen)
         .name ("Description")
-        .index (1)
         .build ();
     private final Locator title       = Locator.buildLocator ()
-        .android (className ("android.widget.TextView"))
+        .android (androidUIAutomator ("new UiSelector ().text (\"Congratulations\")"))
+        .ios (iOSNsPredicateString ("type == 'XCUIElementTypeStaticText' AND label == 'Congratulations'"))
         .parent (this.screen)
         .name ("Title")
         .build ();
@@ -58,6 +62,7 @@ public class DragDropPage {
         return Locator.buildLocator ()
             .name (format ("Center Source Tile [{0}]", index))
             .android (accessibilityId (format ("drag-c{0}", index)))
+            .ios (accessibilityId (format ("drag-c{0}", index)))
             .build ();
     }
 
@@ -72,6 +77,7 @@ public class DragDropPage {
         return Locator.buildLocator ()
             .name (format ("Center Target Tile [{0}]", index))
             .android (accessibilityId (format ("drop-c{0}", index)))
+            .ios (accessibilityId (format ("drop-c{0}", index)))
             .build ();
     }
 
@@ -86,6 +92,7 @@ public class DragDropPage {
         return Locator.buildLocator ()
             .name (format ("Left Source Tile [{0}]", index))
             .android (accessibilityId (format ("drag-l{0}", index)))
+            .ios (accessibilityId (format ("drag-l{0}", index)))
             .build ();
     }
 
@@ -100,6 +107,7 @@ public class DragDropPage {
         return Locator.buildLocator ()
             .name (format ("Left Target Tile [{0}]", index))
             .android (accessibilityId (format ("drop-l{0}", index)))
+            .ios (accessibilityId (format ("drop-l{0}", index)))
             .build ();
     }
 
@@ -114,6 +122,7 @@ public class DragDropPage {
         return Locator.buildLocator ()
             .name (format ("Right Source Tile [{0}]", index))
             .android (accessibilityId (format ("drag-r{0}", index)))
+            .ios (accessibilityId (format ("drag-r{0}", index)))
             .build ();
     }
 
@@ -128,6 +137,7 @@ public class DragDropPage {
         return Locator.buildLocator ()
             .name (format ("Right Target Tile [{0}]", index))
             .android (accessibilityId (format ("drop-r{0}", index)))
+            .ios (accessibilityId (format ("drop-r{0}", index)))
             .build ();
     }
 }

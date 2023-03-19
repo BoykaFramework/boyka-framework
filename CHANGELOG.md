@@ -1,5 +1,5 @@
 
-## v0.13.0-rc.0 (2023-02-20)
+## v0.13.0 (2023-02-20)
 
 #### :rocket: New Feature
 * [#373](https://github.com/BoykaFramework/boyka-framework/pull/373) feat(java): :zap: simplified cloud configurations ([@WasiqB](https://github.com/WasiqB))

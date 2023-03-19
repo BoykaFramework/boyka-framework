@@ -50,6 +50,15 @@ public enum Message {
      */
     CONTENT_TYPE_NOT_SET ("Content type must be set before setting request body..."),
     /**
+     * Context switching not allowed for apps other than Hybrid app.
+     */
+    CONTEXT_SWITCHING_NOT_ALLOWED (
+        "Context switching is not allowed for application other than Hybrid, current application type is [{0}]..."),
+    /**
+     * Error when driver is null.
+     */
+    DRIVER_CANNOT_BE_NULL ("Driver cannot be null, make sure you started the session correctly.."),
+    /**
      * WebDriver's error occurred.
      */
     DRIVER_ERROR_OCCURRED ("Error encountered by Driver: {0}"),
@@ -142,6 +151,10 @@ public enum Message {
      */
     INVALID_REMOTE_URL ("Invalid remote url generated..."),
     /**
+     * Swipe distance Error.
+     */
+    INVALID_SWIPE_DISTANCE ("Swipe Distance should be greater than 0% and less than 100%..."),
+    /**
      * Malformed JSON syntax error.
      */
     JSON_SYNTAX_ERROR ("JSON syntax error..."),
@@ -181,6 +194,10 @@ public enum Message {
      * Appium server already running.
      */
     SERVER_ALREADY_RUNNING ("Appium server already running..."),
+    /**
+     * Error when starting session.
+     */
+    SESSION_NOT_STARTED ("Session could not be started..."),
     /**
      * Test Error.
      */

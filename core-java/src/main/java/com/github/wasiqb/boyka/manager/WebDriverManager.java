@@ -1,5 +1,6 @@
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
 import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
@@ -21,15 +22,18 @@ import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNullElse;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
+import com.github.wasiqb.boyka.enums.Message;
 import com.github.wasiqb.boyka.enums.TargetProviders;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -38,6 +42,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -49,28 +54,33 @@ class WebDriverManager implements IDriverManager {
     public void setupDriver () {
         LOGGER.traceEntry ();
         final var webSetting = getSession ().getWebSetting ();
-        switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
-            case CHROME:
-                setDriver (setupChromeDriver (webSetting));
-                break;
-            case NONE:
-                throwError (INVALID_BROWSER);
-                break;
-            case REMOTE:
-                setDriver (setupRemoteDriver (webSetting));
-                break;
-            case SAFARI:
-                setDriver (setupSafariDriver ());
-                break;
-            case EDGE:
-                setDriver (setupEdgeDriver (webSetting));
-                break;
-            case FIREFOX:
-            default:
-                setDriver (setupFirefoxDriver (webSetting));
-                break;
+        try {
+            switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
+                case CHROME:
+                    setDriver (setupChromeDriver (webSetting));
+                    break;
+                case NONE:
+                    throwError (INVALID_BROWSER);
+                    break;
+                case REMOTE:
+                    setDriver (setupRemoteDriver (webSetting));
+                    break;
+                case SAFARI:
+                    setDriver (setupSafariDriver ());
+                    break;
+                case EDGE:
+                    setDriver (setupEdgeDriver (webSetting));
+                    break;
+                case FIREFOX:
+                default:
+                    setDriver (setupFirefoxDriver (webSetting));
+                    break;
+            }
+        } catch (final SessionNotCreatedException e) {
+            handleAndThrow (Message.SESSION_NOT_STARTED, e);
         }
         setDriverSize (webSetting);
+        navigateToBaseUrl (webSetting.getBaseUrl ());
         LOGGER.traceExit ();
     }
 
@@ -115,6 +125,12 @@ class WebDriverManager implements IDriverManager {
         return null;
     }
 
+    private void navigateToBaseUrl (final String baseUrl) {
+        if (isNotEmpty (baseUrl)) {
+            navigate ().to (baseUrl);
+        }
+    }
+
     private void setDriverSize (final WebSetting webSetting) {
         final var window = getSession ().getDriver ()
             .manage ()
@@ -146,6 +162,7 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
+        options.addArguments ("--remote-allow-origins=*");
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -174,8 +191,11 @@ class WebDriverManager implements IDriverManager {
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
-            getCapabilities (webSetting)));
+
+        final var driver = new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
+            getCapabilities (webSetting));
+        driver.setFileDetector (new LocalFileDetector ());
+        return LOGGER.traceExit (driver);
     }
 
     private WebDriver setupSafariDriver () {

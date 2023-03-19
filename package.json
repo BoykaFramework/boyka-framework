@@ -1,6 +1,6 @@
 {
   "name": "boyka-framework",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Ultimate Automation framework to handle automation of web, mobile and API applications.",
   "author": {
     "name": "Wasiq Bhamla",
@@ -27,18 +27,18 @@
     "node": ">=16.15.0"
   },
   "license": "MIT",
-  "packageManager": "yarn@3.4.1",
+  "packageManager": "yarn@3.5.0",
   "private": true,
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
-    "@types/node": "^18.14.0",
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
-    "@typescript-eslint/parser": "^5.52.0",
+    "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
     "commitlint": "^17.4.4",
-    "eslint": "^8.34.0",
+    "eslint": "^8.36.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-prettier": "^8.7.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
@@ -46,13 +46,13 @@
     "husky": "^8.0.3",
     "lerna": "^6.5.1",
     "lerna-changelog": "^2.2.0",
-    "lint-staged": "^13.1.2",
-    "nx": "^15.7.2",
+    "lint-staged": "^13.2.0",
+    "nx": "^15.8.7",
     "prettier": "^2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.2"
   },
   "scripts": {
     "postinstall": "husky install",

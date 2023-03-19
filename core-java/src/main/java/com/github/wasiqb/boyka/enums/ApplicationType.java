@@ -26,5 +26,9 @@ public enum ApplicationType {
     /**
      * Native app.
      */
-    NATIVE
+    NATIVE,
+    /**
+     * Hybrid app.
+     */
+    HYBRID
 }

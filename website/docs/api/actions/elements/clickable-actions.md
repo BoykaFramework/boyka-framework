@@ -17,7 +17,7 @@ IClickableActions mouseActions = ClickableActions.withMouse ();
 
 ### `click`
 
-This method is used to click on the given element if it's a Web application or will perform `tap` action if the element is on Mobile.
+This method is used to click on the given element if it's a Web application or will perform `tap` action if the element is on Mobile. It will also scroll the element into view before clicking on it (in Web application)
 
 ```java
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
@@ -57,12 +57,14 @@ withMouse (locator).clickAndHold ();
 
 ### `dragTo (locator)` {#drag-to}
 
-This method is used to drag and drop on the given element.
+This method is used to drag source element and drop it on the target element.
 
 ```java
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 . . .
-withMouse (locator).dragTo ();
+Locator source = // source element to drag
+Locator target = // target element to drag the source to
+withMouse (source).dragTo (target);
 ```
 
 ### `hover`
