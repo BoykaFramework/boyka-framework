@@ -40,9 +40,7 @@ Before starting to automate Web applications, we need to first setup the configu
       },
       "test_browserstack_chrome": {
         "browser": "REMOTE",
-        "cloud": "BROWSER_STACK",
-        "protocol": "HTTPS",
-        "host": "hub-cloud.browserstack.com",
+        "target": "BROWSER_STACK",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
         "capabilities": {
@@ -58,7 +56,7 @@ Before starting to automate Web applications, we need to first setup the configu
       },
       "test_selenium_grid": {
         "browser": "REMOTE",
-        "cloud": "NONE",
+        "target": "LOCAL",
         "port": "4444",
         "capabilities": {
           "browserName": "chrome",
@@ -67,9 +65,7 @@ Before starting to automate Web applications, we need to first setup the configu
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
-        "cloud": "LAMBDA_TEST",
-        "protocol": "HTTPS",
-        "host": "hub.lambdatest.com",
+        "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
         "capabilities": {

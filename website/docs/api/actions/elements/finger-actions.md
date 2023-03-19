@@ -40,9 +40,9 @@ This method will drag the source element to the target element.
 ```java
 import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
 . . .
-WebElement sourceElement = // source element to drag
-WebElement targetElement = // target element to drag the source to
-withFinger (sourceElement).dragTo (targetElement);
+Locator source = // source element to drag
+Locator target = // target element to drag the source to
+withFinger (source).dragTo (target);
 ```
 
 ### `swipeTill`

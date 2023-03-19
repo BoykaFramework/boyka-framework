@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.12.0">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.12.0/total?color=brightgreen&label=Downloads%20for%20v0.12.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.13.0">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.13.0/total?color=brightgreen&label=Downloads%20for%20v0.13.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -86,7 +86,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.12.0</version>
+  <version>0.13.0</version>
 </dependency>
 ```
 
@@ -120,10 +120,15 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
     },
     "web": {
       "test_local_chrome": {
+        "base_url": "http://the-internet.herokuapp.com/",
         "browser": "CHROME",
         "highlight": true,
         "headless": false,
-        "resize": "CUSTOM"
+        "resize": "CUSTOM",
+        "custom_size": {
+          "width": 1580,
+          "height": 1080
+        }
       },
       "test_local_firefox": {
         "browser": "FIREFOX"

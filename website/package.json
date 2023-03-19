@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "0.13.0",
+  "version": "0.14.0-rc.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -28,7 +28,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.3.1",
     "@docusaurus/plugin-content-docs": "^2.3.1",
-    "@tsconfig/docusaurus": "^1.0.6",
+    "@tsconfig/docusaurus": "^1.0.7",
     "react-typist": "^2.0.5"
   },
   "browserslist": {

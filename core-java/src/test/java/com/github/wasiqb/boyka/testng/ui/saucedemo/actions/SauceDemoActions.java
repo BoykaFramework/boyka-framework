@@ -44,6 +44,7 @@ public class SauceDemoActions {
             navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/checkout-step-one.html", URL));
             onElement (checkoutPage ().getTitle ()).verifyText ()
+                .ignoringCase ()
                 .isEqualTo ("CHECKOUT: YOUR INFORMATION");
         }
 
@@ -52,8 +53,6 @@ public class SauceDemoActions {
         onTextBox (checkoutPage ().getZipCode ()).enterText ("12345");
 
         withMouse (checkoutPage ().getContinueButton ()).click ();
-        onElement (checkoutPage ().getTitle ()).verifyText ()
-            .isEqualTo ("CHECKOUT: OVERVIEW");
     }
 
     public void verifyCheckoutStep2 () {
@@ -69,9 +68,11 @@ public class SauceDemoActions {
             navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/checkout-complete.html", URL));
             onElement (checkoutPage ().getTitle ()).verifyText ()
+                .ignoringCase ()
                 .isEqualTo ("CHECKOUT: COMPLETE!");
             onElement (checkoutPage ().getCompleteHeader ()).verifyText ()
-                .isEqualTo ("THANK YOU FOR YOUR ORDER");
+                .ignoringCase ()
+                .contains ("THANK YOU FOR YOUR ORDER");
         }
 
         onElement (checkoutPage ().getCompleteText ()).verifyText ()

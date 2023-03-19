@@ -1,11 +1,13 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
+import static com.github.wasiqb.boyka.actions.drivers.ContextActions.withContext;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
 import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.testng.ui.saucedemo.actions.SauceDemoActions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -77,6 +79,14 @@ public class SauceDemoTest {
     @Test (description = "Test checkout page step 2.", dependsOnMethods = "testCheckoutStep1")
     public void testCheckoutStep2 () {
         this.sauceDemo.verifyCheckoutStep2 ();
+    }
+
+    /**
+     * Test context switching in Native app
+     */
+    @Test (description = "Test context switching in Native app", dependsOnMethods = "testSignOut", expectedExceptions = FrameworkError.class)
+    public void testContextSwitching () {
+        withContext ().switchToWebView ("WEBVIEW");
     }
 
     /**

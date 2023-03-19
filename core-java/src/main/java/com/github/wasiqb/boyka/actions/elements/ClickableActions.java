@@ -58,6 +58,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Clicking on element: {}", this.locator.getName ());
         if (getSession ().getPlatformType () == WEB) {
+            scrollIntoView ();
             performElementAction (WebElement::click, this.locator);
         } else {
             tap ();

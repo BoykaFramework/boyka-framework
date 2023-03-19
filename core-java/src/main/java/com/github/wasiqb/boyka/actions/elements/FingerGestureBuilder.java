@@ -19,9 +19,11 @@ package com.github.wasiqb.boyka.actions.elements;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_CANNOT_BE_NULL;
+import static com.github.wasiqb.boyka.enums.Message.INVALID_SWIPE_DISTANCE;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.requireNonNull;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.time.Duration.ZERO;
 import static java.time.Duration.ofMillis;
 import static org.openqa.selenium.interactions.PointerInput.Kind.TOUCH;
@@ -112,6 +114,9 @@ final class FingerGestureBuilder {
             .getDevice ()
             .getSwipe ()
             .getDistance ();
+        if (distance <= 0 || distance >= 100) {
+            throwError (INVALID_SWIPE_DISTANCE);
+        }
         var location = new Point (0, 0);
         if (this.element != null) {
             final var webElement = find (this.element, WaitStrategy.CLICKABLE);
@@ -120,6 +125,7 @@ final class FingerGestureBuilder {
         final var start = getSwipeStartPosition ();
         final var x = start.getX () + location.getX () + ((start.getX () * this.direction.getX () * distance) / 100);
         final var y = start.getY () + location.getY () + ((start.getY () * this.direction.getY () * distance) / 100);
+
         return new Point (x, y);
     }
 

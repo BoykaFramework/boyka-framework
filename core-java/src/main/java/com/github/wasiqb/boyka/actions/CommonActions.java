@@ -68,7 +68,11 @@ public final class CommonActions {
         try {
             return LOGGER.traceExit (action.apply ((D) getSession ().getDriver ()));
         } catch (final FrameworkError e) {
-            return defaultValue;
+            if (defaultValue != null) {
+                return defaultValue;
+            } else {
+                throw e;
+            }
         }
     }
 
@@ -161,7 +165,7 @@ public final class CommonActions {
     }
 
     private static void highlight (final String color, final WebElement element) {
-        if (getSession ().getPlatformType () == WEB && getSession ().getWebSetting ()
+        if (getSession ().getWebSetting ()
             .isHighlight ()) {
             final var style = element.getAttribute ("style");
             getSession ().setSharedData (HIGHLIGHT_STYLE, style);
@@ -175,12 +179,14 @@ public final class CommonActions {
     }
 
     private static void prepareElementAction (final WebElement element, final String color) {
-        highlight (color, element);
-        unhighlight (element);
+        if (getSession ().getPlatformType () == WEB) {
+            highlight (color, element);
+            unhighlight (element);
+        }
     }
 
     private static void unhighlight (final WebElement element) {
-        if (getSession ().getPlatformType () == WEB && getSession ().getWebSetting ()
+        if (getSession ().getWebSetting ()
             .isHighlight ()) {
             final var style = getSession ().getSharedData (HIGHLIGHT_STYLE);
             withDriver ().executeScript ("arguments[0].setAttribute('style', arguments[1]);", element, style);

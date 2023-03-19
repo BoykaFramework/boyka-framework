@@ -16,13 +16,13 @@
 
 package com.github.wasiqb.boyka.api;
 
+import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
 import static com.github.wasiqb.boyka.enums.RequestMethod.DELETE;
 import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PATCH;
 import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
-import static com.github.wasiqb.boyka.manager.ApiManager.execute;
 import static java.text.MessageFormat.format;
 
 import com.github.wasiqb.boyka.api.requests.BookingData;
@@ -68,7 +68,7 @@ public class ApiTests {
             .bodyObject (this.newBooking)
             .create ();
 
-        final ApiResponse response = execute (createBookingRequest);
+        final ApiResponse response = withRequest (createBookingRequest).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("bookingid")
@@ -90,7 +90,7 @@ public class ApiTests {
             .pathParam ("id", this.bookingId)
             .create ();
 
-        final ApiResponse response = execute (deleteBookingRequest);
+        final ApiResponse response = withRequest (deleteBookingRequest).execute ();
         response.verifyStatusCode ()
             .isEqualTo (201);
     }
@@ -104,7 +104,7 @@ public class ApiTests {
             .pathParam ("id", this.bookingId)
             .create ();
 
-        final ApiResponse response = execute (getDeletedBookingRequest);
+        final ApiResponse response = withRequest (getDeletedBookingRequest).execute ();
         response.verifyStatusCode ()
             .isEqualTo (404);
     }
@@ -118,7 +118,7 @@ public class ApiTests {
             .pathParam ("id", this.bookingId)
             .create ();
 
-        final ApiResponse response = execute (getBookingRequest);
+        final ApiResponse response = withRequest (getBookingRequest).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("firstname")
@@ -138,7 +138,7 @@ public class ApiTests {
             .pathParam ("id", this.bookingId)
             .create ();
 
-        final ApiResponse response = execute (updateBookingRequest);
+        final ApiResponse response = withRequest (updateBookingRequest).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("firstname")
@@ -158,7 +158,7 @@ public class ApiTests {
             .pathParam ("id", this.bookingId)
             .create ();
 
-        final ApiResponse response = execute (partialUpdateBookingRequest);
+        final ApiResponse response = withRequest (partialUpdateBookingRequest).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("firstname")
@@ -175,7 +175,7 @@ public class ApiTests {
             .bodyObject (this.tokenCreds)
             .create ();
 
-        final ApiResponse response = execute (generateTokenRequest);
+        final ApiResponse response = withRequest (generateTokenRequest).execute ();
         return response.getResponseData ("token");
     }
 }
