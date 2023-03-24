@@ -22,7 +22,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction
 import static com.github.wasiqb.boyka.enums.Message.NO_KEYBOARD_ERROR;
 import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.util.Arrays.stream;
 import static org.apache.logging.log4j.LogManager.getLogger;

@@ -20,8 +20,8 @@ import static com.github.wasiqb.boyka.actions.drivers.FrameActions.onFrame;
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.FramesPage.framesPage;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.NestedFramePage.nestedFramePage;
@@ -50,7 +50,7 @@ public class FramesTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
-        createDriver (platformType, driverKey);
+        createSession (platformType, driverKey);
         navigate ().to (URL);
         withMouse (homePage ().link ("Frames")).click ();
     }
@@ -60,7 +60,7 @@ public class FramesTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        closeDriver ();
+        clearAllSessions ();
     }
 
     /**

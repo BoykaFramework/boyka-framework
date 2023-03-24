@@ -28,7 +28,11 @@
         "custom_size": {
           "width": 1580,
           "height": 1080
-        }
+        },
+        "browser_options": [
+          "use-fake-device-for-media-stream",
+          "use-fake-ui-for-media-stream"
+        ]
       },
       "test_local_firefox": {
         "browser": "FIREFOX"

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.sessions;
+package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -27,7 +27,6 @@ import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
 import com.github.wasiqb.boyka.enums.PlatformType;
-import com.github.wasiqb.boyka.manager.ServiceManager;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;

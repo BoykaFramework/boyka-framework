@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.utils;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 
 import com.github.wasiqb.boyka.enums.Message;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Validator class to validate different conditions.
@@ -27,6 +28,22 @@ import com.github.wasiqb.boyka.enums.Message;
  * @since 25-Aug-2022
  */
 public final class Validator {
+    /**
+     * Checks if the String value is not null.
+     *
+     * @param value Value to check
+     * @param message Message to throw when the value is empty.
+     * @param args Args for the message.
+     *
+     * @return Value if it is not empty.
+     */
+    public static String requireNonEmpty (final String value, final Message message, final Object... args) {
+        if (StringUtils.isEmpty (value)) {
+            throwError (message, args);
+        }
+        return value;
+    }
+
     /**
      * Checks if the object is null or not, if null, a framework error will be thrown with provided message
      *

@@ -21,8 +21,8 @@ import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.AlertPage.alertPage;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
 
@@ -50,7 +50,7 @@ public class AlertsTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
-        createDriver (platformType, driverKey);
+        createSession (platformType, driverKey);
         onWindow ().fullScreen ();
         navigate ().to (URL);
         withMouse (homePage ().link ("JavaScript Alerts")).click ();
@@ -64,7 +64,7 @@ public class AlertsTest {
         navigate ().back ();
         navigate ().verifyUrl ()
             .isEqualTo (URL);
-        closeDriver ();
+        clearAllSessions ();
     }
 
     /**

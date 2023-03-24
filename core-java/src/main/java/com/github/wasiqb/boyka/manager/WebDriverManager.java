@@ -11,8 +11,8 @@ import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
@@ -163,6 +163,8 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
         options.addArguments ("--remote-allow-origins=*");
+        webSetting.getBrowserOptions ()
+            .forEach (options::addArguments);
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -173,6 +175,8 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         edgedriver ().setup ();
         final var options = new EdgeOptions ();
+        webSetting.getBrowserOptions ()
+            .forEach (options::addArguments);
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -183,6 +187,8 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         firefoxdriver ().setup ();
         final var options = new FirefoxOptions ();
+        webSetting.getBrowserOptions ()
+            .forEach (options::addArguments);
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }

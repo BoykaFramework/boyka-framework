@@ -19,8 +19,8 @@ package com.github.wasiqb.boyka.testng.ui.theinternet;
 import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.ContextMenuPage.contextMenuPage;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
 
@@ -48,7 +48,7 @@ public class ContextMenuTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
-        createDriver (platformType, driverKey);
+        createSession (platformType, driverKey);
         navigate ().to (URL);
         withMouse (homePage ().link ("Context Menu")).click ();
     }
@@ -58,7 +58,7 @@ public class ContextMenuTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        closeDriver ();
+        clearAllSessions ();
     }
 
     /**

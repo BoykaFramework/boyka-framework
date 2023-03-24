@@ -6,8 +6,8 @@ import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.DragDropPage.dragDropPage;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.WDIOHomePage.wdioHomePage;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.WebViewPage.webViewPage;
@@ -46,7 +46,7 @@ public class WdioDemoTest {
     @BeforeClass (description = "Setup test class", alwaysRun = true)
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
-        createDriver (platformType, driverKey);
+        createSession (platformType, driverKey);
     }
 
     /**
@@ -55,7 +55,7 @@ public class WdioDemoTest {
     @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
         withDriver ().saveLogs ();
-        closeDriver ();
+        clearAllSessions ();
     }
 
     /**

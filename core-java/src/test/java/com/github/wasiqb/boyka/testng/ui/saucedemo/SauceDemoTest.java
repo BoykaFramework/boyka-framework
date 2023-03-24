@@ -3,8 +3,8 @@ package com.github.wasiqb.boyka.testng.ui.saucedemo;
 import static com.github.wasiqb.boyka.actions.drivers.ContextActions.withContext;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
 import com.github.wasiqb.boyka.exception.FrameworkError;
@@ -44,7 +44,7 @@ public class SauceDemoTest {
     @BeforeClass (description = "Setup test class", alwaysRun = true)
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
-        createDriver (platformType, driverKey);
+        createSession (platformType, driverKey);
         this.sauceDemo = new SauceDemoActions ();
     }
 
@@ -54,7 +54,7 @@ public class SauceDemoTest {
     @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
         withDriver ().saveLogs ();
-        closeDriver ();
+        clearAllSessions ();
     }
 
     /**

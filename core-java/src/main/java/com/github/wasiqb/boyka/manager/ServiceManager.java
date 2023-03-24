@@ -22,7 +22,7 @@ import static com.github.wasiqb.boyka.enums.Message.ERROR_STOPPING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.SERVER_ALREADY_RUNNING;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.BOOTSTRAP_PORT_NUMBER;
