@@ -88,6 +88,15 @@ public final class ParallelSession {
     }
 
     /**
+     * Gets current persona name.
+     *
+     * @return Persona name
+     */
+    public static String getCurrentPersona () {
+        return currentPersona;
+    }
+
+    /**
      * Gets current session in thread.
      *
      * @param <D> the generic WebDriver type
