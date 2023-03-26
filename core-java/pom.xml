@@ -16,8 +16,8 @@
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
@@ -41,7 +41,7 @@
         <json-path.version>2.7.0</json-path.version>
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
-        <faker.version>1.8.0</faker.version>
+        <faker.version>1.8.1</faker.version>
         <jackson-dataformat-yaml.version>2.14.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.14.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
@@ -69,7 +69,7 @@
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>3.9.1.2184</sonar.maven.version>
         <jacoco.version>0.8.8</jacoco.version>
-        <surefire-version>3.0.0-M9</surefire-version>
+        <surefire-version>3.0.0</surefire-version>
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.0.1</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
