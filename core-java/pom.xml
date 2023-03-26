@@ -54,7 +54,7 @@
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.2.1</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.8.0</checkstyle.version>
+        <checkstyle.version>10.9.2</checkstyle.version>
         <suite-xml>test-suites/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <sonar.organization>boykaframework</sonar.organization>
