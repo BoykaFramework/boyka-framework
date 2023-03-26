@@ -175,8 +175,7 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         edgedriver ().setup ();
         final var options = new EdgeOptions ();
-        webSetting.getBrowserOptions ()
-            .forEach (options::addArguments);
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -187,8 +186,7 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         firefoxdriver ().setup ();
         final var options = new FirefoxOptions ();
-        webSetting.getBrowserOptions ()
-            .forEach (options::addArguments);
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
