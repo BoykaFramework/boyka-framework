@@ -20,7 +20,7 @@ import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
-import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.DoubleClickPage.doubleClickPage;
 
@@ -48,7 +48,7 @@ public class DoubleClickTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
-        createSession (platformType, driverKey);
+        createSession ("DoubleClickTest", platformType, driverKey);
         navigate ().to (URL);
     }
 
@@ -57,7 +57,7 @@ public class DoubleClickTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        clearAllSessions ();
+        clearSession ();
     }
 
     /**

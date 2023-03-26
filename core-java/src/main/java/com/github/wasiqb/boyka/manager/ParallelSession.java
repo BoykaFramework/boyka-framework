@@ -20,6 +20,7 @@ import static com.github.wasiqb.boyka.enums.Message.SESSION_PERSONA_CANNOT_BE_NU
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.HashMap;
@@ -36,11 +37,11 @@ import org.openqa.selenium.WebDriver;
  * @since 17-Feb-2022
  */
 public final class ParallelSession {
-    private static final Logger                                                       LOGGER  = getLogger ();
-    private static final ThreadLocal<Map<String, DriverSession<? extends WebDriver>>> SESSION = withInitial (
+    private static final ThreadLocal<String>                                          CURRENT_PERSONA = withInitial (
+        () -> EMPTY);
+    private static final Logger                                                       LOGGER          = getLogger ();
+    private static final ThreadLocal<Map<String, DriverSession<? extends WebDriver>>> SESSION         = withInitial (
         HashMap::new);
-
-    private static String currentPersona;
 
     /**
      * Clears all the sessions.
@@ -48,27 +49,26 @@ public final class ParallelSession {
     public static void clearAllSessions () {
         LOGGER.info ("Clearing all the sessions...");
         final var sessions = SESSION.get ();
-        sessions.forEach ((k, v) -> {
-            LOGGER.info ("Clearing session for persona [{}]...", k);
-            v.getDriver ()
-                .quit ();
-            if (v.getPlatformType () != WEB) {
-                v.getServiceManager ()
-                    .stopServer ();
-            }
+        sessions.forEach ((persona, session) -> {
+            switchPersona (persona);
+            clearSession ();
         });
         sessions.clear ();
         SESSION.remove ();
     }
 
     /**
-     * Create a new Session.
-     *
-     * @param platformType Target Platform Type
-     * @param configKey Configuration key for the session
+     * Clear session for current persona
      */
-    public static void createSession (final PlatformType platformType, final String configKey) {
-        createSession ("Default User", platformType, configKey);
+    public static void clearSession () {
+        LOGGER.info ("Clearing session for persona [{}]...", getCurrentPersona ());
+        getSession ().getDriver ()
+            .quit ();
+        if (getSession ().getPlatformType () != WEB) {
+            getSession ().getServiceManager ()
+                .stopServer ();
+        }
+        CURRENT_PERSONA.remove ();
     }
 
     /**
@@ -93,7 +93,7 @@ public final class ParallelSession {
      * @return Persona name
      */
     public static String getCurrentPersona () {
-        return currentPersona;
+        return CURRENT_PERSONA.get ();
     }
 
     /**
@@ -106,6 +106,7 @@ public final class ParallelSession {
     @SuppressWarnings ("unchecked")
     public static <D extends WebDriver> DriverSession<D> getSession () {
         LOGGER.traceEntry ();
+        final var currentPersona = getCurrentPersona ();
         final var session = SESSION.get ()
             .containsKey (currentPersona);
         if (!session) {
@@ -122,12 +123,13 @@ public final class ParallelSession {
      * @param persona New Persona name
      */
     public static void switchPersona (final String persona) {
+        final var currentPersona = getCurrentPersona ();
         if (currentPersona != null && currentPersona.equals (
             requireNonEmpty (persona, SESSION_PERSONA_CANNOT_BE_NULL))) {
             return;
         }
         LOGGER.info ("Switching current session persona from [{}] to [{}]...", currentPersona, persona);
-        currentPersona = persona;
+        CURRENT_PERSONA.set (persona);
     }
 
     /**
