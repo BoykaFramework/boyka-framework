@@ -22,6 +22,7 @@ import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNullElse;
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -163,8 +164,7 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
         options.addArguments ("--remote-allow-origins=*");
-        webSetting.getBrowserOptions ()
-            .forEach (options::addArguments);
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }

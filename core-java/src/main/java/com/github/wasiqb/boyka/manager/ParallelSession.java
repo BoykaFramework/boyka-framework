@@ -20,6 +20,7 @@ import static com.github.wasiqb.boyka.enums.Message.SESSION_PERSONA_CANNOT_BE_NU
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -62,11 +63,9 @@ public final class ParallelSession {
      */
     public static void clearSession () {
         LOGGER.info ("Clearing session for persona [{}]...", getCurrentPersona ());
-        getSession ().getDriver ()
-            .quit ();
+        ofNullable (getSession ().getDriver ()).ifPresent (WebDriver::quit);
         if (getSession ().getPlatformType () != WEB) {
-            getSession ().getServiceManager ()
-                .stopServer ();
+            ofNullable (getSession ().getServiceManager ()).ifPresent (ServiceManager::stopServer);
         }
         CURRENT_PERSONA.remove ();
     }
