@@ -22,6 +22,7 @@ import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.HashMap;
@@ -51,8 +52,10 @@ public final class ParallelSession {
         LOGGER.info ("Clearing all the sessions...");
         final var sessions = SESSION.get ();
         sessions.forEach ((persona, session) -> {
-            switchPersona (persona);
-            clearSession ();
+            if (isNotEmpty (persona)) {
+                switchPersona (persona);
+                clearSession ();
+            }
         });
         sessions.clear ();
         SESSION.remove ();
