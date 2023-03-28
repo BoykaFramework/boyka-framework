@@ -74,7 +74,10 @@ public class JioMeetTest {
         switchPersona (HOST_PERSONA);
         withMouse (meetingPage ().getEndCallButton ()).click ();
         withMouse (meetingPage ().getEndForAll ()).click ();
-        withMouse (meetingPage ().getSkipButton ()).click ();
+
+        if (onElement (meetingPage ().getSkipButton ()).isDisplayed ()) {
+            withMouse (meetingPage ().getSkipButton ()).click ();
+        }
     }
 
     @Test (dependsOnMethods = "testGuestStartMeeting")
