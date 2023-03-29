@@ -31,7 +31,8 @@
         },
         "browser_options": [
           "use-fake-device-for-media-stream",
-          "use-fake-ui-for-media-stream"
+          "use-fake-ui-for-media-stream",
+          "--remote-allow-origins=*"
         ]
       },
       "test_local_firefox": {
