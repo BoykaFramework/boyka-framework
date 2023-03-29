@@ -147,6 +147,9 @@
         "browser": "ABC"
       },
       "test_local_null_browser": {
+        "browser_options": [
+          "--remote-allow-origins=*"
+        ]
       }
     },
     "mobile": {
