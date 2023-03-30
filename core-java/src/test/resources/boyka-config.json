@@ -173,6 +173,7 @@
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
           "full_reset": true,
+          "system_port": 8200,
           "swipe": {
             "distance": 50,
             "max_swipe_until_found": 5
@@ -206,6 +207,7 @@
           "name": "Pixel_6_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
+          "system_port": 8201,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
           "full_reset": true,
@@ -318,7 +320,8 @@
           },
           "wda": {
             "launch_timeout": 120,
-            "connection_timeout": 120
+            "connection_timeout": 120,
+            "local_port": 8100
           },
           "application": {
             "path": "/apps/ios/sauce-demo.zip",
@@ -352,7 +355,8 @@
           },
           "wda": {
             "launch_timeout": 120,
-            "connection_timeout": 120
+            "connection_timeout": 120,
+            "local_port": 8101
           },
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",

@@ -18,6 +18,9 @@ package com.github.wasiqb.boyka.utils;
 
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 
+import java.util.Optional;
+import java.util.function.Consumer;
+
 import com.github.wasiqb.boyka.enums.Message;
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,6 +62,26 @@ public final class Validator {
             throwError (message, args);
         }
         return obj;
+    }
+
+    /**
+     * Checks if the value is not null or zero and perform action on it.
+     *
+     * @param value Value to check
+     * @param action Action to perform if value present
+     * @param <T> Type of value
+     */
+    public static <T> void setOptionIfPresent (final T value, final Consumer<T> action) {
+        if (value != null) {
+            if (value instanceof Integer) {
+                Optional.of (value)
+                    .filter (i -> (Integer) i > 0)
+                    .ifPresent (action);
+            } else {
+                Optional.of (value)
+                    .ifPresent (action);
+            }
+        }
     }
 
     private Validator () {
