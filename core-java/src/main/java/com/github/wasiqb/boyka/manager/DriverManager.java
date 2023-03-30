@@ -39,10 +39,9 @@ final class DriverManager {
 
     private final PlatformType platformType;
 
-    DriverManager (final String driverKey) {
+    DriverManager () {
         LOGGER.traceEntry ();
         this.platformType = getSession ().getPlatformType ();
-        getSession ().setConfigKey (driverKey);
         LOGGER.traceExit ();
     }
 

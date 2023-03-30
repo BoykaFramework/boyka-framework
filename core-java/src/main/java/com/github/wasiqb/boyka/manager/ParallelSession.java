@@ -85,7 +85,7 @@ public final class ParallelSession {
         final var currentSession = getSession ();
         currentSession.setPlatformType (platformType);
         currentSession.setConfigKey (configKey);
-        final var instance = new DriverManager (configKey);
+        final var instance = new DriverManager ();
         instance.setupDriver ();
     }
 

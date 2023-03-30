@@ -5,6 +5,7 @@ import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static java.text.MessageFormat.format;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
 import com.github.wasiqb.boyka.exception.FrameworkError;
@@ -44,7 +45,7 @@ public class SauceDemoTest {
     @BeforeClass (description = "Setup test class", alwaysRun = true)
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
-        createSession ("SauceDemoTest", platformType, driverKey);
+        createSession (format ("SauceDemoTest-{0}", platformType), platformType, driverKey);
         this.sauceDemo = new SauceDemoActions ();
     }
 
