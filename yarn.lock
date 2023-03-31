@@ -1653,6 +1653,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/cli@npm:^17.5.1":
+  version: 17.5.1
+  resolution: "@commitlint/cli@npm:17.5.1"
+  dependencies:
+    "@commitlint/format": ^17.4.4
+    "@commitlint/lint": ^17.4.4
+    "@commitlint/load": ^17.5.0
+    "@commitlint/read": ^17.5.1
+    "@commitlint/types": ^17.4.4
+    execa: ^5.0.0
+    lodash.isfunction: ^3.0.9
+    resolve-from: 5.0.0
+    resolve-global: 1.0.0
+    yargs: ^17.0.0
+  bin:
+    commitlint: cli.js
+  checksum: 2bdd26b3215796dccb16b0d7459d3b0db7f6324800aa73b97a8cdf79b77f3691d85ee88f37fa6cf20c97ac664f31dcb6ad7aef1da3c3b32d7bb12f18d49a37f2
+  languageName: node
+  linkType: hard
+
 "@commitlint/config-conventional@npm:^17.4.4":
   version: 17.4.4
   resolution: "@commitlint/config-conventional@npm:17.4.4"
@@ -1747,6 +1767,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/load@npm:^17.5.0":
+  version: 17.5.0
+  resolution: "@commitlint/load@npm:17.5.0"
+  dependencies:
+    "@commitlint/config-validator": ^17.4.4
+    "@commitlint/execute-rule": ^17.4.0
+    "@commitlint/resolve-extends": ^17.4.4
+    "@commitlint/types": ^17.4.4
+    "@types/node": "*"
+    chalk: ^4.1.0
+    cosmiconfig: ^8.0.0
+    cosmiconfig-typescript-loader: ^4.0.0
+    lodash.isplainobject: ^4.0.6
+    lodash.merge: ^4.6.2
+    lodash.uniq: ^4.5.0
+    resolve-from: ^5.0.0
+    ts-node: ^10.8.1
+    typescript: ^4.6.4 || ^5.0.0
+  checksum: c039114b0ad67bb9d8b05ec635d847bd5ab760528f0fb203411f433585bdab5472f4f5c7856dfc417cf64c05576f54c1afc4997a813f529304e0156bfc1d6cc8
+  languageName: node
+  linkType: hard
+
 "@commitlint/message@npm:^17.4.2":
   version: 17.4.2
   resolution: "@commitlint/message@npm:17.4.2"
@@ -1775,6 +1817,19 @@ __metadata:
     git-raw-commits: ^2.0.0
     minimist: ^1.2.6
   checksum: 29c828ba0a756196cff6b6fb480971cc779519823c3d061c6b2debee1dfc6c17453ef8aefe6d72a2f21e7be866f501e478b77dddd77f7cd75dfdae7f4a153268
+  languageName: node
+  linkType: hard
+
+"@commitlint/read@npm:^17.5.1":
+  version: 17.5.1
+  resolution: "@commitlint/read@npm:17.5.1"
+  dependencies:
+    "@commitlint/top-level": ^17.4.0
+    "@commitlint/types": ^17.4.4
+    fs-extra: ^11.0.0
+    git-raw-commits: ^2.0.11
+    minimist: ^1.2.6
+  checksum: 62ee4f7a47b22a8571ae313bca36b418805a248f4986557f38f06317c44b6d18072889f95e7bc22bbb33a2f2b08236f74596ff28e3dbd0894249477a9df367c3
   languageName: node
   linkType: hard
 
@@ -5022,7 +5077,7 @@ __metadata:
     "@types/node": ^18.15.3
     "@typescript-eslint/eslint-plugin": ^5.55.0
     "@typescript-eslint/parser": ^5.55.0
-    commitlint: ^17.4.4
+    commitlint: ^17.5.1
     eslint: ^8.36.0
     eslint-config-google: ^0.14.0
     eslint-config-prettier: ^8.7.0
@@ -5737,15 +5792,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitlint@npm:^17.4.4":
-  version: 17.4.4
-  resolution: "commitlint@npm:17.4.4"
+"commitlint@npm:^17.5.1":
+  version: 17.5.1
+  resolution: "commitlint@npm:17.5.1"
   dependencies:
-    "@commitlint/cli": ^17.4.4
+    "@commitlint/cli": ^17.5.1
     "@commitlint/types": ^17.4.4
   bin:
     commitlint: cli.js
-  checksum: 1b306bbe1662725c198ca04b742a1275e1dd0281c12cb18b12d5fc7f5d800f175c0fdc8674793dc3330d9e83b865761f5ab9a234c307ffca0fbc0dc0b13cb7b3
+  checksum: 562740d46732e4d64e62671bd7b6df585c551b903ee1a507b1a9c2456719e5ab6383e9feb16e1b007ceb807c9a5741b075fc2a0271a9f343ea7a187bce300931
   languageName: node
   linkType: hard
 
@@ -8069,7 +8124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"git-raw-commits@npm:^2.0.0, git-raw-commits@npm:^2.0.8":
+"git-raw-commits@npm:^2.0.0, git-raw-commits@npm:^2.0.11, git-raw-commits@npm:^2.0.8":
   version: 2.0.11
   resolution: "git-raw-commits@npm:2.0.11"
   dependencies:
@@ -15162,6 +15217,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^4.6.4 || ^5.0.0":
+  version: 5.0.3
+  resolution: "typescript@npm:5.0.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 3cce0576d218cb4277ff8b6adfef1a706e9114a98b4261a38ad658a7642f1b274a8396394f6cbff8c0ba852996d7ed2e233e9b8431d5d55ac7c2f6fea645af02
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^5.0.2":
   version: 5.0.2
   resolution: "typescript@npm:5.0.2"
@@ -15179,6 +15244,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: c981e82b77a5acdcc4e69af9c56cdecf5b934a87a08e7b52120596701e389a878b8e3f860e73ffb287bf649cc47a8c741262ce058148f71de4cdd88bb9c75153
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>":
+  version: 5.0.3
+  resolution: "typescript@patch:typescript@npm%3A5.0.3#~builtin<compat/typescript>::version=5.0.3&hash=85af82"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 5580367025ff7ee1f2a61e5affdbddccfe6e893bc662aa33fefdbf12de7e493173fa7d47475e9e15121828691004c4ed13bcd115e57866baed97b54c60954e1c
   languageName: node
   linkType: hard
 
