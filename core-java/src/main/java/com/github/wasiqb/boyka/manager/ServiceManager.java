@@ -63,7 +63,7 @@ import org.apache.logging.log4j.Logger;
  * @author Wasiq Bhamla
  * @since 06-Sept-2022
  */
-public class ServiceManager {
+class ServiceManager {
     private static final Logger LOG = getLogger ();
 
     private       AppiumServiceBuilder     builder;

@@ -47,12 +47,12 @@
     "lerna": "^6.6.1",
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^13.2.0",
-    "nx": "^15.8.9",
+    "nx": "^15.9.1",
     "prettier": "^2.8.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.3"
   },
   "scripts": {
     "postinstall": "husky install",
