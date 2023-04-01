@@ -20,7 +20,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction
 import static com.github.wasiqb.boyka.actions.elements.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.actions.interfaces.elements.IClickableActions;

@@ -21,7 +21,7 @@ import static com.github.wasiqb.boyka.actions.elements.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_SWIPE_DISTANCE;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.requireNonNull;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.time.Duration.ZERO;
