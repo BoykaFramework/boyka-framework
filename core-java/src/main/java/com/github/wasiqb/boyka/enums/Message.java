@@ -199,6 +199,10 @@ public enum Message {
      */
     SESSION_NOT_STARTED ("Session could not be started..."),
     /**
+     * Session persona cannot be null.
+     */
+    SESSION_PERSONA_CANNOT_BE_NULL ("Session Persona cannot be empty or null..."),
+    /**
      * Test Error.
      */
     TEST_ERROR ("Test error..."),

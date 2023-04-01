@@ -23,6 +23,7 @@
         <packages>
             <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
             <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
+            <package name="com.github.wasiqb.boyka.testng.ui.jiomeet"/>
         </packages>
     </test>
     <test name="Test Boyka web on Local Firefox" enabled="false">

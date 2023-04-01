@@ -24,7 +24,7 @@ Check out all the available static methods to interact with the page in your tes
 - [`ElementActions`](/api/actions/elements/element-actions): Contains all common methods for element related actions
 - [`FingerActions`](/api/actions/elements/finger-actions): Contains all methods for single finger on element / screen related actions
 - [`TextBoxActions`](/api/actions/elements/textbox-actions): Contains all text box related actions methods
-:::
+   :::
 
 ## Example
 
@@ -33,9 +33,9 @@ package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
@@ -57,14 +57,14 @@ public class SauceDemoTest {
   @BeforeClass (description = "Setup test class", alwaysRun = true)
   @Parameters ({ "platformType", "driverKey" })
   public void setupTestClass (final PlatformType platformType, final String driverKey) {
-    createDriver (platformType, driverKey);
+    createSession ("SauceDemoTest Persona", platformType, driverKey);
     this.sauceDemo = new SauceDemoActions ();
   }
 
   @AfterClass (description = "Tear down test class", alwaysRun = true)
   public void tearDownTestClass () {
     withDriver ().saveLogs ();
-    closeDriver ();
+    clearSession ();
   }
 
   @Test (description = "Test login functionality")

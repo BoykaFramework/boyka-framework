@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.13.0">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.13.0/total?color=brightgreen&label=Downloads%20for%20v0.13.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.14.0">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.14.0/total?color=brightgreen&label=Downloads%20for%20v0.14.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -64,6 +64,7 @@ This all gave me an idea of having a single framework which could solve all the 
 - ✅ Supports Web browser automation with support for Chrome, Edge, Firefox and Safari.
 - ✅ Supports Android native apps automation
 - ✅ Supports iOS native apps automation
+- ✅ Allow Multi-user Multi-platform session interactions
 - ✅ Supports execution of Web tests on cloud platforms like BrowserStack and LambdaTest.
 - ✅ Highly configurable via `boyka-config.json`
 - ✅ Micro logging to log events of the test execution
@@ -86,7 +87,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.13.0</version>
+  <version>0.14.0</version>
 </dependency>
 ```
 
@@ -516,7 +517,7 @@ import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
 import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
 import static java.text.MessageFormat.format;
 
@@ -569,9 +570,9 @@ package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
@@ -593,14 +594,14 @@ public class SauceDemoTest {
   @BeforeClass (description = "Setup test class", alwaysRun = true)
   @Parameters ({ "platformType", "driverKey" })
   public void setupTestClass (final PlatformType platformType, final String driverKey) {
-    createDriver (platformType, driverKey);
+    createSession ("Unique User Persona", platformType, driverKey);
     this.sauceDemo = new SauceDemoActions ();
   }
 
   @AfterClass (description = "Tear down test class", alwaysRun = true)
   public void tearDownTestClass () {
     withDriver ().saveLogs ();
-    closeDriver ();
+    clearSession ();
   }
 
   @Test (description = "Test login functionality")

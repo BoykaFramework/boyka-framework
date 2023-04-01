@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.config.ui.web;
 import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 
+import java.util.List;
 import java.util.Map;
 
 import com.github.wasiqb.boyka.enums.Browser;
@@ -38,6 +39,7 @@ import org.openqa.selenium.Dimension;
 public class WebSetting {
     private String              baseUrl;
     private Browser             browser    = Browser.CHROME;
+    private List<String>        browserOptions;
     private Map<String, Object> capabilities;
     private Dimension           customSize = new Dimension (1920, 1080);
     private boolean             headless   = true;

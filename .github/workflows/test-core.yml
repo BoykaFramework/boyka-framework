@@ -85,7 +85,7 @@ jobs:
           appium driver install xcuitest
 
       - name: Start Selenium Grid
-        run: java -jar core-java/libs/selenium-server-4.8.0.jar standalone > core-java/selenium-grid.log &
+        run: java -jar core-java/libs/selenium-server-4.8.2.jar standalone > core-java/selenium-grid.log &
 
       - name: Launch iOS Simulator
         uses: futureware-tech/simulator-action@v2

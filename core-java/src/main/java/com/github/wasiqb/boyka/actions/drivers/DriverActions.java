@@ -20,7 +20,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_CREATING_LOGS;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_WRITING_LOGS;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.lang.System.getProperty;
 import static java.lang.Thread.currentThread;
