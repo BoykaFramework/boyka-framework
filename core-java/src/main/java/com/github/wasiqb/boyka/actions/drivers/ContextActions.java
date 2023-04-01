@@ -21,7 +21,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.enums.ApplicationType.HYBRID;
 import static com.github.wasiqb.boyka.enums.Message.CONTEXT_SWITCHING_NOT_ALLOWED;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static org.apache.logging.log4j.LogManager.getLogger;
 

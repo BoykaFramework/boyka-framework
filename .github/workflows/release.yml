@@ -158,6 +158,9 @@ jobs:
           name: version-files
           path: |
             ${{ github.workspace }}/core-java/pom.xml
+            ${{ github.workspace }}/CHANGELOG.md
+            ${{ github.workspace }}/lerna.json
+            ${{ github.workspace }}/website/package.json
 
   push-pom:
     runs-on: ubuntu-latest
@@ -176,10 +179,14 @@ jobs:
         with:
           name: version-files
 
+      - name: Get previous version
+        id: previous-version
+        run: echo "old-version=$(node -p "require('./package.json').version" )" >> "$GITHUB_OUTPUT"
+
       - name: Update new version
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: ${{ needs.prepare-release.outputs.old-version }}
+          find: ${{ steps.previous-version.outputs.old-version }}
           replace: ${{ needs.prepare-release.outputs.new-version }}
           regex: false
           include: |

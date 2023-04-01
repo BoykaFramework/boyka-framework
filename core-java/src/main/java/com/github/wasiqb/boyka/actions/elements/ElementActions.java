@@ -20,7 +20,7 @@ import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -168,6 +168,6 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying text of {}", this.locator.getName ());
         LOGGER.traceExit ();
-        return assertThat (getText ());
+        return assertThat (getText ().trim ());
     }
 }

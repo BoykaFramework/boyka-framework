@@ -22,7 +22,7 @@ import static com.github.wasiqb.boyka.enums.Message.DRIVER_ERROR_OCCURRED;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.VISIBLE;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofMillis;

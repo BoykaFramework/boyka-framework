@@ -3,8 +3,9 @@ package com.github.wasiqb.boyka.manager;
 import static com.github.wasiqb.boyka.enums.AutomationType.UI_AUTOMATOR;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.utils.Validator.setOptionIfPresent;
 import static io.appium.java_client.Setting.IGNORE_UNIMPORTANT_VIEWS;
 import static java.time.Duration.ofSeconds;
 
@@ -74,6 +75,9 @@ class AndroidManager implements IDriverManager {
         options.setFullReset (this.settings.isFullReset ());
         options.setUiautomator2ServerLaunchTimeout (ofSeconds (this.settings.getServerLaunchTimeout ()));
         options.setUiautomator2ServerInstallTimeout (ofSeconds (this.settings.getServerInstallTimeout ()));
+        options.setSystemPort (this.settings.getSystemPort ());
+        options.setUdid (this.settings.getUniqueId ());
+        setOptionIfPresent (this.settings.getChromeDriverPort (), options::setChromedriverPort);
     }
 
     private void setupAndroidSettings () {
