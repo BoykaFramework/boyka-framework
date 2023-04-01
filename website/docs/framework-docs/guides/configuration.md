@@ -484,6 +484,9 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `swipe` | Swipe specific setting | [`SwipeSetting`](#swipe-setting) | |
 | `wda` | WebDriverAgent specific settings for iOS | [`WDASetting`](#wda-config) | |
 | `typing_speed` | Max typing speed for iOS | `int` | `60` |
+| `chrome_driver_port` | Chrome driver port for Android devices | `int` | `0` |
+| `system_port` | System port for Android devices | `int` | `8200` |
+| `unique_id` | Device UDID | `string` | `null` |
 
 ###### Device Application Configurations {#app-config}
 

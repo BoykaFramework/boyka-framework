@@ -11,8 +11,8 @@ import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
@@ -22,6 +22,7 @@ import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
 import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNullElse;
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -162,7 +163,7 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
-        options.addArguments ("--remote-allow-origins=*");
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -173,6 +174,7 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         edgedriver ().setup ();
         final var options = new EdgeOptions ();
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -183,6 +185,7 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         firefoxdriver ().setup ();
         final var options = new FirefoxOptions ();
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
