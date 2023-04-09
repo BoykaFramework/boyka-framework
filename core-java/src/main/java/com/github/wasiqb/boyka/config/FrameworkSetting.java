@@ -17,16 +17,21 @@
 package com.github.wasiqb.boyka.config;
 
 import static com.github.wasiqb.boyka.enums.Message.CONFIG_KEY_NOT_FOUND;
+import static com.github.wasiqb.boyka.enums.Message.INVALID_LISTENER_FOUND;
 import static com.github.wasiqb.boyka.enums.Message.NO_API_SETTINGS_FOUND;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
 import static java.lang.String.join;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.config.ui.UISetting;
+import com.github.wasiqb.boyka.enums.ListenerType;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 
@@ -40,8 +45,9 @@ import org.apache.logging.log4j.Logger;
 public class FrameworkSetting {
     private static final Logger LOGGER = getLogger ();
 
-    private Map<String, ApiSetting> api;
-    private UISetting               ui;
+    private Map<String, ApiSetting>   api;
+    private Map<ListenerType, String> listeners;
+    private UISetting                 ui;
 
     /**
      * Get API setting.
@@ -57,5 +63,28 @@ public class FrameworkSetting {
             throwError (CONFIG_KEY_NOT_FOUND, key, keys);
         }
         return LOGGER.traceExit (requireNonNull (this.api.get (key), NO_API_SETTINGS_FOUND, key));
+    }
+
+    @SuppressWarnings ("unchecked")
+    public <T extends BoykaListener> T getListener (final ListenerType listenerType) {
+        T result = null;
+        if (this.listeners == null) {
+            LOGGER.warn ("No listeners found...");
+            return null;
+        }
+        if (this.listeners.get (listenerType) == null) {
+            LOGGER.warn ("No listeners found for listener type [{}] in Boyka config...", listenerType);
+            return null;
+        }
+        final var listener = this.listeners.get (listenerType);
+        try {
+            final var cls = (Class<T>) Class.forName (listener);
+            final var constructor = cls.getConstructor ();
+            result = constructor.newInstance ();
+        } catch (final ClassNotFoundException | NoSuchMethodException | InstantiationException |
+                       IllegalAccessException | InvocationTargetException e) {
+            handleAndThrow (INVALID_LISTENER_FOUND, e, listener);
+        }
+        return result;
     }
 }

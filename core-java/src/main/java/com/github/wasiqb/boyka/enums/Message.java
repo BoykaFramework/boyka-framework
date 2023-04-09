@@ -143,6 +143,10 @@ public enum Message {
      */
     INVALID_HEADER_KEY ("No such key {0} found..."),
     /**
+     * Invalid listener class provided.
+     */
+    INVALID_LISTENER_FOUND ("Invalid Listener class [{0}] provided in the config..."),
+    /**
      * Invalid platform for operation
      */
     INVALID_PLATFORM_FOR_OPERATION ("Platform [{0}] is not supported for this setting..."),

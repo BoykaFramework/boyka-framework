@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions.api;
 
 import static com.github.wasiqb.boyka.enums.ContentType.JSON;
+import static com.github.wasiqb.boyka.enums.ListenerType.API_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.AUTH_PASSWORD_REQUIRED;
 import static com.github.wasiqb.boyka.enums.Message.CONTENT_TYPE_NOT_SET;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_EXECUTING_REQUEST;
@@ -31,6 +32,7 @@ import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.requireNonNull;
 import static java.util.Objects.requireNonNullElse;
+import static java.util.Optional.ofNullable;
 import static okhttp3.Credentials.basic;
 import static okhttp3.MediaType.parse;
 import static okhttp3.RequestBody.create;
@@ -44,6 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.wasiqb.boyka.actions.interfaces.api.IApiActions;
+import com.github.wasiqb.boyka.actions.interfaces.api.IApiActionsListener;
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
@@ -86,6 +89,7 @@ public final class ApiActions implements IApiActions {
     private final ApiRequest          apiRequest;
     private final ApiSetting          apiSetting;
     private final OkHttpClient        client;
+    private final IApiActionsListener listener;
     private final LogSetting          logSetting;
     private       MediaType           mediaType;
     private final Map<String, String> pathParams;
@@ -96,6 +100,8 @@ public final class ApiActions implements IApiActions {
     private ApiActions (final ApiRequest apiRequest) {
         LOGGER.traceEntry ("Parameter : {}", apiRequest.getConfigKey ());
         getSession ().setConfigKey (apiRequest.getConfigKey ());
+        this.listener = getSession ().getSetting ()
+            .getListener (API_ACTION);
         this.apiRequest = apiRequest;
         this.pathParams = new HashMap<> ();
         this.apiSetting = loadSetting ().getApiSetting (apiRequest.getConfigKey ());
@@ -112,17 +118,19 @@ public final class ApiActions implements IApiActions {
     @Override
     public ApiResponse execute () {
         LOGGER.traceEntry ();
-        final var manager = new ApiActions (this.apiRequest);
-        requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<String, String> ()).forEach (manager::addHeader);
-        requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<String, String> ()).forEach (
-            manager::pathParam);
-        return LOGGER.traceExit (manager.contentType (this.apiRequest.getContentType ())
+        requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<String, String> ()).forEach (this::addHeader);
+        requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<String, String> ()).forEach (this::pathParam);
+
+        final var responseResult = this.contentType (this.apiRequest.getContentType ())
             .basicAuth (this.apiRequest.getUserName (), this.apiRequest.getPassword ())
             .body (requireNonNullElse (this.apiRequest.getBody (), EMPTY))
             .body (this.apiRequest.getBodyObject ())
             .body (this.apiRequest.getFormBodies ())
             .method (this.apiRequest.getMethod ())
-            .getResponse (this.apiRequest.getQueryParams (), this.apiRequest.getPath ()));
+            .getResponse (this.apiRequest.getQueryParams (), this.apiRequest.getPath ());
+
+        ofNullable (this.listener).ifPresent (l -> l.onExecute (responseResult));
+        return LOGGER.traceExit (responseResult);
     }
 
     private void addHeader (final String name, final String value) {
@@ -144,8 +152,7 @@ public final class ApiActions implements IApiActions {
     private <T> ApiActions body (final T body) {
         LOGGER.traceEntry ();
         if (body != null) {
-            this.requestBody = create (JsonUtil.toString (body),
-                requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
+            body (JsonUtil.toString (body));
         }
         return LOGGER.traceExit (this);
     }
@@ -292,7 +299,8 @@ public final class ApiActions implements IApiActions {
                 .networkResponse (parseResponse (res.networkResponse ()))
                 .previousResponse (parseResponse (res.priorResponse ()))
                 .receivedResponseAt (res.receivedResponseAtMillis ())
-                .body (requireNonNullElse (res.body (), ResponseBody.create (EMPTY, parse (JSON.getType ()))).string ())
+                .body (JsonUtil.toString (
+                    requireNonNullElse (res.body (), ResponseBody.create (EMPTY, parse (JSON.getType ()))).string ()))
                 .create ());
         } catch (final IOException e) {
             handleAndThrow (ERROR_PARSING_RESPONSE_BODY, e);

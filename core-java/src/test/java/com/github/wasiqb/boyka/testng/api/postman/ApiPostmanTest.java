@@ -16,10 +16,11 @@
 
 package com.github.wasiqb.boyka.testng.api.postman;
 
+import static com.github.wasiqb.boyka.enums.ContentType.FORM_URLENCODED;
+import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
+
 import com.github.wasiqb.boyka.actions.api.ApiActions;
 import com.github.wasiqb.boyka.builders.ApiRequest;
-import com.github.wasiqb.boyka.enums.ContentType;
-import com.github.wasiqb.boyka.enums.RequestMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -32,16 +33,17 @@ public class ApiPostmanTest {
     /**
      * Test form data request body related API request.
      */
-    @Test
+    @Test (description = "Test Form body POST request")
     public void testFormBodyRequest () {
         final var request = ApiRequest.createRequest ()
             .configKey ("test_postman")
-            .contentType (ContentType.FORM_URLENCODED)
+            .contentType (FORM_URLENCODED)
             .formBody ("strange", "boom")
             .formBody ("test", "abc")
-            .method (RequestMethod.POST)
+            .method (POST)
             .path ("/post")
             .create ();
+
         final var response = ApiActions.withRequest (request)
             .execute ();
         response.verifyStatusCode ()

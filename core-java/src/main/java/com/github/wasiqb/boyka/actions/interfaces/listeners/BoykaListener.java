@@ -14,26 +14,14 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.restful.requests;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+package com.github.wasiqb.boyka.actions.interfaces.listeners;
 
 /**
- * Booking data class.
+ * Base Boyka framework listener class.
  *
  * @author Wasiq Bhamla
- * @since 28-Feb-2023
+ * @since 06-Apr-2023
  */
-@Getter
-@Builder
-@ToString
-public class BookingData {
-    private String       additionalneeds;
-    private BookingDates bookingdates;
-    private boolean      depositpaid;
-    private String       firstname;
-    private String       lastname;
-    private int          totalprice;
+public interface BoykaListener {
+    // Placeholder interface.
 }

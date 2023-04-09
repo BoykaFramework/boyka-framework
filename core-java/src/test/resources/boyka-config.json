@@ -1,4 +1,7 @@
 {
+  "listeners": {
+    "API_ACTION": "com.github.wasiqb.boyka.testng.api.ApiActionListener"
+  },
   "ui": {
     "timeout": {
       "implicit_wait": 10,

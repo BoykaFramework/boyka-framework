@@ -14,26 +14,24 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.restful.requests;
+package com.github.wasiqb.boyka.actions.interfaces.api;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
+import com.github.wasiqb.boyka.builders.ApiResponse;
 
 /**
- * Booking data class.
+ * API Actions listener.
  *
  * @author Wasiq Bhamla
- * @since 28-Feb-2023
+ * @since 06-Apr-2023
  */
-@Getter
-@Builder
-@ToString
-public class BookingData {
-    private String       additionalneeds;
-    private BookingDates bookingdates;
-    private boolean      depositpaid;
-    private String       firstname;
-    private String       lastname;
-    private int          totalprice;
+public interface IApiActionsListener extends BoykaListener {
+    /**
+     * Handle API `execute` method.
+     *
+     * @param response {@link ApiResponse} instance
+     */
+    default void onExecute (final ApiResponse response) {
+        // not implemented
+    }
 }

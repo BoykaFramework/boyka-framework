@@ -38,7 +38,7 @@
         <google.guava.version>31.1-jre</google.guava.version>
         <google-truth.version>1.1.3</google-truth.version>
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
-        <json-path.version>2.7.0</json-path.version>
+        <json-path.version>2.8.0</json-path.version>
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
         <faker.version>1.8.1</faker.version>
@@ -49,14 +49,16 @@
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.2.1</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.9.2</checkstyle.version>
+        <checkstyle.version>10.9.3</checkstyle.version>
+        <aspectj.version>1.9.19</aspectj.version>
         <suite-xml>test-suites/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
+        <allureArgs>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</allureArgs>
         <sonar.organization>boykaframework</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>boyka-framework</sonar.projectKey>
@@ -242,6 +244,13 @@
             <version>${faker.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.21.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -369,11 +378,21 @@
                             <value>false</value>
                         </property>
                     </properties>
+                    <systemPropertyVariables>
+                        <allure.results.directory>target/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>${suite-xml}</suiteXmlFile>
                     </suiteXmlFiles>
-                    <argLine>${argLine}</argLine>
+                    <argLine>${argLine} ${allureArgs}</argLine>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
@@ -487,8 +506,18 @@
                             <suiteXmlFiles>
                                 <suiteXmlFile>${suite-xml}</suiteXmlFile>
                             </suiteXmlFiles>
-                            <argLine>${argLine} ${surefireArgLine}</argLine>
+                            <systemPropertyVariables>
+                                <allure.results.directory>target/allure-results</allure.results.directory>
+                            </systemPropertyVariables>
+                            <argLine>${argLine} ${allureArgs} ${surefireArgLine}</argLine>
                         </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjweaver</artifactId>
+                                <version>${aspectj.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
