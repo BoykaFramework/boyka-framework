@@ -20,15 +20,18 @@ import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.enums.ApplicationType.HYBRID;
+import static com.github.wasiqb.boyka.enums.ListenerType.CONTEXT_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.CONTEXT_SWITCHING_NOT_ALLOWED;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.github.wasiqb.boyka.actions.interfaces.drivers.IContextActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IContextActionsListener;
 import io.appium.java_client.remote.SupportsContextSwitching;
 import org.apache.logging.log4j.Logger;
 
@@ -51,17 +54,27 @@ public class ContextActions implements IContextActions {
         return CONTEXT_ACTIONS;
     }
 
+    private final IContextActionsListener listener;
+
+    private ContextActions () {
+        this.listener = getSession ().getSetting ()
+            .getListener (CONTEXT_ACTION);
+    }
+
     @Override
     public List<String> contexts () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting All available context names...");
-        return getDriverAttribute ((SupportsContextSwitching d) -> new ArrayList<> (d.getContextHandles ()), null);
+        ofNullable (this.listener).ifPresent (IContextActionsListener::onContexts);
+        return getDriverAttribute ((final SupportsContextSwitching d) -> new ArrayList<> (d.getContextHandles ()),
+            null);
     }
 
     @Override
     public String currentContext () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting current context name...");
+        ofNullable (this.listener).ifPresent (IContextActionsListener::onCurrentContext);
         return getDriverAttribute (SupportsContextSwitching::getContext, null);
     }
 
@@ -69,6 +82,7 @@ public class ContextActions implements IContextActions {
     public void switchToNative () {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching context to NATIVE_APP...");
+        ofNullable (this.listener).ifPresent (IContextActionsListener::onSwitchToNative);
         switchToWebView ("NATIVE_APP");
         LOGGER.traceExit ();
     }
@@ -77,6 +91,7 @@ public class ContextActions implements IContextActions {
     public void switchToWebView (final String contextName) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching context to [{}]...", contextName);
+        ofNullable (this.listener).ifPresent (l -> l.onSwitchToWebView (contextName));
         final var applicationType = getSession ().getMobileSetting ()
             .getDevice ()
             .getApplication ()
@@ -92,6 +107,7 @@ public class ContextActions implements IContextActions {
     public void switchToWebView () {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching context to first Web view...");
+        ofNullable (this.listener).ifPresent (IContextActionsListener::onSwitchToWebView);
         withDriver ().waitUntil (d -> contexts ().size () > 1);
         final var webContext = contexts ().stream ()
             .filter (c -> !c.equals ("NATIVE_APP"))

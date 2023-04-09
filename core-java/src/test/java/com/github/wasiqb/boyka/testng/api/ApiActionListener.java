@@ -21,7 +21,7 @@ import static io.qameta.allure.Allure.step;
 import static java.text.MessageFormat.format;
 import static java.util.Optional.ofNullable;
 
-import com.github.wasiqb.boyka.actions.interfaces.api.IApiActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.api.IApiActionsListener;
 import com.github.wasiqb.boyka.builders.ApiResponse;
 
 /**

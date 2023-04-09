@@ -17,11 +17,15 @@
 package com.github.wasiqb.boyka.actions.drivers;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
+import static com.github.wasiqb.boyka.enums.ListenerType.ALERT_ACTION;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.actions.interfaces.drivers.IAlertActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IAlertActionsListener;
 import com.google.common.truth.StringSubject;
 import org.apache.logging.log4j.Logger;
 
@@ -44,6 +48,13 @@ public class AlertActions implements IAlertActions {
         return ALERT_ACTIONS;
     }
 
+    private final IAlertActionsListener listener;
+
+    private AlertActions () {
+        this.listener = getSession ().getSetting ()
+            .getListener (ALERT_ACTION);
+    }
+
     @Override
     public String accept (final String text) {
         LOGGER.traceEntry ();
@@ -53,6 +64,7 @@ public class AlertActions implements IAlertActions {
             final var message = alert.getText ();
             alert.sendKeys (text);
             alert.accept ();
+            ofNullable (this.listener).ifPresent (l -> l.onAccept (text));
             return message;
         }, EMPTY);
     }
@@ -65,6 +77,7 @@ public class AlertActions implements IAlertActions {
                 .alert ();
             final var message = alert.getText ();
             alert.accept ();
+            ofNullable (this.listener).ifPresent (IAlertActionsListener::onAccept);
             return message;
         }, EMPTY);
     }
@@ -77,6 +90,7 @@ public class AlertActions implements IAlertActions {
                 .alert ();
             final var message = alert.getText ();
             alert.dismiss ();
+            ofNullable (this.listener).ifPresent (IAlertActionsListener::onDismiss);
             return message;
         }, EMPTY);
     }
@@ -86,6 +100,7 @@ public class AlertActions implements IAlertActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying accept alert");
         LOGGER.traceExit ();
+        ofNullable (this.listener).ifPresent (IAlertActionsListener::onVerifyAccept);
         return assertThat (accept ());
     }
 
@@ -94,6 +109,7 @@ public class AlertActions implements IAlertActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying accept prompt");
         LOGGER.traceExit ();
+        ofNullable (this.listener).ifPresent (l -> l.onVerifyAccept (text));
         return assertThat (accept (text));
     }
 
@@ -102,6 +118,7 @@ public class AlertActions implements IAlertActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying alert message and dismissing the alert");
         LOGGER.traceExit ();
+        ofNullable (this.listener).ifPresent (IAlertActionsListener::onVerifyDismiss);
         return assertThat (dismiss ());
     }
 }

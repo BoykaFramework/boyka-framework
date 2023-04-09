@@ -18,13 +18,17 @@ package com.github.wasiqb.boyka.actions.drivers;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.enums.ListenerType.COOKIE_ACTION;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static java.util.Collections.emptyList;
+import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.github.wasiqb.boyka.actions.interfaces.drivers.ICookieActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.ICookieActionsListener;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
 
@@ -47,9 +51,18 @@ public class CookieActions implements ICookieActions {
         return COOKIE_ACTIONS;
     }
 
+    private final ICookieActionsListener listener;
+
+    private CookieActions () {
+        this.listener = getSession ().getSetting ()
+            .getListener (COOKIE_ACTION);
+    }
+
     @Override
     public Cookie cookie (final String name) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Get Cookie named [{}]...", name);
+        ofNullable (this.listener).ifPresent (l -> l.onCookie (name));
         return getDriverAttribute (driver -> driver.manage ()
             .getCookieNamed (name), null);
     }
@@ -57,6 +70,8 @@ public class CookieActions implements ICookieActions {
     @Override
     public List<String> cookies () {
         LOGGER.traceEntry ();
+        LOGGER.info ("Getting all the cookies...");
+        ofNullable (this.listener).ifPresent (ICookieActionsListener::onCookies);
         return getDriverAttribute (driver -> driver.manage ()
             .getCookies ()
             .stream ()
@@ -67,6 +82,8 @@ public class CookieActions implements ICookieActions {
     @Override
     public void delete (final String name) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Delete Cookie named [{}]...", name);
+        ofNullable (this.listener).ifPresent (l -> l.onDelete (name));
         performDriverAction (driver -> driver.manage ()
             .deleteCookieNamed (name));
         LOGGER.traceExit ();
@@ -75,6 +92,8 @@ public class CookieActions implements ICookieActions {
     @Override
     public void deleteAll () {
         LOGGER.traceEntry ();
+        LOGGER.info ("Deleting all the cookies...");
+        ofNullable (this.listener).ifPresent (ICookieActionsListener::onDeleteAll);
         performDriverAction (driver -> driver.manage ()
             .deleteAllCookies ());
         LOGGER.traceExit ();

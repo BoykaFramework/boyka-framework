@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.wasiqb.boyka.actions.interfaces.api.IApiActions;
-import com.github.wasiqb.boyka.actions.interfaces.api.IApiActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.api.IApiActionsListener;
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.builders.ApiResponse;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
