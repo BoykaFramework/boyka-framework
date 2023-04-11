@@ -106,7 +106,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
+          script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
 
       - name: Test Report
         if: failure()
