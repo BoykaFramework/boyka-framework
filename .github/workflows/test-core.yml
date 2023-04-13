@@ -35,12 +35,6 @@ jobs:
       - name: Build the project
         run: mvn clean install -f core-java/pom.xml -DskipTests
 
-      - name: Upload target folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: target
-          path: ${{ github.workspace }}/core-java/target
-
       - name: Cache local Maven repository
         uses: actions/cache@v3
         with:
@@ -70,12 +64,6 @@ jobs:
           cache: 'maven'
           check-latest: true
 
-      - name: Download target folder
-        uses: actions/download-artifact@v3
-        with:
-          name: target
-          path: ${{ github.workspace }}/core-java
-
       - name: Install Appium 2.0
         run: |
           npm install -g appium@next
@@ -104,7 +92,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
+          script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
 
       - name: Test Report
         if: failure()
