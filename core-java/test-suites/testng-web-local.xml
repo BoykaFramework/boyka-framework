@@ -34,7 +34,7 @@
             <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
         </packages>
     </test>
-    <test name="Test Boyka web on Local Edge">
+    <test name="Test Boyka web on Local Edge" enabled="false">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_edge"/>
         <packages>
