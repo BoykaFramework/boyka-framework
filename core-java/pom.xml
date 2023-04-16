@@ -42,8 +42,8 @@
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
         <faker.version>1.8.1</faker.version>
-        <jackson-dataformat-yaml.version>2.14.2</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.14.2</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.15.0-rc3</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.15.0-rc3</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <everit-json-schema.version>1.5.1</everit-json-schema.version>
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
@@ -75,6 +75,7 @@
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.0.1</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+        <maven-file.version>3.1.0</maven-file.version>
     </properties>
 
     <distributionManagement>
@@ -250,6 +251,13 @@
             <artifactId>allure-testng</artifactId>
             <version>2.21.0</version>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.shared/file-management -->
+        <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>file-management</artifactId>
+            <version>${maven-file.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
