@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api;
+package com.github.wasiqb.boyka.testng.listeners.api;
 
 import static io.qameta.allure.Allure.addAttachment;
 import static io.qameta.allure.Allure.step;
