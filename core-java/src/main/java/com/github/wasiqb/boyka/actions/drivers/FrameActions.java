@@ -48,8 +48,7 @@ public class FrameActions implements IFrameActions {
     private final IFrameActionsListener listener;
 
     private FrameActions () {
-        this.listener = getSession ().getSetting ()
-            .getListener (FRAME_ACTION);
+        this.listener = getSession ().getListener (FRAME_ACTION);
     }
 
     @Override

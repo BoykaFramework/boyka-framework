@@ -16,11 +16,8 @@
 
 package com.github.wasiqb.boyka.manager;
 
-import static com.github.wasiqb.boyka.enums.Message.APP_TYPE_NOT_SUPPORTED;
-import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
-import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.time.Duration.ofSeconds;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -47,9 +44,6 @@ final class DriverManager {
 
     void setupDriver () {
         LOGGER.traceEntry ();
-        if (this.platformType == API) {
-            throwError (APP_TYPE_NOT_SUPPORTED, this.platformType);
-        }
         final var settings = getSession ().getSetting ()
             .getUi ();
         if (this.platformType != WEB) {

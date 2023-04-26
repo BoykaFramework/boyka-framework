@@ -25,6 +25,7 @@ import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -61,8 +62,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
 
     TextBoxActions (final Locator locator) {
         super (locator);
-        this.listener = getSession ().getSetting ()
-            .getListener (TEXT_BOX_ACTION);
+        this.listener = getSession ().getListener (TEXT_BOX_ACTION);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
     @Override
     public void pressKey (final CharSequence... keys) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Pressing keys [{}]...", keys);
+        LOGGER.info ("Pressing keys [{}]...", asList (keys));
         ofNullable (this.listener).ifPresent (l -> l.onPressKey (keys));
         stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, this.locator.getName ()));
         performElementAction (e -> e.sendKeys (chord (keys)), this.locator);

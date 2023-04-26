@@ -91,6 +91,10 @@ public enum Message {
      */
     ERROR_EXECUTING_REQUEST ("Error occurred while executing request..."),
     /**
+     * Error while getting classes.
+     */
+    ERROR_GETTING_CLASSES ("Error occurred while getting all classes..."),
+    /**
      * Error occurred while parsing request body.
      */
     ERROR_PARSING_REQUEST_BODY ("Error occurred while parsing request body..."),

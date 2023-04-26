@@ -1,9 +1,5 @@
 {
-  "listeners": {
-    "API_ACTION": "com.github.wasiqb.boyka.testng.listeners.api.ApiActionListener",
-    "ALERT_ACTION": "com.github.wasiqb.boyka.testng.listeners.drivers.AlertActionsListener",
-    "CONTEXT_ACTION": "com.github.wasiqb.boyka.testng.listeners.drivers.ContextActionsListener"
-  },
+  "listeners_package": "com.github.wasiqb.boyka.testng.listeners",
   "ui": {
     "timeout": {
       "implicit_wait": 10,

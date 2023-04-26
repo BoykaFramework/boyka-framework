@@ -54,8 +54,7 @@ public class CookieActions implements ICookieActions {
     private final ICookieActionsListener listener;
 
     private CookieActions () {
-        this.listener = getSession ().getSetting ()
-            .getListener (COOKIE_ACTION);
+        this.listener = getSession ().getListener (COOKIE_ACTION);
     }
 
     @Override

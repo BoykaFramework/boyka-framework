@@ -25,7 +25,6 @@ import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_REQUEST_BODY;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_RESPONSE_BODY;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
-import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 import static java.lang.String.join;
 import static java.text.MessageFormat.format;
@@ -98,13 +97,12 @@ public final class ApiActions implements IApiActions {
     private       ApiResponse         response;
 
     private ApiActions (final ApiRequest apiRequest) {
-        LOGGER.traceEntry ("Parameter : {}", apiRequest.getConfigKey ());
-        getSession ().setConfigKey (apiRequest.getConfigKey ());
-        this.listener = getSession ().getSetting ()
-            .getListener (API_ACTION);
+        LOGGER.traceEntry ();
+
+        this.listener = getSession ().getListener (API_ACTION);
         this.apiRequest = apiRequest;
         this.pathParams = new HashMap<> ();
-        this.apiSetting = loadSetting ().getApiSetting (apiRequest.getConfigKey ());
+        this.apiSetting = getSession ().getApiSetting ();
         this.client = new OkHttpClient.Builder ().connectTimeout (ofSeconds (this.apiSetting.getConnectionTimeout ()))
             .readTimeout (ofSeconds (this.apiSetting.getReadTimeout ()))
             .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()))

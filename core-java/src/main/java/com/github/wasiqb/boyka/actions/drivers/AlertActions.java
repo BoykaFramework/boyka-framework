@@ -51,8 +51,7 @@ public class AlertActions implements IAlertActions {
     private final IAlertActionsListener listener;
 
     private AlertActions () {
-        this.listener = getSession ().getSetting ()
-            .getListener (ALERT_ACTION);
+        this.listener = getSession ().getListener (ALERT_ACTION);
     }
 
     @Override

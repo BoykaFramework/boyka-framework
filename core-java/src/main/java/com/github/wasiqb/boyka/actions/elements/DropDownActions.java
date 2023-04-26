@@ -67,8 +67,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
 
     DropDownActions (final Locator locator) {
         super (locator);
-        this.listener = getSession ().getSetting ()
-            .getListener (DROP_DOWN_ACTION);
+        this.listener = getSession ().getListener (DROP_DOWN_ACTION);
     }
 
     @Override

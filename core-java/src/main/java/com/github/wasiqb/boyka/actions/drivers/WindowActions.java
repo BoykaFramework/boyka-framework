@@ -69,8 +69,7 @@ public class WindowActions implements IWindowActions {
     private final IWindowActionsListener listener;
 
     private WindowActions () {
-        this.listener = getSession ().getSetting ()
-            .getListener (WINDOW_ACTION);
+        this.listener = getSession ().getListener (WINDOW_ACTION);
     }
 
     @Override

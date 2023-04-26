@@ -16,67 +16,108 @@
 
 package com.github.wasiqb.boyka.enums;
 
+import java.util.Arrays;
+
+import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.api.IApiActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IAlertActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IContextActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.ICookieActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IDriverActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IFrameActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.INavigateActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IWindowActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.IClickableActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.IDropDownActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.IElementActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.IFingerActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.IFingersActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
+import lombok.Getter;
+
 /**
  * List all the available listener types in the framework.
  *
  * @author Wasiq Bhamla
  * @since 07-Apr-2023
  */
+@Getter
 public enum ListenerType {
     /**
      * Alert Actions listener.
      */
-    ALERT_ACTION,
+    ALERT_ACTION (IAlertActionsListener.class),
     /**
      * API actions listener.
      */
-    API_ACTION,
+    API_ACTION (IApiActionsListener.class),
     /**
      * Mouse actions listener.
      */
-    CLICKABLE_ACTION,
+    CLICKABLE_ACTION (IClickableActionsListener.class),
     /**
      * Context actions listener.
      */
-    CONTEXT_ACTION,
+    CONTEXT_ACTION (IContextActionsListener.class),
     /**
      * Cookies action listener.
      */
-    COOKIE_ACTION,
+    COOKIE_ACTION (ICookieActionsListener.class),
     /**
      * Driver action listener.
      */
-    DRIVER_ACTION,
+    DRIVER_ACTION (IDriverActionsListener.class),
     /**
      * Drop down action listener.
      */
-    DROP_DOWN_ACTION,
+    DROP_DOWN_ACTION (IDropDownActionsListener.class),
     /**
      * Element action listener.
      */
-    ELEMENT_ACTION,
+    ELEMENT_ACTION (IElementActionsListener.class),
     /**
      * Fingers action listener.
      */
-    FINGERS_ACTION,
+    FINGERS_ACTION (IFingersActionsListener.class),
     /**
      * Finger action listener.
      */
-    FINGER_ACTION,
+    FINGER_ACTION (IFingerActionsListener.class),
     /**
      * Frame action listener.
      */
-    FRAME_ACTION,
+    FRAME_ACTION (IFrameActionsListener.class),
     /**
      * Navigate action listener.
      */
-    NAVIGATE_ACTION,
+    NAVIGATE_ACTION (INavigateActionsListener.class),
     /**
      * Text Box action listener.
      */
-    TEXT_BOX_ACTION,
+    TEXT_BOX_ACTION (ITextBoxActionsListener.class),
     /**
      * Window action listener.
      */
-    WINDOW_ACTION
+    WINDOW_ACTION (IWindowActionsListener.class);
+
+    /**
+     * Convert provided listener class to Listener type enum.
+     *
+     * @param className Class name of probable listener interface
+     *
+     * @return Listener type item.
+     */
+    public static ListenerType valueOf (final Class<?> className) {
+        return Arrays.stream (values ())
+            .filter (l -> l.getClassName ()
+                .equals (className))
+            .findFirst ()
+            .orElse (null);
+    }
+
+    private final Class<? extends BoykaListener> className;
+
+    ListenerType (final Class<? extends BoykaListener> className) {
+        this.className = className;
+    }
 }

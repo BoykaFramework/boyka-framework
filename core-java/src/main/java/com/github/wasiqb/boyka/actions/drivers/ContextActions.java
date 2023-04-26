@@ -57,8 +57,7 @@ public class ContextActions implements IContextActions {
     private final IContextActionsListener listener;
 
     private ContextActions () {
-        this.listener = getSession ().getSetting ()
-            .getListener (CONTEXT_ACTION);
+        this.listener = getSession ().getListener (CONTEXT_ACTION);
     }
 
     @Override

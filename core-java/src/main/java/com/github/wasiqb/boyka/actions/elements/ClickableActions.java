@@ -56,8 +56,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
 
     ClickableActions (final Locator locator) {
         super (locator);
-        this.listener = getSession ().getSetting ()
-            .getListener (CLICKABLE_ACTION);
+        this.listener = getSession ().getListener (CLICKABLE_ACTION);
     }
 
     @Override

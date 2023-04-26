@@ -53,8 +53,7 @@ public class NavigateActions implements INavigateActions {
     private final INavigateActionsListener listener;
 
     private NavigateActions () {
-        this.listener = getSession ().getSetting ()
-            .getListener (NAVIGATE_ACTION);
+        this.listener = getSession ().getListener (NAVIGATE_ACTION);
     }
 
     @Override

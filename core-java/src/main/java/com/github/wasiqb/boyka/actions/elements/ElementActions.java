@@ -62,8 +62,7 @@ public class ElementActions implements IElementActions {
 
     ElementActions (final Locator locator) {
         this.locator = locator;
-        this.listener = getSession ().getSetting ()
-            .getListener (ELEMENT_ACTION);
+        this.listener = getSession ().getListener (ELEMENT_ACTION);
         if (getSession ().getPlatformType () != WEB) {
             this.swipeSetting = getSession ().getMobileSetting ()
                 .getDevice ()

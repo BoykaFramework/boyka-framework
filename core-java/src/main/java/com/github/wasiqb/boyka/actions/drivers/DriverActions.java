@@ -65,8 +65,7 @@ public class DriverActions implements IDriverActions {
     private final IDriverActionsListener listener;
 
     private DriverActions () {
-        this.listener = getSession ().getSetting ()
-            .getListener (DRIVER_ACTION);
+        this.listener = getSession ().getListener (DRIVER_ACTION);
     }
 
     @Override

@@ -46,8 +46,7 @@ public class FingersActions extends FingerActions implements IFingersActions {
 
     FingersActions (final Locator locator) {
         super (locator);
-        this.listener = getSession ().getSetting ()
-            .getListener (FINGERS_ACTION);
+        this.listener = getSession ().getListener (FINGERS_ACTION);
     }
 
     @Override
