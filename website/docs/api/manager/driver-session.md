@@ -4,6 +4,16 @@ sidebar_position: 1
 slug: /sessions/driver-session
 ---
 
+## `clearListeners` {#clear-listeners}
+
+This method will clear all the listeners for the session.
+
+```java
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+. . .
+getSession ().clearListeners ();
+```
+
 ## `clearSharedData` {#clear-shared-data}
 
 This method will clear all the shared data for the session.
@@ -23,6 +33,14 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 . . .
 var apiSetting = getSession ().getApiSetting ();
 ```
+
+## `getListener (listenerType)` {#get-listener}
+
+This method gets the Boyka listener for the given listener type.
+
+:::danger Important!!
+This method is for internal use only.
+:::
 
 ## `getMobileSetting` {#get-mobile-setting}
 

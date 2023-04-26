@@ -29,10 +29,6 @@ import lombok.Getter;
 @Getter
 public enum Message {
     /**
-     * Driver only supports Web application type
-     */
-    APP_TYPE_NOT_SUPPORTED ("Application type [{0}] is not yet supported..."),
-    /**
      * Basic auth password is empty.
      */
     AUTH_PASSWORD_REQUIRED ("Basic auth password is required..."),

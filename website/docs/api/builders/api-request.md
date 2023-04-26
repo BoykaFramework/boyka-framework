@@ -14,21 +14,6 @@ Always start composing the request with `createRequest` method.
 ```java
 // highlight-next-line
 final ApiRequest request = ApiRequest.createRequest ()
-    .configKey ("test_reqres")
-    .method (GET)
-    .path ("/users/${userId}")
-    .pathParam ("userId", "2")
-    .create ();
-```
-
-## `configKey`
-
-This method is used to set the configuration key corresponding to API config block in `boyka-config.json`.
-
-```java
-final ApiRequest request = ApiRequest.createRequest ()
-// highlight-next-line
-    .configKey ("test_reqres")
     .method (GET)
     .path ("/users/${userId}")
     .pathParam ("userId", "2")
@@ -46,7 +31,6 @@ This method is used to set the content type of the request. Allowed values are:
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
-    .configKey ("test_reqres")
 // highlight-next-line
     .contentType (ContentType.JSON)
     .method (GET)
@@ -61,7 +45,6 @@ This method is used to set the header of the request.
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
-    .configKey ("test_reqres")
     .contentType (ContentType.JSON)
 // highlight-start
     .header ("Header-Key-1", "Header value 1")
@@ -79,7 +62,6 @@ This method is used to set the path of the request.
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
-    .configKey ("test_reqres")
     .contentType (ContentType.JSON)
     .header ("Header-Key-1", "Header value 1")
     .header ("Header-Key-2", "Header value 2")
@@ -96,7 +78,6 @@ This method is used to set the path parameter(s) of the request.
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
-    .configKey ("test_reqres")
     .contentType (ContentType.JSON)
     .header ("Header-Key-1", "Header value 1")
     .header ("Header-Key-2", "Header value 2")
@@ -113,7 +94,6 @@ This method is used to set the query parameter(s) of the request.
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
-    .configKey ("test_reqres")
     .contentType (ContentType.JSON)
     .header ("Header-Key-1", "Header value 1")
     .header ("Header-Key-2", "Header value 2")
@@ -130,7 +110,7 @@ final ApiRequest request = ApiRequest.createRequest ()
 This method is used to set the body of the request.
 
 ```java
-final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
+final ApiRequest request = ApiRequest.createRequest ()
     .method (POST)
     .path ("/users")
 // highlight-next-line
@@ -148,7 +128,7 @@ final User user = User.createUser ()
     .job ("Software Engineer")
     .create ();
 
-final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
+final ApiRequest request = ApiRequest.createRequest ()
     .method (POST)
     .path ("/users")
 // highlight-next-line
@@ -161,7 +141,7 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 This method is used to set the Form body of the request using key and value pairs.
 
 ```java
-final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
+final ApiRequest request = ApiRequest.createRequest ()
     .method (POST)
     .path ("/users")
 // highlight-start
@@ -185,8 +165,8 @@ This method is used to set the method of the request. Following are the allowed 
 - `TRACE`
 
 ```java
-final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 // highlight-next-line
+final ApiRequest request = ApiRequest.createRequest ()
     .method (RequestMethod.POST)
     .path ("/users")
     .bodyObject (user)
@@ -198,7 +178,7 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 This method is used to set the user name of the request.
 
 ```java
-final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
+final ApiRequest request = ApiRequest.createRequest ()
     .method (POST)
     .path ("/users")
 // highlight-next-line
@@ -213,7 +193,7 @@ final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
 This method is used to set the password of the request.
 
 ```java
-final ApiRequest request = ApiRequest.configKey (API_CONFIG_KEY)
+final ApiRequest request = ApiRequest.createRequest ()
     .method (POST)
     .path ("/users")
     .userName ("wasiq")
@@ -233,7 +213,6 @@ Always end composing the request with `create` method.
 
 ```java
 final ApiRequest request = ApiRequest.createRequest ()
-    .configKey ("test_reqres")
     .method (GET)
     .path ("/users/${userId}")
     .pathParam ("userId", "2")

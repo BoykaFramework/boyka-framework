@@ -21,6 +21,7 @@ The file name and it's location cannot be modified.
 
 ```json title="boyka-config.json"
 {
+  "listeners_package": "com.github.wasiqb.boyka.testng.listeners",
   "ui": {
     "timeout": {
       "implicit_wait": 10,
@@ -331,6 +332,7 @@ The file name and it's location cannot be modified.
 | -------- | ----------- | ---- | ------- |
 | `ui` | Contains UI platform specific configuration. See [UI Config below](#ui-config). | `object` |  |
 | `api` | Contains API platform specific configuration. See [API config below](#api-config). | `object` |  |
+| `listeners_package` | This will be the package name under which all the Boyka framework listeners are saved. | `string` |  |
 
 ### UI Configuration {#ui-config}
 

@@ -76,6 +76,12 @@ public final class ParallelSession {
         CURRENT_PERSONA.remove ();
     }
 
+    /**
+     * Create a new Session.
+     *
+     * @param platformType Target Platform Type
+     * @param configKey Configuration key for the session
+     */
     public static void createSession (final PlatformType platformType, final String configKey) {
         createSession (configKey, platformType, configKey);
     }

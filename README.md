@@ -69,6 +69,7 @@ This all gave me an idea of having a single framework which could solve all the 
 - ✅ Highly configurable via `boyka-config.json`
 - ✅ Micro logging to log events of the test execution
 - ✅ Supports taking screenshots
+- ✅ Highly extensible via listeners
 
 ## ⏱️ Coming soon
 
@@ -100,6 +101,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
 
 ```json
 {
+  "listeners_package": "com.github.wasiqb.boyka.testng.listeners",
   "ui": {
     "timeout": {
       "implicit_wait": 10,
@@ -420,6 +422,9 @@ Here's how you can execute the API test and also verify its response.
 
 ```java
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 . . .
 // Create request body object
 final User user = User.createUser ()
@@ -427,9 +432,11 @@ final User user = User.createUser ()
   .job ("Software Engineer")
   .create ();
 
+// Create API session.
+createSession (API, "test_postman");
+
 // Compose request
 final ApiRequest request = ApiRequest.createRequest ()
-  .configKey (API_CONFIG_KEY)
   .method (POST)
   .path ("/users")
   .bodyObject (user)
@@ -454,6 +461,9 @@ response.verifyTextField ("job")
   .isEqualTo (user.getJob ());
 response.verifyTextField ("createdAt")
   .isNotNull ();
+
+// Clear API session.
+clearSession ();
 ```
 
 </details>
