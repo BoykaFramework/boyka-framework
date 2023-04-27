@@ -40,7 +40,10 @@
         "browser": "FIREFOX"
       },
       "test_local_edge": {
-        "browser": "EDGE"
+        "browser": "EDGE",
+        "browser_options": [
+          "--remote-allow-origins=*"
+        ]
       },
       "test_local_safari": {
         "browser": "SAFARI"
