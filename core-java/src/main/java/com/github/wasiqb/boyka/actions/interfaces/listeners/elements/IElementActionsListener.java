@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions.interfaces.listeners.elements;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
+import com.github.wasiqb.boyka.builders.Locator;
 
 /**
  * Handle all element actions events.
@@ -27,107 +28,131 @@ import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 public interface IElementActionsListener extends BoykaListener {
     /**
      * Handle clear method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onClear () {
+    default void onClear (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle get attribute method.
      *
+     * @param locator Locator of the element.
      * @param attribute Attribute name
      */
-    default void onGetAttribute (final String attribute) {
+    default void onGetAttribute (final Locator locator, final String attribute) {
         // not implemented.
     }
 
     /**
      * Handle get style method.
      *
+     * @param locator Locator of the element.
      * @param styleName Style name
      */
-    default void onGetStyle (final String styleName) {
+    default void onGetStyle (final Locator locator, final String styleName) {
         // not implemented.
     }
 
     /**
      * Handle get text method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onGetText () {
+    default void onGetText (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle is displayed method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onIsDisplayed () {
+    default void onIsDisplayed (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle is enabled method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onIsEnabled () {
+    default void onIsEnabled (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle is selected method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onIsSelected () {
+    default void onIsSelected (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle scroll into view method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onScrollIntoView () {
+    default void onScrollIntoView (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle verify attribute method.
      *
+     * @param locator Locator of the element.
      * @param attribute attribute name
      */
-    default void onVerifyAttribute (final String attribute) {
+    default void onVerifyAttribute (final Locator locator, final String attribute) {
         // not implemented.
     }
 
     /**
      * Handle verify is displayed method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onVerifyIsDisplayed () {
+    default void onVerifyIsDisplayed (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle verify is enabled method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onVerifyIsEnabled () {
+    default void onVerifyIsEnabled (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle verify is selected method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onVerifyIsSelected () {
+    default void onVerifyIsSelected (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle verify style method.
      *
+     * @param locator Locator of the element.
      * @param styleName Style name
      */
-    default void onVerifyStyle (final String styleName) {
+    default void onVerifyStyle (final Locator locator, final String styleName) {
         // not implemented.
     }
 
     /**
      * Handle verify text method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onVerifyText () {
+    default void onVerifyText (final Locator locator) {
         // not implemented.
     }
 }

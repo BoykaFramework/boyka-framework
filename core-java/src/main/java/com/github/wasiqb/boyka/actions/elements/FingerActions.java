@@ -77,7 +77,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     public void dragTo (final Locator destination) {
         LOGGER.traceEntry ();
         LOGGER.info ("Dragging [{}] to [{}] on Mobile devices.", this.locator.getName (), destination.getName ());
-        ofNullable (this.listener).ifPresent (l -> l.onDragTo (destination));
+        ofNullable (this.listener).ifPresent (l -> l.onDragTo (this.locator, destination));
         final var dragSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .element (this.locator)
             .targetElement (destination)
@@ -91,7 +91,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     public void swipe (final SwipeDirection direction) {
         LOGGER.traceEntry ();
         LOGGER.info ("Swiping {} on Mobile devices.", direction);
-        ofNullable (this.listener).ifPresent (l -> l.onSwipe (direction));
+        ofNullable (this.listener).ifPresent (l -> l.onSwipe (this.locator, direction));
         final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (direction)
             .element (this.locator)
@@ -105,7 +105,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     public void swipeTill (final SwipeDirection direction) {
         LOGGER.traceEntry ();
         LOGGER.info ("Swiping till the element in the [{}] direction...", direction);
-        ofNullable (this.listener).ifPresent (l -> l.onSwipeTill (direction));
+        ofNullable (this.listener).ifPresent (l -> l.onSwipeTill (this.locator, direction));
         final var maxSwipe = this.swipeSetting.getMaxSwipeUntilFound ();
         var swipeCounts = 0;
         final var element = onElement (this.locator);
@@ -123,7 +123,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     public void tap () {
         LOGGER.traceEntry ();
         LOGGER.info ("Tapping on the element...");
-        ofNullable (this.listener).ifPresent (IFingerActionsListener::onTap);
+        ofNullable (this.listener).ifPresent (l -> l.onTap (this.locator));
         final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
             .element (this.locator)
             .build ()

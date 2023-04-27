@@ -51,13 +51,13 @@ public class FingersActions extends FingerActions implements IFingersActions {
 
     @Override
     public void zoomIn () {
-        ofNullable (this.listener).ifPresent (IFingersActionsListener::onZoomIn);
+        ofNullable (this.listener).ifPresent (l -> l.onZoomIn (this.locator));
         // TODO: need to implement.
     }
 
     @Override
     public void zoomOut () {
-        ofNullable (this.listener).ifPresent (IFingersActionsListener::onZoomOut);
+        ofNullable (this.listener).ifPresent (l -> l.onZoomOut (this.locator));
         // TODO: need to implement.
     }
 }

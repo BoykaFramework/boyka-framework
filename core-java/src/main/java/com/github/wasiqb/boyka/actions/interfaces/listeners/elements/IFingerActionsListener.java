@@ -30,34 +30,39 @@ public interface IFingerActionsListener extends BoykaListener {
     /**
      * Handle drag to method.
      *
+     * @param source Source element to drag.
      * @param destination target element to drop to
      */
-    default void onDragTo (final Locator destination) {
+    default void onDragTo (final Locator source, final Locator destination) {
         // not implemented.
     }
 
     /**
      * Handle swipe method.
      *
+     * @param locator Locator of the element.
      * @param direction Swipe direction
      */
-    default void onSwipe (final SwipeDirection direction) {
+    default void onSwipe (final Locator locator, final SwipeDirection direction) {
         // not implemented.
     }
 
     /**
      * Handle swipe till method.
      *
+     * @param locator Locator of the element.
      * @param direction swipe direction
      */
-    default void onSwipeTill (final SwipeDirection direction) {
+    default void onSwipeTill (final Locator locator, final SwipeDirection direction) {
         // not implemented.
     }
 
     /**
      * Handle tap method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onTap () {
+    default void onTap (final Locator locator) {
         // not implemented.
     }
 }

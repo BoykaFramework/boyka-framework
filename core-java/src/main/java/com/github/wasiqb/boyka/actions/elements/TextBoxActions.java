@@ -69,7 +69,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
     public void enterText (final String text) {
         LOGGER.traceEntry ();
         LOGGER.info ("Entering text {} to element {}", text, this.locator.getName ());
-        ofNullable (this.listener).ifPresent (l -> l.onEnterText (text));
+        ofNullable (this.listener).ifPresent (l -> l.onEnterText (this.locator, text));
         performElementAction (e -> {
             e.sendKeys (text);
             if (getSession ().getPlatformType () == IOS) {
@@ -107,7 +107,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
     public void pressKey (final CharSequence... keys) {
         LOGGER.traceEntry ();
         LOGGER.info ("Pressing keys [{}]...", asList (keys));
-        ofNullable (this.listener).ifPresent (l -> l.onPressKey (keys));
+        ofNullable (this.listener).ifPresent (l -> l.onPressKey (this.locator, keys));
         stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, this.locator.getName ()));
         performElementAction (e -> e.sendKeys (chord (keys)), this.locator);
         LOGGER.traceExit ();

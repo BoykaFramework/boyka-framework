@@ -49,7 +49,7 @@ import org.openqa.selenium.interactions.Actions;
  * @author Wasiq Bhamla
  * @since 24-Feb-2022
  */
-public class DriverActions implements IDriverActions {
+public final class DriverActions implements IDriverActions {
     private static final DriverActions DRIVER_ACTIONS = new DriverActions ();
     private static final Logger        LOGGER         = getLogger ();
 

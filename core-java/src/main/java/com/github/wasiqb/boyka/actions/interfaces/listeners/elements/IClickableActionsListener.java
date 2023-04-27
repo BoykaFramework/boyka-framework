@@ -27,53 +27,66 @@ import com.github.wasiqb.boyka.builders.Locator;
  */
 public interface IClickableActionsListener extends BoykaListener {
     /**
-     * Handle click method.
+     * Handle click method
+     *
+     * @param locator Locator of the element.
      */
-    default void onClick () {
+    default void onClick (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle click and hold method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onClickAndHold () {
+    default void onClickAndHold (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle double click method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onDoubleClick () {
+    default void onDoubleClick (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle drag to the target element.
      *
+     * @param source source element.
      * @param destination target element
      */
-    default void onDragTo (final Locator destination) {
+    default void onDragTo (final Locator source, final Locator destination) {
         // not implemented.
     }
 
     /**
      * Handle hover method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onHover () {
+    default void onHover (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle right click method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onRightClick () {
+    default void onRightClick (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle submit method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onSubmit () {
+    default void onSubmit (final Locator locator) {
         // not implemented.
     }
 }

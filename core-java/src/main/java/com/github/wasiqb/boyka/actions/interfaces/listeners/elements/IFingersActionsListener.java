@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions.interfaces.listeners.elements;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
+import com.github.wasiqb.boyka.builders.Locator;
 
 /**
  * Handles all multi-fingers actions events.
@@ -27,15 +28,19 @@ import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 public interface IFingersActionsListener extends BoykaListener {
     /**
      * Handle zoom in method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onZoomIn () {
+    default void onZoomIn (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle zoom out method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onZoomOut () {
+    default void onZoomOut (final Locator locator) {
         // not implemented.
     }
 }

@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions.interfaces.listeners.elements;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
+import com.github.wasiqb.boyka.builders.Locator;
 
 /**
  * Handle all the dropdown actions events.
@@ -27,17 +28,20 @@ import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 public interface IDropDownActionsListener extends BoykaListener {
     /**
      * Handle deselect all items method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onDeselectAll () {
+    default void onDeselectAll (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle deselect by index method.
      *
+     * @param locator Locator of the element.
      * @param index Item index
      */
-    default void onDeselectByIndex (final int index) {
+    default void onDeselectByIndex (final Locator locator, final int index) {
         // not implemented.
     }
 
@@ -46,71 +50,83 @@ public interface IDropDownActionsListener extends BoykaListener {
      *
      * @param text Item text
      */
-    default void onDeselectByText (final String text) {
+    default void onDeselectByText (final Locator locator, final String text) {
         // not implemented.
     }
 
     /**
      * Handle deselect by value method.
      *
+     * @param locator Locator of the element.
      * @param value Item value
      */
-    default void onDeselectByValue (final String value) {
+    default void onDeselectByValue (final Locator locator, final String value) {
         // not implemented.
     }
 
     /**
      * Handle select by index method.
      *
+     * @param locator Locator of the element.
      * @param index Item index
      */
-    default void onSelectByIndex (final int index) {
+    default void onSelectByIndex (final Locator locator, final int index) {
         // not implemented.
     }
 
     /**
      * Handle select by text method.
      *
+     * @param locator Locator of the element.
      * @param text Item text
      */
-    default void onSelectByText (final String text) {
+    default void onSelectByText (final Locator locator, final String text) {
         // not implemented.
     }
 
     /**
      * Handle select by value method.
      *
+     * @param locator Locator of the element.
      * @param value Item value
      */
-    default void onSelectByValue (final String value) {
+    default void onSelectByValue (final Locator locator, final String value) {
         // not implemented.
     }
 
     /**
      * Handle selected item method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onSelectedItem () {
+    default void onSelectedItem (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle selected items method.
+     *
+     * @param locator Locator of the element.
      */
-    default void onSelectedItems () {
+    default void onSelectedItems (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle verify selected item.
+     *
+     * @param locator Locator of the element.
      */
-    default void onVerifySelectedItem () {
+    default void onVerifySelectedItem (final Locator locator) {
         // not implemented.
     }
 
     /**
      * Handle verify selected items.
+     *
+     * @param locator Locator of the element.
      */
-    default void onVerifySelectedItems () {
+    default void onVerifySelectedItems (final Locator locator) {
         // not implemented.
     }
 }

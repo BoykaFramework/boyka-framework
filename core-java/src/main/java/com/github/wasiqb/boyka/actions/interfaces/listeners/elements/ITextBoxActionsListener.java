@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions.interfaces.listeners.elements;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
+import com.github.wasiqb.boyka.builders.Locator;
 
 /**
  * Handle all text box action events.
@@ -28,9 +29,10 @@ public interface ITextBoxActionsListener extends BoykaListener {
     /**
      * Handle enter text method.
      *
+     * @param locator Locator of the element.
      * @param text Text to enter into text box
      */
-    default void onEnterText (final String text) {
+    default void onEnterText (final Locator locator, final String text) {
         // not implemented.
     }
 
@@ -51,9 +53,10 @@ public interface ITextBoxActionsListener extends BoykaListener {
     /**
      * Handle press key method.
      *
+     * @param locator Locator of the element.
      * @param keys Keys to be pressed
      */
-    default void onPressKey (final CharSequence... keys) {
+    default void onPressKey (final Locator locator, final CharSequence... keys) {
         // not implemented.
     }
 }

@@ -74,7 +74,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public void deselectAll () {
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {}", this.locator.getName ());
-        ofNullable (this.listener).ifPresent (IDropDownActionsListener::onDeselectAll);
+        ofNullable (this.listener).ifPresent (l -> l.onDeselectAll (this.locator));
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
@@ -89,7 +89,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public void deselectByIndex (final int index) {
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by index: {}", this.locator.getName (), index);
-        ofNullable (this.listener).ifPresent (l -> l.onDeselectByIndex (index));
+        ofNullable (this.listener).ifPresent (l -> l.onDeselectByIndex (this.locator, index));
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
@@ -104,7 +104,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public void deselectByText (final String text) {
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by visible text: {}", this.locator.getName (), text);
-        ofNullable (this.listener).ifPresent (l -> l.onDeselectByText (text));
+        ofNullable (this.listener).ifPresent (l -> l.onDeselectByText (this.locator, text));
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
@@ -119,7 +119,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public void deselectByValue (final String value) {
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by value: {}", this.locator.getName (), value);
-        ofNullable (this.listener).ifPresent (l -> l.onDeselectByValue (value));
+        ofNullable (this.listener).ifPresent (l -> l.onDeselectByValue (this.locator, value));
         performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
@@ -134,7 +134,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public void selectByIndex (final int index) {
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by index: {}", this.locator.getName (), index);
-        ofNullable (this.listener).ifPresent (l -> l.onSelectByIndex (index));
+        ofNullable (this.listener).ifPresent (l -> l.onSelectByIndex (this.locator, index));
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByIndex (index);
@@ -146,7 +146,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public void selectByText (final String text) {
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by text: {}", this.locator.getName (), text);
-        ofNullable (this.listener).ifPresent (l -> l.onSelectByText (text));
+        ofNullable (this.listener).ifPresent (l -> l.onSelectByText (this.locator, text));
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByVisibleText (text);
@@ -158,7 +158,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public void selectByValue (final String value) {
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by value: {}", this.locator.getName (), value);
-        ofNullable (this.listener).ifPresent (l -> l.onSelectByValue (value));
+        ofNullable (this.listener).ifPresent (l -> l.onSelectByValue (this.locator, value));
         performElementAction (e -> {
             final var select = new Select (e);
             select.selectByValue (value);
@@ -170,7 +170,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public String selectedItem () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting selected option from element located by: {}", this.locator.getName ());
-        ofNullable (this.listener).ifPresent (IDropDownActionsListener::onSelectedItem);
+        ofNullable (this.listener).ifPresent (l -> l.onSelectedItem (this.locator));
         return getElementAttribute (element -> {
             final var select = new Select (element);
             try {
@@ -186,7 +186,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public List<String> selectedItems () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting all selected options from element located by: {}", this.locator.getName ());
-        ofNullable (this.listener).ifPresent (IDropDownActionsListener::onSelectedItems);
+        ofNullable (this.listener).ifPresent (l -> l.onSelectedItems (this.locator));
         return getElementAttribute (e -> {
             final var select = new Select (e);
             return select.getAllSelectedOptions ()
@@ -199,14 +199,14 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     @Override
     public StringSubject verifySelectedItem () {
         LOGGER.info ("Verifying the selected item...");
-        ofNullable (this.listener).ifPresent (IDropDownActionsListener::onVerifySelectedItem);
+        ofNullable (this.listener).ifPresent (l -> l.onVerifySelectedItem (this.locator));
         return assertThat (selectedItem ());
     }
 
     @Override
     public IterableSubject verifySelectedItems () {
         LOGGER.info ("Verifying the selected items...");
-        ofNullable (this.listener).ifPresent (IDropDownActionsListener::onVerifySelectedItems);
+        ofNullable (this.listener).ifPresent (l -> l.onVerifySelectedItems (this.locator));
         return assertThat (selectedItems ());
     }
 }
