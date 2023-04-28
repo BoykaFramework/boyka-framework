@@ -48,6 +48,7 @@ public interface IDropDownActionsListener extends BoykaListener {
     /**
      * Handle deselect by text method.
      *
+     * @param locator Locator of the element.
      * @param text Item text
      */
     default void onDeselectByText (final Locator locator, final String text) {
