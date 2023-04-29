@@ -16,7 +16,12 @@
 
 package com.github.wasiqb.boyka.actions.elements;
 
+import static com.github.wasiqb.boyka.enums.ListenerType.FINGERS_ACTION;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static java.util.Optional.ofNullable;
+
 import com.github.wasiqb.boyka.actions.interfaces.elements.IFingersActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.IFingersActionsListener;
 import com.github.wasiqb.boyka.builders.Locator;
 
 /**
@@ -37,17 +42,22 @@ public class FingersActions extends FingerActions implements IFingersActions {
         return new FingersActions (locator);
     }
 
+    private final IFingersActionsListener listener;
+
     FingersActions (final Locator locator) {
         super (locator);
+        this.listener = getSession ().getListener (FINGERS_ACTION);
     }
 
     @Override
     public void zoomIn () {
+        ofNullable (this.listener).ifPresent (l -> l.onZoomIn (this.locator));
         // TODO: need to implement.
     }
 
     @Override
     public void zoomOut () {
+        ofNullable (this.listener).ifPresent (l -> l.onZoomOut (this.locator));
         // TODO: need to implement.
     }
 }

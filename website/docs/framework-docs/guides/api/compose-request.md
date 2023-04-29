@@ -16,8 +16,10 @@ This class has a builder pattern which allows you to build API requests in a flu
 Let's create an instance of `ApiRequest` and build a request for `POST /api/users` with body:
 
 ```java
-// This key refers to config key under API section.
-final String API_CONFIG_KEY = "test_reqres";
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+
+// Create API session using the config key.
+createSession (PlatformType.API, "test_reqres");
 
 // Create request body object.
 final User user = User.createUser ()
@@ -27,7 +29,6 @@ final User user = User.createUser ()
 
 // Build API request.
 final ApiRequest request = ApiRequest.createRequest ()
-    .configKey (API_CONFIG_KEY)
     .method (RequestMethod.POST)
     .path ("/users")
     .bodyObject (user)

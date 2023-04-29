@@ -17,7 +17,7 @@
 package com.github.wasiqb.boyka.actions.elements;
 
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.text.MessageFormat.format;

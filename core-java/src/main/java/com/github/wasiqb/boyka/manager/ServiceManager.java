@@ -22,7 +22,7 @@ import static com.github.wasiqb.boyka.enums.Message.ERROR_STOPPING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.SERVER_ALREADY_RUNNING;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.BOOTSTRAP_PORT_NUMBER;
@@ -63,7 +63,7 @@ import org.apache.logging.log4j.Logger;
  * @author Wasiq Bhamla
  * @since 06-Sept-2022
  */
-public class ServiceManager {
+class ServiceManager {
     private static final Logger LOG = getLogger ();
 
     private       AppiumServiceBuilder     builder;

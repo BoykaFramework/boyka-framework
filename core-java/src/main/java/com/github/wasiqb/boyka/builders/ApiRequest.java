@@ -37,7 +37,6 @@ import lombok.ToString;
 public class ApiRequest {
     private String              body;
     private Object              bodyObject;
-    private String              configKey;
     private ContentType         contentType;
     @Singular
     private Map<String, String> formBodies;

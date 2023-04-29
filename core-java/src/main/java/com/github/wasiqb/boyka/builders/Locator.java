@@ -16,7 +16,7 @@
 
 package com.github.wasiqb.boyka.builders;
 
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 
 import java.util.function.Predicate;
 

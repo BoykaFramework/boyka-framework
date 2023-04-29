@@ -41,6 +41,7 @@ public class FrameworkSetting {
     private static final Logger LOGGER = getLogger ();
 
     private Map<String, ApiSetting> api;
+    private String                  listenersPackage;
     private UISetting               ui;
 
     /**

@@ -29,10 +29,6 @@ import lombok.Getter;
 @Getter
 public enum Message {
     /**
-     * Driver only supports Web application type
-     */
-    APP_TYPE_NOT_SUPPORTED ("Application type [{0}] is not yet supported..."),
-    /**
      * Basic auth password is empty.
      */
     AUTH_PASSWORD_REQUIRED ("Basic auth password is required..."),
@@ -91,6 +87,10 @@ public enum Message {
      */
     ERROR_EXECUTING_REQUEST ("Error occurred while executing request..."),
     /**
+     * Error while getting classes.
+     */
+    ERROR_GETTING_CLASSES ("Error occurred while getting all classes..."),
+    /**
      * Error occurred while parsing request body.
      */
     ERROR_PARSING_REQUEST_BODY ("Error occurred while parsing request body..."),
@@ -142,6 +142,10 @@ public enum Message {
      * No such key found
      */
     INVALID_HEADER_KEY ("No such key {0} found..."),
+    /**
+     * Invalid listener class provided.
+     */
+    INVALID_LISTENER_FOUND ("Invalid Listener class [{0}] provided in the config..."),
     /**
      * Invalid platform for operation
      */
@@ -198,6 +202,10 @@ public enum Message {
      * Error when starting session.
      */
     SESSION_NOT_STARTED ("Session could not be started..."),
+    /**
+     * Session persona cannot be null.
+     */
+    SESSION_PERSONA_CANNOT_BE_NULL ("Session Persona cannot be empty or null..."),
     /**
      * Test Error.
      */

@@ -22,8 +22,8 @@ import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.MultiWindowPage.multiWindowPage;
 import static com.google.common.truth.Truth.assertThat;
@@ -55,7 +55,7 @@ public class WindowTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
-        createDriver (platformType, driverKey);
+        createSession ("WindowTest", platformType, driverKey);
         onWindow ().maximize ();
         navigate ().to (URL);
         withMouse (homePage ().link ("Multiple Windows")).click ();
@@ -66,7 +66,7 @@ public class WindowTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        closeDriver ();
+        clearSession ();
     }
 
     /**

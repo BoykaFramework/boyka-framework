@@ -14,7 +14,7 @@ import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
 import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
 import static java.text.MessageFormat.format;
 

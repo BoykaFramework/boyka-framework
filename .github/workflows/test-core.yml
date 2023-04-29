@@ -28,16 +28,12 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'adopt'
+          distribution: 'temurin'
+          cache: 'maven'
+          check-latest: true
 
       - name: Build the project
-        run: mvn install -f core-java/pom.xml -DskipTests
-
-      - name: Upload target folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: target
-          path: ${{ github.workspace }}/core-java/target
+        run: mvn clean install -f core-java/pom.xml -DskipTests
 
       - name: Cache local Maven repository
         uses: actions/cache@v3
@@ -64,19 +60,9 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'adopt'
-
-      - name: Restore local Maven repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ github.sha }}
-
-      - name: Download target folder
-        uses: actions/download-artifact@v3
-        with:
-          name: target
-          path: ${{ github.workspace }}/core-java
+          distribution: 'temurin'
+          cache: 'maven'
+          check-latest: true
 
       - name: Install Appium 2.0
         run: |
@@ -85,7 +71,7 @@ jobs:
           appium driver install xcuitest
 
       - name: Start Selenium Grid
-        run: java -jar core-java/libs/selenium-server-4.8.0.jar standalone > core-java/selenium-grid.log &
+        run: java -jar core-java/libs/selenium-server-4.9.0.jar standalone > core-java/selenium-grid.log &
 
       - name: Launch iOS Simulator
         uses: futureware-tech/simulator-action@v2
@@ -106,7 +92,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
+          script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -f core-java/pom.xml -Pcoverage-per-test
 
       - name: Test Report
         if: failure()
@@ -144,13 +130,9 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'adopt'
-
-      - name: Restore local Maven repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ github.sha }}
+          distribution: 'temurin'
+          cache: 'maven'
+          check-latest: true
 
       - name: Download reports folder
         uses: actions/download-artifact@v3

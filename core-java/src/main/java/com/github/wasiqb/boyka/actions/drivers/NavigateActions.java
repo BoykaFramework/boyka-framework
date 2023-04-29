@@ -18,11 +18,15 @@ package com.github.wasiqb.boyka.actions.drivers;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.enums.ListenerType.NAVIGATE_ACTION;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.actions.interfaces.drivers.INavigateActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.INavigateActionsListener;
 import com.google.common.truth.StringSubject;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -46,9 +50,16 @@ public class NavigateActions implements INavigateActions {
         return NAVIGATE_ACTIONS;
     }
 
+    private final INavigateActionsListener listener;
+
+    private NavigateActions () {
+        this.listener = getSession ().getListener (NAVIGATE_ACTION);
+    }
+
     @Override
     public void back () {
         LOGGER.traceEntry ();
+        ofNullable (this.listener).ifPresent (INavigateActionsListener::onBack);
         performDriverAction (driver -> driver.navigate ()
             .back ());
         LOGGER.traceExit ();
@@ -57,6 +68,7 @@ public class NavigateActions implements INavigateActions {
     @Override
     public void forward () {
         LOGGER.traceEntry ();
+        ofNullable (this.listener).ifPresent (INavigateActionsListener::onForward);
         performDriverAction (driver -> driver.navigate ()
             .forward ());
         LOGGER.traceExit ();
@@ -66,12 +78,14 @@ public class NavigateActions implements INavigateActions {
     public String getUrl () {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting url of the browser");
+        ofNullable (this.listener).ifPresent (INavigateActionsListener::onGetUrl);
         return LOGGER.traceExit (getDriverAttribute (WebDriver::getCurrentUrl, EMPTY));
     }
 
     @Override
     public void refresh () {
         LOGGER.traceEntry ();
+        ofNullable (this.listener).ifPresent (INavigateActionsListener::onRefresh);
         performDriverAction (driver -> driver.navigate ()
             .refresh ());
         LOGGER.traceExit ();
@@ -81,6 +95,7 @@ public class NavigateActions implements INavigateActions {
     public void to (final String url) {
         LOGGER.traceEntry ();
         LOGGER.info ("Navigating to url: {}", url);
+        ofNullable (this.listener).ifPresent (l -> l.onTo (url));
         performDriverAction (driver -> driver.get (url));
         LOGGER.traceExit ();
     }
@@ -89,6 +104,7 @@ public class NavigateActions implements INavigateActions {
     public StringSubject verifyUrl () {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying browser url");
+        ofNullable (this.listener).ifPresent (INavigateActionsListener::onVerifyUrl);
         LOGGER.traceExit ();
         return assertThat (getUrl ());
     }
