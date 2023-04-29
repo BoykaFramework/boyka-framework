@@ -29,12 +29,9 @@ import com.github.wasiqb.boyka.enums.RequestMethod;
  * @author Wasiq Bhamla
  * @since 28-Feb-2023
  */
-public class BookingRequest {
-    private static final String API_CONFIG_KEY = "test_restfulbooker";
-
+public final class BookingRequest {
     public static ApiRequest createBooking (final Object requestBody) {
-        return createRequest ().configKey (API_CONFIG_KEY)
-            .method (RequestMethod.POST)
+        return createRequest ().method (RequestMethod.POST)
             .header ("Accept", "application/json")
             .path ("/booking")
             .bodyObject (requestBody)
@@ -42,8 +39,7 @@ public class BookingRequest {
     }
 
     public static ApiRequest deleteBooking (final String id) {
-        return createRequest ().configKey (API_CONFIG_KEY)
-            .method (RequestMethod.DELETE)
+        return createRequest ().method (RequestMethod.DELETE)
             .header ("Content-Type", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
@@ -52,8 +48,7 @@ public class BookingRequest {
     }
 
     public static ApiRequest getBooking (final String id) {
-        return createRequest ().configKey (API_CONFIG_KEY)
-            .method (RequestMethod.GET)
+        return createRequest ().method (RequestMethod.GET)
             .header ("Accept", "application/json")
             .path ("/booking/${id}")
             .pathParam ("id", id)
@@ -61,8 +56,7 @@ public class BookingRequest {
     }
 
     public static ApiRequest updateBooking (final String id, final Object requestBody) {
-        return createRequest ().configKey (API_CONFIG_KEY)
-            .method (RequestMethod.PUT)
+        return createRequest ().method (RequestMethod.PUT)
             .header ("Accept", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
@@ -72,8 +66,7 @@ public class BookingRequest {
     }
 
     public static ApiRequest updatePartialBooking (final String id, final Object requestBody) {
-        return createRequest ().configKey (API_CONFIG_KEY)
-            .method (RequestMethod.PATCH)
+        return createRequest ().method (RequestMethod.PATCH)
             .header ("Accept", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
@@ -84,8 +77,7 @@ public class BookingRequest {
 
     private static String generateToken () {
         final TokenBuilder builder = new TokenBuilder ();
-        final var generateTokenRequest = createRequest ().configKey (API_CONFIG_KEY)
-            .header ("Accept", "application/json")
+        final var generateTokenRequest = createRequest ().header ("Accept", "application/json")
             .method (RequestMethod.POST)
             .path ("/auth")
             .bodyObject (builder.tokenBuilder ())

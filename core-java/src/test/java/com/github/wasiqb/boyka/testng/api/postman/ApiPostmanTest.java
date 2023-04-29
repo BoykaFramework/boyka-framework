@@ -16,10 +16,16 @@
 
 package com.github.wasiqb.boyka.testng.api.postman;
 
+import static com.github.wasiqb.boyka.enums.ContentType.FORM_URLENCODED;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
+import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+
 import com.github.wasiqb.boyka.actions.api.ApiActions;
 import com.github.wasiqb.boyka.builders.ApiRequest;
-import com.github.wasiqb.boyka.enums.ContentType;
-import com.github.wasiqb.boyka.enums.RequestMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
@@ -30,18 +36,34 @@ import org.testng.annotations.Test;
  */
 public class ApiPostmanTest {
     /**
+     * Setup API Test.
+     */
+    @BeforeClass (description = "Setup test class", alwaysRun = true)
+    public void setupTestClass () {
+        createSession (API, "test_postman");
+    }
+
+    /**
+     * Clean up Test class.
+     */
+    @AfterClass (description = "Tear down test class", alwaysRun = true)
+    public void tearDownTestClass () {
+        clearSession ();
+    }
+
+    /**
      * Test form data request body related API request.
      */
-    @Test
+    @Test (description = "Test Form body POST request")
     public void testFormBodyRequest () {
         final var request = ApiRequest.createRequest ()
-            .configKey ("test_postman")
-            .contentType (ContentType.FORM_URLENCODED)
+            .contentType (FORM_URLENCODED)
             .formBody ("strange", "boom")
             .formBody ("test", "abc")
-            .method (RequestMethod.POST)
+            .method (POST)
             .path ("/post")
             .create ();
+
         final var response = ApiActions.withRequest (request)
             .execute ();
         response.verifyStatusCode ()

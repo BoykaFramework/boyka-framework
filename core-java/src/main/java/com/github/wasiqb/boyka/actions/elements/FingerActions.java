@@ -19,13 +19,16 @@ package com.github.wasiqb.boyka.actions.elements;
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.getElementAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performMobileGestures;
+import static com.github.wasiqb.boyka.enums.ListenerType.FINGER_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.util.Collections.singletonList;
+import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.actions.interfaces.elements.IFingerActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.IFingerActionsListener;
 import com.github.wasiqb.boyka.builders.Locator;
 import com.github.wasiqb.boyka.enums.SwipeDirection;
 import org.apache.logging.log4j.Logger;
@@ -59,18 +62,22 @@ public class FingerActions extends ElementActions implements IFingerActions {
         return new FingerActions ();
     }
 
+    private final IFingerActionsListener listener;
+
     FingerActions () {
-        super (null);
+        this (null);
     }
 
     FingerActions (final Locator locator) {
         super (locator);
+        this.listener = getSession ().getListener (FINGER_ACTION);
     }
 
     @Override
     public void dragTo (final Locator destination) {
         LOGGER.traceEntry ();
         LOGGER.info ("Dragging [{}] to [{}] on Mobile devices.", this.locator.getName (), destination.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onDragTo (this.locator, destination));
         final var dragSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .element (this.locator)
             .targetElement (destination)
@@ -84,6 +91,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     public void swipe (final SwipeDirection direction) {
         LOGGER.traceEntry ();
         LOGGER.info ("Swiping {} on Mobile devices.", direction);
+        ofNullable (this.listener).ifPresent (l -> l.onSwipe (this.locator, direction));
         final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (direction)
             .element (this.locator)
@@ -96,6 +104,8 @@ public class FingerActions extends ElementActions implements IFingerActions {
     @Override
     public void swipeTill (final SwipeDirection direction) {
         LOGGER.traceEntry ();
+        LOGGER.info ("Swiping till the element in the [{}] direction...", direction);
+        ofNullable (this.listener).ifPresent (l -> l.onSwipeTill (this.locator, direction));
         final var maxSwipe = this.swipeSetting.getMaxSwipeUntilFound ();
         var swipeCounts = 0;
         final var element = onElement (this.locator);
@@ -112,6 +122,8 @@ public class FingerActions extends ElementActions implements IFingerActions {
     @Override
     public void tap () {
         LOGGER.traceEntry ();
+        LOGGER.info ("Tapping on the element...");
+        ofNullable (this.listener).ifPresent (l -> l.onTap (this.locator));
         final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
             .element (this.locator)
             .build ()

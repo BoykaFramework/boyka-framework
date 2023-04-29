@@ -56,8 +56,6 @@ public interface IDriverActions {
      *
      * @param condition condition to wait for
      * @param <T> type of condition
-     *
-     * @return value of the condition
      */
-    <T> T waitUntil (final Function<WebDriver, T> condition);
+    <T> void waitUntil (final Function<WebDriver, T> condition);
 }

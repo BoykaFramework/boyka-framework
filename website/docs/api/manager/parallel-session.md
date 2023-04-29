@@ -24,6 +24,16 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 clearSession ();
 ```
 
+## `createSession (platformType, configKey)` {#create-session}
+
+This method will create the session for the mentioned persona.
+
+```java
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+. . .
+createSession (PlatformType.WEB, "test_chrome");
+```
+
 ## `createSession (persona, platformType, configKey)` {#create-session}
 
 This method will create the session for the mentioned persona.

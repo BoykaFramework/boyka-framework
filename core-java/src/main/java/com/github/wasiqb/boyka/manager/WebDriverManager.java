@@ -174,6 +174,10 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceEntry ();
         edgedriver ().setup ();
         final var options = new EdgeOptions ();
+        options.addArguments ("enable-automation");
+        options.addArguments ("--no-sandbox");
+        options.addArguments ("--disable-gpu");
+        options.addArguments ("--disable-dev-shm-usage");
         ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
