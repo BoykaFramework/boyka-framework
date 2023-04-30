@@ -70,7 +70,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>3.9.1.2184</sonar.maven.version>
-        <jacoco.version>0.8.8</jacoco.version>
+        <jacoco.version>0.8.10</jacoco.version>
         <surefire-version>3.0.0</surefire-version>
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.0.1</maven.gpg.version>
