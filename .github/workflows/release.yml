@@ -3,6 +3,7 @@
 name: Deploy Release to GitHub and Maven Central
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main
@@ -47,7 +48,7 @@ jobs:
         id: old_version
         run: |
           export MVN_OLD_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
-          echo "previous_version=$MVN_OLD_VERSION" >> $GITHUB_OUTPUT
+          echo "previous_version=${MVN_OLD_VERSION:1}" >> $GITHUB_OUTPUT
 
       - name: Update release version
         run: yarn release
@@ -61,7 +62,7 @@ jobs:
       - name: Generate Change log
         if: steps.version.outputs.version != null
         run: |
-          yarn changelog --from ${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
+          yarn changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
       - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v3
