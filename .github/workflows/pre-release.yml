@@ -23,10 +23,10 @@ env:
 jobs:
   prepare-pre-release:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
 
     outputs:
       new-version: ${{ steps.version.outputs.version }}
+      old-version: ${{ steps.old_version.outputs.previous_version }}
 
     steps:
       - name: Check out Git repository
@@ -193,7 +193,7 @@ jobs:
             CHANGELOG.md
             website/package.json
           message: |
-            chore(Internal): :bookmark: released latest version to maven central
+            chore(Internal): :bookmark: released v${{ needs.prepare-pre-release.outputs.old-version }} to maven central
           push: true
           default_author: user_info
           commit: --no-verify
