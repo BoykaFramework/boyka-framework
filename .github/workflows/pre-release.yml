@@ -11,6 +11,7 @@ on:
       - closed
     paths:
       - 'core-java/**'
+      - '.github/workflows/**'
 
 env:
   GITHUB_AUTH: ${{ secrets.PUSH_TOKEN }}
