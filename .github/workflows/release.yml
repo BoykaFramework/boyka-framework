@@ -23,7 +23,6 @@ env:
 jobs:
   prepare-release:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
 
     outputs:
       new-version: ${{ steps.version.outputs.version }}
@@ -180,14 +179,10 @@ jobs:
         with:
           name: version-files
 
-      - name: Get previous version
-        id: previous-version
-        run: echo "old-version=$(node -p "require('./package.json').version" )" >> "$GITHUB_OUTPUT"
-
       - name: Update new version
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: ${{ steps.previous-version.outputs.old-version }}
+          find: ${{ needs.prepare-release.outputs.old-version }}
           replace: ${{ needs.prepare-release.outputs.new-version }}
           regex: false
           include: |
@@ -215,7 +210,7 @@ jobs:
             package.json
             website/docs/framework-docs/getting-started/usage.md
           message: |
-            chore(Internal): :bookmark: released latest version to maven central
+            chore(Internal): :bookmark: released v${{ needs.prepare-release.outputs.old-version }} to maven central
           push: true
           default_author: user_info
           commit: --no-verify
