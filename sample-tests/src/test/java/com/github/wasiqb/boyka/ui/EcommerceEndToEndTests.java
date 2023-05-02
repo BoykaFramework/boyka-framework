@@ -18,8 +18,8 @@ package com.github.wasiqb.boyka.ui;
 
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.ui.actions.CheckoutPageActions.checkoutPageActions;
 import static com.github.wasiqb.boyka.ui.actions.ConfirmOrderPageActions.confirmOrderPageActions;
 import static com.github.wasiqb.boyka.ui.actions.HomePageActions.homePageActions;
@@ -47,14 +47,14 @@ public class EcommerceEndToEndTests {
     @Parameters ({ "driverKey" })
     public void setupTestClass (final String driverKey) {
         final String url = "https://ecommerce-playground.lambdatest.io/";
-        createDriver (PlatformType.WEB, driverKey);
+        createSession ("User 1", PlatformType.WEB, driverKey);
         this.billingData = TestDataBuilder.getBillingData ();
         navigate ().to (url);
     }
 
     @AfterClass (description = "Tear down test class")
     public void tearDownTestClass () {
-        closeDriver ();
+        clearSession ();
     }
 
     @Test (dependsOnMethods = "testRegisterUser")

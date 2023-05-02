@@ -18,14 +18,12 @@ package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.getSession;
-import static com.github.wasiqb.boyka.sessions.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.utils.Validator.setOptionIfPresent;
 import static io.appium.java_client.remote.IOSMobileCapabilityType.XCODE_ORG_ID;
 import static io.appium.java_client.remote.IOSMobileCapabilityType.XCODE_SIGNING_ID;
 import static java.time.Duration.ofSeconds;
-
-import java.util.Optional;
-import java.util.function.Consumer;
 
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
@@ -72,20 +70,8 @@ class IOSManager implements IDriverManager {
             .name ());
         options.setPlatformVersion (this.settings.getVersion ());
         options.setDeviceName (this.settings.getName ());
+        options.setUdid (this.settings.getUniqueId ());
         setApplicationCapabilities (options, this.settings.getApplication ());
-    }
-
-    private <T> void setOptionIfPresent (final T value, final Consumer<T> action) {
-        if (value != null) {
-            if (value instanceof Integer) {
-                Optional.of (value)
-                    .filter (i -> (Integer) i > 0)
-                    .ifPresent (action);
-            } else {
-                Optional.of (value)
-                    .ifPresent (action);
-            }
-        }
     }
 
     private void setWdaOptions (final WDASetting wda, final XCUITestOptions options) {

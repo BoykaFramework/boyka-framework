@@ -23,7 +23,6 @@ env:
 jobs:
   prepare-release:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
 
     outputs:
       new-version: ${{ steps.version.outputs.version }}
@@ -159,6 +158,9 @@ jobs:
           name: version-files
           path: |
             ${{ github.workspace }}/core-java/pom.xml
+            ${{ github.workspace }}/CHANGELOG.md
+            ${{ github.workspace }}/lerna.json
+            ${{ github.workspace }}/website/package.json
 
   push-pom:
     runs-on: ubuntu-latest
@@ -208,7 +210,7 @@ jobs:
             package.json
             website/docs/framework-docs/getting-started/usage.md
           message: |
-            chore(Internal): :bookmark: released latest version to maven central
+            chore(Internal): :bookmark: released v${{ needs.prepare-release.outputs.old-version }} to maven central
           push: true
           default_author: user_info
           commit: --no-verify

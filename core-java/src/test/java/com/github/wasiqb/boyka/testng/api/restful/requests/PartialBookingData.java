@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.testng.api.restful.requests;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * Partial Booking data class
@@ -27,6 +28,7 @@ import lombok.Getter;
  */
 @Getter
 @Builder
+@ToString
 public class PartialBookingData {
     private String firstname;
     private int    totalprice;

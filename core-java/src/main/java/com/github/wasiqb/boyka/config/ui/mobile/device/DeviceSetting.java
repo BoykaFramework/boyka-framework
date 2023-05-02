@@ -35,6 +35,7 @@ import lombok.Data;
 public class DeviceSetting {
     private ApplicationSetting   application;
     private Map<String, Object>  capabilities;
+    private int                  chromeDriverPort;
     private boolean              clearFiles             = true;
     private boolean              clearLogs              = true;
     private boolean              fullReset;
@@ -46,8 +47,10 @@ public class DeviceSetting {
     private int                  serverInstallTimeout   = 30;
     private int                  serverLaunchTimeout    = 30;
     private SwipeSetting         swipe                  = new SwipeSetting ();
+    private int                  systemPort             = 8200;
     private DeviceType           type                   = VIRTUAL;
     private int                  typingSpeed            = 60;
+    private String               uniqueId;
     private String               version;
     private VirtualDeviceSetting virtualDevice          = new VirtualDeviceSetting ();
     private WDASetting           wda;

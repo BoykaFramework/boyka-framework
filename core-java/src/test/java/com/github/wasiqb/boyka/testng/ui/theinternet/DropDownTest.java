@@ -18,8 +18,8 @@ package com.github.wasiqb.boyka.testng.ui.theinternet;
 
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
-import static com.github.wasiqb.boyka.manager.DriverManager.closeDriver;
-import static com.github.wasiqb.boyka.manager.DriverManager.createDriver;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.DropDownPage.dropDownPage;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -47,7 +47,7 @@ public class DropDownTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
-        createDriver (platformType, driverKey);
+        createSession ("DropDownTest", platformType, driverKey);
         navigate ().to (URL);
     }
 
@@ -56,7 +56,7 @@ public class DropDownTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        closeDriver ();
+        clearSession ();
     }
 
     /**

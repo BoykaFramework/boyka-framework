@@ -16,8 +16,8 @@
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.wasiqb.boyka</groupId>
@@ -27,12 +27,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.version>3.11.0</maven.compiler.version>
-        <surefire-version>3.0.0-M9</surefire-version>
+        <surefire-version>3.0.0</surefire-version>
         <java.release.version>11</java.release.version>
         <maven.source.encoding>UTF-8</maven.source.encoding>
         <suite-xml>test-suites/testng.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
-        <boyka.version>0.13.0</boyka.version>
+        <boyka.version>0.14.0</boyka.version>
         <testng.version>7.7.1</testng.version>
         <lombok.version>1.18.26</lombok.version>
         <java.faker.version>1.0.2</java.faker.version>
