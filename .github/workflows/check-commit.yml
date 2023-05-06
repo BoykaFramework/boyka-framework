@@ -1,9 +1,13 @@
-name: Conventional Commit Check
+name: Conventional Commit Lint
 
 on:
   pull_request:
     branches:
       - develop
+
+concurrency:
+  group: boyka-commit-lint-${{ github.ref }}-1
+  cancel-in-progress: true
 
 jobs:
   build:

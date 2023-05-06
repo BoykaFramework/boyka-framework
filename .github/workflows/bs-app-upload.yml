@@ -11,7 +11,7 @@ env:
 
 jobs:
   upload-app:
-    name: 'Upload App to BrowserStack'
+    name: Upload App to BrowserStack
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
