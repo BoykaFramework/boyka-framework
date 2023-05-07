@@ -5,42 +5,34 @@ on:
     inputs:
       runs-on:
         type: string
-        required: true
         description: On which runner to run on
         default: ubuntu
       java-version:
         type: string
-        required: true
         description: Version of Java to run on
         default: 11
       suite-name:
         type: string
-        required: true
         description: Test Suite name to run
         default: ''
       profile-name:
         type: string
-        required: true
         description: Test Profile Name
         default: coverage-test
       run-appium:
         type: boolean
-        required: true
         description: Start Appium server
         default: false
       run-grid:
         type: boolean
-        required: true
         description: Start Selenium Grid
         default: false
       run-ios:
         type: boolean
-        required: true
         description: Start iOS Simulator
         default: false
       run-android:
         type: boolean
-        required: true
         description: Start Android Emulator
         default: false
 
