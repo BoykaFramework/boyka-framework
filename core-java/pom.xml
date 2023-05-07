@@ -16,8 +16,8 @@
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
@@ -56,15 +56,18 @@
         <codestyle.version>1.1.0</codestyle.version>
         <checkstyle.version>10.10.0</checkstyle.version>
         <aspectj.version>1.9.19</aspectj.version>
-        <suite-xml>test-suites/testng.xml</suite-xml>
+        <suite-name>testng</suite-name>
+        <suite-xml>test-suites/${suite-name}.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
-        <allureArgs>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</allureArgs>
+        <allureArgs>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</allureArgs>
         <sonar.organization>boykaframework</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>boyka-framework</sonar.projectKey>
         <checkstyle.config>checkstyles/checkstyle.xml</checkstyle.config>
         <checkstyle.suppress>checkstyles/checkstyle-suppressions.xml</checkstyle.suppress>
-        <sonar.report>${project.basedir}/reports/jacoco.exec</sonar.report>
+        <sonar.report>${project.basedir}/reports/${suite-name}-jacoco.exec</sonar.report>
+        <jacoco.report>${project.reporting.outputDirectory}/jacoco</jacoco.report>
         <maven-enforcer.version>3.3.0</maven-enforcer.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -75,8 +78,8 @@
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.0.1</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <maven-file.version>3.1.0</maven-file.version>
         <allure-testng.version>2.22.0</allure-testng.version>
+        <maven-failsafe.version>3.0.0</maven-failsafe.version>
     </properties>
 
     <distributionManagement>
@@ -91,7 +94,7 @@
     </distributionManagement>
 
     <organization>
-        <name>Wasiq Bhamla</name>
+        <name>Boyka Framework</name>
         <url>https://github.com/BoykaFramework</url>
     </organization>
 
@@ -253,22 +256,94 @@
             <version>${allure-testng.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.shared/file-management -->
-        <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>file-management</artifactId>
-            <version>${maven-file.version}</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven-dependency-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar.maven.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${maven.gpg.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>${nexus.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>${maven-enforcer.version}</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -280,6 +355,9 @@
                                 <requireMavenVersion>
                                     <version>3.8</version>
                                 </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>11</version>
+                                </requireJavaVersion>
                             </rules>
                         </configuration>
                     </execution>
@@ -288,7 +366,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>${maven-clean-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>auto-clean</id>
@@ -302,7 +379,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
@@ -310,7 +386,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven-dependency-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -327,7 +402,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <release>11</release>
                     <encoding>UTF-8</encoding>
@@ -337,7 +411,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -350,7 +423,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
@@ -366,12 +438,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire-version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -406,12 +476,10 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>${sonar.maven.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>verify-style</id>
@@ -449,53 +517,51 @@
 
     <profiles>
         <profile>
-            <id>coverage-per-test</id>
+            <id>coverage-test</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>${jacoco.version}</version>
                         <executions>
                             <execution>
+                                <id>before-integration-test-execution</id>
+                                <phase>pre-integration-test</phase>
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
                                 <configuration>
                                     <destFile>${sonar.report}</destFile>
-                                    <propertyName>surefireArgLine</propertyName>
+                                    <propertyName>failsafe.jacoco.args</propertyName>
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>report</id>
-                                <phase>test</phase>
+                                <id>after-integration-test-execution</id>
+                                <phase>post-integration-test</phase>
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
                                 <configuration>
                                     <dataFile>${sonar.report}</dataFile>
-                                    <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                                    <outputDirectory>${jacoco.report}</outputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>jacoco-check</id>
+                                <id>merge-unit-and-integration</id>
+                                <phase>post-integration-test</phase>
                                 <goals>
-                                    <goal>check</goal>
+                                    <goal>merge</goal>
                                 </goals>
                                 <configuration>
-                                    <dataFile>${sonar.report}</dataFile>
-                                    <rules>
-                                        <rule>
-                                            <element>PACKAGE</element>
-                                            <limits>
-                                                <limit>
-                                                    <counter>LINE</counter>
-                                                    <value>COVEREDRATIO</value>
-                                                    <minimum>0.0</minimum>
-                                                </limit>
-                                            </limits>
-                                        </rule>
-                                    </rules>
+                                    <fileSets>
+                                        <fileSet>
+                                            <directory>${project.basedir}/reports/</directory>
+                                            <includes>
+                                                <include>*.exec</include>
+                                            </includes>
+                                        </fileSet>
+                                    </fileSets>
+                                    <destFile>${project.basedir}/reports/merged/merged.exec</destFile>
                                 </configuration>
                             </execution>
                         </executions>
@@ -503,30 +569,84 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${surefire-version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>test</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                         <configuration>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <argLine>${failsafe.jacoco.args}</argLine>
                             <suiteXmlFiles>
                                 <suiteXmlFile>${suite-xml}</suiteXmlFile>
                             </suiteXmlFiles>
                             <systemPropertyVariables>
                                 <allure.results.directory>target/allure-results</allure.results.directory>
                             </systemPropertyVariables>
-                            <argLine>${argLine} ${allureArgs} ${surefireArgLine}</argLine>
                         </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.aspectj</groupId>
-                                <artifactId>aspectjweaver</artifactId>
-                                <version>${aspectj.version}</version>
-                            </dependency>
-                        </dependencies>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.sonarsource.java</groupId>
+                    <artifactId>sonar-jacoco-listeners</artifactId>
+                    <version>${sonar.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>coverage-report</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-merged-report</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <dataFile>${project.basedir}/reports/merged/merged.exec</dataFile>
+                                    <outputDirectory>${jacoco.report}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -546,7 +666,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven.gpg.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -566,7 +685,6 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${nexus.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
