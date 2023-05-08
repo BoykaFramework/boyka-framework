@@ -52,18 +52,18 @@ jobs:
           check-latest: true
 
       - name: Install Appium 2.0
-        if: ${{ inputs.run-appium == 'true' }}
+        if: inputs.run-appium
         run: |
           npm install -g appium@next
           CHROMEDRIVER_VERSION=83.0.4103 appium driver install uiautomator2
           appium driver install xcuitest
 
       - name: Start Selenium Grid
-        if: ${{ inputs.run-grid == 'true' }}
+        if: inputs.run-grid
         run: java -jar core-java/libs/selenium-server-4.9.0.jar standalone > core-java/selenium-grid.log &
 
       - name: Launch iOS Simulator
-        if: ${{ inputs.run-ios == 'true' }}
+        if: inputs.run-ios
         uses: futureware-tech/simulator-action@v2
         with:
           model: 'iPhone 14'
@@ -72,7 +72,7 @@ jobs:
           shutdown_after_job: true
 
       - name: All Test execution
-        if: ${{ inputs.run-android == 'true' }}
+        if: inputs.run-android
         uses: reactivecircus/android-emulator-runner@v2
         with:
           avd-name: Nexus_6
@@ -86,7 +86,7 @@ jobs:
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 
       - name: All ${{ inputs.suite-name }} Test execution
-        if: ${{ inputs.run-android == 'false' }}
+        if: inputs.run-android == false
         run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
 
       - name: Test Report
