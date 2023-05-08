@@ -64,6 +64,9 @@ jobs:
     needs:
       - build
     uses: ./.github/workflows/test-core-java.yml
+    secrets:
+      BS_USER: ${{ env.BS_USER }}
+      BS_KEY: ${{ env.BS_KEY }}
     with:
       suite-name: testng-web-bs
 
@@ -71,6 +74,9 @@ jobs:
     needs:
       - build
     uses: ./.github/workflows/test-core-java.yml
+    secrets:
+      LT_USER: ${{ env.LT_USER }}
+      LT_KEY: ${{ env.LT_KEY }}
     with:
       suite-name: testng-web-lt
 
@@ -98,6 +104,9 @@ jobs:
     needs:
       - build
     uses: ./.github/workflows/test-core-java.yml
+    secrets:
+      BS_USER: ${{ env.BS_USER }}
+      BS_KEY: ${{ env.BS_KEY }}
     with:
       suite-name: testng-mobile-bs
 
@@ -105,6 +114,11 @@ jobs:
     needs:
       - build
     uses: ./.github/workflows/test-core-java.yml
+    secrets:
+      LT_USER: ${{ env.LT_USER }}
+      LT_KEY: ${{ env.LT_KEY }}
+      LT_APP_ANDROID: ${{ env.LT_APP_ANDROID }}
+      LT_APP_IOS: ${{ env.LT_APP_IOS }}
     with:
       suite-name: testng-mobile-lt
 

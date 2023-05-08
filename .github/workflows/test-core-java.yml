@@ -39,6 +39,19 @@ on:
         type: boolean
         description: Start Local Web Browser
         default: false
+    secrets:
+      BS_USER:
+        required: false
+      BS_KEY:
+        required: false
+      LT_USER:
+        required: false
+      LT_KEY:
+        required: false
+      LT_APP_ANDROID:
+        required: false
+      LT_APP_IOS:
+        required: false
 
 jobs:
   test:
