@@ -78,7 +78,7 @@ jobs:
       - build
     uses: ./.github/workflows/test-core-java.yml
     with:
-      suite-name: testng-web-lt
+      suite-name: testng-web-grid
       run-grid: true
 
   test-mobile-local:
