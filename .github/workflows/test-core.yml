@@ -117,9 +117,47 @@ jobs:
       - test-mobile-local
       - test-mobile-bs
       - test-mobile-lt
-    uses: ./.github/workflows/test-core-java.yml
-    with:
-      profile-name: coverage-report
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Install Java and Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+          cache: 'maven'
+          check-latest: true
+
+      - name: Download All the artifacts from previous jobs
+        uses: actions/download-artifact@v3
+        with:
+          path: ${{ github.workspace }}/core-java
+
+      - name: Generate Code Coverage Report
+        run: |
+          ls ${{ github.workspace }}/core-java/reports
+          mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -Pcoverage-report
+
+      - name: Upload target folder
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: target-${{ github.run_id }}
+          path: |
+            ${{ github.workspace }}/core-java/target
+            ${{ github.workspace }}/core-java/logs
+            ${{ github.workspace }}/core-java/selenium-grid.log
+            ${{ github.workspace }}/core-java/screenshots
+
+      - name: Upload reports folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports-${{ github.run_id }}
+          path: |
+            ${{ github.workspace }}/core-java/reports
 
   analysis:
     needs:
@@ -142,13 +180,13 @@ jobs:
       - name: Download target folder
         uses: actions/download-artifact@v3
         with:
-          name: target-*
+          name: target-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java
 
       - name: Download reports folder
         uses: actions/download-artifact@v3
         with:
-          name: reports-*
+          name: reports-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java
 
       - name: Build and analyze

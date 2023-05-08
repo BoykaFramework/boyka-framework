@@ -64,6 +64,7 @@
         <sonar.organization>boykaframework</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>boyka-framework</sonar.projectKey>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <checkstyle.config>checkstyles/checkstyle.xml</checkstyle.config>
         <checkstyle.suppress>checkstyles/checkstyle-suppressions.xml</checkstyle.suppress>
         <sonar.report>${project.basedir}/reports/${suite-name}-jacoco.exec</sonar.report>
@@ -546,24 +547,6 @@
                                     <outputDirectory>${jacoco.report}</outputDirectory>
                                 </configuration>
                             </execution>
-                            <execution>
-                                <id>merge-unit-and-integration</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                    <goal>merge</goal>
-                                </goals>
-                                <configuration>
-                                    <fileSets>
-                                        <fileSet>
-                                            <directory>${project.basedir}/reports/</directory>
-                                            <includes>
-                                                <include>*.exec</include>
-                                            </includes>
-                                        </fileSet>
-                                    </fileSets>
-                                    <destFile>${project.basedir}/reports/merged/merged.exec</destFile>
-                                </configuration>
-                            </execution>
                         </executions>
                     </plugin>
                     <plugin>
@@ -613,6 +596,24 @@
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
                         <executions>
+                            <execution>
+                                <id>merge-unit-and-integration</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>merge</goal>
+                                </goals>
+                                <configuration>
+                                    <fileSets>
+                                        <fileSet>
+                                            <directory>${project.basedir}/reports/</directory>
+                                            <includes>
+                                                <include>*.exec</include>
+                                            </includes>
+                                        </fileSet>
+                                    </fileSets>
+                                    <destFile>${project.basedir}/reports/merged/merged.exec</destFile>
+                                </configuration>
+                            </execution>
                             <execution>
                                 <id>create-merged-report</id>
                                 <phase>post-integration-test</phase>

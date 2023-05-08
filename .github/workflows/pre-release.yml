@@ -1,5 +1,3 @@
-# Auto release pre-release `rc` version to Maven Central and create Tag
-# As soon as PR from develop to staging gets merged and closed.
 name: Deploy Pre-release to Maven Central
 
 on:

@@ -1,5 +1,3 @@
-# Auto release version to Maven Central and GitHub Releases
-# As soon as PR from staging to main gets merged and closed.
 name: Deploy Release to GitHub and Maven Central
 
 on:
