@@ -58,6 +58,7 @@ jobs:
     uses: ./.github/workflows/test-core-java.yml
     with:
       suite-name: testng-web-local
+      run-web: true
 
   test-web-bs:
     needs:
@@ -80,6 +81,7 @@ jobs:
     with:
       suite-name: testng-web-grid
       run-grid: true
+      run-web: true
 
   test-mobile-local:
     needs:

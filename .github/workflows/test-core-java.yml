@@ -35,14 +35,10 @@ on:
         type: boolean
         description: Start Android Emulator
         default: false
-
-env:
-  BS_USER: ${{ secrets.BS_USER }}
-  BS_KEY: ${{ secrets.BS_KEY }}
-  LT_USER: ${{ secrets.LT_USER }}
-  LT_KEY: ${{ secrets.LT_KEY }}
-  LT_APP_ANDROID: ${{ secrets.LT_APP_ANDROID }}
-  LT_APP_IOS: ${{ secrets.LT_APP_IOS }}
+      run-web:
+        type: boolean
+        description: Start Local Web Browser
+        default: false
 
 jobs:
   test:
@@ -58,6 +54,14 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true
+
+      - name: Install Chrome
+        if: inputs.run-web
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Install Edge
+        if: inputs.run-web
+        uses: browser-actions/setup-edge@latest
 
       - name: Install Appium 2.0
         if: inputs.run-appium
@@ -95,6 +99,13 @@ jobs:
 
       - name: All ${{ inputs.suite-name }} Test execution
         if: inputs.run-android == false
+        env:
+          BS_USER: ${{ secrets.BS_USER }}
+          BS_KEY: ${{ secrets.BS_KEY }}
+          LT_USER: ${{ secrets.LT_USER }}
+          LT_KEY: ${{ secrets.LT_KEY }}
+          LT_APP_ANDROID: ${{ secrets.LT_APP_ANDROID }}
+          LT_APP_IOS: ${{ secrets.LT_APP_IOS }}
         run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
 
       - name: Test Report
