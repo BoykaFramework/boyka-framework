@@ -58,15 +58,15 @@ jobs:
     uses: ./.github/workflows/test-core-java.yml
     with:
       suite-name: testng-web-local
-      run-web: true
+      runs-on: macos
 
   test-web-bs:
     needs:
       - build
     uses: ./.github/workflows/test-core-java.yml
     secrets:
-      BS_USER: ${{ env.BS_USER }}
-      BS_KEY: ${{ env.BS_KEY }}
+      BS_USER: ${{ secrets.BS_USER }}
+      BS_KEY: ${{ secrets.BS_KEY }}
     with:
       suite-name: testng-web-bs
 
@@ -75,8 +75,8 @@ jobs:
       - build
     uses: ./.github/workflows/test-core-java.yml
     secrets:
-      LT_USER: ${{ env.LT_USER }}
-      LT_KEY: ${{ env.LT_KEY }}
+      LT_USER: ${{ secrets.LT_USER }}
+      LT_KEY: ${{ secrets.LT_KEY }}
     with:
       suite-name: testng-web-lt
 
@@ -87,7 +87,7 @@ jobs:
     with:
       suite-name: testng-web-grid
       run-grid: true
-      run-web: true
+      runs-on: macos
 
   test-mobile-local:
     needs:
@@ -105,8 +105,8 @@ jobs:
       - build
     uses: ./.github/workflows/test-core-java.yml
     secrets:
-      BS_USER: ${{ env.BS_USER }}
-      BS_KEY: ${{ env.BS_KEY }}
+      BS_USER: ${{ secrets.BS_USER }}
+      BS_KEY: ${{ secrets.BS_KEY }}
     with:
       suite-name: testng-mobile-bs
 
@@ -115,10 +115,10 @@ jobs:
       - build
     uses: ./.github/workflows/test-core-java.yml
     secrets:
-      LT_USER: ${{ env.LT_USER }}
-      LT_KEY: ${{ env.LT_KEY }}
-      LT_APP_ANDROID: ${{ env.LT_APP_ANDROID }}
-      LT_APP_IOS: ${{ env.LT_APP_IOS }}
+      LT_USER: ${{ secrets.LT_USER }}
+      LT_KEY: ${{ secrets.LT_KEY }}
+      LT_APP_ANDROID: ${{ secrets.LT_APP_ANDROID }}
+      LT_APP_IOS: ${{ secrets.LT_APP_IOS }}
     with:
       suite-name: testng-mobile-lt
 
