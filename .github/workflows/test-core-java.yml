@@ -83,11 +83,11 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
+          script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 
       - name: All ${{ inputs.suite-name }} Test execution
         if: inputs.run-android == false
-        run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
+        run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
 
       - name: Test Report
         if: failure() && inputs.profile-name != 'coverage-report'
