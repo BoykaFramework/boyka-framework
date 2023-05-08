@@ -147,10 +147,50 @@ jobs:
           cache: 'maven'
           check-latest: true
 
-      - name: Download All the artifacts from previous jobs
+      - name: Download reports-testng-api files
         uses: actions/download-artifact@v3
         with:
-          path: ${{ github.workspace }}/core-java
+          name: reports-testng-api
+
+      - name: Download reports-testng-mobile-bs files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-mobile-bs
+
+      - name: Download reports-testng-mobile-local files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-mobile-local
+
+      - name: Download reports-testng-mobile-lt files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-mobile-lt
+
+      - name: Download reports-testng-others files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-others
+
+      - name: Download reports-testng-web-bs files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-web-bs
+
+      - name: Download reports-testng-web-grid files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-web-grid
+
+      - name: Download reports-testng-web-local files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-web-local
+
+      - name: Download reports-testng-web-lt files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-web-lt
 
       - name: Generate Code Coverage Report
         run: |

@@ -68,14 +68,6 @@ jobs:
           cache: 'maven'
           check-latest: true
 
-      - name: Install Chrome
-        if: inputs.run-web
-        uses: browser-actions/setup-chrome@latest
-
-      - name: Install Edge
-        if: inputs.run-web
-        uses: browser-actions/setup-edge@latest
-
       - name: Install Appium 2.0
         if: inputs.run-appium
         run: |
