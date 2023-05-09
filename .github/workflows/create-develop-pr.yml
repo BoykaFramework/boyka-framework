@@ -14,5 +14,5 @@ jobs:
       title: ${{ github.event.head_commit.message }}
       is-feature: true
     secrets:
-      GITHUB_AUTH: ${{ secrets.GITHUB_AUTH }}
+      GH_TOKEN: ${{ secrets.GITHUB_AUTH }}
       PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}

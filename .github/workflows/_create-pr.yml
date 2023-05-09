@@ -22,7 +22,7 @@ on:
     secrets:
       PUSH_TOKEN:
         required: true
-      GITHUB_TOKEN:
+      GH_TOKEN:
         required: true
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
         id: branch-changes
         uses: fjenik/detect-changes-between-two-branches@0.0.3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GH_TOKEN }}
           target-branch: ${{ inputs.target-branch }}
           source-branch: ${{ inputs.source-branch }}
 
@@ -49,7 +49,7 @@ jobs:
         if: steps.branch-changes.outputs.is-source-branch-ahead == 'true'
         uses: fjenik/check-if-pr-exists@0.0.3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GH_TOKEN }}
           target-branch: ${{ inputs.target-branch }}
           source-branch: ${{ inputs.source-branch }}
 
