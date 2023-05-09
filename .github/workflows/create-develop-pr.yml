@@ -7,42 +7,12 @@ on:
 
 jobs:
   create-feature-to-develop-pr:
-    runs-on: ubuntu-latest
-    name: Create pull request from feature branch to develop branch
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-
-      - name: Detect changes between feature and develop
-        id: branch-changes
-        uses: fjenik/detect-changes-between-two-branches@0.0.3
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          target-branch: develop
-          source-branch: ${{ github.ref_name }}
-
-      - name: Detect changes output
-        run: echo "Output of detect changes ${{ steps.branch-changes.outputs.is-source-branch-ahead }}"
-
-      - name: Check if pr already exists
-        id: pr-exists
-        if: ${{ steps.branch-changes.outputs.is-source-branch-ahead == 'true' }}
-        uses: fjenik/check-if-pr-exists@0.0.3
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          target-branch: develop
-          source-branch: ${{ github.ref_name }}
-
-      - name: Print output
-        run: echo "Output of pull request already exists is [${{ steps.pr-exists.outputs.is-pr-already-created }}]"
-
-      - name: Create pull request
-        if: ${{ steps.pr-exists.outputs.is-pr-already-created == 'false' }}
-        uses: repo-sync/pull-request@v2
-        with:
-          github_token: ${{ secrets.PUSH_TOKEN }}
-          destination_branch: develop
-          pr_reviewer: boyka-core
-          pr_title: ${{ github.event.head_commit.message }}
-          pr_template: '.github/pull_request_template.md'
-          pr_draft: true
+    uses: ./.github/workflows/_create-pr.yml
+    with:
+      source-branch: ${{ github.ref_name }}
+      target-branch: develop
+      title: ${{ github.event.head_commit.message }}
+      is-feature: true
+    secrets:
+      GITHUB_AUTH: ${{ secrets.GITHUB_AUTH }}
+      PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}

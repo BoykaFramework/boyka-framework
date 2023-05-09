@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: windows-latest
     env:
       BS_USER: ${{ secrets.BS_USER }}
       BS_KEY: ${{ secrets.BS_KEY }}
@@ -59,6 +59,7 @@ jobs:
         if: failure()
         with:
           name: target
+          retention-days: 1
           path: |
             ${{ github.workspace }}/sample-tests/logs
             ${{ github.workspace }}/sample-tests/selenium-grid.log

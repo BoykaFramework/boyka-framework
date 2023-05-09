@@ -69,7 +69,7 @@
     "format-fix": "prettier --write .",
     "clear:website": "yarn workspace website clear",
     "changelog": "lerna-changelog",
-    "prerelease": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-prerelease --preid rc",
+    "prerelease": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-prerelease --preid beta",
     "release": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-graduate"
   },
   "lint-staged": {

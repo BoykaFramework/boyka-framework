@@ -122,6 +122,7 @@ jobs:
         if: always()
         with:
           name: target-${{ inputs.suite-name }}
+          retention-days: 1
           path: |
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/logs
@@ -132,5 +133,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: reports-${{ inputs.suite-name }}
+          retention-days: 1
           path: |
             ${{ github.workspace }}/core-java/reports

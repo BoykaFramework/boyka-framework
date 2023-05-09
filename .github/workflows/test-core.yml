@@ -41,21 +41,21 @@ jobs:
   test-api:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-api
 
   test-others:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-others
 
   test-web-local:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-local
       runs-on: macos
@@ -63,7 +63,7 @@ jobs:
   test-web-bs:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     secrets:
       BS_USER: ${{ secrets.BS_USER }}
       BS_KEY: ${{ secrets.BS_KEY }}
@@ -73,7 +73,7 @@ jobs:
   test-web-lt:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     secrets:
       LT_USER: ${{ secrets.LT_USER }}
       LT_KEY: ${{ secrets.LT_KEY }}
@@ -83,16 +83,16 @@ jobs:
   test-web-grid:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-grid
       run-grid: true
-      runs-on: macos
+      runs-on: windows
 
   test-mobile-local:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       runs-on: macos
       suite-name: testng-mobile-local
@@ -103,7 +103,7 @@ jobs:
   test-mobile-bs:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     secrets:
       BS_USER: ${{ secrets.BS_USER }}
       BS_KEY: ${{ secrets.BS_KEY }}
@@ -113,7 +113,7 @@ jobs:
   test-mobile-lt:
     needs:
       - build
-    uses: ./.github/workflows/test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     secrets:
       LT_USER: ${{ secrets.LT_USER }}
       LT_KEY: ${{ secrets.LT_KEY }}
@@ -203,7 +203,6 @@ jobs:
 
       - name: Generate Code Coverage Report
         run: |
-          ls ${{ github.workspace }}/core-java/reports
           mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Pcoverage-report
 
       - name: Upload target folder
@@ -211,6 +210,7 @@ jobs:
         if: always()
         with:
           name: target-${{ github.run_id }}
+          retention-days: 1
           path: |
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/logs
@@ -221,6 +221,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: reports-${{ github.run_id }}
+          retention-days: 1
           path: |
             ${{ github.workspace }}/core-java/reports
 
