@@ -204,7 +204,7 @@ jobs:
       - name: Generate Code Coverage Report
         run: |
           ls ${{ github.workspace }}/core-java/reports
-          mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -Pcoverage-report
+          mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Pcoverage-report
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
