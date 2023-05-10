@@ -96,7 +96,7 @@ class WebDriverManager implements IDriverManager {
 
     private ChromeOptions getChromeOptions (final WebSetting webSetting) {
         final var options = new ChromeOptions ();
-        options.setPlatformName (webSetting.getPlatform ());
+        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         options.addArguments ("enable-automation");
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
@@ -110,7 +110,7 @@ class WebDriverManager implements IDriverManager {
 
     private EdgeOptions getEdgeOptions (final WebSetting webSetting) {
         final var options = new EdgeOptions ();
-        options.setPlatformName (webSetting.getPlatform ());
+        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         options.addArguments ("enable-automation");
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
@@ -124,7 +124,7 @@ class WebDriverManager implements IDriverManager {
 
     private FirefoxOptions getFirefoxOptions (final WebSetting webSetting) {
         final var options = new FirefoxOptions ();
-        options.setPlatformName (webSetting.getPlatform ());
+        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
@@ -167,7 +167,7 @@ class WebDriverManager implements IDriverManager {
 
     private SafariOptions getSafariOptions (final WebSetting webSetting) {
         final var options = new SafariOptions ();
-        options.setPlatformName (webSetting.getPlatform ());
+        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         return options;
     }
 
