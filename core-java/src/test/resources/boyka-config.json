@@ -32,18 +32,14 @@
         },
         "browser_options": [
           "use-fake-device-for-media-stream",
-          "use-fake-ui-for-media-stream",
-          "--remote-allow-origins=*"
+          "use-fake-ui-for-media-stream"
         ]
       },
       "test_local_firefox": {
         "browser": "FIREFOX"
       },
       "test_local_edge": {
-        "browser": "EDGE",
-        "browser_options": [
-          "--remote-allow-origins=*"
-        ]
+        "browser": "EDGE"
       },
       "test_local_safari": {
         "browser": "SAFARI"
@@ -65,13 +61,10 @@
         }
       },
       "test_selenium_grid": {
-        "browser": "REMOTE",
+        "browser": "CHROME",
         "target": "LOCAL",
         "port": "4444",
-        "capabilities": {
-          "browserName": "chrome",
-          "platform": "MAC"
-        }
+        "platform": "Windows"
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",

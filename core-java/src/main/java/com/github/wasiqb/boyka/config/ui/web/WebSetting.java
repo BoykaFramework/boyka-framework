@@ -46,6 +46,7 @@ public class WebSetting {
     private boolean             highlight  = false;
     private String              host;
     private String              password;
+    private String              platform;
     private int                 port;
     private Protocol            protocol   = HTTP;
     private WindowResizeType    resize     = WindowResizeType.NORMAL;

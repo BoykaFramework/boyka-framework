@@ -36,17 +36,17 @@ public enum TargetProviders {
      */
     BROWSER_STACK ("hub-cloud.browserstack.com", HTTPS),
     /**
-     * None.
+     * Lambda Test for Mobile.
      */
-    LOCAL ("127.0.0.1", HTTP),
+    LAMBDA_TEST_MOBILE ("mobile-hub.lambdatest.com", HTTPS),
     /**
      * Lambda Test for Web.
      */
     LAMBDA_TEST_WEB ("hub.lambdatest.com", HTTPS),
     /**
-     * Lambda Test for Mobile.
+     * None.
      */
-    LAMBDA_TEST_MOBILE ("mobile-hub.lambdatest.com", HTTPS);
+    LOCAL ("127.0.0.1", HTTP);
 
     private final String   host;
     private final Protocol protocol;

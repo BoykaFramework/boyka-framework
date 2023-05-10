@@ -46,6 +46,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 class WebDriverManager implements IDriverManager {
     private static final String HEADLESS = "--headless=new";
@@ -67,7 +68,7 @@ class WebDriverManager implements IDriverManager {
                     setDriver (setupRemoteDriver (webSetting));
                     break;
                 case SAFARI:
-                    setDriver (setupSafariDriver ());
+                    setDriver (setupSafariDriver (webSetting));
                     break;
                 case EDGE:
                     setDriver (setupEdgeDriver (webSetting));
@@ -91,6 +92,44 @@ class WebDriverManager implements IDriverManager {
         final var remoteCapabilities = new DesiredCapabilities ();
         capabilities.forEach (remoteCapabilities::setCapability);
         return LOGGER.traceExit (remoteCapabilities);
+    }
+
+    private ChromeOptions getChromeOptions (final WebSetting webSetting) {
+        final var options = new ChromeOptions ();
+        options.setPlatformName (webSetting.getPlatform ());
+        options.addArguments ("enable-automation");
+        options.addArguments ("--no-sandbox");
+        options.addArguments ("--disable-gpu");
+        options.addArguments ("--disable-dev-shm-usage");
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        if (webSetting.isHeadless ()) {
+            options.addArguments (HEADLESS);
+        }
+        return options;
+    }
+
+    private EdgeOptions getEdgeOptions (final WebSetting webSetting) {
+        final var options = new EdgeOptions ();
+        options.setPlatformName (webSetting.getPlatform ());
+        options.addArguments ("enable-automation");
+        options.addArguments ("--no-sandbox");
+        options.addArguments ("--disable-gpu");
+        options.addArguments ("--disable-dev-shm-usage");
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        if (webSetting.isHeadless ()) {
+            options.addArguments (HEADLESS);
+        }
+        return options;
+    }
+
+    private FirefoxOptions getFirefoxOptions (final WebSetting webSetting) {
+        final var options = new FirefoxOptions ();
+        options.setPlatformName (webSetting.getPlatform ());
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        if (webSetting.isHeadless ()) {
+            options.addArguments (HEADLESS);
+        }
+        return options;
     }
 
     private String getHostName (final WebSetting webSetting, final TargetProviders target) {
@@ -126,6 +165,12 @@ class WebDriverManager implements IDriverManager {
         return null;
     }
 
+    private SafariOptions getSafariOptions (final WebSetting webSetting) {
+        final var options = new SafariOptions ();
+        options.setPlatformName (webSetting.getPlatform ());
+        return options;
+    }
+
     private void navigateToBaseUrl (final String baseUrl) {
         if (isNotEmpty (baseUrl)) {
             navigate ().to (baseUrl);
@@ -158,41 +203,21 @@ class WebDriverManager implements IDriverManager {
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         chromedriver ().setup ();
-        final var options = new ChromeOptions ();
-        options.addArguments ("enable-automation");
-        options.addArguments ("--no-sandbox");
-        options.addArguments ("--disable-gpu");
-        options.addArguments ("--disable-dev-shm-usage");
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
-        }
+        final var options = getChromeOptions (webSetting);
         return LOGGER.traceExit (new ChromeDriver (options));
     }
 
     private WebDriver setupEdgeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         edgedriver ().setup ();
-        final var options = new EdgeOptions ();
-        options.addArguments ("enable-automation");
-        options.addArguments ("--no-sandbox");
-        options.addArguments ("--disable-gpu");
-        options.addArguments ("--disable-dev-shm-usage");
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
-        }
+        final var options = getEdgeOptions (webSetting);
         return LOGGER.traceExit (new EdgeDriver (options));
     }
 
     private WebDriver setupFirefoxDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         firefoxdriver ().setup ();
-        final var options = new FirefoxOptions ();
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
-        }
+        final var options = getFirefoxOptions (webSetting);
         return LOGGER.traceExit (new FirefoxDriver (options));
     }
 
@@ -205,9 +230,10 @@ class WebDriverManager implements IDriverManager {
         return LOGGER.traceExit (driver);
     }
 
-    private WebDriver setupSafariDriver () {
+    private WebDriver setupSafariDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         safaridriver ().setup ();
-        return LOGGER.traceExit (new SafariDriver ());
+        final var options = getSafariOptions (webSetting);
+        return LOGGER.traceExit (new SafariDriver (options));
     }
 }
