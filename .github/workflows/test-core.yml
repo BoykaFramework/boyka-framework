@@ -87,7 +87,6 @@ jobs:
     with:
       suite-name: testng-web-grid
       run-grid: true
-      runs-on: windows
 
   test-mobile-local:
     needs:
