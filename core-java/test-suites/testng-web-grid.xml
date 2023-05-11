@@ -20,10 +20,6 @@
     <test name="Test Boyka web on Selenium Grid">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_selenium_grid"/>
-        <packages>
-            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
-        </packages>
         <classes>
             <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
             <class name="com.github.wasiqb.boyka.testng.ui.theinternet.AlertsTest"/>
