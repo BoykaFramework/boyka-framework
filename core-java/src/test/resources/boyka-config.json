@@ -51,13 +51,19 @@
         "password": "${env:BS_KEY}",
         "capabilities": {
           "browser": "Chrome",
-          "browser_version": "latest",
+          "browserVersion": "latest",
           "os": "Windows",
-          "os_version": "10",
+          "osVersion": "11",
           "resolution": "1920x1080",
-          "project": "Test Boyka Project",
-          "build": "Test BrowserStack Build",
-          "name": "Test BrowserStack Session"
+          "projectName": "Test Boyka Project",
+          "buildName": "Test BrowserStack Build",
+          "sessionName": "Test BrowserStack Session",
+          "seleniumVersion": "4.8.0",
+          "telemetryLogs": "true",
+          "seleniumLogs": "true",
+          "video": "true",
+          "networkLogs": "true",
+          "debug": "true"
         }
       },
       "test_selenium_grid": {

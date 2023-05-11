@@ -9,6 +9,7 @@ import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.NULL_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
+import static com.github.wasiqb.boyka.enums.Message.SESSION_NOT_STARTED;
 import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
@@ -30,10 +31,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
-import com.github.wasiqb.boyka.enums.Message;
 import com.github.wasiqb.boyka.enums.TargetProviders;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -42,7 +43,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -79,7 +79,7 @@ class WebDriverManager implements IDriverManager {
                     break;
             }
         } catch (final SessionNotCreatedException e) {
-            handleAndThrow (Message.SESSION_NOT_STARTED, e);
+            handleAndThrow (SESSION_NOT_STARTED, e);
         }
         setDriverSize (webSetting);
         navigateToBaseUrl (webSetting.getBaseUrl ());
@@ -89,8 +89,8 @@ class WebDriverManager implements IDriverManager {
     private Capabilities getCapabilities (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         final var capabilities = requireNonNull (webSetting.getCapabilities (), CAPABILITIES_REQUIRED_FOR_REMOTE);
-        final var remoteCapabilities = new DesiredCapabilities ();
-        capabilities.forEach (remoteCapabilities::setCapability);
+        final var remoteCapabilities = new MutableCapabilities ();
+        setupCloudDriverOptions (remoteCapabilities, capabilities, webSetting.getTarget ());
         return LOGGER.traceExit (remoteCapabilities);
     }
 

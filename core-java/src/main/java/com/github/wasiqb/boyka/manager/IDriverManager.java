@@ -23,12 +23,14 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
 import com.github.wasiqb.boyka.enums.TargetProviders;
 import io.appium.java_client.remote.options.BaseOptions;
 import io.appium.java_client.remote.options.SupportsAppOption;
+import org.openqa.selenium.MutableCapabilities;
 
 interface IDriverManager {
     default <E extends BaseOptions<E>, T extends SupportsAppOption<E>> void setupApplicationOptions (
@@ -43,9 +45,8 @@ interface IDriverManager {
         }
     }
 
-    default <E extends BaseOptions<E>> void setupCloudDriverOptions (final E options, final DeviceSetting deviceSetting,
-        final String optionPrefix) {
-        final var capabilities = deviceSetting.getCapabilities ();
+    default <E extends MutableCapabilities> void setupCloudDriverOptions (final E options,
+        final Map<String, Object> capabilities, final TargetProviders targetProviders) {
         if (capabilities != null) {
             final var optionCapabilities = new HashMap<String, Object> ();
             capabilities.forEach ((k, v) -> {
@@ -55,22 +56,13 @@ interface IDriverManager {
                     optionCapabilities.put (k, v);
                 }
             });
-            options.setCapability (format ("{0}:options", optionPrefix), optionCapabilities);
+            options.setCapability (format ("{0}:options", targetProviders.getPrefix ()), optionCapabilities);
         }
     }
 
-    default <E extends BaseOptions<E>> void setupCloudMobileDriver (final E options,
+    default <E extends MutableCapabilities> void setupCloudMobileDriver (final E options,
         final TargetProviders targetProviders, final DeviceSetting deviceSetting) {
-        switch (targetProviders) {
-            case BROWSER_STACK:
-                setupCloudDriverOptions (options, deviceSetting, "bstack");
-                break;
-            case LAMBDA_TEST_MOBILE:
-            case LAMBDA_TEST_WEB:
-            default:
-                setupCloudDriverOptions (options, deviceSetting, "lt");
-                break;
-        }
+        setupCloudDriverOptions (options, deviceSetting.getCapabilities (), targetProviders);
     }
 
     void setupDriver ();
