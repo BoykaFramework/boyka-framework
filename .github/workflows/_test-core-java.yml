@@ -128,7 +128,6 @@ jobs:
           path: |
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/logs
-            ${{ github.workspace }}/core-java/selenium-grid.log
             ${{ github.workspace }}/core-java/screenshots
 
       - name: Upload reports folder

@@ -206,6 +206,7 @@ jobs:
 
       - name: Update new version
         uses: jacobtomlinson/gha-find-replace@v3
+        if: inputs.pre-release == false
         with:
           find: ${{ needs.prepare.outputs.old-version }}
           replace: ${{ needs.prepare.outputs.new-version }}
