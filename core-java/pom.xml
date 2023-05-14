@@ -80,7 +80,7 @@
         <maven.gpg.version>3.0.1</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <allure-testng.version>2.22.0</allure-testng.version>
-        <maven-failsafe.version>3.0.0</maven-failsafe.version>
+        <maven-failsafe.version>3.1.0</maven-failsafe.version>
     </properties>
 
     <distributionManagement>
