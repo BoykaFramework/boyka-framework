@@ -57,6 +57,18 @@ public class DriverManagerTest {
     }
 
     /**
+     * Test method to verify none browser.
+     */
+    @Test (description = "Test None Browser", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "NONE Browser type is not allowed for Web platform...")
+    public void testNoneBrowser () {
+        try {
+            createSession (PERSONA, WEB, "test_local_none_browser");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
      * Test method to verify empty browser in config.
      */
     @Test (description = "Test Web null browser in config")

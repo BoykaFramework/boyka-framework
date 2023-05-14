@@ -204,7 +204,7 @@ jobs:
         with:
           name: version-files
 
-      - name: Update new version
+      - name: Update new version in README and Usage
         uses: jacobtomlinson/gha-find-replace@v3
         if: inputs.pre-release == false
         with:
@@ -213,8 +213,17 @@ jobs:
           regex: false
           include: |
             README.md
-            package.json
             website/docs/framework-docs/getting-started/usage.md
+
+      - name: Update new version in package.json
+        uses: jacobtomlinson/gha-find-replace@v3
+        if: inputs.pre-release == false
+        with:
+          find: '"version": "${{ needs.prepare.outputs.old-version }}"'
+          replace: '"version": "${{ needs.prepare.outputs.new-version }}"'
+          regex: false
+          include: |
+            package.json
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v5

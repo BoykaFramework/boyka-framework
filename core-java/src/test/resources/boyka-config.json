@@ -39,7 +39,8 @@
         "browser": "FIREFOX"
       },
       "test_local_edge": {
-        "browser": "EDGE"
+        "browser": "EDGE",
+        "resize": "FULL_SCREEN"
       },
       "test_local_safari": {
         "browser": "SAFARI"
@@ -49,6 +50,7 @@
         "target": "BROWSER_STACK",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
+        "resize": "MAXIMIZED",
         "capabilities": {
           "browser": "Chrome",
           "browserVersion": "latest",
@@ -76,6 +78,7 @@
         "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
+        "resize": "MINIMIZED",
         "capabilities": {
           "browserName": "Chrome",
           "version": "99.0",
@@ -152,6 +155,9 @@
         "browser_options": [
           "--remote-allow-origins=*"
         ]
+      },
+      "test_local_none_browser": {
+        "browser": "NONE"
       }
     },
     "mobile": {

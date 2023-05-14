@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
-import com.github.wasiqb.boyka.config.ui.mobile.device.DeviceSetting;
 import com.github.wasiqb.boyka.enums.TargetProviders;
 import io.appium.java_client.remote.options.BaseOptions;
 import io.appium.java_client.remote.options.SupportsAppOption;
@@ -58,11 +57,6 @@ interface IDriverManager {
             });
             options.setCapability (format ("{0}:options", targetProviders.getPrefix ()), optionCapabilities);
         }
-    }
-
-    default <E extends MutableCapabilities> void setupCloudMobileDriver (final E options,
-        final TargetProviders targetProviders, final DeviceSetting deviceSetting) {
-        setupCloudDriverOptions (options, deviceSetting.getCapabilities (), targetProviders);
     }
 
     void setupDriver ();
