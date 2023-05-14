@@ -13,5 +13,4 @@ jobs:
       target-branch: main
       title: 'chore(Internal): :bookmark: new release'
     secrets:
-      GH_TOKEN: ${{ secrets.GITHUB_AUTH }}
-      PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
+      token: ${{ secrets.PUSH_TOKEN }}

@@ -40,17 +40,13 @@ on:
         description: Start Local Web Browser
         default: false
     secrets:
-      BS_USER:
+      cloudUser:
         required: false
-      BS_KEY:
+      cloudKey:
         required: false
-      LT_USER:
+      androidAppUrl:
         required: false
-      LT_KEY:
-        required: false
-      LT_APP_ANDROID:
-        required: false
-      LT_APP_IOS:
+      iosAppUrl:
         required: false
 
 jobs:
@@ -106,12 +102,12 @@ jobs:
       - name: All ${{ inputs.suite-name }} Test execution
         if: inputs.run-android == false
         env:
-          BS_USER: ${{ secrets.BS_USER }}
-          BS_KEY: ${{ secrets.BS_KEY }}
-          LT_USER: ${{ secrets.LT_USER }}
-          LT_KEY: ${{ secrets.LT_KEY }}
-          LT_APP_ANDROID: ${{ secrets.LT_APP_ANDROID }}
-          LT_APP_IOS: ${{ secrets.LT_APP_IOS }}
+          BS_USER: ${{ secrets.cloudUser }}
+          BS_KEY: ${{ secrets.cloudKey }}
+          LT_USER: ${{ secrets.cloudUser }}
+          LT_KEY: ${{ secrets.cloudKey }}
+          LT_APP_ANDROID: ${{ secrets.androidAppUrl }}
+          LT_APP_IOS: ${{ secrets.iosAppUrl }}
         run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
 
       - name: Stop Selenium Grid

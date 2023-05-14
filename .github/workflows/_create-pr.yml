@@ -20,9 +20,7 @@ on:
         description: Is this PR from a feature branch
         default: false
     secrets:
-      PUSH_TOKEN:
-        required: true
-      GH_TOKEN:
+      token:
         required: true
 
 jobs:
@@ -37,7 +35,7 @@ jobs:
         id: branch-changes
         uses: fjenik/detect-changes-between-two-branches@0.0.3
         with:
-          repo-token: ${{ secrets.GH_TOKEN }}
+          repo-token: ${{ secrets.token }}
           target-branch: ${{ inputs.target-branch }}
           source-branch: ${{ inputs.source-branch }}
 
@@ -49,7 +47,7 @@ jobs:
         if: steps.branch-changes.outputs.is-source-branch-ahead == 'true'
         uses: fjenik/check-if-pr-exists@0.0.3
         with:
-          repo-token: ${{ secrets.GH_TOKEN }}
+          repo-token: ${{ secrets.token }}
           target-branch: ${{ inputs.target-branch }}
           source-branch: ${{ inputs.source-branch }}
 
@@ -62,7 +60,7 @@ jobs:
           inputs.is-feature == false
         uses: repo-sync/pull-request@v2
         with:
-          github_token: ${{ secrets.PUSH_TOKEN }}
+          github_token: ${{ secrets.token }}
           source_branch: ${{ inputs.source-branch }}
           destination_branch: ${{ inputs.target-branch }}
           pr_reviewer: boyka-core
@@ -79,7 +77,7 @@ jobs:
           inputs.is-feature
         uses: repo-sync/pull-request@v2
         with:
-          github_token: ${{ secrets.PUSH_TOKEN }}
+          github_token: ${{ secrets.token }}
           source_branch: ${{ inputs.source-branch }}
           destination_branch: ${{ inputs.target-branch }}
           pr_reviewer: boyka-core
