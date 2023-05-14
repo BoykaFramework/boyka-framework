@@ -65,8 +65,8 @@ jobs:
       - build
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
-      BS_USER: ${{ secrets.BS_USER }}
-      BS_KEY: ${{ secrets.BS_KEY }}
+      cloudUser: ${{ secrets.BS_USER }}
+      cloudKey: ${{ secrets.BS_KEY }}
     with:
       suite-name: testng-web-bs
 
@@ -75,8 +75,8 @@ jobs:
       - build
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
-      LT_USER: ${{ secrets.LT_USER }}
-      LT_KEY: ${{ secrets.LT_KEY }}
+      cloudUser: ${{ secrets.LT_USER }}
+      cloudKey: ${{ secrets.LT_KEY }}
     with:
       suite-name: testng-web-lt
 
@@ -104,8 +104,8 @@ jobs:
       - build
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
-      BS_USER: ${{ secrets.BS_USER }}
-      BS_KEY: ${{ secrets.BS_KEY }}
+      cloudUser: ${{ secrets.BS_USER }}
+      cloudKey: ${{ secrets.BS_KEY }}
     with:
       suite-name: testng-mobile-bs
 
@@ -114,10 +114,10 @@ jobs:
       - build
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
-      LT_USER: ${{ secrets.LT_USER }}
-      LT_KEY: ${{ secrets.LT_KEY }}
-      LT_APP_ANDROID: ${{ secrets.LT_APP_ANDROID }}
-      LT_APP_IOS: ${{ secrets.LT_APP_IOS }}
+      cloudUser: ${{ secrets.LT_USER }}
+      cloudKey: ${{ secrets.LT_KEY }}
+      androidAppUrl: ${{ secrets.LT_APP_ANDROID }}
+      iosAppUrl: ${{ secrets.LT_APP_IOS }}
     with:
       suite-name: testng-mobile-lt
 

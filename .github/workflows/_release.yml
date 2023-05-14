@@ -16,17 +16,15 @@ on:
         description: Whether the release is pre-release?
         default: true
     secrets:
-      GITHUB_AUTH:
+      pushToken:
         required: true
-      PUSH_TOKEN:
+      gpgKey:
         required: true
-      GPG_PRIVATE_KEY:
+      gpgPass:
         required: true
-      GPG_PASSPHRASE:
+      nexusUser:
         required: true
-      NEXUS_USERNAME:
-        required: true
-      NEXUS_PASSWORD:
+      nexusPass:
         required: true
 
 jobs:
@@ -121,10 +119,10 @@ jobs:
       - name: Release snapshot to Maven central
         uses: samuelmeuli/action-maven-publish@v1
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          nexus_username: ${{ secrets.NEXUS_USERNAME }}
-          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+          gpg_private_key: ${{ secrets.gpgKey }}
+          gpg_passphrase: ${{ secrets.gpgPass }}
+          nexus_username: ${{ secrets.nexusUser }}
+          nexus_password: ${{ secrets.nexusPass }}
           maven_profiles: release
           server_id: ossrh
           maven_args: --settings ${{ github.workspace }}/core-java/setting/settings.xml -f core-java/pom.xml -DskipTests -Dcheckstyle.skip -B
@@ -157,10 +155,10 @@ jobs:
       - name: Release to Maven central
         uses: samuelmeuli/action-maven-publish@v1
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          nexus_username: ${{ secrets.NEXUS_USERNAME }}
-          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+          gpg_private_key: ${{ secrets.gpgKey }}
+          gpg_passphrase: ${{ secrets.gpgPass }}
+          nexus_username: ${{ secrets.nexusUser }}
+          nexus_password: ${{ secrets.nexusPass }}
           maven_profiles: release
           server_id: ossrh
           maven_args: --settings ${{ github.workspace }}/core-java/setting/settings.xml -f core-java/pom.xml -DskipTests -Dcheckstyle.skip -B
@@ -197,7 +195,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.PUSH_TOKEN }}
+          token: ${{ secrets.pushToken }}
 
       - name: Download Version files
         uses: actions/download-artifact@v3
@@ -228,8 +226,8 @@ jobs:
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v5
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          gpg_private_key: ${{ secrets.gpgKey }}
+          passphrase: ${{ secrets.gpgPass }}
           git_user_signingkey: true
           git_commit_gpgsign: true
 
@@ -276,7 +274,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.pushToken }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         with:
           tag_name: v${{ needs.prepare.outputs.new-version }}
