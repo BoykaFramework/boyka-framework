@@ -16,17 +16,29 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.Message.INVALID_LISTENER_FOUND;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 import com.github.wasiqb.boyka.config.FrameworkSetting;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
+import com.github.wasiqb.boyka.enums.ListenerType;
 import com.github.wasiqb.boyka.enums.PlatformType;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -43,15 +55,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @SuppressWarnings ("unchecked")
 @Data
 public class DriverSession<D extends WebDriver> {
-    private static final Logger LOGGER = getLogger ();
+    private static final ImmutableSet<ClassPath.ClassInfo> ALL_CLASSES = getAllClasses ();
+    private static final Logger                            LOGGER      = getLogger ();
 
-    private       String              configKey;
-    private       D                   driver;
-    private       PlatformType        platformType;
-    private       ServiceManager      serviceManager;
-    private final FrameworkSetting    setting;
-    private       Map<String, Object> sharedData;
-    private       WebDriverWait       wait;
+    private static ImmutableSet<ClassPath.ClassInfo> getAllClasses () {
+        ImmutableSet<ClassPath.ClassInfo> result = null;
+        try {
+            result = ClassPath.from (ClassLoader.getSystemClassLoader ())
+                .getAllClasses ();
+        } catch (final IOException e) {
+            handleAndThrow (INVALID_LISTENER_FOUND, e);
+        }
+        return result;
+    }
+
+    private       String                                            configKey;
+    private       D                                                 driver;
+    private       Map<ListenerType, Class<? extends BoykaListener>> listeners;
+    private       PlatformType                                      platformType;
+    private       ServiceManager                                    serviceManager;
+    private final FrameworkSetting                                  setting;
+    private       Map<String, Object>                               sharedData;
+    private       WebDriverWait                                     wait;
 
     /**
      * Driver session constructor.
@@ -59,7 +84,15 @@ public class DriverSession<D extends WebDriver> {
     DriverSession () {
         this.setting = loadSetting ();
         this.sharedData = new HashMap<> ();
+        this.listeners = new EnumMap<> (ListenerType.class);
         LOGGER.traceExit ();
+    }
+
+    /**
+     * Clear all the listeners.
+     */
+    public void clearListeners () {
+        this.listeners.clear ();
     }
 
     /**
@@ -76,6 +109,34 @@ public class DriverSession<D extends WebDriver> {
      */
     public ApiSetting getApiSetting () {
         return this.setting.getApiSetting (this.configKey);
+    }
+
+    /**
+     * Gets the listener for provided listener type.
+     *
+     * @param listenerType {@link ListenerType}
+     * @param <T> Type of the listener
+     *
+     * @return Listener object.
+     */
+    public <T extends BoykaListener> T getListener (final ListenerType listenerType) {
+        T result = null;
+        if (this.listeners.size () == 0) {
+            loadAllListeners ();
+        }
+        final var listener = this.listeners.get (listenerType);
+        if (listener == null) {
+            LOGGER.warn ("No listeners found for listener type [{}] in Boyka config...", listenerType);
+            return null;
+        }
+        try {
+            final var constructor = listener.getConstructor ();
+            result = (T) constructor.newInstance ();
+        } catch (final NoSuchMethodException | InstantiationException | IllegalAccessException |
+                       InvocationTargetException e) {
+            handleAndThrow (INVALID_LISTENER_FOUND, e, listener);
+        }
+        return result;
     }
 
     /**
@@ -114,12 +175,9 @@ public class DriverSession<D extends WebDriver> {
      * Removes the shared data.
      *
      * @param key Key to shared data
-     * @param <T> Type of shared data
-     *
-     * @return Data which is now removed
      */
-    public <T> T removeSharedData (final String key) {
-        return (T) this.sharedData.remove (key);
+    public void removeSharedData (final String key) {
+        this.sharedData.remove (key);
     }
 
     /**
@@ -131,5 +189,38 @@ public class DriverSession<D extends WebDriver> {
      */
     public <T> void setSharedData (final String key, final T data) {
         this.sharedData.put (key, data);
+    }
+
+    private void addListeners (final ArrayList<String> listenerList, final String packageName) {
+        if (isNotEmpty (packageName)) {
+            ALL_CLASSES.stream ()
+                .filter (clazz -> clazz.getPackageName ()
+                    .startsWith (packageName))
+                .map (ClassPath.ClassInfo::getName)
+                .forEach (listenerList::add);
+        }
+    }
+
+    private void loadAllListeners () {
+        final var packageName = getSetting ().getListenersPackage ();
+        final var listenerList = new ArrayList<String> ();
+        addListeners (listenerList, packageName);
+        loadAllListeners (listenerList);
+    }
+
+    private <T extends BoykaListener> void loadAllListeners (final List<String> listenerList) {
+        listenerList.forEach (listener -> {
+            try {
+                final var cls = (Class<T>) Class.forName (listener);
+                final var interfaceType = cls.getInterfaces ()[0];
+                final var listenerType = ListenerType.valueOf (interfaceType);
+                final var isBoykaListener = BoykaListener.class.isAssignableFrom (cls);
+                if (isBoykaListener && !this.listeners.containsKey (listenerType)) {
+                    this.listeners.put (listenerType, cls);
+                }
+            } catch (final ClassNotFoundException e) {
+                handleAndThrow (INVALID_LISTENER_FOUND, e, listener);
+            }
+        });
     }
 }

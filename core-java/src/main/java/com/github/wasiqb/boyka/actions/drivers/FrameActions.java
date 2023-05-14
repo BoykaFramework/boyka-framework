@@ -17,9 +17,13 @@
 package com.github.wasiqb.boyka.actions.drivers;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.enums.ListenerType.FRAME_ACTION;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.actions.interfaces.drivers.IFrameActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IFrameActionsListener;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -41,10 +45,17 @@ public class FrameActions implements IFrameActions {
         return FRAME_ACTIONS;
     }
 
+    private final IFrameActionsListener listener;
+
+    private FrameActions () {
+        this.listener = getSession ().getListener (FRAME_ACTION);
+    }
+
     @Override
     public void switchTo (final String frameName) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to frame: {}", frameName);
+        ofNullable (this.listener).ifPresent (l -> l.onSwitchTo (frameName));
         performDriverAction (driver -> driver.switchTo ()
             .frame (frameName));
         LOGGER.traceExit ();
@@ -54,6 +65,7 @@ public class FrameActions implements IFrameActions {
     public void switchTo (final int index) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to frame index: {}", index);
+        ofNullable (this.listener).ifPresent (l -> l.onSwitchTo (index));
         performDriverAction (driver -> driver.switchTo ()
             .frame (index));
         LOGGER.traceExit ();
@@ -63,6 +75,7 @@ public class FrameActions implements IFrameActions {
     public void switchToParent () {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to main frame...");
+        ofNullable (this.listener).ifPresent (IFrameActionsListener::onSwitchToParent);
         performDriverAction (driver -> driver.switchTo ()
             .parentFrame ());
         LOGGER.traceExit ();

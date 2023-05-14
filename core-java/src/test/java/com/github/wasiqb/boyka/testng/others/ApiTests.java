@@ -18,7 +18,10 @@ package com.github.wasiqb.boyka.testng.others;
 
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.testng.annotations.Test;
@@ -35,11 +38,12 @@ public class ApiTests {
      */
     @Test (description = "Test Invalid API config key", expectedExceptions = FrameworkError.class)
     public void testInvalidApiConfigKey () {
-        final var userRequest = createRequest ().configKey ("test_req")
-            .method (GET)
+        createSession (API, "test_req");
+        final var userRequest = createRequest ().method (GET)
             .path ("/users/${userId}")
             .pathParam ("userId", "2")
             .create ();
         withRequest (userRequest).execute ();
+        clearSession ();
     }
 }

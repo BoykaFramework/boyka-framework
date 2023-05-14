@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.14.0">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.14.0/total?color=brightgreen&label=Downloads%20for%20v0.14.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.14.1">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.14.1/total?color=brightgreen&label=Downloads%20for%20v0.14.1&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -69,6 +69,7 @@ This all gave me an idea of having a single framework which could solve all the 
 - ✅ Highly configurable via `boyka-config.json`
 - ✅ Micro logging to log events of the test execution
 - ✅ Supports taking screenshots
+- ✅ Highly extensible via listeners
 
 ## ⏱️ Coming soon
 
@@ -87,7 +88,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.14.0</version>
+  <version>0.14.1</version>
 </dependency>
 ```
 
@@ -100,6 +101,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
 
 ```json
 {
+  "listeners_package": "com.github.wasiqb.boyka.testng.listeners",
   "ui": {
     "timeout": {
       "implicit_wait": 10,
@@ -420,6 +422,9 @@ Here's how you can execute the API test and also verify its response.
 
 ```java
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 . . .
 // Create request body object
 final User user = User.createUser ()
@@ -427,9 +432,11 @@ final User user = User.createUser ()
   .job ("Software Engineer")
   .create ();
 
+// Create API session.
+createSession (API, "test_postman");
+
 // Compose request
 final ApiRequest request = ApiRequest.createRequest ()
-  .configKey (API_CONFIG_KEY)
   .method (POST)
   .path ("/users")
   .bodyObject (user)
@@ -454,6 +461,9 @@ response.verifyTextField ("job")
   .isEqualTo (user.getJob ());
 response.verifyTextField ("createdAt")
   .isNotNull ();
+
+// Clear API session.
+clearSession ();
 ```
 
 </details>

@@ -6,8 +6,12 @@ title: ✅ Verify Response
 Once the `ApiResponse` object is returned from the `withRequest` method, it can be used to verify that the response is valid.
 
 ```java
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+
+// Execute request.
 final ApiResponse response = ApiManager.execute (request);
 
+// Verify response body.
 response.verifyStatusCode ()
     .isEqualTo (201);
 response.verifyTextField ("id")
@@ -19,6 +23,9 @@ response.verifyTextField ("job")
 response.verifyTextField ("createdAt")
     .isNotNull ();
 response.verifySchema("CreateUserSchema.json");
+
+// Clear session after test is completed.
+clearSession ();
 ```
 
 ### Verification methods

@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.actions.drivers;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
+import static com.github.wasiqb.boyka.enums.ListenerType.DRIVER_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_CREATING_LOGS;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_WRITING_LOGS;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
@@ -25,6 +26,7 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.lang.System.getProperty;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
+import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.BufferedWriter;
@@ -34,6 +36,7 @@ import java.time.Duration;
 import java.util.function.Function;
 
 import com.github.wasiqb.boyka.actions.interfaces.drivers.IDriverActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IDriverActionsListener;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +49,7 @@ import org.openqa.selenium.interactions.Actions;
  * @author Wasiq Bhamla
  * @since 24-Feb-2022
  */
-public class DriverActions implements IDriverActions {
+public final class DriverActions implements IDriverActions {
     private static final DriverActions DRIVER_ACTIONS = new DriverActions ();
     private static final Logger        LOGGER         = getLogger ();
 
@@ -59,17 +62,25 @@ public class DriverActions implements IDriverActions {
         return DRIVER_ACTIONS;
     }
 
+    private final IDriverActionsListener listener;
+
+    private DriverActions () {
+        this.listener = getSession ().getListener (DRIVER_ACTION);
+    }
+
     @Override
     @SuppressWarnings ("unchecked")
     public <T> T executeScript (final String script, final Object... args) {
         LOGGER.traceEntry ();
         LOGGER.info ("Executing script");
+        ofNullable (this.listener).ifPresent (l -> l.onExecuteScript (script, args));
         return (T) getDriverAttribute (driver -> ((JavascriptExecutor) driver).executeScript (script, args), null);
     }
 
     @Override
     public void pause (final Duration time) {
         LOGGER.traceEntry ();
+        ofNullable (this.listener).ifPresent (l -> l.onPause (time));
         performDriverAction (driver -> {
             final var action = new Actions (driver);
             action.pause (time)
@@ -82,6 +93,7 @@ public class DriverActions implements IDriverActions {
     @Override
     public void saveLogs () {
         LOGGER.traceEntry ();
+        ofNullable (this.listener).ifPresent (IDriverActionsListener::onSaveLogs);
         performDriverAction (d -> {
             final var logSetting = getSession ().getSetting ()
                 .getUi ()
@@ -112,13 +124,14 @@ public class DriverActions implements IDriverActions {
     }
 
     @Override
-    public <T> T waitUntil (final Function<WebDriver, T> condition) {
+    public <T> void waitUntil (final Function<WebDriver, T> condition) {
         LOGGER.traceEntry ();
         LOGGER.info ("Waiting for condition...");
-        return getDriverAttribute (driver -> {
+        ofNullable (this.listener).ifPresent (IDriverActionsListener::onWaitUntil);
+        performDriverAction (driver -> {
             final var wait = getSession ().getWait ();
-            return wait.until (condition);
-        }, null);
+            wait.until (condition);
+        });
     }
 
     private <D extends WebDriver> void saveLogType (final D driver, final String logType, final String logPath) {

@@ -16,7 +16,6 @@
 
 package com.github.wasiqb.boyka.testng.others;
 
-import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
@@ -32,18 +31,6 @@ import org.testng.annotations.Test;
  */
 public class DriverManagerTest {
     private static final String PERSONA = "DriverManagerTest";
-
-    /**
-     * Method to test create driver.
-     */
-    @Test (description = "Test Create Driver", expectedExceptions = FrameworkError.class)
-    public void testCreateDriver () {
-        try {
-            createSession (PERSONA, API, "test_local_chrome");
-        } finally {
-            clearSession ();
-        }
-    }
 
     /**
      * Test method to verify empty browser in config.
@@ -64,6 +51,18 @@ public class DriverManagerTest {
     public void testInvalidWebConfigKey () {
         try {
             createSession (PERSONA, WEB, "test_lambda_test_no_pa");
+        } finally {
+            clearSession ();
+        }
+    }
+
+    /**
+     * Test method to verify none browser.
+     */
+    @Test (description = "Test None Browser", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "NONE Browser type is not allowed for Web platform...")
+    public void testNoneBrowser () {
+        try {
+            createSession (PERSONA, WEB, "test_local_none_browser");
         } finally {
             clearSession ();
         }

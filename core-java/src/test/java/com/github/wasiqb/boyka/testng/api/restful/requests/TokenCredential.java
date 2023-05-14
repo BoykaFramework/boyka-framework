@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.testng.api.restful.requests;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * Token credential class
@@ -27,6 +28,7 @@ import lombok.Getter;
  */
 @Getter
 @Builder
+@ToString
 public class TokenCredential {
     private String password;
     private String username;

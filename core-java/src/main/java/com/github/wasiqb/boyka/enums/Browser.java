@@ -40,7 +40,7 @@ public enum Browser {
      */
     NONE,
     /**
-     * Remote Grid / cloud browser.
+     * Cloud browser.
      */
     REMOTE,
     /**

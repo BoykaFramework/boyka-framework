@@ -21,10 +21,11 @@ The file name and it's location cannot be modified.
 
 ```json title="boyka-config.json"
 {
+  "listeners_package": "com.github.wasiqb.boyka.testng.listeners",
   "ui": {
     "timeout": {
       "implicit_wait": 10,
-      "explicit_wait": 10,
+      "explicit_wait": 30,
       "page_load_timeout": 30,
       "script_timeout": 10,
       "highlight_delay": 100
@@ -50,13 +51,18 @@ The file name and it's location cannot be modified.
         "custom_size": {
           "width": 1580,
           "height": 1080
-        }
+        },
+        "browser_options": [
+          "use-fake-device-for-media-stream",
+          "use-fake-ui-for-media-stream"
+        ]
       },
       "test_local_firefox": {
         "browser": "FIREFOX"
       },
       "test_local_edge": {
-        "browser": "EDGE"
+        "browser": "EDGE",
+        "resize": "FULL_SCREEN"
       },
       "test_local_safari": {
         "browser": "SAFARI"
@@ -66,31 +72,35 @@ The file name and it's location cannot be modified.
         "target": "BROWSER_STACK",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
+        "resize": "MAXIMIZED",
         "capabilities": {
           "browser": "Chrome",
-          "browser_version": "latest",
+          "browserVersion": "latest",
           "os": "Windows",
-          "os_version": "10",
+          "osVersion": "11",
           "resolution": "1920x1080",
-          "project": "Test Boyka Project",
-          "build": "Test BrowserStack Build",
-          "name": "Test BrowserStack Session"
+          "projectName": "Test Boyka Project",
+          "buildName": "Test BrowserStack Build",
+          "sessionName": "Test BrowserStack Session",
+          "seleniumVersion": "4.8.0",
+          "telemetryLogs": "true",
+          "seleniumLogs": "true",
+          "video": "true",
+          "networkLogs": "true",
+          "debug": "true"
         }
       },
       "test_selenium_grid": {
-        "browser": "REMOTE",
+        "browser": "CHROME",
         "target": "LOCAL",
-        "port": "4444",
-        "capabilities": {
-          "browserName": "chrome",
-          "platform": "MAC"
-        }
+        "port": "4444"
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
         "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
+        "resize": "MINIMIZED",
         "capabilities": {
           "browserName": "Chrome",
           "version": "99.0",
@@ -113,27 +123,32 @@ The file name and it's location cannot be modified.
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
-            "get_server_logs"
+            "get_server_logs",
+            "chromedriver_autodownload"
           ]
         },
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_6_Pro",
+          "name": "Nexus_6",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
+          "full_reset": true,
+          "system_port": 8200,
           "swipe": {
-            "distance": 25,
+            "distance": 50,
             "max_swipe_until_found": 5
           },
           "application": {
             "path": "/apps/android/sauce-demo.apk",
-            "install_timeout": 180
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
+            "install_timeout": 180,
+            "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Nexus_6",
             "headless": true
           }
         }
@@ -153,6 +168,7 @@ The file name and it's location cannot be modified.
           "ignore_unimportant_views": true,
           "application": {
             "path": "AndroidApp",
+            "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "external": true,
             "install_timeout": 180
           },
@@ -205,27 +221,22 @@ The file name and it's location cannot be modified.
       },
       "test_local_sauce_ios": {
         "server": {
-          "protocol": "HTTP",
-          "host": "127.0.0.1",
-          "port": 4724,
-          "base_path": "/wd/hub",
+          "target": "LOCAL",
+          "port": 4725,
           "session_override": true,
-          "driver": "XCUI",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "driver": "XCUI"
         },
         "device": {
           "os": "IOS",
           "version": "16.2",
-          "name": "iPhone 14 Pro Max",
+          "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
           "connect_keyboard": false,
-          "typing_speed": 30,
+          "typing_speed": 25,
           "swipe": {
-            "distance": 25,
+            "distance": 50,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -234,7 +245,8 @@ The file name and it's location cannot be modified.
           },
           "wda": {
             "launch_timeout": 120,
-            "connection_timeout": 120
+            "connection_timeout": 120,
+            "local_port": 8100
           },
           "application": {
             "path": "/apps/ios/sauce-demo.zip",
@@ -247,13 +259,12 @@ The file name and it's location cannot be modified.
           "target": "BROWSER_STACK",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
-          "base_path": "/wd/hub",
           "driver": "XCUI"
         },
         "device": {
           "os": "IOS",
           "version": "16",
-          "name": "iPhone 14 Pro",
+          "name": "iPhone 14",
           "type": "CLOUD",
           "application": {
             "path": "IOSApp",
@@ -309,9 +320,8 @@ The file name and it's location cannot be modified.
     }
   },
   "api": {
-    "test_reqres": {
-      "base_uri": "https://reqres.in",
-      "base_path": "/api",
+    "test_restfulbooker": {
+      "base_uri": "https://restful-booker.herokuapp.com",
       "read_timeout": 2,
       "write_timeout": 2,
       "connection_timeout": 1,
@@ -331,6 +341,7 @@ The file name and it's location cannot be modified.
 | -------- | ----------- | ---- | ------- |
 | `ui` | Contains UI platform specific configuration. See [UI Config below](#ui-config). | `object` |  |
 | `api` | Contains API platform specific configuration. See [API config below](#api-config). | `object` |  |
+| `listeners_package` | This will be the package name under which all the Boyka framework listeners are saved. | `string` |  |
 
 ### UI Configuration {#ui-config}
 
@@ -386,6 +397,7 @@ See the example in [sample configuration file](#config-sample).
 | `host` | Remote driver host name, will override Host provided by Target provider | `string` | `null` |
 | `port` | Remote driver port, if `0`, port will not be considered. | `number` | `0` |
 | `target` | Target provider name. | [`TargetProviders`](#target-providers) | `TargetProviders.LOCAL` |
+| `platform` | Platform name for the Browser | `string` | `null` |
 | `user_name` | User name for cloud service provider. | `string` | `null` |
 | `password` | Password / Access key for cloud service provider. | `string` | `null` |
 | `capabilities` | Capabilities for browser. | `Map<String, Object>` | `null` |
@@ -566,7 +578,7 @@ We have an enum `Browser` where we maintain the list of supported browsers. They
 - `EDGE`: Is used for Edge browser.
 - `FIREFOX`: Is used for Firefox browser.
 - `NONE`: No browser will be used.
-- `REMOTE`: Is used for Selenium Grid or cloud based browsers.
+- `REMOTE`: Is used for Cloud based browsers.
 - `SAFARI`: Is used for Safari browser.
 
 ## Supported Protocols {#supported-protocols}

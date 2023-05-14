@@ -8,6 +8,10 @@ on:
       - opened
       - closed
 
+concurrency:
+  group: boyka-labeler-${{ github.ref }}-1
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest

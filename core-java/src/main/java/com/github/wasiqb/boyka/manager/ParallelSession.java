@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.Message.SESSION_PERSONA_CANNOT_BE_NULL;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
@@ -66,11 +67,23 @@ public final class ParallelSession {
      */
     public static void clearSession () {
         LOGGER.info ("Clearing session for persona [{}]...", getCurrentPersona ());
+        getSession ().clearListeners ();
+        getSession ().clearSharedData ();
         ofNullable (getSession ().getDriver ()).ifPresent (WebDriver::quit);
         if (getSession ().getPlatformType () != WEB) {
             ofNullable (getSession ().getServiceManager ()).ifPresent (ServiceManager::stopServer);
         }
         CURRENT_PERSONA.remove ();
+    }
+
+    /**
+     * Create a new Session.
+     *
+     * @param platformType Target Platform Type
+     * @param configKey Configuration key for the session
+     */
+    public static void createSession (final PlatformType platformType, final String configKey) {
+        createSession (configKey, platformType, configKey);
     }
 
     /**
@@ -85,8 +98,10 @@ public final class ParallelSession {
         final var currentSession = getSession ();
         currentSession.setPlatformType (platformType);
         currentSession.setConfigKey (configKey);
-        final var instance = new DriverManager ();
-        instance.setupDriver ();
+        if (platformType != API) {
+            final var instance = new DriverManager ();
+            instance.setupDriver ();
+        }
     }
 
     /**
