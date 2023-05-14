@@ -32,8 +32,7 @@
         },
         "browser_options": [
           "use-fake-device-for-media-stream",
-          "use-fake-ui-for-media-stream",
-          "--remote-allow-origins=*"
+          "use-fake-ui-for-media-stream"
         ]
       },
       "test_local_firefox": {
@@ -41,9 +40,7 @@
       },
       "test_local_edge": {
         "browser": "EDGE",
-        "browser_options": [
-          "--remote-allow-origins=*"
-        ]
+        "resize": "FULL_SCREEN"
       },
       "test_local_safari": {
         "browser": "SAFARI"
@@ -53,31 +50,35 @@
         "target": "BROWSER_STACK",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
+        "resize": "MAXIMIZED",
         "capabilities": {
           "browser": "Chrome",
-          "browser_version": "latest",
+          "browserVersion": "latest",
           "os": "Windows",
-          "os_version": "10",
+          "osVersion": "11",
           "resolution": "1920x1080",
-          "project": "Test Boyka Project",
-          "build": "Test BrowserStack Build",
-          "name": "Test BrowserStack Session"
+          "projectName": "Test Boyka Project",
+          "buildName": "Test BrowserStack Build",
+          "sessionName": "Test BrowserStack Session",
+          "seleniumVersion": "4.8.0",
+          "telemetryLogs": "true",
+          "seleniumLogs": "true",
+          "video": "true",
+          "networkLogs": "true",
+          "debug": "true"
         }
       },
       "test_selenium_grid": {
-        "browser": "REMOTE",
+        "browser": "CHROME",
         "target": "LOCAL",
-        "port": "4444",
-        "capabilities": {
-          "browserName": "chrome",
-          "platform": "MAC"
-        }
+        "port": "4444"
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
         "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
+        "resize": "NORMAL",
         "capabilities": {
           "browserName": "Chrome",
           "version": "99.0",
@@ -154,6 +155,9 @@
         "browser_options": [
           "--remote-allow-origins=*"
         ]
+      },
+      "test_local_none_browser": {
+        "browser": "NONE"
       }
     },
     "mobile": {

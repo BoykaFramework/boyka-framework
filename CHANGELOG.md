@@ -1,5 +1,5 @@
 
-## v0.14.1-rc.0 (2023-05-02)
+## v0.14.1 (2023-05-02)
 
 #### :rocket: New Feature
 * [#445](https://github.com/BoykaFramework/boyka-framework/pull/445) feat(java): :sparkles: added listeners to allow outside control in the framework ([@WasiqB](https://github.com/WasiqB))

@@ -18,11 +18,15 @@ package com.github.wasiqb.boyka.api;
 
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.enums.RequestMethod.DELETE;
 import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PATCH;
 import static com.github.wasiqb.boyka.enums.RequestMethod.POST;
 import static com.github.wasiqb.boyka.enums.RequestMethod.PUT;
+import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static java.text.MessageFormat.format;
 
 import com.github.wasiqb.boyka.api.requests.BookingData;
@@ -31,6 +35,7 @@ import com.github.wasiqb.boyka.api.requests.PartialBookingData;
 import com.github.wasiqb.boyka.api.requests.TokenBuilder;
 import com.github.wasiqb.boyka.api.requests.Tokencreds;
 import com.github.wasiqb.boyka.builders.ApiResponse;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -42,15 +47,16 @@ import org.testng.annotations.Test;
  */
 public class ApiTests {
 
-    private static final String             API_CONFIG_KEY = "test_restfulbooker";
-    private              String             bookingId;
-    private              BookingData        newBooking;
-    private              PartialBookingData partialUpdateBooking;
-    private              Tokencreds         tokenCreds;
-    private              BookingData        updatedBooking;
+    private static final String BOOKING_ID = "bookingid";
+
+    private BookingData        newBooking;
+    private PartialBookingData partialUpdateBooking;
+    private Tokencreds         tokenCreds;
+    private BookingData        updatedBooking;
 
     @BeforeTest (description = "Setting up the API tests")
     public void setupTest () {
+        createSession (API, "test_restfulbooker");
         final BookingDataBuilder builder = new BookingDataBuilder ();
         final TokenBuilder buildToken = new TokenBuilder ();
         this.newBooking = builder.bookingDataBuilder ();
@@ -59,10 +65,14 @@ public class ApiTests {
         this.tokenCreds = buildToken.tokenBuilder ();
     }
 
+    @AfterTest
+    public void tearDownTest () {
+        clearSession ();
+    }
+
     @Test (description = "Test for creating new booking with POST request")
     public void testCreateBooking () {
-        final var createBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
-            .method (POST)
+        final var createBookingRequest = createRequest ().method (POST)
             .header ("Accept", "application/json")
             .path ("/booking")
             .bodyObject (this.newBooking)
@@ -77,17 +87,16 @@ public class ApiTests {
             .isEqualTo (this.newBooking.getFirstname ());
         response.verifyTextField ("booking.lastname")
             .isEqualTo (this.newBooking.getLastname ());
-        this.bookingId = response.getResponseData ("bookingid");
+        getSession ().setSharedData (BOOKING_ID, response.getResponseData (BOOKING_ID));
     }
 
     @Test (description = "Test for Deleting a booking using DELETE request")
     public void testDeleteBooking () {
-        final var deleteBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
-            .method (DELETE)
+        final var deleteBookingRequest = createRequest ().method (DELETE)
             .header ("Content-Type", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
-            .pathParam ("id", this.bookingId)
+            .pathParam ("id", getSession ().getSharedData (BOOKING_ID))
             .create ();
 
         final ApiResponse response = withRequest (deleteBookingRequest).execute ();
@@ -97,11 +106,10 @@ public class ApiTests {
 
     @Test (description = "Test for checking deleted booking using GET request")
     public void testDeletedBooking () {
-        final var getDeletedBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
-            .method (GET)
+        final var getDeletedBookingRequest = createRequest ().method (GET)
             .header ("Accept", "application/json")
             .path ("/booking/${id}")
-            .pathParam ("id", this.bookingId)
+            .pathParam ("id", getSession ().getSharedData (BOOKING_ID))
             .create ();
 
         final ApiResponse response = withRequest (getDeletedBookingRequest).execute ();
@@ -111,11 +119,10 @@ public class ApiTests {
 
     @Test (description = "Test for retrieving booking using GET request")
     public void testGetBooking () {
-        final var getBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
-            .method (GET)
+        final var getBookingRequest = createRequest ().method (GET)
             .header ("Accept", "application/json")
             .path ("/booking/${id}")
-            .pathParam ("id", this.bookingId)
+            .pathParam ("id", getSession ().getSharedData (BOOKING_ID))
             .create ();
 
         final ApiResponse response = withRequest (getBookingRequest).execute ();
@@ -129,13 +136,12 @@ public class ApiTests {
 
     @Test (description = "Test for Updating booking using PUT request")
     public void testUpdateBooking () {
-        final var updateBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
-            .method (PUT)
+        final var updateBookingRequest = createRequest ().method (PUT)
             .header ("Accept", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
             .bodyObject (this.updatedBooking)
-            .pathParam ("id", this.bookingId)
+            .pathParam ("id", getSession ().getSharedData (BOOKING_ID))
             .create ();
 
         final ApiResponse response = withRequest (updateBookingRequest).execute ();
@@ -149,13 +155,12 @@ public class ApiTests {
 
     @Test (description = "Test for partial updating booking using PATCH request")
     public void testUpdatePartialBooking () {
-        final var partialUpdateBookingRequest = createRequest ().configKey (API_CONFIG_KEY)
-            .method (PATCH)
+        final var partialUpdateBookingRequest = createRequest ().method (PATCH)
             .header ("Accept", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
             .path ("/booking/${id}")
             .bodyObject (this.partialUpdateBooking)
-            .pathParam ("id", this.bookingId)
+            .pathParam ("id", getSession ().getSharedData (BOOKING_ID))
             .create ();
 
         final ApiResponse response = withRequest (partialUpdateBookingRequest).execute ();
@@ -168,8 +173,7 @@ public class ApiTests {
     }
 
     private String generateToken () {
-        final var generateTokenRequest = createRequest ().configKey (API_CONFIG_KEY)
-            .header ("Accept", "application/json")
+        final var generateTokenRequest = createRequest ().header ("Accept", "application/json")
             .method (POST)
             .path ("/auth")
             .bodyObject (this.tokenCreds)
