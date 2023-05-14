@@ -8,11 +8,10 @@ on:
 jobs:
   create-feature-to-develop-pr:
     uses: ./.github/workflows/_create-pr.yml
+    secrets:
+      token: ${{ secrets.PUSH_TOKEN }}
     with:
       source-branch: ${{ github.ref_name }}
       target-branch: develop
       title: ${{ github.event.head_commit.message }}
       is-feature: true
-    secrets:
-      GH_TOKEN: ${{ secrets.GITHUB_AUTH }}
-      PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}

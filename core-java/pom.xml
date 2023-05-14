@@ -28,10 +28,10 @@
     <url>https://github.com/BoykaFramework/boyka-framework</url>
 
     <properties>
-        <selenium-webdriver.version>4.9.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.9.1</selenium-webdriver.version>
         <testng.version>7.7.1</testng.version>
-        <appium-java-client.version>8.4.0</appium-java-client.version>
-        <webdrivermanager.version>5.3.2</webdrivermanager.version>
+        <appium-java-client.version>8.5.0</appium-java-client.version>
+        <webdrivermanager.version>5.3.3</webdrivermanager.version>
         <okhttp.version>4.11.0</okhttp.version>
         <lombok.version>1.18.26</lombok.version>
         <google-gson.version>2.10.1</google-gson.version>
@@ -54,7 +54,7 @@
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.10.0</checkstyle.version>
+        <checkstyle.version>10.11.0</checkstyle.version>
         <aspectj.version>1.9.19</aspectj.version>
         <suite-name>testng</suite-name>
         <suite-xml>test-suites/${suite-name}.xml</suite-xml>
@@ -75,12 +75,12 @@
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>3.9.1.2184</sonar.maven.version>
         <jacoco.version>0.8.10</jacoco.version>
-        <surefire-version>3.0.0</surefire-version>
+        <surefire-version>3.1.0</surefire-version>
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.0.1</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <allure-testng.version>2.22.0</allure-testng.version>
-        <maven-failsafe.version>3.0.0</maven-failsafe.version>
+        <maven-failsafe.version>3.1.0</maven-failsafe.version>
     </properties>
 
     <distributionManagement>

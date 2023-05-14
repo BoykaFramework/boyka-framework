@@ -14,11 +14,10 @@ jobs:
   release:
     uses: ./.github/workflows/_release.yml
     secrets:
-      GITHUB_AUTH: ${{ secrets.GITHUB_AUTH }}
-      PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
-      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
-      NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+      pushToken: ${{ secrets.PUSH_TOKEN }}
+      gpgKey: ${{ secrets.GPG_PRIVATE_KEY }}
+      gpgPass: ${{ secrets.GPG_PASSPHRASE }}
+      nexusUser: ${{ secrets.NEXUS_USERNAME }}
+      nexusPass: ${{ secrets.NEXUS_PASSWORD }}
     with:
       pre-release: false
