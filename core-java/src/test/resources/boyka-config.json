@@ -78,7 +78,7 @@
         "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
-        "resize": "MINIMIZED",
+        "resize": "NORMAL",
         "capabilities": {
           "browserName": "Chrome",
           "version": "99.0",
