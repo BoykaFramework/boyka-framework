@@ -1,0 +1,139 @@
+name: Common Test workflow for boyka-framework
+
+on:
+  workflow_call:
+    inputs:
+      runs-on:
+        type: string
+        description: On which runner to run on
+        default: ubuntu
+      java-version:
+        type: string
+        description: Version of Java to run on
+        default: 11
+      suite-name:
+        type: string
+        description: Test Suite name to run
+        default: ''
+      profile-name:
+        type: string
+        description: Test Profile Name
+        default: coverage-test
+      run-appium:
+        type: boolean
+        description: Start Appium server
+        default: false
+      run-grid:
+        type: boolean
+        description: Start Selenium Grid
+        default: false
+      run-ios:
+        type: boolean
+        description: Start iOS Simulator
+        default: false
+      run-android:
+        type: boolean
+        description: Start Android Emulator
+        default: false
+      run-web:
+        type: boolean
+        description: Start Local Web Browser
+        default: false
+    secrets:
+      BS_USER:
+        required: false
+      BS_KEY:
+        required: false
+      LT_USER:
+        required: false
+      LT_KEY:
+        required: false
+      LT_APP_ANDROID:
+        required: false
+      LT_APP_IOS:
+        required: false
+
+jobs:
+  test:
+    runs-on: ${{ inputs.runs-on }}-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Install Java and Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ inputs.java-version }}
+          distribution: 'temurin'
+          cache: 'maven'
+          check-latest: true
+
+      - name: Install Appium 2.0
+        if: inputs.run-appium
+        run: |
+          npm install -g appium@next
+          CHROMEDRIVER_VERSION=83.0.4103 appium driver install uiautomator2
+          appium driver install xcuitest
+
+      - name: Start Selenium Grid
+        if: inputs.run-grid
+        run: |
+          docker-compose -f core-java/compose/docker-compose.yml up -d
+
+      - name: Launch iOS Simulator
+        if: inputs.run-ios
+        uses: futureware-tech/simulator-action@v2
+        with:
+          model: 'iPhone 14'
+          os: 'iOS'
+          os_version: 16.2
+          shutdown_after_job: true
+
+      - name: All Test execution
+        if: inputs.run-android
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          avd-name: Nexus_6
+          api-level: 30
+          target: google_apis
+          arch: x86
+          profile: Nexus 6
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
+
+      - name: All ${{ inputs.suite-name }} Test execution
+        if: inputs.run-android == false
+        env:
+          BS_USER: ${{ secrets.BS_USER }}
+          BS_KEY: ${{ secrets.BS_KEY }}
+          LT_USER: ${{ secrets.LT_USER }}
+          LT_KEY: ${{ secrets.LT_KEY }}
+          LT_APP_ANDROID: ${{ secrets.LT_APP_ANDROID }}
+          LT_APP_IOS: ${{ secrets.LT_APP_IOS }}
+        run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
+
+      - name: Stop Selenium Grid
+        if: inputs.run-grid && always()
+        run: |
+          docker-compose -f core-java/compose/docker-compose.yml down --remove-orphans
+
+      - name: Upload target folder
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: target-${{ inputs.suite-name }}
+          retention-days: 1
+          path: |
+            ${{ github.workspace }}/core-java/target
+            ${{ github.workspace }}/core-java/logs
+            ${{ github.workspace }}/core-java/screenshots
+
+      - name: Upload reports folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports-${{ inputs.suite-name }}
+          retention-days: 1
+          path: |
+            ${{ github.workspace }}/core-java/reports

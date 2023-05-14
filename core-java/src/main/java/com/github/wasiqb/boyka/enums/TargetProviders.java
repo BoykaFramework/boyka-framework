@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.enums;
 
 import static com.github.wasiqb.boyka.enums.Protocol.HTTP;
 import static com.github.wasiqb.boyka.enums.Protocol.HTTPS;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,20 +35,21 @@ public enum TargetProviders {
     /**
      * BrowserStack.
      */
-    BROWSER_STACK ("hub-cloud.browserstack.com", HTTPS),
-    /**
-     * None.
-     */
-    LOCAL ("127.0.0.1", HTTP),
-    /**
-     * Lambda Test for Web.
-     */
-    LAMBDA_TEST_WEB ("hub.lambdatest.com", HTTPS),
+    BROWSER_STACK ("hub-cloud.browserstack.com", "bstack", HTTPS),
     /**
      * Lambda Test for Mobile.
      */
-    LAMBDA_TEST_MOBILE ("mobile-hub.lambdatest.com", HTTPS);
+    LAMBDA_TEST_MOBILE ("mobile-hub.lambdatest.com", "lt", HTTPS),
+    /**
+     * Lambda Test for Web.
+     */
+    LAMBDA_TEST_WEB ("hub.lambdatest.com", "lt", HTTPS),
+    /**
+     * None.
+     */
+    LOCAL ("127.0.0.1", EMPTY, HTTP);
 
     private final String   host;
+    private final String   prefix;
     private final Protocol protocol;
 }

@@ -20,9 +20,18 @@
     <test name="Test Boyka web on Selenium Grid">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_selenium_grid"/>
-        <packages>
-            <package name="com.github.wasiqb.boyka.testng.ui.saucedemo"/>
-            <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
-        </packages>
+        <classes>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.AlertsTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.CheckboxTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.ContextMenuTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.DoubleClickTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.DragDropTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.DropDownTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.FileUploadTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.FramesTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.HoverTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.WindowTest"/>
+        </classes>
     </test>
 </suite>
