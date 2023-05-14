@@ -30,7 +30,7 @@ import com.github.javafaker.Faker;
 public class BookingDataBuilder {
     public BookingData bookingDataBuilder () {
         final var faker = Faker.instance ();
-        final var formatter = new SimpleDateFormat ("YYYY-MM-dd");
+        final var formatter = new SimpleDateFormat ("yyyy-MM-dd");
         return BookingData.builder ()
             .firstname (faker.name ()
                 .firstName ())
