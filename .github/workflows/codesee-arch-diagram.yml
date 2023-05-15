@@ -1,5 +1,5 @@
-# This workflow was added by CodeSee. Learn more at https://codesee.io/
-# This is v2.0 of this workflow file
+name: CodeSee
+
 on:
   push:
     branches:
@@ -9,9 +9,11 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
 
-name: CodeSee
-
 permissions: read-all
+
+concurrency:
+  group: boyka-CodeSee-${{ github.ref }}-1
+  cancel-in-progress: true
 
 jobs:
   codesee:

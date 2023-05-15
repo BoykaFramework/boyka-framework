@@ -89,7 +89,7 @@ class AndroidManager implements IDriverManager {
         final var options = new UiAutomator2Options ();
         setCommonUiAutomatorOptions (options);
         if (this.settings.getType () == CLOUD) {
-            setupCloudMobileDriver (options, targetProviders, this.settings);
+            setupCloudDriverOptions (options, this.settings.getCapabilities (), targetProviders);
         } else {
             setLocalUiAutomatorOptions (options);
         }

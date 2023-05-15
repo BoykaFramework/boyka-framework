@@ -11,7 +11,7 @@ You can start by adding the following dependency to your `pom.xml` file:
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.14.0</version>
+  <version>0.14.1</version>
 </dependency>
 ```
 
@@ -20,7 +20,7 @@ You can start by adding the following dependency to your `pom.xml` file:
 You can start by adding the following dependency to your `build.gradle` file:
 
 ```groovy title=build.gradle
-compile "com.github.wasiqb.boyka:boyka-framework:0.14.0"
+compile "com.github.wasiqb.boyka:boyka-framework:0.14.1"
 ```
 
 ## ⬇️ Download the jar
