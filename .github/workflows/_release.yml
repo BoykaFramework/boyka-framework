@@ -50,19 +50,17 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Get the previous pre-release version
+      - name: Get the previous version
         id: old_version
-        if: inputs.pre-release
         run: |
-          export MVN_OLD_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
-          echo "previous_version=${MVN_OLD_VERSION:1}" >> $GITHUB_OUTPUT
-
-      - name: Get the previous release version
-        id: old_version
-        if: inputs.pre-release == false
-        run: |
-          export MVN_OLD_VERSION=$(node -pe "require('./package.json').version")
-          echo "previous_version=${MVN_OLD_VERSION}" >> $GITHUB_OUTPUT
+          export PRE_RELEASE=${{ inputs.pre-release }}
+          if $PRE_RELEASE ; then
+            export MVN_OLD_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+            echo "previous_version=${MVN_OLD_VERSION:1}" >> $GITHUB_OUTPUT
+          else
+            export MVN_OLD_VERSION=$(node -pe "require('./package.json').version")
+            echo "previous_version=${MVN_OLD_VERSION}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Update pre-release version
         if: inputs.pre-release
