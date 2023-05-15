@@ -78,6 +78,8 @@ jobs:
 
       - name: Generate Change log
         if: steps.version.outputs.version != null
+        env:
+          GITHUB_TOKEN: ${{ secrets.pushToken }}
         run: |
           yarn changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
