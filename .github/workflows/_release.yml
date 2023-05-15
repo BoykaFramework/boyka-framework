@@ -27,6 +27,14 @@ on:
       nexusPass:
         required: true
 
+env:
+  GITHUB_AUTH: ${{ secrets.pushToken }}
+  PUSH_TOKEN: ${{ secrets.pushToken }}
+  GPG_PRIVATE_KEY: ${{ secrets.gpgKey }}
+  GPG_PASSPHRASE: ${{ secrets.gpgPass }}
+  NEXUS_USERNAME: ${{ secrets.nexusUser }}
+  NEXUS_PASSWORD: ${{ secrets.nexusPass }}
+
 jobs:
   prepare:
     runs-on: ubuntu-latest
@@ -78,8 +86,6 @@ jobs:
 
       - name: Generate Change log
         if: steps.version.outputs.version != null
-        env:
-          GITHUB_TOKEN: ${{ secrets.pushToken }}
         run: |
           yarn changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
