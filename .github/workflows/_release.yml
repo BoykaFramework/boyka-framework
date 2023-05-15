@@ -240,14 +240,15 @@ jobs:
       - name: Push updated version files
         uses: EndBug/add-and-commit@v9
         with:
-          add: |
-            core-java/pom.xml
-            lerna.json
-            CHANGELOG.md
-            website/package.json
-            README.md
-            package.json
-            website/docs/framework-docs/getting-started/usage.md
+          add: "[
+            'core-java/pom.xml',
+            'lerna.json',
+            'CHANGELOG.md',
+            'website/package.json',
+            'README.md',
+            'package.json',
+            'website/docs/framework-docs/getting-started/usage.md',
+            ]"
           message: |
             chore(Internal): :bookmark: released v${{ needs.prepare.outputs.old-version }} to maven central
           push: true
