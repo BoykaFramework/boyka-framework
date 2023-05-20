@@ -1,4 +1,4 @@
-## v0.14.2-beta.0 (2023-05-15)
+## v0.14.2 (2023-05-15)
 
 #### :bug: Bug Fix
 * [#476](https://github.com/BoykaFramework/boyka-framework/pull/476) fix(workflow): :bug: fixed release common workflow ([@WasiqB](https://github.com/WasiqB))

@@ -24,13 +24,13 @@
     <version>0.14.2</version>
     <inceptionYear>2022</inceptionYear>
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>🎉 Ultimate test automation for testing any application on any platform</description>
+    <description>🎉 Ultimate test automation framework for testing any application on any platform</description>
     <url>https://github.com/BoykaFramework/boyka-framework</url>
 
     <properties>
         <selenium-webdriver.version>4.9.1</selenium-webdriver.version>
-        <testng.version>7.7.1</testng.version>
-        <appium-java-client.version>8.5.0</appium-java-client.version>
+        <testng.version>7.8.0</testng.version>
+        <appium-java-client.version>8.4.0</appium-java-client.version>
         <webdrivermanager.version>5.3.3</webdrivermanager.version>
         <okhttp.version>4.11.0</okhttp.version>
         <lombok.version>1.18.26</lombok.version>
@@ -42,8 +42,8 @@
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
         <faker.version>1.9.0</faker.version>
-        <jackson-dataformat-yaml.version>2.15.0</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.15.0</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.15.1</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.15.1</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <everit-json-schema.version>1.5.1</everit-json-schema.version>
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>

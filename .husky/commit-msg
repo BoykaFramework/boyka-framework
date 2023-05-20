@@ -3,4 +3,4 @@
 
 yarn lint-staged
 yarn build:site
-mvn clean install -f core-java/pom.xml -DskipTests
+mvn clean install -f core-java/pom.xml -DskipTests -Dmaven.plugin.validation=VERBOSE
