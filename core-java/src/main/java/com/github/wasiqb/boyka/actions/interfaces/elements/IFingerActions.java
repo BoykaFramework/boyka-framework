@@ -51,4 +51,9 @@ public interface IFingerActions extends IElementActions {
      * Taps on an element.
      */
     void tap ();
+
+    /**
+     * Tap and hold on an element.
+     */
+    void tapAndHold ();
 }

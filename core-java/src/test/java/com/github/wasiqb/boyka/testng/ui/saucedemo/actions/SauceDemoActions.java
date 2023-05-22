@@ -5,8 +5,10 @@ import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
+import static com.github.wasiqb.boyka.actions.elements.FingersActions.withFingers;
 import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
+import static com.github.wasiqb.boyka.enums.SwipeDirection.DOWN;
 import static com.github.wasiqb.boyka.enums.SwipeDirection.UP;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.CartPage.cartPage;
@@ -27,7 +29,11 @@ public class SauceDemoActions {
     }
 
     public void verifyAddToCart () {
-        withMouse (homePage ().getAddToCartButton ()).click ();
+        if (this.platformType == WEB) {
+            withMouse (homePage ().getAddToCartButton ()).click ();
+        } else {
+            withFinger (homePage ().getAddToCartDragHandle ()).dragTo (homePage ().getCartDropZone ());
+        }
 
         onElement (homePage ().getProductPrice ()).verifyText ()
             .isEqualTo ("$29.99");
@@ -137,5 +143,11 @@ public class SauceDemoActions {
         }
         onElement (productDetailsPage ().getContainer ()).verifyIsDisplayed ()
             .isTrue ();
+        if (this.platformType != WEB) {
+            withFinger (productDetailsPage ().getContainer ()).swipe (UP);
+            withFinger (productDetailsPage ().getContainer ()).swipe (DOWN);
+            withFingers (productDetailsPage ().getImage ()).zoomIn ();
+            withFingers (productDetailsPage ().getImage ()).zoomOut ();
+        }
     }
 }

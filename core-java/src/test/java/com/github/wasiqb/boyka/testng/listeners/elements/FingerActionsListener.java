@@ -31,7 +31,7 @@ public class FingerActionsListener implements IFingerActionsListener {
 
     @Override
     public void onSwipe (final Locator locator, final SwipeDirection direction) {
-        step (format ("Swiping on element [{0}] in [{1}] direction...", locator.getName (), direction.name ()));
+        step (format ("Swiping on element [{0}] in [{1}] direction...", locator, direction.name ()));
     }
 
     @Override

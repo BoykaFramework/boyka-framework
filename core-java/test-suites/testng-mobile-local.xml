@@ -27,13 +27,7 @@
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_local_sauce_ios"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
-                <methods>
-                    <include name="testLogin"/>
-                    <include name="testAddToCart"/>
-                    <include name="testCheckoutStep1"/>
-                </methods>
-            </class>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
         </classes>
     </test>
     <test name="Test Boyka Mobile on Local Android Emulator WDIO">

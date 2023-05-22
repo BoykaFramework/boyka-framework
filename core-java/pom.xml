@@ -28,7 +28,7 @@
     <url>https://github.com/BoykaFramework/boyka-framework</url>
 
     <properties>
-        <selenium-webdriver.version>4.9.1</selenium-webdriver.version>
+        <selenium-webdriver.version>4.9.0</selenium-webdriver.version>
         <testng.version>7.8.0</testng.version>
         <appium-java-client.version>8.4.0</appium-java-client.version>
         <webdrivermanager.version>5.3.3</webdrivermanager.version>
