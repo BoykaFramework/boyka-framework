@@ -183,7 +183,7 @@
           "full_reset": true,
           "system_port": 8200,
           "swipe": {
-            "distance": 50,
+            "distance": 75,
             "max_swipe_until_found": 5
           },
           "application": {
@@ -220,7 +220,7 @@
           "ignore_unimportant_views": true,
           "full_reset": true,
           "swipe": {
-            "distance": 50,
+            "distance": 75,
             "max_swipe_until_found": 5
           },
           "application": {
@@ -266,6 +266,10 @@
             "debug": true,
             "video": true,
             "appiumLogs": true
+          },
+          "swipe": {
+            "distance": 75,
+            "max_swipe_until_found": 5
           }
         }
       },
@@ -299,6 +303,10 @@
             "autoAcceptAlerts": true,
             "isRealMobile": true,
             "w3c": true
+          },
+          "swipe": {
+            "distance": 75,
+            "max_swipe_until_found": 5
           }
         }
       },
@@ -319,7 +327,7 @@
           "connect_keyboard": false,
           "typing_speed": 25,
           "swipe": {
-            "distance": 50,
+            "distance": 75,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -354,7 +362,7 @@
           "connect_keyboard": false,
           "typing_speed": 35,
           "swipe": {
-            "distance": 50,
+            "distance": 75,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -401,6 +409,10 @@
             "debug": true,
             "video": true,
             "appiumLogs": true
+          },
+          "swipe": {
+            "distance": 75,
+            "max_swipe_until_found": 5
           }
         }
       },
@@ -416,7 +428,6 @@
           "application": {
             "install_timeout": 180
           },
-          "ignore_unimportant_views": true,
           "capabilities": {
             "platformName": "iOS",
             "deviceName": "iPhone 14",
@@ -433,6 +444,10 @@
             "autoAcceptAlerts": true,
             "isRealMobile": true,
             "w3c": true
+          },
+          "swipe": {
+            "distance": 75,
+            "max_swipe_until_found": 5
           }
         }
       }

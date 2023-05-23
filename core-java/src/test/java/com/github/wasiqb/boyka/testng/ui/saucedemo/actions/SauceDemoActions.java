@@ -144,8 +144,8 @@ public class SauceDemoActions {
         onElement (productDetailsPage ().getContainer ()).verifyIsDisplayed ()
             .isTrue ();
         if (this.platformType != WEB) {
-            withFinger (productDetailsPage ().getContainer ()).swipe (UP);
-            withFinger (productDetailsPage ().getContainer ()).swipe (DOWN);
+            withFinger ().swipe (UP);
+            withFinger ().swipe (DOWN);
             withFingers (productDetailsPage ().getImage ()).zoomIn ();
             withFingers (productDetailsPage ().getImage ()).zoomOut ();
         }
