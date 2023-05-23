@@ -16,29 +16,11 @@
   -->
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Mobile Local Suite" verbose="2">
-    <test name="Test Boyka Mobile on Local Android Emulator Sauce Demo app">
-        <parameter name="platformType" value="ANDROID"/>
-        <parameter name="driverKey" value="test_local_sauce_android"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
-        </classes>
-    </test>
-    <test name="Test Boyka Mobile on Local iOS Simulator Sauce Demo app">
-        <parameter name="platformType" value="IOS"/>
-        <parameter name="driverKey" value="test_local_sauce_ios"/>
-        <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
-        </classes>
-    </test>
     <test name="Test Boyka Mobile on Local Android Emulator WDIO">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_wdio_android"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest">
-                <methods>
-                    <include name="testDragDrop"/>
-                </methods>
-            </class>
+            <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest"/>
         </classes>
     </test>
     <test name="Test Boyka Mobile on Local iOS Simulator WDIO">
