@@ -134,18 +134,4 @@ public class FingerActions extends ElementActions implements IFingerActions {
         performMobileGestures (singletonList (sequences));
         LOGGER.traceExit ();
     }
-
-    @Override
-    public void tapAndHold () {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Tapping and holding on the element...");
-        ofNullable (this.listener).ifPresent (l -> l.onTapAndHold (this.locator));
-        final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
-            .sourceElement (this.locator)
-            .pause (ZERO)
-            .build ()
-            .tapAndHold (), this.locator, null);
-        performMobileGestures (singletonList (sequences));
-        LOGGER.traceExit ();
-    }
 }
