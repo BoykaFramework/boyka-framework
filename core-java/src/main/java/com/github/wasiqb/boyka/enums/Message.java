@@ -131,6 +131,10 @@ public enum Message {
      */
     ERROR_WRITING_LOGS ("Error occurred while writing logs..."),
     /**
+     * Finger should be within the bounds.
+     */
+    FINGER_OUT_OF_BOUND ("Finger co-ordinates [{0}] is outside the bounds [{1}]..."),
+    /**
      * Host name is required for Remote execution
      */
     HOSTNAME_REQUIRED_FOR_REMOTE ("Host name is required for remote driver execution..."),

@@ -6,7 +6,7 @@ on:
       node-version:
         type: string
         description: Node JS version
-        default: 16
+        default: 18
       java-version:
         type: string
         description: Java version
@@ -26,6 +26,14 @@ on:
         required: true
       nexusPass:
         required: true
+
+env:
+  GITHUB_AUTH: ${{ secrets.pushToken }}
+  PUSH_TOKEN: ${{ secrets.pushToken }}
+  GPG_PRIVATE_KEY: ${{ secrets.gpgKey }}
+  GPG_PASSPHRASE: ${{ secrets.gpgPass }}
+  NEXUS_USERNAME: ${{ secrets.nexusUser }}
+  NEXUS_PASSWORD: ${{ secrets.nexusPass }}
 
 jobs:
   prepare:
@@ -84,7 +92,7 @@ jobs:
       - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: version-files
+          name: version-files-${{ github.run_id }}
           retention-days: 1
           path: |
             ${{ github.workspace }}/CHANGELOG.md
@@ -167,7 +175,7 @@ jobs:
       - name: Upload target folder
         uses: actions/upload-artifact@v3
         with:
-          name: target
+          name: target-${{ github.run_id }}
           retention-days: 1
           path: |
             ${{ github.workspace }}/core-java/target
@@ -175,13 +183,10 @@ jobs:
       - name: Upload version files folder
         uses: actions/upload-artifact@v3
         with:
-          name: version-files
+          name: version-files-${{ github.run_id }}
           retention-days: 1
           path: |
             ${{ github.workspace }}/core-java/pom.xml
-            ${{ github.workspace }}/CHANGELOG.md
-            ${{ github.workspace }}/lerna.json
-            ${{ github.workspace }}/website/package.json
 
   push-pom:
     runs-on: ubuntu-latest
@@ -198,7 +203,7 @@ jobs:
       - name: Download Version files
         uses: actions/download-artifact@v3
         with:
-          name: version-files
+          name: version-files-${{ github.run_id }}
 
       - name: Update new version in README and Usage
         uses: jacobtomlinson/gha-find-replace@v3
@@ -232,14 +237,15 @@ jobs:
       - name: Push updated version files
         uses: EndBug/add-and-commit@v9
         with:
-          add: |
-            core-java/pom.xml
-            lerna.json
-            CHANGELOG.md
-            website/package.json
-            README.md
-            package.json
-            website/docs/framework-docs/getting-started/usage.md
+          add: "[
+            'core-java/pom.xml',
+            'lerna.json',
+            'CHANGELOG.md',
+            'website/package.json',
+            'README.md',
+            'package.json',
+            'website/docs/framework-docs/getting-started/usage.md',
+            ]"
           message: |
             chore(Internal): :bookmark: released v${{ needs.prepare.outputs.old-version }} to maven central
           push: true
@@ -261,13 +267,13 @@ jobs:
       - name: Download target folder
         uses: actions/download-artifact@v3
         with:
-          name: target
+          name: target-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java/target
 
       - name: Download Version files
         uses: actions/download-artifact@v3
         with:
-          name: version-files
+          name: version-files-${{ github.run_id }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1

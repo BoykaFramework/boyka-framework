@@ -30,10 +30,10 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Setup Node v16
+      - name: Setup Node v18
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'yarn'
 
       - name: Install dependencies
@@ -49,7 +49,6 @@ jobs:
           echo "version=$MVN_VERSION" >> $GITHUB_OUTPUT
 
       - name: Start Selenium Grid
-        if: inputs.run-grid
         run: |
           docker-compose -f core-java/compose/docker-compose.yml up
 
@@ -57,7 +56,7 @@ jobs:
         run: mvn clean test -f sample-tests/pom.xml -Dboyka.version=${{ steps.version.outputs.version }}
 
       - name: Stop Selenium Grid
-        if: inputs.run-grid && always()
+        if: always()
         run: |
           docker-compose -f core-java/compose/docker-compose.yml down
 
@@ -65,7 +64,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: target
+          name: target-${{ github.run_id }}
           retention-days: 1
           path: |
             ${{ github.workspace }}/sample-tests/logs

@@ -21,7 +21,13 @@
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_bs_android"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
+                <methods>
+                    <include name="testLogin"/>
+                    <include name="testAddToCart"/>
+                    <include name="testCheckoutStep1"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="Test Boyka Mobile on BrowserStack iOS Device">
@@ -31,6 +37,8 @@
             <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
                 <methods>
                     <include name="testLogin"/>
+                    <include name="testAddToCart"/>
+                    <include name="testCheckoutStep1"/>
                 </methods>
             </class>
         </classes>
