@@ -10,6 +10,6 @@ import lombok.Data;
  */
 @Data
 public class SwipeSetting {
-    private int distance           = 25;
+    private int distance           = 75;
     private int maxSwipeUntilFound = 5;
 }

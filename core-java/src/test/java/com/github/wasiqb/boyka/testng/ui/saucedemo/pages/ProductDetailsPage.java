@@ -48,6 +48,10 @@ public class ProductDetailsPage {
         .ios (accessibilityId ("test-Inventory item page"))
         .name ("Container")
         .build ();
+    private final Locator image     = buildLocator ().name ("Product Image")
+        .android (accessibilityId ("test-Image Container"))
+        .ios (accessibilityId ("test-Image Container"))
+        .build ();
 
     private ProductDetailsPage () {
         // Avoid explicit class initialisation.
