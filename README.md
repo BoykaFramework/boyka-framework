@@ -12,7 +12,7 @@
 <!-- Badges -->
 <p>
 
-[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light)](https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework)
+[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light)](https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka-framework)
 
 [![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/BoykaFramework/boyka-framework)
 
@@ -112,9 +112,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       "highlight_delay": 100
     },
     "logging": {
-      "exclude_logs": [
-        "bugreport"
-      ]
+      "exclude_logs": ["bugreport"]
     },
     "screenshot": {
       "enabled": true,
@@ -194,9 +192,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "port": 4723,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "allow_insecure": ["get_server_logs"]
         },
         "device": {
           "os": "ANDROID",
@@ -291,9 +287,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "port": 4724,
           "session_override": true,
           "driver": "XCUI",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "allow_insecure": ["get_server_logs"]
         },
         "device": {
           "os": "IOS",
