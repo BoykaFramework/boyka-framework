@@ -1,5 +1,5 @@
 ---
-title: FingerActions
+title: FingersActions
 sidebar_position: 5
 ---
 
