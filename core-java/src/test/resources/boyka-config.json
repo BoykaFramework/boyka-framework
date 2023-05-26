@@ -183,7 +183,6 @@
           "full_reset": true,
           "system_port": 8200,
           "swipe": {
-            "distance": 75,
             "max_swipe_until_found": 5
           },
           "application": {
@@ -220,7 +219,6 @@
           "ignore_unimportant_views": true,
           "full_reset": true,
           "swipe": {
-            "distance": 75,
             "max_swipe_until_found": 5
           },
           "application": {
@@ -268,7 +266,6 @@
             "appiumLogs": true
           },
           "swipe": {
-            "distance": 75,
             "max_swipe_until_found": 5
           }
         }
@@ -305,7 +302,6 @@
             "w3c": true
           },
           "swipe": {
-            "distance": 75,
             "max_swipe_until_found": 5
           }
         }
@@ -327,7 +323,6 @@
           "connect_keyboard": false,
           "typing_speed": 25,
           "swipe": {
-            "distance": 75,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -362,7 +357,6 @@
           "connect_keyboard": false,
           "typing_speed": 35,
           "swipe": {
-            "distance": 75,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -411,7 +405,6 @@
             "appiumLogs": true
           },
           "swipe": {
-            "distance": 75,
             "max_swipe_until_found": 5
           }
         }
@@ -446,7 +439,6 @@
             "w3c": true
           },
           "swipe": {
-            "distance": 75,
             "max_swipe_until_found": 5
           }
         }
