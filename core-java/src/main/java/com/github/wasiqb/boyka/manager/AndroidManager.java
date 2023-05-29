@@ -1,5 +1,7 @@
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
 import static com.github.wasiqb.boyka.enums.AutomationType.UI_AUTOMATOR;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
@@ -8,6 +10,7 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.Validator.setOptionIfPresent;
 import static io.appium.java_client.Setting.IGNORE_UNIMPORTANT_VIEWS;
 import static java.time.Duration.ofSeconds;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
@@ -38,12 +41,24 @@ class AndroidManager implements IDriverManager {
         setupAndroidSettings ();
     }
 
+    private void navigateToBaseUrl () {
+        if (this.settings.getApplication ()
+            .getType () == WEB && isNotEmpty (this.settings.getBaseUrl ())) {
+            navigate ().to (this.settings.getBaseUrl ());
+        }
+    }
+
     private void setAndroidApplicationOptions (final UiAutomator2Options options,
         final ApplicationSetting application) {
-        setupApplicationOptions (application, options);
-        options.setAppWaitActivity (application.getWaitActivity ());
-        options.setAppWaitDuration (ofSeconds (application.getWaitTimeout ()));
-        options.setAndroidInstallTimeout (ofSeconds (application.getInstallTimeout ()));
+        if (application.getType () == WEB) {
+            options.withBrowserName (this.settings.getBrowser ()
+                .name ());
+        } else {
+            setupApplicationOptions (application, options);
+            options.setAppWaitActivity (application.getWaitActivity ());
+            options.setAppWaitDuration (ofSeconds (application.getWaitTimeout ()));
+            options.setAndroidInstallTimeout (ofSeconds (application.getInstallTimeout ()));
+        }
     }
 
     private void setAvdOptions (final UiAutomator2Options options, final DeviceType type,
@@ -95,5 +110,6 @@ class AndroidManager implements IDriverManager {
         }
         setDriver (new AndroidDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
+        navigateToBaseUrl ();
     }
 }

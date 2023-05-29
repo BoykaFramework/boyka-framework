@@ -28,6 +28,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import com.github.wasiqb.boyka.actions.interfaces.elements.IClickableActions;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.IClickableActionsListener;
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -64,7 +65,11 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Clicking on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onClick (this.locator));
-        if (getSession ().getPlatformType () == WEB) {
+        final var session = getSession ();
+        if (session.getPlatformType () == WEB || session.getMobileSetting ()
+            .getDevice ()
+            .getApplication ()
+            .getType () == ApplicationType.WEB) {
             scrollIntoView ();
             performElementAction (WebElement::click, this.locator);
         } else {

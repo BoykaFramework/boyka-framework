@@ -24,11 +24,16 @@ package com.github.wasiqb.boyka.enums;
  */
 public enum ApplicationType {
     /**
+     * Hybrid app.
+     */
+    HYBRID,
+    /**
      * Native app.
      */
     NATIVE,
     /**
-     * Hybrid app.
+     * Web app.
      */
-    HYBRID
+    WEB
+
 }

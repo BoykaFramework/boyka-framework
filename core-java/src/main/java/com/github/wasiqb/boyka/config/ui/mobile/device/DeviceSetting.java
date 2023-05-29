@@ -21,6 +21,7 @@ import static com.github.wasiqb.boyka.enums.OS.ANDROID;
 
 import java.util.Map;
 
+import com.github.wasiqb.boyka.enums.Browser;
 import com.github.wasiqb.boyka.enums.DeviceType;
 import com.github.wasiqb.boyka.enums.OS;
 import lombok.Data;
@@ -34,6 +35,8 @@ import lombok.Data;
 @Data
 public class DeviceSetting {
     private ApplicationSetting   application;
+    private String               baseUrl;
+    private Browser              browser;
     private Map<String, Object>  capabilities;
     private int                  chromeDriverPort;
     private boolean              clearFiles             = true;

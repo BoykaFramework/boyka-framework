@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
@@ -58,8 +59,13 @@ class IOSManager implements IDriverManager {
     }
 
     private void setApplicationCapabilities (final XCUITestOptions options, final ApplicationSetting application) {
-        setupApplicationOptions (application, options);
-        options.setBundleId (application.getBundleId ());
+        if (application.getType () == WEB) {
+            options.withBrowserName (this.settings.getBrowser ()
+                .name ());
+        } else {
+            setupApplicationOptions (application, options);
+            options.setBundleId (application.getBundleId ());
+        }
     }
 
     private void setCommonCapabilities (final XCUITestOptions options) {
