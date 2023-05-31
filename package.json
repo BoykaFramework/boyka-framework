@@ -31,7 +31,7 @@
   "private": true,
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.5",
     "@lerna/child-process": "^6.6.2",
     "@lerna/version": "^6.6.2",
     "@types/node": "^18.16.15",
