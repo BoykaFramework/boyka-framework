@@ -42,7 +42,7 @@
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
         <faker.version>1.9.0</faker.version>
-        <jackson-dataformat-yaml.version>2.15.1</jackson-dataformat-yaml.version>
+        <jackson-dataformat-yaml.version>2.15.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.15.1</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <everit-json-schema.version>1.5.1</everit-json-schema.version>
