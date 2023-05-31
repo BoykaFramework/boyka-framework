@@ -34,7 +34,7 @@
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <boyka.version>0.14.2</boyka.version>
         <testng.version>7.8.0</testng.version>
-        <lombok.version>1.18.26</lombok.version>
+        <lombok.version>1.18.28</lombok.version>
         <java.faker.version>1.0.2</java.faker.version>
     </properties>
 
