@@ -56,11 +56,12 @@ class IOSManager implements IDriverManager {
         }
         setDriver (new IOSDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
+        navigateToBaseUrl (this.settings.getApplication ());
     }
 
     private void setApplicationCapabilities (final XCUITestOptions options, final ApplicationSetting application) {
         if (application.getType () == WEB) {
-            options.withBrowserName (this.settings.getBrowser ()
+            options.withBrowserName (application.getBrowser ()
                 .name ());
         } else {
             setupApplicationOptions (application, options);

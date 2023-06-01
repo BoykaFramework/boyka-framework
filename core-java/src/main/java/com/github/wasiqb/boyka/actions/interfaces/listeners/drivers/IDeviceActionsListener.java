@@ -14,35 +14,16 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.listeners.elements;
+package com.github.wasiqb.boyka.actions.interfaces.listeners.drivers;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
-import com.github.wasiqb.boyka.builders.Locator;
 
-/**
- * Handle all text box action events.
- *
- * @author Wasiq Bhamla
- * @since 09-Apr-2023
- */
-public interface ITextBoxActionsListener extends BoykaListener {
-    /**
-     * Handle enter text method.
-     *
-     * @param locator Locator of the element.
-     * @param text Text to enter into text box
-     */
-    default void onEnterText (final Locator locator, final String text) {
+public interface IDeviceActionsListener extends BoykaListener {
+    default void onHideKeyboard () {
         // not implemented.
     }
 
-    /**
-     * Handle press key method.
-     *
-     * @param locator Locator of the element.
-     * @param keys Keys to be pressed
-     */
-    default void onPressKey (final Locator locator, final CharSequence... keys) {
+    default void onIsKeyboardVisible () {
         // not implemented.
     }
 }

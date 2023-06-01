@@ -16,15 +16,10 @@
 
 package com.github.wasiqb.boyka.actions.elements;
 
-import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
-import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.enums.ListenerType.TEXT_BOX_ACTION;
-import static com.github.wasiqb.boyka.enums.Message.NO_KEYBOARD_ERROR;
 import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
-import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
-import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.Optional.ofNullable;
@@ -34,8 +29,6 @@ import static org.openqa.selenium.Keys.chord;
 import com.github.wasiqb.boyka.actions.interfaces.elements.ITextBoxActions;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
 import com.github.wasiqb.boyka.builders.Locator;
-import io.appium.java_client.HasOnScreenKeyboard;
-import io.appium.java_client.HidesKeyboard;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -77,30 +70,6 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
             }
         }, this.locator);
         LOGGER.traceExit ();
-    }
-
-    @Override
-    public void hideKeyboard () {
-        LOGGER.info ("Hiding the visible keyboard...");
-        ofNullable (this.listener).ifPresent (ITextBoxActionsListener::onHideKeyboard);
-        final var platform = getSession ().getPlatformType ();
-        if (platform == WEB) {
-            throwError (NO_KEYBOARD_ERROR);
-        }
-        if (isKeyboardVisible ()) {
-            performDriverAction (HidesKeyboard::hideKeyboard);
-        }
-    }
-
-    @Override
-    public boolean isKeyboardVisible () {
-        LOGGER.info ("Checking if keyboard is visible...");
-        ofNullable (this.listener).ifPresent (ITextBoxActionsListener::onIsKeyboardVisible);
-        final var platform = getSession ().getPlatformType ();
-        if (platform == WEB) {
-            throwError (NO_KEYBOARD_ERROR);
-        }
-        return getDriverAttribute (HasOnScreenKeyboard::isKeyboardShown, false);
     }
 
     @Override

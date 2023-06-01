@@ -12,7 +12,7 @@ on:
 
 jobs:
   pre-release:
-    uses: ./.github/workflows/_release.yml
+    uses: ./.github/workflows/common/_release.yml
     secrets:
       pushToken: ${{ secrets.PUSH_TOKEN }}
       gpgKey: ${{ secrets.GPG_PRIVATE_KEY }}

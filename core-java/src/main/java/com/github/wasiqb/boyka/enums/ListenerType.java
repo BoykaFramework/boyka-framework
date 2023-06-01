@@ -23,6 +23,7 @@ import com.github.wasiqb.boyka.actions.interfaces.listeners.api.IApiActionsListe
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IAlertActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IContextActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.ICookieActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IDeviceActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IDriverActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IFrameActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.INavigateActionsListener;
@@ -67,6 +68,10 @@ public enum ListenerType {
      * Driver action listener.
      */
     DRIVER_ACTION (IDriverActionsListener.class),
+    /**
+     * Device action listener.
+     */
+    DEVICE_ACTION (IDeviceActionsListener.class),
     /**
      * Drop down action listener.
      */

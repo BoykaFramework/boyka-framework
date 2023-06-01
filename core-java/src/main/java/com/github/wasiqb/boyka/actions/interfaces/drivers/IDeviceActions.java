@@ -14,26 +14,24 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.elements;
+package com.github.wasiqb.boyka.actions.interfaces.drivers;
 
 /**
- * All text box related actions
+ * Handle all device specific actions.
  *
  * @author Wasiq Bhamla
- * @since 15-Feb-2023
+ * @since 31-May-2023
  */
-public interface ITextBoxActions extends IClickableActions {
+public interface IDeviceActions {
     /**
-     * Enter text in text field.
-     *
-     * @param text text to enter
+     * Hides the keyboard if visible.
      */
-    void enterText (final String text);
+    void hideKeyboard ();
 
     /**
-     * Press specified keys in text field.
+     * Gets the keyboard state whether it is visible or not.
      *
-     * @param keys keys to press
+     * @return true, if visible.
      */
-    void pressKey (final CharSequence... keys);
+    boolean isKeyboardVisible ();
 }

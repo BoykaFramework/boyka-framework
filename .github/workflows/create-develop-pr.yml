@@ -7,7 +7,7 @@ on:
 
 jobs:
   create-feature-to-develop-pr:
-    uses: ./.github/workflows/_create-pr.yml
+    uses: ./.github/workflows/common/_create-pr.yml
     secrets:
       token: ${{ secrets.PUSH_TOKEN }}
     with:

@@ -29,16 +29,6 @@ public class TextBoxActionsListener implements ITextBoxActionsListener {
     }
 
     @Override
-    public void onHideKeyboard () {
-        step ("Hiding the keyboard...");
-    }
-
-    @Override
-    public void onIsKeyboardVisible () {
-        step ("Checking if keyboard is visible...");
-    }
-
-    @Override
     public void onPressKey (final Locator locator, final CharSequence... keys) {
         step (format ("Pressing keys [{0}] on element [{1}]...", keys, locator.getName ()));
     }

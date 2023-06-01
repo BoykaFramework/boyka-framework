@@ -16,6 +16,8 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 import static java.lang.System.getProperty;
 import static java.text.MessageFormat.format;
@@ -32,6 +34,12 @@ import io.appium.java_client.remote.options.SupportsAppOption;
 import org.openqa.selenium.MutableCapabilities;
 
 interface IDriverManager {
+    default void navigateToBaseUrl (final ApplicationSetting application) {
+        if (application.getType () == WEB && isNotEmpty (application.getBaseUrl ())) {
+            navigate ().to (application.getBaseUrl ());
+        }
+    }
+
     default <E extends BaseOptions<E>, T extends SupportsAppOption<E>> void setupApplicationOptions (
         final ApplicationSetting application, final T options) {
         if (isNotEmpty (application.getPath ())) {

@@ -14,26 +14,20 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.elements;
+package com.github.wasiqb.boyka.testng.listeners.drivers;
 
-/**
- * All text box related actions
- *
- * @author Wasiq Bhamla
- * @since 15-Feb-2023
- */
-public interface ITextBoxActions extends IClickableActions {
-    /**
-     * Enter text in text field.
-     *
-     * @param text text to enter
-     */
-    void enterText (final String text);
+import static io.qameta.allure.Allure.step;
 
-    /**
-     * Press specified keys in text field.
-     *
-     * @param keys keys to press
-     */
-    void pressKey (final CharSequence... keys);
+import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IDeviceActionsListener;
+
+public class DeviceActionsListener implements IDeviceActionsListener {
+    @Override
+    public void onHideKeyboard () {
+        step ("Hiding the keyboard...");
+    }
+
+    @Override
+    public void onIsKeyboardVisible () {
+        step ("Checking if keyboard is visible...");
+    }
 }
