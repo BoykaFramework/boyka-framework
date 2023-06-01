@@ -49,21 +49,21 @@ jobs:
   test-api:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-api
 
   test-others:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-others
 
   test-web-local:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-local
       runs-on: macos
@@ -71,7 +71,7 @@ jobs:
   test-web-bs:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     secrets:
       cloudUser: ${{ secrets.BS_USER }}
       cloudKey: ${{ secrets.BS_KEY }}
@@ -81,7 +81,7 @@ jobs:
   test-web-lt:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     secrets:
       cloudUser: ${{ secrets.LT_USER }}
       cloudKey: ${{ secrets.LT_KEY }}
@@ -91,7 +91,7 @@ jobs:
   test-web-grid:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-grid
       run-grid: true
@@ -99,7 +99,7 @@ jobs:
   test-mobile-local:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       runs-on: macos
       suite-name: testng-mobile-local
@@ -110,7 +110,7 @@ jobs:
   test-mobile-web:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     with:
       runs-on: macos
       suite-name: testng-mobile-web
@@ -121,7 +121,7 @@ jobs:
   test-mobile-bs:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     secrets:
       cloudUser: ${{ secrets.BS_USER }}
       cloudKey: ${{ secrets.BS_KEY }}
@@ -131,7 +131,7 @@ jobs:
   test-mobile-lt:
     needs:
       - build
-    uses: ./.github/workflows/common/_test-core-java.yml
+    uses: ./.github/workflows/_test-core-java.yml
     secrets:
       cloudUser: ${{ secrets.LT_USER }}
       cloudKey: ${{ secrets.LT_KEY }}

@@ -7,7 +7,7 @@ on:
 
 jobs:
   create-develop-to-staging-pr:
-    uses: ./.github/workflows/common/_create-pr.yml
+    uses: ./.github/workflows/_create-pr.yml
     with:
       source-branch: develop
       target-branch: staging
