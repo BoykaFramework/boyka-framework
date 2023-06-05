@@ -14,24 +14,28 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.drivers;
+package com.github.wasiqb.boyka.actions.interfaces.listeners.device;
+
+import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 
 /**
- * Handle all device specific actions.
+ * Handles all the common device specific events.
  *
  * @author Wasiq Bhamla
- * @since 31-May-2023
+ * @since 03-Jun-2023
  */
-public interface IDeviceActions {
+public interface IDeviceActionsListener extends BoykaListener {
     /**
-     * Hides the keyboard if visible.
+     * Handle hide keyboard event.
      */
-    void hideKeyboard ();
+    default void onHideKeyboard () {
+        // not implemented.
+    }
 
     /**
-     * Gets the keyboard state whether it is visible or not.
-     *
-     * @return true, if visible.
+     * Handle is keyboard visible event.
      */
-    boolean isKeyboardVisible ();
+    default void onIsKeyboardVisible () {
+        // not implemented.
+    }
 }

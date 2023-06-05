@@ -29,6 +29,10 @@ import lombok.Getter;
 @Getter
 public enum Message {
     /**
+     * Action not supported error.
+     */
+    ACTION_NOT_SUPPORTED_ON_PLATFORM ("[{0}] action is not supported on [{1}] platform..."),
+    /**
      * Basic auth password is empty.
      */
     AUTH_PASSWORD_REQUIRED ("Basic auth password is required..."),

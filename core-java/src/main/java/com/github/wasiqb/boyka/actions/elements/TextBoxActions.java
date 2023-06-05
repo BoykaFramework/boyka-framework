@@ -29,6 +29,7 @@ import static org.openqa.selenium.Keys.chord;
 import com.github.wasiqb.boyka.actions.interfaces.elements.ITextBoxActions;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
 import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -65,7 +66,10 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
         ofNullable (this.listener).ifPresent (l -> l.onEnterText (this.locator, text));
         performElementAction (e -> {
             e.sendKeys (text);
-            if (getSession ().getPlatformType () == IOS) {
+            if (getSession ().getPlatformType () == IOS && getSession ().getMobileSetting ()
+                .getDevice ()
+                .getApplication ()
+                .getType () != ApplicationType.WEB) {
                 e.sendKeys ("\n");
             }
         }, this.locator);

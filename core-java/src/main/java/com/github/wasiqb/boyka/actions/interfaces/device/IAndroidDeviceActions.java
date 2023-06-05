@@ -14,20 +14,21 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.listeners.drivers;
+package com.github.wasiqb.boyka.actions.interfaces.device;
 
-import static io.qameta.allure.Allure.step;
+import io.appium.java_client.android.nativekey.AndroidKey;
 
-import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IDeviceActionsListener;
-
-public class DeviceActionsListener implements IDeviceActionsListener {
-    @Override
-    public void onHideKeyboard () {
-        step ("Hiding the keyboard...");
-    }
-
-    @Override
-    public void onIsKeyboardVisible () {
-        step ("Checking if keyboard is visible...");
-    }
+/**
+ * Handles all Android device specific actions.
+ *
+ * @author Wasiq Bhamla
+ * @since 03-Jun-2023
+ */
+public interface IAndroidDeviceActions extends IDeviceActions {
+    /**
+     * Press Android key on the device.
+     *
+     * @param key Android key
+     */
+    void pressKey (AndroidKey key);
 }

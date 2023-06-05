@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.drivers;
+package com.github.wasiqb.boyka.actions.device;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
@@ -26,8 +26,8 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import com.github.wasiqb.boyka.actions.interfaces.drivers.IDeviceActions;
-import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IDeviceActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.device.IDeviceActions;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IDeviceActionsListener;
 import io.appium.java_client.HasOnScreenKeyboard;
 import io.appium.java_client.HidesKeyboard;
 import org.apache.logging.log4j.Logger;
@@ -53,7 +53,7 @@ public class DeviceActions implements IDeviceActions {
 
     private final IDeviceActionsListener listener;
 
-    private DeviceActions () {
+    protected DeviceActions () {
         this.listener = getSession ().getListener (DEVICE_ACTION);
     }
 

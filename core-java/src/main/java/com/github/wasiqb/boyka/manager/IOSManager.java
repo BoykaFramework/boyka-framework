@@ -98,8 +98,8 @@ class IOSManager implements IDriverManager {
     }
 
     private void setupLocalSimulatorOptions (final XCUITestOptions options) {
-        options.setAutoAcceptAlerts (this.settings.isGrantPermission ());
-        options.setAutoDismissAlerts (!this.settings.isGrantPermission ());
+        options.setAutoAcceptAlerts (this.settings.isAcceptAlerts ());
+        options.setAutoDismissAlerts (!this.settings.isAcceptAlerts ());
         setupApplicationOptions (this.settings.getApplication (), options);
         setupVirtualDeviceSetting (this.settings.getType (), this.settings.getVirtualDevice (), options);
         options.setBundleId (this.settings.getApplication ()

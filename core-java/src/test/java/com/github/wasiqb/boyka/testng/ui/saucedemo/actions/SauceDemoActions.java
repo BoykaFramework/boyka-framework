@@ -1,6 +1,7 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo.actions;
 
-import static com.github.wasiqb.boyka.actions.drivers.DeviceActions.onDevice;
+import static com.github.wasiqb.boyka.actions.device.AndroidDeviceActions.onAndroidDevice;
+import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
@@ -21,6 +22,7 @@ import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.ProductDetailsPa
 import static java.text.MessageFormat.format;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
+import io.appium.java_client.android.nativekey.AndroidKey;
 
 public class SauceDemoActions {
     private static final String       URL = "https://www.saucedemo.com";
@@ -91,8 +93,8 @@ public class SauceDemoActions {
         verifyNavigateToSite ();
         onTextBox (loginPage ().getUsername ()).enterText (userName);
         onTextBox (loginPage ().getPassword ()).enterText (password);
-        if (this.platformType == ANDROID) {
-            onDevice ().hideKeyboard ();
+        if (this.platformType == ANDROID && onDevice ().isKeyboardVisible ()) {
+            onAndroidDevice ().pressKey (AndroidKey.BACK);
         }
         withMouse (loginPage ().getLoginButton ()).click ();
         verifyLoggedIn ();

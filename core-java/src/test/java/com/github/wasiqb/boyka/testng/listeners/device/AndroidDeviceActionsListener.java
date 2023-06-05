@@ -14,16 +14,17 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.listeners.drivers;
+package com.github.wasiqb.boyka.testng.listeners.device;
 
-import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
+import static io.qameta.allure.Allure.step;
+import static java.text.MessageFormat.format;
 
-public interface IDeviceActionsListener extends BoykaListener {
-    default void onHideKeyboard () {
-        // not implemented.
-    }
+import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IAndroidDeviceActionsListener;
+import io.appium.java_client.android.nativekey.AndroidKey;
 
-    default void onIsKeyboardVisible () {
-        // not implemented.
+public class AndroidDeviceActionsListener implements IAndroidDeviceActionsListener {
+    @Override
+    public void onPressKey (final AndroidKey key) {
+        step (format ("Pressing [{0}] key on the device...", key));
     }
 }

@@ -14,20 +14,24 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.listeners.drivers;
+package com.github.wasiqb.boyka.actions.interfaces.device;
 
-import static io.qameta.allure.Allure.step;
+/**
+ * Handle all device specific actions.
+ *
+ * @author Wasiq Bhamla
+ * @since 31-May-2023
+ */
+public interface IDeviceActions {
+    /**
+     * Hides the keyboard if visible.
+     */
+    void hideKeyboard ();
 
-import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IDeviceActionsListener;
-
-public class DeviceActionsListener implements IDeviceActionsListener {
-    @Override
-    public void onHideKeyboard () {
-        step ("Hiding the keyboard...");
-    }
-
-    @Override
-    public void onIsKeyboardVisible () {
-        step ("Checking if keyboard is visible...");
-    }
+    /**
+     * Gets the keyboard state whether it is visible or not.
+     *
+     * @return true, if visible.
+     */
+    boolean isKeyboardVisible ();
 }

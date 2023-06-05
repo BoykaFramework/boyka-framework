@@ -20,10 +20,11 @@ import java.util.Arrays;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.api.IApiActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IAndroidDeviceActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IDeviceActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IAlertActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IContextActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.ICookieActionsListener;
-import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IDeviceActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IDriverActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IFrameActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.INavigateActionsListener;
@@ -49,6 +50,10 @@ public enum ListenerType {
      */
     ALERT_ACTION (IAlertActionsListener.class),
     /**
+     * Android device action listener.
+     */
+    ANDROID_DEVICE_ACTION (IAndroidDeviceActionsListener.class),
+    /**
      * API actions listener.
      */
     API_ACTION (IApiActionsListener.class),
@@ -65,13 +70,13 @@ public enum ListenerType {
      */
     COOKIE_ACTION (ICookieActionsListener.class),
     /**
-     * Driver action listener.
-     */
-    DRIVER_ACTION (IDriverActionsListener.class),
-    /**
      * Device action listener.
      */
     DEVICE_ACTION (IDeviceActionsListener.class),
+    /**
+     * Driver action listener.
+     */
+    DRIVER_ACTION (IDriverActionsListener.class),
     /**
      * Drop down action listener.
      */
