@@ -325,6 +325,7 @@
           "server_install_timeout": 60,
           "system_port": 8202,
           "server_launch_timeout": 60,
+          "no_reset": true,
           "swipe": {
             "max_swipe_until_found": 5
           },
