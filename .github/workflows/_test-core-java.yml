@@ -70,7 +70,6 @@ jobs:
           npm install -g appium@next
           appium driver install uiautomator2
           appium driver install xcuitest
-          avdmanager list device
 
       - name: Start Selenium Grid
         if: inputs.run-grid
