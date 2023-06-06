@@ -70,6 +70,7 @@ jobs:
           npm install -g appium@next
           appium driver install uiautomator2
           appium driver install xcuitest
+          avdmanager list device
 
       - name: Start Selenium Grid
         if: inputs.run-grid
@@ -91,7 +92,7 @@ jobs:
         with:
           avd-name: Pixel_6_Pro
           api-level: 30
-          target: google_apis
+          target: playstore
           arch: x86
           profile: Nexus 6
           force-avd-creation: false
