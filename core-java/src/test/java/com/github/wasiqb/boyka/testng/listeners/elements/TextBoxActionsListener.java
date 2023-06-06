@@ -27,9 +27,4 @@ public class TextBoxActionsListener implements ITextBoxActionsListener {
     public void onEnterText (final Locator locator, final String text) {
         step (format ("Entering text [{0}] in element [{1}]...", text, locator.getName ()));
     }
-
-    @Override
-    public void onPressKey (final Locator locator, final CharSequence... keys) {
-        step (format ("Pressing keys [{0}] on element [{1}]...", keys, locator.getName ()));
-    }
 }

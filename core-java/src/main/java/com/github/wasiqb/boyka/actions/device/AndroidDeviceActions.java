@@ -32,10 +32,21 @@ import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Handles all Android device specific actions.
+ *
+ * @author Wasiq Bhamla
+ * @since 06-Jun-2023
+ */
 public class AndroidDeviceActions extends DeviceActions implements IAndroidDeviceActions {
     private static final IAndroidDeviceActions DEVICE_ACTIONS = new AndroidDeviceActions ();
     private static final Logger                LOGGER         = getLogger ();
 
+    /**
+     * Handles Android device specific actions.
+     *
+     * @return {@link IAndroidDeviceActions} instance
+     */
     public static IAndroidDeviceActions onAndroidDevice () {
         return DEVICE_ACTIONS;
     }

@@ -35,14 +35,4 @@ public interface ITextBoxActionsListener extends BoykaListener {
     default void onEnterText (final Locator locator, final String text) {
         // not implemented.
     }
-
-    /**
-     * Handle press key method.
-     *
-     * @param locator Locator of the element.
-     * @param keys Keys to be pressed
-     */
-    default void onPressKey (final Locator locator, final CharSequence... keys) {
-        // not implemented.
-    }
 }

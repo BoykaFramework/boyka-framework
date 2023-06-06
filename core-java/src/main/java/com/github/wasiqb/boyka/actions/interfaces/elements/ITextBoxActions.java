@@ -29,11 +29,4 @@ public interface ITextBoxActions extends IClickableActions {
      * @param text text to enter
      */
     void enterText (final String text);
-
-    /**
-     * Press specified keys in text field.
-     *
-     * @param keys keys to press
-     */
-    void pressKey (final CharSequence... keys);
 }

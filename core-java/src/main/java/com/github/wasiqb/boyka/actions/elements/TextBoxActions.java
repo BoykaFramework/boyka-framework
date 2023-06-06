@@ -20,11 +20,8 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction
 import static com.github.wasiqb.boyka.enums.ListenerType.TEXT_BOX_ACTION;
 import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
-import static java.util.Arrays.asList;
-import static java.util.Arrays.stream;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
-import static org.openqa.selenium.Keys.chord;
 
 import com.github.wasiqb.boyka.actions.interfaces.elements.ITextBoxActions;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
@@ -73,16 +70,6 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
                 e.sendKeys ("\n");
             }
         }, this.locator);
-        LOGGER.traceExit ();
-    }
-
-    @Override
-    public void pressKey (final CharSequence... keys) {
-        LOGGER.traceEntry ();
-        LOGGER.info ("Pressing keys [{}]...", asList (keys));
-        ofNullable (this.listener).ifPresent (l -> l.onPressKey (this.locator, keys));
-        stream (keys).forEach (key -> LOGGER.info ("Pressing key {} in element {}", key, this.locator.getName ()));
-        performElementAction (e -> e.sendKeys (chord (keys)), this.locator);
         LOGGER.traceExit ();
     }
 }

@@ -184,6 +184,12 @@ jobs:
           name: reports-testng-mobile-local
           path: ${{ github.workspace }}/core-java/reports
 
+      - name: Download reports-testng-mobile-web files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-mobile-web
+          path: ${{ github.workspace }}/core-java/reports
+
       - name: Download reports-testng-mobile-lt files
         uses: actions/download-artifact@v3
         with:

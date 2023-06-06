@@ -117,7 +117,7 @@ jobs:
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: target-${{ inputs.suite-name }}
           retention-days: 1
