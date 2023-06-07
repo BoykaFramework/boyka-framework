@@ -23,6 +23,10 @@ on:
         type: boolean
         description: Start Appium server
         default: false
+      emulator-target:
+        type: string
+        description: Emulator target image
+        default: google_apis
       run-grid:
         type: boolean
         description: Start Selenium Grid
@@ -91,7 +95,7 @@ jobs:
         with:
           avd-name: Pixel_6_Pro
           api-level: 30
-          target: playstore
+          target: ${{ inputs.emulator-target }}
           arch: x86
           profile: Nexus 6
           force-avd-creation: false
