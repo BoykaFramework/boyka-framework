@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.actions.elements;
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
 import static com.github.wasiqb.boyka.actions.elements.ElementFinder.find;
 import static com.github.wasiqb.boyka.enums.ListenerType.CLICKABLE_ACTION;
+import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.enums.WaitStrategy.CLICKABLE;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
@@ -66,10 +67,10 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.info ("Clicking on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onClick (this.locator));
         final var session = getSession ();
-        if (session.getPlatformType () == WEB || session.getMobileSetting ()
+        if (session.getPlatformType () == WEB || (session.getMobileSetting ()
             .getDevice ()
             .getApplication ()
-            .getType () == ApplicationType.WEB) {
+            .getType () == ApplicationType.WEB && session.getPlatformType () == IOS)) {
             scrollIntoView ();
             performElementAction (WebElement::click, this.locator);
         } else {
