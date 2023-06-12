@@ -23,6 +23,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.github.wasiqb.boyka.config.ui.TimeoutSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
+import com.github.wasiqb.boyka.enums.ApplicationType;
 import com.github.wasiqb.boyka.enums.PlatformType;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -70,15 +71,19 @@ final class DriverManager {
 
     private void setDriverWaits (final TimeoutSetting timeoutSetting) {
         LOGGER.traceEntry ();
-        final var driver = getSession ().getDriver ();
+        final var session = getSession ();
+        final var driver = session.getDriver ();
         final var timeouts = driver.manage ()
             .timeouts ();
         timeouts.implicitlyWait (ofSeconds (timeoutSetting.getImplicitWait ()));
-        if (this.platformType == WEB) {
+        if (this.platformType == WEB || session.getMobileSetting ()
+            .getDevice ()
+            .getApplication ()
+            .getType () == ApplicationType.WEB) {
             timeouts.pageLoadTimeout (ofSeconds (timeoutSetting.getPageLoadTimeout ()));
             timeouts.scriptTimeout (ofSeconds (timeoutSetting.getScriptTimeout ()));
         }
-        getSession ().setWait (new WebDriverWait (driver, ofSeconds (timeoutSetting.getExplicitWait ())));
+        session.setWait (new WebDriverWait (driver, ofSeconds (timeoutSetting.getExplicitWait ())));
         LOGGER.traceExit ();
     }
 

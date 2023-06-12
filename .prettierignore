@@ -2,7 +2,8 @@ website/.docusaurus
 website/build
 **/.yarn
 **/.vscode
-/core-java
+core-java/
+sample-tests/
 .pnp.*
 *.md*
 *.xml
