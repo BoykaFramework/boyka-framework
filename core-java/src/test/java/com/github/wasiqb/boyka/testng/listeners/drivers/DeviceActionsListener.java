@@ -14,17 +14,20 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.listeners.elements;
+package com.github.wasiqb.boyka.testng.listeners.drivers;
 
 import static io.qameta.allure.Allure.step;
-import static java.text.MessageFormat.format;
 
-import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
-import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IDeviceActionsListener;
 
-public class TextBoxActionsListener implements ITextBoxActionsListener {
+public class DeviceActionsListener implements IDeviceActionsListener {
     @Override
-    public void onEnterText (final Locator locator, final String text) {
-        step (format ("Entering text [{0}] in element [{1}]...", text, locator.getName ()));
+    public void onHideKeyboard () {
+        step ("Hiding the keyboard...");
+    }
+
+    @Override
+    public void onIsKeyboardVisible () {
+        step ("Checking if keyboard is visible...");
     }
 }

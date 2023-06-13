@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
@@ -55,11 +56,17 @@ class IOSManager implements IDriverManager {
         }
         setDriver (new IOSDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
+        navigateToBaseUrl (this.settings.getApplication ());
     }
 
     private void setApplicationCapabilities (final XCUITestOptions options, final ApplicationSetting application) {
-        setupApplicationOptions (application, options);
-        options.setBundleId (application.getBundleId ());
+        if (application.getType () == WEB) {
+            options.withBrowserName (application.getBrowser ()
+                .name ());
+        } else {
+            setupApplicationOptions (application, options);
+            options.setBundleId (application.getBundleId ());
+        }
     }
 
     private void setCommonCapabilities (final XCUITestOptions options) {
@@ -91,8 +98,8 @@ class IOSManager implements IDriverManager {
     }
 
     private void setupLocalSimulatorOptions (final XCUITestOptions options) {
-        options.setAutoAcceptAlerts (this.settings.isGrantPermission ());
-        options.setAutoDismissAlerts (!this.settings.isGrantPermission ());
+        options.setAutoAcceptAlerts (this.settings.isAcceptAlerts ());
+        options.setAutoDismissAlerts (!this.settings.isAcceptAlerts ());
         setupApplicationOptions (this.settings.getApplication (), options);
         setupVirtualDeviceSetting (this.settings.getType (), this.settings.getVirtualDevice (), options);
         options.setBundleId (this.settings.getApplication ()
