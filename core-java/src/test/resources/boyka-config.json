@@ -175,7 +175,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Nexus_6",
+          "name": "Pixel_6_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -192,7 +192,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Nexus_6",
+            "name": "Pixel_6_Pro",
             "headless": true
           }
         }
@@ -229,7 +229,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Nexus_6",
+            "name": "Pixel_6_Pro",
             "headless": true
           }
         }
@@ -303,6 +303,40 @@
           },
           "swipe": {
             "max_swipe_until_found": 5
+          }
+        }
+      },
+      "test_local_android_web": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4728,
+          "session_override": true,
+          "driver": "UI_AUTOMATOR",
+          "allow_insecure": [
+            "get_server_logs",
+            "chromedriver_autodownload"
+          ]
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11",
+          "name": "Pixel_6_Pro",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "system_port": 8202,
+          "server_launch_timeout": 60,
+          "no_reset": true,
+          "swipe": {
+            "max_swipe_until_found": 5
+          },
+          "application": {
+            "browser": "CHROME",
+            "type": "WEB",
+            "base_url": "https://www.saucedemo.com"
+          },
+          "virtual_device": {
+            "name": "Pixel_6_Pro",
+            "headless": true
           }
         }
       },
@@ -440,6 +474,41 @@
           },
           "swipe": {
             "max_swipe_until_found": 5
+          }
+        }
+      },
+      "test_local_ios_web": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4727,
+          "session_override": true,
+          "driver": "XCUI"
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16.2",
+          "name": "iPhone 14",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "connect_keyboard": false,
+          "typing_speed": 35,
+          "swipe": {
+            "max_swipe_until_found": 5
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
+          },
+          "wda": {
+            "launch_timeout": 120,
+            "connection_timeout": 120,
+            "local_port": 8102
+          },
+          "application": {
+            "browser": "SAFARI",
+            "type": "WEB",
+            "base_url": "https://www.saucedemo.com"
           }
         }
       }

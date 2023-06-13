@@ -14,17 +14,28 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.listeners.elements;
+package com.github.wasiqb.boyka.actions.interfaces.listeners.device;
 
-import static io.qameta.allure.Allure.step;
-import static java.text.MessageFormat.format;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 
-import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
-import com.github.wasiqb.boyka.builders.Locator;
+/**
+ * Handles all the common device specific events.
+ *
+ * @author Wasiq Bhamla
+ * @since 03-Jun-2023
+ */
+public interface IDeviceActionsListener extends BoykaListener {
+    /**
+     * Handle hide keyboard event.
+     */
+    default void onHideKeyboard () {
+        // not implemented.
+    }
 
-public class TextBoxActionsListener implements ITextBoxActionsListener {
-    @Override
-    public void onEnterText (final Locator locator, final String text) {
-        step (format ("Entering text [{0}] in element [{1}]...", text, locator.getName ()));
+    /**
+     * Handle is keyboard visible event.
+     */
+    default void onIsKeyboardVisible () {
+        // not implemented.
     }
 }

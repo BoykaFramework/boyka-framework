@@ -14,31 +14,26 @@
   ~ The above copyright notice and this permission notice shall be included in all
   ~ copies or substantial portions of the Software.
   -->
-
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Mobile BrowserStack Suite" verbose="2">
-    <test name="Test Boyka Mobile app on BrowserStack Android Device">
+<suite name="Boyka Mobile Local Suite" verbose="2">
+    <test name="Test Boyka Mobile Web app on Local Android Device">
         <parameter name="platformType" value="ANDROID"/>
-        <parameter name="driverKey" value="test_bs_android"/>
+        <parameter name="driverKey" value="test_local_android_web"/>
         <classes>
             <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
                 <methods>
                     <include name="testLogin"/>
-                    <include name="testAddToCart"/>
-                    <include name="testCheckoutStep1"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="Test Boyka Mobile app on BrowserStack iOS Device">
+    <test name="Test Boyka Mobile Web app on Local iOS Device">
         <parameter name="platformType" value="IOS"/>
-        <parameter name="driverKey" value="test_bs_ios"/>
+        <parameter name="driverKey" value="test_local_ios_web"/>
         <classes>
             <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
                 <methods>
                     <include name="testLogin"/>
-                    <include name="testAddToCart"/>
-                    <include name="testCheckoutStep1"/>
                 </methods>
             </class>
         </classes>

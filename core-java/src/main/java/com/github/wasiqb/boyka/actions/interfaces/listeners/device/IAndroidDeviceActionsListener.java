@@ -14,17 +14,23 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.listeners.elements;
+package com.github.wasiqb.boyka.actions.interfaces.listeners.device;
 
-import static io.qameta.allure.Allure.step;
-import static java.text.MessageFormat.format;
+import io.appium.java_client.android.nativekey.AndroidKey;
 
-import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
-import com.github.wasiqb.boyka.builders.Locator;
-
-public class TextBoxActionsListener implements ITextBoxActionsListener {
-    @Override
-    public void onEnterText (final Locator locator, final String text) {
-        step (format ("Entering text [{0}] in element [{1}]...", text, locator.getName ()));
+/**
+ * Handles all Android device specific events.
+ *
+ * @author Wasiq Bhamla
+ * @since 03-Jun-2023
+ */
+public interface IAndroidDeviceActionsListener extends IDeviceActionsListener {
+    /**
+     * Handle key press event.
+     *
+     * @param key Android key
+     */
+    default void onPressKey (final AndroidKey key) {
+        // not implemented.
     }
 }

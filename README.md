@@ -62,8 +62,8 @@ This all gave me an idea of having a single framework which could solve all the 
 - ✅ Zero boilerplate code
 - ✅ Support Rest API automation with schema validations and response body verification
 - ✅ Supports Web browser automation with support for Chrome, Edge, Firefox and Safari.
-- ✅ Supports Android native and hybrid apps automation
-- ✅ Supports iOS native and hybrid apps automation
+- ✅ Supports Android native, web and hybrid apps automation
+- ✅ Supports iOS native, web and hybrid apps automation
 - ✅ Allow Multi-user Multi-platform session interactions like testing a multi-platform chat application
 - ✅ Supports execution of Web tests on cloud platforms like BrowserStack and LambdaTest
 - ✅ Highly configurable via `boyka-config.json`

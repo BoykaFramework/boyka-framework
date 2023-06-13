@@ -20,6 +20,8 @@ import java.util.Arrays;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.api.IApiActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IAndroidDeviceActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IDeviceActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IAlertActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IContextActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.ICookieActionsListener;
@@ -48,6 +50,10 @@ public enum ListenerType {
      */
     ALERT_ACTION (IAlertActionsListener.class),
     /**
+     * Android device action listener.
+     */
+    ANDROID_DEVICE_ACTION (IAndroidDeviceActionsListener.class),
+    /**
      * API actions listener.
      */
     API_ACTION (IApiActionsListener.class),
@@ -63,6 +69,10 @@ public enum ListenerType {
      * Cookies action listener.
      */
     COOKIE_ACTION (ICookieActionsListener.class),
+    /**
+     * Device action listener.
+     */
+    DEVICE_ACTION (IDeviceActionsListener.class),
     /**
      * Driver action listener.
      */

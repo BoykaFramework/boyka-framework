@@ -23,6 +23,10 @@ on:
         type: boolean
         description: Start Appium server
         default: false
+      emulator-target:
+        type: string
+        description: Emulator target image
+        default: google_apis
       run-grid:
         type: boolean
         description: Start Selenium Grid
@@ -68,7 +72,7 @@ jobs:
         if: inputs.run-appium
         run: |
           npm install -g appium@next
-          CHROMEDRIVER_VERSION=83.0.4103 appium driver install uiautomator2
+          appium driver install uiautomator2
           appium driver install xcuitest
 
       - name: Start Selenium Grid
@@ -89,9 +93,9 @@ jobs:
         if: inputs.run-android
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          avd-name: Nexus_6
+          avd-name: Pixel_6_Pro
           api-level: 30
-          target: google_apis
+          target: ${{ inputs.emulator-target }}
           arch: x86
           profile: Nexus 6
           force-avd-creation: false
@@ -117,7 +121,7 @@ jobs:
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: target-${{ inputs.suite-name }}
           retention-days: 1

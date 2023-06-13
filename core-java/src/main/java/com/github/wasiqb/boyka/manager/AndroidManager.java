@@ -1,5 +1,6 @@
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
 import static com.github.wasiqb.boyka.enums.AutomationType.UI_AUTOMATOR;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
@@ -40,10 +41,16 @@ class AndroidManager implements IDriverManager {
 
     private void setAndroidApplicationOptions (final UiAutomator2Options options,
         final ApplicationSetting application) {
-        setupApplicationOptions (application, options);
-        options.setAppWaitActivity (application.getWaitActivity ());
-        options.setAppWaitDuration (ofSeconds (application.getWaitTimeout ()));
-        options.setAndroidInstallTimeout (ofSeconds (application.getInstallTimeout ()));
+        if (application.getType () == WEB) {
+            options.withBrowserName (application.getBrowser ()
+                .name ());
+            setOptionIfPresent (application.getChromeDriverPort (), options::setChromedriverPort);
+        } else {
+            setupApplicationOptions (application, options);
+            options.setAppWaitActivity (application.getWaitActivity ());
+            options.setAppWaitDuration (ofSeconds (application.getWaitTimeout ()));
+            options.setAndroidInstallTimeout (ofSeconds (application.getInstallTimeout ()));
+        }
     }
 
     private void setAvdOptions (final UiAutomator2Options options, final DeviceType type,
@@ -77,7 +84,6 @@ class AndroidManager implements IDriverManager {
         options.setUiautomator2ServerInstallTimeout (ofSeconds (this.settings.getServerInstallTimeout ()));
         options.setSystemPort (this.settings.getSystemPort ());
         options.setUdid (this.settings.getUniqueId ());
-        setOptionIfPresent (this.settings.getChromeDriverPort (), options::setChromedriverPort);
     }
 
     private void setupAndroidSettings () {
@@ -95,5 +101,6 @@ class AndroidManager implements IDriverManager {
         }
         setDriver (new AndroidDriver (getSession ().getServiceManager ()
             .getServiceUrl (), options));
+        navigateToBaseUrl (this.settings.getApplication ());
     }
 }

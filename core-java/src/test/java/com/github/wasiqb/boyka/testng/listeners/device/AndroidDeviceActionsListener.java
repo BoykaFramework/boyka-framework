@@ -14,17 +14,17 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.listeners.elements;
+package com.github.wasiqb.boyka.testng.listeners.device;
 
 import static io.qameta.allure.Allure.step;
 import static java.text.MessageFormat.format;
 
-import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
-import com.github.wasiqb.boyka.builders.Locator;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IAndroidDeviceActionsListener;
+import io.appium.java_client.android.nativekey.AndroidKey;
 
-public class TextBoxActionsListener implements ITextBoxActionsListener {
+public class AndroidDeviceActionsListener implements IAndroidDeviceActionsListener {
     @Override
-    public void onEnterText (final Locator locator, final String text) {
-        step (format ("Entering text [{0}] in element [{1}]...", text, locator.getName ()));
+    public void onPressKey (final AndroidKey key) {
+        step (format ("Pressing [{0}] key on the device...", key));
     }
 }
