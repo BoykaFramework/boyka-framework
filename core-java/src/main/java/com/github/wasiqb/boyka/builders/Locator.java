@@ -20,6 +20,7 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 
 import java.util.function.Predicate;
 
+import com.github.wasiqb.boyka.enums.ApplicationType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -54,12 +55,22 @@ public class Locator {
     public By getLocator () {
         switch (getSession ().getPlatformType ()) {
             case ANDROID:
-                return this.android;
+                return getMobileOrWebLocator (this.android);
             case IOS:
-                return this.ios;
+                return getMobileOrWebLocator (this.ios);
             case WEB:
             default:
                 return this.web;
         }
+    }
+
+    private By getMobileOrWebLocator (final By locator) {
+        if (getSession ().getMobileSetting ()
+            .getDevice ()
+            .getApplication ()
+            .getType () == ApplicationType.WEB) {
+            return this.web;
+        }
+        return locator;
     }
 }

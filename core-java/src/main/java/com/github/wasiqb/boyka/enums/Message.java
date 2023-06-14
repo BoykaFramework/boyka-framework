@@ -29,6 +29,10 @@ import lombok.Getter;
 @Getter
 public enum Message {
     /**
+     * Action not supported error.
+     */
+    ACTION_NOT_SUPPORTED_ON_PLATFORM ("[{0}] action is not supported on [{1}] platform..."),
+    /**
      * Basic auth password is empty.
      */
     AUTH_PASSWORD_REQUIRED ("Basic auth password is required..."),
@@ -130,6 +134,10 @@ public enum Message {
      * Error while writing logs to file.
      */
     ERROR_WRITING_LOGS ("Error occurred while writing logs..."),
+    /**
+     * Finger should be within the bounds.
+     */
+    FINGER_OUT_OF_BOUND ("Finger co-ordinates [{0}] is outside the bounds [{1}]..."),
     /**
      * Host name is required for Remote execution
      */

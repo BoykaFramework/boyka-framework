@@ -8,6 +8,14 @@ on:
       - 'core-java/**'
       - '.github/**'
 
+  push:
+    branches:
+      - main
+      - staging
+      - develop
+    paths:
+      - 'core-java/**'
+
 concurrency:
   group: boyka-tests-${{ github.ref }}-1
   cancel-in-progress: true
@@ -99,6 +107,18 @@ jobs:
       run-ios: true
       run-android: true
 
+  test-mobile-web:
+    needs:
+      - build
+    uses: ./.github/workflows/_test-core-java.yml
+    with:
+      runs-on: macos
+      suite-name: testng-mobile-web
+      run-appium: true
+      run-ios: true
+      run-android: true
+      emulator-target: playstore
+
   test-mobile-bs:
     needs:
       - build
@@ -130,6 +150,7 @@ jobs:
       - test-web-lt
       - test-web-grid
       - test-mobile-local
+      - test-mobile-web
       - test-mobile-bs
       - test-mobile-lt
 
@@ -162,6 +183,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: reports-testng-mobile-local
+          path: ${{ github.workspace }}/core-java/reports
+
+      - name: Download reports-testng-mobile-web files
+        uses: actions/download-artifact@v3
+        with:
+          name: reports-testng-mobile-web
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-lt files

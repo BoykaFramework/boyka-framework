@@ -175,7 +175,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Nexus_6",
+          "name": "Pixel_6_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -183,7 +183,6 @@
           "full_reset": true,
           "system_port": 8200,
           "swipe": {
-            "distance": 50,
             "max_swipe_until_found": 5
           },
           "application": {
@@ -193,7 +192,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Nexus_6",
+            "name": "Pixel_6_Pro",
             "headless": true
           }
         }
@@ -220,7 +219,6 @@
           "ignore_unimportant_views": true,
           "full_reset": true,
           "swipe": {
-            "distance": 50,
             "max_swipe_until_found": 5
           },
           "application": {
@@ -231,7 +229,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Nexus_6",
+            "name": "Pixel_6_Pro",
             "headless": true
           }
         }
@@ -266,6 +264,9 @@
             "debug": true,
             "video": true,
             "appiumLogs": true
+          },
+          "swipe": {
+            "max_swipe_until_found": 5
           }
         }
       },
@@ -299,6 +300,43 @@
             "autoAcceptAlerts": true,
             "isRealMobile": true,
             "w3c": true
+          },
+          "swipe": {
+            "max_swipe_until_found": 5
+          }
+        }
+      },
+      "test_local_android_web": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4728,
+          "session_override": true,
+          "driver": "UI_AUTOMATOR",
+          "allow_insecure": [
+            "get_server_logs",
+            "chromedriver_autodownload"
+          ]
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11",
+          "name": "Pixel_6_Pro",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "system_port": 8202,
+          "server_launch_timeout": 60,
+          "no_reset": true,
+          "swipe": {
+            "max_swipe_until_found": 5
+          },
+          "application": {
+            "browser": "CHROME",
+            "type": "WEB",
+            "base_url": "https://www.saucedemo.com"
+          },
+          "virtual_device": {
+            "name": "Pixel_6_Pro",
+            "headless": true
           }
         }
       },
@@ -319,7 +357,6 @@
           "connect_keyboard": false,
           "typing_speed": 25,
           "swipe": {
-            "distance": 50,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -354,7 +391,6 @@
           "connect_keyboard": false,
           "typing_speed": 35,
           "swipe": {
-            "distance": 50,
             "max_swipe_until_found": 5
           },
           "virtual_device": {
@@ -401,6 +437,9 @@
             "debug": true,
             "video": true,
             "appiumLogs": true
+          },
+          "swipe": {
+            "max_swipe_until_found": 5
           }
         }
       },
@@ -416,7 +455,6 @@
           "application": {
             "install_timeout": 180
           },
-          "ignore_unimportant_views": true,
           "capabilities": {
             "platformName": "iOS",
             "deviceName": "iPhone 14",
@@ -433,6 +471,44 @@
             "autoAcceptAlerts": true,
             "isRealMobile": true,
             "w3c": true
+          },
+          "swipe": {
+            "max_swipe_until_found": 5
+          }
+        }
+      },
+      "test_local_ios_web": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4727,
+          "session_override": true,
+          "driver": "XCUI"
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16.2",
+          "name": "iPhone 14",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "connect_keyboard": false,
+          "typing_speed": 35,
+          "swipe": {
+            "max_swipe_until_found": 5
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
+          },
+          "wda": {
+            "launch_timeout": 120,
+            "connection_timeout": 120,
+            "local_port": 8102
+          },
+          "application": {
+            "browser": "SAFARI",
+            "type": "WEB",
+            "base_url": "https://www.saucedemo.com"
           }
         }
       }

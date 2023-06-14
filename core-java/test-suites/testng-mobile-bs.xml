@@ -17,20 +17,28 @@
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Mobile BrowserStack Suite" verbose="2">
-    <test name="Test Boyka Mobile on BrowserStack Android Device">
+    <test name="Test Boyka Mobile app on BrowserStack Android Device">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_bs_android"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
+            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
+                <methods>
+                    <include name="testLogin"/>
+                    <include name="testAddToCart"/>
+                    <include name="testCheckoutStep1"/>
+                </methods>
+            </class>
         </classes>
     </test>
-    <test name="Test Boyka Mobile on BrowserStack iOS Device">
+    <test name="Test Boyka Mobile app on BrowserStack iOS Device">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_bs_ios"/>
         <classes>
             <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
                 <methods>
                     <include name="testLogin"/>
+                    <include name="testAddToCart"/>
+                    <include name="testCheckoutStep1"/>
                 </methods>
             </class>
         </classes>

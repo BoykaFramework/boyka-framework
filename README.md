@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.14.1">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.14.1/total?color=brightgreen&label=Downloads%20for%20v0.14.1&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.14.2">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.14.2/total?color=brightgreen&label=Downloads%20for%20v0.14.2&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -62,14 +62,15 @@ This all gave me an idea of having a single framework which could solve all the 
 - ✅ Zero boilerplate code
 - ✅ Support Rest API automation with schema validations and response body verification
 - ✅ Supports Web browser automation with support for Chrome, Edge, Firefox and Safari.
-- ✅ Supports Android native apps automation
-- ✅ Supports iOS native apps automation
-- ✅ Allow Multi-user Multi-platform session interactions
-- ✅ Supports execution of Web tests on cloud platforms like BrowserStack and LambdaTest.
+- ✅ Supports Android native, web and hybrid apps automation
+- ✅ Supports iOS native, web and hybrid apps automation
+- ✅ Allow Multi-user Multi-platform session interactions like testing a multi-platform chat application
+- ✅ Supports execution of Web tests on cloud platforms like BrowserStack and LambdaTest
 - ✅ Highly configurable via `boyka-config.json`
 - ✅ Micro logging to log events of the test execution
 - ✅ Supports taking screenshots
-- ✅ Highly extensible via listeners
+- ✅ Highly extensible via listeners for integrating with available Reporters
+- ✅ Supports any available test frameworks like TestNG, JUnit, Cucumber, etc.
 
 ## ⏱️ Coming soon
 
@@ -88,7 +89,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.14.1</version>
+  <version>0.14.2</version>
 </dependency>
 ```
 

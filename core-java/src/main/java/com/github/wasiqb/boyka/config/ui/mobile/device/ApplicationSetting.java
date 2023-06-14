@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.config.ui.mobile.device;
 import static com.github.wasiqb.boyka.enums.ApplicationType.NATIVE;
 
 import com.github.wasiqb.boyka.enums.ApplicationType;
+import com.github.wasiqb.boyka.enums.Browser;
 import lombok.Data;
 
 /**
@@ -29,7 +30,10 @@ import lombok.Data;
  */
 @Data
 public class ApplicationSetting {
+    private String          baseUrl;
+    private Browser         browser;
     private String          bundleId;
+    private int             chromeDriverPort;
     private boolean         external;
     private int             installTimeout = 30;
     private String          path;

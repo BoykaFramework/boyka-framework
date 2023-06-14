@@ -489,7 +489,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `clear_logs` | Determines if device logs needs to be cleared | `boolean` | `true` |
 | `full_reset` | Determines if full reset needs to be done | `boolean` | |
 | `no_reset` | Determines if there should be no reset | `boolean` | |
-| `grant_permission` | Determines if auto grant permission is needed | `boolean` | `true` |
+| `accept_alerts` | Determines if auto accept alerts is needed | `boolean` | `true` |
 | `ignore_unimportant_views` | Determines if unimportant views needs to be ignored | `boolean` | `true` |
 | `server_install_timeout` | Timeout in seconds to wait for Appium server app to get installed | `int` | `30` |
 | `server_launch_timeout` | Timeout in seconds to wait for Appium server app to start | `int` | `30` |
@@ -504,13 +504,16 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
+| `base_url` | Base URL to navigate to by default | `string` | `null` |
+| `browser` | Browser name. | [`Browser`](#supported-browsers) | `null` |
 | `external` | Is the app saved outside `src/test/resources` folder? | `boolean` | `false` |
 | `path` | Path to the AUT, can also contain environment variables for cloud App URL | `string` | |
-| `type` | Application type | `ApplicationType` | `NATIVE` |
+| `type` | Application type | [`ApplicationType`](#application-type) | `NATIVE` |
 | `install_timeout` | Timeout in seconds to wait until app gets installed on device | `int` | `30` |
 | `wait_activity` | Wait for the mentioned activity to load | `string` | |
 | `wait_timeout` | Wait timeout in seconds to wait for AUT | `int` | `30` |
 | `bundle_id` | iOS application bundle id | `string` | `null` |
+| `chrome_driver_port` | Port on which Chrome driver would run | `int` | `0` |
 
 ###### Virtual Device Configurations {#avd-config}
 
@@ -648,3 +651,9 @@ We have an enum `OS` where we maintain the list of currently supported device OS
 - `MAXIMIZED`: Opens the window maximized (if supported by your platform)
 - `MINIMIZED`: Opens the window minimized
 - `NORMAL`: Opens the window in default state
+
+## Supported Application Types {#application-type}
+
+- `NATIVE`: Native Mobile application
+- `HYBRID`: Hybrid Mobile application
+- `WEB`: Web Mobile application

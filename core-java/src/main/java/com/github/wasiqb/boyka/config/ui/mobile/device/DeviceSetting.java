@@ -33,13 +33,12 @@ import lombok.Data;
  */
 @Data
 public class DeviceSetting {
+    private boolean              acceptAlerts           = true;
     private ApplicationSetting   application;
     private Map<String, Object>  capabilities;
-    private int                  chromeDriverPort;
     private boolean              clearFiles             = true;
     private boolean              clearLogs              = true;
     private boolean              fullReset;
-    private boolean              grantPermission        = true;
     private boolean              ignoreUnimportantViews = true;
     private String               name;
     private boolean              noReset;
