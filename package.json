@@ -32,11 +32,11 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
-    "@lerna/child-process": "^7.0.0",
+    "@lerna/child-process": "^7.0.1",
     "@lerna/version": "^6.6.2",
-    "@types/node": "^18.16.17",
-    "@typescript-eslint/eslint-plugin": "^5.59.9",
-    "@typescript-eslint/parser": "^5.59.9",
+    "@types/node": "^18.16.18",
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
     "commitlint": "^17.6.5",
     "eslint": "^8.42.0",
     "eslint-config-google": "^0.14.0",
@@ -47,9 +47,10 @@
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3",
     "js-yaml": "^4.1.0",
-    "lerna": "7.0.0",
+    "lerna": "7.0.1",
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^13.2.2",
+    "lodash": "^4.17.21",
     "nx": "^16.3.2",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
@@ -70,7 +71,9 @@
     "clear:website": "yarn workspace website clear",
     "changelog": "lerna-changelog",
     "prerelease": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-prerelease --preid beta",
-    "release": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-graduate"
+    "release": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-graduate",
+    "check-deps": "mvn -f core-java/pom.xml versions:display-dependency-updates",
+    "check-plugin-deps": "mvn -f core-java/pom.xml versions:display-plugin-updates"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
