@@ -65,4 +65,13 @@ public interface IFingerActionsListener extends BoykaListener {
     default void onTap (final Locator locator) {
         // not implemented.
     }
+
+    /**
+     * Handle Tap and Hold.
+     *
+     * @param locator Locator of the element.
+     */
+    default void onTapAndHold (final Locator locator) {
+        // not implemented.
+    }
 }

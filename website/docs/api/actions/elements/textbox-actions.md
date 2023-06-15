@@ -1,6 +1,6 @@
 ---
 title: TextBoxActions
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 ## Static methods
@@ -33,24 +33,4 @@ This method is used to press the given key to the given element.
 import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 . . .
 onTextBox (locator).pressKey (key);
-```
-
-### `isKeyboardVisible` {#is-keyboard-visible}
-
-This method is used to determine if the Mobile keyboard is visible.
-
-```java
-import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
-. . .
-var isKeyboardDisplayed = onTextBox (locator).isKeyboardVisible ();
-```
-
-### `hideKeyboard` {#hide-keyboard}
-
-This method is used to hide the keyboard on the mobile.
-
-```java
-import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
-. . .
-onTextBox (locator).hideKeyboard ();
 ```

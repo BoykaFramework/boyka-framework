@@ -71,7 +71,7 @@ public class DriverManagerTest {
     /**
      * Test method to verify empty browser in config.
      */
-    @Test (description = "Test Web null browser in config")
+    @Test (description = "Test Web null browser in config", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "NONE Browser type is not allowed for Web platform...")
     public void testNullBrowserInConfig () {
         try {
             createSession (PERSONA, WEB, "test_local_null_browser");

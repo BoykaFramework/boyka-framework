@@ -29,23 +29,4 @@ public interface ITextBoxActions extends IClickableActions {
      * @param text text to enter
      */
     void enterText (final String text);
-
-    /**
-     * Hides the keyboard if visible.
-     */
-    void hideKeyboard ();
-
-    /**
-     * Gets the keyboard state whether it is visible or not.
-     *
-     * @return true, if visible.
-     */
-    boolean isKeyboardVisible ();
-
-    /**
-     * Press specified keys in text field.
-     *
-     * @param keys keys to press
-     */
-    void pressKey (final CharSequence... keys);
 }

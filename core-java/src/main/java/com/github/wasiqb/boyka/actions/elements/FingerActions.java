@@ -23,6 +23,8 @@ import static com.github.wasiqb.boyka.enums.ListenerType.FINGER_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.ELEMENT_NOT_FOUND;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static java.time.Duration.ZERO;
+import static java.time.Duration.ofMillis;
 import static java.util.Collections.singletonList;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -79,10 +81,10 @@ public class FingerActions extends ElementActions implements IFingerActions {
         LOGGER.info ("Dragging [{}] to [{}] on Mobile devices.", this.locator.getName (), destination.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onDragTo (this.locator, destination));
         final var dragSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
-            .element (this.locator)
-            .targetElement (destination)
+            .sourceElement (this.locator)
+            .pause (ofMillis (600))
             .build ()
-            .swipe (), null);
+            .dragTo (destination), null);
         performMobileGestures (singletonList (dragSequence));
         LOGGER.traceExit ();
     }
@@ -94,7 +96,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
         ofNullable (this.listener).ifPresent (l -> l.onSwipe (this.locator, direction));
         final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (direction)
-            .element (this.locator)
+            .sourceElement (this.locator)
             .build ()
             .swipe (), null);
         performMobileGestures (singletonList (swipeUpSequence));
@@ -125,7 +127,8 @@ public class FingerActions extends ElementActions implements IFingerActions {
         LOGGER.info ("Tapping on the element...");
         ofNullable (this.listener).ifPresent (l -> l.onTap (this.locator));
         final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
-            .element (this.locator)
+            .sourceElement (this.locator)
+            .pause (ZERO)
             .build ()
             .tapOn (), this.locator, null);
         performMobileGestures (singletonList (sequences));
