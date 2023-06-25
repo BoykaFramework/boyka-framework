@@ -71,11 +71,11 @@ jobs:
           fi
 
       - name: Update pre-release version
-        if: inputs.pre-release
+        if: ${{ inputs.pre-release }}
         run: yarn prerelease
 
       - name: Update release version
-        if: inputs.pre-release == false
+        if: ${{ ! inputs.pre-release }}
         run: yarn release
 
       - name: Get the new version
@@ -85,7 +85,7 @@ jobs:
           echo "version=$MVN_VERSION" >> $GITHUB_OUTPUT
 
       - name: Generate Change log
-        if: steps.version.outputs.version != null
+        if: ${{ steps.version.outputs.version != null }}
         run: |
           yarn changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
@@ -102,7 +102,7 @@ jobs:
   release-snapshot:
     runs-on: ubuntu-latest
     needs: prepare
-    if: needs.prepare.outputs.new-version != null
+    if: ${{ needs.prepare.outputs.new-version != null }}
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
@@ -207,7 +207,7 @@ jobs:
 
       - name: Update new version in README and Usage
         uses: jacobtomlinson/gha-find-replace@v3
-        if: inputs.pre-release == false
+        if: ${{ ! inputs.pre-release }}
         with:
           find: ${{ needs.prepare.outputs.old-version }}
           replace: ${{ needs.prepare.outputs.new-version }}
@@ -218,7 +218,7 @@ jobs:
 
       - name: Update new version in package.json
         uses: jacobtomlinson/gha-find-replace@v3
-        if: inputs.pre-release == false
+        if: ${{ ! inputs.pre-release }}
         with:
           find: '"version": "${{ needs.prepare.outputs.old-version }}"'
           replace: '"version": "${{ needs.prepare.outputs.new-version }}"'
@@ -247,7 +247,7 @@ jobs:
             'website/docs/framework-docs/getting-started/usage.md',
             ]"
           message: |
-            chore(Internal): :bookmark: released v${{ needs.prepare.outputs.old-version }} to maven central
+            chore(Internal): :bookmark: released v${{ needs.prepare.outputs.new-version }} to maven central
           push: true
           default_author: user_info
           commit: --no-verify
