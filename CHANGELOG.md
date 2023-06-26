@@ -1,5 +1,5 @@
 
-## v0.15.0-beta.0 (2023-06-15)
+## v0.15.0 (2023-06-15)
 
 #### :rocket: New Feature
 * [#483](https://github.com/BoykaFramework/boyka-framework/pull/483) feat(java): :sparkles: adding web app support for mobile ([@WasiqB](https://github.com/WasiqB))
