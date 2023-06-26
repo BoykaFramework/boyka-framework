@@ -14,7 +14,7 @@ on:
       pre-release:
         type: boolean
         description: Whether the release is pre-release?
-        default: true
+        default: false
     secrets:
       pushToken:
         required: true
