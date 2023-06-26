@@ -56,13 +56,13 @@ jobs:
         run: mvn clean test -f sample-tests/pom.xml -Dboyka.version=${{ steps.version.outputs.version }}
 
       - name: Stop Selenium Grid
-        if: always()
+        if: ${{ always() }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml down
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
-        if: failure()
+        if: ${{ failure() }}
         with:
           name: target-${{ github.run_id }}
           retention-days: 1

@@ -233,7 +233,7 @@ jobs:
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
-        if: always()
+        if: ${{ always() }}
         with:
           name: target-${{ github.run_id }}
           retention-days: 1

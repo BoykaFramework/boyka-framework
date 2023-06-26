@@ -44,7 +44,7 @@ jobs:
 
       - name: Check if pr already exists
         id: pr-exists
-        if: steps.branch-changes.outputs.is-source-branch-ahead == 'true'
+        if: ${{ steps.branch-changes.outputs.is-source-branch-ahead == 'true' }}
         uses: fjenik/check-if-pr-exists@0.0.3
         with:
           repo-token: ${{ secrets.token }}
@@ -55,9 +55,7 @@ jobs:
         run: echo "Output of pull request already exists ${{ steps.pr-exists.outputs.is-pr-already-created }}"
 
       - name: Create pull request
-        if: |
-          steps.pr-exists.outputs.is-pr-already-created == 'false' &&
-          inputs.is-feature == false
+        if: ${{ steps.pr-exists.outputs.is-pr-already-created == 'false' && ! inputs.is-feature }}
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.token }}
@@ -72,9 +70,7 @@ jobs:
             **Don't squash merge this PR**
 
       - name: Create feature pull request
-        if: |
-          steps.pr-exists.outputs.is-pr-already-created == 'false' &&
-          inputs.is-feature
+        if: ${{ steps.pr-exists.outputs.is-pr-already-created == 'false' && inputs.is-feature }}
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.token }}
