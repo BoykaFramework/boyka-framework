@@ -19,5 +19,3 @@ jobs:
       gpgPass: ${{ secrets.GPG_PASSPHRASE }}
       nexusUser: ${{ secrets.NEXUS_USERNAME }}
       nexusPass: ${{ secrets.NEXUS_PASSWORD }}
-    with:
-      pre-release: false

@@ -69,19 +69,19 @@ jobs:
           check-latest: true
 
       - name: Install Appium 2.0
-        if: inputs.run-appium
+        if: ${{ inputs.run-appium }}
         run: |
           npm install -g appium@next
           appium driver install uiautomator2
           appium driver install xcuitest
 
       - name: Start Selenium Grid
-        if: inputs.run-grid
+        if: ${{ inputs.run-grid }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml up -d
 
       - name: Launch iOS Simulator
-        if: inputs.run-ios
+        if: ${{ inputs.run-ios }}
         uses: futureware-tech/simulator-action@v2
         with:
           model: 'iPhone 14'
@@ -90,7 +90,7 @@ jobs:
           shutdown_after_job: true
 
       - name: All Test execution
-        if: inputs.run-android
+        if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
           avd-name: Pixel_6_Pro
@@ -104,7 +104,7 @@ jobs:
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 
       - name: All ${{ inputs.suite-name }} Test execution
-        if: inputs.run-android == false
+        if: ${{ ! inputs.run-android }}
         env:
           BS_USER: ${{ secrets.cloudUser }}
           BS_KEY: ${{ secrets.cloudKey }}
@@ -115,13 +115,13 @@ jobs:
         run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
 
       - name: Stop Selenium Grid
-        if: inputs.run-grid && always()
+        if: ${{ inputs.run-grid && always() }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml down --remove-orphans
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
-        if: failure()
+        if: ${{ failure() }}
         with:
           name: target-${{ inputs.suite-name }}
           retention-days: 1
