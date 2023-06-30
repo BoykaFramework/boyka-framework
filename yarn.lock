@@ -2646,7 +2646,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lerna/child-process@npm:7.1.0, @lerna/child-process@npm:^7.1.0":
+"@lerna/child-process@npm:7.1.0":
   version: 7.1.0
   resolution: "@lerna/child-process@npm:7.1.0"
   dependencies:
@@ -2654,6 +2654,17 @@ __metadata:
     execa: ^5.0.0
     strong-log-transformer: ^2.1.0
   checksum: 03f440ef548537699083ded2b2431da40d957632628aaab13d09c08e9fdab1cb284e3e775af62de94477a032f8c80ca486c30526123a8bd2890595f7829e38f8
+  languageName: node
+  linkType: hard
+
+"@lerna/child-process@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "@lerna/child-process@npm:7.1.1"
+  dependencies:
+    chalk: ^4.1.0
+    execa: ^5.0.0
+    strong-log-transformer: ^2.1.0
+  checksum: 022f0cc9094d1242601426c6225575888b66073fd020416abd57bcdd07b31825d30be4143ec0f69ceff94177de42bbb096378c80ba403e7adb38f1bb8b4f41e2
   languageName: node
   linkType: hard
 
@@ -5477,7 +5488,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.6.6
     "@commitlint/config-conventional": ^17.6.6
-    "@lerna/child-process": ^7.1.0
+    "@lerna/child-process": ^7.1.1
     "@lerna/version": ^6.6.2
     "@types/node": ^18.16.18
     "@typescript-eslint/eslint-plugin": ^5.60.0

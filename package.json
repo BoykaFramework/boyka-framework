@@ -32,7 +32,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
-    "@lerna/child-process": "^7.1.0",
+    "@lerna/child-process": "^7.1.1",
     "@lerna/version": "^6.6.2",
     "@types/node": "^18.16.18",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
