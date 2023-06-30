@@ -36,7 +36,7 @@
     "@lerna/version": "^6.6.2",
     "@types/node": "^18.16.18",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
-    "@typescript-eslint/parser": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.1",
     "commitlint": "^17.6.6",
     "eslint": "^8.43.0",
     "eslint-config-google": "^0.14.0",
