@@ -41,7 +41,7 @@
         <json-path.version>2.8.0</json-path.version>
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
-        <faker.version>1.9.0</faker.version>
+        <faker.version>2.0.1</faker.version>
         <jackson-dataformat-yaml.version>2.15.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
