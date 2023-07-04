@@ -24,6 +24,7 @@ import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.switchPersona;
 import static com.github.wasiqb.boyka.testng.ui.jiomeet.pages.GuestJoinPage.guestJoinPage;
 import static com.github.wasiqb.boyka.testng.ui.jiomeet.pages.HomePage.homePage;
@@ -42,10 +43,9 @@ import org.testng.annotations.Test;
 
 public class JioMeetTest {
     private static final String GUEST_PERSONA = "User 2";
+    private static final String HOST_NAME     = "hostName";
     private static final String HOST_PERSONA  = "User 1";
-
-    private String hostName;
-    private String meetingUrl;
+    private static final String MEETING_URL   = "meetingUrl";
 
     @AfterMethod (alwaysRun = true)
     public void afterMethod (final ITestResult result) {
@@ -89,8 +89,11 @@ public class JioMeetTest {
 
     @Test (dependsOnMethods = "testStartHostMeeting")
     public void testGuestStartMeeting () {
+        final var meetingUrl = getSession ().getSharedData (MEETING_URL)
+            .toString ();
+
         switchPersona (GUEST_PERSONA);
-        navigate ().to (this.meetingUrl);
+        navigate ().to (meetingUrl);
 
         onTextBox (guestJoinPage ().getGuestName ()).enterText (GUEST_PERSONA);
         withMouse (guestJoinPage ().getJoinButton ()).click ();
@@ -103,7 +106,7 @@ public class JioMeetTest {
     public void testHostParticipantName () {
         switchPersona (HOST_PERSONA);
         withMouse (meetingPage ().getParticipants ()).click ();
-        onElement (meetingPage ().getCurrentParticipantName (this.hostName)).verifyText ()
+        onElement (meetingPage ().getCurrentParticipantName (getSession ().getSharedData (HOST_NAME))).verifyText ()
             .endsWith ("(You)");
     }
 
@@ -127,7 +130,7 @@ public class JioMeetTest {
         withDriver ().waitUntil (invisibilityOfElementLocated (homePage ().getLoader ()
             .getLocator ()));
 
-        this.hostName = onElement (meetingPage ().getHostName ()).getText ();
-        this.meetingUrl = onElement (meetingPage ().getMeetingLink ()).getText ();
+        getSession ().setSharedData (HOST_NAME, "Test User");
+        getSession ().setSharedData (MEETING_URL, onElement (meetingPage ().getMeetingLink ()).getText ());
     }
 }
