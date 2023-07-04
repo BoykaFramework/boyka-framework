@@ -16,8 +16,8 @@
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
@@ -45,7 +45,7 @@
         <jackson-dataformat-yaml.version>2.15.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <everit-json-schema.version>1.5.1</everit-json-schema.version>
+        <json-schema-validator.version>1.0.85</json-schema-validator.version>
         <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
@@ -60,7 +60,8 @@
         <suite-xml>test-suites/${suite-name}.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <allureArgs>
-            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</allureArgs>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+        </allureArgs>
         <sonar.organization>boykaframework</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>boyka-framework</sonar.projectKey>
@@ -237,12 +238,6 @@
             <artifactId>ok2curl</artifactId>
             <version>${ok2curl.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.everit.json/org.everit.json.schema -->
-        <dependency>
-            <groupId>org.everit.json</groupId>
-            <artifactId>org.everit.json.schema</artifactId>
-            <version>${everit-json-schema.version}</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
         <dependency>
             <groupId>net.datafaker</groupId>
@@ -256,6 +251,12 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure-testng.version}</version>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.networknt/json-schema-validator -->
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${json-schema-validator.version}</version>
         </dependency>
     </dependencies>
 
