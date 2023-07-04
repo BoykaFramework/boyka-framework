@@ -48,10 +48,6 @@ on:
         required: false
       cloudKey:
         required: false
-      androidAppUrl:
-        required: false
-      iosAppUrl:
-        required: false
 
 jobs:
   test:
@@ -110,8 +106,6 @@ jobs:
           BS_KEY: ${{ secrets.cloudKey }}
           LT_USER: ${{ secrets.cloudUser }}
           LT_KEY: ${{ secrets.cloudKey }}
-          LT_APP_ANDROID: ${{ secrets.androidAppUrl }}
-          LT_APP_IOS: ${{ secrets.iosAppUrl }}
         run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
 
       - name: Stop Selenium Grid
