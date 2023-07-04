@@ -1,0 +1,40 @@
+name: 'Upload app to LambdaTest'
+
+on:
+  schedule:
+    - cron: '0 21 1 1/3 *'
+  workflow_dispatch:
+
+env:
+  LT_USER: ${{ secrets.LT_USER }}
+  LT_KEY: ${{ secrets.LT_KEY }}
+
+jobs:
+  upload-app:
+    name: Upload App to LambdaTest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Upload Android App
+        id: android_app_upload
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: https://manual-api.lambdatest.com/app/upload/realDevice
+          method: POST
+          username: ${{ env.LT_USER }}
+          password: ${{ env.LT_KEY }}
+          data: '{ "custom_id": "AndroidApp" }'
+          files: '{ "appFile": "${{ github.workspace }}/core-java/src/test/resources/apps/android/sauce-demo.apk" }'
+
+      - name: Upload iOS App
+        id: ios_app_upload
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: https://manual-api.lambdatest.com/app/upload/realDevice
+          method: POST
+          username: ${{ env.LT_USER }}
+          password: ${{ env.LT_KEY }}
+          data: '{ "custom_id": "IOSApp" }'
+          files: '{ "appFile": "${{ github.workspace }}/core-java/src/test/resources/apps/ios/sauce-demo.ipa" }'

@@ -204,7 +204,7 @@ const config = {
               },
               {
                 label: 'Join our Discord server',
-                href: 'https://discord.gg/dUg8K9DAsR',
+                href: 'https://dub.sh/boyka-discord',
               },
               {
                 label: 'Twitter',
