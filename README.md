@@ -16,7 +16,7 @@
 
 [![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/BoykaFramework/boyka-framework)
 
-  <a href="https://discord.gg/dUg8K9DAsR">
+  <a href="https://dub.sh/boyka-discord">
     <img src="https://img.shields.io/discord/950985052769120337?label=Discord&logo=Discord&style=for-the-badge" alt="Join Discord">
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/graphs/contributors">
@@ -701,7 +701,7 @@ Distributed under MIT [License](LICENSE).
 
 ## 🤝 Contact
 
-- Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
+- Join our [Discord server](https://dub.sh/boyka-discord) to discuss anything about the framework
 - Open a [new Discussion](https://github.com/BoykaFramework/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
 - Connect with me on [my LinkFree links](https://linkfree.eddiehub.io/WasiqB)
 
