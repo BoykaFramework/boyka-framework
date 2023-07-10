@@ -72,10 +72,9 @@ div[class^='announcementBar_'] {
   display: none;
 }
 
-img[src*='browserstack'],
-img[src*='LT-logo'] {
-  width: 40%;
-  height: auto;
+.supporter-img {
+  height: 150px !important;
+  width: auto;
 }
 
 .gh-sponsor-big {
