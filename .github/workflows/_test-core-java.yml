@@ -66,10 +66,7 @@ jobs:
 
       - name: Install Appium 2.0
         if: ${{ inputs.run-appium }}
-        run: |
-          npm install -g appium@next
-          appium driver install uiautomator2
-          appium driver install xcuitest
+        run: npm install --global appium --drivers=xcuitest,uiautomator2
 
       - name: Start Selenium Grid
         if: ${{ inputs.run-grid }}

@@ -10,7 +10,7 @@ const config = {
   tagline:
     'Ultimate test automation framework for automating Web, Android, iOS and API applications',
   url: 'https://BoykaFramework.github.io',
-  baseUrl: '/',
+  baseUrl: '/boyka-framework/',
   deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
@@ -168,7 +168,21 @@ const config = {
           { to: '/blog', label: 'Blogs' },
           {
             href: 'https://github.com/BoykaFramework/boyka-framework',
-            label: 'GitHub',
+            position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
+          },
+          {
+            href: 'https://dub.sh/boyka-linkedin',
+            position: 'right',
+            className: 'header-linkedin-link',
+            'aria-label': 'LinkedIn page',
+          },
+          {
+            href: 'https://dub.sh/boyka-twitter',
+            className: 'header-twitter-link',
+            'aria-label': 'Twitter Profile',
+            position: 'right',
           },
         ],
       },

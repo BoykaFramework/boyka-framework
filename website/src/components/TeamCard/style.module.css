@@ -1,0 +1,9 @@
+.twitterProfile,
+.linkedinProfile,
+.githubProfile {
+  margin-left: 10px;
+}
+
+.teamProfile {
+  margin-bottom: 20px;
+}
