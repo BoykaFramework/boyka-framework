@@ -33,16 +33,15 @@ const HeroContent = ({ title, tagLine }): JSX.Element => {
 const CTAButtons = ({ buttons }): JSX.Element => {
   return (
     <div className={styles.ctaButtons}>
-      {buttons &&
-        buttons.map((button) => (
-          <ActionButton
-            key={button.id}
-            href={useBaseUrl(button.href)}
-            text={button.text}
-            type={button.type}
-            target={button.target}
-          />
-        ))}
+      {buttons?.map((button) => (
+        <ActionButton
+          key={button.id}
+          href={button.href}
+          text={button.text}
+          type={button.type}
+          target={button.target}
+        />
+      ))}
     </div>
   );
 };
@@ -50,16 +49,15 @@ const CTAButtons = ({ buttons }): JSX.Element => {
 const SocialButtons = ({ gitButtons }): JSX.Element => {
   return (
     <div className={styles.SocialButtons}>
-      {gitButtons &&
-        gitButtons.map((button) => (
-          <GitHubCountButton
-            key={button.id}
-            id={button.id}
-            userId={button.userId}
-            repoName={button.repoName}
-            type={button.type}
-          />
-        ))}
+      {gitButtons?.map((button) => (
+        <GitHubCountButton
+          key={button.id}
+          id={button.id}
+          userId={button.userId}
+          repoName={button.repoName}
+          type={button.type}
+        />
+      ))}
     </div>
   );
 };

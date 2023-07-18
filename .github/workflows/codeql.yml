@@ -1,6 +1,11 @@
 name: CodeQL Scannings
 
 on:
+  push:
+    branches:
+      - main
+      - staging
+      - develop
   pull_request:
     branches:
       - develop

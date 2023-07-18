@@ -11,6 +11,7 @@ const config = {
     'Ultimate test automation framework for automating Web, Android, iOS and API applications',
   url: 'https://BoykaFramework.github.io',
   baseUrl: '/boyka-framework/',
+  deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/Boyka.png',
@@ -117,7 +118,7 @@ const config = {
       announcementBar: {
         id: 'star-the-repo',
         content:
-          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/BoykaFramework/boyka-framework">GitHub</a> ⭐ | 🤝 Support us by Sponsoring us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/WasiqB">GitHub Sponsors</a> 🤝',
+          '⭐ Don\'t forget to Star the repo on 👉 <a target="_blank" rel="noopener noreferrer" href="https://github.com/BoykaFramework/boyka-framework">GitHub</a> ⭐ | 🤝 Support us by Sponsoring us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/BoykaFramework">GitHub Sponsors</a> 🤝',
         backgroundColor: '#ffb600',
         textColor: '#000000',
         isCloseable: false,
@@ -167,7 +168,21 @@ const config = {
           { to: '/blog', label: 'Blogs' },
           {
             href: 'https://github.com/BoykaFramework/boyka-framework',
-            label: 'GitHub',
+            position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
+          },
+          {
+            href: 'https://dub.sh/boyka-linkedin',
+            position: 'right',
+            className: 'header-linkedin-link',
+            'aria-label': 'LinkedIn page',
+          },
+          {
+            href: 'https://dub.sh/boyka-twitter',
+            className: 'header-twitter-link',
+            'aria-label': 'Twitter Profile',
+            position: 'right',
           },
         ],
       },
@@ -199,16 +214,20 @@ const config = {
             title: 'Follow us',
             items: [
               {
-                label: 'StackOverflow',
-                href: 'https://stackoverflow.com/questions/tagged/boyka-framework',
-              },
-              {
                 label: 'Join our Discord server',
                 href: 'https://dub.sh/boyka-discord',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/BoykaFramework',
+                href: 'https://dub.sh/boyka-twitter',
+              },
+              {
+                label: 'LinkedIn',
+                href: 'https://dub.sh/boyka-linkedin',
+              },
+              {
+                label: 'StackOverflow',
+                href: 'https://stackoverflow.com/questions/tagged/boyka-framework',
               },
             ],
           },
