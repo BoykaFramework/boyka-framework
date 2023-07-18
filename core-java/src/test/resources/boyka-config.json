@@ -9,9 +9,7 @@
       "highlight_delay": 100
     },
     "logging": {
-      "exclude_logs": [
-        "bugreport"
-      ]
+      "exclude_logs": ["bugreport"]
     },
     "screenshot": {
       "enabled": true,
@@ -30,10 +28,7 @@
           "width": 1580,
           "height": 1080
         },
-        "browser_options": [
-          "use-fake-device-for-media-stream",
-          "use-fake-ui-for-media-stream"
-        ]
+        "browser_options": ["use-fake-device-for-media-stream", "use-fake-ui-for-media-stream"]
       },
       "test_local_firefox": {
         "browser": "FIREFOX"
@@ -152,9 +147,7 @@
         "browser": "ABC"
       },
       "test_local_null_browser": {
-        "browser_options": [
-          "--remote-allow-origins=*"
-        ]
+        "browser_options": ["--remote-allow-origins=*"]
       },
       "test_local_none_browser": {
         "browser": "NONE"
@@ -167,10 +160,7 @@
           "port": 4723,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": [
-            "get_server_logs",
-            "chromedriver_autodownload"
-          ]
+          "allow_insecure": ["get_server_logs", "chromedriver_autodownload"]
         },
         "device": {
           "os": "ANDROID",
@@ -203,10 +193,7 @@
           "port": 4724,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": [
-            "get_server_logs",
-            "chromedriver_autodownload"
-          ]
+          "allow_insecure": ["get_server_logs", "chromedriver_autodownload"]
         },
         "device": {
           "os": "ANDROID",
@@ -312,10 +299,7 @@
           "port": 4728,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": [
-            "get_server_logs",
-            "chromedriver_autodownload"
-          ]
+          "allow_insecure": ["get_server_logs", "chromedriver_autodownload"]
         },
         "device": {
           "os": "ANDROID",

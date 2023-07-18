@@ -12,7 +12,7 @@
 <!-- Badges -->
 <p>
 
-[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light)](https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework)
+[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light)](https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka-framework)
 
 [![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/BoykaFramework/boyka-framework)
 
@@ -112,9 +112,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       "highlight_delay": 100
     },
     "logging": {
-      "exclude_logs": [
-        "bugreport"
-      ]
+      "exclude_logs": ["bugreport"]
     },
     "screenshot": {
       "enabled": true,
@@ -194,9 +192,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "port": 4723,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "allow_insecure": ["get_server_logs"]
         },
         "device": {
           "os": "ANDROID",
@@ -291,9 +287,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "port": 4724,
           "session_override": true,
           "driver": "XCUI",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "allow_insecure": ["get_server_logs"]
         },
         "device": {
           "os": "IOS",
@@ -662,14 +656,18 @@ public class SauceDemoTest {
     alt="Boyka Main project tech stack" width="400" height="auto" />
 </div>
 
-### 💎 Cloud platform supporters
+### 💎 Open source supporters
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
 <div align="center">
   <a href="http://www.lambdatest.com?fp_ref=wasiq95" target="_blank" style="outline:none;border:none;"><img src="https://d2gdx5nv84sdx2.cloudfront.net/uploads/n3ufe5o3/marketing_asset/banner/6476/728_x_90.png" alt="lambdatest"/></a>
   <br/>
-  <a href="http://www.browserstack.com" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/></a>
+  <a href="https://www.browserstack.com/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/></a>
+  <br/>
+  <a href="https://www.jetbrains.com/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/jetbrains.png" alt="JetBrains" width="300px"/></a>
+  <br/>
+  <a href="https://tuple.app/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/tuple.svg" alt="Tuple" width="300px"/></a>
 </div>
 
 ## 🧭 Project Road-map
