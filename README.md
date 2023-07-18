@@ -656,14 +656,18 @@ public class SauceDemoTest {
     alt="Boyka Main project tech stack" width="400" height="auto" />
 </div>
 
-### 💎 Cloud platform supporters
+### 💎 Open source supporters
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
 <div align="center">
   <a href="http://www.lambdatest.com?fp_ref=wasiq95" target="_blank" style="outline:none;border:none;"><img src="https://d2gdx5nv84sdx2.cloudfront.net/uploads/n3ufe5o3/marketing_asset/banner/6476/728_x_90.png" alt="lambdatest"/></a>
   <br/>
-  <a href="http://www.browserstack.com" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/></a>
+  <a href="https://www.browserstack.com/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/></a>
+  <br/>
+  <a href="https://www.jetbrains.com/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/jetbrains.png" alt="JetBrains" width="300px"/></a>
+  <br/>
+  <a href="https://tuple.app/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/tuple.svg" alt="Tuple" width="300px"/></a>
 </div>
 
 ## 🧭 Project Road-map
