@@ -3306,13 +3306,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/nx-win32-x64-msvc@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@nx/nx-win32-x64-msvc@npm:16.4.3"
-  conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@octokit/auth-token@npm:^3.0.0":
   version: 3.0.3
   resolution: "@octokit/auth-token@npm:3.0.3"
@@ -12588,89 +12581,6 @@ __metadata:
   bin:
     nx: bin/nx.js
   checksum: 717da8be398dd1d6a19419dc579cb4197c76de49577edf664ce8a9fdb341176823a277988d4b2b625ec7812ef498a6d4dfecf987d9cc0b981628cd235b09b8f0
-  languageName: node
-  linkType: hard
-
-"nx@npm:16.4.3, nx@npm:^16.4.3":
-  version: 16.4.3
-  resolution: "nx@npm:16.4.3"
-  dependencies:
-    "@nrwl/tao": 16.4.3
-    "@nx/nx-darwin-arm64": 16.4.3
-    "@nx/nx-darwin-x64": 16.4.3
-    "@nx/nx-freebsd-x64": 16.4.3
-    "@nx/nx-linux-arm-gnueabihf": 16.4.3
-    "@nx/nx-linux-arm64-gnu": 16.4.3
-    "@nx/nx-linux-arm64-musl": 16.4.3
-    "@nx/nx-linux-x64-gnu": 16.4.3
-    "@nx/nx-linux-x64-musl": 16.4.3
-    "@nx/nx-win32-arm64-msvc": 16.4.3
-    "@nx/nx-win32-x64-msvc": 16.4.3
-    "@parcel/watcher": 2.0.4
-    "@yarnpkg/lockfile": ^1.1.0
-    "@yarnpkg/parsers": 3.0.0-rc.46
-    "@zkochan/js-yaml": 0.0.6
-    axios: ^1.0.0
-    chalk: ^4.1.0
-    cli-cursor: 3.1.0
-    cli-spinners: 2.6.1
-    cliui: ^7.0.2
-    dotenv: ~10.0.0
-    enquirer: ~2.3.6
-    fast-glob: 3.2.7
-    figures: 3.2.0
-    flat: ^5.0.2
-    fs-extra: ^11.1.0
-    glob: 7.1.4
-    ignore: ^5.0.4
-    js-yaml: 4.1.0
-    jsonc-parser: 3.2.0
-    lines-and-columns: ~2.0.3
-    minimatch: 3.0.5
-    npm-run-path: ^4.0.1
-    open: ^8.4.0
-    semver: 7.5.3
-    string-width: ^4.2.3
-    strong-log-transformer: ^2.1.0
-    tar-stream: ~2.2.0
-    tmp: ~0.2.1
-    tsconfig-paths: ^4.1.2
-    tslib: ^2.3.0
-    v8-compile-cache: 2.3.0
-    yargs: ^17.6.2
-    yargs-parser: 21.1.1
-  peerDependencies:
-    "@swc-node/register": ^1.4.2
-    "@swc/core": ^1.2.173
-  dependenciesMeta:
-    "@nx/nx-darwin-arm64":
-      optional: true
-    "@nx/nx-darwin-x64":
-      optional: true
-    "@nx/nx-freebsd-x64":
-      optional: true
-    "@nx/nx-linux-arm-gnueabihf":
-      optional: true
-    "@nx/nx-linux-arm64-gnu":
-      optional: true
-    "@nx/nx-linux-arm64-musl":
-      optional: true
-    "@nx/nx-linux-x64-gnu":
-      optional: true
-    "@nx/nx-linux-x64-musl":
-      optional: true
-    "@nx/nx-win32-arm64-msvc":
-      optional: true
-    "@nx/nx-win32-x64-msvc":
-      optional: true
-  peerDependenciesMeta:
-    "@swc-node/register":
-      optional: true
-    "@swc/core":
-      optional: true
-  bin:
-    nx: bin/nx.js
-  checksum: d895fa212737541b9fa8633b8eb0e06852964d1096099dc0d43d628c4aa76d66a3d6b387bc8efb6e91b0d58d9411f9df38a93a857ebe48ee11464d0c9ec1664f
   languageName: node
   linkType: hard
 
