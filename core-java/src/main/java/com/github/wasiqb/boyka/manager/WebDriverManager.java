@@ -17,10 +17,6 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
-import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
-import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
-import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
-import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNullElse;
 import static java.util.Optional.ofNullable;
@@ -199,21 +195,18 @@ class WebDriverManager implements IDriverManager {
 
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        chromedriver ().setup ();
         final var options = getChromeOptions (webSetting);
         return LOGGER.traceExit (new ChromeDriver (options));
     }
 
     private WebDriver setupEdgeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        edgedriver ().setup ();
         final var options = getEdgeOptions (webSetting);
         return LOGGER.traceExit (new EdgeDriver (options));
     }
 
     private WebDriver setupFirefoxDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        firefoxdriver ().setup ();
         final var options = getFirefoxOptions (webSetting);
         return LOGGER.traceExit (new FirefoxDriver (options));
     }
@@ -229,7 +222,6 @@ class WebDriverManager implements IDriverManager {
 
     private WebDriver setupSafariDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        safaridriver ().setup ();
         final var options = getSafariOptions (webSetting);
         return LOGGER.traceExit (new SafariDriver (options));
     }
