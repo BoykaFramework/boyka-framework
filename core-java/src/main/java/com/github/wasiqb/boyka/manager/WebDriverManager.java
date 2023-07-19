@@ -39,6 +39,7 @@ import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -96,29 +97,13 @@ class WebDriverManager implements IDriverManager {
 
     private ChromeOptions getChromeOptions (final WebSetting webSetting) {
         final var options = new ChromeOptions ();
-        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
-        options.addArguments ("enable-automation");
-        options.addArguments ("--no-sandbox");
-        options.addArguments ("--disable-gpu");
-        options.addArguments ("--disable-dev-shm-usage");
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
-        }
+        setCommonBrowserOptions (options, webSetting);
         return options;
     }
 
     private EdgeOptions getEdgeOptions (final WebSetting webSetting) {
         final var options = new EdgeOptions ();
-        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
-        options.addArguments ("enable-automation");
-        options.addArguments ("--no-sandbox");
-        options.addArguments ("--disable-gpu");
-        options.addArguments ("--disable-dev-shm-usage");
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
-        }
+        setCommonBrowserOptions (options, webSetting);
         return options;
     }
 
@@ -174,6 +159,18 @@ class WebDriverManager implements IDriverManager {
     private void navigateToBaseUrl (final String baseUrl) {
         if (isNotEmpty (baseUrl)) {
             navigate ().to (baseUrl);
+        }
+    }
+
+    private <T extends ChromiumOptions<T>> void setCommonBrowserOptions (final T options, final WebSetting webSetting) {
+        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
+        options.addArguments ("enable-automation");
+        options.addArguments ("--no-sandbox");
+        options.addArguments ("--disable-gpu");
+        options.addArguments ("--disable-dev-shm-usage");
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        if (webSetting.isHeadless ()) {
+            options.addArguments (HEADLESS);
         }
     }
 

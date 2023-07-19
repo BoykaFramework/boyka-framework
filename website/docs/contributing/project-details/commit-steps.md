@@ -177,4 +177,4 @@ As soon as you push your commit, you must create a draft PR on GitHub. Because o
 
 ## Ping on Discord
 
-Once PR is raised, ping in the `#contributor-discussion` channel on our [Discord server](https://discord.gg/dUg8K9DAsR) to let all the contributors know and you can schedule a demo with the contributors to showcase your changes.
+Once PR is raised, ping in the `#contributor-discussion` channel on our [Discord server](https://dub.sh/boyka-discord) to let all the contributors know and you can schedule a demo with the contributors to showcase your changes.

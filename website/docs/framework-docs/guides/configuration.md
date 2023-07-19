@@ -584,6 +584,10 @@ We have an enum `Browser` where we maintain the list of supported browsers. They
 - `REMOTE`: Is used for Cloud based browsers.
 - `SAFARI`: Is used for Safari browser.
 
+:::danger
+Browsers are case sensitive, so make sure you provide exact names in the config.
+:::
+
 ## Supported Protocols {#supported-protocols}
 
 We have an enum `Protocol` where we maintain the list of supported protocols. They are:

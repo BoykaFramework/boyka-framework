@@ -5,11 +5,15 @@ on:
     branches:
       - issue-*
 
+permissions:
+  checks: write
+  pull-requests: write
+
 jobs:
   create-feature-to-develop-pr:
     uses: ./.github/workflows/_create-pr.yml
     secrets:
-      token: ${{ secrets.PUSH_TOKEN }}
+      token: ${{ secrets.GITHUB_TOKEN }}
     with:
       source-branch: ${{ github.ref_name }}
       target-branch: develop
