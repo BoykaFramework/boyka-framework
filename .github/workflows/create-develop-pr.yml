@@ -6,6 +6,8 @@ on:
       - issue-*
 
 permissions:
+  actions: write
+  statuses: write
   checks: write
   pull-requests: write
 
