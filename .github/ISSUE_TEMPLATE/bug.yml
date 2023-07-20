@@ -21,7 +21,7 @@ body:
     attributes:
       label: Issue Version
       description: 🔢 What version of the framework is this bug related to?
-      placeholder: v0.8.1
+      placeholder: v0.15.0
     validations:
       required: true
 
@@ -57,14 +57,5 @@ body:
       label: ✅ Expected Behavior
       placeholder: What were you expecting?
       description: Describe the expected behavior you were expecting.
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual-result
-    attributes:
-      label: ❌ Actual Behavior
-      placeholder: What happened instead?
-      description: Describe the actual behavior which occurred.
     validations:
       required: true
