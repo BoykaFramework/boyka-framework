@@ -16,12 +16,12 @@
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
-    <version>0.14.2</version>
+    <version>0.15.0</version>
     <inceptionYear>2022</inceptionYear>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>🎉 Ultimate test automation framework for testing any application on any platform</description>
@@ -31,13 +31,13 @@
         <selenium-webdriver.version>4.10.0</selenium-webdriver.version>
         <testng.version>7.8.0</testng.version>
         <appium-java-client.version>8.5.1</appium-java-client.version>
-        <webdrivermanager.version>5.3.3</webdrivermanager.version>
         <okhttp.version>4.11.0</okhttp.version>
         <lombok.version>1.18.28</lombok.version>
         <google-gson.version>2.10.1</google-gson.version>
-        <google.guava.version>32.0.1-jre</google.guava.version>
-        <google-truth.version>1.1.4</google-truth.version>
+        <google.guava.version>32.1.1-jre</google.guava.version>
+        <google-truth.version>1.1.5</google-truth.version>
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
+        <commons-io.version>2.13.0</commons-io.version>
         <json-path.version>2.8.0</json-path.version>
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
@@ -45,8 +45,8 @@
         <jackson-dataformat-yaml.version>2.15.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <everit-json-schema.version>1.5.1</everit-json-schema.version>
-        <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
+        <json-schema-validator.version>1.0.86</json-schema-validator.version>
+        <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
@@ -54,13 +54,14 @@
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.12.0</checkstyle.version>
+        <checkstyle.version>10.12.1</checkstyle.version>
         <aspectj.version>1.9.19</aspectj.version>
         <suite-name>testng</suite-name>
         <suite-xml>test-suites/${suite-name}.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
         <allureArgs>
-            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</allureArgs>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+        </allureArgs>
         <sonar.organization>boykaframework</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>boyka-framework</sonar.projectKey>
@@ -75,11 +76,11 @@
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>3.9.1.2184</sonar.maven.version>
         <jacoco.version>0.8.10</jacoco.version>
-        <surefire-version>3.1.0</surefire-version>
+        <surefire-version>3.1.2</surefire-version>
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.1.0</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <allure-testng.version>2.22.2</allure-testng.version>
+        <allure-testng.version>2.23.0</allure-testng.version>
         <maven-failsafe.version>3.1.2</maven-failsafe.version>
     </properties>
 
@@ -157,12 +158,6 @@
             <artifactId>java-client</artifactId>
             <version>${appium-java-client.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -199,6 +194,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>${apache-commons-text.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
         <dependency>
@@ -237,12 +238,6 @@
             <artifactId>ok2curl</artifactId>
             <version>${ok2curl.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.everit.json/org.everit.json.schema -->
-        <dependency>
-            <groupId>org.everit.json</groupId>
-            <artifactId>org.everit.json.schema</artifactId>
-            <version>${everit-json-schema.version}</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
         <dependency>
             <groupId>net.datafaker</groupId>
@@ -256,6 +251,12 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure-testng.version}</version>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.networknt/json-schema-validator -->
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${json-schema-validator.version}</version>
         </dependency>
     </dependencies>
 

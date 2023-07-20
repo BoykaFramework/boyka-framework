@@ -17,10 +17,6 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
-import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
-import static io.github.bonigarcia.wdm.WebDriverManager.edgedriver;
-import static io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver;
-import static io.github.bonigarcia.wdm.WebDriverManager.safaridriver;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNullElse;
 import static java.util.Optional.ofNullable;
@@ -39,6 +35,7 @@ import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -96,29 +93,13 @@ class WebDriverManager implements IDriverManager {
 
     private ChromeOptions getChromeOptions (final WebSetting webSetting) {
         final var options = new ChromeOptions ();
-        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
-        options.addArguments ("enable-automation");
-        options.addArguments ("--no-sandbox");
-        options.addArguments ("--disable-gpu");
-        options.addArguments ("--disable-dev-shm-usage");
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
-        }
+        setCommonBrowserOptions (options, webSetting);
         return options;
     }
 
     private EdgeOptions getEdgeOptions (final WebSetting webSetting) {
         final var options = new EdgeOptions ();
-        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
-        options.addArguments ("enable-automation");
-        options.addArguments ("--no-sandbox");
-        options.addArguments ("--disable-gpu");
-        options.addArguments ("--disable-dev-shm-usage");
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
-        }
+        setCommonBrowserOptions (options, webSetting);
         return options;
     }
 
@@ -177,6 +158,18 @@ class WebDriverManager implements IDriverManager {
         }
     }
 
+    private <T extends ChromiumOptions<T>> void setCommonBrowserOptions (final T options, final WebSetting webSetting) {
+        ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
+        options.addArguments ("enable-automation");
+        options.addArguments ("--no-sandbox");
+        options.addArguments ("--disable-gpu");
+        options.addArguments ("--disable-dev-shm-usage");
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        if (webSetting.isHeadless ()) {
+            options.addArguments (HEADLESS);
+        }
+    }
+
     private void setDriverSize (final WebSetting webSetting) {
         final var window = getSession ().getDriver ()
             .manage ()
@@ -202,21 +195,18 @@ class WebDriverManager implements IDriverManager {
 
     private WebDriver setupChromeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        chromedriver ().setup ();
         final var options = getChromeOptions (webSetting);
         return LOGGER.traceExit (new ChromeDriver (options));
     }
 
     private WebDriver setupEdgeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        edgedriver ().setup ();
         final var options = getEdgeOptions (webSetting);
         return LOGGER.traceExit (new EdgeDriver (options));
     }
 
     private WebDriver setupFirefoxDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        firefoxdriver ().setup ();
         final var options = getFirefoxOptions (webSetting);
         return LOGGER.traceExit (new FirefoxDriver (options));
     }
@@ -232,7 +222,6 @@ class WebDriverManager implements IDriverManager {
 
     private WebDriver setupSafariDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        safaridriver ().setup ();
         final var options = getSafariOptions (webSetting);
         return LOGGER.traceExit (new SafariDriver (options));
     }

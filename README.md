@@ -12,11 +12,11 @@
 <!-- Badges -->
 <p>
 
-[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light)](https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka&#0045;framework)
+[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352770&theme=light)](https://www.producthunt.com/posts/boyka-framework?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-boyka-framework)
 
 [![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/BoykaFramework/boyka-framework)
 
-  <a href="https://discord.gg/dUg8K9DAsR">
+  <a href="https://dub.sh/boyka-discord">
     <img src="https://img.shields.io/discord/950985052769120337?label=Discord&logo=Discord&style=for-the-badge" alt="Join Discord">
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/graphs/contributors">
@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.14.2">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.14.2/total?color=brightgreen&label=Downloads%20for%20v0.14.2&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.15.0">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.15.0/total?color=brightgreen&label=Downloads%20for%20v0.15.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -89,7 +89,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>com.github.wasiqb.boyka</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.14.2</version>
+  <version>0.15.0</version>
 </dependency>
 ```
 
@@ -112,9 +112,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
       "highlight_delay": 100
     },
     "logging": {
-      "exclude_logs": [
-        "bugreport"
-      ]
+      "exclude_logs": ["bugreport"]
     },
     "screenshot": {
       "enabled": true,
@@ -194,9 +192,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "port": 4723,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "allow_insecure": ["get_server_logs"]
         },
         "device": {
           "os": "ANDROID",
@@ -291,9 +287,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
           "port": 4724,
           "session_override": true,
           "driver": "XCUI",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "allow_insecure": ["get_server_logs"]
         },
         "device": {
           "os": "IOS",
@@ -662,14 +656,18 @@ public class SauceDemoTest {
     alt="Boyka Main project tech stack" width="400" height="auto" />
 </div>
 
-### 💎 Cloud platform supporters
+### 💎 Open source supporters
 
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
 <div align="center">
   <a href="http://www.lambdatest.com?fp_ref=wasiq95" target="_blank" style="outline:none;border:none;"><img src="https://d2gdx5nv84sdx2.cloudfront.net/uploads/n3ufe5o3/marketing_asset/banner/6476/728_x_90.png" alt="lambdatest"/></a>
   <br/>
-  <a href="http://www.browserstack.com" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/></a>
+  <a href="https://www.browserstack.com/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/></a>
+  <br/>
+  <a href="https://www.jetbrains.com/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/jetbrains.png" alt="JetBrains" width="300px"/></a>
+  <br/>
+  <a href="https://tuple.app/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/tuple.svg" alt="Tuple" width="300px"/></a>
 </div>
 
 ## 🧭 Project Road-map
@@ -701,7 +699,7 @@ Distributed under MIT [License](LICENSE).
 
 ## 🤝 Contact
 
-- Join our [Discord server](https://discord.gg/dUg8K9DAsR) to discuss anything about the framework
+- Join our [Discord server](https://dub.sh/boyka-discord) to discuss anything about the framework
 - Open a [new Discussion](https://github.com/BoykaFramework/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
 - Connect with me on [my LinkFree links](https://linkfree.eddiehub.io/WasiqB)
 

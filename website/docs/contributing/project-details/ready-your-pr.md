@@ -48,4 +48,4 @@ If everything is fine, wait for `boyka-core` team to merge your PR. Most of the 
 Don't merge approved PR yourself. Instead, tag the `boyka-core` team to the PR comments if it's not merged by the reviewer.
 :::
 
-[join-discord]: https://discord.gg/dUg8K9DAsR
+[join-discord]: https://dub.sh/boyka-discord

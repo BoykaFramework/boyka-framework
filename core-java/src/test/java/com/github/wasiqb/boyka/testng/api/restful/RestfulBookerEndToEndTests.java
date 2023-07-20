@@ -27,6 +27,7 @@ import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest
 import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.updateBooking;
 import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.updatePartialBooking;
 
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.testng.api.restful.requests.BookingData;
 import com.github.wasiqb.boyka.testng.api.restful.requests.BookingDataBuilder;
 import io.qameta.allure.Description;
@@ -120,6 +121,19 @@ public class RestfulBookerEndToEndTests {
             .isEqualTo (this.newBooking.getFirstname ());
         response.verifyTextField ("lastname")
             .isEqualTo (this.newBooking.getLastname ());
+    }
+
+    @Story ("Json Validation Exception tests")
+    @Test (description = "Tests for file not found exception", expectedExceptions = FrameworkError.class)
+    public void testJsonSchemaFileException () {
+        final var request = createBooking (this.newBooking);
+        final var response = withRequest (request).execute ();
+
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyStatusMessage ()
+            .isEqualTo ("OK");
+        response.verifySchema ("create-booking-scheme.json");
     }
 
     @Story ("Update Booking")

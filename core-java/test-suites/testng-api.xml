@@ -27,6 +27,7 @@
                     <include name="testUpdatePartialBooking"/>
                     <include name="testDeleteBooking"/>
                     <include name="testDeletedBooking"/>
+                    <include name="testJsonSchemaFileException"/>
                 </methods>
             </class>
             <class name="com.github.wasiqb.boyka.testng.api.postman.ApiPostmanTest">

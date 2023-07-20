@@ -33,4 +33,4 @@ sidebar_position: 2
     - Tests will be triggered to run on sample tests project to run the tests on `release candidate`
   - Finally a Tweet will be posted on Twitter handle [@BoykaFramework][twitter], informing about the Boyka framework release
 
-[twitter]: https://twitter.com/BoykaFramework
+[twitter]: https://dub.sh/boyka-twitter

@@ -26,4 +26,4 @@ Following are the GitHub Actions workflows that we have created for our project 
 | `tweet-release` | `release -> (published)` | `all` | Will tweet about the release on Twitter handle [@BoykaFramework][twitter]. |
 
 [commit]: https://conventionalcommits.org/
-[twitter]: https://twitter.com/BoykaFramework
+[twitter]: https://dub.sh/boyka-twitter
