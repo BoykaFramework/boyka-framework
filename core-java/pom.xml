@@ -31,13 +31,13 @@
         <selenium-webdriver.version>4.10.0</selenium-webdriver.version>
         <testng.version>7.8.0</testng.version>
         <appium-java-client.version>8.5.1</appium-java-client.version>
-        <webdrivermanager.version>5.4.0</webdrivermanager.version>
         <okhttp.version>4.11.0</okhttp.version>
         <lombok.version>1.18.28</lombok.version>
         <google-gson.version>2.10.1</google-gson.version>
         <google.guava.version>32.1.1-jre</google.guava.version>
         <google-truth.version>1.1.5</google-truth.version>
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
+        <commons-io.version>2.13.0</commons-io.version>
         <json-path.version>2.8.0</json-path.version>
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
@@ -158,12 +158,6 @@
             <artifactId>java-client</artifactId>
             <version>${appium-java-client.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -200,6 +194,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>${apache-commons-text.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
         <dependency>
