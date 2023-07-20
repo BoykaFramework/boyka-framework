@@ -1,5 +1,5 @@
 
-## v0.16.0-beta.1 (2023-07-20)
+## v0.16.0 (2023-07-20)
 
 #### :rocket: New Feature
 * [#545](https://github.com/BoykaFramework/boyka-framework/pull/545) feat(java): :sparkles: replaced json schema validator ([@WasiqB](https://github.com/WasiqB))
