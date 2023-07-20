@@ -18,6 +18,5 @@
 - [#549](https://github.com/BoykaFramework/boyka-framework/pull/549) docs(website): :memo: updating documentations ([@github-actions[bot]](https://github.com/apps/github-actions))
 
 #### Committers: 2
-
 - Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
 - [@github-actions[bot]](https://github.com/apps/github-actions)
