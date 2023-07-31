@@ -1,0 +1,16 @@
+name: Create pull request from main to develop
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-main-to-develop-pr:
+    uses: ./.github/workflows/_create-pr.yml
+    with:
+      source-branch: main
+      target-branch: develop
+      title: '👾 Merge `main` to `develop`'
+    secrets:
+      token: ${{ secrets.PUSH_TOKEN }}
