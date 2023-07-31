@@ -40,7 +40,7 @@
     "commitlint": "^17.6.7",
     "eslint": "^8.45.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-prettier": "^8.9.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
