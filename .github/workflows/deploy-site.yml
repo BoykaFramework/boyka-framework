@@ -29,11 +29,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Install dependencies
-        run: yarn
+        run: pnpm i
       - name: Build site
-        run: yarn build:site
+        run: pnpm build:site
 
   gh-release:
     if: ${{ github.event_name == 'push' }}
@@ -43,11 +43,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Install dependencies
-        run: yarn
+        run: pnpm i
       - name: Build site
-        run: yarn build:site
+        run: pnpm build:site
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

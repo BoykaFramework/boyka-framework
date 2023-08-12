@@ -1,6 +1,6 @@
 {
   "version": "0.16.0",
-  "npmClient": "yarn",
+  "npmClient": "pnpm",
   "changelog": {
     "repo": "BoykaFramework/boyka-framework",
     "labels": {

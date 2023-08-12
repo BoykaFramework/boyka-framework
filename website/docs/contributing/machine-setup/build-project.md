@@ -31,41 +31,32 @@ The above URLs for `SSH`, `HTTPS` and `Github CLI` can be found on the github re
 
 ## Setting up the project
 
-To build the project, `yarn` is required to be installed on your machine.
+To build the project, `pnpm` is required to be installed on your machine.
 
 On Mac OS, run the following command:
 
 ```shell
-> brew install yarn
+> brew install pnpm
 ```
 
 On Windows and Linux, you can run the following command:
 
 ```shell
-> npm install -g yarn
+> npm install -g pnpm
 ```
 
-Once the installation is complete you can check by running the following command to verify that `yarn` was installed correctly on your machine:
+Once the installation is complete you can check by running the following command to verify that `pnpm` was installed correctly on your machine:
 
 ```shell
-> yarn --version
+> pnpm --version
 ```
 
 Now, execute the following command to set up the project:
 
 ```shell
 > cd boyka-framework
-> yarn install
+> pnpm i
 ```
-
-:::danger Windows users
-You must also execute the following command after `yarn install`:
-
-```shell
-> yarn prepare
-```
-
-:::
 
 This step is mandatory before you start contributing to the project, because it will setup pre-commit hooks to automatically run the lint checks and test coverage check for the code before you can commit.
 
@@ -139,7 +130,7 @@ The documentation project is located in `website/` directory.
 To build the documentation project, navigate to the root folder of the project and run the following command:
 
 ```shell
-> yarn build:site
+> pnpm build:site
 ```
 
 This will install all dependencies and build the documentation site.
@@ -149,7 +140,7 @@ This will install all dependencies and build the documentation site.
 From the root repository directory, run the following command:
 
 ```shell
-> yarn start:site
+> pnpm start:site
 ```
 
 This will start the documentation site on `localhost:3000` and will constantly watch on any changes you do in the project.
@@ -163,7 +154,7 @@ Dependency upgrade will only be done by `boyka-core` team members.
 From the root repository directory, run the following command:
 
 ```shell
-> yarn upgrade-interactive
+> pnpm up -i -r
 ```
 
 This will prompt to select the version to which we need to upgrade any particular dependency.
