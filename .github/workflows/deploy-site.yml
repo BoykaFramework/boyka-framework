@@ -26,12 +26,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'pnpm'
+
       - name: Install dependencies
         run: pnpm i
+
       - name: Build site
         run: pnpm build:site
 
@@ -40,14 +47,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'pnpm'
+
       - name: Install dependencies
         run: pnpm i
+
       - name: Build site
         run: pnpm build:site
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
