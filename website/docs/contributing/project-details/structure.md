@@ -9,7 +9,6 @@ Following is the project repository root directory structure:
 - .github/
 - .husky/
 - .vscode/
-- .yarn/
 - assets/
 - core-java/
 - sample-tests/
@@ -21,13 +20,13 @@ Following is the project repository root directory structure:
 - .gitpod.yml
 - .prettieriignore
 - .prettierrc.json
-- .yarnrc.yml
 - commitlint.config.js
 - lerna.json
 - LICENSE
 - package.json
+- pnpm-lock.yaml
+- pnpm-workspace.yaml
 - README.md
-- yarn.lock
 ```
 
 ## Details
@@ -48,82 +47,78 @@ This directory contains Husky pre-commit hook configs for linting,
 
 This directory contains VS Code settings and extensions.
 
-### 4. `.yarn/`
-
-This directory contains Yarn specific setting files.
-
-### 5. `assets/`
+### 4. `assets/`
 
 This directory contains all the assets required by the README file.
 
-### 6. `core-java/`
+### 5. `core-java/`
 
 This directory contains the core framework Java Maven based project.
 
-### 7. `sample-tests/`
+### 6. `sample-tests/`
 
 This directory contains the sample tests for boyka-framework for API and Web.
 
-### 8. `website/`
+### 7. `website/`
 
 This directory contains the website documentation for the project.
 
-### 9. `.editorconfig`
-
-This file contains the EditorConfig settings for the project.
-
-### 10. `.eslintignore`
+### 8. `.eslintignore`
 
 This file contains the ESLint ignore patterns for the project.
 
-### 11. `.eslintrc.json`
+### 9. `.eslintrc.json`
 
 This file contains the ESLint rules for the project.
 
-### 12. `.gitignore`
+### 10. `.gitignore`
 
 This file contains the Git ignore patterns for the project.
 
-### 13. `.gitpod.yml`
+### 11. `.gitpod.yml`
 
 This file contains the Gitpod settings for the project.
 
-### 14. `.nvmrc`
+### 12. `.nvmrc`
 
 This file contains the Node version for the project.
 
-### 15. `.prettierignore`
+### 13. `.prettierignore`
 
 This file contains the Prettier ignore patterns for the project.
 
-### 16. `.prettierrc.json`
+### 14. `.prettierrc.json`
 
 This file contains the Prettier rules for the project.
 
-### 17. `.yarnrc.yml`
+### 15. `CHANGELOG.md`
 
-This file contains the Yarn settings for the project.
+This file contains the project change logs for the last release.
 
-### 18. `commitlint.config.js`
+### 16. `commitlint.config.js`
 
-This file contains the Commitlint config for the project.
+This file contains the commit lint config for the project.
 
-### 19. `lerna.json`
+### 17. `lerna.json`
 
 This file contains the Lerna settings for the project.
 
-### 20. `LICENSE`
+### 18. `LICENSE`
 
 This file contains the license for the project.
 
-### 21. `package.json`
+### 19. `package.json`
 
 This file contains the project package.json settings.
 
-### 22. `README.md`
+### 20. `README.md`
 
 This file contains the project README.md file.
 
-### 23. `yarn.lock`
+### 21. `pnpm-lock.yaml`
 
-This file contains the project yarn.lock file.
+This file contains the projects pnpm lock file.
+
+### 22. `pnpm-workspace.yaml`
+
+This file contains the project workspace details.

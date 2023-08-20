@@ -6,3 +6,4 @@
 *.svg
 website/build
 *.json
+build/

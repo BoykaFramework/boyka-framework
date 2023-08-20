@@ -1,7 +1,7 @@
 {
   "name": "boyka-framework",
   "version": "0.16.0",
-  "description": "Ultimate Automation framework to handle automation of web, mobile and API applications.",
+  "description": "Ultimate Automation framework to handle automation of Web, Mobile and API applications.",
   "author": {
     "name": "Wasiq Bhamla",
     "email": "wasbhamla2005@gmail.com"
@@ -20,38 +20,34 @@
   "bugs": {
     "url": "https://github.com/BoykaFramework/boyka-framework/issues"
   },
-  "workspaces": [
-    "website"
-  ],
   "engines": {
     "node": ">=18.0.0"
   },
   "license": "MIT",
-  "packageManager": "yarn@3.6.1",
   "private": true,
   "devDependencies": {
-    "@commitlint/cli": "^17.6.7",
-    "@commitlint/config-conventional": "^17.6.7",
-    "@lerna/child-process": "^7.1.4",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@lerna/child-process": "^7.1.5",
     "@lerna/version": "^6.6.2",
-    "@types/node": "^18.17.3",
-    "@typescript-eslint/eslint-plugin": "^6.2.1",
-    "@typescript-eslint/parser": "^6.2.1",
-    "commitlint": "^17.6.7",
-    "eslint": "^8.46.0",
+    "@types/node": "^18.17.6",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "commitlint": "^17.7.1",
+    "eslint": "^8.47.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.10.0",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.28.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.33.1",
+    "eslint-plugin-react": "^7.33.2",
     "husky": "^8.0.3",
     "js-yaml": "^4.1.0",
     "lerna": "7.1.4",
     "lerna-changelog": "^2.2.0",
-    "lint-staged": "^13.2.3",
+    "lint-staged": "^13.3.0",
     "lodash": "^4.17.21",
-    "nx": "^16.6.0",
+    "nx": "^16.7.2",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -60,15 +56,16 @@
     "typescript": "^5.1.6"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "postinstall": "husky install",
-    "build:site": "yarn workspace website build",
-    "start:site": "yarn workspace website start",
-    "deploy:site": "yarn workspace website deploy",
+    "build:site": "pnpm -r --filter=\"./website\" build",
+    "start:site": "pnpm -r --filter=\"./website\" start",
+    "deploy:site": "pnpm -r --filter=\"./website\" deploy",
+    "clear:website": "pnpm -r --filter=\"./website\" clear",
     "lint": "eslint --report-unused-disable-directives \"**/*.{js,jsx,ts,tsx,mjs}\"",
-    "lint:ci": "yarn lint --quiet",
+    "lint:ci": "pnpm lint --quiet",
     "format": "prettier --check .",
     "format-fix": "prettier --write .",
-    "clear:website": "yarn workspace website clear",
     "changelog": "lerna-changelog",
     "prerelease": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-prerelease --preid beta",
     "release": "lerna version --yes --no-git-tag-version --no-push --no-changelog --conventional-commits --conventional-graduate",
@@ -77,14 +74,14 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
-      "yarn lint",
-      "yarn format-fix",
-      "yarn format"
+      "pnpm lint",
+      "pnpm format-fix",
+      "pnpm format"
     ],
     "**/*.{js,jsx}": [
-      "yarn lint",
-      "yarn format-fix",
-      "yarn format"
+      "pnpm lint",
+      "pnpm format-fix",
+      "pnpm format"
     ]
   }
 }
