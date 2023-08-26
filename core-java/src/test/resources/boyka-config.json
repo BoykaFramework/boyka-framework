@@ -224,6 +224,7 @@
       "test_bs_android": {
         "server": {
           "target": "BROWSER_STACK",
+          "base_path": "/wd/hub",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
           "driver": "UI_AUTOMATOR"
@@ -260,6 +261,7 @@
       "test_lt_android": {
         "server": {
           "target": "LAMBDA_TEST_MOBILE",
+          "base_path": "/wd/hub",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
           "driver": "UI_AUTOMATOR"
@@ -396,6 +398,7 @@
       "test_bs_ios": {
         "server": {
           "target": "BROWSER_STACK",
+          "base_path": "/wd/hub",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
           "driver": "XCUI"
@@ -430,6 +433,7 @@
       "test_lt_ios": {
         "server": {
           "target": "LAMBDA_TEST_MOBILE",
+          "base_path": "/wd/hub",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
           "driver": "XCUI"
