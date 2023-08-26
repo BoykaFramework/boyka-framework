@@ -37,7 +37,7 @@ public class ServerSetting {
     private List<String>    allowInsecure;
     private AndroidSetting  android;
     private String          appiumPath;
-    private String          basePath        = "/wd/hub";
+    private String          basePath;
     private AutomationType  driver;
     private boolean         external;
     private String          host;
