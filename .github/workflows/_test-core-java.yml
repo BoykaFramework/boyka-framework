@@ -71,10 +71,19 @@ jobs:
           appium driver install uiautomator2
           appium driver install xcuitest
 
-      - name: Start Selenium Grid
-        if: ${{ inputs.run-grid }}
+      - name: Start Selenium Grid for Web
+        if: ${{ inputs.run-grid && ! inputs.run-appium }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml up -d
+
+      - name: Start Selenium Grid for Mobile
+        if: ${{ inputs.run-grid && inputs.run-appium }}
+        run: |
+          appium server --config core-java/src/test/resources/grid/appium-android.yml > logs/appium-android-server.log
+          appium server --config core-java/src/test/resources/grid/appium-ios.yml > logs/appium-ios-server.log
+          java -jar core-java/libs/selenium-server-4.12.0.jar hub > logs/selenium-hub.log
+          java -jar core-java/libs/selenium-server-4.12.0.jar node --config core-java/src/test/resources/grid/appium-node-android.toml > logs/appium-android-node.log
+          java -jar core-java/libs/selenium-server-4.12.0.jar node --config core-java/src/test/resources/grid/appium-node-ios.toml > logs/appium-ios-node.log
 
       - name: Launch iOS Simulator
         if: ${{ inputs.run-ios }}
@@ -89,8 +98,8 @@ jobs:
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          avd-name: Pixel_6_Pro
-          api-level: 30
+          avd-name: Pixel_7_Pro
+          api-level: 31
           target: ${{ inputs.emulator-target }}
           arch: x86
           profile: Nexus 6
@@ -108,10 +117,14 @@ jobs:
           LT_KEY: ${{ secrets.cloudKey }}
         run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
 
-      - name: Stop Selenium Grid
-        if: ${{ inputs.run-grid && always() }}
+      - name: Stop Selenium Grid for Web
+        if: ${{ inputs.run-grid && ! inputs.run-appium && always() }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml down --remove-orphans
+
+      - name: Stop Selenium Grid for Mobile
+        if: ${{ inputs.run-grid && inputs.run-appium && always() }}
+        run: npx kill-port --port 4723,4733,4444
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3

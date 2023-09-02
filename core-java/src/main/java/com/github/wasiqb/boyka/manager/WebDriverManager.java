@@ -1,6 +1,7 @@
 package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.enums.Message.BROWSER_OPTION_NOT_SUPPORTED;
 import static com.github.wasiqb.boyka.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
 import static com.github.wasiqb.boyka.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
 import static com.github.wasiqb.boyka.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
@@ -25,8 +26,10 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
+import com.github.wasiqb.boyka.enums.Browser;
 import com.github.wasiqb.boyka.enums.TargetProviders;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
@@ -83,11 +86,30 @@ class WebDriverManager implements IDriverManager {
         LOGGER.traceExit ();
     }
 
+    private MutableCapabilities getBrowserOptions (final Browser browser, final WebSetting webSetting) {
+        switch (browser) {
+            case CHROME:
+                return getChromeOptions (webSetting);
+            case EDGE:
+                return getEdgeOptions (webSetting);
+            case FIREFOX:
+                return getFirefoxOptions (webSetting);
+            case SAFARI:
+                return getSafariOptions (webSetting);
+            case NONE:
+            case REMOTE:
+            default:
+                throwError (BROWSER_OPTION_NOT_SUPPORTED, browser.name ());
+        }
+        return null;
+    }
+
     private Capabilities getCapabilities (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         final var capabilities = requireNonNull (webSetting.getCapabilities (), CAPABILITIES_REQUIRED_FOR_REMOTE);
         final var remoteCapabilities = new MutableCapabilities ();
         setupCloudDriverOptions (remoteCapabilities, capabilities, webSetting.getTarget ());
+        setupDriverOptions (remoteCapabilities, capabilities, webSetting);
         return LOGGER.traceExit (remoteCapabilities);
     }
 
@@ -127,7 +149,7 @@ class WebDriverManager implements IDriverManager {
 
     private URL getRemoteUrl (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-        final var URL_PATTERN = "{0}://{1}/wd/hub";
+        final var URL_PATTERN = "{0}://{1}";
         final var target = webSetting.getTarget ();
         final var hostName = new StringBuilder (getHostName (webSetting, target));
         if (webSetting.getPort () != 0) {
@@ -138,6 +160,9 @@ class WebDriverManager implements IDriverManager {
             requireNonNull (requireNonNullElse (webSetting.getProtocol (), target.getProtocol ()),
                 PROTOCOL_REQUIRED_FOR_HOST, hostName).name ()
                 .toLowerCase (), hostName);
+        if (target != LOCAL) {
+            hostName.append ("/wd/hub");
+        }
         try {
             return LOGGER.traceExit (new URL (url));
         } catch (final MalformedURLException e) {
@@ -199,6 +224,20 @@ class WebDriverManager implements IDriverManager {
         return LOGGER.traceExit (new ChromeDriver (options));
     }
 
+    private <E extends MutableCapabilities> void setupDriverOptions (final MutableCapabilities options,
+        final Map<String, Object> capabilities, final WebSetting webSetting) {
+        if (capabilities != null && webSetting.getTarget () == LOCAL) {
+            final var browserName = capabilities.get ("browserName")
+                .toString ();
+            if (isNotEmpty (browserName)) {
+                requireNonNull (getBrowserOptions (Browser.valueOf (browserName.toUpperCase ()), webSetting),
+                    BROWSER_OPTION_NOT_SUPPORTED, browserName).asMap ()
+                    .forEach (options::setCapability);
+            }
+            capabilities.forEach (options::setCapability);
+        }
+    }
+
     private WebDriver setupEdgeDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
         final var options = getEdgeOptions (webSetting);
@@ -213,7 +252,6 @@ class WebDriverManager implements IDriverManager {
 
     private WebDriver setupRemoteDriver (final WebSetting webSetting) {
         LOGGER.traceEntry ();
-
         final var driver = new RemoteWebDriver (requireNonNull (getRemoteUrl (webSetting), NULL_REMOTE_URL),
             getCapabilities (webSetting));
         driver.setFileDetector (new LocalFileDetector ());

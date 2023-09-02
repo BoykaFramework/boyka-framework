@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
+import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
 import static java.lang.System.getProperty;
 import static java.text.MessageFormat.format;
@@ -54,7 +55,7 @@ interface IDriverManager {
 
     default <E extends MutableCapabilities> void setupCloudDriverOptions (final E options,
         final Map<String, Object> capabilities, final TargetProviders targetProviders) {
-        if (capabilities != null) {
+        if (capabilities != null && targetProviders != LOCAL) {
             final var optionCapabilities = new HashMap<String, Object> ();
             capabilities.forEach ((k, v) -> {
                 if (v instanceof String) {

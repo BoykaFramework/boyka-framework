@@ -28,7 +28,7 @@
     <url>https://github.com/BoykaFramework/boyka-framework</url>
 
     <properties>
-        <selenium-webdriver.version>4.11.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.12.0</selenium-webdriver.version>
         <testng.version>7.8.0</testng.version>
         <appium-java-client.version>8.5.1</appium-java-client.version>
         <okhttp.version>4.11.0</okhttp.version>
@@ -54,8 +54,8 @@
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.12.2</checkstyle.version>
-        <aspectj.version>1.9.19</aspectj.version>
+        <checkstyle.version>10.12.3</checkstyle.version>
+        <aspectj.version>1.9.20</aspectj.version>
         <suite-name>testng</suite-name>
         <suite-xml>test-suites/${suite-name}.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
@@ -80,7 +80,7 @@
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.1.0</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <allure-testng.version>2.23.0</allure-testng.version>
+        <allure-testng.version>2.24.0</allure-testng.version>
         <maven-failsafe.version>3.1.2</maven-failsafe.version>
     </properties>
 

@@ -121,7 +121,7 @@ The file name and it's location cannot be modified.
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "12",
           "name": "Nexus_6",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
