@@ -156,13 +156,13 @@ class WebDriverManager implements IDriverManager {
             hostName.append (":")
                 .append (webSetting.getPort ());
         }
+        if (target != LOCAL) {
+            hostName.append ("/wd/hub");
+        }
         final var url = format (URL_PATTERN,
             requireNonNull (requireNonNullElse (webSetting.getProtocol (), target.getProtocol ()),
                 PROTOCOL_REQUIRED_FOR_HOST, hostName).name ()
                 .toLowerCase (), hostName);
-        if (target != LOCAL) {
-            hostName.append ("/wd/hub");
-        }
         try {
             return LOGGER.traceExit (new URL (url));
         } catch (final MalformedURLException e) {
