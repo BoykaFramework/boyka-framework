@@ -101,7 +101,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           avd-name: Pixel_7_Pro
-          api-level: 31
+          api-level: 30
           target: ${{ inputs.emulator-target }}
           arch: x86
           profile: Nexus 6

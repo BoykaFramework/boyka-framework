@@ -167,7 +167,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "11",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -200,7 +200,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "11",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -233,7 +233,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "11",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -340,7 +340,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "11",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
