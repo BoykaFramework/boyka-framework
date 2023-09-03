@@ -18,6 +18,7 @@ package com.github.wasiqb.boyka.config.ui.mobile.server;
 
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -60,7 +61,7 @@ public class ServerSetting {
      * @return Path to Appium Config.
      */
     public String getConfigPath () {
-        if (isExternalConfig ()) {
+        if (isExternalConfig () || isEmpty (this.configPath)) {
             return this.configPath;
         }
         return Path.of (System.getProperty ("user.dir"), this.configPath)
