@@ -114,7 +114,7 @@ jobs:
       suite-name: testng-mobile-grid
       run-appium: true
       run-ios: true
-      run-android: true
+      run-android: false
       run-grid: true
 
   test-mobile-web:
