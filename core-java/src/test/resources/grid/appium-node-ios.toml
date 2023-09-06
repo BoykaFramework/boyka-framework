@@ -8,5 +8,5 @@ detect-drivers = false
 url = "http://localhost:4733"
 status-endpoint = "/status"
 configs = [
-    "1", "{\"platformName\": \"iOS\", \"appium:platformVersion\": \"16.2\", \"appium:deviceName\": \"iPhone 14\",\"appium:automationName\": \"XCUITest\"}"
+    "1", "{\"platformName\": \"iOS\", \"appium:platformVersion\": \"16.4\", \"appium:deviceName\": \"iPhone 14\",\"appium:automationName\": \"XCUITest\"}"
 ]

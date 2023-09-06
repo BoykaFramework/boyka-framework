@@ -6,7 +6,7 @@ on:
       runs-on:
         type: string
         description: On which runner to run on
-        default: ubuntu
+        default: ubuntu-latest
       java-version:
         type: string
         description: Version of Java to run on
@@ -51,7 +51,7 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ inputs.runs-on }}-latest
+    runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
@@ -101,13 +101,13 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           avd-name: Pixel_7_Pro
-          api-level: 30
+          api-level: 31
           target: ${{ inputs.emulator-target }}
-          arch: x86
+          arch: arm64-v8a
           profile: Nexus 6
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
+          disable-animations: true
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 
       - name: All ${{ inputs.suite-name }} Test execution

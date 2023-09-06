@@ -64,7 +64,7 @@ jobs:
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-local
-      runs-on: macos
+      runs-on: macos-latest
 
   test-web-bs:
     needs:
@@ -99,7 +99,7 @@ jobs:
       - build
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos
+      runs-on: macos-13
       suite-name: testng-mobile-local
       run-appium: true
       run-ios: true
@@ -110,12 +110,13 @@ jobs:
       - build
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos
+      runs-on: macos-13
       suite-name: testng-mobile-grid
       run-appium: true
       run-ios: true
-      run-android: false
+      run-android: true
       run-grid: true
+      emulator-target: playstore
 
   test-mobile-web:
     needs:
