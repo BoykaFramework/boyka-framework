@@ -93,7 +93,7 @@ jobs:
         with:
           model: 'iPhone 14'
           os: 'iOS'
-          os_version: 16.2
+          os_version: 16.4
           shutdown_after_job: true
 
       - name: All Test execution
