@@ -101,13 +101,13 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           avd-name: Pixel_7_Pro
-          api-level: 31
+          api-level: 30
           target: ${{ inputs.emulator-target }}
           arch: x86_64
           profile: Nexus 6
-          force-avd-creation: true
+          force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
+          disable-animations: false
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 
       - name: All ${{ inputs.suite-name }} Test execution

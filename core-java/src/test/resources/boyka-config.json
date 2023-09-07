@@ -149,9 +149,7 @@
       "test_local_empty_browser": {
         "browser": "ABC"
       },
-      "test_local_null_browser": {
-        "browser_options": ["--remote-allow-origins=*"]
-      },
+      "test_local_null_browser": {},
       "test_local_none_browser": {
         "browser": "NONE"
       }
@@ -167,7 +165,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "11",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -200,7 +198,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "11",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -233,7 +231,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "11",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -340,7 +338,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "11",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
