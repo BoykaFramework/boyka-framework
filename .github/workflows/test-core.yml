@@ -105,18 +105,6 @@ jobs:
       run-ios: true
       run-android: true
 
-  test-mobile-grid:
-    needs:
-      - build
-    uses: ./.github/workflows/_test-core-java.yml
-    with:
-      runs-on: macos-13
-      suite-name: testng-mobile-grid
-      run-appium: true
-      run-ios: true
-      run-android: true
-      run-grid: true
-
   test-mobile-web:
     needs:
       - build
@@ -158,7 +146,6 @@ jobs:
       - test-web-lt
       - test-web-grid
       - test-mobile-local
-      - test-mobile-grid
       - test-mobile-web
       - test-mobile-bs
       - test-mobile-lt
@@ -192,12 +179,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: reports-testng-mobile-local
-          path: ${{ github.workspace }}/core-java/reports
-
-      - name: Download reports-testng-mobile-grid files
-        uses: actions/download-artifact@v3
-        with:
-          name: reports-testng-mobile-grid
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-web files

@@ -67,7 +67,7 @@ jobs:
       - name: Install Appium 2.0
         if: ${{ inputs.run-appium }}
         run: |
-          npm install -g appium@next
+          npm install -g appium
           appium driver install uiautomator2
           appium driver install xcuitest
 
@@ -75,17 +75,6 @@ jobs:
         if: ${{ inputs.run-grid && ! inputs.run-appium }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml up -d
-
-      - name: Start Selenium Grid for Mobile
-        if: ${{ inputs.run-grid && inputs.run-appium }}
-        run: |
-          npm install -g kill-port
-          mkdir core-java/logs
-          appium server --config core-java/src/test/resources/grid/appium-android.yml > core-java/logs/appium-android-server.log &
-          appium server --config core-java/src/test/resources/grid/appium-ios.yml > core-java/logs/appium-ios-server.log &
-          java -jar core-java/libs/selenium-server-4.12.0.jar hub > core-java/logs/selenium-hub.log &
-          java -jar core-java/libs/selenium-server-4.12.0.jar node --config core-java/src/test/resources/grid/appium-node-android.toml > core-java/logs/appium-android-node.log &
-          java -jar core-java/libs/selenium-server-4.12.0.jar node --config core-java/src/test/resources/grid/appium-node-ios.toml > core-java/logs/appium-ios-node.log &
 
       - name: Launch iOS Simulator
         if: ${{ inputs.run-ios }}
@@ -123,10 +112,6 @@ jobs:
         if: ${{ inputs.run-grid && ! inputs.run-appium && always() }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml down --remove-orphans
-
-      - name: Stop Selenium Grid for Mobile
-        if: ${{ inputs.run-grid && inputs.run-appium && always() }}
-        run: npx kill-port --port 4723,4733,4444
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3
