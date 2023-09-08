@@ -87,21 +87,26 @@ class WebDriverManager implements IDriverManager {
     }
 
     private MutableCapabilities getBrowserOptions (final Browser browser, final WebSetting webSetting) {
+        MutableCapabilities capabilities = null;
         switch (browser) {
             case CHROME:
-                return getChromeOptions (webSetting);
+                capabilities = getChromeOptions (webSetting);
+                break;
             case EDGE:
-                return getEdgeOptions (webSetting);
+                capabilities = getEdgeOptions (webSetting);
+                break;
             case FIREFOX:
-                return getFirefoxOptions (webSetting);
+                capabilities = getFirefoxOptions (webSetting);
+                break;
             case SAFARI:
-                return getSafariOptions (webSetting);
+                capabilities = getSafariOptions (webSetting);
+                break;
             case NONE:
             case REMOTE:
             default:
                 throwError (BROWSER_OPTION_NOT_SUPPORTED, browser.name ());
         }
-        return null;
+        return capabilities;
     }
 
     private Capabilities getCapabilities (final WebSetting webSetting) {
@@ -224,7 +229,7 @@ class WebDriverManager implements IDriverManager {
         return LOGGER.traceExit (new ChromeDriver (options));
     }
 
-    private <E extends MutableCapabilities> void setupDriverOptions (final MutableCapabilities options,
+    private <E extends MutableCapabilities> void setupDriverOptions (final E options,
         final Map<String, Object> capabilities, final WebSetting webSetting) {
         if (capabilities != null && webSetting.getTarget () == LOCAL) {
             final var browserName = capabilities.get ("browserName")
