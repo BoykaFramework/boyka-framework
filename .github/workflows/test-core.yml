@@ -99,7 +99,7 @@ jobs:
       - build
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos-13
+      runs-on: macos-latest
       suite-name: testng-mobile-local
       run-appium: true
       run-ios: true
@@ -110,7 +110,7 @@ jobs:
       - build
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos-13
+      runs-on: macos-latest
       suite-name: testng-mobile-web
       run-appium: true
       run-ios: true

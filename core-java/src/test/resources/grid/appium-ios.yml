@@ -4,5 +4,5 @@ server:
     - xcuitest
   default-capabilities:
     appium:deviceName: iPhone 14
-    appium:platformVersion: 16.4
+    appium:platformVersion: 16.2
     appium:wdaLocalPort: 8110

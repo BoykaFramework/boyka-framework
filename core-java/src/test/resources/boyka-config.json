@@ -368,7 +368,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.4",
+          "version": "16.2",
           "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -402,7 +402,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.4",
+          "version": "16.2",
           "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -437,7 +437,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.4",
+          "version": "16.2",
           "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -541,7 +541,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.4",
+          "version": "16.2",
           "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
