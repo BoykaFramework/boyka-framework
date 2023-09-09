@@ -6,7 +6,7 @@ on:
       runs-on:
         type: string
         description: On which runner to run on
-        default: ubuntu
+        default: ubuntu-latest
       java-version:
         type: string
         description: Version of Java to run on
@@ -51,7 +51,7 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ inputs.runs-on }}-latest
+    runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
@@ -67,12 +67,12 @@ jobs:
       - name: Install Appium 2.0
         if: ${{ inputs.run-appium }}
         run: |
-          npm install -g appium@next
+          npm install -g appium
           appium driver install uiautomator2
           appium driver install xcuitest
 
-      - name: Start Selenium Grid
-        if: ${{ inputs.run-grid }}
+      - name: Start Selenium Grid for Web
+        if: ${{ inputs.run-grid && ! inputs.run-appium }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml up -d
 
@@ -89,10 +89,10 @@ jobs:
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          avd-name: Pixel_6_Pro
+          avd-name: Pixel_7_Pro
           api-level: 30
           target: ${{ inputs.emulator-target }}
-          arch: x86
+          arch: x86_64
           profile: Nexus 6
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -108,8 +108,8 @@ jobs:
           LT_KEY: ${{ secrets.cloudKey }}
         run: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -P${{ inputs.profile-name }}
 
-      - name: Stop Selenium Grid
-        if: ${{ inputs.run-grid && always() }}
+      - name: Stop Selenium Grid for Web
+        if: ${{ inputs.run-grid && ! inputs.run-appium && always() }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml down --remove-orphans
 

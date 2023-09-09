@@ -196,8 +196,8 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
-          "name": "Pixel_6_Pro",
+          "version": "12",
+          "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -211,7 +211,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
             "install_timeout": 180
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Pixel_7_Pro",
             "headless": true
           }
         }
