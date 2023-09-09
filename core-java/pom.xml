@@ -70,7 +70,7 @@
         <checkstyle.suppress>checkstyles/checkstyle-suppressions.xml</checkstyle.suppress>
         <sonar.report>${project.basedir}/reports/${suite-name}-jacoco.exec</sonar.report>
         <jacoco.report>${project.reporting.outputDirectory}/jacoco</jacoco.report>
-        <maven-enforcer.version>3.3.0</maven-enforcer.version>
+        <maven-enforcer.version>3.4.0</maven-enforcer.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
