@@ -55,7 +55,7 @@
         <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
         <checkstyle.version>10.12.3</checkstyle.version>
-        <aspectj.version>1.9.20</aspectj.version>
+        <aspectj.version>1.9.20.1</aspectj.version>
         <suite-name>testng</suite-name>
         <suite-xml>test-suites/${suite-name}.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
