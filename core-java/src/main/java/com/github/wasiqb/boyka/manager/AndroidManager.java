@@ -4,8 +4,10 @@ import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
 import static com.github.wasiqb.boyka.enums.AutomationType.UI_AUTOMATOR;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
+import static com.github.wasiqb.boyka.enums.Message.SESSION_NOT_STARTED;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.Validator.setOptionIfPresent;
 import static io.appium.java_client.Setting.IGNORE_UNIMPORTANT_VIEWS;
 import static java.time.Duration.ofSeconds;
@@ -18,6 +20,7 @@ import com.github.wasiqb.boyka.enums.DeviceType;
 import com.github.wasiqb.boyka.enums.TargetProviders;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import org.openqa.selenium.SessionNotCreatedException;
 
 class AndroidManager implements IDriverManager {
     private final MobileSetting mobileSetting;
@@ -99,8 +102,12 @@ class AndroidManager implements IDriverManager {
         } else {
             setLocalUiAutomatorOptions (options);
         }
-        setDriver (new AndroidDriver (getSession ().getServiceManager ()
-            .getServiceUrl (), options));
+        try {
+            setDriver (new AndroidDriver (getSession ().getServiceManager ()
+                .getServiceUrl (), options));
+        } catch (final SessionNotCreatedException e) {
+            handleAndThrow (SESSION_NOT_STARTED, e);
+        }
         navigateToBaseUrl (this.settings.getApplication ());
     }
 }

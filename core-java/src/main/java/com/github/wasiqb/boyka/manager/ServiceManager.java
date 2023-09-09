@@ -48,6 +48,7 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Path;
 
 import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -266,7 +267,11 @@ class ServiceManager {
             .getLogging ()
             .getPath ();
         if (logFolderPath != null) {
-            final var filePath = new File (format ("{0}/server-{1}.log", logFolderPath, currentThread ().getId ()));
+            final var fileName = format ("appium-{0}-server-{1}.log", getSession ().getPlatformType ()
+                .name ()
+                .toLowerCase (), currentThread ().getId ());
+            final var filePath = Path.of (System.getProperty ("user.dir"), logFolderPath, fileName)
+                .toFile ();
             this.builder.withLogFile (filePath);
         }
     }
