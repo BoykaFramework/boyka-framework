@@ -49,14 +49,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
       - name: Setup Node v16
         uses: actions/setup-node@v3
         with:
           node-version: ${{ inputs.node-version }}
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm i
 
       - name: Get the previous version
         id: old_version
@@ -72,11 +76,11 @@ jobs:
 
       - name: Update pre-release version
         if: ${{ inputs.pre-release }}
-        run: yarn prerelease
+        run: pnpm prerelease
 
       - name: Update release version
         if: ${{ ! inputs.pre-release }}
-        run: yarn release
+        run: pnpm release
 
       - name: Get the new version
         id: version
@@ -87,7 +91,7 @@ jobs:
       - name: Generate Change log
         if: ${{ steps.version.outputs.version != null }}
         run: |
-          yarn changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
+          pnpm changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
       - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v3
@@ -237,15 +241,6 @@ jobs:
       - name: Push updated version files
         uses: EndBug/add-and-commit@v9
         with:
-          add: "[
-            'core-java/pom.xml',
-            'lerna.json',
-            'CHANGELOG.md',
-            'website/package.json',
-            'README.md',
-            'package.json',
-            'website/docs/framework-docs/getting-started/usage.md',
-            ]"
           message: |
             chore(Internal): :bookmark: released v${{ needs.prepare.outputs.new-version }} to maven central
           push: true

@@ -1,0 +1,8 @@
+server:
+  port: 4733
+  use-drivers:
+    - xcuitest
+  default-capabilities:
+    appium:deviceName: iPhone 14
+    appium:platformVersion: 16.2
+    appium:wdaLocalPort: 8110

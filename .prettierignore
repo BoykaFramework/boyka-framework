@@ -1,9 +1,10 @@
 website/.docusaurus
 website/build
-**/.yarn
-**/.vscode
+.vscode/
+.github/
 core-java/
 sample-tests/
-.pnp.*
 *.md*
 *.xml
+*.toml
+build/

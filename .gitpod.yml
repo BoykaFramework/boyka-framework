@@ -11,5 +11,5 @@ tasks:
   - name: Build Java project
     command: mvn -f core-java/pom.xml clean install -DskipTests
   - name: Build Website
-    init: yarn install
-    command: yarn build:site
+    init: pnpm i
+    command: pnpm build:site

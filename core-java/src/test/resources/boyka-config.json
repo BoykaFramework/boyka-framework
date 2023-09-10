@@ -64,9 +64,12 @@
         }
       },
       "test_selenium_grid": {
-        "browser": "CHROME",
+        "browser": "REMOTE",
         "target": "LOCAL",
-        "port": "4444"
+        "port": "4444",
+        "capabilities": {
+          "browserName": "chrome"
+        }
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
@@ -146,9 +149,7 @@
       "test_local_empty_browser": {
         "browser": "ABC"
       },
-      "test_local_null_browser": {
-        "browser_options": ["--remote-allow-origins=*"]
-      },
+      "test_local_null_browser": {},
       "test_local_none_browser": {
         "browser": "NONE"
       }
@@ -165,7 +166,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_6_Pro",
+          "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -182,7 +183,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Pixel_7_Pro",
             "headless": true
           }
         }
@@ -198,7 +199,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_6_Pro",
+          "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "system_port": 8201,
@@ -216,7 +217,39 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Pixel_7_Pro",
+            "headless": true
+          }
+        }
+      },
+      "test_grid_wdio_android": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4444,
+          "driver": "UI_AUTOMATOR",
+          "external": true
+        },
+        "device": {
+          "os": "ANDROID",
+          "version": "11",
+          "name": "Pixel_7_Pro",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
+          "full_reset": true,
+          "swipe": {
+            "max_swipe_until_found": 5
+          },
+          "application": {
+            "path": "/apps/android/wdio-demo.apk",
+            "wait_activity": "com.wdiodemoapp.MainActivity",
+            "type": "HYBRID",
+            "install_timeout": 180,
+            "wait_timeout": 120
+          },
+          "virtual_device": {
+            "name": "Pixel_7_Pro",
             "headless": true
           }
         }
@@ -224,13 +257,14 @@
       "test_bs_android": {
         "server": {
           "target": "BROWSER_STACK",
+          "base_path": "/wd/hub",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
           "driver": "UI_AUTOMATOR"
         },
         "device": {
           "os": "ANDROID",
-          "version": "11.0",
+          "version": "12.0",
           "name": "Google Pixel 5",
           "type": "CLOUD",
           "ignore_unimportant_views": true,
@@ -260,6 +294,7 @@
       "test_lt_android": {
         "server": {
           "target": "LAMBDA_TEST_MOBILE",
+          "base_path": "/wd/hub",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
           "driver": "UI_AUTOMATOR"
@@ -304,7 +339,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_6_Pro",
+          "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "system_port": 8202,
@@ -319,7 +354,7 @@
             "base_url": "https://www.saucedemo.com"
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Pixel_7_Pro",
             "headless": true
           }
         }
@@ -393,9 +428,44 @@
           }
         }
       },
+      "test_grid_wdio_ios": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4444,
+          "driver": "XCUI",
+          "external": true
+        },
+        "device": {
+          "os": "IOS",
+          "version": "16.2",
+          "name": "iPhone 14",
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "connect_keyboard": false,
+          "typing_speed": 35,
+          "swipe": {
+            "max_swipe_until_found": 5
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
+          },
+          "wda": {
+            "launch_timeout": 120,
+            "connection_timeout": 120
+          },
+          "application": {
+            "path": "/apps/ios/wdio-demo.app.zip",
+            "type": "HYBRID",
+            "install_timeout": 180
+          }
+        }
+      },
       "test_bs_ios": {
         "server": {
           "target": "BROWSER_STACK",
+          "base_path": "/wd/hub",
           "user_name": "${env:BS_USER}",
           "password": "${env:BS_KEY}",
           "driver": "XCUI"
@@ -430,6 +500,7 @@
       "test_lt_ios": {
         "server": {
           "target": "LAMBDA_TEST_MOBILE",
+          "base_path": "/wd/hub",
           "user_name": "${env:LT_USER}",
           "password": "${env:LT_KEY}",
           "driver": "XCUI"

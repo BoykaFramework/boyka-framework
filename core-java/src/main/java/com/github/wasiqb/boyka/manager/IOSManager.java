@@ -19,8 +19,10 @@ package com.github.wasiqb.boyka.manager;
 import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.DeviceType.VIRTUAL;
+import static com.github.wasiqb.boyka.enums.Message.SESSION_NOT_STARTED;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.Validator.setOptionIfPresent;
 import static io.appium.java_client.remote.IOSMobileCapabilityType.XCODE_ORG_ID;
 import static io.appium.java_client.remote.IOSMobileCapabilityType.XCODE_SIGNING_ID;
@@ -34,6 +36,7 @@ import com.github.wasiqb.boyka.config.ui.mobile.device.WDASetting;
 import com.github.wasiqb.boyka.enums.DeviceType;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
+import org.openqa.selenium.SessionNotCreatedException;
 
 class IOSManager implements IDriverManager {
     private final MobileSetting mobileSetting;
@@ -54,8 +57,12 @@ class IOSManager implements IDriverManager {
         } else {
             setupLocalSimulatorOptions (options);
         }
-        setDriver (new IOSDriver (getSession ().getServiceManager ()
-            .getServiceUrl (), options));
+        try {
+            setDriver (new IOSDriver (getSession ().getServiceManager ()
+                .getServiceUrl (), options));
+        } catch (final SessionNotCreatedException e) {
+            handleAndThrow (SESSION_NOT_STARTED, e);
+        }
         navigateToBaseUrl (this.settings.getApplication ());
     }
 

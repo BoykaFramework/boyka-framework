@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint-staged
-yarn build:site
+pnpm lint-staged
+pnpm build:site
 mvn clean install -f core-java/pom.xml -DskipTests

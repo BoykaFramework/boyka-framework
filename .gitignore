@@ -5,13 +5,7 @@
 *.iml
 .DS_Store
 
-.pnp.*
-**/.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!**/.yarn/sdks
-/node_modules
+node_modules/
 
 .changelog
 .docusaurus/

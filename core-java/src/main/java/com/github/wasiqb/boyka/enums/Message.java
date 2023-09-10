@@ -37,6 +37,10 @@ public enum Message {
      */
     AUTH_PASSWORD_REQUIRED ("Basic auth password is required..."),
     /**
+     * Browser option not supported Error.
+     */
+    BROWSER_OPTION_NOT_SUPPORTED ("Browser options not supported for [{0}] browser..."),
+    /**
      * Remote execution requires capabilities
      */
     CAPABILITIES_REQUIRED_FOR_REMOTE ("Capabilities required for remote execution..."),

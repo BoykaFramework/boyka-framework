@@ -18,7 +18,9 @@ package com.github.wasiqb.boyka.config.ui.mobile.server;
 
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import com.github.wasiqb.boyka.enums.AutomationType;
@@ -37,9 +39,11 @@ public class ServerSetting {
     private List<String>    allowInsecure;
     private AndroidSetting  android;
     private String          appiumPath;
-    private String          basePath        = "/wd/hub";
+    private String          basePath;
+    private String          configPath;
     private AutomationType  driver;
     private boolean         external;
+    private boolean         externalConfig;
     private String          host;
     private IOSSetting      ios;
     private String          nodePath;
@@ -50,6 +54,19 @@ public class ServerSetting {
     private TargetProviders target          = LOCAL;
     private int             timeout         = 30;
     private String          userName;
+
+    /**
+     * Gets the Appium Config path
+     *
+     * @return Path to Appium Config.
+     */
+    public String getConfigPath () {
+        if (isExternalConfig () || isEmpty (this.configPath)) {
+            return this.configPath;
+        }
+        return Path.of (System.getProperty ("user.dir"), this.configPath)
+            .toString ();
+    }
 
     /**
      * Gets cloud password.
