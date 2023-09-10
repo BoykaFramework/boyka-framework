@@ -48,6 +48,7 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Path;
 
 import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -72,7 +73,7 @@ class ServiceManager {
 
     ServiceManager (final ServerSetting setting) {
         this.setting = setting;
-        if (!isCloud ()) {
+        if (!isCloud () && !setting.isExternal ()) {
             this.builder = new AppiumServiceBuilder ();
             buildService ();
         }
@@ -102,7 +103,7 @@ class ServiceManager {
 
     URL getServiceUrl () {
         LOG.trace ("Fetching Appium Service URL...");
-        if (!isCloud ()) {
+        if (!isCloud () && !this.setting.isExternal ()) {
             return this.service.getUrl ();
         }
         try {
@@ -146,13 +147,17 @@ class ServiceManager {
 
     private void buildService () {
         LOG.trace ("Building Appium Service started...");
-        final var target = this.setting.getTarget ();
-        this.builder.withIPAddress (requireNonNullElse (this.setting.getHost (), target.getHost ()))
-            .withTimeout (ofSeconds (this.setting.getTimeout ()));
-        setPort ();
-        setAppiumJS ();
-        setNodeExe ();
-        setArguments ();
+        if (isNotEmpty (this.setting.getConfigPath ())) {
+            setArgument (() -> "--config", this.setting.getConfigPath ());
+        } else {
+            final var target = this.setting.getTarget ();
+            this.builder.withIPAddress (requireNonNullElse (this.setting.getHost (), target.getHost ()))
+                .withTimeout (ofSeconds (this.setting.getTimeout ()));
+            setPort ();
+            setAppiumJS ();
+            setNodeExe ();
+            setArguments ();
+        }
         this.service = AppiumDriverLocalService.buildService (this.builder);
         LOG.trace ("Building Appium Service done...");
     }
@@ -262,7 +267,11 @@ class ServiceManager {
             .getLogging ()
             .getPath ();
         if (logFolderPath != null) {
-            final var filePath = new File (format ("{0}/server-{1}.log", logFolderPath, currentThread ().getId ()));
+            final var fileName = format ("appium-{0}-server-{1}.log", getSession ().getPlatformType ()
+                .name ()
+                .toLowerCase (), currentThread ().getId ());
+            final var filePath = Path.of (System.getProperty ("user.dir"), logFolderPath, fileName)
+                .toFile ();
             this.builder.withLogFile (filePath);
         }
     }

@@ -17,9 +17,7 @@ Let's see how to set configuration in the configuration file for Android applica
       "script_timeout": 10
     },
     "logging": {
-      "exclude_logs": [
-        "bugreport"
-      ]
+      "exclude_logs": ["bugreport"]
     },
     "screenshot": {
       "enabled": true,
@@ -35,14 +33,12 @@ Let's see how to set configuration in the configuration file for Android applica
           "base_path": "/wd/hub",
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": [
-            "get_server_logs"
-          ]
+          "allow_insecure": ["get_server_logs"]
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
-          "name": "Pixel_6_Pro",
+          "version": "12",
+          "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -56,7 +52,7 @@ Let's see how to set configuration in the configuration file for Android applica
             "install_timeout": 180
           },
           "virtual_device": {
-            "name": "Pixel_6_Pro",
+            "name": "Pixel_7_Pro",
             "headless": true
           }
         }

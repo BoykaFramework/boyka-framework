@@ -1,0 +1,12 @@
+[server]
+port = 5565
+
+[node]
+detect-drivers = false
+
+[relay]
+url = "http://localhost:4733"
+status-endpoint = "/status"
+configs = [
+    "1", "{\"platformName\": \"iOS\",\"appium:platformVersion\": \"16.2\", \"appium:deviceName\": \"iPhone 14\",\"appium:automationName\": \"XCUITest\"}"
+]

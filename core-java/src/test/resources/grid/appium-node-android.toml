@@ -1,0 +1,12 @@
+[server]
+port = 5555
+
+[node]
+detect-drivers = false
+
+[relay]
+url = "http://localhost:4723"
+status-endpoint = "/status"
+configs = [
+    "1", "{\"platformName\": \"Android\", \"appium:platformVersion\": \"11\", \"appium:deviceName\": \"Pixel_7_Pro\",\"appium:automationName\": \"UiAutomator2\", \"appium:avd\": \"Pixel_7_Pro\"}"
+]
