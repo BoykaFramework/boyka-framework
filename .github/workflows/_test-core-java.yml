@@ -95,6 +95,7 @@ jobs:
           arch: x86_64
           profile: Nexus 6
           force-avd-creation: false
+          disk-size: 2048M
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
