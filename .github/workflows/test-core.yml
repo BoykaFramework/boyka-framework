@@ -116,7 +116,6 @@ jobs:
       run-ios: true
       run-android: true
       emulator-target: playstore
-      emulator-arch: x86
 
   test-mobile-bs:
     needs:
