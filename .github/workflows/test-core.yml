@@ -29,6 +29,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [11, 17]
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
@@ -36,7 +39,7 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true
@@ -159,7 +162,7 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: 17
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true
@@ -261,7 +264,7 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true

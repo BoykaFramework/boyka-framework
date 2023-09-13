@@ -14,10 +14,6 @@ on:
 
 permissions: read-all
 
-concurrency:
-  group: boyka-CodeSee-${{ github.ref }}-1
-  cancel-in-progress: true
-
 jobs:
   codesee:
     runs-on: ubuntu-latest

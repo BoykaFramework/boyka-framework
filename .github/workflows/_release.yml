@@ -10,7 +10,7 @@ on:
       java-version:
         type: string
         description: Java version
-        default: 11
+        default: 17
       pre-release:
         type: boolean
         description: Whether the release is pre-release?
@@ -115,7 +115,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ inputs.java-version }}
-          distribution: 'adopt'
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Restore local Maven repository
         uses: actions/cache@v3
@@ -151,7 +152,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ inputs.java-version }}
-          distribution: 'adopt'
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Restore local Maven repository
         uses: actions/cache@v3
