@@ -94,11 +94,8 @@ jobs:
           target: ${{ inputs.emulator-target }}
           arch: x86_64
           profile: Nexus 6
-          force-avd-creation: true
-          disk-size: 2048M
+          force-avd-creation: false
           cores: 4
-          ram-size: 2048M
-          heap-size: 512M
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           disable-spellchecker: true
