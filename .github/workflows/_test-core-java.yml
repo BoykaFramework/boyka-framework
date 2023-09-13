@@ -27,6 +27,10 @@ on:
         type: string
         description: Emulator target image
         default: google_apis
+      emulator-arch:
+        type: string
+        description: Emulator target architecture
+        default: x86_64
       run-grid:
         type: boolean
         description: Start Selenium Grid
@@ -92,13 +96,11 @@ jobs:
           avd-name: Pixel_7_Pro
           api-level: 30
           target: ${{ inputs.emulator-target }}
-          arch: x86_64
+          arch: ${{ inputs.emulator-arch }}
           profile: Nexus 6
           force-avd-creation: false
-          cores: 4
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          disable-spellchecker: true
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 
       - name: All ${{ inputs.suite-name }} Test execution
