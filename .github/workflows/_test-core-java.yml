@@ -31,6 +31,10 @@ on:
         type: string
         description: Emulator target architecture
         default: x86_64
+      emulator-channel:
+        type: string
+        description: Emulator SDK channel
+        default: stable
       run-grid:
         type: boolean
         description: Start Selenium Grid
@@ -89,6 +93,15 @@ jobs:
           os_version: 16.2
           shutdown_after_job: true
 
+      - name: Cache AVD snapshot
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-30
+
       - name: All Test execution
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
@@ -97,11 +110,13 @@ jobs:
           api-level: 30
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
-          profile: Nexus 6
+          profile: pixel
+          channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
+          pre-emulator-launch-script: avdmanager list device
 
       - name: All ${{ inputs.suite-name }} Test execution
         if: ${{ ! inputs.run-android }}
