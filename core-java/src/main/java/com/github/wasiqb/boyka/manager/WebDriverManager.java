@@ -12,6 +12,7 @@ import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Message.SESSION_NOT_STARTED;
 import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
+import static com.github.wasiqb.boyka.enums.Message.WINDOW_RESIZE_NOT_SUPPORTED;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
@@ -58,25 +59,12 @@ class WebDriverManager implements IDriverManager {
         final var webSetting = getSession ().getWebSetting ();
         try {
             switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
-                case CHROME:
-                    setDriver (setupChromeDriver (webSetting));
-                    break;
-                case NONE:
-                    throwError (INVALID_BROWSER);
-                    break;
-                case REMOTE:
-                    setDriver (setupRemoteDriver (webSetting));
-                    break;
-                case SAFARI:
-                    setDriver (setupSafariDriver (webSetting));
-                    break;
-                case EDGE:
-                    setDriver (setupEdgeDriver (webSetting));
-                    break;
-                case FIREFOX:
-                default:
-                    setDriver (setupFirefoxDriver (webSetting));
-                    break;
+                case CHROME -> setDriver (setupChromeDriver (webSetting));
+                case NONE -> throwError (INVALID_BROWSER);
+                case REMOTE -> setDriver (setupRemoteDriver (webSetting));
+                case SAFARI -> setDriver (setupSafariDriver (webSetting));
+                case EDGE -> setDriver (setupEdgeDriver (webSetting));
+                default -> setDriver (setupFirefoxDriver (webSetting));
             }
         } catch (final SessionNotCreatedException e) {
             handleAndThrow (SESSION_NOT_STARTED, e);
@@ -89,22 +77,11 @@ class WebDriverManager implements IDriverManager {
     private MutableCapabilities getBrowserOptions (final Browser browser, final WebSetting webSetting) {
         MutableCapabilities capabilities = null;
         switch (browser) {
-            case CHROME:
-                capabilities = getChromeOptions (webSetting);
-                break;
-            case EDGE:
-                capabilities = getEdgeOptions (webSetting);
-                break;
-            case FIREFOX:
-                capabilities = getFirefoxOptions (webSetting);
-                break;
-            case SAFARI:
-                capabilities = getSafariOptions (webSetting);
-                break;
-            case NONE:
-            case REMOTE:
-            default:
-                throwError (BROWSER_OPTION_NOT_SUPPORTED, browser.name ());
+            case CHROME -> capabilities = getChromeOptions (webSetting);
+            case EDGE -> capabilities = getEdgeOptions (webSetting);
+            case FIREFOX -> capabilities = getFirefoxOptions (webSetting);
+            case SAFARI -> capabilities = getSafariOptions (webSetting);
+            default -> throwError (BROWSER_OPTION_NOT_SUPPORTED, browser.name ());
         }
         return capabilities;
     }
@@ -205,21 +182,11 @@ class WebDriverManager implements IDriverManager {
             .manage ()
             .window ();
         switch (webSetting.getResize ()) {
-            case CUSTOM:
-                window.setSize (webSetting.getCustomSize ());
-                break;
-            case FULL_SCREEN:
-                window.fullscreen ();
-                break;
-            case MAXIMIZED:
-                window.maximize ();
-                break;
-            case MINIMIZED:
-                window.minimize ();
-                break;
-            case NORMAL:
-            default:
-                break;
+            case CUSTOM -> window.setSize (webSetting.getCustomSize ());
+            case FULL_SCREEN -> window.fullscreen ();
+            case MAXIMIZED -> window.maximize ();
+            case MINIMIZED -> window.minimize ();
+            default -> throwError (WINDOW_RESIZE_NOT_SUPPORTED, webSetting.getResize ());
         }
     }
 

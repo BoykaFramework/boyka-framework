@@ -122,7 +122,7 @@ public final class ParallelSession {
      * @return {@link DriverSession}
      */
     @SuppressWarnings ("unchecked")
-    public static <D extends WebDriver> DriverSession<D> getSession () {
+    public static synchronized <D extends WebDriver> DriverSession<D> getSession () {
         LOGGER.traceEntry ();
         final var currentPersona = getCurrentPersona ();
         final var session = SESSION.get ()

@@ -95,6 +95,7 @@ jobs:
 
       - name: Cache AVD snapshot
         uses: actions/cache@v3
+        if: ${{ inputs.run-android }}
         id: avd-cache
         with:
           path: |
@@ -110,7 +111,7 @@ jobs:
           api-level: 30
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
-          profile: pixel
+          profile: pixel_6_pro
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
