@@ -85,9 +85,6 @@ class ServiceManager {
      * @return true, if server is running, else false.
      */
     public boolean isRunning () {
-        if (isCloud ()) {
-            return true;
-        }
         if (!this.setting.isExternal ()) {
             LOG.trace ("Checking if Appium Service is running...");
             return this.service.isRunning ();
@@ -115,24 +112,26 @@ class ServiceManager {
     }
 
     void startServer () {
-        if (isRunning ()) {
-            throwError (SERVER_ALREADY_RUNNING);
-        }
-        var failed = false;
-        try {
-            this.service.start ();
-        } catch (final AppiumServerHasNotBeenStartedLocallyException e) {
-            failed = true;
-            handleAndThrow (ERROR_STARTING_SERVER, e, e.getMessage ());
-        } finally {
-            if (failed) {
-                stopServer ();
+        if (!isCloud ()) {
+            if (isRunning ()) {
+                throwError (SERVER_ALREADY_RUNNING);
+            }
+            var failed = false;
+            try {
+                this.service.start ();
+            } catch (final AppiumServerHasNotBeenStartedLocallyException e) {
+                failed = true;
+                handleAndThrow (ERROR_STARTING_SERVER, e, e.getMessage ());
+            } finally {
+                if (failed) {
+                    stopServer ();
+                }
             }
         }
     }
 
     void stopServer () {
-        if (this.service != null && isRunning ()) {
+        if (!isCloud () && this.service != null && isRunning ()) {
             try {
                 this.service.stop ();
                 this.service = null;
