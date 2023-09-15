@@ -225,11 +225,7 @@ public enum Message {
     /**
      * User name required for cloud execution
      */
-    USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution..."),
-    /**
-     * Window resize type is not supported.
-     */
-    WINDOW_RESIZE_NOT_SUPPORTED ("[{0}] widow resize type is not supported...");
+    USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution...");
 
     private final String messageText;
 }

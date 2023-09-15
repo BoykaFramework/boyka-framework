@@ -12,7 +12,6 @@ import static com.github.wasiqb.boyka.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static com.github.wasiqb.boyka.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static com.github.wasiqb.boyka.enums.Message.SESSION_NOT_STARTED;
 import static com.github.wasiqb.boyka.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
-import static com.github.wasiqb.boyka.enums.Message.WINDOW_RESIZE_NOT_SUPPORTED;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
@@ -182,11 +181,20 @@ class WebDriverManager implements IDriverManager {
             .manage ()
             .window ();
         switch (webSetting.getResize ()) {
-            case CUSTOM -> window.setSize (webSetting.getCustomSize ());
-            case FULL_SCREEN -> window.fullscreen ();
-            case MAXIMIZED -> window.maximize ();
-            case MINIMIZED -> window.minimize ();
-            default -> throwError (WINDOW_RESIZE_NOT_SUPPORTED, webSetting.getResize ());
+            case CUSTOM:
+                window.setSize (webSetting.getCustomSize ());
+                break;
+            case FULL_SCREEN:
+                window.fullscreen ();
+                break;
+            case MAXIMIZED:
+                window.maximize ();
+                break;
+            case MINIMIZED:
+                window.minimize ();
+                break;
+            default:
+                break;
         }
     }
 
