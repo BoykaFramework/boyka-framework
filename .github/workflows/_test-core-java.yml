@@ -101,7 +101,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-30
+          key: avd-30-${{ inputs.emulator-target }}
 
       - name: All Test execution
         if: ${{ inputs.run-android }}
