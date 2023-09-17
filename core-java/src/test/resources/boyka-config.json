@@ -67,7 +67,6 @@
         "browser": "REMOTE",
         "target": "LOCAL",
         "port": "4444",
-        "resize": "MINIMIZED",
         "capabilities": {
           "browserName": "chrome"
         }

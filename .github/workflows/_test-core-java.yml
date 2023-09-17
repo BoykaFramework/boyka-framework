@@ -79,7 +79,7 @@ jobs:
           appium driver install uiautomator2
           appium driver install xcuitest
           mkdir core-java/logs
-          appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs > core-java/logs/appium-server.logs 2>&1 &
+          appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-server.logs 2>&1 &
 
       - name: Start Selenium Grid for Web
         if: ${{ inputs.run-grid && ! inputs.run-appium }}
