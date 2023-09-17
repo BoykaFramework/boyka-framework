@@ -351,7 +351,7 @@
           "application": {
             "browser": "CHROME",
             "type": "WEB",
-            "base_url": "https://www.saucedemo.com"
+            "base_url": "https://the-internet.herokuapp.com/"
           },
           "virtual_device": {
             "name": "Pixel_7_Pro",
@@ -563,7 +563,7 @@
           "application": {
             "browser": "SAFARI",
             "type": "WEB",
-            "base_url": "https://www.saucedemo.com"
+            "base_url": "https://the-internet.herokuapp.com/"
           }
         }
       }

@@ -20,7 +20,7 @@
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_android_web"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.LoginTest">
                 <methods>
                     <include name="testLogin"/>
                 </methods>
@@ -31,7 +31,7 @@
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_local_ios_web"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.LoginTest">
                 <methods>
                     <include name="testLogin"/>
                 </methods>
