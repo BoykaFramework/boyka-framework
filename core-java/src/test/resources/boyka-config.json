@@ -19,7 +19,7 @@
     },
     "web": {
       "test_local_chrome": {
-        "base_url": "http://the-internet.herokuapp.com/",
+        "base_url": "https://the-internet.herokuapp.com/",
         "browser": "CHROME",
         "highlight": true,
         "headless": false,
@@ -67,6 +67,7 @@
         "browser": "REMOTE",
         "target": "LOCAL",
         "port": "4444",
+        "resize": "MINIMIZED",
         "capabilities": {
           "browserName": "chrome"
         }
@@ -192,9 +193,8 @@
         "server": {
           "target": "LOCAL",
           "port": 4724,
-          "session_override": true,
-          "driver": "UI_AUTOMATOR",
-          "allow_insecure": ["get_server_logs", "chromedriver_autodownload"]
+          "external": true,
+          "driver": "UI_AUTOMATOR"
         },
         "device": {
           "os": "ANDROID",

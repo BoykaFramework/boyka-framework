@@ -131,7 +131,7 @@ public class ElementActions implements IElementActions {
 
     @Override
     public void scrollIntoView () {
-        LOGGER.info ("Scrolling element located by: [{}] into view", this.locator.getName ());
+        LOGGER.info ("Scrolling element located by [{}] into view", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onScrollIntoView (this.locator));
         performElementAction (e -> withDriver ().executeScript ("arguments[0].scrollIntoView(true);", e), this.locator);
     }

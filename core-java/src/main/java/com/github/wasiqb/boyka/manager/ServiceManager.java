@@ -51,6 +51,7 @@ import java.net.URL;
 import java.nio.file.Path;
 
 import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
+import com.github.wasiqb.boyka.enums.TargetProviders;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -89,7 +90,7 @@ class ServiceManager {
             LOG.trace ("Checking if Appium Service is running...");
             return this.service.isRunning ();
         }
-        final var address = new InetSocketAddress (this.setting.getHost (), this.setting.getPort ());
+        final var address = new InetSocketAddress (getHost (this.setting.getTarget ()), this.setting.getPort ());
         try (final Socket socket = new Socket ()) {
             socket.connect (address, 2000);
         } catch (final IOException e) {
@@ -112,7 +113,7 @@ class ServiceManager {
     }
 
     void startServer () {
-        if (!isCloud ()) {
+        if (!isCloud () && !this.setting.isExternal ()) {
             if (isRunning ()) {
                 throwError (SERVER_ALREADY_RUNNING);
             }
@@ -147,7 +148,7 @@ class ServiceManager {
             setArgument (() -> "--config", this.setting.getConfigPath ());
         } else {
             final var target = this.setting.getTarget ();
-            this.builder.withIPAddress (requireNonNullElse (this.setting.getHost (), target.getHost ()))
+            this.builder.withIPAddress (getHost (target))
                 .withTimeout (ofSeconds (this.setting.getTimeout ()));
             setPort ();
             setAppiumJS ();
@@ -156,6 +157,10 @@ class ServiceManager {
         }
         this.service = AppiumDriverLocalService.buildService (this.builder);
         LOG.trace ("Building Appium Service done...");
+    }
+
+    private String getHost (final TargetProviders target) {
+        return requireNonNullElse (this.setting.getHost (), target.getHost ());
     }
 
     private String getUrl () {
@@ -168,7 +173,7 @@ class ServiceManager {
                 .append (this.setting.getPassword ())
                 .append ("@");
         }
-        sb.append (requireNonNullElse (this.setting.getHost (), target.getHost ()));
+        sb.append (getHost (target));
         if (this.setting.getPort () > 0) {
             sb.append (":")
                 .append (this.setting.getPort ());

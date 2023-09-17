@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
  * @since 14-Mar-2023
  */
 public class FileUploadTest {
-    private static final String URL = "http://the-internet.herokuapp.com/upload";
+    private static final String URL = "https://the-internet.herokuapp.com/upload";
 
     /**
      * Setup test class by initialising driver.
