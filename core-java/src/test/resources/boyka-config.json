@@ -397,7 +397,10 @@
           "target": "LOCAL",
           "port": 4726,
           "session_override": true,
-          "driver": "XCUI"
+          "driver": "XCUI",
+          "ios": {
+            "webkit_proxy_port": 27752
+          }
         },
         "device": {
           "os": "IOS",

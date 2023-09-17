@@ -16,15 +16,12 @@
 
 package com.github.wasiqb.boyka.manager;
 
-import static com.github.wasiqb.boyka.enums.Message.ERROR_SERVER_NOT_RUNNING;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STARTING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STOPPING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
-import static com.github.wasiqb.boyka.enums.Message.SERVER_ALREADY_RUNNING;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
-import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.BOOTSTRAP_PORT_NUMBER;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.REBOOT;
 import static io.appium.java_client.service.local.flags.AndroidServerFlag.SUPPRESS_ADB_KILL_SERVER;
@@ -43,10 +40,7 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.URL;
 import java.nio.file.Path;
 
@@ -80,25 +74,6 @@ class ServiceManager {
         }
     }
 
-    /**
-     * Determines if the server is running.
-     *
-     * @return true, if server is running, else false.
-     */
-    public boolean isRunning () {
-        if (!this.setting.isExternal ()) {
-            LOG.trace ("Checking if Appium Service is running...");
-            return this.service.isRunning ();
-        }
-        final var address = new InetSocketAddress (getHost (this.setting.getTarget ()), this.setting.getPort ());
-        try (final Socket socket = new Socket ()) {
-            socket.connect (address, 2000);
-        } catch (final IOException e) {
-            handleAndThrow (ERROR_SERVER_NOT_RUNNING, e, e.getMessage ());
-        }
-        return true;
-    }
-
     URL getServiceUrl () {
         LOG.trace ("Fetching Appium Service URL...");
         if (!isCloud () && !this.setting.isExternal ()) {
@@ -114,9 +89,6 @@ class ServiceManager {
 
     void startServer () {
         if (!isCloud () && !this.setting.isExternal ()) {
-            if (isRunning ()) {
-                throwError (SERVER_ALREADY_RUNNING);
-            }
             var failed = false;
             try {
                 this.service.start ();
@@ -132,7 +104,7 @@ class ServiceManager {
     }
 
     void stopServer () {
-        if (!isCloud () && this.service != null && isRunning ()) {
+        if (!isCloud () && !this.setting.isExternal () && this.service != null && this.service.isRunning ()) {
             try {
                 this.service.stop ();
                 this.service = null;
