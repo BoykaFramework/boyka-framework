@@ -434,38 +434,22 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 
 ##### Appium Server Configuration {#server-config}
 
-| Property           | Description                                                                                    | Type                                             | Default                 |
-| ------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------ | ----------------------- |
-| `protocol`         | Protocol type of the server host                                                               | [`Protocol`](#supported-protocols)               | `HTTP`                  |
-| `host`             | Host of the server                                                                             | `string`                                         |                         |
-| `port`             | Port on which server will run                                                                  | `int`                                            |                         |
-| `base_path`        | Base path of the server                                                                        | `string`                                         |                         |
-| `external`         | Set `true` if using already running server, else framework will start the server automatically | `boolean`                                        | `false`                 |
-| `session_override` | Enables session override                                                                       | `boolean`                                        | `true`                  |
-| `node_path`        | Node executable path                                                                           | `string`                                         |                         |
-| `appium_path`      | Appium executable `main.js` path                                                               | `string`                                         |                         |
-| `target`           | Target provider name.                                                                          | [`TargetProviders`](#target-providers)           | `TargetProviders.LOCAL` |
-| `user_name`        | User name for cloud service provider.                                                          | `string`                                         | `null`                  |
-| `password`         | Password / Access key for cloud service provider.                                              | `string`                                         | `null`                  |
-| `android`          | Android specific server settings                                                               | [`AndroidServerSetting`](#android-server-config) |                         |
-| `ios`              | iOS specific server settings                                                                   | [`IOSSetting`](#ios-server-config)               |                         |
-| `allow_insecure`   | Allow list of features in server considered as insecure                                        | `List<string>`                                   |                         |
-| `timeout`          | Timeout in seconds for server to start                                                         | `int`                                            | `30`                    |
-| `driver`           | Appium automation driver type                                                                  | [`AutomationType`](#supported-automation-types)  | `null`                  |
-
-###### Android Server Configuration {#android-server-config}
-
-| Property            | Description                               | Type      | Default |
-| ------------------- | ----------------------------------------- | --------- | ------- |
-| `bootstrap_port`    | Bootstrap port                            | `int`     |         |
-| `reboot`            | Should emulator be rebooted?              | `boolean` | `false` |
-| `suppress_adb_kill` | Should kill ADB after session completion? | `boolean` | `true`  |
-
-###### iOS Server Configuration {#ios-server-config}
-
-| Property            | Description                         | Type  | Default |
-| ------------------- | ----------------------------------- | ----- | ------- |
-| `webkit_proxy_port` | Port for Webkit debug proxy for iOS | `int` | `27753` |
+| Property           | Description                                                                                    | Type                                            | Default                 |
+| ------------------ | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- | ----------------------- |
+| `protocol`         | Protocol type of the server host                                                               | [`Protocol`](#supported-protocols)              | `HTTP`                  |
+| `host`             | Host of the server                                                                             | `string`                                        |                         |
+| `port`             | Port on which server will run                                                                  | `int`                                           |                         |
+| `base_path`        | Base path of the server                                                                        | `string`                                        |                         |
+| `external`         | Set `true` if using already running server, else framework will start the server automatically | `boolean`                                       | `false`                 |
+| `session_override` | Enables session override                                                                       | `boolean`                                       | `true`                  |
+| `node_path`        | Node executable path                                                                           | `string`                                        |                         |
+| `appium_path`      | Appium executable `main.js` path                                                               | `string`                                        |                         |
+| `target`           | Target provider name.                                                                          | [`TargetProviders`](#target-providers)          | `TargetProviders.LOCAL` |
+| `user_name`        | User name for cloud service provider.                                                          | `string`                                        | `null`                  |
+| `password`         | Password / Access key for cloud service provider.                                              | `string`                                        | `null`                  |
+| `allow_insecure`   | Allow list of features in server considered as insecure                                        | `List<string>`                                  |                         |
+| `timeout`          | Timeout in seconds for server to start                                                         | `int`                                           | `30`                    |
+| `driver`           | Appium automation driver type                                                                  | [`AutomationType`](#supported-automation-types) | `null`                  |
 
 ##### Mobile Device Configuration {#device-config}
 
