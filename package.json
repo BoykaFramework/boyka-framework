@@ -1,6 +1,6 @@
 {
   "name": "boyka-framework",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "Ultimate Automation framework to handle automation of Web, Mobile and API applications.",
   "author": {
     "name": "Wasiq Bhamla",
@@ -23,27 +23,30 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "workspaces": [
+    "website"
+  ],
   "license": "MIT",
   "private": true,
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
-    "@lerna/child-process": "^7.2.0",
+    "@lerna/child-process": "^7.3.0",
     "@lerna/version": "^6.6.2",
     "@types/node": "^18.17.15",
-    "@typescript-eslint/eslint-plugin": "^6.6.0",
-    "@typescript-eslint/parser": "^6.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
     "commitlint": "^17.7.1",
     "eslint": "^8.49.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.0",
     "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "husky": "^8.0.3",
     "js-yaml": "^4.1.0",
-    "lerna": "7.2.0",
+    "lerna": "7.3.0",
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^14.0.1",
     "lodash": "^4.17.21",

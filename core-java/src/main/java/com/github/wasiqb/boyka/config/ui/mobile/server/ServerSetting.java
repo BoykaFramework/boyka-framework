@@ -37,7 +37,6 @@ import lombok.Data;
 @Data
 public class ServerSetting {
     private List<String>    allowInsecure;
-    private AndroidSetting  android;
     private String          appiumPath;
     private String          basePath;
     private String          configPath;
@@ -45,7 +44,6 @@ public class ServerSetting {
     private boolean         external;
     private boolean         externalConfig;
     private String          host;
-    private IOSSetting      ios;
     private String          nodePath;
     private String          password;
     private int             port;

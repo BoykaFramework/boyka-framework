@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.wasiqb.boyka</groupId>
     <artifactId>boyka-framework</artifactId>
-    <version>0.16.0</version>
+    <version>0.17.0</version>
     <inceptionYear>2022</inceptionYear>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>🎉 Ultimate test automation framework for testing any application on any platform</description>
@@ -41,11 +41,11 @@
         <json-path.version>2.8.0</json-path.version>
         <log4j-core.version>2.20.0</log4j-core.version>
         <log4j-api.version>2.20.0</log4j-api.version>
-        <faker.version>1.9.0</faker.version>
+        <faker.version>2.0.1</faker.version>
         <jackson-dataformat-yaml.version>2.15.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.15.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <json-schema-validator.version>1.0.86</json-schema-validator.version>
+        <json-schema-validator.version>1.0.87</json-schema-validator.version>
         <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
@@ -71,8 +71,8 @@
         <sonar.report>${project.basedir}/reports/${suite-name}-jacoco.exec</sonar.report>
         <jacoco.report>${project.reporting.outputDirectory}/jacoco</jacoco.report>
         <maven-enforcer.version>3.4.0</maven-enforcer.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>3.9.1.2184</sonar.maven.version>
         <jacoco.version>0.8.10</jacoco.version>
@@ -358,7 +358,7 @@
                                     <version>3.8</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>11</version>
+                                    <version>17</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
@@ -405,7 +405,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <release>11</release>
+                    <release>17</release>
                     <encoding>UTF-8</encoding>
                     <forceJavacCompilerUse>true</forceJavacCompilerUse>
                 </configuration>
