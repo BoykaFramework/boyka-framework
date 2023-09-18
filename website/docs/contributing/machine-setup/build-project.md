@@ -69,7 +69,7 @@ The core framework project is located in `core-java/` directory.
 `Maven` is the build tool we would be using for this project. So need to have Maven installed on your machine before you proceed to build the project.
 
 :::danger Minimum Maven version check
-Minimum version for Maven `3.8.0` is required, else, project will **not build**
+Minimum version for Maven `3.9.0` is required, else, project will **not build**
 :::
 
 In case Maven is not installed on your machine, the following steps should help.
