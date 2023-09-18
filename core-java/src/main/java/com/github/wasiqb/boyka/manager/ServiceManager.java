@@ -182,12 +182,6 @@ class ServiceManager {
         }
     }
 
-    private void setArgument (final ServerArgument flag, final int value) {
-        if (value > 0) {
-            this.builder.withArgument (flag, Integer.toString (value));
-        }
-    }
-
     private void setArgument (final ServerArgument flag, final String value) {
         if (isNoneEmpty (value)) {
             this.builder.withArgument (flag, value);
