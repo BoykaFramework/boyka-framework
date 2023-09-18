@@ -22,9 +22,6 @@ import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
-import static io.appium.java_client.service.local.flags.AndroidServerFlag.BOOTSTRAP_PORT_NUMBER;
-import static io.appium.java_client.service.local.flags.AndroidServerFlag.REBOOT;
-import static io.appium.java_client.service.local.flags.AndroidServerFlag.SUPPRESS_ADB_KILL_SERVER;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.ALLOW_INSECURE;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.BASEPATH;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
@@ -43,13 +40,13 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.List;
 
 import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
 import com.github.wasiqb.boyka.enums.TargetProviders;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import io.appium.java_client.service.local.flags.IOSServerFlag;
 import io.appium.java_client.service.local.flags.ServerArgument;
 import org.apache.logging.log4j.Logger;
 
@@ -161,15 +158,6 @@ class ServiceManager {
             this.setting.getPassword ());
     }
 
-    private void setAndroidArguments () {
-        final var android = this.setting.getAndroid ();
-        if (android != null) {
-            setArgument (BOOTSTRAP_PORT_NUMBER, android.getBootstrapPort ());
-            setArgument (REBOOT, android.isReboot ());
-            setArgument (SUPPRESS_ADB_KILL_SERVER, android.isSuppressAdbKill ());
-        }
-    }
-
     private void setAppiumJS () {
         if (this.setting.getAppiumPath () != null) {
             final var appJs = new File (this.setting.getAppiumPath ());
@@ -183,21 +171,19 @@ class ServiceManager {
         }
     }
 
-    private void setArgument (final ServerArgument flag, final int value) {
-        if (value > 0) {
-            this.builder.withArgument (flag, Integer.toString (value));
-        }
-    }
-
     private void setArgument (final ServerArgument flag, final String value) {
         if (isNoneEmpty (value)) {
             this.builder.withArgument (flag, value);
         }
     }
 
+    private void setArgument (final ServerArgument flag, final List<String> argList) {
+        if (argList != null && !argList.isEmpty ()) {
+            setArgument (flag, join (",", argList));
+        }
+    }
+
     private void setArguments () {
-        setAndroidArguments ();
-        setIOSArguments ();
         setLogArguments ();
         setCommonArguments ();
     }
@@ -207,17 +193,7 @@ class ServiceManager {
         setArgument (SESSION_OVERRIDE, this.setting.isSessionOverride ());
         setArgument (USE_DRIVERS, this.setting.getDriver ()
             .getDriverName ());
-        if (this.setting.getAllowInsecure () != null && !this.setting.getAllowInsecure ()
-            .isEmpty ()) {
-            setArgument (ALLOW_INSECURE, join (",", this.setting.getAllowInsecure ()));
-        }
-    }
-
-    private void setIOSArguments () {
-        final var ios = this.setting.getIos ();
-        if (ios != null) {
-            setArgument (IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, ios.getWebkitProxyPort ());
-        }
+        setArgument (ALLOW_INSECURE, this.setting.getAllowInsecure ());
     }
 
     private void setLogArguments () {

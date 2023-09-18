@@ -78,23 +78,23 @@ In case Maven is not installed on your machine, the following steps should help.
 
 1. Download the Maven Zip File from the maven download page and extract it.
 1. Add `MAVEN_HOME` System Variable.
-    1. Open the Start menu and search for environment variables. Click on the Edit System environment variables result.
-    1. Under the Advanced tab in the System Properties window, click Environment Variables.  
-    ![System Properties Tab](/img/docs/contributing/system-properties-window.png)
-    1. Click the New button under the System variables section to add a new system environment variable.
-    1. Enter `MAVEN_HOME` as the variable name and the path to the Maven directory as the variable value. Click OK to save the new system variable.
-    ![New System Variable Dialog box](/img/docs/contributing/new-system-variable.png)
+   1. Open the Start menu and search for environment variables. Click on the Edit System environment variables result.
+   1. Under the Advanced tab in the System Properties window, click Environment Variables.  
+      ![System Properties Tab](/img/docs/contributing/system-properties-window.png)
+   1. Click the New button under the System variables section to add a new system environment variable.
+   1. Enter `MAVEN_HOME` as the variable name and the path to the Maven directory as the variable value. Click OK to save the new system variable.
+      ![New System Variable Dialog box](/img/docs/contributing/new-system-variable.png)
 1. Add `MAVEN_HOME` directory in the PATH Variable.
-    1. Select the Path variable under the System variables section in the Environment Variables window. Click the Edit button to edit the variable.
-    1. Click the New button in the Edit environment variable window.
-    ![Environment Variable](/img/docs/contributing/env-variable.png)
-    1. Enter `%MAVEN_HOME%\bin` in the new field. Click OK to save changes to the Path variable.
-    1. Click OK in the Environment Variables window to save the changes to the system variables.  
-    ![Edit env Variable](/img/docs/contributing/edit-env-variable.png)
+   1. Select the Path variable under the System variables section in the Environment Variables window. Click the Edit button to edit the variable.
+   1. Click the New button in the Edit environment variable window.
+      ![Environment Variable](/img/docs/contributing/env-variable.png)
+   1. Enter `%MAVEN_HOME%\bin` in the new field. Click OK to save changes to the Path variable.
+   1. Click OK in the Environment Variables window to save the changes to the system variables.  
+      ![Edit env Variable](/img/docs/contributing/edit-env-variable.png)
 1. Verify if Maven is installed correctly.
-    1. Open Command Prompt and run the command: `mvn -v`
-    1. It should display the Maven version as shown in the screenshot below:
-    ![Maven Version Check](/img/docs/contributing/command-prompt-mvn-v.png)
+   1. Open Command Prompt and run the command: `mvn -v`
+   1. It should display the Maven version as shown in the screenshot below:
+      ![Maven Version Check](/img/docs/contributing/command-prompt-mvn-v.png)
 
 #### Installing Maven on MacOS
 
@@ -121,9 +121,9 @@ The documentation project is located in `website/` directory.
 1. Open your terminal or command prompt and run the following command: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
 1. Run the following command to set up the project: `nvm install`
 1. Verify if Node is installed correctly.
-    1. Open Command Prompt and run the command: `nvm -v` and `node -v`
-    1. It should display the NVM and Node version as shown in the screenshot below:
-    ![Node Version Check](/img/docs/contributing/command-prompt-node-v.png)
+   1. Open Command Prompt and run the command: `nvm -v` and `node -v`
+   1. It should display the NVM and Node version as shown in the screenshot below:
+      ![Node Version Check](/img/docs/contributing/command-prompt-node-v.png)
 
 ### Build the documentation project {#build-documentation-project}
 
@@ -154,9 +154,9 @@ Dependency upgrade will only be done by `boyka-core` team members.
 From the root repository directory, run the following command:
 
 ```shell
-> pnpm up -i -r
+> pnpm up -i -r --latest
 ```
 
 This will prompt to select the version to which we need to upgrade any particular dependency.
 
-[github_cli]:https://github.com/cli/cli
+[github_cli]: https://github.com/cli/cli
