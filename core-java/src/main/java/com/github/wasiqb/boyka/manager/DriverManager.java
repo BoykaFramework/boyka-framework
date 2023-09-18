@@ -51,19 +51,11 @@ final class DriverManager {
             final var mobileSetting = getSession ().getMobileSetting ();
             setupAppiumServer (mobileSetting.getServer ());
         }
-        final IDriverManager driverManager;
-        switch (this.platformType) {
-            case WEB:
-                driverManager = new WebDriverManager ();
-                break;
-            case ANDROID:
-                driverManager = new AndroidManager ();
-                break;
-            case IOS:
-            default:
-                driverManager = new IOSManager ();
-                break;
-        }
+        final IDriverManager driverManager = switch (this.platformType) {
+            case WEB -> new WebDriverManager ();
+            case ANDROID -> new AndroidManager ();
+            default -> new IOSManager ();
+        };
         driverManager.setupDriver ();
         setDriverWaits (settings.getTimeout ());
         LOGGER.traceExit ();

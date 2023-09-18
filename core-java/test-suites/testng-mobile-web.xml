@@ -20,18 +20,18 @@
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_android_web"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.LoginTest">
                 <methods>
                     <include name="testLogin"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="Test Boyka Mobile Web app on Local iOS Device" enabled="false">
+    <test name="Test Boyka Mobile Web app on Local iOS Device">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_local_ios_web"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest">
+            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.LoginTest">
                 <methods>
                     <include name="testLogin"/>
                 </methods>
