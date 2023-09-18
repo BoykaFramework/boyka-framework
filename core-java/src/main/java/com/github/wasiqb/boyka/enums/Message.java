@@ -207,10 +207,6 @@ public enum Message {
      */
     RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),
     /**
-     * Appium server already running.
-     */
-    SERVER_ALREADY_RUNNING ("Appium server already running..."),
-    /**
      * Error when starting session.
      */
     SESSION_NOT_STARTED ("Session could not be started..."),

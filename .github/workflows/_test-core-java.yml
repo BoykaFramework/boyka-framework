@@ -10,7 +10,7 @@ on:
       java-version:
         type: string
         description: Version of Java to run on
-        default: 11
+        default: 17
       suite-name:
         type: string
         description: Test Suite name to run
@@ -27,6 +27,14 @@ on:
         type: string
         description: Emulator target image
         default: google_apis
+      emulator-arch:
+        type: string
+        description: Emulator target architecture
+        default: x86_64
+      emulator-channel:
+        type: string
+        description: Emulator SDK channel
+        default: stable
       run-grid:
         type: boolean
         description: Start Selenium Grid
@@ -70,6 +78,8 @@ jobs:
           npm install -g appium
           appium driver install uiautomator2
           appium driver install xcuitest
+          mkdir core-java/logs
+          appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-server.logs 2>&1 &
 
       - name: Start Selenium Grid for Web
         if: ${{ inputs.run-grid && ! inputs.run-appium }}
@@ -85,6 +95,16 @@ jobs:
           os_version: 16.2
           shutdown_after_job: true
 
+      - name: Cache AVD snapshot
+        uses: actions/cache@v3
+        if: ${{ inputs.run-android }}
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-30-${{ inputs.emulator-target }}
+
       - name: All Test execution
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
@@ -92,12 +112,14 @@ jobs:
           avd-name: Pixel_7_Pro
           api-level: 30
           target: ${{ inputs.emulator-target }}
-          arch: x86_64
-          profile: Nexus 6
+          arch: ${{ inputs.emulator-arch }}
+          profile: pixel_6_pro
+          channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
+          pre-emulator-launch-script: avdmanager list device
 
       - name: All ${{ inputs.suite-name }} Test execution
         if: ${{ ! inputs.run-android }}
@@ -112,6 +134,10 @@ jobs:
         if: ${{ inputs.run-grid && ! inputs.run-appium && always() }}
         run: |
           docker-compose -f core-java/compose/docker-compose.yml down --remove-orphans
+
+      - name: Stop Appium Server
+        if: ${{ inputs.run-appium && always() }}
+        run: npx kill-port --port 4724
 
       - name: Upload target folder
         uses: actions/upload-artifact@v3

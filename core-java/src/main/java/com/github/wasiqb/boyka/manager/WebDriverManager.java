@@ -58,25 +58,12 @@ class WebDriverManager implements IDriverManager {
         final var webSetting = getSession ().getWebSetting ();
         try {
             switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
-                case CHROME:
-                    setDriver (setupChromeDriver (webSetting));
-                    break;
-                case NONE:
-                    throwError (INVALID_BROWSER);
-                    break;
-                case REMOTE:
-                    setDriver (setupRemoteDriver (webSetting));
-                    break;
-                case SAFARI:
-                    setDriver (setupSafariDriver (webSetting));
-                    break;
-                case EDGE:
-                    setDriver (setupEdgeDriver (webSetting));
-                    break;
-                case FIREFOX:
-                default:
-                    setDriver (setupFirefoxDriver (webSetting));
-                    break;
+                case CHROME -> setDriver (setupChromeDriver (webSetting));
+                case NONE -> throwError (INVALID_BROWSER);
+                case REMOTE -> setDriver (setupRemoteDriver (webSetting));
+                case SAFARI -> setDriver (setupSafariDriver (webSetting));
+                case EDGE -> setDriver (setupEdgeDriver (webSetting));
+                default -> setDriver (setupFirefoxDriver (webSetting));
             }
         } catch (final SessionNotCreatedException e) {
             handleAndThrow (SESSION_NOT_STARTED, e);
@@ -89,22 +76,11 @@ class WebDriverManager implements IDriverManager {
     private MutableCapabilities getBrowserOptions (final Browser browser, final WebSetting webSetting) {
         MutableCapabilities capabilities = null;
         switch (browser) {
-            case CHROME:
-                capabilities = getChromeOptions (webSetting);
-                break;
-            case EDGE:
-                capabilities = getEdgeOptions (webSetting);
-                break;
-            case FIREFOX:
-                capabilities = getFirefoxOptions (webSetting);
-                break;
-            case SAFARI:
-                capabilities = getSafariOptions (webSetting);
-                break;
-            case NONE:
-            case REMOTE:
-            default:
-                throwError (BROWSER_OPTION_NOT_SUPPORTED, browser.name ());
+            case CHROME -> capabilities = getChromeOptions (webSetting);
+            case EDGE -> capabilities = getEdgeOptions (webSetting);
+            case FIREFOX -> capabilities = getFirefoxOptions (webSetting);
+            case SAFARI -> capabilities = getSafariOptions (webSetting);
+            default -> throwError (BROWSER_OPTION_NOT_SUPPORTED, browser.name ());
         }
         return capabilities;
     }
@@ -217,7 +193,6 @@ class WebDriverManager implements IDriverManager {
             case MINIMIZED:
                 window.minimize ();
                 break;
-            case NORMAL:
             default:
                 break;
         }

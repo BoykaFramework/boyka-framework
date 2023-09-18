@@ -19,6 +19,12 @@ package com.github.wasiqb.boyka.actions.interfaces.listeners.drivers;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 import org.openqa.selenium.WindowType;
 
+/**
+ * Handle windows action events.
+ *
+ * @author Wasiq Bhamla
+ * @since 29-Apr-2023
+ */
 public interface IWindowActionsListener extends BoykaListener {
     default void onClose () {
         // not implemented.
