@@ -43,7 +43,7 @@ import org.apache.logging.log4j.Logger;
  * @author Wasiq Bhamla
  * @since 17-Feb-2022
  */
-public class JsonUtil {
+public final class JsonUtil {
     private static final Gson   GSON;
     private static final Logger LOGGER = getLogger ();
 
@@ -64,15 +64,14 @@ public class JsonUtil {
      */
     public static <T> T fromFile (final String filePath, final Class<T> objectClass) {
         LOGGER.traceEntry ("filePath: {}, objectClass: {}", filePath, objectClass);
-        final var path = requireNonNull (SettingUtils.class.getClassLoader ()
-            .getResource (filePath), NO_JSON_FILE_FOUND.getMessageText ());
+        final var path = requireNonNull (filePath, NO_JSON_FILE_FOUND.getMessageText ());
         T result = null;
-        try (final var reader = new FileReader (path.getPath ())) {
+        try (final var reader = new FileReader (path)) {
             result = GSON.fromJson (reader, of (objectClass).getType ());
         } catch (final JsonSyntaxException e) {
             handleAndThrow (JSON_SYNTAX_ERROR, e);
         } catch (final IOException e) {
-            handleAndThrow (ERROR_READING_FILE, e, path.getPath ());
+            handleAndThrow (ERROR_READING_FILE, e, path);
         }
         return LOGGER.traceExit (result);
     }

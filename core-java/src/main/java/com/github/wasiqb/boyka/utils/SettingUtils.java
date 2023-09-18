@@ -20,8 +20,12 @@ import static com.github.wasiqb.boyka.enums.Message.CONFIG_KEY_NOT_FOUND;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.JsonUtil.fromFile;
 import static java.lang.String.join;
+import static java.lang.System.getProperty;
+import static java.lang.System.getenv;
+import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.nio.file.Path;
 import java.util.Map;
 
 import com.github.wasiqb.boyka.config.FrameworkSetting;
@@ -64,7 +68,13 @@ public final class SettingUtils {
     public static FrameworkSetting loadSetting () {
         LOGGER.traceEntry ();
         if (frameworkSetting == null) {
-            frameworkSetting = fromFile ("boyka-config.json", FrameworkSetting.class);
+            final var defaultPath = Path.of (getProperty ("user.dir"), "src/test/resources")
+                .toString ();
+            final var configDirectory = ofNullable (getenv ("BOYKA_CONFIG_PATH")).orElse (
+                ofNullable (getProperty ("boyka.config.path")).orElse (defaultPath));
+            final var configPath = Path.of (configDirectory, "boyka-config.json")
+                .toString ();
+            frameworkSetting = fromFile (configPath, FrameworkSetting.class);
         }
         return LOGGER.traceExit (frameworkSetting);
     }
