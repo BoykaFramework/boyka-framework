@@ -17,30 +17,40 @@
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
-import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.FileUploadPage.fileUploadPage;
-import static java.lang.System.getProperty;
-
-import java.nio.file.Path;
+import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.LoginPage.loginPage;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
- * Test File Upload feature.
+ * Login Test class.
  *
  * @author Wasiq Bhamla
- * @since 14-Mar-2023
+ * @since 16-Sept-2023
  */
-public class FileUploadTest {
-    private static final String URL = "https://the-internet.herokuapp.com/upload";
+public class LoginTest {
+    private static final String URL = "https://the-internet.herokuapp.com/login";
+
+    /**
+     * Setup test method to take screenshot after each test method.
+     */
+    @AfterMethod (alwaysRun = true)
+    public void afterMethod (final ITestResult result) {
+        if (!result.isSuccess ()) {
+            onWindow ().takeScreenshot ();
+        }
+    }
 
     /**
      * Setup test class by initialising driver.
@@ -51,7 +61,7 @@ public class FileUploadTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
-        createSession ("FileUploadTest", platformType, driverKey);
+        createSession ("LoginTest", platformType, driverKey);
         navigate ().to (URL);
     }
 
@@ -63,14 +73,15 @@ public class FileUploadTest {
         clearSession ();
     }
 
-    @Test
-    public void testFileUpload () {
-        final var filePath = Path.of (getProperty ("user.dir"), "src/test/resources/test-file.txt")
-            .toFile ();
-        onTextBox (fileUploadPage ().getFileUploadInput ()).enterText (filePath.getPath ());
-
-        withMouse (fileUploadPage ().getFileSubmit ()).click ();
-        onElement (fileUploadPage ().getSuccessTitle ()).verifyText ()
-            .isEqualTo ("File Uploaded!");
+    @Test (description = "Test Login Flow")
+    public void testLogin () {
+        onTextBox (loginPage ().getUserName ()).enterText ("tomsmith");
+        onTextBox (loginPage ().getPassword ()).enterText ("SuperSecretPassword!");
+        withMouse (loginPage ().getLogin ()).click ();
+        onElement (loginPage ().getMessage ()).verifyText ()
+            .contains ("You logged into a secure area!");
+        withMouse (loginPage ().getLogout ()).click ();
+        onElement (loginPage ().getMessage ()).verifyText ()
+            .contains ("You logged out of the secure area!");
     }
 }

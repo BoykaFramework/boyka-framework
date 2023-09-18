@@ -121,7 +121,7 @@ public class DriverSession<D extends WebDriver> {
      */
     public <T extends BoykaListener> T getListener (final ListenerType listenerType) {
         T result = null;
-        if (this.listeners.size () == 0) {
+        if (this.listeners.isEmpty ()) {
             loadAllListeners ();
         }
         final var listener = this.listeners.get (listenerType);
