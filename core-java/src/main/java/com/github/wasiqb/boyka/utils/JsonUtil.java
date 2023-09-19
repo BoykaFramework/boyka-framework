@@ -24,9 +24,9 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.google.common.reflect.TypeToken.of;
 import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
 import static com.google.gson.JsonParser.parseString;
-import static java.util.Objects.requireNonNull;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -43,7 +43,7 @@ import org.apache.logging.log4j.Logger;
  * @author Wasiq Bhamla
  * @since 17-Feb-2022
  */
-public class JsonUtil {
+public final class JsonUtil {
     private static final Gson   GSON;
     private static final Logger LOGGER = getLogger ();
 
@@ -64,15 +64,15 @@ public class JsonUtil {
      */
     public static <T> T fromFile (final String filePath, final Class<T> objectClass) {
         LOGGER.traceEntry ("filePath: {}, objectClass: {}", filePath, objectClass);
-        final var path = requireNonNull (SettingUtils.class.getClassLoader ()
-            .getResource (filePath), NO_JSON_FILE_FOUND.getMessageText ());
         T result = null;
-        try (final var reader = new FileReader (path.getPath ())) {
+        try (final var reader = new FileReader (filePath)) {
             result = GSON.fromJson (reader, of (objectClass).getType ());
+        } catch (final FileNotFoundException e) {
+            handleAndThrow (NO_JSON_FILE_FOUND, e, filePath);
         } catch (final JsonSyntaxException e) {
             handleAndThrow (JSON_SYNTAX_ERROR, e);
         } catch (final IOException e) {
-            handleAndThrow (ERROR_READING_FILE, e, path.getPath ());
+            handleAndThrow (ERROR_READING_FILE, e, filePath);
         }
         return LOGGER.traceExit (result);
     }

@@ -11,10 +11,14 @@ The framework is highly configurable. You can configure repeated setting for you
 Boyka framework is driven by `boyka-config.json` configuration file. You must have this file in order to use the framework.
 :::
 
-Configuration is stored in `boyka-config.json` file. This file is in JSON format and is expected to be placed in `src/test/resources/` directory. The file is loaded only once by the framework during the initialization.
+Configuration is stored in `boyka-config.json` file. This file is in JSON format. Following is the logic which Boyka-framework will find the config file:
+
+- First it will check for the config folder in the `BOYKA_CONFIG_PATH` environment variable
+- If the environment variable is not set, then it will check `boyka.config.path` system property
+- If the system property is not set, then by default, it will check in the `src/test/resources` folder of your root project path
 
 :::danger
-The file name and it's location cannot be modified.
+The Config file name cannot be modified. It should always be `boyka-config.json`
 :::
 
 ## Configuration file sample {#config-sample}
