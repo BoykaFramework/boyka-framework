@@ -16,8 +16,14 @@
 
 package com.github.wasiqb.boyka.testng.others;
 
+import static com.github.wasiqb.boyka.utils.JsonUtil.fromFile;
 import static com.google.common.truth.Truth.assertThat;
+import static java.lang.System.getProperty;
 
+import java.nio.file.Path;
+
+import com.github.wasiqb.boyka.config.FrameworkSetting;
+import com.github.wasiqb.boyka.exception.FrameworkError;
 import com.github.wasiqb.boyka.utils.JsonUtil;
 import org.testng.annotations.Test;
 
@@ -26,6 +32,16 @@ import org.testng.annotations.Test;
  * @since 8/22/2022
  */
 public class JsonUtilTest {
+    /**
+     * This method verifies the Error when file is not found.
+     */
+    @Test (expectedExceptions = FrameworkError.class)
+    public void testFromFile () {
+        final var configPath = Path.of (getProperty ("user.dir"), "boyka-config.json")
+            .toString ();
+        fromFile (configPath, FrameworkSetting.class);
+    }
+
     /**
      * This method verifies the output of JSON util toString() method.
      */
