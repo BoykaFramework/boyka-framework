@@ -22,6 +22,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 import com.github.wasiqb.boyka.enums.AutomationType;
 import com.github.wasiqb.boyka.enums.Protocol;
@@ -36,22 +37,33 @@ import lombok.Data;
  */
 @Data
 public class ServerSetting {
-    private List<String>    allowInsecure;
-    private String          appiumPath;
-    private String          basePath;
-    private String          configPath;
-    private AutomationType  driver;
-    private boolean         external;
-    private boolean         externalConfig;
-    private String          host;
-    private String          nodePath;
-    private String          password;
-    private int             port;
-    private Protocol        protocol;
-    private boolean         sessionOverride = true;
-    private TargetProviders target          = LOCAL;
-    private int             timeout         = 30;
-    private String          userName;
+    private boolean             allowCors;
+    private List<String>        allowInsecure;
+    private String              appiumPath;
+    private String              basePath;
+    private String              callbackAddress;
+    private int                 callbackPort;
+    private String              configPath;
+    private List<String>        denyInsecure;
+    private AutomationType      driver;
+    private boolean             external;
+    private boolean             externalConfig;
+    private String              host;
+    private int                 keepAliveTimeout;
+    private LogSetting          logging;
+    private String              nodePath;
+    private Map<String, String> otherArgs;
+    private String              password;
+    private List<String>        plugins;
+    private int                 port;
+    private Protocol            protocol;
+    private boolean             relaxedSecurity;
+    private boolean             sessionOverride = true;
+    private boolean             strictCapabilities;
+    private TargetProviders     target          = LOCAL;
+    private int                 timeout         = 30;
+    private String              userName;
+    private String              webhook;
 
     /**
      * Gets the Appium Config path

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2023, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,20 +14,23 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.config.ui;
+package com.github.wasiqb.boyka.config.ui.mobile.server;
 
-import java.util.List;
+import static com.github.wasiqb.boyka.enums.LogLevel.INFO;
 
+import com.github.wasiqb.boyka.enums.LogLevel;
 import lombok.Data;
 
 /**
- * Appium server log settings.
+ * Mobile logging settings.
  *
  * @author Wasiq Bhamla
- * @since 07-Sept-2022
+ * @since 21-Sept-2023
  */
 @Data
 public class LogSetting {
-    private List<String> excludeLogs;
-    private String       path = "./logs";
+    private boolean  debugSpacing;
+    private LogLevel level = INFO;
+    private boolean  localTimezone;
+    private boolean  timestamp;
 }

@@ -30,7 +30,7 @@ import lombok.Data;
  */
 @Data
 public class UISetting {
-    private LogSetting                 logging    = new LogSetting ();
+    private LogSetting                 logging;
     private Map<String, MobileSetting> mobile;
     private ScreenshotSetting          screenshot = new ScreenshotSetting ();
     private TimeoutSetting             timeout    = new TimeoutSetting ();
