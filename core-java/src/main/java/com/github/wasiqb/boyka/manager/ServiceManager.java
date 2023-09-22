@@ -112,7 +112,7 @@ class ServiceManager {
     }
 
     void stopServer () {
-        if (!isCloud () && !this.setting.isExternal () && this.service != null && this.service.isRunning ()) {
+        if (!isCloud () && !this.setting.isExternal () && !isNull (this.service) && this.service.isRunning ()) {
             try {
                 this.service.stop ();
                 this.service = null;
@@ -170,7 +170,7 @@ class ServiceManager {
     }
 
     private void setAppiumJS () {
-        if (this.setting.getAppiumPath () != null) {
+        if (isNotEmpty (this.setting.getAppiumPath ())) {
             final var appJs = new File (this.setting.getAppiumPath ());
             this.builder.withAppiumJS (appJs);
         }
@@ -195,7 +195,7 @@ class ServiceManager {
     }
 
     private void setArgument (final ServerArgument flag, final List<String> argList) {
-        if (argList != null && !argList.isEmpty ()) {
+        if (!isNull (argList) && !argList.isEmpty ()) {
             setArgument (flag, join (",", argList));
         }
     }
@@ -216,10 +216,13 @@ class ServiceManager {
         setArgument (CALLBACK_PORT, this.setting.getCallbackPort ());
         setArgument (() -> "--keep-alive-timeout", this.setting.getKeepAliveTimeout ());
         setArgument (() -> "--allow-cors", this.setting.isAllowCors ());
-        setArgument (USE_PLUGINS, join (",", this.setting.getPlugins ()));
         setArgument (WEB_HOOK, this.setting.getWebhook ());
         setArgument (RELAXED_SECURITY, this.setting.isRelaxedSecurity ());
         setArgument (STRICT_CAPS, this.setting.isStrictCapabilities ());
+
+        if (!isNull (this.setting.getPlugins ())) {
+            setArgument (USE_PLUGINS, join (",", this.setting.getPlugins ()));
+        }
 
         final var otherArgs = this.setting.getOtherArgs ();
         if (!isNull (otherArgs)) {
@@ -228,16 +231,16 @@ class ServiceManager {
     }
 
     private void setLogArguments () {
+        setLogFile (getSession ().getSetting ()
+            .getUi ()
+            .getLogging ()
+            .getPath ());
         final var logs = this.setting.getLogging ();
         if (!isNull (logs)) {
-            if (logs.getLevel () != null) {
+            if (!isNull (logs.getLevel ())) {
                 setArgument (LOG_LEVEL, logs.getLevel ()
                     .getLevel ());
             }
-            setLogFile (getSession ().getSetting ()
-                .getUi ()
-                .getLogging ()
-                .getPath ());
             setArgument (LOCAL_TIMEZONE, logs.isLocalTimezone ());
             setArgument (LOG_TIMESTAMP, logs.isTimestamp ());
             setArgument (DEBUG_LOG_SPACING, logs.isDebugSpacing ());
@@ -245,7 +248,7 @@ class ServiceManager {
     }
 
     private void setLogFile (final String logFolderPath) {
-        if (logFolderPath != null) {
+        if (isNotEmpty (logFolderPath)) {
             final var fileName = format ("appium-{0}-server-{1}.log", getSession ().getPlatformType ()
                 .name ()
                 .toLowerCase (), currentThread ().getId ());
@@ -256,7 +259,7 @@ class ServiceManager {
     }
 
     private void setNodeExe () {
-        if (this.setting.getNodePath () != null) {
+        if (isNotEmpty (this.setting.getNodePath ())) {
             final var node = new File (this.setting.getNodePath ());
             this.builder.usingDriverExecutable (node);
         }

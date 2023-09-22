@@ -9,7 +9,9 @@
       "highlight_delay": 100
     },
     "logging": {
-      "exclude_logs": ["bugreport"]
+      "exclude_logs": [
+        "bugreport"
+      ]
     },
     "screenshot": {
       "enabled": true,
@@ -28,7 +30,10 @@
           "width": 1580,
           "height": 1080
         },
-        "browser_options": ["use-fake-device-for-media-stream", "use-fake-ui-for-media-stream"]
+        "browser_options": [
+          "use-fake-device-for-media-stream",
+          "use-fake-ui-for-media-stream"
+        ]
       },
       "test_local_firefox": {
         "browser": "FIREFOX"
@@ -161,7 +166,10 @@
           "port": 4723,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": ["get_server_logs", "chromedriver_autodownload"]
+          "allow_insecure": [
+            "get_server_logs",
+            "chromedriver_autodownload"
+          ]
         },
         "device": {
           "os": "ANDROID",
@@ -333,7 +341,10 @@
           "port": 4728,
           "session_override": true,
           "driver": "UI_AUTOMATOR",
-          "allow_insecure": ["get_server_logs", "chromedriver_autodownload"]
+          "allow_insecure": [
+            "get_server_logs",
+            "chromedriver_autodownload"
+          ]
         },
         "device": {
           "os": "ANDROID",
