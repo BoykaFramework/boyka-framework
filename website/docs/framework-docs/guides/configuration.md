@@ -464,6 +464,15 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `webhook` | Also send log output to this http listener | `string` | `null` |
 | `other_args` | Any other Appium server arguments which is currently not supported by Boyka, you can use them in this setting | `Map<string, string>` | `null` |
 
+###### Server Logging Setting {#mobile-log-setting}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `debug_spacing` | Add exaggerated spacing in logs to help with visual inspection | `boolean` | `false` |
+| `level` | Log level | [`LogLevel`](#log-level) | `INFO` |
+| `local_timezone` | Use local timezone for timestamps | `boolean` | `false` |
+| `timestamp` | Show timestamps in console output | `boolean` | `false` |
+
 ##### Mobile Device Configuration {#device-config}
 
 | Property | Description | Type | Default |
