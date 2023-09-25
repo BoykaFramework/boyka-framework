@@ -369,6 +369,7 @@ See the example in [sample configuration file](#config-sample).
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
+| `enable` | Determines whether logging is enabled for the framework | `boolean` | `true` |
 | `exclude_logs` | Exclude any specific logs which is supported by Drivers | `null` |
 | `path` | Path where the logs will be saved | `string` | `{root-folder}/logs` |
 
@@ -443,7 +444,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `port` | Port on which server will run | `int` | |
 | `base_path` | Base path of the server | `string` | |
 | `external` | Set `true` if using already running server, else framework will start the server automatically | `boolean` | `false` |
-| `session_override` | Enables session override | `boolean` | `true` |
+| `session_override` | Enables session override | `boolean` | `false` |
 | `node_path` | Node executable path | `string` | |
 | `appium_path` | Appium executable `main.js` path | `string` | |
 | `target` | Target provider name | [`TargetProviders`](#target-providers) | `TargetProviders.LOCAL` |

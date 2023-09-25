@@ -26,7 +26,6 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static java.lang.System.getProperty;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
-import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -99,7 +98,7 @@ public final class DriverActions implements IDriverActions {
             final var logSetting = getSession ().getSetting ()
                 .getUi ()
                 .getLogging ();
-            if (isNull (logSetting)) {
+            if (!logSetting.isEnable ()) {
                 LOGGER.warn ("Cannot save different logs to file, logging is disabled...");
                 return;
             }

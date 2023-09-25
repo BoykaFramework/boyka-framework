@@ -407,8 +407,17 @@
         "server": {
           "target": "LOCAL",
           "port": 4726,
+          "callback_port": 4726,
           "session_override": true,
-          "driver": "XCUI"
+          "driver": "XCUI",
+          "logging": {
+            "debug_spacing": true,
+            "timestamp": true,
+            "local_timezone": true
+          },
+          "other_args": {
+            "--long-stacktrace": true
+          }
         },
         "device": {
           "os": "IOS",

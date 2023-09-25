@@ -28,6 +28,7 @@ import lombok.Data;
  */
 @Data
 public class LogSetting {
+    private boolean      enable = true;
     private List<String> excludeLogs;
-    private String       path = "./logs";
+    private String       path   = "./logs";
 }

@@ -52,16 +52,16 @@ public class ServerSetting {
     private int                 keepAliveTimeout;
     private LogSetting          logging;
     private String              nodePath;
-    private Map<String, String> otherArgs;
+    private Map<String, Object> otherArgs;
     private String              password;
     private List<String>        plugins;
     private int                 port;
     private Protocol            protocol;
     private boolean             relaxedSecurity;
-    private boolean             sessionOverride = true;
+    private boolean             sessionOverride;
     private boolean             strictCapabilities;
-    private TargetProviders     target          = LOCAL;
-    private int                 timeout         = 30;
+    private TargetProviders     target  = LOCAL;
+    private int                 timeout = 30;
     private String              userName;
     private String              webhook;
 

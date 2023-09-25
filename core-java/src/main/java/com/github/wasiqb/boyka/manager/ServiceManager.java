@@ -226,7 +226,16 @@ class ServiceManager {
 
         final var otherArgs = this.setting.getOtherArgs ();
         if (!isNull (otherArgs)) {
-            otherArgs.forEach ((k, v) -> setArgument (() -> k, v));
+            otherArgs.forEach ((k, v) -> {
+                final ServerArgument flag = () -> k;
+                if (v instanceof Boolean) {
+                    setArgument (flag, (boolean) v);
+                } else if (v instanceof Integer) {
+                    setArgument (flag, (int) v);
+                } else {
+                    setArgument (flag, v.toString ());
+                }
+            });
         }
     }
 
