@@ -333,21 +333,21 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
 
 ## Configuration File properties
 
-| Property            | Description                                                                            | Type     | Default |
-| ------------------- | -------------------------------------------------------------------------------------- | -------- | ------- |
-| `ui`                | Contains UI platform specific configuration. See [UI Config below](#ui-config).        | `object` |         |
-| `api`               | Contains API platform specific configuration. See [API config below](#api-config).     | `object` |         |
-| `listeners_package` | This will be the package name under which all the Boyka framework listeners are saved. | `string` |         |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `ui` | Contains UI platform specific configuration. See [UI Config below](#ui-config). | `object` | |
+| `api` | Contains API platform specific configuration. See [API config below](#api-config). | `object` | |
+| `listeners_package` | This will be the package name under which all the Boyka framework listeners are saved. | `string` | |
 
 ### UI Configuration {#ui-config}
 
-| Property     | Description                                                                             | Type                      | Default |
-| ------------ | --------------------------------------------------------------------------------------- | ------------------------- | ------- |
-| `timeout`    | Contains timeout configuration. See [Timeout Config below](#timeout-config).            | `TimeoutSetting`          |         |
-| `logging`    | Contains logging specific configuration. See [Logging Config below](#ui-logging-config) | `LoggingSetting`          |         |
-| `screenshot` | Contains screenshot configuration. See [Screenshot Config below](#screenshot-config).   | `ScreenshotSetting`       |         |
-| `web`        | Contains web platform configuration. See [Web Config below](#web-config).               | `Map<String, WebSetting>` |         |
-| `mobile`     | Contains Mobile platform configuration. See [Mobile Config below](#mobile-config).      | `object`                  |         |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `timeout` | Contains timeout configuration. See [Timeout Config below](#timeout-config). | `TimeoutSetting` | |
+| `logging` | Contains logging specific configuration. See [Logging Config below](#ui-logging-config) | `LoggingSetting` | |
+| `screenshot` | Contains screenshot configuration. See [Screenshot Config below](#screenshot-config). | `ScreenshotSetting` | |
+| `web` | Contains web platform configuration. See [Web Config below](#web-config). | `Map<String, WebSetting>` | |
+| `mobile` | Contains Mobile platform configuration. See [Mobile Config below](#mobile-config). | `object` | |
 
 :::info Web Configuration
 In `ui` configuration block, you can provide different versions of web settings having different key names under `web` object.
@@ -357,189 +357,208 @@ See the example in [sample configuration file](#config-sample).
 
 #### Timeout Configuration {#timeout-config}
 
-| Property            | Description                                                  | Type     | Default |
-| ------------------- | ------------------------------------------------------------ | -------- | ------- |
-| `implicit_wait`     | Implicit wait for finding the elements on UI (in seconds).   | `number` | `1`     |
-| `explicit_wait`     | Explicit wait for finding the elements on UI (in seconds).   | `number` | `1`     |
-| `page_load_timeout` | Page load timeout for waiting for page to load (in seconds). | `number` | `30`    |
-| `script_timeout`    | Script timeout for waiting for page to load (in seconds).    | `number` | `30`    |
-| `highlight_delay`   | Delay for element getting highlighted                        | `long`   | `100`   |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `implicit_wait` | Implicit wait for finding the elements on UI (in seconds). | `number` | `1` |
+| `explicit_wait` | Explicit wait for finding the elements on UI (in seconds). | `number` | `1` |
+| `page_load_timeout` | Page load timeout for waiting for page to load (in seconds). | `number` | `30` |
+| `script_timeout` | Script timeout for waiting for page to load (in seconds). | `number` | `30` |
+| `highlight_delay` | Delay for element getting highlighted | `long` | `100` |
 
 #### UI Logging Configuration {#ui-logging-config}
 
-| Property       | Description                                             | Type                     | Default              |
-| -------------- | ------------------------------------------------------- | ------------------------ | -------------------- |
-| `enable`       | Enable / Disable logging for UI logging                 | `boolean`                | `true`               |
-| `exclude_logs` | Exclude any specific logs which is supported by Drivers | `null`                   |
-| `level`        | Log a specific type of logging                          | [`LogLevel`](#log-level) | `DEBUG`              |
-| `path`         | Path where the logs will be saved                       | `string`                 | `{root-folder}/logs` |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `enable` | Determines whether logging is enabled for the framework | `boolean` | `true` |
+| `exclude_logs` | Exclude any specific logs which is supported by Drivers | `null` |
+| `path` | Path where the logs will be saved | `string` | `{root-folder}/logs` |
 
 #### Screenshot Configuration {#screenshot-config}
 
-| Property    | Description                                         | Type      | Default         |
-| ----------- | --------------------------------------------------- | --------- | --------------- |
-| `enabled`   | Enable/disable screenshot capturing.                | `boolean` | `true`          |
-| `path`      | Path to the directory where screenshots are stored. | `string`  | `./screenshots` |
-| `extension` | Extension of the screenshot file.                   | `string`  | `jpeg`          |
-| `prefix`    | Prefix of the screenshot file.                      | `string`  | `SCR`           |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `enabled` | Enable/disable screenshot capturing | `boolean` | `true` |
+| `path` | Path to the directory where screenshots are stored | `string` | `./screenshots` |
+| `extension` | Extension of the screenshot file | `string` | `jpeg` |
+| `prefix` | Prefix of the screenshot file | `string` | `SCR` |
 
 #### Web Configuration {#web-config}
 
-| Property       | Description                                                             | Type                                      | Default                   |
-| -------------- | ----------------------------------------------------------------------- | ----------------------------------------- | ------------------------- |
-| `base_url`     | Base URL to navigate to by default                                      | `string`                                  | `null`                    |
-| `browser`      | Browser name.                                                           | [`Browser`](#supported-browsers)          | `Browser.NONE`            |
-| `protocol`     | Protocol type, will override Host provided by Target provider           | [`Protocol`](#supported-protocols)        | `Protocol.HTTP`           |
-| `host`         | Remote driver host name, will override Host provided by Target provider | `string`                                  | `null`                    |
-| `port`         | Remote driver port, if `0`, port will not be considered.                | `number`                                  | `0`                       |
-| `target`       | Target provider name.                                                   | [`TargetProviders`](#target-providers)    | `TargetProviders.LOCAL`   |
-| `platform`     | Platform name for the Browser                                           | `string`                                  | `null`                    |
-| `user_name`    | User name for cloud service provider.                                   | `string`                                  | `null`                    |
-| `password`     | Password / Access key for cloud service provider.                       | `string`                                  | `null`                    |
-| `capabilities` | Capabilities for browser.                                               | `Map<String, Object>`                     | `null`                    |
-| `headless`     | Headless mode for browser.                                              | `boolean`                                 | `true`                    |
-| `highlight`    | Highlight element on interaction, if `true`                             | `boolean`                                 | `false`                   |
-| `resize`       | How to resize the window initial state                                  | [`WindowResizeType`](#window-resize-type) | `WindowResizeType.NORMAL` |
-| `custom_size`  | Custom window size, when `resize` option is selected as `CUSTOM`        | `Dimension`                               | `1920x1080`               |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `base_url` | Base URL to navigate to by default | `string` | `null` |
+| `browser` | Browser name | [`Browser`](#supported-browsers) | `Browser.NONE` |
+| `protocol` | Protocol type, will override Host provided by Target provider | [`Protocol`](#supported-protocols) | `Protocol.HTTP` |
+| `host` | Remote driver host name, will override Host provided by Target provider | `string` | `null` |
+| `port` | Remote driver port, if `0`, port will not be considered | `number` | `0` |
+| `target` | Target provider name | [`TargetProviders`](#target-providers) | `TargetProviders.LOCAL` |
+| `platform` | Platform name for the Browser | `string` | `null` |
+| `user_name` | User name for cloud service provider | `string` | `null` |
+| `password` | Password / Access key for cloud service provider | `string` | `null` |
+| `capabilities` | Capabilities for browser | `Map<String, Object>` | `null` |
+| `headless` | Headless mode for browser | `boolean` | `true` |
+| `highlight` | Highlight element on interaction, if `true` | `boolean` | `false` |
+| `resize` | How to resize the window initial state | [`WindowResizeType`](#window-resize-type) | `WindowResizeType.NORMAL` |
+| `custom_size` | Custom window size, when `resize` option is selected as `CUSTOM` | `Dimension` | `1920x1080` |
 
 :::info
 For fields `user_name` and `password`, you can use placeholder variables in the following format:
 
-| Input type           | Variable sample                                                               |
-| -------------------- | ----------------------------------------------------------------------------- |
-| Base64 Decoder       | `${base64Decoder:SGVsbG9Xb3JsZCE=}`                                           |
-| Base64 Encoder       | `${base64Encoder:HelloWorld!}`                                                |
-| Java Constant        | `${const:java.awt.event.KeyEvent.VK_ESCAPE}`                                  |
-| Date                 | `${date:yyyy-MM-dd}`                                                          |
-| DNS                  | <code>${dns:address&#124;apache.org}</code>                                   |
-| Environment Variable | `${env:USERNAME}`                                                             |
-| File Content         | `${file:UTF-8:src/test/resources/document.properties}`                        |
-| Java                 | `${java:version}`                                                             |
-| Localhost            | `${localhost:canonical-name}`                                                 |
-| Properties File      | `${properties:src/test/resources/document.properties::mykey}`                 |
-| Resource Bundle      | `${resourceBundle:org.example.testResourceBundleLookup:mykey}`                |
-| Script               | `${script:javascript:3 + 4}`                                                  |
-| System Property      | `${sys:user.dir}`                                                             |
-| URL Decoder          | `${urlDecoder:Hello%20World%21}`                                              |
-| URL Encoder          | `${urlEncoder:Hello World!}`                                                  |
-| URL Content (HTTP)   | `${url:UTF-8:http://www.apache.org}`                                          |
-| URL Content (HTTPS)  | `${url:UTF-8:https://www.apache.org}`                                         |
-| URL Content (File)   | `${url:UTF-8:file:///${sys:user.dir}/src/test/resources/document.properties}` |
-| XML XPath            | `${xml:src/test/resources/document.xml:/root/path/to/node}`                   |
+| Input type | Variable sample |
+| ---------- | --------------- |
+| Base64 Decoder | `${base64Decoder:SGVsbG9Xb3JsZCE=}` |
+| Base64 Encoder | `${base64Encoder:HelloWorld!}` |
+| Java Constant | `${const:java.awt.event.KeyEvent.VK_ESCAPE}` |
+| Date | `${date:yyyy-MM-dd}` |
+| DNS | <code>${dns:address&#124;apache.org}</code> |
+| Environment Variable | `${env:USERNAME}` |
+| File Content | `${file:UTF-8:src/test/resources/document.properties}` |
+| Java | `${java:version}` |
+| Localhost | `${localhost:canonical-name}` |
+| Properties File | `${properties:src/test/resources/document.properties::mykey}` |
+| Resource Bundle | `${resourceBundle:org.example.testResourceBundleLookup:mykey}` |
+| Script | `${script:javascript:3 + 4}` |
+| System Property | `${sys:user.dir}` |
+| URL Decoder | `${urlDecoder:Hello%20World%21}` |
+| URL Encoder | `${urlEncoder:Hello World!}` |
+| URL Content (HTTP) | `${url:UTF-8:http://www.apache.org}` |
+| URL Content (HTTPS) | `${url:UTF-8:https://www.apache.org}` |
+| URL Content (File) | `${url:UTF-8:file:///${sys:user.dir}/src/test/resources/document.properties}` |
+| XML XPath | `${xml:src/test/resources/document.xml:/root/path/to/node}` |
 
 :::
 
 #### Mobile Configuration {#mobile-config}
 
-| Property | Description                                        | Type                              | Default |
-| -------- | -------------------------------------------------- | --------------------------------- | ------- |
-| `server` | Contains Appium Server related configurations      | [`ServerSetting`](#server-config) |         |
-| `device` | Contains Mobile test device related configurations | [`DeviceSetting`](#device-config) |         |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `server` | Contains Appium Server related configurations | [`ServerSetting`](#server-config) | |
+| `device` | Contains Mobile test device related configurations | [`DeviceSetting`](#device-config) | |
 
 ##### Appium Server Configuration {#server-config}
 
-| Property           | Description                                                                                    | Type                                            | Default                 |
-| ------------------ | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- | ----------------------- |
-| `protocol`         | Protocol type of the server host                                                               | [`Protocol`](#supported-protocols)              | `HTTP`                  |
-| `host`             | Host of the server                                                                             | `string`                                        |                         |
-| `port`             | Port on which server will run                                                                  | `int`                                           |                         |
-| `base_path`        | Base path of the server                                                                        | `string`                                        |                         |
-| `external`         | Set `true` if using already running server, else framework will start the server automatically | `boolean`                                       | `false`                 |
-| `session_override` | Enables session override                                                                       | `boolean`                                       | `true`                  |
-| `node_path`        | Node executable path                                                                           | `string`                                        |                         |
-| `appium_path`      | Appium executable `main.js` path                                                               | `string`                                        |                         |
-| `target`           | Target provider name.                                                                          | [`TargetProviders`](#target-providers)          | `TargetProviders.LOCAL` |
-| `user_name`        | User name for cloud service provider.                                                          | `string`                                        | `null`                  |
-| `password`         | Password / Access key for cloud service provider.                                              | `string`                                        | `null`                  |
-| `allow_insecure`   | Allow list of features in server considered as insecure                                        | `List<string>`                                  |                         |
-| `timeout`          | Timeout in seconds for server to start                                                         | `int`                                           | `30`                    |
-| `driver`           | Appium automation driver type                                                                  | [`AutomationType`](#supported-automation-types) | `null`                  |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `protocol` | Protocol type of the server host | [`Protocol`](#supported-protocols) | `HTTP` |
+| `host` | Host of the server | `string` | |
+| `port` | Port on which server will run | `int` | |
+| `base_path` | Base path of the server | `string` | |
+| `external` | Set `true` if using already running server, else framework will start the server automatically | `boolean` | `false` |
+| `session_override` | Enables session override | `boolean` | `false` |
+| `node_path` | Node executable path | `string` | |
+| `appium_path` | Appium executable `main.js` path | `string` | |
+| `target` | Target provider name | [`TargetProviders`](#target-providers) | `TargetProviders.LOCAL` |
+| `user_name` | User name for cloud service provider | `string` | `null` |
+| `password` | Password / Access key for cloud service provider | `string` | `null` |
+| `allow_insecure` | Allow list of features in server considered as insecure | `List<string>` | |
+| `timeout` | Timeout in seconds for server to start | `int` | `30` |
+| `driver` | Appium automation driver type | [`AutomationType`](#supported-automation-types) | `null` |
+| `allow_cors` | If set to `true`, will enable CORS | `boolean` | `false` |
+| `callback_address` | Callback IP address | `string` | `null` |
+| `callback_port` | Callback Port number | `int` | `0` |
+| `deny_insecure` | Set which insecure features are not allowed to run in this server's sessions | `List<string>` | `null` |
+| `keep_alive_timeout` | Number of seconds the Appium server should apply as both the keep-alive timeout and the connection timeout for all requests | `int` | `0` |
+| `logging` | Logging related settings | [`LogSetting`](#mobile-log-setting) | `null` |
+| `plugins` | Use a single or a list of Appium plugins | `List<string>` | `null` |
+| `relaxed_security` | Disable additional security checks, so it is possible to use some advanced features, provided by drivers supporting this option | `boolean` | `false` |
+| `strict_capabilities` | Cause sessions to fail if desired caps are sent in that Appium does not recognize as valid for the selected device | `boolean` | `false` |
+| `webhook` | Also send log output to this http listener | `string` | `null` |
+| `other_args` | Any other Appium server arguments which is currently not supported by Boyka, you can use them in this setting | `Map<string, string>` | `null` |
+
+###### Server Logging Setting {#mobile-log-setting}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `debug_spacing` | Add exaggerated spacing in logs to help with visual inspection | `boolean` | `false` |
+| `level` | Log level | [`LogLevel`](#log-level) | `INFO` |
+| `local_timezone` | Use local timezone for timestamps | `boolean` | `false` |
+| `timestamp` | Show timestamps in console output | `boolean` | `false` |
 
 ##### Mobile Device Configuration {#device-config}
 
-| Property                   | Description                                                                 | Type                                    | Default   |
-| -------------------------- | --------------------------------------------------------------------------- | --------------------------------------- | --------- |
-| `name`                     | Device Name                                                                 | `string`                                |           |
-| `os`                       | Device OS type                                                              | [`OS`](#supported-os)                   | `ANDROID` |
-| `version`                  | Device OS version                                                           | `string`                                |           |
-| `type`                     | Device type                                                                 | [`DeviceType`](#supported-device-types) | `VIRTUAL` |
-| `capabilities`             | Contains cloud specific capabilities                                        | `Map`                                   |           |
-| `application`              | Contains application related configs                                        | [`ApplicationSetting`](#app-config)     |           |
-| `virtual_device`           | Contains virtual device specific configs                                    | [`VirtualDeviceSetting`](#avd-config)   |           |
-| `clear_files`              | Determines if system files needs to cleared after run completes on a device | `boolean`                               | `true`    |
-| `clear_logs`               | Determines if device logs needs to be cleared                               | `boolean`                               | `true`    |
-| `full_reset`               | Determines if full reset needs to be done                                   | `boolean`                               |           |
-| `no_reset`                 | Determines if there should be no reset                                      | `boolean`                               |           |
-| `accept_alerts`            | Determines if auto accept alerts is needed                                  | `boolean`                               | `true`    |
-| `ignore_unimportant_views` | Determines if unimportant views needs to be ignored                         | `boolean`                               | `true`    |
-| `server_install_timeout`   | Timeout in seconds to wait for Appium server app to get installed           | `int`                                   | `30`      |
-| `server_launch_timeout`    | Timeout in seconds to wait for Appium server app to start                   | `int`                                   | `30`      |
-| `swipe`                    | Swipe specific setting                                                      | [`SwipeSetting`](#swipe-setting)        |           |
-| `wda`                      | WebDriverAgent specific settings for iOS                                    | [`WDASetting`](#wda-config)             |           |
-| `typing_speed`             | Max typing speed for iOS                                                    | `int`                                   | `60`      |
-| `chrome_driver_port`       | Chrome driver port for Android devices                                      | `int`                                   | `0`       |
-| `system_port`              | System port for Android devices                                             | `int`                                   | `8200`    |
-| `unique_id`                | Device UDID                                                                 | `string`                                | `null`    |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `name` | Device Name | `string` | |
+| `os` | Device OS type | [`OS`](#supported-os) | `ANDROID` |
+| `version` | Device OS version | `string` | |
+| `type` | Device type | [`DeviceType`](#supported-device-types) | `VIRTUAL` |
+| `capabilities` | Contains cloud specific capabilities | `Map` | |
+| `application` | Contains application related configs | [`ApplicationSetting`](#app-config) | |
+| `virtual_device` | Contains virtual device specific configs | [`VirtualDeviceSetting`](#avd-config) | |
+| `clear_files` | Determines if system files needs to cleared after run completes on a device | `boolean` | `true` |
+| `clear_logs` | Determines if device logs needs to be cleared | `boolean` | `true` |
+| `full_reset` | Determines if full reset needs to be done | `boolean` | |
+| `no_reset` | Determines if there should be no reset | `boolean` | |
+| `accept_alerts` | Determines if auto accept alerts is needed | `boolean` | `true` |
+| `ignore_unimportant_views` | Determines if unimportant views needs to be ignored | `boolean` | `true` |
+| `server_install_timeout` | Timeout in seconds to wait for Appium server app to get installed | `int` | `30` |
+| `server_launch_timeout` | Timeout in seconds to wait for Appium server app to start | `int` | `30` |
+| `swipe` | Swipe specific setting | [`SwipeSetting`](#swipe-setting) | |
+| `wda` | WebDriverAgent specific settings for iOS | [`WDASetting`](#wda-config) | |
+| `typing_speed` | Max typing speed for iOS | `int` | `60` |
+| `chrome_driver_port` | Chrome driver port for Android devices | `int` | `0` |
+| `system_port` | System port for Android devices | `int` | `8200` |
+| `unique_id` | Device UDID | `string` | `null` |
 
 ###### Device Application Configurations {#app-config}
 
-| Property             | Description                                                               | Type                                   | Default  |
-| -------------------- | ------------------------------------------------------------------------- | -------------------------------------- | -------- |
-| `base_url`           | Base URL to navigate to by default                                        | `string`                               | `null`   |
-| `browser`            | Browser name.                                                             | [`Browser`](#supported-browsers)       | `null`   |
-| `external`           | Is the app saved outside `src/test/resources` folder?                     | `boolean`                              | `false`  |
-| `path`               | Path to the AUT, can also contain environment variables for cloud App URL | `string`                               |          |
-| `type`               | Application type                                                          | [`ApplicationType`](#application-type) | `NATIVE` |
-| `install_timeout`    | Timeout in seconds to wait until app gets installed on device             | `int`                                  | `30`     |
-| `wait_activity`      | Wait for the mentioned activity to load                                   | `string`                               |          |
-| `wait_timeout`       | Wait timeout in seconds to wait for AUT                                   | `int`                                  | `30`     |
-| `bundle_id`          | iOS application bundle id                                                 | `string`                               | `null`   |
-| `chrome_driver_port` | Port on which Chrome driver would run                                     | `int`                                  | `0`      |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `base_url` | Base URL to navigate to by default | `string` | `null` |
+| `browser` | Browser name. | [`Browser`](#supported-browsers) | `null` |
+| `external` | Is the app saved outside `src/test/resources` folder? | `boolean` | `false` |
+| `path` | Path to the AUT, can also contain environment variables for cloud App URL | `string` | |
+| `type` | Application type | [`ApplicationType`](#application-type) | `NATIVE` |
+| `install_timeout` | Timeout in seconds to wait until app gets installed on device | `int` | `30` |
+| `wait_activity` | Wait for the mentioned activity to load | `string` | |
+| `wait_timeout` | Wait timeout in seconds to wait for AUT | `int` | `30` |
+| `bundle_id` | iOS application bundle id | `string` | `null` |
+| `chrome_driver_port` | Port on which Chrome driver would run | `int` | `0` |
 
 ###### Virtual Device Configurations {#avd-config}
 
-| Property           | Description                                        | Type      | Default |
-| ------------------ | -------------------------------------------------- | --------- | ------- |
-| `name`             | Name of AVD                                        | `string`  |         |
-| `launch_timeout`   | Timeout in seconds to wait until AVD launches      | `int`     | `60`    |
-| `headless`         | Determine if required to run in headless mode      | `boolean` | `false` |
-| `ready_timeout`    | Timeout in seconds to wait until AVD is ready      | `int`     | `60`    |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `name` | Name of AVD | `string` | |
+| `launch_timeout` | Timeout in seconds to wait until AVD launches | `int` | `60` |
+| `headless` | Determine if required to run in headless mode | `boolean` | `false` |
+| `ready_timeout` | Timeout in seconds to wait until AVD is ready | `int` | `60` |
 | `connect_keyboard` | Should iOS simulator connect to hardware keyboard? | `boolean` | `false` |
 
 ##### Swipe Configuration {#swipe-setting}
 
-| Property                | Description                                                                                    | Type  | Default |
-| ----------------------- | ---------------------------------------------------------------------------------------------- | ----- | ------- |
-| `distance`              | Amount of distance to swipe from the center of the screen to the edge of the screen or element | `int` | `25`    |
-| `max_swipe_until_found` | Maximum amount of time to swipe until an element is found on the screen                        | `int` | `5`     |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `distance` | Amount of distance to swipe from the center of the screen to the edge of the screen or element | `int` | `25` |
+| `max_swipe_until_found` | Maximum amount of time to swipe until an element is found on the screen | `int` | `5` |
 
 ##### WebDriverAgent Configuration {##wda-config}
 
-| Property                 | Description                                                                                                                                                                             | Type      | Default |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- |
-| `local_port`             | This value, if specified, will be used to forward traffic from Mac host to real ios devices over USB. Default value is the same as the port number used by WDA on the device under test | `int`     | `8100`  |
-| `use_new`                | If true, forces uninstall of any existing WebDriverAgent app on device                                                                                                                  | `boolean` | `false` |
-| `launch_timeout`         | Timeout to wait for WebDriverAgent to be pingable                                                                                                                                       | `int`     | `60`    |
-| `startup_retries`        | Number of times to try to build and launch WebDriverAgent onto the device                                                                                                               | `int`     | `2`     |
-| `connection_timeout`     | Connection timeout to wait for a response from WebDriverAgent                                                                                                                           | `int`     | `60`    |
-| `startup_retry_interval` | Time interval to wait between tries to build and launch WebDriverAgent                                                                                                                  | `int`     | `10`    |
-| `use_prebuilt`           | If true, uses existing WebDriverAgent app on device                                                                                                                                     | `boolean` | `false` |
-| `update_bundle_id`       | Bundle id to update WDA to before building and launching on real devices. This bundle id must be associated with a valid provisioning profile                                           | `string`  | `null`  |
-| `team_id`                | Apple developer team identifier string. Must be used in conjunction with xcodeSigningId to take effect. e.g., JWL241K123                                                                | `string`  | `null`  |
-| `signing_id`             | String representing a signing certificate. Must be used in conjunction with xcodeOrgId. This is usually just iPhone Developer                                                           | `string`  | `null`  |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `local_port` | This value, if specified, will be used to forward traffic from Mac host to real ios devices over USB. Default value is the same as the port number used by WDA on the device under test | `int` | `8100` |
+| `use_new` | If true, forces uninstall of any existing WebDriverAgent app on device | `boolean` | `false` |
+| `launch_timeout` | Timeout to wait for WebDriverAgent to be pingable | `int` | `60` |
+| `startup_retries` | Number of times to try to build and launch WebDriverAgent onto the device | `int` | `2` |
+| `connection_timeout` | Connection timeout to wait for a response from WebDriverAgent | `int` | `60` |
+| `startup_retry_interval` | Time interval to wait between tries to build and launch WebDriverAgent | `int` | `10` |
+| `use_prebuilt` | If true, uses existing WebDriverAgent app on device | `boolean` | `false` |
+| `update_bundle_id` | Bundle id to update WDA to before building and launching on real devices. This bundle id must be associated with a valid provisioning profile | `string` | `null` |
+| `team_id` | Apple developer team identifier string. Must be used in conjunction with xcodeSigningId to take effect. e.g., JWL241K123 | `string` | `null` |
+| `signing_id` | String representing a signing certificate. Must be used in conjunction with xcodeOrgId. This is usually just iPhone Developer | `string` | `null` |
 
 ### API Configuration {#api-config}
 
-| Property             | Description                                                         | Type     | Default |
-| -------------------- | ------------------------------------------------------------------- | -------- | ------- |
-| `base_uri`           | Base URL of the API.                                                | `string` |         |
-| `base_path`          | Base path of the API.                                               | `string` |         |
-| `port`               | Port of the API.                                                    | `number` |         |
-| `connection_timeout` | Connection timeout in seconds for the API.                          | `number` | 5       |
-| `read_timeout`       | Read timeout in seconds for the API.                                | `number` | 5       |
-| `write_timeout`      | Write timeout in seconds for the API.                               | `number` | 5       |
-| `logging`            | Logging configuration. See [Logging Config below](#logging-config). | `object` |         |
-| `schema_path`        | Path of schema file at location `src/test/resources`                | `string` |         |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `base_uri` | Base URL of the API. | `string` | |
+| `base_path` | Base path of the API. | `string` | |
+| `port` | Port of the API. | `number` | |
+| `connection_timeout` | Connection timeout in seconds for the API. | `number` | `5` |
+| `read_timeout`       | Read timeout in seconds for the API. | `number` | `5` |
+| `write_timeout` | Write timeout in seconds for the API. | `number` | `5` |
+| `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` | |
+| `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
 
 :::info API Configuration
 In `api` configuration block, you can provide different versions of API settings having different key names.
@@ -549,10 +568,10 @@ See the example in [sample configuration file](#config-sample).
 
 #### Logging Configuration {#logging-config}
 
-| Property   | Description               | Type      | Default |
-| ---------- | ------------------------- | --------- | ------- |
-| `request`  | Log request information.  | `boolean` | `true`  |
-| `response` | Log response information. | `boolean` | `true`  |
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `request` | Log request information. | `boolean` | `true` |
+| `response` | Log response information. | `boolean` | `true` |
 
 ## Supported Browsers {#supported-browsers}
 
