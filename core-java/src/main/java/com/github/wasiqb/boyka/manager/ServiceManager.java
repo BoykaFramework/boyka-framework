@@ -219,24 +219,8 @@ class ServiceManager {
         setArgument (WEB_HOOK, this.setting.getWebhook ());
         setArgument (RELAXED_SECURITY, this.setting.isRelaxedSecurity ());
         setArgument (STRICT_CAPS, this.setting.isStrictCapabilities ());
-
-        if (!isNull (this.setting.getPlugins ())) {
-            setArgument (USE_PLUGINS, join (",", this.setting.getPlugins ()));
-        }
-
-        final var otherArgs = this.setting.getOtherArgs ();
-        if (!isNull (otherArgs)) {
-            otherArgs.forEach ((k, v) -> {
-                final ServerArgument flag = () -> k;
-                if (v instanceof Boolean) {
-                    setArgument (flag, (boolean) v);
-                } else if (v instanceof Integer) {
-                    setArgument (flag, (int) v);
-                } else {
-                    setArgument (flag, v.toString ());
-                }
-            });
-        }
+        setPlugins ();
+        setOtherArguments ();
     }
 
     private void setLogArguments () {
@@ -271,6 +255,28 @@ class ServiceManager {
         if (isNotEmpty (this.setting.getNodePath ())) {
             final var node = new File (this.setting.getNodePath ());
             this.builder.usingDriverExecutable (node);
+        }
+    }
+
+    private void setOtherArguments () {
+        final var otherArgs = this.setting.getOtherArgs ();
+        if (!isNull (otherArgs)) {
+            otherArgs.forEach ((k, v) -> {
+                final ServerArgument flag = () -> k;
+                if (v instanceof Boolean) {
+                    setArgument (flag, (boolean) v);
+                } else if (v instanceof Integer) {
+                    setArgument (flag, (int) v);
+                } else {
+                    setArgument (flag, v.toString ());
+                }
+            });
+        }
+    }
+
+    private void setPlugins () {
+        if (!isNull (this.setting.getPlugins ())) {
+            setArgument (USE_PLUGINS, join (",", this.setting.getPlugins ()));
         }
     }
 

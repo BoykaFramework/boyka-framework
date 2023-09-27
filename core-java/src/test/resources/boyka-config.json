@@ -416,7 +416,9 @@
             "local_timezone": true
           },
           "other_args": {
-            "--long-stacktrace": true
+            "--long-stacktrace": true,
+            "--callback-port": 4726,
+            "--callback-address": "127.0.0.1"
           }
         },
         "device": {
