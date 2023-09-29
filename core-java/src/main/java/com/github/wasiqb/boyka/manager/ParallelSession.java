@@ -93,7 +93,8 @@ public final class ParallelSession {
      * @param platformType Target Platform Type
      * @param configKey Configuration key for the session
      */
-    public static void createSession (final String persona, final PlatformType platformType, final String configKey) {
+    public static synchronized void createSession (final String persona, final PlatformType platformType,
+        final String configKey) {
         switchPersona (persona);
         final var currentSession = getSession ();
         currentSession.setPlatformType (platformType);
@@ -121,7 +122,7 @@ public final class ParallelSession {
      * @return {@link DriverSession}
      */
     @SuppressWarnings ("unchecked")
-    public static <D extends WebDriver> DriverSession<D> getSession () {
+    public static synchronized <D extends WebDriver> DriverSession<D> getSession () {
         LOGGER.traceEntry ();
         final var currentPersona = getCurrentPersona ();
         final var session = SESSION.get ()

@@ -36,7 +36,7 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: 17
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true
@@ -104,7 +104,9 @@ jobs:
       run-appium: true
       run-ios: true
       run-android: true
-      emulator-target: playstore
+      emulator-channel: canary
+      emulator-arch: x86
+      emulator-target: aosp_atd
 
   test-mobile-web:
     needs:
@@ -159,7 +161,7 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: 17
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true
@@ -261,7 +263,7 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true

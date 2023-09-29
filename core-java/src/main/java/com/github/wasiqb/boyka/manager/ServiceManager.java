@@ -16,45 +16,48 @@
 
 package com.github.wasiqb.boyka.manager;
 
-import static com.github.wasiqb.boyka.enums.Message.ERROR_SERVER_NOT_RUNNING;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STARTING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_STOPPING_SERVER;
 import static com.github.wasiqb.boyka.enums.Message.INVALID_REMOTE_URL;
-import static com.github.wasiqb.boyka.enums.Message.SERVER_ALREADY_RUNNING;
 import static com.github.wasiqb.boyka.enums.TargetProviders.LOCAL;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
-import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
-import static io.appium.java_client.service.local.flags.AndroidServerFlag.BOOTSTRAP_PORT_NUMBER;
-import static io.appium.java_client.service.local.flags.AndroidServerFlag.REBOOT;
-import static io.appium.java_client.service.local.flags.AndroidServerFlag.SUPPRESS_ADB_KILL_SERVER;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.ALLOW_INSECURE;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.BASEPATH;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.CALLBACK_ADDRESS;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.CALLBACK_PORT;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.DEBUG_LOG_SPACING;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.DENY_INSECURE;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOCAL_TIMEZONE;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_TIMESTAMP;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.RELAXED_SECURITY;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.STRICT_CAPS;
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.USE_DRIVERS;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.USE_PLUGINS;
+import static io.appium.java_client.service.local.flags.GeneralServerFlag.WEB_HOOK;
 import static java.lang.String.join;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNullElse;
 import static org.apache.commons.lang3.StringUtils.isNoneEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.List;
 
 import com.github.wasiqb.boyka.config.ui.mobile.server.ServerSetting;
+import com.github.wasiqb.boyka.enums.TargetProviders;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import io.appium.java_client.service.local.flags.IOSServerFlag;
 import io.appium.java_client.service.local.flags.ServerArgument;
 import org.apache.logging.log4j.Logger;
 
@@ -79,28 +82,6 @@ class ServiceManager {
         }
     }
 
-    /**
-     * Determines if the server is running.
-     *
-     * @return true, if server is running, else false.
-     */
-    public boolean isRunning () {
-        if (isCloud ()) {
-            return true;
-        }
-        if (!this.setting.isExternal ()) {
-            LOG.trace ("Checking if Appium Service is running...");
-            return this.service.isRunning ();
-        }
-        final var address = new InetSocketAddress (this.setting.getHost (), this.setting.getPort ());
-        try (final Socket socket = new Socket ()) {
-            socket.connect (address, 2000);
-        } catch (final IOException e) {
-            handleAndThrow (ERROR_SERVER_NOT_RUNNING, e, e.getMessage ());
-        }
-        return true;
-    }
-
     URL getServiceUrl () {
         LOG.trace ("Fetching Appium Service URL...");
         if (!isCloud () && !this.setting.isExternal ()) {
@@ -115,11 +96,7 @@ class ServiceManager {
     }
 
     void startServer () {
-        if (this.service != null && !isCloud () && !this.setting.isExternal ()) {
-            final var running = this.service.isRunning ();
-            if (running) {
-                throwError (SERVER_ALREADY_RUNNING);
-            }
+        if (!isCloud () && !this.setting.isExternal ()) {
             var failed = false;
             try {
                 this.service.start ();
@@ -135,7 +112,7 @@ class ServiceManager {
     }
 
     void stopServer () {
-        if (!isCloud () && !this.setting.isExternal () && this.service != null && this.service.isRunning ()) {
+        if (!isCloud () && !this.setting.isExternal () && !isNull (this.service) && this.service.isRunning ()) {
             try {
                 this.service.stop ();
                 this.service = null;
@@ -151,7 +128,7 @@ class ServiceManager {
             setArgument (() -> "--config", this.setting.getConfigPath ());
         } else {
             final var target = this.setting.getTarget ();
-            this.builder.withIPAddress (requireNonNullElse (this.setting.getHost (), target.getHost ()))
+            this.builder.withIPAddress (getHost (target))
                 .withTimeout (ofSeconds (this.setting.getTimeout ()));
             setPort ();
             setAppiumJS ();
@@ -160,6 +137,10 @@ class ServiceManager {
         }
         this.service = AppiumDriverLocalService.buildService (this.builder);
         LOG.trace ("Building Appium Service done...");
+    }
+
+    private String getHost (final TargetProviders target) {
+        return requireNonNullElse (this.setting.getHost (), target.getHost ());
     }
 
     private String getUrl () {
@@ -172,7 +153,7 @@ class ServiceManager {
                 .append (this.setting.getPassword ())
                 .append ("@");
         }
-        sb.append (requireNonNullElse (this.setting.getHost (), target.getHost ()));
+        sb.append (getHost (target));
         if (this.setting.getPort () > 0) {
             sb.append (":")
                 .append (this.setting.getPort ());
@@ -188,17 +169,8 @@ class ServiceManager {
             this.setting.getPassword ());
     }
 
-    private void setAndroidArguments () {
-        final var android = this.setting.getAndroid ();
-        if (android != null) {
-            setArgument (BOOTSTRAP_PORT_NUMBER, android.getBootstrapPort ());
-            setArgument (REBOOT, android.isReboot ());
-            setArgument (SUPPRESS_ADB_KILL_SERVER, android.isSuppressAdbKill ());
-        }
-    }
-
     private void setAppiumJS () {
-        if (this.setting.getAppiumPath () != null) {
+        if (isNotEmpty (this.setting.getAppiumPath ())) {
             final var appJs = new File (this.setting.getAppiumPath ());
             this.builder.withAppiumJS (appJs);
         }
@@ -222,9 +194,13 @@ class ServiceManager {
         }
     }
 
+    private void setArgument (final ServerArgument flag, final List<String> argList) {
+        if (!isNull (argList) && !argList.isEmpty ()) {
+            setArgument (flag, join (",", argList));
+        }
+    }
+
     private void setArguments () {
-        setAndroidArguments ();
-        setIOSArguments ();
         setLogArguments ();
         setCommonArguments ();
     }
@@ -234,39 +210,38 @@ class ServiceManager {
         setArgument (SESSION_OVERRIDE, this.setting.isSessionOverride ());
         setArgument (USE_DRIVERS, this.setting.getDriver ()
             .getDriverName ());
-        if (this.setting.getAllowInsecure () != null && !this.setting.getAllowInsecure ()
-            .isEmpty ()) {
-            setArgument (ALLOW_INSECURE, join (",", this.setting.getAllowInsecure ()));
-        }
-    }
-
-    private void setIOSArguments () {
-        final var ios = this.setting.getIos ();
-        if (ios != null) {
-            setArgument (IOSServerFlag.WEBKIT_DEBUG_PROXY_PORT, ios.getWebkitProxyPort ());
-        }
+        setArgument (ALLOW_INSECURE, this.setting.getAllowInsecure ());
+        setArgument (DENY_INSECURE, this.setting.getDenyInsecure ());
+        setArgument (CALLBACK_ADDRESS, this.setting.getCallbackAddress ());
+        setArgument (CALLBACK_PORT, this.setting.getCallbackPort ());
+        setArgument (() -> "--keep-alive-timeout", this.setting.getKeepAliveTimeout ());
+        setArgument (() -> "--allow-cors", this.setting.isAllowCors ());
+        setArgument (WEB_HOOK, this.setting.getWebhook ());
+        setArgument (RELAXED_SECURITY, this.setting.isRelaxedSecurity ());
+        setArgument (STRICT_CAPS, this.setting.isStrictCapabilities ());
+        setPlugins ();
+        setOtherArguments ();
     }
 
     private void setLogArguments () {
-        final var logs = getSession ().getSetting ()
-            .getUi ()
-            .getLogging ();
-        if (!logs.isEnable ()) {
-            return;
-        }
-        if (logs.getLevel () != null) {
-            setArgument (LOG_LEVEL, logs.getLevel ()
-                .getLevel ());
-        }
-        setLogFile ();
-    }
-
-    private void setLogFile () {
-        final var logFolderPath = getSession ().getSetting ()
+        setLogFile (getSession ().getSetting ()
             .getUi ()
             .getLogging ()
-            .getPath ();
-        if (logFolderPath != null) {
+            .getPath ());
+        final var logs = this.setting.getLogging ();
+        if (!isNull (logs)) {
+            if (!isNull (logs.getLevel ())) {
+                setArgument (LOG_LEVEL, logs.getLevel ()
+                    .getLevel ());
+            }
+            setArgument (LOCAL_TIMEZONE, logs.isLocalTimezone ());
+            setArgument (LOG_TIMESTAMP, logs.isTimestamp ());
+            setArgument (DEBUG_LOG_SPACING, logs.isDebugSpacing ());
+        }
+    }
+
+    private void setLogFile (final String logFolderPath) {
+        if (isNotEmpty (logFolderPath)) {
             final var fileName = format ("appium-{0}-server-{1}.log", getSession ().getPlatformType ()
                 .name ()
                 .toLowerCase (), currentThread ().getId ());
@@ -277,9 +252,31 @@ class ServiceManager {
     }
 
     private void setNodeExe () {
-        if (this.setting.getNodePath () != null) {
+        if (isNotEmpty (this.setting.getNodePath ())) {
             final var node = new File (this.setting.getNodePath ());
             this.builder.usingDriverExecutable (node);
+        }
+    }
+
+    private void setOtherArguments () {
+        final var otherArgs = this.setting.getOtherArgs ();
+        if (!isNull (otherArgs)) {
+            otherArgs.forEach ((k, v) -> {
+                final ServerArgument flag = () -> k;
+                if (v instanceof Boolean) {
+                    setArgument (flag, (boolean) v);
+                } else if (v instanceof Integer) {
+                    setArgument (flag, (int) v);
+                } else {
+                    setArgument (flag, v.toString ());
+                }
+            });
+        }
+    }
+
+    private void setPlugins () {
+        if (!isNull (this.setting.getPlugins ())) {
+            setArgument (USE_PLUGINS, join (",", this.setting.getPlugins ()));
         }
     }
 

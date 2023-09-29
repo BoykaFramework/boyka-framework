@@ -16,15 +16,21 @@
 
 package com.github.wasiqb.boyka.config.ui.mobile.server;
 
+import static com.github.wasiqb.boyka.enums.LogLevel.INFO;
+
+import com.github.wasiqb.boyka.enums.LogLevel;
 import lombok.Data;
 
 /**
- * iOS specific server settings
+ * Mobile logging settings.
  *
  * @author Wasiq Bhamla
- * @since 15-Jan-2023
+ * @since 21-Sept-2023
  */
 @Data
-public class IOSSetting {
-    private int webkitProxyPort = 27753;
+public class LogSetting {
+    private boolean  debugSpacing;
+    private LogLevel level = INFO;
+    private boolean  localTimezone;
+    private boolean  timestamp;
 }
