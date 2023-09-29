@@ -3,15 +3,6 @@ name: Deploy Release to GitHub and Maven Central
 on:
   workflow_dispatch:
     inputs:
-      release-type:
-        description: Release Type
-        required: true
-        type: choice
-        options:
-          - "major"
-          - "minor"
-          - "patch"
-        default: "minor"
       pre-release:
         description: Is this a pre-release?
         required: true
@@ -67,11 +58,11 @@ jobs:
 
       - name: Update pre-release version
         if: ${{ inputs.pre-release }}
-        run: pnpm prerelease pre${{ inputs.release-type }}
+        run: pnpm prerelease
 
       - name: Update release version
         if: ${{ ! inputs.pre-release }}
-        run: pnpm release ${{ inputs.release-type }}
+        run: pnpm release
 
       - name: Get the new version
         id: version
