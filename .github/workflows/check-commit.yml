@@ -3,7 +3,7 @@ name: Conventional Commit Lint
 on:
   pull_request:
     branches:
-      - develop
+      - main
 
 concurrency:
   group: boyka-commit-lint-${{ github.ref }}-1
