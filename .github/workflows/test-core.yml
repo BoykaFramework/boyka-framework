@@ -36,32 +36,67 @@ jobs:
       - name: Build the project
         run: mvn clean install -f core-java/pom.xml -DskipTests
 
-  test-api:
+  check-cloud:
+    runs-on: ubuntu-latest
+
     needs:
       - build
+
+    env:
+      LT_USER: ${{ secrets.LT_USER }}
+      BS_USER: ${{ secrets.BS_USER }}
+    
+    outputs:
+      bs-present: ${{ steps.bs-secrets.outputs.present }}
+      lt-present: ${{ steps.lt-secrets.outputs.present }}
+
+    steps:
+      - name: Check BrowserStack secrets presence
+        id: bs-secrets
+        shell: bash
+        run: |
+          if [ "$BS_USER" == "" ]; then
+            echo "present=NO" >> $GITHUB_OUTPUT
+          else
+            echo "present=YES" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check BrowserStack secrets presence
+        id: lt-secrets
+        shell: bash
+        run: |
+          if [ "$LT_USER" == "" ]; then
+            echo "present=NO" >> $GITHUB_OUTPUT
+          else
+            echo "present=YES" >> $GITHUB_OUTPUT
+          fi
+
+  test-api:
+    needs:
+      - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-api
 
   test-others:
     needs:
-      - build
+      - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-others
 
   test-web-local:
     needs:
-      - build
+      - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-local
       runs-on: macos-latest
 
   test-web-bs:
-    if: ${{ secrets.BS_USER != '' }}
     needs:
-      - build
+      - check-cloud
+    if: ${{ needs.check-cloud.outputs.bs-present == 'YES' }}
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
       cloudUser: ${{ secrets.BS_USER }}
@@ -70,9 +105,9 @@ jobs:
       suite-name: testng-web-bs
 
   test-web-lt:
-    if: ${{ secrets.LT_USER != '' }}
     needs:
-      - build
+      - check-cloud
+    if: ${{ needs.check-cloud.outputs.lt-present == 'YES' }}
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
       cloudUser: ${{ secrets.LT_USER }}
@@ -82,7 +117,7 @@ jobs:
 
   test-web-grid:
     needs:
-      - build
+      - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-grid
@@ -90,7 +125,7 @@ jobs:
 
   test-mobile-local:
     needs:
-      - build
+      - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
       runs-on: macos-latest
@@ -104,7 +139,7 @@ jobs:
 
   test-mobile-web:
     needs:
-      - build
+      - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
       runs-on: macos-latest
@@ -115,9 +150,9 @@ jobs:
       emulator-target: playstore
 
   test-mobile-bs:
-    if: ${{ secrets.BS_USER != '' }}
     needs:
-      - build
+      - check-cloud
+    if: ${{ needs.check-cloud.outputs.bs-present == 'YES' }}
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
       cloudUser: ${{ secrets.BS_USER }}
@@ -126,9 +161,9 @@ jobs:
       suite-name: testng-mobile-bs
 
   test-mobile-lt:
-    if: ${{ secrets.LT_USER != '' }}
     needs:
-      - build
+      - check-cloud
+    if: ${{ needs.check-cloud.outputs.lt-present == 'YES' }}
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
       cloudUser: ${{ secrets.LT_USER }}

@@ -10,7 +10,7 @@ on:
       java-version:
         type: string
         description: Version of Java to run on
-        default: 17
+        default: '17'
       suite-name:
         type: string
         description: Test Suite name to run
