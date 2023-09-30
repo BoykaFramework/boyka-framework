@@ -18,12 +18,6 @@ concurrency:
   group: boyka-tests-${{ github.ref }}-1
   cancel-in-progress: true
 
-env:
-  BS_USER: ${{ secrets.BS_USER }}
-  BS_KEY: ${{ secrets.BS_KEY }}
-  LT_USER: ${{ secrets.LT_USER }}
-  LT_KEY: ${{ secrets.LT_KEY }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -65,24 +59,24 @@ jobs:
       runs-on: macos-latest
 
   test-web-bs:
+    if: ${{ secrets.BS_USER != '' }}
     needs:
       - build
-    if: ${{ env.BS_USER != '' }}
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
-      cloudUser: ${{ env.BS_USER }}
-      cloudKey: ${{ env.BS_KEY }}
+      cloudUser: ${{ secrets.BS_USER }}
+      cloudKey: ${{ secrets.BS_KEY }}
     with:
       suite-name: testng-web-bs
 
   test-web-lt:
+    if: ${{ secrets.LT_USER != '' }}
     needs:
       - build
-    if: ${{ env.LT_USER != '' }}
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
-      cloudUser: ${{ env.LT_USER }}
-      cloudKey: ${{ env.LT_KEY }}
+      cloudUser: ${{ secrets.LT_USER }}
+      cloudKey: ${{ secrets.LT_KEY }}
     with:
       suite-name: testng-web-lt
 
@@ -121,24 +115,24 @@ jobs:
       emulator-target: playstore
 
   test-mobile-bs:
+    if: ${{ secrets.BS_USER != '' }}
     needs:
       - build
-    if: ${{ env.BS_USER != '' }}
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
-      cloudUser: ${{ env.BS_USER }}
-      cloudKey: ${{ env.BS_KEY }}
+      cloudUser: ${{ secrets.BS_USER }}
+      cloudKey: ${{ secrets.BS_KEY }}
     with:
       suite-name: testng-mobile-bs
 
   test-mobile-lt:
+    if: ${{ secrets.LT_USER != '' }}
     needs:
       - build
-    if: ${{ env.LT_USER != '' }}
     uses: ./.github/workflows/_test-core-java.yml
     secrets:
-      cloudUser: ${{ env.LT_USER }}
-      cloudKey: ${{ env.LT_KEY }}
+      cloudUser: ${{ secrets.LT_USER }}
+      cloudKey: ${{ secrets.LT_KEY }}
     with:
       suite-name: testng-mobile-lt
 
