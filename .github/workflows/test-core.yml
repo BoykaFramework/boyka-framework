@@ -3,7 +3,7 @@ name: Test boyka-framework project
 on:
   pull_request:
     branches:
-      - develop
+      - main
     paths:
       - 'core-java/**'
       - '.github/**'
@@ -11,8 +11,6 @@ on:
   push:
     branches:
       - main
-      - staging
-      - develop
     paths:
       - 'core-java/**'
 

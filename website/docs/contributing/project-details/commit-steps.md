@@ -173,7 +173,7 @@ When you click on the `Push` button, you will see a pop-up asking you to confirm
 
 ## Create draft PR
 
-As soon as you push your commit, you must create a draft PR on GitHub. Because our workflows will only get triggered on PR's that are raised against `develop` branch.
+As soon as you push your commit, you must create a draft PR on GitHub. Because our workflows will only get triggered on PR's that are raised against `main` branch.
 
 ## Ping on Discord
 

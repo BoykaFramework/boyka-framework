@@ -3,7 +3,7 @@ name: Label Feature and Bug PRs
 on:
   pull_request:
     branches:
-      - develop
+      - main
 
 concurrency:
   group: boyka-labeler-${{ github.ref }}-1

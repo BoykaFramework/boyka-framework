@@ -25,7 +25,6 @@ import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -192,7 +191,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
             return select.getAllSelectedOptions ()
                 .stream ()
                 .map (WebElement::getText)
-                .collect (toList ());
+                .toList ();
         }, this.locator, emptyList ());
     }
 

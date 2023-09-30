@@ -3,8 +3,6 @@ name: Deploy boyka website on GitHub
 on:
   pull_request:
     branches:
-      - develop
-      - staging
       - main
     paths:
       - 'website/**'
