@@ -25,7 +25,6 @@ import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.github.wasiqb.boyka.actions.interfaces.drivers.ICookieActions;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.ICookieActionsListener;
@@ -75,7 +74,7 @@ public class CookieActions implements ICookieActions {
             .getCookies ()
             .stream ()
             .map (Cookie::getName)
-            .collect (Collectors.toList ()), emptyList ());
+            .toList (), emptyList ());
     }
 
     @Override
