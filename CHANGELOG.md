@@ -1,6 +1,6 @@
 
 > boyka-framework@0.17.0 changelog /home/runner/work/boyka-framework/boyka-framework
-> lerna-changelog "--from" "v0.17.0" "--next-version" "v0.18.0-beta.0"
+> lerna-changelog "--from" "v0.17.0" "--next-version" "v0.18.0"
 
 
 ## v0.18.0-beta.0 (2023-10-01)
