@@ -25,7 +25,7 @@ jobs:
           method: POST
           username: ${{ env.LT_USER }}
           password: ${{ env.LT_KEY }}
-          data: '{ "custom_id": "AndroidApp" }'
+          data: '{ "custom_id": "AndroidApp", "name": "AndroidApp" }'
           files: '{ "appFile": "${{ github.workspace }}/core-java/src/test/resources/apps/android/sauce-demo.apk" }'
 
       - name: Upload iOS App
@@ -36,5 +36,5 @@ jobs:
           method: POST
           username: ${{ env.LT_USER }}
           password: ${{ env.LT_KEY }}
-          data: '{ "custom_id": "IOSApp" }'
+          data: '{ "custom_id": "IOSApp", "name": "IOSApp" }'
           files: '{ "appFile": "${{ github.workspace }}/core-java/src/test/resources/apps/ios/sauce-demo.ipa" }'
