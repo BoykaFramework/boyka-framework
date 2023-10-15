@@ -21,7 +21,7 @@ body:
     attributes:
       label: Issue Version
       description: 🔢 What version of the framework is this bug related to?
-      placeholder: v0.17.0
+      placeholder: v0.18.0
     validations:
       required: true
 
