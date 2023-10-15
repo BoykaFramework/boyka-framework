@@ -24,9 +24,8 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.setDriver;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.Validator.setOptionIfPresent;
-import static io.appium.java_client.remote.IOSMobileCapabilityType.XCODE_ORG_ID;
-import static io.appium.java_client.remote.IOSMobileCapabilityType.XCODE_SIGNING_ID;
 import static java.time.Duration.ofSeconds;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.device.ApplicationSetting;
@@ -36,6 +35,7 @@ import com.github.wasiqb.boyka.config.ui.mobile.device.WDASetting;
 import com.github.wasiqb.boyka.enums.DeviceType;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
+import io.appium.java_client.ios.options.wda.XcodeCertificate;
 import org.openqa.selenium.SessionNotCreatedException;
 
 class IOSManager implements IDriverManager {
@@ -99,8 +99,11 @@ class IOSManager implements IDriverManager {
                 i -> options.setWdaStartupRetryInterval (ofSeconds (i)));
             options.setUsePrebuiltWda (wda.isUsePrebuilt ());
             setOptionIfPresent (wda.getUpdateBundleId (), options::setUpdatedWdaBundleId);
-            setOptionIfPresent (wda.getTeamId (), v -> options.setCapability (XCODE_ORG_ID, v));
-            setOptionIfPresent (wda.getSigningId (), v -> options.setCapability (XCODE_SIGNING_ID, v));
+
+            if (isNotEmpty (wda.getTeamId ())) {
+                final var certificate = new XcodeCertificate (wda.getTeamId (), wda.getSigningId ());
+                options.setXcodeCertificate (certificate);
+            }
         }
     }
 
