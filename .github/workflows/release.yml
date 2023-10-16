@@ -73,7 +73,7 @@ jobs:
       - name: Generate Change log
         if: ${{ steps.version.outputs.version != null }}
         run: |
-          pnpm changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
+          pnpm --silent changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
       - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v3

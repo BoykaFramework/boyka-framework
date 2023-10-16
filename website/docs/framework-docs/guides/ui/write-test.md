@@ -1,5 +1,5 @@
 ---
-title: ✅ Write Test for Web
+title: ✅ Write Test class
 sidebar_position: 4
 ---
 
@@ -11,6 +11,7 @@ Check out all the available static methods to interact with the page in your tes
 ## Driver actions
 
 - [`AlertActions`](/api/actions/drivers/alert-actions): Contains all Alert related actions
+- [`ContextActions`](/api/actions/drivers/context-actions): Contains all Mobile context actions methods
 - [`CookieActions`](/api/actions/drivers/cookie-actions): Contains all cookies related actions
 - [`DriverActions`](/api/actions/drivers/driver-actions): Contains all other driver related actions
 - [`FrameActions`](/api/actions/drivers/frame-actions): Contains all Frames related actions
@@ -22,9 +23,10 @@ Check out all the available static methods to interact with the page in your tes
 - [`ClickableActions`](/api/actions/elements/clickable-actions): Contains all clickable element related actions
 - [`DropDownActions`](/api/actions/elements/drop-down-actions): Contains all drop down element related actions
 - [`ElementActions`](/api/actions/elements/element-actions): Contains all common methods for element related actions
-- [`FingerActions`](/api/actions/elements/finger-actions): Contains all methods for single finger on element / screen related actions
+- [`FingerActions`](/api/actions/elements/finger-actions): Contains all methods for single finger actions on element / screen related
+- [`FingersAction`](/api/actions/elements/fingers-actions): Contains all method for multi finger actions on element / screen
 - [`TextBoxActions`](/api/actions/elements/textbox-actions): Contains all text box related actions methods
-   :::
+:::
 
 ## Example
 
