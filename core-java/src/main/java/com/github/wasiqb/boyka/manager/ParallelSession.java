@@ -16,9 +16,12 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.Message.SESSION_ALREADY_CREATED;
+import static com.github.wasiqb.boyka.enums.Message.SESSION_NOT_CREATED;
 import static com.github.wasiqb.boyka.enums.Message.SESSION_PERSONA_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
 import static java.util.Optional.ofNullable;
@@ -58,7 +61,6 @@ public final class ParallelSession {
                 clearSession ();
             }
         });
-        sessions.clear ();
         SESSION.remove ();
     }
 
@@ -73,17 +75,9 @@ public final class ParallelSession {
         if (getSession ().getPlatformType () != WEB) {
             ofNullable (getSession ().getServiceManager ()).ifPresent (ServiceManager::stopServer);
         }
+        SESSION.get ()
+            .remove (getCurrentPersona ());
         CURRENT_PERSONA.remove ();
-    }
-
-    /**
-     * Create a new Session.
-     *
-     * @param platformType Target Platform Type
-     * @param configKey Configuration key for the session
-     */
-    public static void createSession (final PlatformType platformType, final String configKey) {
-        createSession (configKey, platformType, configKey);
     }
 
     /**
@@ -96,13 +90,24 @@ public final class ParallelSession {
     public static synchronized void createSession (final String persona, final PlatformType platformType,
         final String configKey) {
         switchPersona (persona);
-        final var currentSession = getSession ();
+        final var currentSession = new DriverSession<> ();
         currentSession.setPlatformType (platformType);
         currentSession.setConfigKey (configKey);
+        setSession (currentSession);
         if (platformType != API) {
             final var instance = new DriverManager ();
             instance.setupDriver ();
         }
+    }
+
+    /**
+     * Create a new Session.
+     *
+     * @param platformType Target Platform Type
+     * @param configKey Configuration key for the session
+     */
+    public static void createSession (final PlatformType platformType, final String configKey) {
+        createSession (configKey, platformType, configKey);
     }
 
     /**
@@ -128,8 +133,7 @@ public final class ParallelSession {
         final var session = SESSION.get ()
             .containsKey (currentPersona);
         if (!session) {
-            SESSION.get ()
-                .put (currentPersona, new DriverSession<> ());
+            throwError (SESSION_NOT_CREATED);
         }
         return LOGGER.traceExit ((DriverSession<D>) SESSION.get ()
             .get (currentPersona));
@@ -161,6 +165,16 @@ public final class ParallelSession {
         LOGGER.traceEntry ("Application Type: {}, Driver: {}", session.getPlatformType (), driver);
         session.setDriver (driver);
         LOGGER.traceExit ();
+    }
+
+    private static synchronized <D extends WebDriver> void setSession (final DriverSession<D> session) {
+        final var persona = getCurrentPersona ();
+        final var currentSession = SESSION.get ();
+        if (currentSession.isEmpty ()) {
+            SESSION.set (Map.of (persona, session));
+        } else {
+            throwError (SESSION_ALREADY_CREATED, persona);
+        }
     }
 
     private ParallelSession () {

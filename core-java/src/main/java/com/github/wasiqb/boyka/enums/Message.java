@@ -207,6 +207,14 @@ public enum Message {
      */
     RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),
     /**
+     * Session already created.
+     */
+    SESSION_ALREADY_CREATED ("Session is already created for [{0}] persona..."),
+    /**
+     * Session has not been created.
+     */
+    SESSION_NOT_CREATED ("Session has not been created for [{0}] persona..."),
+    /**
      * Error when starting session.
      */
     SESSION_NOT_STARTED ("Session could not be started..."),
