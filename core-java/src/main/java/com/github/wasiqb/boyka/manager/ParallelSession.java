@@ -75,8 +75,10 @@ public final class ParallelSession {
         if (getSession ().getPlatformType () != WEB) {
             ofNullable (getSession ().getServiceManager ()).ifPresent (ServiceManager::stopServer);
         }
-        SESSION.get ()
-            .remove (getCurrentPersona ());
+        final var session = SESSION.get ();
+        if (!session.isEmpty ()) {
+            session.remove (getCurrentPersona ());
+        }
         CURRENT_PERSONA.remove ();
     }
 
@@ -171,7 +173,9 @@ public final class ParallelSession {
         final var persona = getCurrentPersona ();
         final var currentSession = SESSION.get ();
         if (currentSession.isEmpty ()) {
-            SESSION.set (Map.of (persona, session));
+            final var sessionMap = new HashMap<String, DriverSession<? extends WebDriver>> ();
+            sessionMap.put (persona, session);
+            SESSION.set (sessionMap);
         } else {
             throwError (SESSION_ALREADY_CREATED, persona);
         }
