@@ -52,15 +52,18 @@ public final class ParallelSession {
     /**
      * Clears all the sessions.
      */
-    public static void clearAllSessions () {
+    public static synchronized void clearAllSessions () {
         LOGGER.info ("Clearing all the sessions...");
         final var sessions = SESSION.get ();
-        sessions.forEach ((persona, session) -> {
+        final var sessionList = sessions.keySet ()
+            .stream ()
+            .toList ();
+        for (final var persona : sessionList) {
             if (isNotEmpty (persona)) {
                 switchPersona (persona);
                 clearSession ();
             }
-        });
+        }
         SESSION.remove ();
     }
 
@@ -177,7 +180,11 @@ public final class ParallelSession {
             sessionMap.put (persona, session);
             SESSION.set (sessionMap);
         } else {
-            throwError (SESSION_ALREADY_CREATED, persona);
+            if (!currentSession.containsKey (persona)) {
+                currentSession.put (persona, session);
+            } else {
+                throwError (SESSION_ALREADY_CREATED, persona);
+            }
         }
     }
 
