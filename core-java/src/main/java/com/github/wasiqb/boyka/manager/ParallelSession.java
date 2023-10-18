@@ -27,7 +27,6 @@ import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.HashMap;
@@ -60,10 +59,8 @@ public final class ParallelSession {
             .stream ()
             .toList ();
         for (final var persona : sessionList) {
-            if (isNotEmpty (persona)) {
-                switchPersona (persona);
-                clearSession ();
-            }
+            switchPersona (persona);
+            clearSession ();
         }
         SESSION.remove ();
     }
@@ -74,7 +71,7 @@ public final class ParallelSession {
     public static void clearSession () {
         LOGGER.info ("Clearing session for persona [{}]...", getCurrentPersona ());
         final var session = SESSION.get ();
-        if (session.isEmpty ()) {
+        if (!isSessionCreated ()) {
             throwError (SESSION_ALREADY_CLEARED);
         }
         getSession ().clearListeners ();
@@ -83,7 +80,7 @@ public final class ParallelSession {
         if (getSession ().getPlatformType () != WEB) {
             ofNullable (getSession ().getServiceManager ()).ifPresent (ServiceManager::stopServer);
         }
-        if (!session.isEmpty ()) {
+        if (isSessionCreated ()) {
             session.remove (getCurrentPersona ());
         }
         CURRENT_PERSONA.remove ();
@@ -139,13 +136,21 @@ public final class ParallelSession {
     public static synchronized <D extends WebDriver> DriverSession<D> getSession () {
         LOGGER.traceEntry ();
         final var currentPersona = getCurrentPersona ();
-        final var session = SESSION.get ()
-            .containsKey (currentPersona);
-        if (!session) {
+        if (!isSessionCreated ()) {
             throwError (SESSION_NOT_CREATED);
         }
         return LOGGER.traceExit ((DriverSession<D>) SESSION.get ()
             .get (currentPersona));
+    }
+
+    /**
+     * Checks if the session has been started.
+     *
+     * @return true, if session has been created, else, false.
+     */
+    public static boolean isSessionCreated () {
+        return SESSION.get ()
+            .containsKey (getCurrentPersona ());
     }
 
     /**
@@ -179,16 +184,10 @@ public final class ParallelSession {
     private static synchronized <D extends WebDriver> void setSession (final DriverSession<D> session) {
         final var persona = getCurrentPersona ();
         final var currentSession = SESSION.get ();
-        if (currentSession.isEmpty ()) {
-            final var sessionMap = new HashMap<String, DriverSession<? extends WebDriver>> ();
-            sessionMap.put (persona, session);
-            SESSION.set (sessionMap);
+        if (!isSessionCreated ()) {
+            currentSession.put (persona, session);
         } else {
-            if (!currentSession.containsKey (persona)) {
-                currentSession.put (persona, session);
-            } else {
-                throwError (SESSION_ALREADY_CREATED, persona);
-            }
+            throwError (SESSION_ALREADY_CREATED, persona);
         }
     }
 

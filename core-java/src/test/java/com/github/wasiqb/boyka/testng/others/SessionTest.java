@@ -23,6 +23,7 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -35,16 +36,21 @@ public class SessionTest {
     private static final String PERSONA = "SessionTest";
 
     /**
+     * Clear any open sessions.
+     */
+    @AfterMethod
+    public void teardownMethod () {
+        clearAllSessions ();
+    }
+
+    /**
      * Test duplicate clear session.
      */
     @Test (description = "Test duplicate clear session", expectedExceptions = FrameworkError.class)
     public void testDuplicateClearSession () {
-        try {
-            createSession (PERSONA, WEB, "test_local_chrome");
-        } finally {
-            clearSession ();
-            clearSession ();
-        }
+        createSession (PERSONA, WEB, "test_local_chrome");
+        clearSession ();
+        clearSession ();
     }
 
     /**
@@ -52,12 +58,9 @@ public class SessionTest {
      */
     @Test (description = "Test Duplicate Session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session is already created for .SessionTest. persona...")
     public void testDuplicateSessionCreation () {
-        try {
-            createSession (PERSONA, WEB, "test_local_chrome");
-            createSession (PERSONA, WEB, "test_local_chrome");
-        } finally {
-            clearAllSessions ();
-        }
+        createSession (PERSONA, WEB, "test_local_chrome");
+        createSession (PERSONA, WEB, "test_local_chrome");
+        clearSession ();
     }
 
     /**
