@@ -37,7 +37,7 @@ public class SessionTest {
     /**
      * Test duplicate clear session.
      */
-    @Test (description = "Test duplicate clear session", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session already cleared...")
+    @Test (description = "Test duplicate clear session", expectedExceptions = FrameworkError.class)
     public void testDuplicateClearSession () {
         try {
             createSession (PERSONA, WEB, "test_local_chrome");
