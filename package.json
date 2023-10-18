@@ -31,7 +31,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.8.0",
     "@commitlint/config-conventional": "^17.8.0",
-    "@lerna/child-process": "^7.3.1",
+    "@lerna/child-process": "^7.4.1",
     "@lerna/version": "^6.6.2",
     "@types/node": "^20.8.6",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
@@ -46,7 +46,7 @@
     "eslint-plugin-react": "^7.33.2",
     "husky": "^8.0.3",
     "js-yaml": "^4.1.0",
-    "lerna": "7.3.1",
+    "lerna": "7.4.1",
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^15.0.1",
     "lodash": "^4.17.21",

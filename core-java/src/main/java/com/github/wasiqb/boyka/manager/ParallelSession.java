@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.manager;
 
+import static com.github.wasiqb.boyka.enums.Message.SESSION_ALREADY_CLEARED;
 import static com.github.wasiqb.boyka.enums.Message.SESSION_ALREADY_CREATED;
 import static com.github.wasiqb.boyka.enums.Message.SESSION_NOT_CREATED;
 import static com.github.wasiqb.boyka.enums.Message.SESSION_PERSONA_CANNOT_BE_NULL;
@@ -72,13 +73,16 @@ public final class ParallelSession {
      */
     public static void clearSession () {
         LOGGER.info ("Clearing session for persona [{}]...", getCurrentPersona ());
+        final var session = SESSION.get ();
+        if (session.isEmpty ()) {
+            throwError (SESSION_ALREADY_CLEARED, getCurrentPersona ());
+        }
         getSession ().clearListeners ();
         getSession ().clearSharedData ();
         ofNullable (getSession ().getDriver ()).ifPresent (WebDriver::quit);
         if (getSession ().getPlatformType () != WEB) {
             ofNullable (getSession ().getServiceManager ()).ifPresent (ServiceManager::stopServer);
         }
-        final var session = SESSION.get ();
         if (!session.isEmpty ()) {
             session.remove (getCurrentPersona ());
         }
@@ -138,7 +142,7 @@ public final class ParallelSession {
         final var session = SESSION.get ()
             .containsKey (currentPersona);
         if (!session) {
-            throwError (SESSION_NOT_CREATED);
+            throwError (SESSION_NOT_CREATED, currentPersona);
         }
         return LOGGER.traceExit ((DriverSession<D>) SESSION.get ()
             .get (currentPersona));

@@ -31,7 +31,7 @@ public enum Message {
     /**
      * Action not supported error.
      */
-    ACTION_NOT_SUPPORTED_ON_PLATFORM ("[{0}] action is not supported on [{1}] platform..."),
+    ACTION_NOT_SUPPORTED_ON_PLATFORM ("({0}) action is not supported on ({1}) platform..."),
     /**
      * Basic auth password is empty.
      */
@@ -39,7 +39,7 @@ public enum Message {
     /**
      * Browser option not supported Error.
      */
-    BROWSER_OPTION_NOT_SUPPORTED ("Browser options not supported for [{0}] browser..."),
+    BROWSER_OPTION_NOT_SUPPORTED ("Browser options not supported for ({0}) browser..."),
     /**
      * Remote execution requires capabilities
      */
@@ -48,7 +48,7 @@ public enum Message {
      * Config key is not found.
      */
     CONFIG_KEY_NOT_FOUND (
-        "The key [{0}] mentioned is not found in the config file, please provide a valid keys from the following [{1}]..."),
+        "The key ({0}) mentioned is not found in the config file, please provide a valid keys from the following ({1})..."),
     /**
      * Content type must be set before setting request body
      */
@@ -57,7 +57,7 @@ public enum Message {
      * Context switching not allowed for apps other than Hybrid app.
      */
     CONTEXT_SWITCHING_NOT_ALLOWED (
-        "Context switching is not allowed for application other than Hybrid, current application type is [{0}]..."),
+        "Context switching is not allowed for application other than Hybrid, current application type is ({0})..."),
     /**
      * Error when driver is null.
      */
@@ -73,7 +73,7 @@ public enum Message {
     /**
      * Element not found.
      */
-    ELEMENT_NOT_FOUND ("Element [{0}] not found for platform [{1}]..."),
+    ELEMENT_NOT_FOUND ("Element ({0}) not found for platform ({1})..."),
     /**
      * Empty browser is not allowed.
      */
@@ -113,7 +113,7 @@ public enum Message {
     /**
      * Error reading file
      */
-    ERROR_READING_FILE ("Error occurred reading file [{0}]..."),
+    ERROR_READING_FILE ("Error occurred reading file ({0})..."),
     /**
      * Error while saving screenshot.
      */
@@ -133,7 +133,7 @@ public enum Message {
     /**
      * Error writing file
      */
-    ERROR_WRITING_FILE ("Error occurred writing file [{0}]..."),
+    ERROR_WRITING_FILE ("Error occurred writing file ({0})..."),
     /**
      * Error while writing logs to file.
      */
@@ -141,7 +141,7 @@ public enum Message {
     /**
      * Finger should be within the bounds.
      */
-    FINGER_OUT_OF_BOUND ("Finger co-ordinates [{0}] is outside the bounds [{1}]..."),
+    FINGER_OUT_OF_BOUND ("Finger co-ordinates ({0}) is outside the bounds ({1})..."),
     /**
      * Host name is required for Remote execution
      */
@@ -157,11 +157,11 @@ public enum Message {
     /**
      * Invalid listener class provided.
      */
-    INVALID_LISTENER_FOUND ("Invalid Listener class [{0}] provided in the config..."),
+    INVALID_LISTENER_FOUND ("Invalid Listener class ({0}) provided in the config..."),
     /**
      * Invalid platform for operation
      */
-    INVALID_PLATFORM_FOR_OPERATION ("Platform [{0}] is not supported for this setting..."),
+    INVALID_PLATFORM_FOR_OPERATION ("Platform ({0}) is not supported for this setting..."),
     /**
      * Invalid Remote session URL.
      */
@@ -185,7 +185,7 @@ public enum Message {
     /**
      * No JSON file found
      */
-    NO_JSON_FILE_FOUND ("JSON file [{0}] not found..."),
+    NO_JSON_FILE_FOUND ("JSON file ({0}) not found..."),
     /**
      * No virtual keyboard for Web platform.
      */
@@ -201,19 +201,23 @@ public enum Message {
     /**
      * Protocol is required for host name
      */
-    PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host [{0}]..."),
+    PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host ({0})..."),
     /**
      * Schema validation assert failure
      */
     RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),
     /**
+     * Session already cleared.
+     */
+    SESSION_ALREADY_CLEARED ("Session already cleared for ({0}) persona..."),
+    /**
      * Session already created.
      */
-    SESSION_ALREADY_CREATED ("Session is already created for [{0}] persona..."),
+    SESSION_ALREADY_CREATED ("Session is already created for ({0}) persona..."),
     /**
      * Session has not been created.
      */
-    SESSION_NOT_CREATED ("Session has not been created for [{0}] persona..."),
+    SESSION_NOT_CREATED ("Session has not been created for ({0}) persona..."),
     /**
      * Error when starting session.
      */
