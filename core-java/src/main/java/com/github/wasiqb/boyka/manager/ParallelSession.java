@@ -75,7 +75,7 @@ public final class ParallelSession {
         LOGGER.info ("Clearing session for persona [{}]...", getCurrentPersona ());
         final var session = SESSION.get ();
         if (session.isEmpty ()) {
-            throwError (SESSION_ALREADY_CLEARED, getCurrentPersona ());
+            throwError (SESSION_ALREADY_CLEARED);
         }
         getSession ().clearListeners ();
         getSession ().clearSharedData ();
@@ -142,7 +142,7 @@ public final class ParallelSession {
         final var session = SESSION.get ()
             .containsKey (currentPersona);
         if (!session) {
-            throwError (SESSION_NOT_CREATED, currentPersona);
+            throwError (SESSION_NOT_CREATED);
         }
         return LOGGER.traceExit ((DriverSession<D>) SESSION.get ()
             .get (currentPersona));

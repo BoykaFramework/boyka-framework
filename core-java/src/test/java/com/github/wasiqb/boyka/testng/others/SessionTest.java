@@ -37,7 +37,7 @@ public class SessionTest {
     /**
      * Test duplicate clear session.
      */
-    @Test (description = "Test duplicate clear session", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session already cleared for \\(\\) persona...")
+    @Test (description = "Test duplicate clear session", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session already cleared...")
     public void testDuplicateClearSession () {
         try {
             createSession (PERSONA, WEB, "test_local_chrome");
@@ -50,7 +50,7 @@ public class SessionTest {
     /**
      * Test Duplicate Session creation.
      */
-    @Test (description = "Test Duplicate Session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session is already created for \\(SessionTest\\) persona...")
+    @Test (description = "Test Duplicate Session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session is already created for .SessionTest. persona...")
     public void testDuplicateSessionCreation () {
         try {
             createSession (PERSONA, WEB, "test_local_chrome");
@@ -63,7 +63,7 @@ public class SessionTest {
     /**
      * Test get session without session creation.
      */
-    @Test (description = "Test get session without session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session has not been created for \\(\\) persona...")
+    @Test (description = "Test get session without session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session has not been created...")
     public void testGetSessionWithoutSessionCreated () {
         getSession ();
     }
