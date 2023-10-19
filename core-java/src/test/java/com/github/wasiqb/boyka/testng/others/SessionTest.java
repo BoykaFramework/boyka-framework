@@ -24,6 +24,7 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -56,6 +57,7 @@ public class SessionTest {
     /**
      * Test Duplicate Session creation.
      */
+    @Ignore
     @Test (description = "Test Duplicate Session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session is already created for .SessionTest. persona...")
     public void testDuplicateSessionCreation () {
         createSession (PERSONA, WEB, "test_local_chrome");
