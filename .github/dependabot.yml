@@ -49,6 +49,3 @@ updates:
       - 'github_actions'
     reviewers:
       - 'boyka-core'
-    schedule:
-      interval: 'monthly'
-      timezone: 'Asia/Calcutta'
