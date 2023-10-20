@@ -14,34 +14,22 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.device;
+package com.github.wasiqb.boyka.config.ui.mobile.device;
+
+import static io.appium.java_client.ios.IOSStartScreenRecordingOptions.VideoQuality.MEDIUM;
+
+import io.appium.java_client.ios.IOSStartScreenRecordingOptions.VideoQuality;
+import lombok.Data;
 
 /**
- * Handle all device specific actions.
+ * iOS specific video recording settings.
  *
  * @author Wasiq Bhamla
- * @since 31-May-2023
+ * @since 16-Oct-2023
  */
-public interface IDeviceActions {
-    /**
-     * Hides the keyboard if visible.
-     */
-    void hideKeyboard ();
-
-    /**
-     * Gets the keyboard state whether it is visible or not.
-     *
-     * @return true, if visible.
-     */
-    boolean isKeyboardVisible ();
-
-    /**
-     * Starts video recording.
-     */
-    void startRecording ();
-
-    /**
-     * Stops video recording.
-     */
-    void stopRecording ();
+@Data
+public class IOSVideoSetting {
+    private String       codec   = "mpeg4";
+    private int          fps;
+    private VideoQuality quality = MEDIUM;
 }

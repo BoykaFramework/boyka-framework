@@ -1,7 +1,8 @@
-**/target/
-**/.idea
-**/reports
-**/logs
+target/
+.idea/
+reports/
+logs/
+videos/
 *.iml
 .DS_Store
 

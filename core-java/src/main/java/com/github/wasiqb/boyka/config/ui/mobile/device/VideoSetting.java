@@ -14,34 +14,23 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.device;
+package com.github.wasiqb.boyka.config.ui.mobile.device;
+
+import lombok.Data;
 
 /**
- * Handle all device specific actions.
+ * Video recording related settings.
  *
  * @author Wasiq Bhamla
- * @since 31-May-2023
+ * @since 13-Oct-2023
  */
-public interface IDeviceActions {
-    /**
-     * Hides the keyboard if visible.
-     */
-    void hideKeyboard ();
-
-    /**
-     * Gets the keyboard state whether it is visible or not.
-     *
-     * @return true, if visible.
-     */
-    boolean isKeyboardVisible ();
-
-    /**
-     * Starts video recording.
-     */
-    void startRecording ();
-
-    /**
-     * Stops video recording.
-     */
-    void stopRecording ();
+@Data
+public class VideoSetting {
+    private AndroidVideoSetting android = new AndroidVideoSetting ();
+    private boolean             enabled = false;
+    private IOSVideoSetting     ios     = new IOSVideoSetting ();
+    private String              path    = "./videos";
+    private String              prefix  = "VID";
+    private String              size;
+    private int                 timeLimit;
 }

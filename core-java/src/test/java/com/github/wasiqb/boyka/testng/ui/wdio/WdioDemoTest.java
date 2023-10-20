@@ -1,5 +1,6 @@
 package com.github.wasiqb.boyka.testng.ui.wdio;
 
+import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
 import static com.github.wasiqb.boyka.actions.drivers.ContextActions.withContext;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
@@ -48,6 +49,7 @@ public class WdioDemoTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
         createSession (format ("WdioDemoTest-{0}", platformType), platformType, driverKey);
+        onDevice ().startRecording ();
     }
 
     /**
@@ -55,6 +57,7 @@ public class WdioDemoTest {
      */
     @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
+        onDevice ().stopRecording ();
         withDriver ().saveLogs ();
         clearSession ();
     }

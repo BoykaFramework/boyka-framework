@@ -119,6 +119,10 @@ public enum Message {
      */
     ERROR_SAVING_SCREENSHOT ("Error saving screenshot"),
     /**
+     * Error saving video recording.
+     */
+    ERROR_SAVING_VIDEO ("Error occurred while saving video recording..."),
+    /**
      * Error due to server not running.
      */
     ERROR_SERVER_NOT_RUNNING ("Error occurred, server not running: {0}..."),
@@ -202,6 +206,10 @@ public enum Message {
      * Protocol is required for host name
      */
     PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host ({0})..."),
+    /**
+     * Video recording is not supported.
+     */
+    RECORDING_NOT_SUPPORTED ("Video recording is not supported for [{0}] platform..."),
     /**
      * Schema validation assert failure
      */
