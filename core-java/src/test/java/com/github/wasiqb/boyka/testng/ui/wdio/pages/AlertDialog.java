@@ -16,8 +16,11 @@
 
 package com.github.wasiqb.boyka.testng.ui.wdio.pages;
 
+import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
+import static com.github.wasiqb.boyka.enums.PlatformType.ANDROID;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static io.appium.java_client.AppiumBy.id;
 
 import com.github.wasiqb.boyka.builders.Locator;
@@ -63,11 +66,15 @@ public class AlertDialog {
      * Accepts pop-up and verify message.
      */
     public void verifyMessage (final String expectedMessage) {
-        try {
-            onElement (getMessage ()).verifyText ()
-                .isEqualTo (expectedMessage);
-        } finally {
-            withFinger (getButton1 ()).tap ();
+        if (getSession ().getPlatformType () == ANDROID) {
+            try {
+                onElement (getMessage ()).verifyText ()
+                    .isEqualTo (expectedMessage);
+            } finally {
+                withFinger (getButton1 ()).tap ();
+            }
+        } else {
+            onAlert ().verifyAccept (expectedMessage);
         }
     }
 }
