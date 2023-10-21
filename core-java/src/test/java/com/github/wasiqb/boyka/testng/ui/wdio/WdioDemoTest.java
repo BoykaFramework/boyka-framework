@@ -7,9 +7,14 @@ import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
+import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
+import static com.github.wasiqb.boyka.enums.PlatformType.ANDROID;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.testng.ui.wdio.pages.AlertDialog.alertDialog;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.DragDropPage.dragDropPage;
+import static com.github.wasiqb.boyka.testng.ui.wdio.pages.SignUpPage.signUpPage;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.WDIOHomePage.wdioHomePage;
 import static com.github.wasiqb.boyka.testng.ui.wdio.pages.WebViewPage.webViewPage;
 import static java.text.MessageFormat.format;
@@ -80,16 +85,39 @@ public class WdioDemoTest {
     }
 
     /**
+     * Sign Up test.
+     */
+    @Test
+    public void testSignUp () {
+        final var userName = "admin@gmail.com";
+        final var password = "Admin@1234";
+        withFinger (wdioHomePage ().getLoginTab ()).tap ();
+
+        withFinger (signUpPage ().getSignUpTab ()).tap ();
+        onTextBox (signUpPage ().getEmail ()).enterText (userName);
+        onTextBox (signUpPage ().getPassword ()).enterText (password);
+        onTextBox (signUpPage ().getConfirmPassword ()).enterText (password);
+
+        if (getSession ().getPlatformType () == ANDROID) {
+            onDevice ().hideKeyboard ();
+        }
+
+        withFinger (signUpPage ().getSignUp ()).tap ();
+
+        alertDialog ().verifyMessage ("You successfully signed up!");
+    }
+
+    /**
      * Test web view screen.
      */
     @Test (description = "Test WebView screen")
     public void testWebView () {
+        withMouse (wdioHomePage ().getWebViewTab ()).click ();
+
         verifyWebView ();
     }
 
     private void verifyWebView () {
-        withMouse (wdioHomePage ().getWebViewTab ()).click ();
-
         withContext ().switchToWebView ();
 
         onElement (webViewPage ().getPageTitle ()).verifyText ()
