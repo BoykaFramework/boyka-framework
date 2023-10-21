@@ -67,7 +67,7 @@ public class AlertDialog {
             onElement (getMessage ()).verifyText ()
                 .isEqualTo (expectedMessage);
         } finally {
-            withFinger (alertDialog ().getButton1 ()).tap ();
+            withFinger (getButton1 ()).tap ();
         }
     }
 }
