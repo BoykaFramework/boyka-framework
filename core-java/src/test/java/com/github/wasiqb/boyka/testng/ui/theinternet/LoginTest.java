@@ -16,11 +16,13 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
+import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
 import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
 import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
+import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.LoginPage.loginPage;
@@ -42,6 +44,8 @@ import org.testng.annotations.Test;
 public class LoginTest {
     private static final String URL = "https://the-internet.herokuapp.com/login";
 
+    private PlatformType platformType;
+
     /**
      * Setup test method to take screenshot after each test method.
      */
@@ -62,6 +66,10 @@ public class LoginTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createSession ("LoginTest", platformType, driverKey);
+        this.platformType = platformType;
+        if (platformType != WEB) {
+            onDevice ().startRecording ();
+        }
         navigate ().to (URL);
     }
 
@@ -70,6 +78,9 @@ public class LoginTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
+        if (this.platformType != WEB) {
+            onDevice ().stopRecording ();
+        }
         clearSession ();
     }
 
