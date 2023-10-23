@@ -17,7 +17,7 @@
 package com.github.wasiqb.boyka.testng.others;
 
 import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
-import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
+import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 
@@ -41,11 +41,11 @@ public class VideoRecordTest {
     }
 
     /**
-     * Test Web platform video recording.
+     * Test API platform video recording.
      */
-    @Test (expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Video recording is not supported for .WEB. platform...")
-    public void testWebVideoRecording () {
-        createSession (WEB, "test_local_chrome");
+    @Test (expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Video recording is not supported for .API. platform...")
+    public void testApiVideoRecording () {
+        createSession (API, "test_postman");
         onDevice ().startRecording ();
     }
 }
