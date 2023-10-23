@@ -209,7 +209,7 @@ public enum Message {
     /**
      * Video recording is not supported.
      */
-    RECORDING_NOT_SUPPORTED ("Video recording is not supported for [{0}] platform..."),
+    RECORDING_NOT_SUPPORTED ("Video recording is not supported for ({0}) platform..."),
     /**
      * Schema validation assert failure
      */
