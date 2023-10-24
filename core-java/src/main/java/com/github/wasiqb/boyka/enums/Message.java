@@ -207,10 +207,6 @@ public enum Message {
      */
     PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host ({0})..."),
     /**
-     * Video recording is not supported.
-     */
-    RECORDING_NOT_SUPPORTED ("Video recording is not supported for ({0}) platform..."),
-    /**
      * Schema validation assert failure
      */
     RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),

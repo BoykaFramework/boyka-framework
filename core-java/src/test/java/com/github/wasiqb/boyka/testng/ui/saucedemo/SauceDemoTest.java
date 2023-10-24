@@ -1,5 +1,6 @@
 package com.github.wasiqb.boyka.testng.ui.saucedemo;
 
+import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
 import static com.github.wasiqb.boyka.actions.drivers.ContextActions.withContext;
 import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
@@ -46,6 +47,7 @@ public class SauceDemoTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
         createSession (format ("SauceDemoTest-{0}", platformType), platformType, driverKey);
+        onDevice ().startRecording ();
         this.sauceDemo = new SauceDemoActions ();
     }
 
@@ -54,6 +56,7 @@ public class SauceDemoTest {
      */
     @AfterClass (description = "Tear down test class", alwaysRun = true)
     public void tearDownTestClass () {
+        onDevice ().stopRecording ();
         withDriver ().saveLogs ();
         clearSession ();
     }

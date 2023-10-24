@@ -21,7 +21,6 @@ import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.enums.DeviceType.CLOUD;
 import static com.github.wasiqb.boyka.enums.ListenerType.DEVICE_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.NO_KEYBOARD_ERROR;
-import static com.github.wasiqb.boyka.enums.Message.RECORDING_NOT_SUPPORTED;
 import static com.github.wasiqb.boyka.enums.PlatformType.ANDROID;
 import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
@@ -92,27 +91,29 @@ public class DeviceActions implements IDeviceActions {
     @Override
     public void startRecording () {
         final var platform = getSession ().getPlatformType ();
-        checkVideoSupported (platform);
-        final var mobileSetting = getSession ().getMobileSetting ()
-            .getDevice ();
-        final var setting = mobileSetting.getVideo ();
-        if (setting.isEnabled () && mobileSetting.getType () != CLOUD) {
-            final var screen = (CanRecordScreen) getSession ().getDriver ();
-            startRecording (screen, setting, platform);
+        if (platform == ANDROID || platform == IOS) {
+            final var mobileSetting = getSession ().getMobileSetting ()
+                .getDevice ();
+            final var setting = mobileSetting.getVideo ();
+            if (mobileSetting.getType () != CLOUD && setting.isEnabled ()) {
+                final var screen = (CanRecordScreen) getSession ().getDriver ();
+                startRecording (screen, setting, platform);
+            }
         }
     }
 
     @Override
     public void stopRecording () {
         final var platform = getSession ().getPlatformType ();
-        checkVideoSupported (platform);
-        final var mobileSetting = getSession ().getMobileSetting ()
-            .getDevice ();
-        final var setting = mobileSetting.getVideo ();
-        if (setting.isEnabled () && mobileSetting.getType () != CLOUD) {
-            final var screen = (CanRecordScreen) getSession ().getDriver ();
-            final var content = stopRecording (screen, platform);
-            saveVideo (content);
+        if (platform == ANDROID || platform == IOS) {
+            final var mobileSetting = getSession ().getMobileSetting ()
+                .getDevice ();
+            final var setting = mobileSetting.getVideo ();
+            if (mobileSetting.getType () != CLOUD && setting.isEnabled ()) {
+                final var screen = (CanRecordScreen) getSession ().getDriver ();
+                final var content = stopRecording (screen, platform);
+                saveVideo (content);
+            }
         }
     }
 
@@ -120,12 +121,6 @@ public class DeviceActions implements IDeviceActions {
         final var platform = getSession ().getPlatformType ();
         if (platform == WEB) {
             throwError (NO_KEYBOARD_ERROR);
-        }
-    }
-
-    private void checkVideoSupported (final PlatformType platform) {
-        if (platform != ANDROID && platform != IOS) {
-            throwError (RECORDING_NOT_SUPPORTED, platform);
         }
     }
 
