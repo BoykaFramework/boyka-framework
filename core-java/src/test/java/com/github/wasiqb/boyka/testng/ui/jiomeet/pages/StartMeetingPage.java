@@ -16,8 +16,8 @@
 
 package com.github.wasiqb.boyka.testng.ui.jiomeet.pages;
 
+import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.By.tagName;
 
 import com.github.wasiqb.boyka.builders.Locator;
 import lombok.Getter;
@@ -36,9 +36,7 @@ public class StartMeetingPage {
         .build ();
     private final Locator start     = Locator.buildLocator ()
         .name ("Start Button")
-        .web (tagName ("button"))
-        .filter (e -> e.getText ()
-            .equals ("Start"))
+        .web (cssSelector ("button[type=\"button\"]"))
         .build ();
 
     private StartMeetingPage () {

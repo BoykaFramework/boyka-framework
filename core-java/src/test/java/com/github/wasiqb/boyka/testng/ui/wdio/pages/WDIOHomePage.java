@@ -29,6 +29,11 @@ public class WDIOHomePage {
         .ios (accessibilityId ("Drag"))
         .name ("Drag Tab")
         .build ();
+    private final Locator loginTab   = Locator.buildLocator ()
+        .name ("Login Tab")
+        .android (accessibilityId ("Login"))
+        .ios (accessibilityId ("Login"))
+        .build ();
     private final Locator webViewTab = Locator.buildLocator ()
         .android (accessibilityId ("Webview"))
         .ios (accessibilityId ("Webview"))

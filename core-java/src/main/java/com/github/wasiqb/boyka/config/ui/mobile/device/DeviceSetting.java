@@ -51,6 +51,7 @@ public class DeviceSetting {
     private int                  typingSpeed            = 60;
     private String               uniqueId;
     private String               version;
+    private VideoSetting         video                  = new VideoSetting ();
     private VirtualDeviceSetting virtualDevice          = new VirtualDeviceSetting ();
     private WDASetting           wda;
 }

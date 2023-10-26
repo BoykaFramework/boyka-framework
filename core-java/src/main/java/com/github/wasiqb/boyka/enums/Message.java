@@ -119,6 +119,10 @@ public enum Message {
      */
     ERROR_SAVING_SCREENSHOT ("Error saving screenshot"),
     /**
+     * Error saving video recording.
+     */
+    ERROR_SAVING_VIDEO ("Error occurred while saving video recording..."),
+    /**
      * Error due to server not running.
      */
     ERROR_SERVER_NOT_RUNNING ("Error occurred, server not running: {0}..."),

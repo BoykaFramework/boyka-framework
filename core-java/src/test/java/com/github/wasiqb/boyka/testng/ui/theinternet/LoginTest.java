@@ -16,6 +16,7 @@
 
 package com.github.wasiqb.boyka.testng.ui.theinternet;
 
+import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
 import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
 import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
@@ -42,6 +43,8 @@ import org.testng.annotations.Test;
 public class LoginTest {
     private static final String URL = "https://the-internet.herokuapp.com/login";
 
+    private PlatformType platformType;
+
     /**
      * Setup test method to take screenshot after each test method.
      */
@@ -62,6 +65,8 @@ public class LoginTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createSession ("LoginTest", platformType, driverKey);
+        this.platformType = platformType;
+        onDevice ().startRecording ();
         navigate ().to (URL);
     }
 
@@ -70,6 +75,7 @@ public class LoginTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
+        onDevice ().stopRecording ();
         clearSession ();
     }
 

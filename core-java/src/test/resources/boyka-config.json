@@ -216,6 +216,14 @@
           "swipe": {
             "max_swipe_until_found": 5
           },
+          "video": {
+            "enabled": true,
+            "time_limit": 300,
+            "size": "800x720",
+            "android": {
+              "bit_rate": 4
+            }
+          },
           "application": {
             "path": "/apps/android/wdio-demo.apk",
             "wait_activity": "com.wdiodemoapp.MainActivity",
@@ -357,6 +365,14 @@
           "no_reset": true,
           "swipe": {
             "max_swipe_until_found": 5
+          },
+          "video": {
+            "enabled": true,
+            "time_limit": 300,
+            "size": "800x720",
+            "android": {
+              "bit_rate": 4
+            }
           },
           "application": {
             "browser": "CHROME",
@@ -575,6 +591,13 @@
           "virtual_device": {
             "headless": true,
             "launch_timeout": 180
+          },
+          "video": {
+            "enabled": true,
+            "time_limit": 300,
+            "ios": {
+              "fps": 30
+            }
           },
           "wda": {
             "launch_timeout": 120,

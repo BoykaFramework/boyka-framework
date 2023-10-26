@@ -76,6 +76,11 @@
       "description": "Supports Mobile testing with Android and iOS platforms for Native, Hybrid and Web applications"
     },
     {
+      "title": "Video Recording",
+      "image": "img/home/video-recording.svg",
+      "description": "Allows video recording of Mobile automation tests"
+    },
+    {
       "title": "Cloud Support",
       "image": "img/home/cloud-support.svg",
       "description": "Provides facility to run tests on Cloud platforms like BrowserStack"
@@ -96,7 +101,7 @@
       "description": "Provides logging support using Log4J2 to log all events occurred during test execution"
     },
     {
-      "title": "Inbuilt verification",
+      "title": "In-built verification",
       "image": "img/home/inline-check.svg",
       "description": "Provides inbuilt verification for inline assertion of element properties and API responses"
     },

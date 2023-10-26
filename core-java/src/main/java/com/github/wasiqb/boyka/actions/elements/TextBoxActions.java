@@ -17,6 +17,7 @@
 package com.github.wasiqb.boyka.actions.elements;
 
 import static com.github.wasiqb.boyka.actions.CommonActions.performElementAction;
+import static com.github.wasiqb.boyka.enums.ApplicationType.WEB;
 import static com.github.wasiqb.boyka.enums.ListenerType.TEXT_BOX_ACTION;
 import static com.github.wasiqb.boyka.enums.PlatformType.IOS;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
@@ -26,7 +27,6 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import com.github.wasiqb.boyka.actions.interfaces.elements.ITextBoxActions;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.elements.ITextBoxActionsListener;
 import com.github.wasiqb.boyka.builders.Locator;
-import com.github.wasiqb.boyka.enums.ApplicationType;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -51,7 +51,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
 
     private final ITextBoxActionsListener listener;
 
-    TextBoxActions (final Locator locator) {
+    private TextBoxActions (final Locator locator) {
         super (locator);
         this.listener = getSession ().getListener (TEXT_BOX_ACTION);
     }
@@ -66,7 +66,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
             if (getSession ().getPlatformType () == IOS && getSession ().getMobileSetting ()
                 .getDevice ()
                 .getApplication ()
-                .getType () != ApplicationType.WEB) {
+                .getType () != WEB) {
                 e.sendKeys ("\n");
             }
         }, this.locator);
