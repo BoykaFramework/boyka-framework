@@ -143,6 +143,14 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
             "install_timeout": 180,
             "wait_timeout": 120
           },
+          "video": {
+            "enabled": true,
+            "time_limit": 300,
+            "size": "800x720",
+            "android": {
+              "bit_rate": 4
+            }
+          },
           "virtual_device": {
             "name": "Nexus_6",
             "headless": true
@@ -238,6 +246,13 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
           "virtual_device": {
             "headless": true,
             "launch_timeout": 180
+          },
+          "video": {
+            "enabled": true,
+            "time_limit": 300,
+            "ios": {
+              "fps": 30
+            }
           },
           "wda": {
             "launch_timeout": 120,
@@ -499,6 +514,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `chrome_driver_port` | Chrome driver port for Android devices | `int` | `0` |
 | `system_port` | System port for Android devices | `int` | `8200` |
 | `unique_id` | Device UDID | `string` | `null` |
+| `video` | Video recording related settings | `VideoSetting` | `null` |
 
 ###### Device Application Configurations {#app-config}
 
@@ -532,7 +548,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `distance` | Amount of distance to swipe from the center of the screen to the edge of the screen or element | `int` | `25` |
 | `max_swipe_until_found` | Maximum amount of time to swipe until an element is found on the screen | `int` | `5` |
 
-##### WebDriverAgent Configuration {##wda-config}
+##### WebDriverAgent Configuration {#wda-config}
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -546,6 +562,32 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `update_bundle_id` | Bundle id to update WDA to before building and launching on real devices. This bundle id must be associated with a valid provisioning profile | `string` | `null` |
 | `team_id` | Apple developer team identifier string. Must be used in conjunction with xcodeSigningId to take effect. e.g., JWL241K123 | `string` | `null` |
 | `signing_id` | String representing a signing certificate. Must be used in conjunction with xcodeOrgId. This is usually just iPhone Developer | `string` | `null` |
+
+##### Video recording Configuration {#video-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `enabled` | Set it to `true` to enable video recording for Mobile automation | `boolean` | `false` |
+| `path` | Path to the folder where video recording will be saved | `string` | `./videos` |
+| `prefix` | Prefix for the video file name | `string` | `VID` |
+| `size` | Size of the video screen in `WIDTHxHEIGHT` | `string` | `null` |
+| `time_limit` | Time limit of the video recording. Maximum `30` mins of recording is supported | `integer` | `0` |
+| `android` | Android specific video record settings | `AndroidVideoSetting` | `default instance` |
+| `ios` | iOS specific video record settings | `IOSVideoSetting` | `default instance` |
+
+###### Android video recording configurations {#android-video}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `bit_rate` | Bit rate of video recording. Value will be internally multiplied by `100000` | `int` | `4` |
+
+###### iOS video recording configurations {#ios-video}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `fps` | Frames per second between range of `1` to `60` | `int` | `10` |
+| `codec` | Video codec type to be used for encoding the video. Use the value from the output of command `ffmpeg -codecs` | `string` | `mpeg4` |
+| `quality` | Video encoding quality. It can be any of `LOW`, `MEDIUM`, `HIGH`, `PHOTO` | `io.appium.java_client.ios.IOSStartScreenRecordingOptions.VideoQuality` | `MEDIUM` |
 
 ### API Configuration {#api-config}
 

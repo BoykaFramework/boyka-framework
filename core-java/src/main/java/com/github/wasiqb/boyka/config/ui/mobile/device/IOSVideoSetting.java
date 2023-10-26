@@ -30,6 +30,6 @@ import lombok.Data;
 @Data
 public class IOSVideoSetting {
     private String       codec   = "mpeg4";
-    private int          fps;
+    private int          fps     = 10;
     private VideoQuality quality = MEDIUM;
 }

@@ -34,3 +34,23 @@ import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
 . . .
 onDevice ().hideKeyboard ();
 ```
+
+### `startRecording` {#start-recording}
+
+This method is used to start video recording for Mobile tests.
+
+```java
+import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
+. . .
+onDevice ().startRecording ();
+```
+
+### `stopRecording` {#stop-recording}
+
+This method is used to stop video recording for Mobile tests.
+
+```java
+import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
+. . .
+onDevice ().stopRecording ();
+```

@@ -26,5 +26,5 @@ import lombok.Data;
  */
 @Data
 public class AndroidVideoSetting {
-    private int bitRate;
+    private int bitRate = 4;
 }
