@@ -110,7 +110,7 @@ jobs:
         run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare.outputs.new-version }}-SNAPSHOT versions:commit
 
       - name: Release snapshot to Maven central
-        uses: samuelmeuli/action-maven-publish@v1
+        uses: WasiqB/maven-publish-action@v1.1.0
         with:
           gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
           gpg_passphrase: ${{ env.GPG_PASSPHRASE }}
@@ -118,7 +118,9 @@ jobs:
           nexus_password: ${{ env.NEXUS_PASSWORD }}
           maven_profiles: release
           server_id: ossrh
-          maven_args: --settings ${{ github.workspace }}/core-java/setting/settings.xml -f core-java/pom.xml -DskipTests -Dcheckstyle.skip -B
+          settings_path: ${{ github.workspace }}/core-java/setting/settings.xml
+          directory: ${{ github.workspace }}/core-java
+          maven_args: -DskipTests -Dcheckstyle.skip
 
   release:
     runs-on: ubuntu-latest
@@ -146,16 +148,18 @@ jobs:
       - name: Maven command to update release version
         run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare.outputs.new-version }} versions:commit
 
-      - name: Release to Maven central
-        uses: samuelmeuli/action-maven-publish@v1
+      - name: Release snapshot to Maven central
+        uses: WasiqB/maven-publish-action@v1.1.0
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          nexus_username: ${{ secrets.NEXUS_USERNAME }}
-          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+          gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ env.GPG_PASSPHRASE }}
+          nexus_username: ${{ env.NEXUS_USERNAME }}
+          nexus_password: ${{ env.NEXUS_PASSWORD }}
           maven_profiles: release
           server_id: ossrh
-          maven_args: --settings ${{ github.workspace }}/core-java/setting/settings.xml -f core-java/pom.xml -DskipTests -Dcheckstyle.skip -B
+          settings_path: ${{ github.workspace }}/core-java/setting/settings.xml
+          directory: ${{ github.workspace }}/core-java
+          maven_args: -DskipTests -Dcheckstyle.skip
 
       - name: Build the project JAR files
         run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
@@ -171,10 +175,9 @@ jobs:
       - name: Upload version files folder
         uses: actions/upload-artifact@v3
         with:
-          name: version-files-${{ github.run_id }}
+          name: version-pom-files-${{ github.run_id }}
           retention-days: 1
-          path: |
-            ${{ github.workspace }}/core-java/pom.xml
+          path: ${{ github.workspace }}/core-java/pom.xml
 
   push-pom:
     runs-on: ubuntu-latest
@@ -193,6 +196,12 @@ jobs:
         with:
           name: version-files-${{ github.run_id }}
 
+      - name: Download Version files
+        uses: actions/download-artifact@v3
+        with:
+          name: version-pom-files-${{ github.run_id }}
+          path: ${{ github.workspace }}/core-java/pom.xml
+
       - name: Update new version in README and Usage
         uses: jacobtomlinson/gha-find-replace@v3
         if: ${{ ! inputs.pre-release }}
@@ -201,8 +210,8 @@ jobs:
           replace: ${{ needs.prepare.outputs.new-version }}
           regex: false
           include: |
-            README.md
-            website/docs/framework-docs/getting-started/usage.md
+            ${{ github.workspace }}/README.md
+            ${{ github.workspace }}/website/docs/framework-docs/getting-started/usage.md
 
       - name: Update new version in package.json
         uses: jacobtomlinson/gha-find-replace@v3
@@ -212,7 +221,7 @@ jobs:
           replace: '"version": "${{ needs.prepare.outputs.new-version }}"'
           regex: false
           include: |
-            package.json
+            ${{ github.workspace }}/package.json
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6

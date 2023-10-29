@@ -15,8 +15,8 @@ importers:
         specifier: ^18.1.0
         version: 18.1.0
       '@lerna/child-process':
-        specifier: ^7.4.1
-        version: 7.4.1
+        specifier: ^7.4.2
+        version: 7.4.2
       '@lerna/version':
         specifier: ^6.6.2
         version: 6.6.2
@@ -2688,6 +2688,15 @@ packages:
 
   /@lerna/child-process@7.4.1:
     resolution: {integrity: sha512-Bx1cRCZcVcWoz+atDQc4CSVzGuEgGJPOpIAXjQbBEA2cX5nqIBWdbye8eHu31En/F03aH9BhpNEJghs6wy4iTg==}
+    engines: {node: '>=16.0.0'}
+    dependencies:
+      chalk: 4.1.2
+      execa: 5.1.1
+      strong-log-transformer: 2.1.0
+    dev: true
+
+  /@lerna/child-process@7.4.2:
+    resolution: {integrity: sha512-je+kkrfcvPcwL5Tg8JRENRqlbzjdlZXyaR88UcnCdNW0AJ1jX9IfHRys1X7AwSroU2ug8ESNC+suoBw1vX833Q==}
     engines: {node: '>=16.0.0'}
     dependencies:
       chalk: 4.1.2
