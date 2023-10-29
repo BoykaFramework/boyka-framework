@@ -24,7 +24,7 @@ updates:
     reviewers:
       - 'boyka-core'
     schedule:
-      interval: 'monthly'
+      interval: 'weekly'
       timezone: 'Asia/Calcutta'
 
   - package-ecosystem: 'maven'
@@ -37,7 +37,7 @@ updates:
     reviewers:
       - 'boyka-core'
     schedule:
-      interval: 'monthly'
+      interval: 'weekly'
       timezone: 'Asia/Calcutta'
 
   - package-ecosystem: 'github-actions'
@@ -49,3 +49,6 @@ updates:
       - 'github_actions'
     reviewers:
       - 'boyka-core'
+    schedule:
+      interval: 'weekly'
+      timezone: 'Asia/Calcutta'
