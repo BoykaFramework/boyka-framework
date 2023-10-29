@@ -52,7 +52,7 @@
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
+        <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
         <checkstyle.version>10.12.4</checkstyle.version>
         <aspectj.version>1.9.20.1</aspectj.version>
