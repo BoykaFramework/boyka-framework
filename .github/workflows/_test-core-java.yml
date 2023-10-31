@@ -31,6 +31,10 @@ on:
         type: string
         description: Emulator target architecture
         default: x86_64
+      emulator-version:
+        type: number
+        description: Emulator Target version
+        default: 30
       emulator-channel:
         type: string
         description: Emulator SDK channel
@@ -89,7 +93,7 @@ jobs:
 
       - name: Launch iOS Simulator
         if: ${{ inputs.run-ios }}
-        uses: futureware-tech/simulator-action@v2
+        uses: futureware-tech/simulator-action@v3
         with:
           model: 'iPhone 14'
           os: 'iOS'
@@ -104,14 +108,14 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-30-${{ inputs.emulator-target }}
+          key: avd-${{ inputs.emulator-version }}-${{ inputs.emulator-target }}-${{ inputs.emulator-arch }}
 
-      - name: All Test execution
+      - name: Create AVD and generate snapshot for caching
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
           avd-name: Pixel_7_Pro
-          api-level: 30
+          api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
           profile: pixel_6_pro
@@ -119,8 +123,23 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
+          script: echo "Generated AVD snapshot for caching..."
           pre-emulator-launch-script: avdmanager list device
+
+      - name: All Test execution
+        if: ${{ inputs.run-android }}
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          avd-name: Pixel_7_Pro
+          api-level: ${{ inputs.emulator-version }}
+          target: ${{ inputs.emulator-target }}
+          arch: ${{ inputs.emulator-arch }}
+          profile: pixel_6_pro
+          channel: ${{ inputs.emulator-channel }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 
       - name: All ${{ inputs.suite-name }} Test execution
         if: ${{ ! inputs.run-android }}

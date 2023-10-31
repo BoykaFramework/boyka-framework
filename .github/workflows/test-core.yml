@@ -61,7 +61,7 @@ jobs:
             echo "present=YES" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check BrowserStack secrets presence
+      - name: Check LambdaTest secrets presence
         id: lt-secrets
         shell: bash
         run: |
@@ -148,6 +148,7 @@ jobs:
       run-ios: true
       run-android: true
       emulator-target: playstore
+      emulator-version: 30
 
   test-mobile-bs:
     needs:
