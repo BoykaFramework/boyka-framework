@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.4.3",
-    "@docusaurus/plugin-content-docs": "^2.4.3",
+    "@docusaurus/plugin-content-docs": "^3.0.0",
     "@tsconfig/docusaurus": "^2.0.2",
     "react-typist": "^2.0.5"
   },
