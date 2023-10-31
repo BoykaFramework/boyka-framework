@@ -61,7 +61,7 @@ jobs:
             echo "present=YES" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check BrowserStack secrets presence
+      - name: Check LambdaTest secrets presence
         id: lt-secrets
         shell: bash
         run: |
