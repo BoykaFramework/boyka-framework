@@ -31,6 +31,10 @@ on:
         type: string
         description: Emulator target architecture
         default: x86_64
+      emulator-version:
+        type: number
+        description: Emulator Target version
+        default: 30
       emulator-channel:
         type: string
         description: Emulator SDK channel
@@ -111,7 +115,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           avd-name: Pixel_7_Pro
-          api-level: 30
+          api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
           profile: pixel_6_pro
