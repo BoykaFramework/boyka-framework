@@ -148,9 +148,7 @@ jobs:
       run-ios: true
       run-android: true
       emulator-target: playstore
-      emulator-channel: canary
-      emulator-arch: x86_64
-      emulator-version: 31
+      emulator-version: 30
 
   test-mobile-bs:
     needs:
