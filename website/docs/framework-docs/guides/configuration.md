@@ -425,7 +425,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | Base64 Encoder | `${base64Encoder:HelloWorld!}` |
 | Java Constant | `${const:java.awt.event.KeyEvent.VK_ESCAPE}` |
 | Date | `${date:yyyy-MM-dd}` |
-| DNS | <code>${dns:address&#124;apache.org}</code> |
+| DNS | `${dns:address\|apache.org}` |
 | Environment Variable | `${env:USERNAME}` |
 | File Content | `${file:UTF-8:src/test/resources/document.properties}` |
 | Java | `${java:version}` |
