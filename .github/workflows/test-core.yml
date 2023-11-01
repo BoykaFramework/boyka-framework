@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'core-java/**'
-      - '.github/**'
+      - '.github/workflows/**'
 
   push:
     branches:

@@ -13,6 +13,11 @@ updates:
     schedule:
       interval: 'monthly'
       timezone: 'Asia/Calcutta'
+    groups:
+      dependencies:
+        dependency-type: 'production'
+      dev-dependencies:
+        dependency-type: 'development'
 
   - package-ecosystem: 'maven'
     directory: '/core-java'
@@ -26,6 +31,9 @@ updates:
     schedule:
       interval: 'weekly'
       timezone: 'Asia/Calcutta'
+    groups:
+      dependencies:
+        dependency-type: 'production'
 
   - package-ecosystem: 'maven'
     directory: '/sample-tests'
@@ -39,6 +47,9 @@ updates:
     schedule:
       interval: 'weekly'
       timezone: 'Asia/Calcutta'
+    groups:
+      dependencies:
+        dependency-type: 'production'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
@@ -52,3 +63,6 @@ updates:
     schedule:
       interval: 'weekly'
       timezone: 'Asia/Calcutta'
+    groups:
+      dependencies:
+        dependency-type: 'production'
