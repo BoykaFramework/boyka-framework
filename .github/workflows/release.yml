@@ -196,11 +196,11 @@ jobs:
         with:
           name: version-files-${{ github.run_id }}
 
-      - name: Download Version files
+      - name: Download Version pom files
         uses: actions/download-artifact@v3
         with:
           name: version-pom-files-${{ github.run_id }}
-          path: ${{ github.workspace }}/core-java/pom.xml
+          path: ${{ github.workspace }}/core-java
 
       - name: Update new version in README and Usage
         uses: jacobtomlinson/gha-find-replace@v3
