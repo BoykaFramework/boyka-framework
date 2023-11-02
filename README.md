@@ -70,15 +70,16 @@ This all gave me an idea of having a single framework which could solve all the 
 - ✅ Micro logging to log events of the test execution
 - ✅ Supports taking screenshots
 - ✅ Highly extensible via listeners for integrating with available Reporters
-- ✅ Supports any available test frameworks like TestNG, JUnit, Cucumber, etc.
+- ✅ Supports any available test frameworks like TestNG, JUnit, Cucumber, etc
+- ✅ Support video recording of the tests for Mobile platforms
 
 ## ⏱️ Coming soon
 
 Following are the awesome features which will be implemented soon to the frameworks:
 
 - Support for GraphQL and SOAP API automation
-- Support video recording of the tests for Web and Mobile platforms
-- Support for more cloud platforms.
+- Support video recording of the tests for Web platforms
+- Support for more cloud platforms
 - Many many more...
 
 ## 👀 Usage
