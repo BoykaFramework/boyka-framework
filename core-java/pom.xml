@@ -47,7 +47,7 @@
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>1.0.87</json-schema-validator.version>
         <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
-        <maven-javadoc-plugin.version>3.6.0</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.6.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
@@ -76,12 +76,12 @@
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>3.10.0.2594</sonar.maven.version>
         <jacoco.version>0.8.11</jacoco.version>
-        <surefire-version>3.2.1</surefire-version>
+        <surefire-version>3.2.2</surefire-version>
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.1.0</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <allure-testng.version>2.24.0</allure-testng.version>
-        <maven-failsafe.version>3.2.1</maven-failsafe.version>
+        <maven-failsafe.version>3.2.2</maven-failsafe.version>
     </properties>
 
     <distributionManagement>
