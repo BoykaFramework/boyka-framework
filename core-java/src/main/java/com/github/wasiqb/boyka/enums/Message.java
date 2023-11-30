@@ -79,6 +79,10 @@ public enum Message {
      */
     EMPTY_BROWSER_NOT_ALLOWED ("Browser type cannot be empty in the config..."),
     /**
+     * Error while calling setter method.
+     */
+    ERROR_CALLING_SETTER ("Error encountered when calling setter method [{0}] in [{1}] data class..."),
+    /**
      * Error while creating log file for a log type.
      */
     ERROR_CREATING_LOGS ("Error occurred while creating log file for log type: {}..."),
@@ -99,6 +103,10 @@ public enum Message {
      */
     ERROR_GETTING_CLASSES ("Error occurred while getting all classes..."),
     /**
+     * No constructor in the test class.
+     */
+    ERROR_NO_CTOR ("Constructor not found in Test data class [{0}]..."),
+    /**
      * Error occurred while parsing request body.
      */
     ERROR_PARSING_REQUEST_BODY ("Error occurred while parsing request body..."),
@@ -110,6 +118,10 @@ public enum Message {
      * Error occurred while quitting driver.
      */
     ERROR_QUITTING_DRIVER ("Error quitting driver..."),
+    /**
+     * Error reading data file.
+     */
+    ERROR_READING_DATA_FILE ("Error encountered while reading data from file [{0}]..."),
     /**
      * Error reading file
      */
@@ -150,6 +162,10 @@ public enum Message {
      * Host name is required for Remote execution
      */
     HOSTNAME_REQUIRED_FOR_REMOTE ("Host name is required for remote driver execution..."),
+    /**
+     * Index out of bounds.
+     */
+    INDEX_OUT_OF_BOUNDS ("Index [{0}] is out of bounds..."),
     /**
      * Invalid browser selected
      */

@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.api.IApiActionsListener;
+import com.github.wasiqb.boyka.actions.interfaces.listeners.data.ITestDataActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IAndroidDeviceActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.device.IDeviceActionsListener;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.drivers.IAlertActionsListener;
@@ -101,6 +102,10 @@ public enum ListenerType {
      * Navigate action listener.
      */
     NAVIGATE_ACTION (INavigateActionsListener.class),
+    /**
+     * Test data action listener.
+     */
+    TEST_DATA_ACTION (ITestDataActionsListener.class),
     /**
      * Text Box action listener.
      */
