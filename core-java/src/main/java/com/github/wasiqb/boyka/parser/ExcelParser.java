@@ -19,7 +19,9 @@ package com.github.wasiqb.boyka.parser;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_CALLING_SETTER;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_NO_CTOR;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_READING_FILE;
+import static com.github.wasiqb.boyka.enums.Message.ERROR_SETTER_NOT_FOUND;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.lang.System.getProperty;
 import static java.text.MessageFormat.format;
@@ -31,6 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +92,7 @@ public class ExcelParser implements IDataParser {
         final List<Object[]> result = new ArrayList<> ();
         try (final var workbook = new XSSFWorkbook (dataFileName)) {
             final var sheet = workbook.getSheet (blockName);
-            final var rowCount = sheet.getPhysicalNumberOfRows ();
+            final var rowCount = sheet.getLastRowNum ();
             for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
                 final var row = sheet.getRow (rowIndex);
                 final var colCount = row.getPhysicalNumberOfCells ();
@@ -104,7 +107,7 @@ public class ExcelParser implements IDataParser {
                 result.add (rowData);
             }
         } catch (final IOException | InvalidFormatException e) {
-            throwError (ERROR_READING_FILE, dataFileName.getPath ());
+            handleAndThrow (ERROR_READING_FILE, e, dataFileName.getPath ());
         }
         return result;
     }
@@ -113,6 +116,7 @@ public class ExcelParser implements IDataParser {
         final List<T> result = new ArrayList<> ();
         final var headers = stream (data.get (0)).map (Object::toString)
             .toList ();
+        String methodName;
         for (var row = 1; row < data.size (); row++) {
             var header = "";
             try {
@@ -120,16 +124,36 @@ public class ExcelParser implements IDataParser {
                 for (var col = 0; col < headers.size (); col++) {
                     header = headers.get (col);
                     final var value = data.get (row)[col];
-                    final var setter = dataObject.getClass ()
-                        .getMethod (format ("set{0}", capitalize (header)), String.class);
-                    setter.invoke (dataObject, value.toString ());
+                    methodName = format ("set{0}", capitalize (header));
+                    setFieldValue (dataObject, value, methodName);
                 }
-            } catch (final InstantiationException | IllegalAccessException | InvocationTargetException |
-                           NoSuchMethodException e) {
-                throwError (ERROR_CALLING_SETTER, format ("set{0}", capitalize (header)), dataCtor.getClass ()
+                result.add (dataObject);
+            } catch (final InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                handleAndThrow (ERROR_CALLING_SETTER, e, format ("set{0}", capitalize (header)), dataCtor.getClass ()
                     .getSimpleName ());
             }
         }
         return result;
+    }
+
+    private <T> void setFieldValue (final T dataObject, final Object value, final String methodName) {
+        final var dataClass = dataObject.getClass ();
+        try {
+            final Method method;
+            if (value instanceof String) {
+                method = dataClass.getMethod (methodName, String.class);
+                method.invoke (dataObject, value.toString ());
+            } else if (value instanceof Integer) {
+                method = dataClass.getMethod (methodName, Integer.class);
+                method.invoke (dataObject, Integer.parseInt (value.toString ()));
+            } else if (value instanceof Double) {
+                method = dataClass.getMethod (methodName, Double.class);
+                method.invoke (dataObject, Double.parseDouble (value.toString ()));
+            }
+        } catch (final IllegalAccessException | InvocationTargetException e) {
+            handleAndThrow (ERROR_CALLING_SETTER, e, methodName, dataClass.getSimpleName ());
+        } catch (final NoSuchMethodException e) {
+            handleAndThrow (ERROR_SETTER_NOT_FOUND, e, methodName, dataClass.getSimpleName ());
+        }
     }
 }

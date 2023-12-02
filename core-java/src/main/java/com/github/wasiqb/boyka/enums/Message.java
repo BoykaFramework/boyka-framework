@@ -139,6 +139,10 @@ public enum Message {
      */
     ERROR_SERVER_NOT_RUNNING ("Error occurred, server not running: {0}..."),
     /**
+     * Setter method not found.
+     */
+    ERROR_SETTER_NOT_FOUND ("Setter method [{0}] not found in [{1}] class..."),
+    /**
      * Error starting Appium server.
      */
     ERROR_STARTING_SERVER ("Error occurred starting Appium server: {0}..."),

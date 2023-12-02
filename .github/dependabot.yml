@@ -11,7 +11,7 @@ updates:
     reviewers:
       - 'boyka-core'
     schedule:
-      interval: 'monthly'
+      interval: 'weekly'
       timezone: 'Asia/Calcutta'
     groups:
       dependencies:

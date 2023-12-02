@@ -22,7 +22,6 @@ import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
 import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 
 import java.util.Iterator;
 
@@ -30,6 +29,7 @@ import com.github.wasiqb.boyka.actions.interfaces.data.IDataRow;
 import com.github.wasiqb.boyka.enums.RequestMethod;
 import com.github.wasiqb.boyka.testng.api.restful.requests.BookingData;
 import com.github.wasiqb.boyka.testng.api.restful.requests.BookingDates;
+import com.github.wasiqb.boyka.testng.api.restful.requests.BookingTestData;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -42,12 +42,20 @@ import org.testng.annotations.Test;
  * @since 28-Nov-2023
  */
 public class DataDrivenBookingTest {
-    private static final String BOOKING_ID = "bookingId";
-
     @DataProvider
     public Iterator<Object[]> getBookingData () {
         final var rows = withData ("BookingData").inBlock ("Bookings")
             .rows ();
+        return rows.stream ()
+            .map (d -> new Object[] { d })
+            .toList ()
+            .iterator ();
+    }
+
+    @DataProvider
+    public Iterator<Object[]> getBookingDataObject () {
+        final var rows = withData ("BookingData").inBlock ("Bookings")
+            .get (BookingTestData.class);
         return rows.stream ()
             .map (d -> new Object[] { d })
             .toList ()
@@ -83,6 +91,29 @@ public class DataDrivenBookingTest {
             .additionalneeds (row.cell ("AdditionalNeeds"))
             .build ();
 
+        testBooking (bookingData);
+    }
+
+    @Test (dataProvider = "getBookingDataObject")
+    public void testBookingObject (final BookingTestData bookingTestData) {
+        final var depositPaid = bookingTestData.getDepositPaid ()
+            .equalsIgnoreCase ("yes");
+        final var bookingData = BookingData.builder ()
+            .firstname (bookingTestData.getFirstName ())
+            .lastname (bookingTestData.getLastName ())
+            .totalprice (bookingTestData.getTotalPrice ())
+            .depositpaid (depositPaid)
+            .bookingdates (BookingDates.builder ()
+                .checkin (bookingTestData.getCheckInDate ())
+                .checkout (bookingTestData.getCheckOutDate ())
+                .build ())
+            .additionalneeds (bookingTestData.getAdditionalNeeds ())
+            .build ();
+
+        testBooking (bookingData);
+    }
+
+    private void testBooking (final BookingData bookingData) {
         final var request = createRequest ().method (RequestMethod.POST)
             .header ("Accept", "application/json")
             .path ("/booking")
@@ -99,12 +130,10 @@ public class DataDrivenBookingTest {
         response.verifyTextField ("bookingid")
             .isNotNull ();
         response.verifyTextField ("booking.firstname")
-            .isEqualTo (row.cell ("FirstName"));
+            .isEqualTo (bookingData.getFirstname ());
         response.verifyBooleanField ("booking.depositpaid")
-            .isEqualTo (depositPaid);
+            .isEqualTo (bookingData.isDepositpaid ());
         response.verifyHeader ("Content-Type")
             .isEqualTo ("application/json; charset=utf-8");
-        final var bookingId = response.getResponseData ("bookingid");
-        getSession ().setSharedData (BOOKING_ID, bookingId);
     }
 }
