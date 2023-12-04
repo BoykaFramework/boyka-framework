@@ -365,6 +365,7 @@
           "server_install_timeout": 120,
           "system_port": 8202,
           "server_launch_timeout": 120,
+          "adb_timeout": 120,
           "no_reset": true,
           "swipe": {
             "max_swipe_until_found": 5

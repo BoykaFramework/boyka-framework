@@ -508,6 +508,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `ignore_unimportant_views` | Determines if unimportant views needs to be ignored | `boolean` | `true` |
 | `server_install_timeout` | Timeout in seconds to wait for Appium server app to get installed | `int` | `30` |
 | `server_launch_timeout` | Timeout in seconds to wait for Appium server app to start | `int` | `30` |
+| `adb_timeout` | Timeout in seconds to wait for ADB commands to get executed | `int` | `30` |
 | `swipe` | Swipe specific setting | [`SwipeSetting`](#swipe-setting) | |
 | `wda` | WebDriverAgent specific settings for iOS | [`WDASetting`](#wda-config) | |
 | `typing_speed` | Max typing speed for iOS | `int` | `60` |

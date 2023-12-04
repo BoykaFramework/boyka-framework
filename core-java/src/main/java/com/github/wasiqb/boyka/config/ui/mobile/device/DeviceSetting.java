@@ -34,6 +34,7 @@ import lombok.Data;
 @Data
 public class DeviceSetting {
     private boolean              acceptAlerts           = true;
+    private int                  adbTimeout             = 30;
     private ApplicationSetting   application;
     private Map<String, Object>  capabilities;
     private boolean              clearFiles             = true;

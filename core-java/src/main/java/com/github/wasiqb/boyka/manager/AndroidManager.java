@@ -85,6 +85,7 @@ class AndroidManager implements IDriverManager {
         options.setFullReset (this.settings.isFullReset ());
         options.setUiautomator2ServerLaunchTimeout (ofSeconds (this.settings.getServerLaunchTimeout ()));
         options.setUiautomator2ServerInstallTimeout (ofSeconds (this.settings.getServerInstallTimeout ()));
+        options.setAdbExecTimeout (ofSeconds (this.settings.getAdbTimeout ()));
         options.setSystemPort (this.settings.getSystemPort ());
         options.setUdid (this.settings.getUniqueId ());
     }
