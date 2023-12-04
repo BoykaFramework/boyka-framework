@@ -49,9 +49,7 @@ public class LoginTest {
      */
     @AfterMethod (alwaysRun = true)
     public void afterMethod (final ITestResult result) {
-        if (!result.isSuccess ()) {
-            onWindow ().takeScreenshot ();
-        }
+        onWindow ().takeScreenshot ();
     }
 
     /**

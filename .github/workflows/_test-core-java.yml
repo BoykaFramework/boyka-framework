@@ -169,6 +169,7 @@ jobs:
             ${{ github.workspace }}/core-java/target
             ${{ github.workspace }}/core-java/logs
             ${{ github.workspace }}/core-java/screenshots
+            ${{ github.workspace }}/core-java/videos
 
       - name: Upload reports folder
         uses: actions/upload-artifact@v3
