@@ -38,4 +38,18 @@ public interface IDeviceActionsListener extends BoykaListener {
     default void onIsKeyboardVisible () {
         // not implemented.
     }
+
+    /**
+     * Handle start recording event.
+     */
+    default void onStartRecording () {
+        // not implemented.
+    }
+
+    /**
+     * Handle stop recording event.
+     */
+    default void onStopRecording () {
+        // not implemented.
+    }
 }

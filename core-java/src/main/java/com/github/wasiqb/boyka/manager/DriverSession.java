@@ -126,7 +126,6 @@ public class DriverSession<D extends WebDriver> {
         }
         final var listener = this.listeners.get (listenerType);
         if (listener == null) {
-            LOGGER.warn ("No listeners found for listener type [{}] in Boyka config...", listenerType);
             return null;
         }
         try {

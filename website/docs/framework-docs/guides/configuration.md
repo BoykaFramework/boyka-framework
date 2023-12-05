@@ -353,6 +353,7 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
 | `ui` | Contains UI platform specific configuration. See [UI Config below](#ui-config). | `object` | |
 | `api` | Contains API platform specific configuration. See [API config below](#api-config). | `object` | |
 | `listeners_package` | This will be the package name under which all the Boyka framework listeners are saved. | `string` | |
+| `data` | Contains Test data related configurations. See [Test data configuration](#data-config) below | `TestDataSetting` | |
 
 ### UI Configuration {#ui-config}
 
@@ -609,6 +610,15 @@ In `api` configuration block, you can provide different versions of API settings
 See the example in [sample configuration file](#config-sample).
 :::
 
+### Test Data Configuration {#data-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `path` | Path to the folder of test data | `string` | `test-data` |
+| `external` | If `false`, by default test data path will be searched in `src/test/resources` | `boolean` | `false` |
+| `type` | Type of test data file | [`TestDataSource`](#data-source-types) | `EXCEL` |
+| `extension` | Test data file extension | `string` | `xlsx` |
+
 #### Logging Configuration {#logging-config}
 
 | Property | Description | Type | Default |
@@ -704,3 +714,7 @@ We have an enum `OS` where we maintain the list of currently supported device OS
 - `NATIVE`: Native Mobile application
 - `HYBRID`: Hybrid Mobile application
 - `WEB`: Web Mobile application
+
+## Test Data Source types {#data-source-types}
+
+- `EXCEL`: Excel test data file

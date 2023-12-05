@@ -97,6 +97,7 @@ public class DeviceActions implements IDeviceActions {
             final var setting = mobileSetting.getVideo ();
             if (mobileSetting.getType () != CLOUD && setting.isEnabled ()) {
                 final var screen = (CanRecordScreen) getSession ().getDriver ();
+                ofNullable (this.listener).ifPresent (IDeviceActionsListener::onStartRecording);
                 startRecording (screen, setting, platform);
             }
         }
@@ -111,6 +112,7 @@ public class DeviceActions implements IDeviceActions {
             final var setting = mobileSetting.getVideo ();
             if (mobileSetting.getType () != CLOUD && setting.isEnabled ()) {
                 final var screen = (CanRecordScreen) getSession ().getDriver ();
+                ofNullable (this.listener).ifPresent (IDeviceActionsListener::onStopRecording);
                 final var content = stopRecording (screen, platform);
                 saveVideo (content);
             }

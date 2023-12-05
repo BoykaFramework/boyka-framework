@@ -22,7 +22,6 @@ import static com.github.wasiqb.boyka.enums.Message.ERROR_READING_FILE;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SETTER_NOT_FOUND;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
-import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
 import static java.lang.System.getProperty;
 import static java.text.MessageFormat.format;
 import static java.util.Arrays.stream;
@@ -56,7 +55,7 @@ public class ExcelParser implements IDataParser {
             final var ctor = dataType.getConstructor ();
             return getDataFromFile (dataSet, ctor);
         } catch (final NoSuchMethodException e) {
-            throwError (ERROR_NO_CTOR, dataType.getSimpleName ());
+            handleAndThrow (ERROR_NO_CTOR, e, dataType.getSimpleName ());
         }
         return List.of ();
     }
