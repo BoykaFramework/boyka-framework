@@ -148,7 +148,7 @@ jobs:
       run-ios: true
       run-android: true
       emulator-target: playstore
-      emulator-version: 30
+      emulator-version: 31
 
   test-mobile-bs:
     needs:
