@@ -37,7 +37,7 @@
         <google.guava.version>32.1.3-jre</google.guava.version>
         <google-truth.version>1.1.5</google-truth.version>
         <apache-commons-text.version>1.11.0</apache-commons-text.version>
-        <commons-io.version>2.15.0</commons-io.version>
+        <commons-io.version>2.15.1</commons-io.version>
         <json-path.version>2.8.0</json-path.version>
         <log4j-core.version>2.22.0</log4j-core.version>
         <log4j-api.version>2.22.0</log4j-api.version>
@@ -47,7 +47,7 @@
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>1.0.87</json-schema-validator.version>
         <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
-        <maven-javadoc-plugin.version>3.6.2</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
@@ -56,7 +56,7 @@
         <codestyle.version>1.1.0</codestyle.version>
         <checkstyle.version>10.12.5</checkstyle.version>
         <aspectj.version>1.9.20.1</aspectj.version>
-        <poi.version>5.2.4</poi.version>
+        <poi.version>5.2.5</poi.version>
         <suite-name>testng</suite-name>
         <suite-xml>test-suites/${suite-name}.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
