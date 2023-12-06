@@ -11,13 +11,15 @@ updates:
     reviewers:
       - 'boyka-core'
     schedule:
-      interval: 'monthly'
+      interval: 'weekly'
       timezone: 'Asia/Calcutta'
     groups:
-      dependencies:
-        dependency-type: 'production'
-      dev-dependencies:
-        dependency-type: 'development'
+      major:
+        update-types: ['major']
+      minor:
+        update-types: ['minor']
+      patch:
+        update-types: ['patch']
 
   - package-ecosystem: 'maven'
     directory: '/core-java'

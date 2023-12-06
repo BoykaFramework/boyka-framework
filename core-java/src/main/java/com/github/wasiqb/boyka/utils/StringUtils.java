@@ -34,26 +34,6 @@ public final class StringUtils {
     private static final Logger LOGGER = getLogger ();
 
     /**
-     * Replace all variables in the given string with the values from system environment variables, system properties,
-     * etc.
-     *
-     * @param value String to be interpolated
-     *
-     * @return Interpolated string
-     */
-    public static String interpolate (final String value) {
-        LOGGER.traceEntry ("Interpolating string: {}", value);
-        var result = value;
-        if (value != null && value.startsWith ("${")) {
-            final var substitute = createInterpolator ();
-            substitute.setEnableSubstitutionInVariables (true);
-            result = substitute.replace (value);
-        }
-        LOGGER.traceExit ();
-        return result;
-    }
-
-    /**
      * Replace all the variables in the given string with the values from the specified map.
      *
      * @param value String to be interpolated
@@ -66,6 +46,26 @@ public final class StringUtils {
         var result = value;
         if (value.contains ("${")) {
             final var substitute = new StringSubstitutor (valuesMap);
+            substitute.setEnableSubstitutionInVariables (true);
+            result = substitute.replace (value);
+        }
+        LOGGER.traceExit ();
+        return result;
+    }
+
+    /**
+     * Replace all variables in the given string with the values from system environment variables, system properties,
+     * etc.
+     *
+     * @param value String to be interpolated
+     *
+     * @return Interpolated string
+     */
+    public static String interpolate (final String value) {
+        LOGGER.traceEntry ("Interpolating string: {}", value);
+        var result = value;
+        if (value != null && value.startsWith ("${")) {
+            final var substitute = createInterpolator ();
             substitute.setEnableSubstitutionInVariables (true);
             result = substitute.replace (value);
         }

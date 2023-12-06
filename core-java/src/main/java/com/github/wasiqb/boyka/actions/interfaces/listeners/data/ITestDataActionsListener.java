@@ -14,42 +14,40 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.actions.interfaces.listeners.device;
+package com.github.wasiqb.boyka.actions.interfaces.listeners.data;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 
 /**
- * Handles all the common device specific events.
+ * Test Data action listener.
  *
  * @author Wasiq Bhamla
- * @since 03-Jun-2023
+ * @since 28-Nov-2023
  */
-public interface IDeviceActionsListener extends BoykaListener {
+public interface ITestDataActionsListener extends BoykaListener {
     /**
-     * Handle hide keyboard event.
+     * Handle `get` method from TestDataAction
+     *
+     * @param dataClass Test data class
+     * @param <T> Type of test data class
      */
-    default void onHideKeyboard () {
-        // not implemented.
+    default <T> void onGet (final Class<T> dataClass) {
+        // not implemented
     }
 
     /**
-     * Handle is keyboard visible event.
+     * Handle row method from TestDataAction
+     *
+     * @param index Row index
      */
-    default void onIsKeyboardVisible () {
-        // not implemented.
+    default void onRow (final int index) {
+        // not implemented
     }
 
     /**
-     * Handle start recording event.
+     * Handle row method from TestDataAction
      */
-    default void onStartRecording () {
-        // not implemented.
-    }
-
-    /**
-     * Handle stop recording event.
-     */
-    default void onStopRecording () {
-        // not implemented.
+    default void onRows () {
+        // not implemented
     }
 }

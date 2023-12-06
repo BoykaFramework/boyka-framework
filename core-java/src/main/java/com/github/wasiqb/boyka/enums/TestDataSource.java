@@ -14,26 +14,17 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.restful.requests;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+package com.github.wasiqb.boyka.enums;
 
 /**
- * Booking data class.
+ * Test Data source.
  *
  * @author Wasiq Bhamla
- * @since 28-Feb-2023
+ * @since 18-Nov-2023
  */
-@Getter
-@Builder
-@ToString
-public class BookingData {
-    private String       additionalneeds;
-    private BookingDates bookingdates;
-    private boolean      depositpaid;
-    private String       firstname;
-    private String       lastname;
-    private double       totalprice;
+public enum TestDataSource {
+    /**
+     * Excel file data source.
+     */
+    EXCEL
 }

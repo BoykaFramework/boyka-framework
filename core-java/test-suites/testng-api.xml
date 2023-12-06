@@ -35,6 +35,7 @@
                     <include name="testFormBodyRequest"/>
                 </methods>
             </class>
+            <class name="com.github.wasiqb.boyka.testng.api.restful.DataDrivenBookingTest"/>
         </classes>
     </test>
 </suite>

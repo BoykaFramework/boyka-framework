@@ -16,9 +16,10 @@
 
 package com.github.wasiqb.boyka.utils;
 
+import static com.github.wasiqb.boyka.enums.Message.INDEX_OUT_OF_BOUNDS;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static java.util.Optional.of;
 
-import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.github.wasiqb.boyka.enums.Message;
@@ -31,6 +32,18 @@ import org.apache.commons.lang3.StringUtils;
  * @since 25-Aug-2022
  */
 public final class Validator {
+    /**
+     * Checks if the index is in bounds.
+     *
+     * @param index Index number
+     * @param size Size of the list
+     */
+    public static void checkIndex (final int index, final int size) {
+        if (index < 0 || index >= size) {
+            throwError (INDEX_OUT_OF_BOUNDS, index);
+        }
+    }
+
     /**
      * Checks if the String value is not null.
      *
@@ -74,12 +87,10 @@ public final class Validator {
     public static <T> void setOptionIfPresent (final T value, final Consumer<T> action) {
         if (value != null) {
             if (value instanceof Integer) {
-                Optional.of (value)
-                    .filter (i -> (Integer) i > 0)
+                of (value).filter (i -> (Integer) i > 0)
                     .ifPresent (action);
             } else {
-                Optional.of (value)
-                    .ifPresent (action);
+                of (value).ifPresent (action);
             }
         }
     }

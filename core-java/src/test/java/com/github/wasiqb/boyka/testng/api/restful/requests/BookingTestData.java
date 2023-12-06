@@ -16,24 +16,18 @@
 
 package com.github.wasiqb.boyka.testng.api.restful.requests;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.ToString;
 
-/**
- * Booking data class.
- *
- * @author Wasiq Bhamla
- * @since 28-Feb-2023
- */
-@Getter
-@Builder
 @ToString
-public class BookingData {
-    private String       additionalneeds;
-    private BookingDates bookingdates;
-    private boolean      depositpaid;
-    private String       firstname;
-    private String       lastname;
-    private double       totalprice;
+@Data
+public class BookingTestData {
+    private String additionalNeeds;
+    private String checkInDate;
+    private String checkOutDate;
+    private String depositPaid;
+    private String firstName;
+    private String lastName;
+    private Double srNo;
+    private Double totalPrice;
 }
