@@ -1,35 +1,16 @@
 
-## v0.19.0-beta.2 (2023-11-02)
+## v0.20.0-beta.0 (2023-12-06)
 
 #### :rocket: New Feature
-* [#668](https://github.com/BoykaFramework/boyka-framework/pull/668) feat(website): :sparkles: migrated docusaurus to v3 ([@WasiqB](https://github.com/WasiqB))
-* [#664](https://github.com/BoykaFramework/boyka-framework/pull/664) feat(Internal): :sparkles: updated dependabot config for grouped pr ([@WasiqB](https://github.com/WasiqB))
-
-#### :bug: Bug Fix
-* [#667](https://github.com/BoykaFramework/boyka-framework/pull/667) fix(workflow): :bug: fixed issue in release workflow push-pom job ([@WasiqB](https://github.com/WasiqB))
-* [#655](https://github.com/BoykaFramework/boyka-framework/pull/655) fix(Internal): :bug: fixed release workflow for maven publish action ([@WasiqB](https://github.com/WasiqB))
-* [#639](https://github.com/BoykaFramework/boyka-framework/pull/639) fix(workflow): :bug: fixed pom file issue in release workflow ([@WasiqB](https://github.com/WasiqB))
+* [#685](https://github.com/BoykaFramework/boyka-framework/pull/685) feat(java): :sparkles: added test data handling from excel file ([@WasiqB](https://github.com/WasiqB))
 
 #### :house: Internal
-* [#643](https://github.com/BoykaFramework/boyka-framework/pull/643) build(deps): bump actions/setup-node from 3 to 4 ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#652](https://github.com/BoykaFramework/boyka-framework/pull/652) build(deps): bump org.apache.logging.log4j:log4j-api from 2.21.0 to 2.21.1 in /core-java ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#647](https://github.com/BoykaFramework/boyka-framework/pull/647) build(deps): bump org.apache.maven.plugins:maven-dependency-plugin from 3.6.0 to 3.6.1 in /core-java ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#649](https://github.com/BoykaFramework/boyka-framework/pull/649) build(deps): bump org.apache.logging.log4j:log4j-core from 2.21.0 to 2.21.1 in /core-java ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#640](https://github.com/BoykaFramework/boyka-framework/pull/640) build(deps): bump org.apache.maven.plugins:maven-surefire-plugin from 3.1.2 to 3.2.1 in /sample-tests ([@dependabot[bot]](https://github.com/apps/dependabot))
-
-#### Committers: 1
-- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
-
-
-## v0.19.0-beta.0 (2023-10-26)
-
-#### :rocket: New Feature
-* [#636](https://github.com/BoykaFramework/boyka-framework/pull/636) feat(java): :sparkles: added video recording support for mobile ([@WasiqB](https://github.com/WasiqB))
-* [#631](https://github.com/BoykaFramework/boyka-framework/pull/631) feat(workflow): :zap: added new name param to LT workflow ([@WasiqB](https://github.com/WasiqB))
-
-#### :nail_care: Polish
-* [#635](https://github.com/BoykaFramework/boyka-framework/pull/635) refactor(java): :recycle: refactored getSession method logic ([@WasiqB](https://github.com/WasiqB))
-* [#633](https://github.com/BoykaFramework/boyka-framework/pull/633) chore(workflow): :art: removed command from changelog text ([@WasiqB](https://github.com/WasiqB))
+* [#684](https://github.com/BoykaFramework/boyka-framework/pull/684) build(deps): bump the dependencies group with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#683](https://github.com/BoykaFramework/boyka-framework/pull/683) build(deps): bump the dependencies group in /core-java with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#673](https://github.com/BoykaFramework/boyka-framework/pull/673) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#674](https://github.com/BoykaFramework/boyka-framework/pull/674) build(deps): bump the dependencies group in /sample-tests with 1 update ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#672](https://github.com/BoykaFramework/boyka-framework/pull/672) build(deps): bump the dependencies group in /core-java with 1 update ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#671](https://github.com/BoykaFramework/boyka-framework/pull/671) build(deps): bump the dependencies group in /sample-tests with 1 update ([@dependabot[bot]](https://github.com/apps/dependabot))
 
 #### Committers: 1
 - Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
