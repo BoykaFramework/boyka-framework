@@ -18,7 +18,6 @@ package com.github.wasiqb.boyka.manager;
 
 import static com.github.wasiqb.boyka.enums.Message.SESSION_ALREADY_CLEARED;
 import static com.github.wasiqb.boyka.enums.Message.SESSION_ALREADY_CREATED;
-import static com.github.wasiqb.boyka.enums.Message.SESSION_NOT_CREATED;
 import static com.github.wasiqb.boyka.enums.Message.SESSION_PERSONA_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
@@ -96,10 +95,9 @@ public final class ParallelSession {
     public static synchronized void createSession (final String persona, final PlatformType platformType,
         final String configKey) {
         switchPersona (persona);
-        final var currentSession = new DriverSession<> ();
+        final var currentSession = getSession ();
         currentSession.setPlatformType (platformType);
         currentSession.setConfigKey (configKey);
-        setSession (currentSession);
         if (platformType != API) {
             final var instance = new DriverManager ();
             instance.setupDriver ();
@@ -137,7 +135,7 @@ public final class ParallelSession {
         LOGGER.traceEntry ();
         final var currentPersona = getCurrentPersona ();
         if (!isSessionCreated ()) {
-            throwError (SESSION_NOT_CREATED);
+            setSession (new DriverSession<> ());
         }
         return LOGGER.traceExit ((DriverSession<D>) SESSION.get ()
             .get (currentPersona));

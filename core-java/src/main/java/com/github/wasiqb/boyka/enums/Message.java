@@ -239,10 +239,6 @@ public enum Message {
      */
     SESSION_ALREADY_CREATED ("Session is already created for ({0}) persona..."),
     /**
-     * Session has not been created.
-     */
-    SESSION_NOT_CREATED ("Session has not been created..."),
-    /**
      * Error when starting session.
      */
     SESSION_NOT_STARTED ("Session could not be started..."),

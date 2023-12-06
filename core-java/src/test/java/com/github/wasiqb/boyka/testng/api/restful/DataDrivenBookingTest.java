@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
  */
 public class DataDrivenBookingTest {
     @DataProvider
-    public Iterator<Object[]> getBookingData () {
+    public static Iterator<Object[]> getBookingData () {
         final var rows = withData ("BookingData").inBlock ("Bookings")
             .rows ();
         return rows.stream ()
@@ -53,7 +53,7 @@ public class DataDrivenBookingTest {
     }
 
     @DataProvider
-    public Iterator<Object[]> getBookingDataObject () {
+    public static Iterator<Object[]> getBookingDataObject () {
         final var rows = withData ("BookingData").inBlock ("Bookings")
             .get (BookingTestData.class);
         return rows.stream ()

@@ -62,8 +62,7 @@ public class ExcelParser implements IDataParser {
 
     @Override
     public List<Object[]> parse (final String fileName, final String blockName) {
-        final var setting = getSession ().getSetting ()
-            .getData ();
+        final var setting = getSession ().getTestDataSetting ();
         var filePath = Path.of (getProperty ("user.dir"), "src/test/resources", setting.getPath ())
             .toAbsolutePath ();
         if (setting.isExternal ()) {
