@@ -84,6 +84,7 @@ jobs:
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-others
+      runs-on: windows-latest
 
   test-web-local:
     needs:
