@@ -95,6 +95,7 @@ public final class ParallelSession {
     public static synchronized void createSession (final String persona, final PlatformType platformType,
         final String configKey) {
         switchPersona (persona);
+        checkSession ();
         final var currentSession = getSession ();
         currentSession.setPlatformType (platformType);
         currentSession.setConfigKey (configKey);
@@ -179,14 +180,16 @@ public final class ParallelSession {
         LOGGER.traceExit ();
     }
 
+    private static void checkSession () {
+        if (isSessionCreated ()) {
+            throwError (SESSION_ALREADY_CREATED, getCurrentPersona ());
+        }
+    }
+
     private static synchronized <D extends WebDriver> void setSession (final DriverSession<D> session) {
         final var persona = getCurrentPersona ();
         final var currentSession = SESSION.get ();
-        if (!isSessionCreated ()) {
-            currentSession.put (persona, session);
-        } else {
-            throwError (SESSION_ALREADY_CREATED, persona);
-        }
+        currentSession.put (persona, session);
     }
 
     private ParallelSession () {

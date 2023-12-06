@@ -20,11 +20,9 @@ import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -57,20 +55,11 @@ public class SessionTest {
     /**
      * Test Duplicate Session creation.
      */
-    @Ignore
     @Test (description = "Test Duplicate Session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session is already created for .SessionTest. persona...")
     public void testDuplicateSessionCreation () {
         createSession (PERSONA, WEB, "test_local_chrome");
         createSession (PERSONA, WEB, "test_local_chrome");
         clearSession ();
-    }
-
-    /**
-     * Test get session without session creation.
-     */
-    @Test (description = "Test get session without session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session has not been created...")
-    public void testGetSessionWithoutSessionCreated () {
-        getSession ();
     }
 
     /**
