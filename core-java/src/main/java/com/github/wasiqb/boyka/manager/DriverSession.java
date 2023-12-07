@@ -32,6 +32,7 @@ import java.util.Map;
 
 import com.github.wasiqb.boyka.actions.interfaces.listeners.BoykaListener;
 import com.github.wasiqb.boyka.config.FrameworkSetting;
+import com.github.wasiqb.boyka.config.TestDataSetting;
 import com.github.wasiqb.boyka.config.api.ApiSetting;
 import com.github.wasiqb.boyka.config.ui.mobile.MobileSetting;
 import com.github.wasiqb.boyka.config.ui.web.WebSetting;
@@ -158,6 +159,15 @@ public class DriverSession<D extends WebDriver> {
      */
     public <T> T getSharedData (final String key) {
         return (T) this.sharedData.get (key);
+    }
+
+    /**
+     * Gets the test data settings.
+     *
+     * @return Test data setting.
+     */
+    public TestDataSetting getTestDataSetting () {
+        return this.setting.getData ();
     }
 
     /**
