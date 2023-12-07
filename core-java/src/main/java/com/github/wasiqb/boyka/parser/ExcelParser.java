@@ -16,12 +16,16 @@
 
 package com.github.wasiqb.boyka.parser;
 
+import static com.github.wasiqb.boyka.enums.Message.BLOCK_NAME_REQUIRED;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_CALLING_SETTER;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_NO_CTOR;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_READING_FILE;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SETTER_NOT_FOUND;
+import static com.github.wasiqb.boyka.enums.Message.PATH_NOT_DIRECTORY;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
+import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
 import static java.lang.System.getProperty;
 import static java.text.MessageFormat.format;
 import static java.util.Arrays.stream;
@@ -69,6 +73,10 @@ public class ExcelParser implements IDataParser {
             filePath = Path.of (setting.getPath ())
                 .toAbsolutePath ();
         }
+        if (!filePath.toFile ()
+            .isDirectory ()) {
+            throwError (PATH_NOT_DIRECTORY, filePath.toString ());
+        }
         final var dataFileName = Path.of (filePath.toString (), format ("{0}.{1}", fileName, setting.getExtension ()))
             .toFile ();
         return getDataFromFile (dataFileName, blockName);
@@ -89,13 +97,13 @@ public class ExcelParser implements IDataParser {
     private List<Object[]> getDataFromFile (final File dataFileName, final String blockName) {
         final List<Object[]> result = new ArrayList<> ();
         try (final var workbook = new XSSFWorkbook (dataFileName)) {
-            final var sheet = workbook.getSheet (blockName);
+            final var sheet = workbook.getSheet (requireNonNull (blockName, BLOCK_NAME_REQUIRED));
             final var rowCount = sheet.getLastRowNum ();
-            for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            for (var rowIndex = sheet.getFirstRowNum (); rowIndex <= rowCount; rowIndex++) {
                 final var row = sheet.getRow (rowIndex);
-                final var colCount = row.getPhysicalNumberOfCells ();
+                final var colCount = row.getLastCellNum ();
                 final var rowData = new Object[colCount];
-                for (var colIndex = 0; colIndex < colCount; colIndex++) {
+                for (var colIndex = row.getFirstCellNum (); colIndex < colCount; colIndex++) {
                     final var column = row.getCell (colIndex);
                     final var value = getColumnData (column);
                     if (!isNull (value)) {

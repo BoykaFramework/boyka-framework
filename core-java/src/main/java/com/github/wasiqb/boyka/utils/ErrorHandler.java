@@ -62,23 +62,6 @@ public final class ErrorHandler {
     }
 
     /**
-     * Null check the subject, throw Framework Error if the subject is `null`
-     *
-     * @param subject Object subject to check
-     * @param throwMessage Message to throw Error with
-     * @param args Args for the message
-     * @param <T> Type of subject
-     *
-     * @return Returns subject if not null
-     */
-    public static <T> T requireNonNull (final T subject, final Message throwMessage, final Object... args) {
-        if (subject == null) {
-            throwError (throwMessage, args);
-        }
-        return subject;
-    }
-
-    /**
      * Throws framework error with provided message.
      *
      * @param message Error message

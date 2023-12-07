@@ -18,12 +18,13 @@ package com.github.wasiqb.boyka.utils;
 
 import static com.github.wasiqb.boyka.enums.Message.INDEX_OUT_OF_BOUNDS;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
+import static java.util.Objects.isNull;
 import static java.util.Optional.of;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.util.function.Consumer;
 
 import com.github.wasiqb.boyka.enums.Message;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Validator class to validate different conditions.
@@ -54,7 +55,7 @@ public final class Validator {
      * @return Value if it is not empty.
      */
     public static String requireNonEmpty (final String value, final Message message, final Object... args) {
-        if (StringUtils.isEmpty (value)) {
+        if (isEmpty (value)) {
             throwError (message, args);
         }
         return value;
@@ -71,7 +72,7 @@ public final class Validator {
      * @return Non null object
      */
     public static <T> T requireNonNull (final T obj, final Message message, final Object... args) {
-        if (obj == null) {
+        if (isNull (obj)) {
             throwError (message, args);
         }
         return obj;

@@ -18,10 +18,13 @@ package com.github.wasiqb.boyka.actions.data;
 
 import static com.github.wasiqb.boyka.utils.Validator.checkIndex;
 import static java.util.Arrays.stream;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.List;
 import java.util.Objects;
 
 import com.github.wasiqb.boyka.actions.interfaces.data.IDataRow;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Gets test data in data row.
@@ -30,6 +33,8 @@ import com.github.wasiqb.boyka.actions.interfaces.data.IDataRow;
  * @since 28-Nov-2023
  */
 class DataRow implements IDataRow {
+    private static final Logger LOGGER = getLogger ();
+
     private final Object[] headers;
     private final Object[] rowData;
 
@@ -42,6 +47,7 @@ class DataRow implements IDataRow {
     @Override
     public <T> T cell (final int index) {
         checkIndex (index, this.rowData.length);
+        LOGGER.info ("Getting Cell data at [{}] index", index);
         return (T) this.rowData[index];
     }
 
@@ -54,7 +60,15 @@ class DataRow implements IDataRow {
                 break;
             }
         }
+        LOGGER.info ("Getting Cell data in [{}] column", name);
         return cell (colIndex);
+    }
+
+    @SuppressWarnings ("unchecked")
+    @Override
+    public <T> List<T> cells () {
+        LOGGER.info ("Getting all the Cell data");
+        return stream ((T[]) this.rowData).toList ();
     }
 
     @Override

@@ -37,6 +37,10 @@ public enum Message {
      */
     AUTH_PASSWORD_REQUIRED ("Basic auth password is required..."),
     /**
+     * Block name in test data file is required.
+     */
+    BLOCK_NAME_REQUIRED ("Block name is required to read data from file..."),
+    /**
      * Browser option not supported Error.
      */
     BROWSER_OPTION_NOT_SUPPORTED ("Browser options not supported for ({0}) browser..."),
@@ -222,6 +226,10 @@ public enum Message {
      * Password required for cloud execution
      */
     PASSWORD_REQUIRED_FOR_CLOUD ("Password is required for cloud execution..."),
+    /**
+     * Path should be a folder / directory.
+     */
+    PATH_NOT_DIRECTORY ("Path [{0}] is not a folder. Only folder path should be provided..."),
     /**
      * Protocol is required for host name
      */
