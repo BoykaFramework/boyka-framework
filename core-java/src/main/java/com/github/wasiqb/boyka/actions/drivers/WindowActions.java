@@ -23,7 +23,7 @@ import static com.github.wasiqb.boyka.enums.Message.DRIVER_CANNOT_BE_NULL;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
-import static com.github.wasiqb.boyka.utils.ErrorHandler.requireNonNull;
+import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.io.FileUtils.copyFile;

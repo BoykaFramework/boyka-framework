@@ -94,8 +94,10 @@ public final class ParallelSession {
      */
     public static synchronized void createSession (final String persona, final PlatformType platformType,
         final String configKey) {
+        final var previousPersona = getCurrentPersona ();
         switchPersona (persona);
         checkSession ();
+        overrideSession (previousPersona);
         final var currentSession = getSession ();
         currentSession.setPlatformType (platformType);
         currentSession.setConfigKey (configKey);
@@ -183,6 +185,14 @@ public final class ParallelSession {
     private static void checkSession () {
         if (isSessionCreated ()) {
             throwError (SESSION_ALREADY_CREATED, getCurrentPersona ());
+        }
+    }
+
+    private static void overrideSession (final String previousPersona) {
+        final var session = SESSION.get ();
+        if (session.containsKey (previousPersona)) {
+            final var previousSession = session.remove (previousPersona);
+            session.put (getCurrentPersona (), previousSession);
         }
     }
 
