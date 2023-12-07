@@ -40,6 +40,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -87,10 +88,10 @@ public class ExcelParser implements IDataParser {
             return null;
         }
         return switch (column.getCellType ()) {
-            case NUMERIC -> column.getNumericCellValue ();
+            case FORMULA, NUMERIC -> column.getNumericCellValue ();
             case STRING -> column.getStringCellValue ();
             case BOOLEAN -> column.getBooleanCellValue ();
-            case _NONE, FORMULA, BLANK, ERROR -> null;
+            case _NONE, BLANK, ERROR -> null;
         };
     }
 
@@ -110,7 +111,9 @@ public class ExcelParser implements IDataParser {
                         rowData[colIndex] = value;
                     }
                 }
-                result.add (rowData);
+                if (!stream (rowData).allMatch (Objects::isNull)) {
+                    result.add (rowData);
+                }
             }
         } catch (final IOException | InvalidFormatException e) {
             handleAndThrow (ERROR_READING_FILE, e, dataFileName.getPath ());
@@ -127,11 +130,14 @@ public class ExcelParser implements IDataParser {
             var header = "";
             try {
                 final var dataObject = dataCtor.newInstance ();
+                final var rowData = data.get (row);
                 for (var col = 0; col < headers.size (); col++) {
                     header = headers.get (col);
-                    final var value = data.get (row)[col];
+                    final var value = rowData[col];
                     methodName = format ("set{0}", capitalize (header));
-                    setFieldValue (dataObject, value, methodName);
+                    if (!isNull (value)) {
+                        setFieldValue (dataObject, value, methodName);
+                    }
                 }
                 result.add (dataObject);
             } catch (final InstantiationException | IllegalAccessException | InvocationTargetException e) {
@@ -159,7 +165,8 @@ public class ExcelParser implements IDataParser {
         } catch (final IllegalAccessException | InvocationTargetException e) {
             handleAndThrow (ERROR_CALLING_SETTER, e, methodName, dataClass.getSimpleName ());
         } catch (final NoSuchMethodException e) {
-            handleAndThrow (ERROR_SETTER_NOT_FOUND, e, methodName, dataClass.getSimpleName ());
+            handleAndThrow (ERROR_SETTER_NOT_FOUND, e, methodName, dataClass.getSimpleName (), value.getClass ()
+                .getSimpleName ());
         }
     }
 }

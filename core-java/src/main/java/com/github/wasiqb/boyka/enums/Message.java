@@ -145,7 +145,7 @@ public enum Message {
     /**
      * Setter method not found.
      */
-    ERROR_SETTER_NOT_FOUND ("Setter method [{0}] not found in [{1}] class..."),
+    ERROR_SETTER_NOT_FOUND ("Setter method [{0}] not found in [{1}] class of type [{2}]..."),
     /**
      * Error starting Appium server.
      */
