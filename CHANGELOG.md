@@ -1,16 +1,14 @@
 
-## v0.20.0-beta.0 (2023-12-06)
+## v0.20.1-beta.0 (2023-12-07)
 
-#### :rocket: New Feature
-* [#685](https://github.com/BoykaFramework/boyka-framework/pull/685) feat(java): :sparkles: added test data handling from excel file ([@WasiqB](https://github.com/WasiqB))
+#### :bug: Bug Fix
+* [#702](https://github.com/BoykaFramework/boyka-framework/pull/702) fix(java): :bug: fixed data being skipped in excel ([@WasiqB](https://github.com/WasiqB))
+* [#700](https://github.com/BoykaFramework/boyka-framework/pull/700) fix(java): :bug: session creation not req for test data ([@WasiqB](https://github.com/WasiqB))
 
 #### :house: Internal
-* [#684](https://github.com/BoykaFramework/boyka-framework/pull/684) build(deps): bump the dependencies group with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#683](https://github.com/BoykaFramework/boyka-framework/pull/683) build(deps): bump the dependencies group in /core-java with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#673](https://github.com/BoykaFramework/boyka-framework/pull/673) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#674](https://github.com/BoykaFramework/boyka-framework/pull/674) build(deps): bump the dependencies group in /sample-tests with 1 update ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#672](https://github.com/BoykaFramework/boyka-framework/pull/672) build(deps): bump the dependencies group in /core-java with 1 update ([@dependabot[bot]](https://github.com/apps/dependabot))
-* [#671](https://github.com/BoykaFramework/boyka-framework/pull/671) build(deps): bump the dependencies group in /sample-tests with 1 update ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#690](https://github.com/BoykaFramework/boyka-framework/pull/690) build(deps): bump the dependencies group with 1 update ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#694](https://github.com/BoykaFramework/boyka-framework/pull/694) build(deps-dev): bump io.qameta.allure:allure-testng from 2.24.0 to 2.25.0 in /core-java ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#695](https://github.com/BoykaFramework/boyka-framework/pull/695) build(deps): bump the dependencies group in /core-java with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
 
 #### Committers: 1
 - Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
