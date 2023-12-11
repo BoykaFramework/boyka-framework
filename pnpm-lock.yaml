@@ -72,8 +72,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       nx:
-        specifier: ^17.1.3
-        version: 17.1.3
+        specifier: ^17.2.0
+        version: 17.2.0
       prettier:
         specifier: ^3.1.1
         version: 3.1.1
@@ -103,7 +103,7 @@ importers:
         version: 3.0.1(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       '@docusaurus/preset-classic':
         specifier: 3.0.1
-        version: 3.0.1(@algolia/client-search@4.20.0)(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.11.0)(typescript@5.3.3)
+        version: 3.0.1(@algolia/client-search@4.20.0)(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.13.0)(typescript@5.3.3)
       '@docusaurus/theme-classic':
         specifier: ^3.0.1
         version: 3.0.1(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
@@ -151,10 +151,10 @@ packages:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
 
-  /@algolia/autocomplete-core@1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.11.0):
+  /@algolia/autocomplete-core@1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.13.0):
     resolution: {integrity: sha512-009HdfugtGCdC4JdXUbVJClA0q0zh24yyePn+KUGk3rP7j8FEe/m5Yo/z65gn6nP/cM39PxpzqKrL7A6fP6PPw==}
     dependencies:
-      '@algolia/autocomplete-plugin-algolia-insights': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.11.0)
+      '@algolia/autocomplete-plugin-algolia-insights': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.13.0)
       '@algolia/autocomplete-shared': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -162,13 +162,13 @@ packages:
       - search-insights
     dev: false
 
-  /@algolia/autocomplete-plugin-algolia-insights@1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.11.0):
+  /@algolia/autocomplete-plugin-algolia-insights@1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.13.0):
     resolution: {integrity: sha512-a/yTUkcO/Vyy+JffmAnTWbr4/90cLzw+CC3bRbhnULr/EM0fGNvM13oQQ14f2moLMcVDyAx/leczLlAOovhSZg==}
     peerDependencies:
       search-insights: '>= 1 < 3'
     dependencies:
       '@algolia/autocomplete-shared': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)
-      search-insights: 2.11.0
+      search-insights: 2.13.0
     transitivePeerDependencies:
       - '@algolia/client-search'
       - algoliasearch
@@ -1669,7 +1669,7 @@ packages:
     resolution: {integrity: sha512-SPiDHaWKQZpwR2siD0KQUwlStvIAnEyK6tAE2h2Wuoq8ue9skzhlyVQ1ddzOxX6khULnAALDiR/isSF3bnuciA==}
     dev: false
 
-  /@docsearch/react@3.5.2(@algolia/client-search@4.20.0)(@types/react@18.2.43)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.11.0):
+  /@docsearch/react@3.5.2(@algolia/client-search@4.20.0)(@types/react@18.2.43)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.13.0):
     resolution: {integrity: sha512-9Ahcrs5z2jq/DcAvYtvlqEBHImbm4YJI8M9y0x6Tqg598P40HTEkX7hsMcIuThI+hTFxRGZ9hll0Wygm2yEjng==}
     peerDependencies:
       '@types/react': '>= 16.8.0 < 19.0.0'
@@ -1686,14 +1686,14 @@ packages:
       search-insights:
         optional: true
     dependencies:
-      '@algolia/autocomplete-core': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.11.0)
+      '@algolia/autocomplete-core': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.13.0)
       '@algolia/autocomplete-preset-algolia': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)
       '@docsearch/css': 3.5.2
       '@types/react': 18.2.43
       algoliasearch: 4.20.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      search-insights: 2.11.0
+      search-insights: 2.13.0
     transitivePeerDependencies:
       - '@algolia/client-search'
     dev: false
@@ -2159,7 +2159,7 @@ packages:
       - webpack-cli
     dev: false
 
-  /@docusaurus/preset-classic@3.0.1(@algolia/client-search@4.20.0)(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.11.0)(typescript@5.3.3):
+  /@docusaurus/preset-classic@3.0.1(@algolia/client-search@4.20.0)(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.13.0)(typescript@5.3.3):
     resolution: {integrity: sha512-il9m9xZKKjoXn6h0cRcdnt6wce0Pv1y5t4xk2Wx7zBGhKG1idu4IFHtikHlD0QPuZ9fizpXspXcTzjL5FXc1Gw==}
     engines: {node: '>=18.0'}
     peerDependencies:
@@ -2177,7 +2177,7 @@ packages:
       '@docusaurus/plugin-sitemap': 3.0.1(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       '@docusaurus/theme-classic': 3.0.1(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       '@docusaurus/theme-common': 3.0.1(@docusaurus/types@3.0.1)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
-      '@docusaurus/theme-search-algolia': 3.0.1(@algolia/client-search@4.20.0)(@docusaurus/types@3.0.1)(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.11.0)(typescript@5.3.3)
+      '@docusaurus/theme-search-algolia': 3.0.1(@algolia/client-search@4.20.0)(@docusaurus/types@3.0.1)(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.13.0)(typescript@5.3.3)
       '@docusaurus/types': 3.0.1(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -2307,14 +2307,14 @@ packages:
       - webpack-cli
     dev: false
 
-  /@docusaurus/theme-search-algolia@3.0.1(@algolia/client-search@4.20.0)(@docusaurus/types@3.0.1)(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.11.0)(typescript@5.3.3):
+  /@docusaurus/theme-search-algolia@3.0.1(@algolia/client-search@4.20.0)(@docusaurus/types@3.0.1)(@types/react@18.2.43)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.13.0)(typescript@5.3.3):
     resolution: {integrity: sha512-DDiPc0/xmKSEdwFkXNf1/vH1SzJPzuJBar8kMcBbDAZk/SAmo/4lf6GU2drou4Ae60lN2waix+jYWTWcJRahSA==}
     engines: {node: '>=18.0'}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
     dependencies:
-      '@docsearch/react': 3.5.2(@algolia/client-search@4.20.0)(@types/react@18.2.43)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.11.0)
+      '@docsearch/react': 3.5.2(@algolia/client-search@4.20.0)(@types/react@18.2.43)(react-dom@18.2.0)(react@18.2.0)(search-insights@2.13.0)
       '@docusaurus/core': 3.0.1(@docusaurus/types@3.0.1)(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       '@docusaurus/logger': 3.0.1
       '@docusaurus/plugin-content-docs': 3.0.1(eslint@8.55.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
@@ -2596,7 +2596,7 @@ packages:
     resolution: {integrity: sha512-QyKIWEnKQFnYu2ey+SAAm1A5xjzJLJJj3bhIZd3QKyXKKjaJ0hlxam/OsWSltxTNbcyH1jRJjC6Cxv31usv0Ag==}
     engines: {node: ^14.17.0 || >=16.0.0}
     dependencies:
-      chalk: 4.1.2
+      chalk: 4.1.0
       execa: 5.1.1
       strong-log-transformer: 2.1.0
     dev: true
@@ -2637,7 +2637,7 @@ packages:
     engines: {node: '>=18.0.0'}
     dependencies:
       '@npmcli/run-script': 6.0.2
-      '@nx/devkit': 17.1.3(nx@17.1.3)
+      '@nx/devkit': 17.1.3(nx@17.2.0)
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 19.0.11
       byte-size: 8.1.1
@@ -2674,7 +2674,7 @@ packages:
       npm-packlist: 5.1.1
       npm-registry-fetch: 14.0.5
       npmlog: 6.0.2
-      nx: 17.1.3
+      nx: 17.2.0
       p-map: 4.0.0
       p-map-series: 2.1.0
       p-queue: 6.6.2
@@ -3073,10 +3073,10 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@nrwl/devkit@17.1.3(nx@17.1.3):
+  /@nrwl/devkit@17.1.3(nx@17.2.0):
     resolution: {integrity: sha512-8HfIY7P3yIYfQ/XKuHoq0GGLA9GpwWtBlI9kPQ0ygjuJ9BkpiGMtQvO6003zs7c6vpc2vNeG+Jmi72+EKvoN5A==}
     dependencies:
-      '@nx/devkit': 17.1.3(nx@17.1.3)
+      '@nx/devkit': 17.1.3(nx@17.2.0)
     transitivePeerDependencies:
       - nx
     dev: true
@@ -3173,11 +3173,11 @@ packages:
       - debug
     dev: true
 
-  /@nrwl/tao@17.1.3:
-    resolution: {integrity: sha512-9YpfEkUpVqOweqgQvMDcWApNx4jhCqBNH5IByZj302Enp3TLnQSvhuX5Dfr8hNQRQokIpEn6tW8SGTctTM5LXw==}
+  /@nrwl/tao@17.2.0:
+    resolution: {integrity: sha512-pBs9CaOgzRS4tPEcSeYmktQ1g1VC2C+kzt7X2xlowPx6VRP5eyUKtZUeKztib/Pw2G3RNRxA8E3IZYYcjSb8Vg==}
     hasBin: true
     dependencies:
-      nx: 17.1.3
+      nx: 17.2.0
       tslib: 2.6.2
     transitivePeerDependencies:
       - '@swc-node/register'
@@ -3185,23 +3185,23 @@ packages:
       - debug
     dev: true
 
-  /@nx/devkit@17.1.3(nx@17.1.3):
+  /@nx/devkit@17.1.3(nx@17.2.0):
     resolution: {integrity: sha512-1Is7ooovg3kdGJ5VdkePulRUDaMYLLULr+LwXgx7oHSW7AY2iCmhkoOE/vSR7DJ6rkey2gYx7eT1IoRoORiIaQ==}
     peerDependencies:
       nx: '>= 16 <= 18'
     dependencies:
-      '@nrwl/devkit': 17.1.3(nx@17.1.3)
+      '@nrwl/devkit': 17.1.3(nx@17.2.0)
       ejs: 3.1.9
       enquirer: 2.3.6
       ignore: 5.3.0
-      nx: 17.1.3
+      nx: 17.2.0
       semver: 7.5.3
       tmp: 0.2.1
       tslib: 2.6.2
     dev: true
 
-  /@nx/nx-darwin-arm64@17.1.3:
-    resolution: {integrity: sha512-f4qLa0y3C4uuhYKgq+MU892WaQvtvmHqrEhHINUOxYXNiLy2sgyJPW0mOZvzXtC4dPaUmiVaFP5RMVzc8Lxhtg==}
+  /@nx/nx-darwin-arm64@17.2.0:
+    resolution: {integrity: sha512-c26zrvevAOaoTAGz1+Spdet0seG82VYfgAfuVR1gn2tjVgvFw31RB/YMak2bJ1xFx7sFxZ2NOInRkn9y31lUWA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -3209,8 +3209,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-darwin-x64@17.1.3:
-    resolution: {integrity: sha512-kh76ZjqkLeQUIAfTa9G/DFFf+e1sZ5ipDzk7zFGhZ2k68PoQoFdsFOO3C513JmuEdavspts6Hkifsqh61TaE+A==}
+  /@nx/nx-darwin-x64@17.2.0:
+    resolution: {integrity: sha512-hXYfMtqytcQqXGmWejx79VDkgTs4MTOfI9x4TMpdO2QsJwyDHr2q36bR8ob297hVwfiQoG7SkWvXiKNtPB4XCw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -3218,8 +3218,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-freebsd-x64@17.1.3:
-    resolution: {integrity: sha512-CRuVL5ZSLb+Gc8vwMUUe9Pl/1Z26YtXMKTahBMQh2dac63vzLgzqIV4c66aduUl1x2M0kGYBSIIRG9z0/BgWeg==}
+  /@nx/nx-freebsd-x64@17.2.0:
+    resolution: {integrity: sha512-PcbYzEhInEz8RNN23F0mYZoEXz9JL4XVqwcYfGWkcBEQ8GGwRmv776lfxg+7zDM1QlTwdsiSjQJQ7DRM/BwuTg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [freebsd]
@@ -3227,8 +3227,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-linux-arm-gnueabihf@17.1.3:
-    resolution: {integrity: sha512-KDBmd5tSrg93g/oij/eGW4yeVNVK3DBIM4VYAS2vtkIgVOGoqcQ+SEIeMK3nMUJP9jGyblt3QNj5ZsJBtScwQw==}
+  /@nx/nx-linux-arm-gnueabihf@17.2.0:
+    resolution: {integrity: sha512-oHn7n7NWUy0h5DR0GDxog46pT4fE99DVuyTyIrUybasvsKOQhszg97AHzziwLT6V/jGVoND+aRx+yWoX+T2Gfw==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [linux]
@@ -3236,8 +3236,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-linux-arm64-gnu@17.1.3:
-    resolution: {integrity: sha512-W2tNL/7sIwoQKLmuy68Usd6TZzIZvxZt4UE30kDwGc2RSap6RCHAvDbzSxtW+L4+deC9UxX0Tty0VuW+J8FjSg==}
+  /@nx/nx-linux-arm64-gnu@17.2.0:
+    resolution: {integrity: sha512-tc2HgxkD32nJ5dcWeMPJbveoHgKoc6aZWdNl4pDH8Xy36e+QozoY+7iKk6Li31EFtXBlbW1RVhtltNYpHgBJXg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -3245,8 +3245,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-linux-arm64-musl@17.1.3:
-    resolution: {integrity: sha512-Oto3gkLd7yweuVUCsSHwm4JkAIbcxpPJP0ycRHI/PRHPMIOPiMX8r651QM1amMyKAbJtAe047nyb9Sh1X0FA4A==}
+  /@nx/nx-linux-arm64-musl@17.2.0:
+    resolution: {integrity: sha512-mfPvungAW9mQpKIcz9G8MwqTK3fm9L0ACghreh8wGVG934UtiCMSjkOOsoH+w5Hm4qsZiOjsRCY0B3JFKnw9Tw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -3254,8 +3254,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-linux-x64-gnu@17.1.3:
-    resolution: {integrity: sha512-pJS994sa5PBPFak93RydTB9KdEmiVb3rgiSB7PDBegphERbzHEB77B7G8M5TZ62dGlMdplIEKmdhY5XNqeAf9A==}
+  /@nx/nx-linux-x64-gnu@17.2.0:
+    resolution: {integrity: sha512-0wQXugfleOzMMQVugAH/Jd3wzfOBeY1Jk4Tt6xAUVNZLOkYi1PYR/TjLvXcQ4BH388PF3VZYAZVRC8kbh4aDOg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -3263,8 +3263,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-linux-x64-musl@17.1.3:
-    resolution: {integrity: sha512-4Hcx5Fg/88jV+bcTr6P0dM4unXNvKgrGJe3oK9/sgEhiW6pD2UAFjv16CCSRcWhDUAzUDqcwnD2fgg+vnAJG6g==}
+  /@nx/nx-linux-x64-musl@17.2.0:
+    resolution: {integrity: sha512-KB/Ny2Q0244G4QToKPmVwbTtItB+hRlNXz7NzXrW56gwINk1NbvS9QLZrRJOUyyOpd3gMlGQ5zt/+77pPraYDg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -3272,8 +3272,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-win32-arm64-msvc@17.1.3:
-    resolution: {integrity: sha512-dUasEuskmDxUL36XA0GZqSb9233suE4wKhxrMobyFBzHUZ2tq/unzOpPjYfqDBie4QIvF8tEpAjQsLds8LWgbw==}
+  /@nx/nx-win32-arm64-msvc@17.2.0:
+    resolution: {integrity: sha512-3nxYLUQpYi5AtJCFFoXkn3QvAZHeBwKzyJ5nnD/oWv6EaZH74BfWqAzAq55E7bodlJGBEQxy86aC4epo41jNag==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -3281,8 +3281,8 @@ packages:
     dev: true
     optional: true
 
-  /@nx/nx-win32-x64-msvc@17.1.3:
-    resolution: {integrity: sha512-eTuTpBHFvA5NFJh/iosmqCL4JOAjDrwXLSMgfKrZKjiApHMG1T/5Hb+PrsNpt+WnGp94ur7c4Dtx4xD5vlpAEw==}
+  /@nx/nx-win32-x64-msvc@17.2.0:
+    resolution: {integrity: sha512-+rKsQrDvw/NZan8pMHRjlW9sJB27dvFG6+GvJlmNeutsClb813IKCD2tN9BbcxW7Cw5Ol+a2uKC76l2SZTnO3g==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -9195,7 +9195,7 @@ packages:
     dependencies:
       '@lerna/create': 8.0.0(typescript@5.3.3)
       '@npmcli/run-script': 6.0.2
-      '@nx/devkit': 17.1.3(nx@17.1.3)
+      '@nx/devkit': 17.1.3(nx@17.2.0)
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 19.0.11
       byte-size: 8.1.1
@@ -9238,7 +9238,7 @@ packages:
       npm-packlist: 5.1.1
       npm-registry-fetch: 14.0.5
       npmlog: 6.0.2
-      nx: 17.1.3
+      nx: 17.2.0
       p-map: 4.0.0
       p-map-series: 2.1.0
       p-pipe: 3.1.0
@@ -10542,7 +10542,7 @@ packages:
       array-differ: 3.0.0
       array-union: 2.1.0
       arrify: 2.0.1
-      minimatch: 3.1.2
+      minimatch: 3.0.5
     dev: true
 
   /mute-stream@0.0.8:
@@ -10910,7 +10910,7 @@ packages:
       '@yarnpkg/parsers': 3.0.0-rc.46
       '@zkochan/js-yaml': 0.0.6
       axios: 1.6.2
-      chalk: 4.1.2
+      chalk: 4.1.0
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1
       cliui: 7.0.4
@@ -10952,8 +10952,8 @@ packages:
       - debug
     dev: true
 
-  /nx@17.1.3:
-    resolution: {integrity: sha512-6LYoTt01nS1d/dvvYtRs+pEAMQmUVsd2fr/a8+X1cDjWrb8wsf1O3DwlBTqKOXOazpS3eOr0Ukc9N1svbu7uXA==}
+  /nx@17.2.0:
+    resolution: {integrity: sha512-Nig9IiSoZ4DtxzVKZU1rKPW8hvJ2FcAniUCVXXMfI39lGf02b97L4NOh2MifOCtbPoZv6NmSmwBVqOylDRajvg==}
     hasBin: true
     requiresBuild: true
     peerDependencies:
@@ -10965,7 +10965,7 @@ packages:
       '@swc/core':
         optional: true
     dependencies:
-      '@nrwl/tao': 17.1.3
+      '@nrwl/tao': 17.2.0
       '@yarnpkg/lockfile': 1.1.0
       '@yarnpkg/parsers': 3.0.0-rc.46
       '@zkochan/js-yaml': 0.0.6
@@ -10997,20 +10997,19 @@ packages:
       tmp: 0.2.1
       tsconfig-paths: 4.2.0
       tslib: 2.6.2
-      v8-compile-cache: 2.3.0
       yargs: 17.7.2
       yargs-parser: 21.1.1
     optionalDependencies:
-      '@nx/nx-darwin-arm64': 17.1.3
-      '@nx/nx-darwin-x64': 17.1.3
-      '@nx/nx-freebsd-x64': 17.1.3
-      '@nx/nx-linux-arm-gnueabihf': 17.1.3
-      '@nx/nx-linux-arm64-gnu': 17.1.3
-      '@nx/nx-linux-arm64-musl': 17.1.3
-      '@nx/nx-linux-x64-gnu': 17.1.3
-      '@nx/nx-linux-x64-musl': 17.1.3
-      '@nx/nx-win32-arm64-msvc': 17.1.3
-      '@nx/nx-win32-x64-msvc': 17.1.3
+      '@nx/nx-darwin-arm64': 17.2.0
+      '@nx/nx-darwin-x64': 17.2.0
+      '@nx/nx-freebsd-x64': 17.2.0
+      '@nx/nx-linux-arm-gnueabihf': 17.2.0
+      '@nx/nx-linux-arm64-gnu': 17.2.0
+      '@nx/nx-linux-arm64-musl': 17.2.0
+      '@nx/nx-linux-x64-gnu': 17.2.0
+      '@nx/nx-linux-x64-musl': 17.2.0
+      '@nx/nx-win32-arm64-msvc': 17.2.0
+      '@nx/nx-win32-x64-msvc': 17.2.0
     transitivePeerDependencies:
       - debug
     dev: true
@@ -12956,8 +12955,8 @@ packages:
       ajv-formats: 2.1.1(ajv@8.12.0)
       ajv-keywords: 5.1.0(ajv@8.12.0)
 
-  /search-insights@2.11.0:
-    resolution: {integrity: sha512-Uin2J8Bpm3xaZi9Y8QibSys6uJOFZ+REMrf42v20AA3FUDUrshKkMEP6liJbMAHCm71wO6ls4mwAf7a3gFVxLw==}
+  /search-insights@2.13.0:
+    resolution: {integrity: sha512-Orrsjf9trHHxFRuo9/rzm0KIWmgzE8RMlZMzuhZOJ01Rnz3D0YBAe+V6473t6/H6c7irs6Lt48brULAiRWb3Vw==}
     dev: false
 
   /section-matter@1.0.0:
@@ -14810,7 +14809,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 20.2.9
+      yargs-parser: 20.2.4
     dev: true
 
   /yargs@17.7.2:
