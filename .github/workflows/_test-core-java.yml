@@ -160,7 +160,7 @@ jobs:
         run: npx kill-port --port 4724
 
       - name: Upload target folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ failure() }}
         with:
           name: target-${{ inputs.suite-name }}
@@ -172,7 +172,7 @@ jobs:
             ${{ github.workspace }}/core-java/videos
 
       - name: Upload reports folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: reports-${{ inputs.suite-name }}
           retention-days: 1
