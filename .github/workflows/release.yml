@@ -76,7 +76,7 @@ jobs:
           pnpm --silent changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
 
       - name: Upload updated version related files to artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: version-files-${{ github.run_id }}
           retention-days: 1
@@ -165,7 +165,7 @@ jobs:
         run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
 
       - name: Upload target folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: target-${{ github.run_id }}
           retention-days: 1
@@ -173,7 +173,7 @@ jobs:
             ${{ github.workspace }}/core-java/target
 
       - name: Upload version files folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: version-pom-files-${{ github.run_id }}
           retention-days: 1
@@ -192,12 +192,12 @@ jobs:
           token: ${{ env.PUSH_TOKEN }}
 
       - name: Download Version files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: version-files-${{ github.run_id }}
 
       - name: Download Version pom files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: version-pom-files-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java
@@ -253,13 +253,13 @@ jobs:
           fetch-depth: 0
 
       - name: Download target folder
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: target-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java/target
 
       - name: Download Version files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: version-files-${{ github.run_id }}
 

@@ -200,61 +200,61 @@ jobs:
           check-latest: true
 
       - name: Download reports-testng-api files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-api
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-bs files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-mobile-bs
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-local files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-mobile-local
           path: ${{ github.workspace }}/core-java/reports
 
       # - name: Download reports-testng-mobile-web files
-      #   uses: actions/download-artifact@v3
+      #   uses: actions/download-artifact@v4
       #   with:
       #     name: reports-testng-mobile-web
       #     path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-lt files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-mobile-lt
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-others files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-others
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-web-bs files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-web-bs
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-web-grid files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-web-grid
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-web-local files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-web-local
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-web-lt files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-testng-web-lt
           path: ${{ github.workspace }}/core-java/reports
@@ -264,7 +264,7 @@ jobs:
           mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Pcoverage-report
 
       - name: Upload target folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: target-${{ github.run_id }}
@@ -276,7 +276,7 @@ jobs:
             ${{ github.workspace }}/core-java/screenshots
 
       - name: Upload reports folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: reports-${{ github.run_id }}
           retention-days: 1
@@ -302,13 +302,13 @@ jobs:
           check-latest: true
 
       - name: Download target folder
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: target-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java
 
       - name: Download reports folder
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: reports-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java
