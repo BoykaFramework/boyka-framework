@@ -11,7 +11,6 @@ Following is the project repository root directory structure:
 - .vscode/
 - assets/
 - core-java/
-- sample-tests/
 - website/
 - .editorconfig
 - .eslintignore
@@ -55,70 +54,66 @@ This directory contains all the assets required by the README file.
 
 This directory contains the core framework Java Maven based project.
 
-### 6. `sample-tests/`
-
-This directory contains the sample tests for boyka-framework for API and Web.
-
-### 7. `website/`
+### 6. `website/`
 
 This directory contains the website documentation for the project.
 
-### 8. `.eslintignore`
+### 7. `.eslintignore`
 
 This file contains the ESLint ignore patterns for the project.
 
-### 9. `.eslintrc.json`
+### 8. `.eslintrc.json`
 
 This file contains the ESLint rules for the project.
 
-### 10. `.gitignore`
+### 9. `.gitignore`
 
 This file contains the Git ignore patterns for the project.
 
-### 11. `.gitpod.yml`
+### 10. `.gitpod.yml`
 
 This file contains the Gitpod settings for the project.
 
-### 12. `.nvmrc`
+### 11. `.nvmrc`
 
 This file contains the Node version for the project.
 
-### 13. `.prettierignore`
+### 12. `.prettierignore`
 
 This file contains the Prettier ignore patterns for the project.
 
-### 14. `.prettierrc.json`
+### 13. `.prettierrc.json`
 
 This file contains the Prettier rules for the project.
 
-### 15. `CHANGELOG.md`
+### 14. `CHANGELOG.md`
 
 This file contains the project change logs for the last release.
 
-### 16. `commitlint.config.js`
+### 15. `commitlint.config.js`
 
 This file contains the commit lint config for the project.
 
-### 17. `lerna.json`
+### 16. `lerna.json`
 
 This file contains the Lerna settings for the project.
 
-### 18. `LICENSE`
+### 17. `LICENSE`
 
 This file contains the license for the project.
 
-### 19. `package.json`
+### 18. `package.json`
 
 This file contains the project package.json settings.
 
-### 20. `README.md`
+### 19. `README.md`
 
 This file contains the project README.md file.
 
-### 21. `pnpm-lock.yaml`
+### 20. `pnpm-lock.yaml`
 
 This file contains the projects pnpm lock file.
 
-### 22. `pnpm-workspace.yaml`
+### 21. `pnpm-workspace.yaml`
 
 This file contains the project workspace details.

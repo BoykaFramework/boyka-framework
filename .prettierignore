@@ -3,7 +3,6 @@ website/build
 .vscode/
 .github/
 core-java/
-sample-tests/
 *.md*
 *.xml
 *.toml

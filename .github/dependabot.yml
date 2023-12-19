@@ -37,22 +37,6 @@ updates:
       dependencies:
         dependency-type: 'production'
 
-  - package-ecosystem: 'maven'
-    directory: '/sample-tests'
-    target-branch: 'main'
-    open-pull-requests-limit: 100
-    labels:
-      - ':house: pr: internal'
-      - 'java'
-    reviewers:
-      - 'boyka-core'
-    schedule:
-      interval: 'weekly'
-      timezone: 'Asia/Calcutta'
-    groups:
-      dependencies:
-        dependency-type: 'production'
-
   - package-ecosystem: 'github-actions'
     directory: '/'
     target-branch: 'main'
