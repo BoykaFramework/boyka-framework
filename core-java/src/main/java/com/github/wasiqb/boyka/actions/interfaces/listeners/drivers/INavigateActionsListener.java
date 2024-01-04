@@ -54,11 +54,18 @@ public interface INavigateActionsListener extends BoykaListener {
     }
 
     /**
-     * handle to method.
+     * handle `to` method.
      *
      * @param url URL to navigate to
      */
     default void onTo (final String url) {
+        // not implemented.
+    }
+
+    /**
+     * Handle event of `toBaseUrl` method.
+     */
+    default void onToBaseUrl () {
         // not implemented.
     }
 

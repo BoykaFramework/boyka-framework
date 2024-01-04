@@ -42,6 +42,7 @@
         "browser": "FIREFOX"
       },
       "test_local_edge": {
+        "base_url": "https://the-internet.herokuapp.com/",
         "browser": "EDGE",
         "resize": "FULL_SCREEN"
       },
@@ -160,6 +161,9 @@
       "test_local_null_browser": {},
       "test_local_none_browser": {
         "browser": "NONE"
+      },
+      "test_chrome_no_base_url": {
+        "browser": "CHROME"
       }
     },
     "mobile": {

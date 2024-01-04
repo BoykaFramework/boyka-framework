@@ -19,7 +19,9 @@ package com.github.wasiqb.boyka.actions.drivers;
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.actions.CommonActions.performDriverAction;
 import static com.github.wasiqb.boyka.enums.ListenerType.NAVIGATE_ACTION;
+import static com.github.wasiqb.boyka.enums.Message.BASE_URL_EMPTY;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static com.google.common.truth.Truth.assertThat;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -95,6 +97,17 @@ public class NavigateActions implements INavigateActions {
     public void to (final String url) {
         LOGGER.traceEntry ();
         LOGGER.info ("Navigating to url: {}", url);
+        ofNullable (this.listener).ifPresent (l -> l.onTo (url));
+        performDriverAction (driver -> driver.get (url));
+        LOGGER.traceExit ();
+    }
+
+    @Override
+    public void toBaseUrl () {
+        LOGGER.traceEntry ();
+        final var url = requireNonEmpty (getSession ().getWebSetting ()
+            .getBaseUrl (), BASE_URL_EMPTY);
+        LOGGER.info ("Navigating to base url: {}", url);
         ofNullable (this.listener).ifPresent (l -> l.onTo (url));
         performDriverAction (driver -> driver.get (url));
         LOGGER.traceExit ();

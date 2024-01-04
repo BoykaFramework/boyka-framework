@@ -37,6 +37,10 @@ public enum Message {
      */
     AUTH_PASSWORD_REQUIRED ("Basic auth password is required..."),
     /**
+     * Base URL is not provided.
+     */
+    BASE_URL_EMPTY ("Base URL is not provided in the config..."),
+    /**
      * Block name in test data file is required.
      */
     BLOCK_NAME_REQUIRED ("Block name is required to read data from file..."),
