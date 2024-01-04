@@ -19,6 +19,7 @@ package com.github.wasiqb.boyka.actions.api;
 import static com.github.wasiqb.boyka.enums.ContentType.JSON;
 import static com.github.wasiqb.boyka.enums.ListenerType.API_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.AUTH_PASSWORD_REQUIRED;
+import static com.github.wasiqb.boyka.enums.Message.BASE_URL_EMPTY;
 import static com.github.wasiqb.boyka.enums.Message.CONTENT_TYPE_NOT_SET;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_EXECUTING_REQUEST;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_REQUEST_BODY;
@@ -26,6 +27,7 @@ import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_RESPONSE_BODY;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
+import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static java.lang.String.join;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
@@ -207,7 +209,7 @@ public final class ApiActions implements IApiActions {
 
     private String getUrl () {
         LOGGER.traceEntry ();
-        var hostName = this.apiSetting.getBaseUri ();
+        var hostName = requireNonEmpty (this.apiSetting.getBaseUri (), BASE_URL_EMPTY);
         if (this.apiSetting.getPort () > 0) {
             hostName = format ("{0}:{1}", hostName, this.apiSetting.getPort ());
         }

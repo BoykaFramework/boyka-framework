@@ -52,6 +52,7 @@ public class FileUploadTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createSession ("FileUploadTest", platformType, driverKey);
+        navigate ().toBaseUrl ();
         navigate ().to (URL);
     }
 

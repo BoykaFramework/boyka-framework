@@ -55,6 +55,11 @@ public interface INavigateActions {
     void to (final String url);
 
     /**
+     * Navigate to the base URL.
+     */
+    void toBaseUrl ();
+
+    /**
      * Verify browser url.
      *
      * @return {@link StringSubject} to verify browser url

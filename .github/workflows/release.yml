@@ -208,7 +208,6 @@ jobs:
         with:
           find: ${{ needs.prepare.outputs.old-version }}
           replace: ${{ needs.prepare.outputs.new-version }}
-          regex: false
           include: |
             ${{ github.workspace }}/README.md
             ${{ github.workspace }}/website/docs/framework-docs/getting-started/usage.md
@@ -219,7 +218,6 @@ jobs:
         with:
           find: '"version": "${{ needs.prepare.outputs.old-version }}"'
           replace: '"version": "${{ needs.prepare.outputs.new-version }}"'
-          regex: false
           include: |
             ${{ github.workspace }}/package.json
 

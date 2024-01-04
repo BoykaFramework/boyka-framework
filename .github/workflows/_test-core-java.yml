@@ -80,7 +80,7 @@ jobs:
         if: ${{ inputs.run-appium }}
         run: |
           brew install ffmpeg
-          npm install -g appium
+          npm install -g appium@2.3.0
           appium driver install uiautomator2
           appium driver install xcuitest
           mkdir core-java/logs

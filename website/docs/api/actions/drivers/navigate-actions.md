@@ -55,6 +55,16 @@ import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
 navigate ().to ("https://google.com");
 ```
 
+### `toBaseUrl`
+
+This method will navigate to the base URL mentioned in the config file.
+
+```java
+import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+. . .
+navigate ().toBaseUrl ();
+```
+
 ### `getUrl`
 
 This method will get the URL of the browser window.
