@@ -51,6 +51,7 @@
       },
       "test_browserstack_chrome": {
         "browser": "REMOTE",
+        "base_url": "https://the-internet.herokuapp.com/",
         "target": "BROWSER_STACK",
         "user_name": "${env:BS_USER}",
         "password": "${env:BS_KEY}",
@@ -74,6 +75,7 @@
       },
       "test_selenium_grid": {
         "browser": "REMOTE",
+        "base_url": "https://the-internet.herokuapp.com/",
         "target": "LOCAL",
         "port": "4444",
         "capabilities": {
@@ -82,6 +84,7 @@
       },
       "test_lambda_test_chrome": {
         "browser": "REMOTE",
+        "base_url": "https://the-internet.herokuapp.com/",
         "target": "LAMBDA_TEST_WEB",
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",

@@ -40,6 +40,8 @@ import org.testng.annotations.Test;
  * @since 14-Mar-2023
  */
 public class FileUploadTest {
+    private static final String URL = "https://the-internet.herokuapp.com/upload";
+
     /**
      * Setup test class by initialising driver.
      *
@@ -51,6 +53,7 @@ public class FileUploadTest {
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createSession ("FileUploadTest", platformType, driverKey);
         navigate ().toBaseUrl ();
+        navigate ().to (URL);
     }
 
     /**
