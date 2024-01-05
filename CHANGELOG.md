@@ -1,5 +1,5 @@
 
-## v0.20.1-beta.0 (2023-12-07)
+## v0.20.1 (2023-12-07)
 
 #### :bug: Bug Fix
 * [#702](https://github.com/BoykaFramework/boyka-framework/pull/702) fix(java): :bug: fixed data being skipped in excel ([@WasiqB](https://github.com/WasiqB))

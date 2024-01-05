@@ -73,7 +73,9 @@ jobs:
       - name: Generate Change log
         if: ${{ steps.version.outputs.version != null }}
         run: |
+          rm CHANGELOG.md
           pnpm --silent changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
+          cat CHANGELOG.md
 
       - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v4
@@ -189,6 +191,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v4
         with:
+          ref: 'main'
           token: ${{ env.PUSH_TOKEN }}
 
       - name: Download Version files
@@ -249,6 +252,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: 'main'
 
       - name: Download target folder
         uses: actions/download-artifact@v4
