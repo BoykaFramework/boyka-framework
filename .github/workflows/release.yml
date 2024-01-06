@@ -76,9 +76,14 @@ jobs:
         id: changelog
         run: |
           export CHANGELOG=$(pnpm --silent changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }})
-          echo "Changelog:\n$CHANGELOG"
-          echo "changes=$CHANGELOG" >> $GITHUB_OUTPUT
-          
+          delimiter="$(openssl rand -hex 8)"
+          echo "changes<<${delimiter}" >> "${GITHUB_OUTPUT}"
+          echo "$CHANGELOG" >> "${GITHUB_OUTPUT}"
+          echo "${delimiter}" >> "${GITHUB_OUTPUT}"
+
+      - name: Print Changelog
+        run: echo "${{ steps.changelog.outputs.changes }}"
+
       - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v4
         with:
