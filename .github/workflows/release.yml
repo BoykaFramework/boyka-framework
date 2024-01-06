@@ -24,6 +24,7 @@ jobs:
     outputs:
       new-version: ${{ steps.version.outputs.version }}
       old-version: ${{ steps.old_version.outputs.previous_version }}
+      changelog: ${{ steps.changelog.outputs.changes }}
 
     steps:
       - name: Check out Git repository
@@ -72,16 +73,18 @@ jobs:
 
       - name: Generate Change log
         if: ${{ steps.version.outputs.version != null }}
+        id: changelog
         run: |
-          pnpm --silent changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }} > CHANGELOG.md
-
+          export CHANGELOG=$(pnpm --silent changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }})
+          echo "Changelog:\n$CHANGELOG"
+          echo "changes=$CHANGELOG" >> $GITHUB_OUTPUT
+          
       - name: Upload updated version related files to artifacts
         uses: actions/upload-artifact@v4
         with:
           name: version-files-${{ github.run_id }}
           retention-days: 1
           path: |
-            ${{ github.workspace }}/CHANGELOG.md
             ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/website/package.json
 
@@ -220,12 +223,16 @@ jobs:
           replace: '"version": "${{ needs.prepare.outputs.new-version }}"'
           include: |
             ${{ github.workspace }}/package.json
+      
+      - name: Update Changelog file for v${{ needs.prepare.outputs.new-version }}
+        run: |
+          echo "${{ needs.prepare.outputs.changelog }}" > CHANGELOG.md
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
+          passphrase: ${{ env.GPG_PASSPHRASE }}
           git_user_signingkey: true
           git_commit_gpgsign: true
 
