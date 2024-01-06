@@ -283,7 +283,7 @@ jobs:
           name: Version ${{ needs.prepare.outputs.new-version }}
           prerelease: ${{ inputs.pre-release }}
           draft: false
-          body_path: CHANGELOG.md
+          body: ${{ needs.prepare.outputs.changelog }}
           discussion_category_name: Announcements
           generate_release_notes: false
           files: |
