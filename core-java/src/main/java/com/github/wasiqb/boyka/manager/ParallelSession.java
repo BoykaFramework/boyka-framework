@@ -26,6 +26,7 @@ import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.HashMap;
@@ -97,7 +98,7 @@ public final class ParallelSession {
         final var previousPersona = getCurrentPersona ();
         switchPersona (persona);
         checkSession ();
-        overrideSession (previousPersona);
+        overrideEmptySession (previousPersona);
         final var currentSession = getSession ();
         currentSession.setPlatformType (platformType);
         currentSession.setConfigKey (configKey);
@@ -188,9 +189,9 @@ public final class ParallelSession {
         }
     }
 
-    private static void overrideSession (final String previousPersona) {
+    private static void overrideEmptySession (final String previousPersona) {
         final var session = SESSION.get ();
-        if (session.containsKey (previousPersona)) {
+        if (isEmpty (previousPersona) && session.containsKey (previousPersona)) {
             final var previousSession = session.remove (previousPersona);
             session.put (getCurrentPersona (), previousSession);
         }
