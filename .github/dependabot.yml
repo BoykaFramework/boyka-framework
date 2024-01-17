@@ -14,12 +14,8 @@ updates:
       interval: 'weekly'
       timezone: 'Asia/Calcutta'
     groups:
-      major:
-        update-types: ['major']
-      minor:
-        update-types: ['minor']
-      patch:
-        update-types: ['patch']
+      dependencies:
+        update-types: ['major', 'minor', 'patch']
 
   - package-ecosystem: 'maven'
     directory: '/core-java'

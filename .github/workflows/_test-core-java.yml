@@ -80,7 +80,7 @@ jobs:
         if: ${{ inputs.run-appium }}
         run: |
           brew install ffmpeg
-          npm install -g appium@2.3.0
+          npm install -g appium
           appium driver install uiautomator2
           appium driver install xcuitest
           mkdir core-java/logs
@@ -95,9 +95,9 @@ jobs:
         if: ${{ inputs.run-ios }}
         uses: futureware-tech/simulator-action@v3
         with:
-          model: 'iPhone 14'
+          model: 'iPhone 15'
           os: 'iOS'
-          os_version: 16.2
+          os_version: 17.2
           shutdown_after_job: true
 
       - name: Cache AVD snapshot
