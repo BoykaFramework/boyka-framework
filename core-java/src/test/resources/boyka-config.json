@@ -215,7 +215,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "12",
           "name": "Pixel_7_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -450,7 +450,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.2",
+          "version": "17.2",
           "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
