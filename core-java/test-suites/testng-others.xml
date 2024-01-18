@@ -16,7 +16,7 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Others Suite" verbose="2" parallel="classes">
+<suite name="Boyka Others Suite" verbose="2" parallel="tests">
     <test name="Test Boyka others">
         <packages>
             <package name="com.github.wasiqb.boyka.testng.others"/>
