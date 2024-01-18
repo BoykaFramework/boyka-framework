@@ -101,7 +101,7 @@ jobs:
           shutdown_after_job: true
 
       - name: Cache AVD snapshot
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         if: ${{ inputs.run-android }}
         id: avd-cache
         with:
