@@ -196,7 +196,6 @@ public class WindowActions implements IWindowActions {
     public void takeScreenshot (final String fileName) {
         LOGGER.traceEntry ();
         LOGGER.info ("Taking screenshot and saving at [{}]...", fileName);
-        ofNullable (this.listener).ifPresent (l -> l.onTakeScreenshot (fileName));
         final var setting = getSession ().getSetting ()
             .getUi ()
             .getScreenshot ();
@@ -211,6 +210,7 @@ public class WindowActions implements IWindowActions {
                 handleAndThrow (ERROR_SAVING_SCREENSHOT, e);
             }
         });
+        ofNullable (this.listener).ifPresent (l -> l.onTakeScreenshot (fileName));
         LOGGER.traceExit ();
     }
 
