@@ -97,7 +97,7 @@ jobs:
         with:
           model: 'iPhone 14'
           os: 'iOS'
-          os_version: 17.2
+          os_version: 16.2
           shutdown_after_job: true
 
       - name: Cache AVD snapshot
