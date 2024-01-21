@@ -68,7 +68,9 @@ public final class ErrorHandler {
      * @param args message args
      */
     public static void throwError (final Message message, final Object... args) {
-        throw new FrameworkError (format (message.getMessageText (), args));
+        final var messageText = format (message.getMessageText (), args);
+        LOGGER.error (messageText);
+        throw new FrameworkError (messageText);
     }
 
     private ErrorHandler () {

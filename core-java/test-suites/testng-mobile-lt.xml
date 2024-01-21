@@ -16,7 +16,7 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Mobile LambdaTest Suite" verbose="2" parallel="classes">
+<suite name="Boyka Mobile LambdaTest Suite" verbose="2" parallel="tests">
     <test name="Test Boyka Mobile app on LambdaTest Android Device" group-by-instances="true">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_lt_android"/>
