@@ -17,7 +17,7 @@
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Web Local Suite" verbose="2" parallel="tests">
-    <test name="Test Boyka web on Local Chrome" parallel="classes" group-by-instances="true">
+    <test name="Test Boyka web on Local Chrome" parallel="classes">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
@@ -34,7 +34,7 @@
             <package name="com.github.wasiqb.boyka.testng.ui.theinternet"/>
         </packages>
     </test>
-    <test name="Test Boyka web on Local Edge" parallel="classes" group-by-instances="true">
+    <test name="Test Boyka web on Local Edge" parallel="classes">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_edge"/>
         <packages>
