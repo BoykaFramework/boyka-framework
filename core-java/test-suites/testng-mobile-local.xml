@@ -15,8 +15,8 @@
   ~ copies or substantial portions of the Software.
   -->
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Mobile Local Suite" verbose="2" parallel="tests">
-    <test name="Test Boyka Mobile on Local Android Emulator WDIO" group-by-instances="true">
+<suite name="Boyka Mobile Local Suite" verbose="2" parallel="tests" thread-count="2">
+    <test name="Test Boyka Mobile on Local Android Emulator WDIO" parallel="classes">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_wdio_android"/>
         <classes>
@@ -29,7 +29,7 @@
             </class>
         </classes>
     </test>
-    <test name="Test Boyka Mobile on Local iOS Simulator WDIO" group-by-instances="true">
+    <test name="Test Boyka Mobile on Local iOS Simulator WDIO" parallel="classes">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_local_wdio_ios"/>
         <classes>
