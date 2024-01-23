@@ -47,7 +47,7 @@ public class LoginTest {
     /**
      * Setup test method to take screenshot after each test method.
      */
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod
     public void afterMethod (final ITestResult result) {
         onWindow ().takeScreenshot ();
     }

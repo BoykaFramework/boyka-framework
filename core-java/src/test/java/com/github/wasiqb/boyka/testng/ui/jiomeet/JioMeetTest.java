@@ -47,21 +47,21 @@ public class JioMeetTest {
     private static final String HOST_PERSONA  = "User 1";
     private static final String MEETING_URL   = "meetingUrl";
 
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
             onWindow ().takeScreenshot ();
         }
     }
 
-    @BeforeClass (alwaysRun = true)
+    @BeforeClass
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String chromeConfig) {
         createSession (HOST_PERSONA, platformType, chromeConfig);
         createSession (GUEST_PERSONA, platformType, chromeConfig);
     }
 
-    @AfterClass (alwaysRun = true)
+    @AfterClass
     public void tearDownClass () {
         clearAllSessions ();
     }

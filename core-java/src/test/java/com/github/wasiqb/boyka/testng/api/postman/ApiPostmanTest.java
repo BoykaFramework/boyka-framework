@@ -38,7 +38,7 @@ public class ApiPostmanTest {
     /**
      * Setup API Test.
      */
-    @BeforeClass (description = "Setup test class", alwaysRun = true)
+    @BeforeClass (description = "Setup test class")
     public void setupTestClass () {
         createSession (API, "test_postman");
     }
@@ -46,7 +46,7 @@ public class ApiPostmanTest {
     /**
      * Clean up Test class.
      */
-    @AfterClass (description = "Tear down test class", alwaysRun = true)
+    @AfterClass (description = "Tear down test class")
     public void tearDownTestClass () {
         clearSession ();
     }

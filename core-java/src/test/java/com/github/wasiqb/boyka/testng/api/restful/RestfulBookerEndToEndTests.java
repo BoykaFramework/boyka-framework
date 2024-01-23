@@ -56,7 +56,7 @@ public class RestfulBookerEndToEndTests {
      * Setup API Test.
      */
     @Description ("Setup Test Class")
-    @BeforeClass (description = "Setup test class", alwaysRun = true)
+    @BeforeClass (description = "Setup test class")
     public void setupTestClass () {
         createSession (API, "test_restfulbooker");
         this.dataBuilder = new BookingDataBuilder ();
@@ -66,7 +66,7 @@ public class RestfulBookerEndToEndTests {
     /**
      * Clean up Test class.
      */
-    @AfterClass (description = "Tear down test class", alwaysRun = true)
+    @AfterClass (description = "Tear down test class")
     public void tearDownTestClass () {
         clearSession ();
     }

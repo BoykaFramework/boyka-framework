@@ -37,7 +37,7 @@ public class WdioDemoTest {
     /**
      * Setup test method to take screenshot after each test method.
      */
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
             onWindow ().takeScreenshot ();
@@ -50,7 +50,7 @@ public class WdioDemoTest {
      * @param platformType Application type
      * @param driverKey Driver config key
      */
-    @BeforeClass (description = "Setup test class", alwaysRun = true)
+    @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
         createSession (format ("WdioDemoTest-{0}", platformType), platformType, driverKey);
@@ -60,7 +60,7 @@ public class WdioDemoTest {
     /**
      * Tear down test class by closing driver.
      */
-    @AfterClass (description = "Tear down test class", alwaysRun = true)
+    @AfterClass (description = "Tear down test class")
     public void tearDownTestClass () {
         onDevice ().stopRecording ();
         withDriver ().saveLogs ();
