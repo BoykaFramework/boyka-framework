@@ -15,15 +15,18 @@
   ~ copies or substantial portions of the Software.
   -->
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Mobile Local Grid Suite" verbose="2" parallel="tests">
-    <test name="Test Boyka Mobile on Local Grid Android Emulator WDIO" group-by-instances="true">
+<suite name="Boyka Framework Local Grid Mobile Suite" verbose="2" parallel="tests">
+    <listeners>
+        <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
+    </listeners>
+    <test name="Test Mobile on Local Grid Android Emulator" group-by-instances="true">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_grid_wdio_android"/>
         <classes>
             <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest"/>
         </classes>
     </test>
-    <test name="Test Boyka Mobile on Local Grid iOS Simulator WDIO" group-by-instances="true">
+    <test name="Test Mobile on Local Grid iOS Simulator" group-by-instances="true">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_grid_wdio_ios"/>
         <classes>

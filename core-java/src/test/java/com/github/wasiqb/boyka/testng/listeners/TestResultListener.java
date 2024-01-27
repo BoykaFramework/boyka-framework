@@ -59,10 +59,12 @@ public class TestResultListener implements IReporter {
     @Override
     public void generateReport (final List<XmlSuite> xmlSuites, final List<ISuite> suites,
         final String outputDirectory) {
-        final var reportTemplate = initReportTemplate ();
+        var reportTemplate = initReportTemplate ();
         final var body = suites.stream ()
             .flatMap (suiteToResults ())
             .collect (joining ());
+        reportTemplate = reportTemplate.replaceFirst ("<title>", suites.get (0)
+            .getName ());
         saveReportTemplate (outputDirectory, reportTemplate.replaceFirst ("<body>", body));
     }
 
