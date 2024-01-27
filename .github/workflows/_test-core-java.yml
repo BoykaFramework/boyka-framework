@@ -160,7 +160,7 @@ jobs:
         run: npx kill-port --port 4724
 
       - name: Set Summary Report
-        run: echo "$(cat ${{ github.workspace }}/core-java/test-output/my-report.md)" >> $GITHUB_STEP_SUMMARY
+        run: echo "$(cat ${{ github.workspace }}/core-java/target/failsafe-reports/my-report.md)" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload target folder
         uses: actions/upload-artifact@v4
