@@ -16,8 +16,11 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka API Suite" verbose="2" parallel="classes">
-    <test name="Test Boyka API">
+<suite name="Boyka Framework API Suite" verbose="2" parallel="classes">
+    <listeners>
+        <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
+    </listeners>
+    <test name="Test Rest API">
         <classes>
             <class name="com.github.wasiqb.boyka.testng.api.restful.RestfulBookerEndToEndTests">
                 <methods>

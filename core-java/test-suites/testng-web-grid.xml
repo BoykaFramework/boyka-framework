@@ -16,8 +16,11 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Web Grid Suite" verbose="2" parallel="tests">
-    <test name="Test Boyka web on Selenium Grid">
+<suite name="Boyka Framework Local Grid Web Suite" verbose="2" parallel="tests">
+    <listeners>
+        <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
+    </listeners>
+    <test name="Test web on Selenium Grid Browser">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_selenium_grid"/>
         <classes>
