@@ -24,6 +24,7 @@ import static com.github.wasiqb.boyka.enums.Message.CONTENT_TYPE_NOT_SET;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_EXECUTING_REQUEST;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_REQUEST_BODY;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_PARSING_RESPONSE_BODY;
+import static com.github.wasiqb.boyka.enums.Message.SSL_ERROR;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
@@ -42,9 +43,14 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import com.github.wasiqb.boyka.actions.interfaces.api.IApiActions;
 import com.github.wasiqb.boyka.actions.interfaces.listeners.api.IApiActionsListener;
@@ -105,10 +111,15 @@ public final class ApiActions implements IApiActions {
         this.apiRequest = apiRequest;
         this.pathParams = new HashMap<> ();
         this.apiSetting = getSession ().getApiSetting ();
-        this.client = new OkHttpClient.Builder ().connectTimeout (ofSeconds (this.apiSetting.getConnectionTimeout ()))
+        final var builder = new OkHttpClient.Builder ().connectTimeout (
+                ofSeconds (this.apiSetting.getConnectionTimeout ()))
             .readTimeout (ofSeconds (this.apiSetting.getReadTimeout ()))
-            .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()))
-            .build ();
+            .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()));
+        if (!this.apiSetting.isValidateSsl ()) {
+            builder.sslSocketFactory (requireNonNull (getSslContext ()).getSocketFactory (),
+                (X509TrustManager) getTrustedCertificates ()[0]);
+        }
+        this.client = builder.build ();
         this.logSetting = getSession ().getApiSetting ()
             .getLogging ();
         this.request = new Request.Builder ();
@@ -205,6 +216,36 @@ public final class ApiActions implements IApiActions {
             handleAndThrow (ERROR_EXECUTING_REQUEST, e);
         }
         return LOGGER.traceExit (this.response);
+    }
+
+    private SSLContext getSslContext () {
+        SSLContext sslContext = null;
+        try {
+            sslContext = SSLContext.getInstance ("SSL");
+            sslContext.init (null, getTrustedCertificates (), new java.security.SecureRandom ());
+        } catch (final NoSuchAlgorithmException | KeyManagementException e) {
+            handleAndThrow (SSL_ERROR, e, e.getMessage ());
+        }
+        return sslContext;
+    }
+
+    private TrustManager[] getTrustedCertificates () {
+        return new TrustManager[] { new X509TrustManager () {
+            @Override
+            public void checkClientTrusted (final java.security.cert.X509Certificate[] chain, final String authType) {
+                // Overriding the default implementation.
+            }
+
+            @Override
+            public void checkServerTrusted (final java.security.cert.X509Certificate[] chain, final String authType) {
+                // Overriding the default implementation.
+            }
+
+            @Override
+            public java.security.cert.X509Certificate[] getAcceptedIssuers () {
+                return new java.security.cert.X509Certificate[] {};
+            }
+        } };
     }
 
     private String getUrl () {

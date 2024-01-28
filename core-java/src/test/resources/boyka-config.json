@@ -646,6 +646,10 @@
         "request": true,
         "response": true
       }
+    },
+    "test_bad_ssl": {
+      "base_uri": "https://expired.badssl.com/",
+      "validate_ssl": false
     }
   }
 }

@@ -259,6 +259,10 @@ public enum Message {
      */
     SESSION_PERSONA_CANNOT_BE_NULL ("Session Persona cannot be empty or null..."),
     /**
+     * SSL Context Error.
+     */
+    SSL_ERROR ("Error encountered in SSL Context: {0}..."),
+    /**
      * Test Error.
      */
     TEST_ERROR ("Test error..."),
