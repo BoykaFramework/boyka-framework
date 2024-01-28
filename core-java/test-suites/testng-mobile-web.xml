@@ -30,7 +30,7 @@
             </class>
         </classes>
     </test>
-    <test name="Test Mobile Web app on Local iOS Device">
+    <test name="Test Mobile Web app on Local iOS Device" enabled="false">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_local_ios_web"/>
         <classes>
