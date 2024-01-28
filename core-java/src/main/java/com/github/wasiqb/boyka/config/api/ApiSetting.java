@@ -33,5 +33,6 @@ public class ApiSetting {
     private int        port;
     private int        readTimeout       = 5;
     private String     schemaPath        = "";
+    private boolean    validateSsl       = true;
     private int        writeTimeout      = 5;
 }
