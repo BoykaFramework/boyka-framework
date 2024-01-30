@@ -117,7 +117,8 @@ public final class ApiActions implements IApiActions {
             .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()));
         if (!this.apiSetting.isValidateSsl ()) {
             builder.sslSocketFactory (requireNonNull (getSslContext ()).getSocketFactory (),
-                (X509TrustManager) getTrustedCertificates ()[0]);
+                    (X509TrustManager) getTrustedCertificates ()[0])
+                .hostnameVerifier ((hostname, session) -> true);
         }
         this.client = builder.build ();
         this.logSetting = getSession ().getApiSetting ()
