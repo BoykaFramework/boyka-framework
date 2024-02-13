@@ -111,15 +111,7 @@ public final class ApiActions implements IApiActions {
         this.apiRequest = apiRequest;
         this.pathParams = new HashMap<> ();
         this.apiSetting = getSession ().getApiSetting ();
-        final var builder = new OkHttpClient.Builder ().connectTimeout (
-                ofSeconds (this.apiSetting.getConnectionTimeout ()))
-            .readTimeout (ofSeconds (this.apiSetting.getReadTimeout ()))
-            .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()));
-        if (!this.apiSetting.isValidateSsl ()) {
-            builder.sslSocketFactory (requireNonNull (getSslContext ()).getSocketFactory (),
-                    (X509TrustManager) getTrustedCertificates ()[0])
-                .hostnameVerifier ((hostname, session) -> true);
-        }
+        final var builder = getApiBuilder ();
         this.client = builder.build ();
         this.logSetting = getSession ().getApiSetting ()
             .getLogging ();
@@ -190,6 +182,21 @@ public final class ApiActions implements IApiActions {
         LOGGER.traceEntry ("Parameter : {}", contentType);
         this.mediaType = parse (requireNonNullElse (contentType, JSON).getType ());
         return LOGGER.traceExit (this);
+    }
+
+    private OkHttpClient.Builder getApiBuilder () {
+        final var builder = new OkHttpClient.Builder ().connectTimeout (
+                ofSeconds (this.apiSetting.getConnectionTimeout ()))
+            .readTimeout (ofSeconds (this.apiSetting.getReadTimeout ()))
+            .writeTimeout (ofSeconds (this.apiSetting.getWriteTimeout ()));
+        if (!this.apiSetting.isValidateSsl ()) {
+            builder.sslSocketFactory (requireNonNull (getSslContext ()).getSocketFactory (),
+                (X509TrustManager) getTrustedCertificates ()[0]);
+        }
+        if (!this.apiSetting.isVerifyHostName ()) {
+            builder.hostnameVerifier ((hostname, session) -> true);
+        }
+        return builder;
     }
 
     private String getRequestBody (final RequestBody body) {

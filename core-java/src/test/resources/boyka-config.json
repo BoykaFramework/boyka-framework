@@ -647,9 +647,22 @@
         "response": true
       }
     },
-    "test_bad_ssl": {
-      "base_uri": "https://expired.badssl.com/",
+    "test_bad_ssl_wo_verify": {
+      "base_uri": "https://expired.badssl.com",
       "validate_ssl": false
+    },
+    "test_bad_host_name_wo_verify_ssl": {
+      "base_uri": "http://wrong.host.badssl.com",
+      "validate_ssl": false
+    },
+    "test_bad_host_name_wo_verify_hn": {
+      "base_uri": "http://wrong.host.badssl.com",
+      "validate_ssl": false,
+      "verify_host_name": false
+    },
+    "test_cookies": {
+      "base_uri": "https://postman-echo.com",
+      "handle_cookies": true
     }
   }
 }

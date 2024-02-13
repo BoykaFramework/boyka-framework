@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.ssl;
+package com.github.wasiqb.boyka.testng.api.postman;
 
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 import static com.github.wasiqb.boyka.enums.PlatformType.API;
@@ -28,39 +28,61 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
- * Test Bad SSL API.
+ * Test cookies in API.
  *
  * @author Wasiq Bhamla
- * @since 28-Jan-2024
+ * @since 09-Feb-2024
  */
-public class SslTest {
+public class ApiCookiesTest {
     /**
-     * Set up class.
+     * Setup API Test.
      */
-    @BeforeClass
-    public void setupClass () {
-        createSession (API, "test_bad_ssl");
+    @BeforeClass (description = "Setup test class")
+    public void setupTestClass () {
+        createSession (API, "test_postman");
     }
 
     /**
-     * Tear down the class.
+     * Clean up Test class.
      */
-    @AfterClass
-    public void tearDownClass () {
+    @AfterClass (description = "Tear down test class")
+    public void tearDownTestClass () {
         clearSession ();
     }
 
     /**
-     * Test Bad SSL API.
+     * Test Get Cookies.
      */
-    @Test
-    public void testBadSsl () {
+    @Test (dependsOnMethods = "testSetCookies")
+    public void testGetCookies () {
         final var request = ApiRequest.createRequest ()
             .method (GET)
+            .path ("/cookies")
             .create ();
         final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
+        response.verifyTextField ("cookies.foo1")
+            .isNotEmpty ();
+    }
+
+    /**
+     * Test Set Cookies.
+     */
+    @Test
+    public void testSetCookies () {
+        final var request = ApiRequest.createRequest ()
+            .method (GET)
+            .path ("/cookies/set")
+            .queryParam ("foo1", "bar1")
+            .queryParam ("foo2", "bar2")
+            .create ();
+        final var response = withRequest (request).execute ();
+
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+        response.verifyHeader ("set-cookie")
+            .isNotEmpty ();
     }
 }
