@@ -29,7 +29,6 @@ public class ApiSetting {
     private String     basePath          = "";
     private String     baseUri;
     private int        connectionTimeout = 5;
-    private boolean    handleCookies     = true;
     private LogSetting logging           = new LogSetting ();
     private int        port;
     private int        readTimeout       = 5;
