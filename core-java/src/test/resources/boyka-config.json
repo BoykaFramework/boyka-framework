@@ -659,10 +659,6 @@
       "base_uri": "http://wrong.host.badssl.com",
       "validate_ssl": false,
       "verify_host_name": false
-    },
-    "test_cookies": {
-      "base_uri": "https://postman-echo.com",
-      "handle_cookies": true
     }
   }
 }
