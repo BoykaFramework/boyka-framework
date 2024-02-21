@@ -604,6 +604,7 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` | |
 | `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
 | `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
+| `verify_host_name` | If set to `true`, host name verification will happen | `boolean` | `true` |
 
 :::info API Configuration
 In `api` configuration block, you can provide different versions of API settings having different key names.

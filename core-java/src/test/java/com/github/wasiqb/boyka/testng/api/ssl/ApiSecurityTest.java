@@ -23,8 +23,6 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 
 import com.github.wasiqb.boyka.builders.ApiRequest;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
@@ -33,21 +31,24 @@ import org.testng.annotations.Test;
  * @author Wasiq Bhamla
  * @since 28-Jan-2024
  */
-public class SslTest {
+public class ApiSecurityTest {
     /**
-     * Set up class.
+     * Test bad host name.
      */
-    @BeforeClass
-    public void setupClass () {
-        createSession (API, "test_bad_ssl");
-    }
+    @Test
+    public void testBadHostName () {
+        try {
+            createSession (API, "test_bad_host_name_wo_verify_hn");
+            final var request = ApiRequest.createRequest ()
+                .method (GET)
+                .create ();
+            final var response = withRequest (request).execute ();
 
-    /**
-     * Tear down the class.
-     */
-    @AfterClass
-    public void tearDownClass () {
-        clearSession ();
+            response.verifyStatusCode ()
+                .isEqualTo (200);
+        } finally {
+            clearSession ();
+        }
     }
 
     /**
@@ -55,12 +56,17 @@ public class SslTest {
      */
     @Test
     public void testBadSsl () {
-        final var request = ApiRequest.createRequest ()
-            .method (GET)
-            .create ();
-        final var response = withRequest (request).execute ();
+        try {
+            createSession (API, "test_bad_ssl_wo_verify");
+            final var request = ApiRequest.createRequest ()
+                .method (GET)
+                .create ();
+            final var response = withRequest (request).execute ();
 
-        response.verifyStatusCode ()
-            .isEqualTo (200);
+            response.verifyStatusCode ()
+                .isEqualTo (200);
+        } finally {
+            clearSession ();
+        }
     }
 }

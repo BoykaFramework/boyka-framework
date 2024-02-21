@@ -34,5 +34,6 @@ public class ApiSetting {
     private int        readTimeout       = 5;
     private String     schemaPath        = "";
     private boolean    validateSsl       = true;
+    private boolean    verifyHostName    = true;
     private int        writeTimeout      = 5;
 }
