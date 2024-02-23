@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022 Wasiq Bhamla
+ * Copyright (c) 2024, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.others;
+package com.github.wasiqb.boyka.testng.api.others;
 
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
@@ -22,7 +22,10 @@ import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.enums.RequestMethod.GET;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static com.github.wasiqb.boyka.testng.api.restful.data.BookingRequestData.getBookingData;
+import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.createBooking;
 
+import com.github.wasiqb.boyka.enums.RequestMethod;
 import com.github.wasiqb.boyka.exception.FrameworkError;
 import org.testng.annotations.Test;
 
@@ -44,6 +47,22 @@ public class ApiTests {
             .pathParam ("userId", "2")
             .create ();
         withRequest (userRequest).execute ();
+        clearSession ();
+    }
+
+    @Test
+    public void testNullHeader () {
+        createSession (API, "test_restfulbooker");
+        final var request = createRequest ().method (RequestMethod.POST)
+            .header ("Accept", "application/json")
+            .header ("Content-Type", null)
+            .path ("/booking")
+            .bodyObject (createBooking (getBookingData ()))
+            .create ();
+
+        final var response = withRequest (request).execute ();
+        response.verifyStatusCode ()
+            .isEqualTo (500);
         clearSession ();
     }
 }

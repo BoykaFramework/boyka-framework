@@ -21,6 +21,8 @@ import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static com.github.wasiqb.boyka.testng.api.restful.data.BookingRequestData.getBookingData;
+import static com.github.wasiqb.boyka.testng.api.restful.data.BookingRequestData.getPartialBookingData;
 import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.createBooking;
 import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.deleteBooking;
 import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.getBooking;
@@ -28,8 +30,7 @@ import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest
 import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.updatePartialBooking;
 
 import com.github.wasiqb.boyka.exception.FrameworkError;
-import com.github.wasiqb.boyka.testng.api.restful.requests.BookingData;
-import com.github.wasiqb.boyka.testng.api.restful.requests.BookingDataBuilder;
+import com.github.wasiqb.boyka.testng.api.restful.pojo.BookingData;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -49,8 +50,7 @@ import org.testng.annotations.Test;
 public class RestfulBookerEndToEndTests {
     private static final String BOOKING_ID = "bookingId";
 
-    private BookingDataBuilder dataBuilder;
-    private BookingData        newBooking;
+    private BookingData newBooking;
 
     /**
      * Setup API Test.
@@ -59,8 +59,7 @@ public class RestfulBookerEndToEndTests {
     @BeforeClass (description = "Setup test class")
     public void setupTestClass () {
         createSession (API, "test_restfulbooker");
-        this.dataBuilder = new BookingDataBuilder ();
-        this.newBooking = this.dataBuilder.bookingDataBuilder ();
+        this.newBooking = getBookingData ();
     }
 
     /**
@@ -90,6 +89,7 @@ public class RestfulBookerEndToEndTests {
             .isTrue ();
         response.verifyHeader ("Content-Type")
             .isEqualTo ("application/json; charset=utf-8");
+
         final var bookingId = response.getResponseData ("bookingid");
         getSession ().setSharedData (BOOKING_ID, bookingId);
     }
@@ -97,7 +97,8 @@ public class RestfulBookerEndToEndTests {
     @Story ("Delete Booking")
     @Test (description = "Test for Deleting a booking using DELETE request")
     public void testDeleteBooking () {
-        final var response = withRequest (deleteBooking (getSession ().getSharedData (BOOKING_ID))).execute ();
+        final var request = deleteBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (201);
     }
@@ -105,7 +106,8 @@ public class RestfulBookerEndToEndTests {
     @Story ("Get deleted Booking")
     @Test (description = "Test for checking deleted booking using GET request")
     public void testDeletedBooking () {
-        final var response = withRequest (getBooking (getSession ().getSharedData (BOOKING_ID))).execute ();
+        final var request = getBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (404);
     }
@@ -113,7 +115,8 @@ public class RestfulBookerEndToEndTests {
     @Story ("Get Created Booking")
     @Test (description = "Test for retrieving booking using GET request")
     public void testGetBooking () {
-        final var response = withRequest (getBooking (getSession ().getSharedData (BOOKING_ID))).execute ();
+        final var request = getBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
@@ -139,10 +142,10 @@ public class RestfulBookerEndToEndTests {
     @Story ("Update Booking")
     @Test (description = "Test for Updating booking using PUT request")
     public void testUpdateBooking () {
-        final var updateBookingData = this.dataBuilder.bookingDataBuilder ();
+        final var updateBookingData = this.newBooking;
 
-        final var response = withRequest (
-            updateBooking (getSession ().getSharedData (BOOKING_ID), updateBookingData)).execute ();
+        final var request = updateBooking (getSession ().getSharedData (BOOKING_ID), updateBookingData);
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("firstname")
@@ -154,10 +157,10 @@ public class RestfulBookerEndToEndTests {
     @Story ("Update Partial Booking")
     @Test (description = "Test for partial updating booking using PATCH request")
     public void testUpdatePartialBooking () {
-        final var partialBookingData = this.dataBuilder.partialBookingBuilder ();
+        final var partialBookingData = getPartialBookingData ();
 
-        final var response = withRequest (
-            updatePartialBooking (getSession ().getSharedData (BOOKING_ID), partialBookingData)).execute ();
+        final var request = updatePartialBooking (getSession ().getSharedData (BOOKING_ID), partialBookingData);
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("firstname")

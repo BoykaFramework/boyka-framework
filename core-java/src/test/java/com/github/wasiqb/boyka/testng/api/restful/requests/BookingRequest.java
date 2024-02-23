@@ -18,10 +18,12 @@ package com.github.wasiqb.boyka.testng.api.restful.requests;
 
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
+import static com.github.wasiqb.boyka.testng.api.restful.data.AuthRequestData.getTokenData;
 import static java.text.MessageFormat.format;
 
 import com.github.wasiqb.boyka.builders.ApiRequest;
 import com.github.wasiqb.boyka.enums.RequestMethod;
+import com.github.wasiqb.boyka.testng.api.restful.pojo.BookingData;
 
 /**
  * Booking request class
@@ -30,7 +32,7 @@ import com.github.wasiqb.boyka.enums.RequestMethod;
  * @since 28-Feb-2023
  */
 public final class BookingRequest {
-    public static ApiRequest createBooking (final Object requestBody) {
+    public static ApiRequest createBooking (final BookingData requestBody) {
         return createRequest ().method (RequestMethod.POST)
             .header ("Accept", "application/json")
             .path ("/booking")
@@ -55,7 +57,7 @@ public final class BookingRequest {
             .create ();
     }
 
-    public static ApiRequest updateBooking (final String id, final Object requestBody) {
+    public static ApiRequest updateBooking (final String id, final BookingData requestBody) {
         return createRequest ().method (RequestMethod.PUT)
             .header ("Accept", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
@@ -65,7 +67,7 @@ public final class BookingRequest {
             .create ();
     }
 
-    public static ApiRequest updatePartialBooking (final String id, final Object requestBody) {
+    public static ApiRequest updatePartialBooking (final String id, final BookingData requestBody) {
         return createRequest ().method (RequestMethod.PATCH)
             .header ("Accept", "application/json")
             .header ("Cookie", format ("token={0}", generateToken ()))
@@ -76,11 +78,10 @@ public final class BookingRequest {
     }
 
     private static String generateToken () {
-        final TokenBuilder builder = new TokenBuilder ();
         final var generateTokenRequest = createRequest ().header ("Accept", "application/json")
             .method (RequestMethod.POST)
             .path ("/auth")
-            .bodyObject (builder.tokenBuilder ())
+            .bodyObject (getTokenData ())
             .create ();
 
         final var response = withRequest (generateTokenRequest).execute ();
@@ -88,6 +89,6 @@ public final class BookingRequest {
     }
 
     private BookingRequest () {
-        // Utility class.
+        // Utility Class.
     }
 }
