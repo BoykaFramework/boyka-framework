@@ -17,22 +17,22 @@
 package com.github.wasiqb.boyka.testng.api.restful;
 
 import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
-import static com.github.wasiqb.boyka.actions.data.TestDataAction.withData;
 import static com.github.wasiqb.boyka.builders.ApiRequest.createRequest;
 import static com.github.wasiqb.boyka.enums.PlatformType.API;
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 
-import java.util.Iterator;
+import java.text.DecimalFormat;
 
 import com.github.wasiqb.boyka.actions.interfaces.data.IDataRow;
 import com.github.wasiqb.boyka.enums.RequestMethod;
-import com.github.wasiqb.boyka.testng.api.restful.requests.BookingData;
-import com.github.wasiqb.boyka.testng.api.restful.requests.BookingDates;
-import com.github.wasiqb.boyka.testng.api.restful.requests.BookingTestData;
+import com.github.wasiqb.boyka.testng.api.restful.data.BookingDataProviders;
+import com.github.wasiqb.boyka.testng.api.restful.pojo.BookingData;
+import com.github.wasiqb.boyka.testng.api.restful.pojo.BookingDates;
+import com.github.wasiqb.boyka.testng.api.restful.pojo.BookingTestData;
+import lombok.SneakyThrows;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
@@ -42,26 +42,6 @@ import org.testng.annotations.Test;
  * @since 28-Nov-2023
  */
 public class DataDrivenBookingTest {
-    @DataProvider
-    public static Iterator<Object[]> getBookingData () {
-        final var rows = withData ("BookingData").inBlock ("Bookings")
-            .rows ();
-        return rows.stream ()
-            .map (d -> new Object[] { d })
-            .toList ()
-            .iterator ();
-    }
-
-    @DataProvider
-    public static Iterator<Object[]> getBookingDataObject () {
-        final var rows = withData ("BookingData").inBlock ("Bookings")
-            .get (BookingTestData.class);
-        return rows.stream ()
-            .map (d -> new Object[] { d })
-            .toList ()
-            .iterator ();
-    }
-
     @BeforeClass
     public void setupClass () {
         createSession (API, "test_restfulbooker");
@@ -72,15 +52,19 @@ public class DataDrivenBookingTest {
         clearSession ();
     }
 
-    @Test (dataProvider = "getBookingData")
+    @SneakyThrows
+    @Test (dataProviderClass = BookingDataProviders.class, dataProvider = "getBookingData")
     public void testBooking (final IDataRow row) {
         final var depositPaid = row.cell ("DepositPaid")
             .toString ()
             .equalsIgnoreCase ("yes");
+        final var formatter = new DecimalFormat ("#0.0");
         final var bookingData = BookingData.builder ()
             .firstname (row.cell ("FirstName"))
             .lastname (row.cell ("LastName"))
-            .totalprice (row.cell ("TotalPrice"))
+            .totalprice (formatter.parse (row.cell ("TotalPrice")
+                    .toString ())
+                .intValue ())
             .depositpaid (depositPaid)
             .bookingdates (BookingDates.builder ()
                 .checkin (row.cell ("CheckInDate")
@@ -94,14 +78,15 @@ public class DataDrivenBookingTest {
         testBooking (bookingData);
     }
 
-    @Test (dataProvider = "getBookingDataObject")
+    @Test (dataProviderClass = BookingDataProviders.class, dataProvider = "getBookingDataObject")
     public void testBookingObject (final BookingTestData bookingTestData) {
         final var depositPaid = bookingTestData.getDepositPaid ()
             .equalsIgnoreCase ("yes");
         final var bookingData = BookingData.builder ()
             .firstname (bookingTestData.getFirstName ())
             .lastname (bookingTestData.getLastName ())
-            .totalprice (bookingTestData.getTotalPrice ())
+            .totalprice (bookingTestData.getTotalPrice ()
+                .intValue ())
             .depositpaid (depositPaid)
             .bookingdates (BookingDates.builder ()
                 .checkin (bookingTestData.getCheckInDate ())

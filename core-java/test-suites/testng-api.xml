@@ -40,6 +40,7 @@
             </class>
             <class name="com.github.wasiqb.boyka.testng.api.restful.DataDrivenBookingTest"/>
             <class name="com.github.wasiqb.boyka.testng.api.ssl.ApiSecurityTest"/>
+            <class name="com.github.wasiqb.boyka.testng.api.others.ApiTests"/>
         </classes>
     </test>
 </suite>

@@ -14,19 +14,20 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.restful.requests;
+package com.github.wasiqb.boyka.testng.api.restful.pojo;
 
-/**
- * Token builder class
- *
- * @author Wasiq Bhamla
- * @since 28-Feb-2023
- */
-public class TokenBuilder {
-    public TokenCredential tokenBuilder () {
-        return TokenCredential.builder ()
-            .username ("admin")
-            .password ("password123")
-            .build ();
-    }
+import lombok.Data;
+import lombok.ToString;
+
+@ToString
+@Data
+public class BookingTestData {
+    private String additionalNeeds;
+    private String checkInDate;
+    private String checkOutDate;
+    private String depositPaid;
+    private String firstName;
+    private String lastName;
+    private Double srNo;
+    private Double totalPrice;
 }

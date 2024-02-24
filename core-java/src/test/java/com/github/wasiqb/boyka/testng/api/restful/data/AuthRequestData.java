@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023, Wasiq Bhamla
+ * Copyright (c) 2024, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,26 +14,25 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.restful.requests;
+package com.github.wasiqb.boyka.testng.api.restful.data;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import com.github.wasiqb.boyka.testng.api.restful.pojo.AuthToken;
 
 /**
- * Booking data class.
+ * Token builder class
  *
  * @author Wasiq Bhamla
  * @since 28-Feb-2023
  */
-@Getter
-@Builder
-@ToString
-public class BookingData {
-    private String       additionalneeds;
-    private BookingDates bookingdates;
-    private boolean      depositpaid;
-    private String       firstname;
-    private String       lastname;
-    private double       totalprice;
+public final class AuthRequestData {
+    public static AuthToken getTokenData () {
+        return AuthToken.builder ()
+            .username ("admin")
+            .password ("password123")
+            .build ();
+    }
+
+    private AuthRequestData () {
+        // Utility Class.
+    }
 }

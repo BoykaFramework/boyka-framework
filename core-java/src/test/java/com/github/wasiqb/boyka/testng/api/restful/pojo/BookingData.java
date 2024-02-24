@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023, Wasiq Bhamla
+ * Copyright (c) 2024, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,14 +14,14 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.restful.requests;
+package com.github.wasiqb.boyka.testng.api.restful.pojo;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
 /**
- * Booking dates class
+ * Booking data class.
  *
  * @author Wasiq Bhamla
  * @since 28-Feb-2023
@@ -29,7 +29,11 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class BookingDates {
-    private String checkin;
-    private String checkout;
+public class BookingData {
+    private String       additionalneeds;
+    private BookingDates bookingdates;
+    private boolean      depositpaid;
+    private String       firstname;
+    private String       lastname;
+    private int          totalprice;
 }

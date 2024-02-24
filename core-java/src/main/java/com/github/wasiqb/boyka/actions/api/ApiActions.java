@@ -122,7 +122,11 @@ public final class ApiActions implements IApiActions {
     @Override
     public ApiResponse execute () {
         LOGGER.traceEntry ();
-        requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<String, String> ()).forEach (this::addHeader);
+        requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<String, String> ()).forEach ((k, v) -> {
+            if (isNotEmpty (v)) {
+                this.addHeader (k, v);
+            }
+        });
         requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<String, String> ()).forEach (this::pathParam);
 
         final var responseResult = this.contentType (this.apiRequest.getContentType ())

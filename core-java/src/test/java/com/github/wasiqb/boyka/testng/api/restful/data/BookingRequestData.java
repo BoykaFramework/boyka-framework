@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023, Wasiq Bhamla
+ * Copyright (c) 2024, Wasiq Bhamla
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,11 +14,13 @@
  * copies or substantial portions of the Software.
  */
 
-package com.github.wasiqb.boyka.testng.api.restful.requests;
+package com.github.wasiqb.boyka.testng.api.restful.data;
 
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
 
+import com.github.wasiqb.boyka.testng.api.restful.pojo.BookingData;
+import com.github.wasiqb.boyka.testng.api.restful.pojo.BookingDates;
 import net.datafaker.Faker;
 
 /**
@@ -27,28 +29,28 @@ import net.datafaker.Faker;
  * @author Wasiq Bhamla
  * @since 28-Feb-2023
  */
-public class BookingDataBuilder {
-    private final Faker faker = new Faker ();
+public final class BookingRequestData {
+    private static final Faker FAKER = new Faker ();
 
     /**
      * Build booking data
      *
      * @return {@link BookingData} instance
      */
-    public BookingData bookingDataBuilder () {
+    public static BookingData getBookingData () {
         final var formatter = new SimpleDateFormat ("yyyy-MM-dd");
         return BookingData.builder ()
-            .firstname (this.faker.name ()
+            .firstname (FAKER.name ()
                 .firstName ())
-            .lastname (this.faker.name ()
+            .lastname (FAKER.name ()
                 .lastName ())
-            .totalprice (this.faker.number ()
+            .totalprice (FAKER.number ()
                 .numberBetween (1, 2000))
             .depositpaid (true)
             .bookingdates (BookingDates.builder ()
-                .checkin (formatter.format (this.faker.date ()
+                .checkin (formatter.format (FAKER.date ()
                     .past (20, TimeUnit.DAYS)))
-                .checkout (formatter.format (this.faker.date ()
+                .checkout (formatter.format (FAKER.date ()
                     .future (5, TimeUnit.DAYS)))
                 .build ())
             .additionalneeds ("Breakfast")
@@ -58,14 +60,18 @@ public class BookingDataBuilder {
     /**
      * Build partial booking
      *
-     * @return {@link PartialBookingData} instance
+     * @return {@link BookingData} instance
      */
-    public PartialBookingData partialBookingBuilder () {
-        return PartialBookingData.builder ()
-            .firstname (this.faker.name ()
+    public static BookingData getPartialBookingData () {
+        return BookingData.builder ()
+            .firstname (FAKER.name ()
                 .firstName ())
-            .totalprice (this.faker.number ()
+            .totalprice (FAKER.number ()
                 .numberBetween (100, 5000))
             .build ();
+    }
+
+    private BookingRequestData () {
+        // Utility Class.
     }
 }
