@@ -48,6 +48,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -122,12 +123,9 @@ public final class ApiActions implements IApiActions {
     @Override
     public ApiResponse execute () {
         LOGGER.traceEntry ();
-        requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<String, String> ()).forEach ((k, v) -> {
-            if (isNotEmpty (v)) {
-                this.addHeader (k, v);
-            }
-        });
-        requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<String, String> ()).forEach (this::pathParam);
+
+        fillMap (requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<> ()), this::addHeader);
+        fillMap (requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<> ()), this::pathParam);
 
         final var responseResult = this.contentType (this.apiRequest.getContentType ())
             .basicAuth (this.apiRequest.getUserName (), this.apiRequest.getPassword ())
@@ -186,6 +184,14 @@ public final class ApiActions implements IApiActions {
         LOGGER.traceEntry ("Parameter : {}", contentType);
         this.mediaType = parse (requireNonNullElse (contentType, JSON).getType ());
         return LOGGER.traceExit (this);
+    }
+
+    private void fillMap (final Map<String, String> map, final BiConsumer<String, String> action) {
+        map.forEach ((k, v) -> {
+            if (isNotEmpty (v)) {
+                action.accept (k, v);
+            }
+        });
     }
 
     private OkHttpClient.Builder getApiBuilder () {
