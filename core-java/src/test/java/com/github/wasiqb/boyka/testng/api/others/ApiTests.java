@@ -24,9 +24,11 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.api.restful.data.BookingRequestData.getBookingData;
 import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.createBooking;
+import static com.github.wasiqb.boyka.testng.api.restful.requests.BookingRequest.getBooking;
 
 import com.github.wasiqb.boyka.enums.RequestMethod;
 import com.github.wasiqb.boyka.exception.FrameworkError;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -36,6 +38,21 @@ import org.testng.annotations.Test;
  * @since 27-Aug-2022
  */
 public class ApiTests {
+    @AfterMethod
+    public void tearDownMethod () {
+        clearSession ();
+    }
+
+    @Test (description = "Test Empty path param")
+    public void testEmptyPathParam () {
+        createSession (API, "test_restfulbooker");
+        final var request = getBooking (null);
+        final var response = withRequest (request).execute ();
+
+        response.verifyStatusCode ()
+            .isEqualTo (200);
+    }
+
     /**
      * Tests invalid config key.
      */
@@ -47,7 +64,6 @@ public class ApiTests {
             .pathParam ("userId", "2")
             .create ();
         withRequest (userRequest).execute ();
-        clearSession ();
     }
 
     @Test
@@ -63,6 +79,5 @@ public class ApiTests {
         final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (500);
-        clearSession ();
     }
 }

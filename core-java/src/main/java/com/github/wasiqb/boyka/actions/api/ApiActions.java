@@ -124,8 +124,8 @@ public final class ApiActions implements IApiActions {
     public ApiResponse execute () {
         LOGGER.traceEntry ();
 
-        fillMap (requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<> ()), this::addHeader);
-        fillMap (requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<> ()), this::pathParam);
+        fillMap (requireNonNullElse (this.apiRequest.getHeaders (), new HashMap<> ()), this::addHeader, true);
+        fillMap (requireNonNullElse (this.apiRequest.getPathParams (), new HashMap<> ()), this::pathParam, false);
 
         final var responseResult = this.contentType (this.apiRequest.getContentType ())
             .basicAuth (this.apiRequest.getUserName (), this.apiRequest.getPassword ())
@@ -186,9 +186,12 @@ public final class ApiActions implements IApiActions {
         return LOGGER.traceExit (this);
     }
 
-    private void fillMap (final Map<String, String> map, final BiConsumer<String, String> action) {
+    private void fillMap (final Map<String, String> map, final BiConsumer<String, String> action,
+        final boolean skipOnEmpty) {
         map.forEach ((k, v) -> {
-            if (isNotEmpty (v)) {
+            if (!skipOnEmpty) {
+                action.accept (k, isNotEmpty (v) ? v : EMPTY);
+            } else if (isNotEmpty (v)) {
                 action.accept (k, v);
             }
         });
