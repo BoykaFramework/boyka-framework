@@ -20,7 +20,7 @@ IFingersActions fingersActions = FingersActions.withFingers (locator);
 This method will zoom in on an element, i.e: one finger will move from the center of the element to the left direction and other finger will move from the center of the element to th right direction.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.FingersActions.withFingers;
+import static io.github.boykaframework.actions.elements.FingersActions.withFingers;
 . . .
 withFingers (imageElement).zoomIn ();
 ```
@@ -30,7 +30,7 @@ withFingers (imageElement).zoomIn ();
 This method will zoom out from an element, i.e: one finger will move from the left edge of the element to the center and other finger will move from the right edge of the element to th center.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.FingersActions.withFingers;
+import static io.github.boykaframework.actions.elements.FingersActions.withFingers;
 . . .
 withFingers (imageElement).zoomOut ();
 ```

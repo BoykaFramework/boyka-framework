@@ -20,7 +20,7 @@ IClickableActions mouseActions = ClickableActions.withMouse ();
 This method is used to click on the given element if it's a Web application or will perform `tap` action if the element is on Mobile. It will also scroll the element into view before clicking on it (in Web application)
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 . . .
 withMouse (locator).click ();
 ```
@@ -30,7 +30,7 @@ withMouse (locator).click ();
 This method is used to double click on the given element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 . . .
 withMouse (locator).doubleClick ();
 ```
@@ -40,7 +40,7 @@ withMouse (locator).doubleClick ();
 This method is used to right click on the given element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 . . .
 withMouse (locator).rightClick ();
 ```
@@ -50,7 +50,7 @@ withMouse (locator).rightClick ();
 This method is used to click and hold on the given element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 . . .
 withMouse (locator).clickAndHold ();
 ```
@@ -60,7 +60,7 @@ withMouse (locator).clickAndHold ();
 This method is used to drag source element and drop it on the target element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 . . .
 Locator source = // source element to drag
 Locator target = // target element to drag the source to
@@ -72,7 +72,7 @@ withMouse (source).dragTo (target);
 This method is used to hover on the given element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 . . .
 withMouse (locator).hover ();
 ```
@@ -82,7 +82,7 @@ withMouse (locator).hover ();
 This method is used to submit the given element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 . . .
 withMouse (locator).submit ();
 ```

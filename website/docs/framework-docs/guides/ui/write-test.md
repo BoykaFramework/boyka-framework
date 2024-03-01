@@ -31,17 +31,17 @@ Check out all the available static methods to interact with the page in your tes
 ## Example
 
 ```java
-package com.github.wasiqb.boyka.testng.ui.saucedemo;
+package io.github.boykaframework.testng.ui.saucedemo;
 
-import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
-import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
-import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.manager.ParallelSession.clearSession;
+import static io.github.boykaframework.manager.ParallelSession.createSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
 
-import com.github.wasiqb.boyka.enums.PlatformType;
-import com.github.wasiqb.boyka.testng.ui.saucedemo.actions.SauceDemoActions;
+import io.github.boykaframework.enums.PlatformType;
+import io.github.boykaframework.testng.ui.saucedemo.actions.SauceDemoActions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;

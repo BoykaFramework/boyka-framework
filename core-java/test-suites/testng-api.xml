@@ -18,11 +18,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Framework API Suite" verbose="2" parallel="classes">
     <listeners>
-        <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
+        <listener class-name="listeners.testng.io.github.boykaframework.TestResultListener"/>
     </listeners>
     <test name="Test Rest API">
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.api.restful.RestfulBookerEndToEndTests">
+            <class name="io.github.boykaframework.testng.api.restful.RestfulBookerEndToEndTests">
                 <methods>
                     <include name="testCreateBooking"/>
                     <include name="testGetBooking"/>
@@ -33,14 +33,14 @@
                     <include name="testJsonSchemaFileException"/>
                 </methods>
             </class>
-            <class name="com.github.wasiqb.boyka.testng.api.postman.ApiPostmanTest">
+            <class name="io.github.boykaframework.testng.api.postman.ApiPostmanTest">
                 <methods>
                     <include name="testFormBodyRequest"/>
                 </methods>
             </class>
-            <class name="com.github.wasiqb.boyka.testng.api.restful.DataDrivenBookingTest"/>
-            <class name="com.github.wasiqb.boyka.testng.api.ssl.ApiSecurityTest"/>
-            <class name="com.github.wasiqb.boyka.testng.api.others.ApiTests"/>
+            <class name="io.github.boykaframework.testng.api.restful.DataDrivenBookingTest"/>
+            <class name="io.github.boykaframework.testng.api.ssl.ApiSecurityTest"/>
+            <class name="io.github.boykaframework.testng.api.others.ApiTests"/>
         </classes>
     </test>
 </suite>

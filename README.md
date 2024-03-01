@@ -25,8 +25,8 @@
   <a href="https://github.com/BoykaFramework/boyka-framework/commits/main">
     <img src="https://img.shields.io/github/last-commit/BoykaFramework/boyka-framework?style=for-the-badge" alt="last update" />
   </a>
-  <a href="https://mvnrepository.com/artifact/com.github.wasiqb.boyka/boyka-framework">
-    <img src="https://img.shields.io/maven-central/v/com.github.wasiqb.boyka/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
+  <a href="https://mvnrepository.com/artifact/io.github.boykaframework/boyka-framework">
+    <img src="https://img.shields.io/maven-central/v/io.github.boykaframework/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.22.0">
     <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.22.0/total?color=brightgreen&label=Downloads%20for%20v0.22.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
@@ -88,7 +88,7 @@ Use this space to tell a little more about your project and how it can be used. 
 
 ```xml
 <dependency>
-  <groupId>com.github.wasiqb.boyka</groupId>
+  <groupId>io.github.boykaframework</groupId>
   <artifactId>boyka-framework</artifactId>
   <version>0.22.0</version>
 </dependency>
@@ -103,7 +103,7 @@ This is the configuration file for Boyka Framework named `boyka-config.json` sto
 
 ```json
 {
-  "listeners_package": "com.github.wasiqb.boyka.testng.listeners",
+  "listeners_package": "io.github.boykaframework.testng.listeners",
   "ui": {
     "timeout": {
       "implicit_wait": 10,
@@ -417,10 +417,10 @@ Add your response schema JSON files at the directory mentioned in config under `
 Here's how you can execute the API test and also verify its response.
 
 ```java
-import static com.github.wasiqb.boyka.actions.api.ApiActions.withRequest;
-import static com.github.wasiqb.boyka.enums.PlatformType.API;
-import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
-import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static io.github.boykaframework.actions.api.ApiActions.withRequest;
+import static io.github.boykaframework.enums.PlatformType.API;
+import static io.github.boykaframework.manager.ParallelSession.createSession;
+import static io.github.boykaframework.manager.ParallelSession.clearSession;
 . . .
 // Create request body object
 final User user = User.createUser ()
@@ -473,7 +473,7 @@ This is how you can create a common page object for all Web, Android and iOS.
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 
-import com.github.wasiqb.boyka.builders.Locator;
+import io.github.boykaframework.builders.Locator;
 import lombok.Getter;
 
 @Getter
@@ -517,17 +517,17 @@ public class LoginPage {
 This is how you can write common actions class for Web, Android and iOS together for the app which has similar flows on both the platforms.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
-import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
-import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
-import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
-import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
-import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
+import static io.github.boykaframework.enums.PlatformType.WEB;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.testng.ui.saucedemo.pages.LoginPage.loginPage;
 import static java.text.MessageFormat.format;
 
-import com.github.wasiqb.boyka.enums.PlatformType;
+import io.github.boykaframework.enums.PlatformType;
 
 public class SauceDemoActions {
   private static final String URL = "https://www.saucedemo.com";
@@ -572,17 +572,17 @@ public class SauceDemoActions {
 Now, you can use this actions class in your test as shown below:
 
 ```java
-package com.github.wasiqb.boyka.testng.ui.saucedemo;
+package io.github.boykaframework.testng.ui.saucedemo;
 
-import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
-import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
-import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.manager.ParallelSession.clearSession;
+import static io.github.boykaframework.manager.ParallelSession.createSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static com.google.common.truth.Truth.assertThat;
 
-import com.github.wasiqb.boyka.enums.PlatformType;
-import com.github.wasiqb.boyka.testng.ui.saucedemo.actions.SauceDemoActions;
+import io.github.boykaframework.enums.PlatformType;
+import io.github.boykaframework.testng.ui.saucedemo.actions.SauceDemoActions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;

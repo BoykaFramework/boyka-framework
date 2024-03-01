@@ -10,7 +10,7 @@ In Boyka, we have decoupled the page object from the `WebDriver` class. This is 
 In the following example, I've used Lombok `@Getter` to auto-generate getters for all the declared locators.
 
 ```java
-import com.github.wasiqb.boyka.builders.Locator;
+import io.github.boykaframework.builders.Locator;
 import lombok.Getter;
 
 @Getter

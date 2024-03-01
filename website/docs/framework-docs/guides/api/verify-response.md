@@ -6,7 +6,7 @@ title: ✅ Verify Response
 Once the `ApiResponse` object is returned from the `withRequest` method, it can be used to verify that the response is valid.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static io.github.boykaframework.manager.ParallelSession.clearSession;
 
 // Execute request.
 final ApiResponse response = ApiManager.execute (request);

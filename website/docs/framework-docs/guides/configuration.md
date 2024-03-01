@@ -25,7 +25,7 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
 
 ```json title="boyka-config.json"
 {
-  "listeners_package": "com.github.wasiqb.boyka.testng.listeners",
+  "listeners_package": "io.github.boykaframework.testng.listeners",
   "ui": {
     "timeout": {
       "implicit_wait": 10,

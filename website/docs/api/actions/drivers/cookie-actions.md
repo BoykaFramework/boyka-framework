@@ -20,7 +20,7 @@ ICookieActions cookiesActions = CookieActions.withCookies ();
 This method will get the cookie from the browser based on it's name.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.CookieActions.withCookies;
+import static io.github.boykaframework.actions.drivers.CookieActions.withCookies;
 import org.openqa.selenium.Cookie;
 . . .
 Cookie c = withCookies ().cookie ("cookie-name");
@@ -31,7 +31,7 @@ Cookie c = withCookies ().cookie ("cookie-name");
 This method will get all the cookie from the browser and return all the cookie names as list.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.CookieActions.withCookies;
+import static io.github.boykaframework.actions.drivers.CookieActions.withCookies;
 . . .
 List<String> cookieNames = withCookies ().cookies ();
 ```
@@ -41,7 +41,7 @@ List<String> cookieNames = withCookies ().cookies ();
 This method will delete all the cookies from the browser.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.CookieActions.withCookies;
+import static io.github.boykaframework.actions.drivers.CookieActions.withCookies;
 . . .
 withCookies ().deleteAll ();
 ```
@@ -51,7 +51,7 @@ withCookies ().deleteAll ();
 This method will delete the cookie from the browser based on it's name.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.CookieActions.withCookies;
+import static io.github.boykaframework.actions.drivers.CookieActions.withCookies;
 . . .
 withCookies ().delete ("cookie-name");
 ```

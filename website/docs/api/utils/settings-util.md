@@ -8,7 +8,7 @@ sidebar_position: 3
 This method is used to load the `boyka-config.json` file.
 
 ```java
-import static com.github.wasiqb.boyka.utils.SettingUtils.loadSetting;
+import static io.github.boykaframework.utils.SettingUtils.loadSetting;
 . . .
 loadSetting ();
 ```

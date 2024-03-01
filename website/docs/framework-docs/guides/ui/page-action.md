@@ -8,17 +8,17 @@ Since we have a common page object for all the three platforms (i.e.: Web. Andro
 Let's check out the following action class example below for our `LoginPage` class we created:
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
-import static com.github.wasiqb.boyka.actions.elements.ElementActions.onElement;
-import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
-import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
-import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
-import static com.github.wasiqb.boyka.testng.ui.saucedemo.pages.LoginPage.loginPage;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
+import static io.github.boykaframework.enums.PlatformType.WEB;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.testng.ui.saucedemo.pages.LoginPage.loginPage;
 import static java.text.MessageFormat.format;
 
-import com.github.wasiqb.boyka.enums.PlatformType;
+import io.github.boykaframework.enums.PlatformType;
 
 public class SauceDemoActions {
   private static final String URL = "https://www.saucedemo.com";

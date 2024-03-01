@@ -32,7 +32,7 @@
     </profiles>
     <servers>
         <server>
-            <id>ossrh</id>
+            <id>central</id>
             <username>${env.NEXUS_USERNAME}</username>
             <password>${env.NEXUS_PASSWORD}</password>
         </server>

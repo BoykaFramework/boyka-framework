@@ -18,23 +18,23 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Framework Local Grid Web Suite" verbose="2" parallel="tests">
     <listeners>
-        <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
+        <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
     <test name="Test web on Selenium Grid Browser">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_selenium_grid"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.saucedemo.SauceDemoTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.AlertsTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.CheckboxTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.ContextMenuTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.DoubleClickTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.DragDropTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.DropDownTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.FileUploadTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.FramesTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.HoverTest"/>
-            <class name="com.github.wasiqb.boyka.testng.ui.theinternet.WindowTest"/>
+            <class name="io.github.boykaframework.testng.ui.saucedemo.SauceDemoTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.AlertsTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.CheckboxTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.ContextMenuTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.DoubleClickTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.DragDropTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.DropDownTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.FileUploadTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.FramesTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.HoverTest"/>
+            <class name="io.github.boykaframework.testng.ui.theinternet.WindowTest"/>
         </classes>
     </test>
 </suite>

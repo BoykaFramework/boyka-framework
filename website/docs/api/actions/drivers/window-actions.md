@@ -20,7 +20,7 @@ IWindowActions windowActions = WindowActions.onWindow ();
 This method will close the open browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().close ();
 ```
@@ -30,7 +30,7 @@ onWindow ().close ();
 This method returns the current window handle.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 String handle = onWindow ().currentHandle ();
 ```
@@ -40,7 +40,7 @@ String handle = onWindow ().currentHandle ();
 This method will on-demand do full screen on the browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().fullScreen ();
 ```
@@ -50,7 +50,7 @@ onWindow ().fullScreen ();
 This method will maximize the browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().maximize ();
 ```
@@ -60,7 +60,7 @@ onWindow ().maximize ();
 This method will minimize the browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().minimize ();
 ```
@@ -70,7 +70,7 @@ onWindow ().minimize ();
 This method will switch to the first window after you close any of the other opened windows.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().switchToDefault ();
 ```
@@ -80,7 +80,7 @@ onWindow ().switchToDefault ();
 This method is used to switch to new window of given type.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import org.openqa.selenium.WindowType;
 . . .
 onWindow ().switchToNew (WindowType.TAB);
@@ -91,7 +91,7 @@ onWindow ().switchToNew (WindowType.TAB);
 This method is used to switch to window of given handle.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().switchTo ("window-handle");
 ```
@@ -101,7 +101,7 @@ onWindow ().switchTo ("window-handle");
 This method will take the screenshot of the current page and save it at the path configured in `boyka-config.json`.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().takeScreenshot ();
 ```
@@ -111,7 +111,7 @@ onWindow ().takeScreenshot ();
 This method will take the screenshot of the current page and save it at the path mentioned in the parameter.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().takeScreenshot ("path/to/screenshot.png");
 ```
@@ -121,7 +121,7 @@ onWindow ().takeScreenshot ("path/to/screenshot.png");
 This method will get the title of the browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 System.out.println (onWindow ().getTitle ());
 ```
@@ -131,7 +131,7 @@ System.out.println (onWindow ().getTitle ());
 This method will the size dimension of the screen viewport for Mobile screen or Browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import org.openqa.selenium.Dimension;
 . . .
 Dimension size = onWindow ().viewportSize ();
@@ -142,7 +142,7 @@ Dimension size = onWindow ().viewportSize ();
 This method will get the list of all open window handles.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 List<String> handles = onWindow ().handles ();
 ```
@@ -152,7 +152,7 @@ List<String> handles = onWindow ().handles ();
 This method is used to verify the browser title.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 . . .
 onWindow ().verifyTitle (title).isEqualTo ("Swag Labs");
 ```

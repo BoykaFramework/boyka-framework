@@ -1,0 +1,98 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2024, Wasiq Bhamla
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+package io.github.boykaframework.actions.drivers;
+
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static java.util.Collections.emptyList;
+import static java.util.Optional.ofNullable;
+import static org.apache.logging.log4j.LogManager.getLogger;
+
+import java.util.List;
+
+import io.github.boykaframework.actions.CommonActions;
+import io.github.boykaframework.actions.interfaces.drivers.ICookieActions;
+import io.github.boykaframework.actions.interfaces.listeners.drivers.ICookieActionsListener;
+import io.github.boykaframework.enums.ListenerType;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Cookie;
+
+/**
+ * Class with all methods to handle cookies
+ *
+ * @author Wasiq Bhamla
+ * @since 16-Feb-2023
+ */
+public class CookieActions implements ICookieActions {
+    private static final ICookieActions COOKIE_ACTIONS = new CookieActions ();
+    private static final Logger         LOGGER         = getLogger ();
+
+    /**
+     * Handles all cookies related actions
+     *
+     * @return {@link ICookieActions} instance object
+     */
+    public static ICookieActions withCookies () {
+        return COOKIE_ACTIONS;
+    }
+
+    private final ICookieActionsListener listener;
+
+    private CookieActions () {
+        this.listener = getSession ().getListener (ListenerType.COOKIE_ACTION);
+    }
+
+    @Override
+    public Cookie cookie (final String name) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Get Cookie named [{}]...", name);
+        ofNullable (this.listener).ifPresent (l -> l.onCookie (name));
+        return CommonActions.getDriverAttribute (driver -> driver.manage ()
+            .getCookieNamed (name), null);
+    }
+
+    @Override
+    public List<String> cookies () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting all the cookies...");
+        ofNullable (this.listener).ifPresent (ICookieActionsListener::onCookies);
+        return CommonActions.getDriverAttribute (driver -> driver.manage ()
+            .getCookies ()
+            .stream ()
+            .map (Cookie::getName)
+            .toList (), emptyList ());
+    }
+
+    @Override
+    public void delete (final String name) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Delete Cookie named [{}]...", name);
+        ofNullable (this.listener).ifPresent (l -> l.onDelete (name));
+        CommonActions.performDriverAction (driver -> driver.manage ()
+            .deleteCookieNamed (name));
+        LOGGER.traceExit ();
+    }
+
+    @Override
+    public void deleteAll () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Deleting all the cookies...");
+        ofNullable (this.listener).ifPresent (ICookieActionsListener::onDeleteAll);
+        CommonActions.performDriverAction (driver -> driver.manage ()
+            .deleteAllCookies ());
+        LOGGER.traceExit ();
+    }
+}

@@ -28,7 +28,7 @@ IFingerActions fingerActions = FingerActions.withFinger ();
 This method will swipe on the screen / element, i.e: finger will move from center of the screen to mentioned direction of the screen / element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
+import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
 . . .
 withFinger (sourceElement).swipe (SwipeDirection.UP);
 ```
@@ -38,7 +38,7 @@ withFinger (sourceElement).swipe (SwipeDirection.UP);
 This method will drag the source element to the target element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
+import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
 . . .
 Locator source = // source element to drag
 Locator target = // target element to drag the source to
@@ -50,7 +50,7 @@ withFinger (source).dragTo (target);
 This method will swipe left on the screen, i.e: finger will move from center of the screen to left of the screen.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.FingerActions.withFinger;
+import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
 . . .
 withFinger (sourceElement).swipeTill (SwipeDirection.UP);
 ```

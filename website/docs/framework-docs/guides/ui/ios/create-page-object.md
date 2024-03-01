@@ -11,7 +11,7 @@ In the following example, I have used the [same page object](/docs/guides/ui/and
 import static io.appium.java_client.AppiumBy.accessibilityId;
 import static org.openqa.selenium.By.id;
 
-import com.github.wasiqb.boyka.builders.Locator;
+import io.github.boykaframework.builders.Locator;
 import lombok.Getter;
 
 @Getter

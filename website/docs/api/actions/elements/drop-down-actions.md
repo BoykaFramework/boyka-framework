@@ -20,7 +20,7 @@ IDropDownActions dropDownActions = DropDownActions.onDropDown ();
 This method will deselect all the options of the given multi-select element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (multiSelectLocator).deselectAll ();
 ```
@@ -30,7 +30,7 @@ onDropDown (multiSelectLocator).deselectAll ();
 This method will deselect the option of the given dropdown / multi-select element by the given index.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (dropdownLocator).deselectByIndex (1);
 ```
@@ -40,7 +40,7 @@ onDropDown (dropdownLocator).deselectByIndex (1);
 This method will deselect the option of the given dropdown / multi-select element by the given text.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (dropdownLocator).deselectByText ("Option 1");
 ```
@@ -50,7 +50,7 @@ onDropDown (dropdownLocator).deselectByText ("Option 1");
 This method will deselect the option of the given dropdown / multi-select element by the given value.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (dropdownLocator).deselectByValue ("val1");
 ```
@@ -60,7 +60,7 @@ onDropDown (dropdownLocator).deselectByValue ("val1");
 This method will select the option of the given dropdown / multi-select element by the given index.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (dropdownLocator).selectByIndex (2);
 ```
@@ -70,7 +70,7 @@ onDropDown (dropdownLocator).selectByIndex (2);
 This method will select the option of the given dropdown / multi-select element by the given text.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (dropdownLocator).selectByText ("Option 2");
 ```
@@ -80,7 +80,7 @@ onDropDown (dropdownLocator).selectByText ("Option 2");
 This method will select the option of the given dropdown / multi-select element by the given value.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (dropdownLocator).selectByValue ("value-2");
 ```
@@ -90,7 +90,7 @@ onDropDown (dropdownLocator).selectByValue ("value-2");
 This method will return the selected item text of the given dropdown / multi-select element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 String itemText = onDropDown (dropdownLocator).selectedItem ();
 ```
@@ -100,7 +100,7 @@ String itemText = onDropDown (dropdownLocator).selectedItem ();
 This method will return the list of selected item texts of the given multi-select element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 List<String> itemTexts = onDropDown (dropdownLocator).selectedItems (dropdownLocator);
 ```
@@ -110,7 +110,7 @@ List<String> itemTexts = onDropDown (dropdownLocator).selectedItems (dropdownLoc
 This method will verify the selected item from the drop down.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (dropdownLocator).verifySelectedItem ().isEqualTo ("Batman");
 ```
@@ -120,7 +120,7 @@ onDropDown (dropdownLocator).verifySelectedItem ().isEqualTo ("Batman");
 This method will verify the list of selected items from the drop down.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 . . .
 onDropDown (dropdownLocator).verifySelectedItems ().containsExactly ("The Avengers", "Batman", "Black Panther");
 ```

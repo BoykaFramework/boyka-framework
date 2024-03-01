@@ -20,7 +20,7 @@ IDeviceActions deviceActions = DeviceActions.onDevice ();
 This method is used to determine if the Mobile keyboard is visible.
 
 ```java
-import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
 . . .
 var isKeyboardDisplayed = onDevice ().isKeyboardVisible ();
 ```
@@ -30,7 +30,7 @@ var isKeyboardDisplayed = onDevice ().isKeyboardVisible ();
 This method is used to hide the keyboard on the mobile.
 
 ```java
-import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
 . . .
 onDevice ().hideKeyboard ();
 ```
@@ -40,7 +40,7 @@ onDevice ().hideKeyboard ();
 This method is used to start video recording for Mobile tests.
 
 ```java
-import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
 . . .
 onDevice ().startRecording ();
 ```
@@ -50,7 +50,7 @@ onDevice ().startRecording ();
 This method is used to stop video recording for Mobile tests.
 
 ```java
-import static com.github.wasiqb.boyka.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
 . . .
 onDevice ().stopRecording ();
 ```

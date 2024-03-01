@@ -9,7 +9,7 @@ slug: /sessions/driver-session
 This method will clear all the listeners for the session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 getSession ().clearListeners ();
 ```
@@ -19,7 +19,7 @@ getSession ().clearListeners ();
 This method will clear all the shared data for the session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 getSession ().clearSharedData ();
 ```
@@ -29,7 +29,7 @@ getSession ().clearSharedData ();
 This method gets the API settings for the current session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 var apiSetting = getSession ().getApiSetting ();
 ```
@@ -47,7 +47,7 @@ This method is for internal use only.
 This method gets the Mobile settings for the current session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 var mobileSetting = getSession ().getMobileSetting ();
 ```
@@ -57,7 +57,7 @@ var mobileSetting = getSession ().getMobileSetting ();
 This method gets the shared data for the current session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 var mobileSetting = getSession ().getSharedData ("sample.key");
 ```
@@ -67,7 +67,7 @@ var mobileSetting = getSession ().getSharedData ("sample.key");
 This method gets the Web settings for the current session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 var webSetting = getSession ().getWebSetting ();
 ```
@@ -77,7 +77,7 @@ var webSetting = getSession ().getWebSetting ();
 This method removes the shared data for a particular key for the current session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 var value = getSession ().removeSharedData ("some.key");
 ```
@@ -87,7 +87,7 @@ var value = getSession ().removeSharedData ("some.key");
 This method sets the shared data for a particular key for the current session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 getSession ().setSharedData ("some.key", "some value");
 ```
