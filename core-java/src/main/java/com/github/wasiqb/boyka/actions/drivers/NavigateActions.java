@@ -22,7 +22,7 @@ import static com.github.wasiqb.boyka.enums.ListenerType.NAVIGATE_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.BASE_URL_EMPTY;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonEmpty;
-import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -119,6 +119,6 @@ public class NavigateActions implements INavigateActions {
         LOGGER.info ("Verifying browser url");
         ofNullable (this.listener).ifPresent (INavigateActionsListener::onVerifyUrl);
         LOGGER.traceExit ();
-        return assertThat (getUrl ());
+        return assertWithMessage ("URL").that (getUrl ());
     }
 }

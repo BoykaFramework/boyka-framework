@@ -19,7 +19,7 @@ package com.github.wasiqb.boyka.actions.drivers;
 import static com.github.wasiqb.boyka.actions.CommonActions.getDriverAttribute;
 import static com.github.wasiqb.boyka.enums.ListenerType.ALERT_ACTION;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
-import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -100,7 +100,7 @@ public class AlertActions implements IAlertActions {
         LOGGER.info ("Verifying accept alert");
         LOGGER.traceExit ();
         ofNullable (this.listener).ifPresent (IAlertActionsListener::onVerifyAccept);
-        return assertThat (accept ());
+        return assertWithMessage ("Accepted Alert").that (accept ());
     }
 
     @Override
@@ -109,7 +109,7 @@ public class AlertActions implements IAlertActions {
         LOGGER.info ("Verifying accept prompt");
         LOGGER.traceExit ();
         ofNullable (this.listener).ifPresent (l -> l.onVerifyAccept (text));
-        return assertThat (accept (text));
+        return assertWithMessage ("Accepted Alert Prompt").that (accept (text));
     }
 
     @Override
@@ -118,6 +118,6 @@ public class AlertActions implements IAlertActions {
         LOGGER.info ("Verifying alert message and dismissing the alert");
         LOGGER.traceExit ();
         ofNullable (this.listener).ifPresent (IAlertActionsListener::onVerifyDismiss);
-        return assertThat (dismiss ());
+        return assertWithMessage ("Dismissed Alert").that (dismiss ());
     }
 }

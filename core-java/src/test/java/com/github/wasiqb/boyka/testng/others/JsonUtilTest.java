@@ -17,7 +17,7 @@
 package com.github.wasiqb.boyka.testng.others;
 
 import static com.github.wasiqb.boyka.utils.JsonUtil.fromFile;
-import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static java.lang.System.getProperty;
 
 import java.nio.file.Path;
@@ -47,6 +47,7 @@ public class JsonUtilTest {
      */
     @Test
     public void testToString () {
-        assertThat (JsonUtil.toString ("Created")).isEqualTo ("Created");
+        assertWithMessage ("JsonUtil").that (JsonUtil.toString ("Created"))
+            .isEqualTo ("Created");
     }
 }

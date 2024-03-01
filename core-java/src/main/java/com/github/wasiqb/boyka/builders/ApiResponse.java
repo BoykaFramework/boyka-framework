@@ -22,7 +22,6 @@ import static com.github.wasiqb.boyka.enums.Message.NO_BODY_TO_PARSE;
 import static com.github.wasiqb.boyka.enums.Message.RESPONSE_SCHEMA_NOT_MATCHING;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
-import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static com.jayway.jsonpath.JsonPath.compile;
 import static com.jayway.jsonpath.JsonPath.parse;
@@ -109,7 +108,7 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying boolean field for expression: {}", expression);
         LOGGER.traceExit ();
-        return assertThat (getResponseData (expression, Boolean.class));
+        return assertWithMessage (expression).that (getResponseData (expression, Boolean.class));
     }
 
     /**
@@ -126,7 +125,7 @@ public class ApiResponse {
         if (!getHeaders ().containsKey (key)) {
             throwError (INVALID_HEADER_KEY, key);
         }
-        return assertThat (getHeaders ().get (key));
+        return assertWithMessage (key).that (getHeaders ().get (key));
     }
 
     /**
@@ -140,7 +139,7 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying integer field for expression: {}", expression);
         LOGGER.traceExit ();
-        return assertThat (getResponseData (expression, Integer.class));
+        return assertWithMessage (expression).that (getResponseData (expression, Integer.class));
     }
 
     /**
@@ -179,7 +178,7 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying Status Code");
         LOGGER.traceExit ();
-        return assertThat (getStatusCode ());
+        return assertWithMessage ("Status Code").that (getStatusCode ());
     }
 
     /**
@@ -191,7 +190,7 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying Status Message");
         LOGGER.traceExit ();
-        return assertThat (getStatusMessage ());
+        return assertWithMessage ("Status Message").that (getStatusMessage ());
     }
 
     /**
@@ -205,7 +204,7 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying text field for expression: {}", expression);
         LOGGER.traceExit ();
-        return assertThat (getResponseData (expression));
+        return assertWithMessage (expression).that (getResponseData (expression));
     }
 
     private DocumentContext jsonPath () {

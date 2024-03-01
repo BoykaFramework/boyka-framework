@@ -24,7 +24,7 @@ import static com.github.wasiqb.boyka.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.handleAndThrow;
 import static com.github.wasiqb.boyka.utils.Validator.requireNonNull;
-import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -220,7 +220,7 @@ public class WindowActions implements IWindowActions {
         LOGGER.info ("Verifying browser title...");
         ofNullable (this.listener).ifPresent (IWindowActionsListener::onVerifyTitle);
         LOGGER.traceExit ();
-        return assertThat (getTitle ());
+        return assertWithMessage ("Title").that (getTitle ());
     }
 
     @Override
