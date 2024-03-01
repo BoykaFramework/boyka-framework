@@ -22,7 +22,7 @@ import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
 import static com.github.wasiqb.boyka.enums.ListenerType.ELEMENT_ACTION;
 import static com.github.wasiqb.boyka.enums.PlatformType.WEB;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
-import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -142,7 +142,7 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Verifying attribute of {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onVerifyAttribute (this.locator, attribute));
         LOGGER.traceExit ();
-        return assertThat (getAttribute (attribute));
+        return assertWithMessage (attribute).that (getAttribute (attribute));
     }
 
     @Override
@@ -151,7 +151,7 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Verifying element {} is displayed", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onVerifyIsDisplayed (this.locator));
         LOGGER.traceExit ();
-        return assertThat (isDisplayed ());
+        return assertWithMessage ("Displayed").that (isDisplayed ());
     }
 
     @Override
@@ -160,7 +160,7 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Verifying element {} is enabled", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onVerifyIsEnabled (this.locator));
         LOGGER.traceExit ();
-        return assertThat (isEnabled ());
+        return assertWithMessage ("Enabled").that (isEnabled ());
     }
 
     @Override
@@ -169,7 +169,7 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Verifying element {} is selected", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onVerifyIsSelected (this.locator));
         LOGGER.traceExit ();
-        return assertThat (isSelected ());
+        return assertWithMessage ("Selected").that (isSelected ());
     }
 
     @Override
@@ -178,7 +178,7 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Verifying style of {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onVerifyStyle (this.locator, styleName));
         LOGGER.traceExit ();
-        return assertThat (getStyle (styleName));
+        return assertWithMessage (styleName).that (getStyle (styleName));
     }
 
     @Override
@@ -187,6 +187,6 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Verifying text of {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onVerifyText (this.locator));
         LOGGER.traceExit ();
-        return assertThat (getText ().trim ());
+        return assertWithMessage ("Text").that (getText ().trim ());
     }
 }

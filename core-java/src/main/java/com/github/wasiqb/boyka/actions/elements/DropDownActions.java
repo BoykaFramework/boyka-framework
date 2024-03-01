@@ -22,7 +22,7 @@ import static com.github.wasiqb.boyka.enums.ListenerType.DROP_DOWN_ACTION;
 import static com.github.wasiqb.boyka.enums.Message.ERROR_DESELECT_FROM_DROPDOWN;
 import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
 import static com.github.wasiqb.boyka.utils.ErrorHandler.throwError;
-import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -199,13 +199,13 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
     public StringSubject verifySelectedItem () {
         LOGGER.info ("Verifying the selected item...");
         ofNullable (this.listener).ifPresent (l -> l.onVerifySelectedItem (this.locator));
-        return assertThat (selectedItem ());
+        return assertWithMessage ("Selected Item").that (selectedItem ());
     }
 
     @Override
     public IterableSubject verifySelectedItems () {
         LOGGER.info ("Verifying the selected items...");
         ofNullable (this.listener).ifPresent (l -> l.onVerifySelectedItems (this.locator));
-        return assertThat (selectedItems ());
+        return assertWithMessage ("Selected Items").that (selectedItems ());
     }
 }

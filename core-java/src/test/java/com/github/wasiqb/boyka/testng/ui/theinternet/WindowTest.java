@@ -26,7 +26,7 @@ import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.MultiWindowPage.multiWindowPage;
-import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static java.text.MessageFormat.format;
 import static org.openqa.selenium.WindowType.TAB;
 import static org.openqa.selenium.support.ui.ExpectedConditions.urlMatches;
@@ -127,7 +127,8 @@ public class WindowTest {
             .stream ()
             .filter (handle -> !handle.equals (currentWindow))
             .findFirst ();
-        assertThat (newWindow.isPresent ()).isTrue ();
+        assertWithMessage ("Window").that (newWindow.isPresent ())
+            .isTrue ();
         onWindow ().switchTo (newWindow.get ());
         withDriver ().waitUntil (urlMatches (format ("{0}windows/new", URL)));
         navigate ().verifyUrl ()

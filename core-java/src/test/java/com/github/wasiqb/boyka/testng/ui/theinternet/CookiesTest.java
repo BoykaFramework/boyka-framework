@@ -23,7 +23,7 @@ import static com.github.wasiqb.boyka.actions.elements.ClickableActions.withMous
 import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
 import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
 import static com.github.wasiqb.boyka.testng.ui.theinternet.pages.HomePage.homePage;
-import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import com.github.wasiqb.boyka.enums.PlatformType;
 import org.testng.annotations.AfterClass;
@@ -69,8 +69,9 @@ public class CookiesTest {
     @Test (description = "Verify delete all cookies", priority = 3)
     public void testDeleteAllCookies () {
         withCookies ().deleteAll ();
-        assertThat (withCookies ().cookies ()
-            .size ()).isEqualTo (0);
+        assertWithMessage ("Cookie size").that (withCookies ().cookies ()
+                .size ())
+            .isEqualTo (0);
     }
 
     /**
@@ -81,8 +82,9 @@ public class CookiesTest {
         final var cookies = withCookies ().cookies ();
         final var cookieCount = cookies.size ();
         withCookies ().delete (cookies.get (0));
-        assertThat (withCookies ().cookies ()
-            .size ()).isEqualTo (cookieCount - 1);
+        assertWithMessage ("Cookie Size").that (withCookies ().cookies ()
+                .size ())
+            .isEqualTo (cookieCount - 1);
     }
 
     /**
@@ -92,7 +94,8 @@ public class CookiesTest {
     public void testGetCookie () {
         final var cookie = withCookies ().cookies ()
             .get (0);
-        assertThat (withCookies ().cookie (cookie)
-            .getName ()).isEqualTo (cookie);
+        assertWithMessage ("Cookie Name").that (withCookies ().cookie (cookie)
+                .getName ())
+            .isEqualTo (cookie);
     }
 }
