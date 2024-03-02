@@ -28,8 +28,8 @@
   <a href="https://mvnrepository.com/artifact/io.github.boykaframework/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/io.github.boykaframework/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.22.0">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.22.0/total?color=brightgreen&label=Downloads%20for%20v0.22.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v0.22.1">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v0.22.1/total?color=brightgreen&label=Downloads%20for%20v0.22.1&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -90,7 +90,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>io.github.boykaframework</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>0.22.0</version>
+  <version>0.22.1</version>
 </dependency>
 ```
 
