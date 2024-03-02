@@ -93,48 +93,10 @@ jobs:
             ${{ github.workspace }}/lerna.json
             ${{ github.workspace }}/website/package.json
 
-  release-snapshot:
-    runs-on: ubuntu-latest
-    needs: prepare
-    if: ${{ needs.prepare.outputs.new-version != null }}
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
-
-      - name: Install Java and Maven
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: 'temurin'
-          cache: 'maven'
-
-      - name: Restore local Maven repository
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ github.sha }}
-
-      - name: Maven command to update snapshot version
-        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare.outputs.new-version }}-SNAPSHOT versions:commit
-
-      - name: Release snapshot to Maven central
-        uses: WasiqB/maven-publish-action@v2
-        with:
-          gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
-          gpg_passphrase: ${{ env.GPG_PASSPHRASE }}
-          nexus_username: ${{ env.NEXUS_USERNAME }}
-          nexus_password: ${{ env.NEXUS_PASSWORD }}
-          maven_profiles: release
-          server_id: ossrh
-          settings_path: ${{ github.workspace }}/core-java/setting/settings.xml
-          directory: ${{ github.workspace }}/core-java
-          maven_args: -DskipTests -Dcheckstyle.skip
-
   release:
     runs-on: ubuntu-latest
     needs:
       - prepare
-      - release-snapshot
 
     steps:
       - name: Check out Git repository
@@ -156,7 +118,7 @@ jobs:
       - name: Maven command to update release version
         run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare.outputs.new-version }} versions:commit
 
-      - name: Release snapshot to Maven central
+      - name: Release package to Maven central
         uses: WasiqB/maven-publish-action@v2
         with:
           gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
@@ -164,7 +126,7 @@ jobs:
           nexus_username: ${{ env.NEXUS_USERNAME }}
           nexus_password: ${{ env.NEXUS_PASSWORD }}
           maven_profiles: release
-          server_id: ossrh
+          server_id: central
           settings_path: ${{ github.workspace }}/core-java/setting/settings.xml
           directory: ${{ github.workspace }}/core-java
           maven_args: -DskipTests -Dcheckstyle.skip
