@@ -18,7 +18,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Framework API Suite" verbose="2" parallel="classes">
     <listeners>
-        <listener class-name="listeners.testng.io.github.boykaframework.TestResultListener"/>
+        <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
     <test name="Test Rest API">
         <classes>
