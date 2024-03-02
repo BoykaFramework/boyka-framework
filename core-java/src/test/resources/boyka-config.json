@@ -1,5 +1,5 @@
 {
-  "listeners_package": "com.github.wasiqb.boyka.testng.listeners",
+  "listeners_package": "io.github.boykaframework.testng.listeners",
   "data": {
     "path": "data/excel"
   },

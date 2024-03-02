@@ -20,7 +20,7 @@ IFrameActions frameActions = FrameActions.onFrame ();
 This method will switch to the given frame by it's name / ID.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.FrameActions.onFrame;
+import static io.github.boykaframework.actions.drivers.FrameActions.onFrame;
 . . .
 onFrame ().switchTo ("frame-name-or-id");
 ```
@@ -34,7 +34,7 @@ In order to come out of this frame, use [`switchToParent`](#switch-to-parent) me
 This method will switch to the given frame by it's index.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.FrameActions.onFrame;
+import static io.github.boykaframework.actions.drivers.FrameActions.onFrame;
 . . .
 onFrame ().switchTo (1);
 ```
@@ -48,7 +48,7 @@ In order to come out of this frame, use [`switchToParent`](#switch-to-parent) me
 This method will switch to the parent frame of the current frame. This method is used to come out of any iframe.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.FrameActions.onFrame;
+import static io.github.boykaframework.actions.drivers.FrameActions.onFrame;
 . . .
 onFrame ().switchToParent ();
 ```

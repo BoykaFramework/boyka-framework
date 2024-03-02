@@ -9,7 +9,7 @@ slug: /sessions/parallel-session
 This method clears all the started sessions.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.clearAllSessions;
+import static io.github.boykaframework.manager.ParallelSession.clearAllSessions;
 . . .
 clearAllSessions ();
 ```
@@ -19,7 +19,7 @@ clearAllSessions ();
 This method clears the current session.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.clearSession;
+import static io.github.boykaframework.manager.ParallelSession.clearSession;
 . . .
 clearSession ();
 ```
@@ -29,7 +29,7 @@ clearSession ();
 This method will create the session for the mentioned persona.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static io.github.boykaframework.manager.ParallelSession.createSession;
 . . .
 createSession (PlatformType.WEB, "test_chrome");
 ```
@@ -39,7 +39,7 @@ createSession (PlatformType.WEB, "test_chrome");
 This method will create the session for the mentioned persona.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static io.github.boykaframework.manager.ParallelSession.createSession;
 . . .
 createSession ("User 1", PlatformType.WEB, "test_chrome");
 ```
@@ -49,7 +49,7 @@ createSession ("User 1", PlatformType.WEB, "test_chrome");
 This method gets the current session persona name.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getCurrentPersona;
+import static io.github.boykaframework.manager.ParallelSession.getCurrentPersona;
 . . .
 var sessionPersona = getCurrentPersona ();
 ```
@@ -59,7 +59,7 @@ var sessionPersona = getCurrentPersona ();
 This method gets the current [Driver session](/api/sessions/driver-session)
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 . . .
 var session = getSession ();
 ```
@@ -69,7 +69,7 @@ var session = getSession ();
 This method will switch the current session context to a different persona. This is best when you are working on multiple user sessions.
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.switchPersona;
+import static io.github.boykaframework.manager.ParallelSession.switchPersona;
 . . .
 switchPersona ("User 2");
 ```

@@ -18,11 +18,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Framework Other Tests Suite" verbose="2" parallel="classes">
     <listeners>
-        <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
+        <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
     <test name="Test other features" group-by-instances="true">
         <packages>
-            <package name="com.github.wasiqb.boyka.testng.others"/>
+            <package name="io.github.boykaframework.testng.others"/>
         </packages>
     </test>
 </suite>

@@ -20,7 +20,7 @@ IAlertActions alertActions = AlertActions.onAlert ();
 This method will enter the text in the prompt, accept the Alert and will return the Alert message.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
+import static io.github.boykaframework.actions.drivers.AlertActions.onAlert;
 . . .
 String message = onAlert ().accept ("some text");
 ```
@@ -30,7 +30,7 @@ String message = onAlert ().accept ("some text");
 This method will accept the Alert and return the Alert message.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
+import static io.github.boykaframework.actions.drivers.AlertActions.onAlert;
 . . .
 String message = onAlert ().accept ();
 ```
@@ -40,7 +40,7 @@ String message = onAlert ().accept ();
 This method will dismiss the Alert and return the Alert message.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
+import static io.github.boykaframework.actions.drivers.AlertActions.onAlert;
 . . .
 String message = onAlert ().dismiss ();
 ```
@@ -50,7 +50,7 @@ String message = onAlert ().dismiss ();
 This method is used to verify the alert message after accepting the alert.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
+import static io.github.boykaframework.actions.drivers.AlertActions.onAlert;
 . . .
 onAlert ().verifyAccept ().isEqualTo ("Swag Labs");
 ```
@@ -60,7 +60,7 @@ onAlert ().verifyAccept ().isEqualTo ("Swag Labs");
 This method is used to verify the alert message after entering the text in the prompt and accepting it.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
+import static io.github.boykaframework.actions.drivers.AlertActions.onAlert;
 . . .
 onAlert ().verifyAccept ("Sample text").isEqualTo ("Swag Labs");
 ```
@@ -70,7 +70,7 @@ onAlert ().verifyAccept ("Sample text").isEqualTo ("Swag Labs");
 This method is used to verify the alert message after dismissing the alert.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.AlertActions.onAlert;
+import static io.github.boykaframework.actions.drivers.AlertActions.onAlert;
 . . .
 onAlert ().verifyDismiss ().isEqualTo ("Swag Labs");
 ```

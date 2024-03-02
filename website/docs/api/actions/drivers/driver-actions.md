@@ -20,7 +20,7 @@ IDriverActions driverActions = DriverActions.withDriver ();
 This method will execute the JS script and returns the result.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 . . .
 String output = withDriver ().executeScript ("alert('Hello World');");
 ```
@@ -30,7 +30,7 @@ String output = withDriver ().executeScript ("alert('Hello World');");
 This method is used to navigate to the given URL.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static java.time.Duration.ofMillis;
 . . .
 withDriver ().pause (ofMillis (100));
@@ -41,7 +41,7 @@ withDriver ().pause (ofMillis (100));
 This method will save all the logs captured by the Driver.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 . . .
 withDriver ().saveLogs ();
 ```
@@ -51,7 +51,7 @@ withDriver ().saveLogs ();
 This method will wait for any given condition to be true. It takes in Selenium WebDrivers `ExpectedCondition<Boolean>` object as parameter.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 . . .
 withDriver ().waitUntil (ExpectedConditions.urlMatches (URL));

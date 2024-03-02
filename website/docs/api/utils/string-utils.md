@@ -8,7 +8,7 @@ sidebar_position: 4
 This method is used to interpolate the given string with the given values or with environment variables / system properties.
 
 ```java
-import static com.github.wasiqb.boyka.utils.StringUtils.interpolate;
+import static io.github.boykaframework.utils.StringUtils.interpolate;
 . . .
 System.out.println (interpolate ("${env:USER_NAME}"));
 

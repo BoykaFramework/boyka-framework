@@ -17,13 +17,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Boyka Framework Local Mobile Suite" verbose="2">
     <listeners>
-        <listener class-name="com.github.wasiqb.boyka.testng.listeners.TestResultListener"/>
+        <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
     <test name="Test Mobile on Local Android Emulator">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_wdio_android"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest">
+            <class name="io.github.boykaframework.testng.ui.wdio.WdioDemoTest">
                 <methods>
                     <include name="testDragDrop" />
                     <include name="testSignUp" />
@@ -36,7 +36,7 @@
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_local_wdio_ios"/>
         <classes>
-            <class name="com.github.wasiqb.boyka.testng.ui.wdio.WdioDemoTest">
+            <class name="io.github.boykaframework.testng.ui.wdio.WdioDemoTest">
                 <methods>
                     <include name="testDragDrop" />
                     <include name="testWebView" />

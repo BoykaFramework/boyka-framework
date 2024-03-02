@@ -20,7 +20,7 @@ IAndroidDeviceActions androidActions = AndroidDeviceActions.onAndroidDevice ();
 This method is used to press Android device keys.
 
 ```java
-import static com.github.wasiqb.boyka.actions.device.AndroidDeviceActions.onAndroidDevice;
+import static io.github.boykaframework.actions.device.AndroidDeviceActions.onAndroidDevice;
 . . .
 onAndroidDevice ().pressKey (AndroidKey.BACK);
 ```

@@ -16,7 +16,7 @@ This class has a builder pattern which allows you to build API requests in a flu
 Let's create an instance of `ApiRequest` and build a request for `POST /api/users` with body:
 
 ```java
-import static com.github.wasiqb.boyka.manager.ParallelSession.createSession;
+import static io.github.boykaframework.manager.ParallelSession.createSession;
 
 // Create API session using the config key.
 createSession (PlatformType.API, "test_reqres");

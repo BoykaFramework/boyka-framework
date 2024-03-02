@@ -20,7 +20,7 @@ INavigateActions navigateActions = NavigateActions.navigate ();
 This method will go back to the previous page.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 . . .
 navigate ().back ();
 ```
@@ -30,7 +30,7 @@ navigate ().back ();
 This method will go forward to the next page.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 . . .
 navigate ().forward ();
 ```
@@ -40,7 +40,7 @@ navigate ().forward ();
 This method will refresh the browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 . . .
 navigate ().refresh ();
 ```
@@ -50,7 +50,7 @@ navigate ().refresh ();
 This method will navigate you to the URL mentioned.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 . . .
 navigate ().to ("https://google.com");
 ```
@@ -60,7 +60,7 @@ navigate ().to ("https://google.com");
 This method will navigate to the base URL mentioned in the config file.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 . . .
 navigate ().toBaseUrl ();
 ```
@@ -70,7 +70,7 @@ navigate ().toBaseUrl ();
 This method will get the URL of the browser window.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 . . .
 System.out.println (navigate ().getUrl ());
 ```
@@ -80,7 +80,7 @@ System.out.println (navigate ().getUrl ());
 This method is used to verify the browser url.
 
 ```java
-import static com.github.wasiqb.boyka.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 . . .
 navigate ().verifyUrl ()
     .isEqualTo ("https://www.swaglabs.com/");

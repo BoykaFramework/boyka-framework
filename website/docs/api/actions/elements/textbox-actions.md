@@ -20,7 +20,7 @@ ITextBoxActions textBoxActions = TextBoxActions.onTextBox (locator);
 This method is used to enter the given text to the given element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 . . .
 onTextBox (locator).enterText (text);
 ```
@@ -30,7 +30,7 @@ onTextBox (locator).enterText (text);
 This method is used to press the given key to the given element.
 
 ```java
-import static com.github.wasiqb.boyka.actions.elements.TextBoxActions.onTextBox;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 . . .
 onTextBox (locator).pressKey (key);
 ```
