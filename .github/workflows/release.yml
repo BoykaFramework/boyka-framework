@@ -128,7 +128,7 @@ jobs:
         run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare.outputs.new-version }} versions:commit
 
       - name: Release package to Maven central
-        uses: WasiqB/maven-publish-action@v2.3.0
+        uses: WasiqB/maven-publish-action@v2.4.0
         with:
           gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
           gpg_passphrase: ${{ env.GPG_PASSPHRASE }}
