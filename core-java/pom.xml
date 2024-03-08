@@ -91,6 +91,21 @@
         <url>https://github.com/BoykaFramework</url>
     </organization>
 
+    <contributors>
+        <contributor>
+            <name>Wasiq Bhamla</name>
+            <email>wasbhamla2005@gmail.com</email>
+            <roles>
+                <role>Project Lead</role>
+                <role>Project Maintainer</role>
+            </roles>
+            <organization>Boyka Framework</organization>
+            <organizationUrl>https://github.com/BoykaFramework</organizationUrl>
+            <timezone>+5</timezone>
+            <url>https://github.com/WasiqB</url>
+        </contributor>
+    </contributors>
+
     <licenses>
         <license>
             <name>MIT License</name>
