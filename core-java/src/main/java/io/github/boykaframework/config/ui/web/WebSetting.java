@@ -52,6 +52,7 @@ public class WebSetting {
     private WindowResizeType    resize     = WindowResizeType.NORMAL;
     private TargetProviders     target;
     private String              userName;
+    private String              version    = "stable";
 
     /**
      * Gets cloud password.

@@ -33,8 +33,8 @@ public class UISetting {
     private LogSetting                 logging    = new LogSetting ();
     private Map<String, MobileSetting> mobile;
     private ScreenshotSetting          screenshot = new ScreenshotSetting ();
-    private TimeoutSetting          timeout    = new TimeoutSetting ();
-    private Map<String, WebSetting> web;
+    private TimeoutSetting             timeout    = new TimeoutSetting ();
+    private Map<String, WebSetting>    web;
 
     /**
      * Get Mobile settings.

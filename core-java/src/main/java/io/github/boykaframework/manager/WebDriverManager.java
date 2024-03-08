@@ -28,6 +28,9 @@ import static io.github.boykaframework.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static io.github.boykaframework.enums.Message.SESSION_NOT_STARTED;
 import static io.github.boykaframework.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
 import static io.github.boykaframework.enums.TargetProviders.LOCAL;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.setDriver;
+import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static io.github.boykaframework.utils.Validator.requireNonNull;
 import static java.text.MessageFormat.format;
@@ -44,7 +47,6 @@ import io.github.boykaframework.actions.drivers.NavigateActions;
 import io.github.boykaframework.config.ui.web.WebSetting;
 import io.github.boykaframework.enums.Browser;
 import io.github.boykaframework.enums.TargetProviders;
-import io.github.boykaframework.utils.ErrorHandler;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
@@ -69,19 +71,18 @@ class WebDriverManager implements IDriverManager {
     @Override
     public void setupDriver () {
         LOGGER.traceEntry ();
-        final var webSetting = ParallelSession.getSession ()
-            .getWebSetting ();
+        final var webSetting = getSession ().getWebSetting ();
         try {
             switch (requireNonNull (webSetting.getBrowser (), EMPTY_BROWSER_NOT_ALLOWED)) {
-                case CHROME -> ParallelSession.setDriver (setupChromeDriver (webSetting));
-                case NONE -> ErrorHandler.throwError (INVALID_BROWSER);
-                case REMOTE -> ParallelSession.setDriver (setupRemoteDriver (webSetting));
-                case SAFARI -> ParallelSession.setDriver (setupSafariDriver (webSetting));
-                case EDGE -> ParallelSession.setDriver (setupEdgeDriver (webSetting));
-                default -> ParallelSession.setDriver (setupFirefoxDriver (webSetting));
+                case CHROME -> setDriver (setupChromeDriver (webSetting));
+                case NONE -> throwError (INVALID_BROWSER);
+                case REMOTE -> setDriver (setupRemoteDriver (webSetting));
+                case SAFARI -> setDriver (setupSafariDriver (webSetting));
+                case EDGE -> setDriver (setupEdgeDriver (webSetting));
+                default -> setDriver (setupFirefoxDriver (webSetting));
             }
         } catch (final SessionNotCreatedException e) {
-            ErrorHandler.handleAndThrow (SESSION_NOT_STARTED, e);
+            handleAndThrow (SESSION_NOT_STARTED, e);
         }
         setDriverSize (webSetting);
         navigateToBaseUrl (webSetting.getBaseUrl ());
@@ -162,7 +163,7 @@ class WebDriverManager implements IDriverManager {
         try {
             return LOGGER.traceExit (new URL (url));
         } catch (final MalformedURLException e) {
-            ErrorHandler.handleAndThrow (INVALID_REMOTE_URL, e);
+            handleAndThrow (INVALID_REMOTE_URL, e);
         }
         return null;
     }
@@ -182,6 +183,7 @@ class WebDriverManager implements IDriverManager {
 
     private <T extends ChromiumOptions<T>> void setCommonBrowserOptions (final T options, final WebSetting webSetting) {
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
+        options.setBrowserVersion (webSetting.getVersion ());
         options.addArguments ("enable-automation");
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
@@ -193,8 +195,7 @@ class WebDriverManager implements IDriverManager {
     }
 
     private void setDriverSize (final WebSetting webSetting) {
-        final var window = ParallelSession.getSession ()
-            .getDriver ()
+        final var window = getSession ().getDriver ()
             .manage ()
             .window ();
         switch (webSetting.getResize ()) {
