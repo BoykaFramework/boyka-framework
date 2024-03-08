@@ -76,6 +76,7 @@
       "test_selenium_grid": {
         "browser": "REMOTE",
         "base_url": "https://the-internet.herokuapp.com/",
+        "version": "120",
         "target": "LOCAL",
         "port": "4444",
         "capabilities": {
@@ -91,8 +92,8 @@
         "resize": "NORMAL",
         "capabilities": {
           "browserName": "Chrome",
-          "version": "99.0",
-          "platform": "Windows 10",
+          "version": "latest",
+          "platform": "Windows 11",
           "resolution": "1920x1080",
           "build": "Test LambdaTest Build",
           "name": "Test LambdaTest Session",
@@ -129,8 +130,8 @@
         "user_name": "${env:LT_USER}",
         "capabilities": {
           "browserName": "Chrome",
-          "version": "99.0",
-          "platform": "Windows 10",
+          "version": "latest",
+          "platform": "Windows 11",
           "resolution": "1920x1080",
           "build": "Test LambdaTest Build",
           "name": "Test LambdaTest Session",
@@ -147,8 +148,8 @@
         "password": "${env:LT_KEY}",
         "capabilities": {
           "browserName": "Chrome",
-          "version": "99.0",
-          "platform": "Windows 10",
+          "version": "latest",
+          "platform": "Windows 11",
           "resolution": "1920x1080",
           "build": "Test LambdaTest Build",
           "name": "Test LambdaTest Session",

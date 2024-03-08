@@ -126,6 +126,7 @@ class WebDriverManager implements IDriverManager {
         final var options = new FirefoxOptions ();
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        options.setBrowserVersion (webSetting.getVersion ());
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -170,6 +171,7 @@ class WebDriverManager implements IDriverManager {
 
     private SafariOptions getSafariOptions (final WebSetting webSetting) {
         final var options = new SafariOptions ();
+        options.setBrowserVersion (webSetting.getVersion ());
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         return options;
     }
