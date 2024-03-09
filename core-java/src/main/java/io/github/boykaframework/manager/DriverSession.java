@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.manager;
 
+import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -126,7 +127,7 @@ public class DriverSession<D extends WebDriver> {
             loadAllListeners ();
         }
         final var listener = this.listeners.get (listenerType);
-        if (listener == null) {
+        if (isNull (listener)) {
             return null;
         }
         try {

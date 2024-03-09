@@ -32,6 +32,7 @@ import static io.github.boykaframework.utils.Validator.requireNonEmpty;
 import static java.lang.String.join;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static java.util.Objects.requireNonNullElse;
 import static java.util.Optional.ofNullable;
@@ -146,7 +147,7 @@ public final class ApiActions implements IApiActions {
     }
 
     private ApiActions basicAuth (final String userName, final String password) {
-        if (userName != null) {
+        if (!isNull (userName)) {
             LOGGER.traceEntry ("Parameters: userName={}", userName);
             final var credentials = basic (userName,
                 requireNonNull (password, AUTH_PASSWORD_REQUIRED.getMessageText ()));
@@ -157,7 +158,7 @@ public final class ApiActions implements IApiActions {
 
     private <T> ApiActions body (final T body) {
         LOGGER.traceEntry ();
-        if (body != null) {
+        if (!isNull (body)) {
             body (JsonUtil.toString (body));
         }
         return LOGGER.traceExit (this);
@@ -343,7 +344,7 @@ public final class ApiActions implements IApiActions {
 
     private ApiResponse parseResponse (final Response res) {
         LOGGER.traceEntry ();
-        if (res == null) {
+        if (isNull (res)) {
             return null;
         }
         final var headers = new HashMap<String, String> ();

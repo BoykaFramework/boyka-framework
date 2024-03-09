@@ -19,6 +19,7 @@ package io.github.boykaframework.actions.elements;
 import static io.github.boykaframework.enums.Message.ELEMENT_NOT_FOUND;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.text.MessageFormat.format;
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -58,7 +59,7 @@ public final class ElementFinder {
         if (elements.isEmpty ()) {
             ErrorHandler.throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
         }
-        if (locator.getFilter () != null) {
+        if (!isNull (locator.getFilter ())) {
             return elements.stream ()
                 .filter (locator.getFilter ())
                 .findFirst ()
@@ -80,7 +81,7 @@ public final class ElementFinder {
         LOGGER.traceEntry ();
         final var driver = getSession ().getDriver ();
         final List<WebElement> elements;
-        if (locator.getParent () != null) {
+        if (!isNull (locator.getParent ())) {
             final var parent = find (locator.getParent (), waitStrategy);
             elements = finds (driver, parent, locator);
         } else {
@@ -94,11 +95,12 @@ public final class ElementFinder {
         final Locator locator) {
         LOGGER.traceEntry ();
         final var platformLocator = locator.getLocator ();
-        if (platformLocator == null) {
+        if (isNull (platformLocator)) {
             ErrorHandler.throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
         }
-        return LOGGER.traceExit (
-            parent != null ? parent.findElements (locator.getLocator ()) : driver.findElements (locator.getLocator ()));
+        return LOGGER.traceExit (!isNull (parent)
+                                 ? parent.findElements (locator.getLocator ())
+                                 : driver.findElements (locator.getLocator ()));
     }
 
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator) {

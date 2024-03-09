@@ -21,6 +21,7 @@ import static io.github.boykaframework.utils.JsonUtil.fromFile;
 import static java.lang.String.join;
 import static java.lang.System.getProperty;
 import static java.lang.System.getenv;
+import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -66,7 +67,7 @@ public final class SettingUtils {
      */
     public static FrameworkSetting loadSetting () {
         LOGGER.traceEntry ();
-        if (frameworkSetting == null) {
+        if (isNull (frameworkSetting)) {
             final var defaultPath = Path.of (getProperty ("user.dir"), "src/test/resources")
                 .toString ();
             final var configDirectory = ofNullable (getenv ("BOYKA_CONFIG_PATH")).orElse (

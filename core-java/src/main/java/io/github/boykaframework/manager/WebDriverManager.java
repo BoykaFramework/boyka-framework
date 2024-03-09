@@ -34,6 +34,7 @@ import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static io.github.boykaframework.utils.Validator.requireNonNull;
 import static java.text.MessageFormat.format;
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNullElse;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
@@ -126,7 +127,9 @@ class WebDriverManager implements IDriverManager {
         final var options = new FirefoxOptions ();
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        options.setBrowserVersion (webSetting.getVersion ());
+        if (webSetting.getTarget () == LOCAL && isNull (webSetting.getCapabilities ())) {
+            options.setBrowserVersion (webSetting.getVersion ());
+        }
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -171,7 +174,9 @@ class WebDriverManager implements IDriverManager {
 
     private SafariOptions getSafariOptions (final WebSetting webSetting) {
         final var options = new SafariOptions ();
-        options.setBrowserVersion (webSetting.getVersion ());
+        if (webSetting.getTarget () == LOCAL && isNull (webSetting.getCapabilities ())) {
+            options.setBrowserVersion (webSetting.getVersion ());
+        }
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         return options;
     }
@@ -185,7 +190,9 @@ class WebDriverManager implements IDriverManager {
 
     private <T extends ChromiumOptions<T>> void setCommonBrowserOptions (final T options, final WebSetting webSetting) {
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
-        options.setBrowserVersion (webSetting.getVersion ());
+        if (webSetting.getTarget () == LOCAL && isNull (webSetting.getCapabilities ())) {
+            options.setBrowserVersion (webSetting.getVersion ());
+        }
         options.addArguments ("enable-automation");
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");
@@ -226,7 +233,7 @@ class WebDriverManager implements IDriverManager {
 
     private <E extends MutableCapabilities> void setupDriverOptions (final E options,
         final Map<String, Object> capabilities, final WebSetting webSetting) {
-        if (capabilities != null && webSetting.getTarget () == LOCAL) {
+        if (!isNull (capabilities) && webSetting.getTarget () == LOCAL) {
             final var browserName = capabilities.get ("browserName")
                 .toString ();
             if (isNotEmpty (browserName)) {

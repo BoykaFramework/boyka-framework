@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.utils;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.text.StringSubstitutor.createInterpolator;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -64,7 +65,7 @@ public final class StringUtils {
     public static String interpolate (final String value) {
         LOGGER.traceEntry ("Interpolating string: {}", value);
         var result = value;
-        if (value != null && value.startsWith ("${")) {
+        if (isNotEmpty (value) && value.startsWith ("${")) {
             final var substitute = createInterpolator ();
             substitute.setEnableSubstitutionInVariables (true);
             result = substitute.replace (value);

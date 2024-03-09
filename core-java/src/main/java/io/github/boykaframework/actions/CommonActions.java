@@ -24,6 +24,7 @@ import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofMillis;
+import static java.util.Objects.isNull;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Collection;
@@ -67,7 +68,7 @@ public final class CommonActions {
         try {
             return LOGGER.traceExit (action.apply ((D) getSession ().getDriver ()));
         } catch (final FrameworkError e) {
-            if (defaultValue != null) {
+            if (!isNull (defaultValue)) {
                 return defaultValue;
             } else {
                 throw e;

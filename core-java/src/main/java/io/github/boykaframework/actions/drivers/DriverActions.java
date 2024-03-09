@@ -19,6 +19,7 @@ package io.github.boykaframework.actions.drivers;
 import static java.lang.System.getProperty;
 import static java.lang.Thread.currentThread;
 import static java.text.MessageFormat.format;
+import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -109,7 +110,7 @@ public final class DriverActions implements IDriverActions {
                     .getAvailableLogTypes ();
                 logTypes.forEach (logType -> {
                     LOGGER.info ("Saving [{}] logs to a file...", logType);
-                    if (logSetting.getExcludeLogs () == null || !logSetting.getExcludeLogs ()
+                    if (isNull (logSetting.getExcludeLogs ()) || !logSetting.getExcludeLogs ()
                         .contains (logType)) {
                         saveLogType (d, logType, logSetting.getPath ());
                     } else {

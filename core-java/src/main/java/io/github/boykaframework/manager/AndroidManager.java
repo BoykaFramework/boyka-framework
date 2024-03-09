@@ -18,7 +18,9 @@ package io.github.boykaframework.manager;
 
 import static io.appium.java_client.Setting.IGNORE_UNIMPORTANT_VIEWS;
 import static io.github.boykaframework.enums.AutomationType.UI_AUTOMATOR;
+import static io.github.boykaframework.enums.DeviceType.VIRTUAL;
 import static java.time.Duration.ofSeconds;
+import static java.util.Objects.isNull;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -71,7 +73,7 @@ class AndroidManager implements IDriverManager {
 
     private void setAvdOptions (final UiAutomator2Options options, final DeviceType type,
         final VirtualDeviceSetting avd) {
-        if (type == DeviceType.VIRTUAL && avd != null) {
+        if (type == VIRTUAL && !isNull (avd)) {
             options.setAvd (avd.getName ());
             options.setIsHeadless (avd.isHeadless ());
             options.setAvdLaunchTimeout (ofSeconds (avd.getLaunchTimeout ()));

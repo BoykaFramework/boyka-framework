@@ -26,6 +26,7 @@ import static io.github.boykaframework.utils.Validator.requireNonNull;
 import static java.time.Duration.ZERO;
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
+import static java.util.Objects.isNull;
 import static org.openqa.selenium.interactions.PointerInput.Kind.TOUCH;
 import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
 import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
@@ -103,7 +104,7 @@ final class FingerGestureBuilder {
         var w = SCREEN_SIZE.getWidth ();
         var h = SCREEN_SIZE.getHeight ();
 
-        if (locator != null) {
+        if (!isNull (locator)) {
             final var element = find (locator, WaitStrategy.CLICKABLE);
             final var size = element.getSize ();
             final var location = element.getLocation ();
@@ -171,7 +172,7 @@ final class FingerGestureBuilder {
     }
 
     private Point getSwipeStartPosition () {
-        if (this.sourceElement != null) {
+        if (!isNull (this.sourceElement)) {
             return getElementCenter (this.sourceElement);
         }
         return getScreenCenter ();
@@ -182,7 +183,7 @@ final class FingerGestureBuilder {
             steps.addAction (finger.createPointerMove (ZERO, this.viewport, start.getX (), start.getY ()));
             steps.addAction (finger.createPointerDown (LEFT.asArg ()));
             steps.addAction (new Pause (finger, this.pause));
-            if (end != null) {
+            if (!isNull (end)) {
                 steps.addAction (finger.createPointerMove (this.speed, this.viewport, end.getX (), end.getY ()));
             }
             steps.addAction (finger.createPointerUp (LEFT.asArg ()));

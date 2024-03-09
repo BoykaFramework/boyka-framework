@@ -19,6 +19,7 @@ package io.github.boykaframework.manager;
 import static io.github.boykaframework.enums.TargetProviders.LOCAL;
 import static java.lang.System.getProperty;
 import static java.text.MessageFormat.format;
+import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import java.nio.file.Path;
@@ -56,7 +57,7 @@ interface IDriverManager {
 
     default <E extends MutableCapabilities> void setupCloudDriverOptions (final E options,
         final Map<String, Object> capabilities, final TargetProviders targetProviders) {
-        if (capabilities != null && targetProviders != LOCAL) {
+        if (!isNull (capabilities) && targetProviders != LOCAL) {
             final var optionCapabilities = new HashMap<String, Object> ();
             capabilities.forEach ((k, v) -> {
                 if (v instanceof String) {
