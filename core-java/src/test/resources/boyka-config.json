@@ -76,7 +76,6 @@
       "test_selenium_grid": {
         "browser": "REMOTE",
         "base_url": "https://the-internet.herokuapp.com/",
-        "version": "120",
         "target": "LOCAL",
         "port": "4444",
         "capabilities": {
