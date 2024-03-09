@@ -144,6 +144,7 @@
       "test_lambda_test_no_host": {
         "browser": "REMOTE",
         "protocol": "HTTPS",
+        "target": null,
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
         "capabilities": {
