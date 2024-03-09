@@ -91,8 +91,8 @@
         "resize": "NORMAL",
         "capabilities": {
           "browserName": "Chrome",
-          "version": "99.0",
-          "platform": "Windows 10",
+          "version": "latest",
+          "platform": "Windows 11",
           "resolution": "1920x1080",
           "build": "Test LambdaTest Build",
           "name": "Test LambdaTest Session",
@@ -129,8 +129,8 @@
         "user_name": "${env:LT_USER}",
         "capabilities": {
           "browserName": "Chrome",
-          "version": "99.0",
-          "platform": "Windows 10",
+          "version": "latest",
+          "platform": "Windows 11",
           "resolution": "1920x1080",
           "build": "Test LambdaTest Build",
           "name": "Test LambdaTest Session",
@@ -143,12 +143,13 @@
       "test_lambda_test_no_host": {
         "browser": "REMOTE",
         "protocol": "HTTPS",
+        "target": null,
         "user_name": "${env:LT_USER}",
         "password": "${env:LT_KEY}",
         "capabilities": {
           "browserName": "Chrome",
-          "version": "99.0",
-          "platform": "Windows 10",
+          "version": "latest",
+          "platform": "Windows 11",
           "resolution": "1920x1080",
           "build": "Test LambdaTest Build",
           "name": "Test LambdaTest Session",

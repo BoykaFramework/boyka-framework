@@ -22,6 +22,7 @@ import static io.github.boykaframework.enums.Message.SESSION_PERSONA_CANNOT_BE_N
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static io.github.boykaframework.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
+import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -161,7 +162,7 @@ public final class ParallelSession {
      */
     public static void switchPersona (final String persona) {
         final var currentPersona = getCurrentPersona ();
-        if (currentPersona != null && currentPersona.equals (
+        if (!isNull (currentPersona) && currentPersona.equals (
             requireNonEmpty (persona, SESSION_PERSONA_CANNOT_BE_NULL))) {
             return;
         }

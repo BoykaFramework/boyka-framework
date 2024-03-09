@@ -386,7 +386,7 @@ See the example in [sample configuration file](#config-sample).
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | `enable` | Determines whether logging is enabled for the framework | `boolean` | `true` |
-| `exclude_logs` | Exclude any specific logs which is supported by Drivers | `null` |
+| `exclude_logs` | Exclude any specific logs which is supported by Drivers | `List<string>` | `null` |
 | `path` | Path where the logs will be saved | `string` | `{root-folder}/logs` |
 
 #### Screenshot Configuration {#screenshot-config}
@@ -404,6 +404,7 @@ See the example in [sample configuration file](#config-sample).
 | -------- | ----------- | ---- | ------- |
 | `base_url` | Base URL to navigate to by default | `string` | `null` |
 | `browser` | Browser name | [`Browser`](#supported-browsers) | `Browser.NONE` |
+| `version` | Browser Version | `string` | `stable` |
 | `protocol` | Protocol type, will override Host provided by Target provider | [`Protocol`](#supported-protocols) | `Protocol.HTTP` |
 | `host` | Remote driver host name, will override Host provided by Target provider | `string` | `null` |
 | `port` | Remote driver port, if `0`, port will not be considered | `number` | `0` |

@@ -86,7 +86,7 @@ public final class Validator {
      * @param <T> Type of value
      */
     public static <T> void setOptionIfPresent (final T value, final Consumer<T> action) {
-        if (value != null) {
+        if (!isNull (value)) {
             if (value instanceof Integer) {
                 of (value).filter (i -> (Integer) i > 0)
                     .ifPresent (action);

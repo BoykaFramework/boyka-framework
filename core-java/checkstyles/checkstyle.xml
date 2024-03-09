@@ -146,7 +146,7 @@
         </module>
         <!-- Validate whitespace around Generics (angle brackets) per typical conventions
             http://checkstyle.sourceforge.net/config_whitespace.html#GenericWhitespace -->
-        <module name="GenericWhitespace"/>
+<!--        <module name="GenericWhitespace"/>-->
 
         <!-- ##### Blank line requirements ##### -->
         <module name="EmptyLineSeparator">

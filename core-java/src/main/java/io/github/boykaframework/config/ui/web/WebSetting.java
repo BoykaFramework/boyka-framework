@@ -16,7 +16,10 @@
 
 package io.github.boykaframework.config.ui.web;
 
+import static io.github.boykaframework.enums.Browser.NONE;
 import static io.github.boykaframework.enums.Protocol.HTTP;
+import static io.github.boykaframework.enums.TargetProviders.LOCAL;
+import static io.github.boykaframework.enums.WindowResizeType.NORMAL;
 import static io.github.boykaframework.utils.StringUtils.interpolate;
 
 import java.util.List;
@@ -38,7 +41,7 @@ import org.openqa.selenium.Dimension;
 @Data
 public class WebSetting {
     private String              baseUrl;
-    private Browser             browser    = Browser.NONE;
+    private Browser             browser    = NONE;
     private List<String>        browserOptions;
     private Map<String, Object> capabilities;
     private Dimension           customSize = new Dimension (1920, 1080);
@@ -49,9 +52,10 @@ public class WebSetting {
     private String              platform;
     private int                 port;
     private Protocol            protocol   = HTTP;
-    private WindowResizeType    resize     = WindowResizeType.NORMAL;
-    private TargetProviders     target;
+    private WindowResizeType    resize     = NORMAL;
+    private TargetProviders     target     = LOCAL;
     private String              userName;
+    private String              version    = "stable";
 
     /**
      * Gets cloud password.

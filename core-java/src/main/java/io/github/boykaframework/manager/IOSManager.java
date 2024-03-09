@@ -25,6 +25,7 @@ import static io.github.boykaframework.manager.ParallelSession.setDriver;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.Validator.setOptionIfPresent;
 import static java.time.Duration.ofSeconds;
+import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import io.appium.java_client.ios.IOSDriver;
@@ -89,7 +90,7 @@ class IOSManager implements IDriverManager {
     }
 
     private void setWdaOptions (final WDASetting wda, final XCUITestOptions options) {
-        if (wda != null) {
+        if (!isNull (wda)) {
             setOptionIfPresent (wda.getLocalPort (), options::setWdaLocalPort);
             options.setUseNewWDA (wda.isUseNew ());
             setOptionIfPresent (wda.getLaunchTimeout (), v -> options.setWdaLaunchTimeout (ofSeconds (v)));

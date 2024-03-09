@@ -17,6 +17,7 @@
 package io.github.boykaframework.utils;
 
 import static java.text.MessageFormat.format;
+import static java.util.Objects.isNull;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public final class ErrorHandler {
                 stack.add (format (stackTrace, trace.getClassName (), trace.getMethodName (), trace.getLineNumber ()));
             }
             throwable = throwable.getCause ();
-        } while (throwable != null);
+        } while (!isNull (throwable));
         stack.forEach (LOGGER::error);
         throw new FrameworkError (format (message.getMessageText (), args), cause);
     }
