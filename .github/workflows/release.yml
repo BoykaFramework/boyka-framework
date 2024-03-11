@@ -245,7 +245,7 @@ jobs:
           name: version-files-${{ github.run_id }}
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ env.PUSH_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
