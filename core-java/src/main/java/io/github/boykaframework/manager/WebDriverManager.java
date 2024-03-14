@@ -23,6 +23,7 @@ import static io.github.boykaframework.enums.Message.HOSTNAME_REQUIRED_FOR_REMOT
 import static io.github.boykaframework.enums.Message.INVALID_BROWSER;
 import static io.github.boykaframework.enums.Message.INVALID_REMOTE_URL;
 import static io.github.boykaframework.enums.Message.NULL_REMOTE_URL;
+import static io.github.boykaframework.enums.Message.PAGE_LOAD_STRATEGY_MISSING;
 import static io.github.boykaframework.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
 import static io.github.boykaframework.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static io.github.boykaframework.enums.Message.SESSION_NOT_STARTED;
@@ -130,6 +131,7 @@ class WebDriverManager implements IDriverManager {
         if (webSetting.getTarget () == LOCAL && isNull (webSetting.getCapabilities ())) {
             options.setBrowserVersion (webSetting.getVersion ());
         }
+        options.setPageLoadStrategy (requireNonNull (webSetting.getPageLoadStrategy (), PAGE_LOAD_STRATEGY_MISSING));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }
@@ -177,6 +179,7 @@ class WebDriverManager implements IDriverManager {
         if (webSetting.getTarget () == LOCAL && isNull (webSetting.getCapabilities ())) {
             options.setBrowserVersion (webSetting.getVersion ());
         }
+        options.setPageLoadStrategy (requireNonNull (webSetting.getPageLoadStrategy (), PAGE_LOAD_STRATEGY_MISSING));
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         return options;
     }
@@ -193,6 +196,7 @@ class WebDriverManager implements IDriverManager {
         if (webSetting.getTarget () == LOCAL && isNull (webSetting.getCapabilities ())) {
             options.setBrowserVersion (webSetting.getVersion ());
         }
+        options.setPageLoadStrategy (requireNonNull (webSetting.getPageLoadStrategy (), PAGE_LOAD_STRATEGY_MISSING));
         options.addArguments ("enable-automation");
         options.addArguments ("--no-sandbox");
         options.addArguments ("--disable-gpu");

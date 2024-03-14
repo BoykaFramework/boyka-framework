@@ -31,6 +31,7 @@ import io.github.boykaframework.enums.TargetProviders;
 import io.github.boykaframework.enums.WindowResizeType;
 import lombok.Data;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.PageLoadStrategy;
 
 /**
  * Web settings.
@@ -41,21 +42,22 @@ import org.openqa.selenium.Dimension;
 @Data
 public class WebSetting {
     private String              baseUrl;
-    private Browser             browser    = NONE;
+    private Browser             browser          = NONE;
     private List<String>        browserOptions;
     private Map<String, Object> capabilities;
-    private Dimension           customSize = new Dimension (1920, 1080);
-    private boolean             headless   = true;
-    private boolean             highlight  = false;
+    private Dimension           customSize       = new Dimension (1920, 1080);
+    private boolean             headless         = true;
+    private boolean             highlight        = false;
     private String              host;
+    private PageLoadStrategy    pageLoadStrategy = PageLoadStrategy.NORMAL;
     private String              password;
     private String              platform;
     private int                 port;
-    private Protocol            protocol   = HTTP;
-    private WindowResizeType    resize     = NORMAL;
-    private TargetProviders     target     = LOCAL;
+    private Protocol            protocol         = HTTP;
+    private WindowResizeType    resize           = NORMAL;
+    private TargetProviders     target           = LOCAL;
     private String              userName;
-    private String              version    = "stable";
+    private String              version          = "stable";
 
     /**
      * Gets cloud password.

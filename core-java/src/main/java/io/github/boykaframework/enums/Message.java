@@ -227,6 +227,10 @@ public enum Message {
      */
     NULL_REMOTE_URL ("Remote URL is null..."),
     /**
+     * Missing Page load strategy/
+     */
+    PAGE_LOAD_STRATEGY_MISSING ("Page load strategy is missing in the config..."),
+    /**
      * Password required for cloud execution
      */
     PASSWORD_REQUIRED_FOR_CLOUD ("Password is required for cloud execution..."),
