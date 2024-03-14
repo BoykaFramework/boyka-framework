@@ -26,6 +26,7 @@
       "test_local_chrome": {
         "base_url": "https://the-internet.herokuapp.com/",
         "browser": "CHROME",
+        "page_load_strategy": "NORMAL",
         "highlight": true,
         "headless": false,
         "resize": "CUSTOM",

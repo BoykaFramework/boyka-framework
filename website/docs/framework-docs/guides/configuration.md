@@ -417,6 +417,7 @@ See the example in [sample configuration file](#config-sample).
 | `highlight` | Highlight element on interaction, if `true` | `boolean` | `false` |
 | `resize` | How to resize the window initial state | [`WindowResizeType`](#window-resize-type) | `WindowResizeType.NORMAL` |
 | `custom_size` | Custom window size, when `resize` option is selected as `CUSTOM` | `Dimension` | `1920x1080` |
+| `page_load_strategy` | Page loading strategy (all in capital letters) | [`PageLoadStrategy`](https://www.selenium.dev/documentation/webdriver/drivers/options/#pageloadstrategy) | `NORMAL` |
 
 :::info
 For fields `user_name` and `password`, you can use placeholder variables in the following format:

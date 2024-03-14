@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.manager;
 
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.time.Duration.ofSeconds;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -37,16 +38,16 @@ final class DriverManager {
 
     DriverManager () {
         LOGGER.traceEntry ();
-        this.platformType = ParallelSession.getSession ().getPlatformType ();
+        this.platformType = getSession ().getPlatformType ();
         LOGGER.traceExit ();
     }
 
     void setupDriver () {
         LOGGER.traceEntry ();
-        final var settings = ParallelSession.getSession ().getSetting ()
+        final var settings = getSession ().getSetting ()
             .getUi ();
         if (this.platformType != PlatformType.WEB) {
-            final var mobileSetting = ParallelSession.getSession ().getMobileSetting ();
+            final var mobileSetting = getSession ().getMobileSetting ();
             setupAppiumServer (mobileSetting.getServer ());
         }
         final IDriverManager driverManager = switch (this.platformType) {
@@ -61,7 +62,7 @@ final class DriverManager {
 
     private void setDriverWaits (final TimeoutSetting timeoutSetting) {
         LOGGER.traceEntry ();
-        final var session = ParallelSession.getSession ();
+        final var session = getSession ();
         final var driver = session.getDriver ();
         final var timeouts = driver.manage ()
             .timeouts ();
@@ -78,9 +79,8 @@ final class DriverManager {
     }
 
     private void setupAppiumServer (final ServerSetting serverSetting) {
-        ParallelSession.getSession ().setServiceManager (new ServiceManager (serverSetting));
-        ParallelSession.getSession ().getServiceManager ()
+        getSession ().setServiceManager (new ServiceManager (serverSetting));
+        getSession ().getServiceManager ()
             .startServer ();
     }
-
 }
