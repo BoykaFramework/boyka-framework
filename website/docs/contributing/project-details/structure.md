@@ -16,7 +16,6 @@ Following is the project repository root directory structure:
 - .eslintignore
 - .eslintrc.json
 - .gitignore
-- .gitpod.yml
 - .prettieriignore
 - .prettierrc.json
 - commitlint.config.js
@@ -70,50 +69,46 @@ This file contains the ESLint rules for the project.
 
 This file contains the Git ignore patterns for the project.
 
-### 10. `.gitpod.yml`
-
-This file contains the Gitpod settings for the project.
-
-### 11. `.nvmrc`
+### 10. `.nvmrc`
 
 This file contains the Node version for the project.
 
-### 12. `.prettierignore`
+### 11. `.prettierignore`
 
 This file contains the Prettier ignore patterns for the project.
 
-### 13. `.prettierrc.json`
+### 12. `.prettierrc.json`
 
 This file contains the Prettier rules for the project.
 
-### 14. `CHANGELOG.md`
+### 13. `CHANGELOG.md`
 
 This file contains the project change logs for the last release.
 
-### 15. `commitlint.config.js`
+### 14. `commitlint.config.js`
 
 This file contains the commit lint config for the project.
 
-### 16. `lerna.json`
+### 15. `lerna.json`
 
 This file contains the Lerna settings for the project.
 
-### 17. `LICENSE`
+### 16. `LICENSE`
 
 This file contains the license for the project.
 
-### 18. `package.json`
+### 17. `package.json`
 
 This file contains the project package.json settings.
 
-### 19. `README.md`
+### 18. `README.md`
 
 This file contains the project README.md file.
 
-### 20. `pnpm-lock.yaml`
+### 19. `pnpm-lock.yaml`
 
 This file contains the projects pnpm lock file.
 
-### 21. `pnpm-workspace.yaml`
+### 20. `pnpm-workspace.yaml`
 
 This file contains the project workspace details.

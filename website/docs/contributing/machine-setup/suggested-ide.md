@@ -25,15 +25,12 @@ You can download this IDE from the [Visual Studio Code download page][vscode].
 Search and install following plugins from extensions page:
 
 Following extensions are recommended as must have for contributing to this project:
+
 - Conventional Commits
 - ESLint
 - Node Essentials
 - Prettier
 - SonarLint
-
-Following extensions are optional and good to have:
-- Gitpod
-- Gitpod Remote
 
 [idea]: https://www.jetbrains.com/idea/download/#download
 [vscode]: https://code.visualstudio.com/download
