@@ -30,11 +30,11 @@
     <properties>
         <selenium-webdriver.version>4.18.1</selenium-webdriver.version>
         <testng.version>7.9.0</testng.version>
-        <appium-java-client.version>9.1.0</appium-java-client.version>
+        <appium-java-client.version>9.2.0</appium-java-client.version>
         <okhttp.version>4.12.0</okhttp.version>
         <lombok.version>1.18.30</lombok.version>
         <google-gson.version>2.10.1</google-gson.version>
-        <google.guava.version>33.0.0-jre</google.guava.version>
+        <google.guava.version>33.1.0-jre</google.guava.version>
         <google-truth.version>1.4.2</google-truth.version>
         <apache-commons-text.version>1.11.0</apache-commons-text.version>
         <commons-io.version>2.15.1</commons-io.version>
@@ -42,10 +42,10 @@
         <log4j-core.version>2.23.1</log4j-core.version>
         <log4j-api.version>2.23.1</log4j-api.version>
         <faker.version>2.0.2</faker.version>
-        <jackson-dataformat-yaml.version>2.16.2</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.16.2</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.17.0</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.17.0</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <json-schema-validator.version>1.3.3</json-schema-validator.version>
+        <json-schema-validator.version>1.4.0</json-schema-validator.version>
         <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
@@ -54,8 +54,8 @@
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.14.0</checkstyle.version>
-        <aspectj.version>1.9.21.1</aspectj.version>
+        <checkstyle.version>10.14.2</checkstyle.version>
+        <aspectj.version>1.9.21.2</aspectj.version>
         <poi.version>5.2.5</poi.version>
         <suite-name>testng-api</suite-name>
         <suite-xml>test-suites/${suite-name}.xml</suite-xml>
@@ -75,11 +75,11 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
-        <sonar.maven.version>3.10.0.2594</sonar.maven.version>
+        <sonar.maven.version>3.11.0.3922</sonar.maven.version>
         <jacoco.version>0.8.11</jacoco.version>
         <surefire-version>3.2.5</surefire-version>
         <nexus.version>1.6.13</nexus.version>
-        <maven.gpg.version>3.1.0</maven.gpg.version>
+        <maven.gpg.version>3.2.0</maven.gpg.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <allure-testng.version>2.25.0</allure-testng.version>
         <maven-failsafe.version>3.2.5</maven-failsafe.version>
