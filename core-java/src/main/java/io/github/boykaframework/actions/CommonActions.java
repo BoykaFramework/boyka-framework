@@ -159,7 +159,6 @@ public final class CommonActions {
     public static void performMobileGestures (final Collection<Sequence> sequences) {
         LOGGER.traceEntry ();
         try {
-            delay ();
             performDriverAction (driver -> ((AppiumDriver) driver).perform (sequences));
         } catch (final WebDriverException e) {
             handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
