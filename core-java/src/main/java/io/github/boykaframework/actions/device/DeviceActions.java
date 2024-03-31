@@ -16,6 +16,8 @@
 
 package io.github.boykaframework.actions.device;
 
+import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
+import static io.github.boykaframework.actions.CommonActions.performDriverAction;
 import static io.github.boykaframework.enums.DeviceType.CLOUD;
 import static io.github.boykaframework.enums.ListenerType.DEVICE_ACTION;
 import static io.github.boykaframework.enums.Message.NO_KEYBOARD_ERROR;
@@ -37,7 +39,6 @@ import io.appium.java_client.android.AndroidStopScreenRecordingOptions;
 import io.appium.java_client.ios.IOSStartScreenRecordingOptions;
 import io.appium.java_client.ios.IOSStopScreenRecordingOptions;
 import io.appium.java_client.screenrecording.CanRecordScreen;
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.device.IDeviceActions;
 import io.github.boykaframework.actions.interfaces.listeners.device.IDeviceActionsListener;
 import io.github.boykaframework.config.ui.mobile.device.VideoSetting;
@@ -75,7 +76,7 @@ public class DeviceActions implements IDeviceActions {
         ofNullable (this.listener).ifPresent (IDeviceActionsListener::onHideKeyboard);
         checkKeyboardSupported ();
         if (isKeyboardVisible ()) {
-            CommonActions.performDriverAction (HidesKeyboard::hideKeyboard);
+            performDriverAction (HidesKeyboard::hideKeyboard);
         }
     }
 
@@ -84,7 +85,7 @@ public class DeviceActions implements IDeviceActions {
         LOGGER.info ("Checking if keyboard is visible...");
         ofNullable (this.listener).ifPresent (IDeviceActionsListener::onIsKeyboardVisible);
         checkKeyboardSupported ();
-        return CommonActions.getDriverAttribute (HasOnScreenKeyboard::isKeyboardShown, false);
+        return getDriverAttribute (HasOnScreenKeyboard::isKeyboardShown, false);
     }
 
     @Override

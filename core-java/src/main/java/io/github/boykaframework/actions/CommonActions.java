@@ -122,6 +122,7 @@ public final class CommonActions {
     public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
         LOGGER.traceEntry ();
         try {
+            delay ();
             prepareElementAction (find (locator, WaitStrategy.CLICKABLE), "red");
             action.accept (find (locator, WaitStrategy.CLICKABLE));
         } catch (final WebDriverException e) {
@@ -141,6 +142,7 @@ public final class CommonActions {
         final Locator locator) {
         LOGGER.traceEntry ();
         try {
+            delay ();
             prepareElementAction (find (locator, WaitStrategy.CLICKABLE), "red");
             action.accept ((D) getSession ().getDriver (), find (locator, WaitStrategy.CLICKABLE));
         } catch (final WebDriverException e) {
@@ -157,11 +159,20 @@ public final class CommonActions {
     public static void performMobileGestures (final Collection<Sequence> sequences) {
         LOGGER.traceEntry ();
         try {
+            delay ();
             performDriverAction (driver -> ((AppiumDriver) driver).perform (sequences));
         } catch (final WebDriverException e) {
             handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
         }
         LOGGER.traceExit ();
+    }
+
+    private static void delay () {
+        withDriver ().pause (ofMillis (getSession ().getSetting ()
+            .getUi ()
+            .getTimeout ()
+            .getRunSpeed ()
+            .getDelay ()));
     }
 
     private static void highlight (final String color, final WebElement element) {
