@@ -16,53 +16,48 @@
 
 package io.github.boykaframework.testng.ui.saucedemo.actions;
 
+import static io.appium.java_client.android.nativekey.AndroidKey.BACK;
+import static io.github.boykaframework.actions.device.AndroidDeviceActions.onAndroidDevice;
+import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
 import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
+import static io.github.boykaframework.actions.elements.FingersActions.withFingers;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
+import static io.github.boykaframework.enums.PlatformType.ANDROID;
+import static io.github.boykaframework.enums.PlatformType.WEB;
+import static io.github.boykaframework.enums.SwipeDirection.DOWN;
+import static io.github.boykaframework.enums.SwipeDirection.UP;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.testng.ui.saucedemo.pages.CartPage.cartPage;
+import static io.github.boykaframework.testng.ui.saucedemo.pages.CheckoutPage.checkoutPage;
+import static io.github.boykaframework.testng.ui.saucedemo.pages.HomePage.homePage;
+import static io.github.boykaframework.testng.ui.saucedemo.pages.LoginPage.loginPage;
+import static io.github.boykaframework.testng.ui.saucedemo.pages.ProductDetailsPage.productDetailsPage;
 import static java.text.MessageFormat.format;
 
-import io.appium.java_client.android.nativekey.AndroidKey;
-import io.github.boykaframework.actions.device.AndroidDeviceActions;
-import io.github.boykaframework.actions.device.DeviceActions;
-import io.github.boykaframework.actions.drivers.NavigateActions;
-import io.github.boykaframework.actions.drivers.WindowActions;
-import io.github.boykaframework.actions.elements.ElementActions;
-import io.github.boykaframework.actions.elements.FingersActions;
-import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.enums.PlatformType;
-import io.github.boykaframework.enums.SwipeDirection;
-import io.github.boykaframework.manager.ParallelSession;
-import io.github.boykaframework.testng.ui.saucedemo.pages.CheckoutPage;
-import io.github.boykaframework.testng.ui.saucedemo.pages.HomePage;
-import io.github.boykaframework.testng.ui.saucedemo.pages.LoginPage;
-import io.github.boykaframework.testng.ui.saucedemo.pages.ProductDetailsPage;
 
 public class SauceDemoActions {
     private static final String       URL = "https://www.saucedemo.com";
     private final        PlatformType platformType;
 
     public SauceDemoActions () {
-        this.platformType = ParallelSession.getSession ()
-            .getPlatformType ();
+        this.platformType = getSession ().getPlatformType ();
     }
 
     public void verifyAddToCart () {
-        if (this.platformType == PlatformType.WEB) {
-            withMouse (HomePage.homePage ()
-                .getAddToCartButton ()).click ();
+        if (this.platformType == WEB) {
+            withMouse (homePage ().getAddToCartButton ()).click ();
         } else {
-            withFinger (HomePage.homePage ()
-                .getAddToCartDragHandle ()).dragTo (HomePage.homePage ()
-                .getCartDropZone ());
+            withFinger (homePage ().getAddToCartDragHandle ()).dragTo (homePage ().getCartDropZone ());
         }
 
-        ElementActions.onElement (HomePage.homePage ()
-                .getProductPrice ())
-            .verifyText ()
+        onElement (homePage ().getProductPrice ()).verifyText ()
             .isEqualTo ("$29.99");
-        ElementActions.onElement (HomePage.homePage ()
-                .getShoppingCartCount ())
-            .verifyText ()
+        onElement (homePage ().getShoppingCartCount ()).verifyText ()
             .isEqualTo ("1");
 
         verifyProductDetailPage ();
@@ -71,163 +66,111 @@ public class SauceDemoActions {
 
     public void verifyCheckoutStep1 () {
         withMouse (cartPage ().getCheckout ()).click ();
-        if (this.platformType == PlatformType.WEB) {
-            NavigateActions.navigate ()
-                .verifyUrl ()
+        if (this.platformType == WEB) {
+            navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/checkout-step-one.html", URL));
-            ElementActions.onElement (CheckoutPage.checkoutPage ()
-                    .getTitle ())
-                .verifyText ()
+            onElement (checkoutPage ().getTitle ()).verifyText ()
                 .ignoringCase ()
                 .isEqualTo ("CHECKOUT: YOUR INFORMATION");
         }
 
-        TextBoxActions.onTextBox (CheckoutPage.checkoutPage ()
-                .getFirstName ())
-            .enterText ("Wasiq");
-        TextBoxActions.onTextBox (CheckoutPage.checkoutPage ()
-                .getLastName ())
-            .enterText ("Bhamla");
-        TextBoxActions.onTextBox (CheckoutPage.checkoutPage ()
-                .getZipCode ())
-            .enterText ("12345");
+        onTextBox (checkoutPage ().getFirstName ()).enterText ("Wasiq");
+        onTextBox (checkoutPage ().getLastName ()).enterText ("Bhamla");
+        onTextBox (checkoutPage ().getZipCode ()).enterText ("12345");
 
-        withMouse (CheckoutPage.checkoutPage ()
-            .getContinueButton ()).click ();
+        withMouse (checkoutPage ().getContinueButton ()).click ();
     }
 
     public void verifyCheckoutStep2 () {
-        if (this.platformType != PlatformType.WEB) {
-            withFinger (CheckoutPage.checkoutPage ()
-                .getFinish ()).swipeTill (SwipeDirection.UP);
+        if (this.platformType != WEB) {
+            withFinger (checkoutPage ().getFinish ()).swipeTill (UP);
         }
-        withMouse (CheckoutPage.checkoutPage ()
-            .getFinish ()).click ();
+        withMouse (checkoutPage ().getFinish ()).click ();
 
-        if (this.platformType != PlatformType.WEB) {
-            ElementActions.onElement (CheckoutPage.checkoutPage ()
-                    .getCompleteHeader ())
-                .verifyText ()
+        if (this.platformType != WEB) {
+            onElement (checkoutPage ().getCompleteHeader ()).verifyText ()
                 .isEqualTo ("THANK YOU FOR YOU ORDER");
         } else {
-            NavigateActions.navigate ()
-                .verifyUrl ()
+            navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/checkout-complete.html", URL));
-            ElementActions.onElement (CheckoutPage.checkoutPage ()
-                    .getTitle ())
-                .verifyText ()
+            onElement (checkoutPage ().getTitle ()).verifyText ()
                 .ignoringCase ()
                 .isEqualTo ("CHECKOUT: COMPLETE!");
-            ElementActions.onElement (CheckoutPage.checkoutPage ()
-                    .getCompleteHeader ())
-                .verifyText ()
+            onElement (checkoutPage ().getCompleteHeader ()).verifyText ()
                 .ignoringCase ()
                 .contains ("THANK YOU FOR YOUR ORDER");
         }
 
-        ElementActions.onElement (CheckoutPage.checkoutPage ()
-                .getCompleteText ())
-            .verifyText ()
+        onElement (checkoutPage ().getCompleteText ()).verifyText ()
             .isEqualTo ("Your order has been dispatched, and will arrive just as fast as the pony can get there!");
     }
 
     public void verifyLogin (final String userName, final String password) {
         verifyNavigateToSite ();
-        TextBoxActions.onTextBox (LoginPage.loginPage ()
-                .getUsername ())
-            .enterText (userName);
-        TextBoxActions.onTextBox (LoginPage.loginPage ()
-                .getPassword ())
-            .enterText (password);
-        if (this.platformType == PlatformType.ANDROID && DeviceActions.onDevice ()
-            .isKeyboardVisible ()) {
-            AndroidDeviceActions.onAndroidDevice ()
-                .pressKey (AndroidKey.BACK);
+        onTextBox (loginPage ().getUsername ()).enterText (userName);
+        onTextBox (loginPage ().getPassword ()).enterText (password);
+        if (this.platformType == ANDROID && onDevice ().isKeyboardVisible ()) {
+            onAndroidDevice ().pressKey (BACK);
         }
-        withMouse (LoginPage.loginPage ()
-            .getLoginButton ()).click ();
+        withMouse (loginPage ().getLoginButton ()).click ();
         verifyLoggedIn ();
     }
 
     public void verifySignOut () {
-        withMouse (HomePage.homePage ()
-            .getMenuButton ()).click ();
-        withMouse (HomePage.homePage ()
-            .getLogout ()).click ();
-        if (this.platformType == PlatformType.WEB) {
-            NavigateActions.navigate ()
-                .verifyUrl ()
+        withMouse (homePage ().getMenuButton ()).click ();
+        withMouse (homePage ().getLogout ()).click ();
+        if (this.platformType == WEB) {
+            navigate ().verifyUrl ()
                 .startsWith (URL);
         }
-        ElementActions.onElement (LoginPage.loginPage ()
-                .getUsername ())
-            .verifyIsDisplayed ()
+        onElement (loginPage ().getUsername ()).verifyIsDisplayed ()
             .isTrue ();
     }
 
     private void verifyLoggedIn () {
-        if (this.platformType == PlatformType.WEB) {
-            NavigateActions.navigate ()
-                .verifyUrl ()
+        if (this.platformType == WEB) {
+            navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/inventory.html", URL));
-            WindowActions.onWindow ()
-                .verifyTitle ()
+            onWindow ().verifyTitle ()
                 .isEqualTo ("Swag Labs");
         }
-        ElementActions.onElement (HomePage.homePage ()
-                .getMenuButton ())
-            .verifyIsDisplayed ()
+        onElement (homePage ().getMenuButton ()).verifyIsDisplayed ()
             .isTrue ();
-        ElementActions.onElement (HomePage.homePage ()
-                .getMenuButton ())
-            .verifyIsEnabled ()
+        onElement (homePage ().getMenuButton ()).verifyIsEnabled ()
             .isTrue ();
     }
 
     private void verifyNavigateToSite () {
-        if (this.platformType == PlatformType.WEB) {
-            NavigateActions.navigate ()
-                .to (URL);
-            NavigateActions.navigate ()
-                .verifyUrl ()
+        if (this.platformType == WEB) {
+            navigate ().to (URL);
+            navigate ().verifyUrl ()
                 .startsWith (URL);
         }
     }
 
     private void verifyProductCartPage () {
-        withMouse (HomePage.homePage ()
-            .getShoppingCart ()).click ();
-        if (this.platformType == PlatformType.WEB) {
-            NavigateActions.navigate ()
-                .verifyUrl ()
+        withMouse (homePage ().getShoppingCart ()).click ();
+        if (this.platformType == WEB) {
+            navigate ().verifyUrl ()
                 .isEqualTo (format ("{0}/cart.html", URL));
         }
-        ElementActions.onElement (cartPage ().getCheckout ())
-            .verifyIsDisplayed ()
+        onElement (cartPage ().getCheckout ()).verifyIsDisplayed ()
             .isTrue ();
     }
 
     private void verifyProductDetailPage () {
-        withMouse (HomePage.homePage ()
-            .productItem ("Sauce Labs Backpack")).click ();
-        if (this.platformType == PlatformType.WEB) {
-            NavigateActions.navigate ()
-                .verifyUrl ()
+        withMouse (homePage ().productItem ("Sauce Labs Backpack")).click ();
+        if (this.platformType == WEB) {
+            navigate ().verifyUrl ()
                 .startsWith (format ("{0}/inventory-item.html?id=", URL));
         }
-        ElementActions.onElement (ProductDetailsPage.productDetailsPage ()
-                .getContainer ())
-            .verifyIsDisplayed ()
+        onElement (productDetailsPage ().getContainer ()).verifyIsDisplayed ()
             .isTrue ();
-        if (this.platformType != PlatformType.WEB) {
-            withFinger ().swipe (SwipeDirection.UP);
-            withFinger ().swipe (SwipeDirection.DOWN);
-            FingersActions.withFingers (ProductDetailsPage.productDetailsPage ()
-                    .getImage ())
-                .zoomIn ();
-            FingersActions.withFingers (ProductDetailsPage.productDetailsPage ()
-                    .getImage ())
-                .zoomOut ();
+        if (this.platformType != WEB) {
+            withFinger ().swipe (UP);
+            withFinger ().swipe (DOWN);
+            withFingers (productDetailsPage ().getImage ()).zoomIn ();
+            withFingers (productDetailsPage ().getImage ()).zoomOut ();
         }
     }
 }
