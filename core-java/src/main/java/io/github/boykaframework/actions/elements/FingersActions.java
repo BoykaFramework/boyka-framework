@@ -16,17 +16,18 @@
 
 package io.github.boykaframework.actions.elements;
 
+import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
+import static io.github.boykaframework.actions.CommonActions.performMobileGestures;
+import static io.github.boykaframework.enums.ListenerType.FINGERS_ACTION;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Arrays.asList;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.elements.IFingersActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IFingersActionsListener;
 import io.github.boykaframework.builders.Locator;
-import io.github.boykaframework.enums.ListenerType;
 import io.github.boykaframework.enums.SwipeDirection;
-import io.github.boykaframework.manager.ParallelSession;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -53,8 +54,7 @@ public class FingersActions extends FingerActions implements IFingersActions {
 
     FingersActions (final Locator locator) {
         super (locator);
-        this.listener = ParallelSession.getSession ()
-            .getListener (ListenerType.FINGERS_ACTION);
+        this.listener = getSession ().getListener (FINGERS_ACTION);
     }
 
     @Override
@@ -62,21 +62,21 @@ public class FingersActions extends FingerActions implements IFingersActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Zooming in on the element [{}].", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onZoomIn (this.locator));
-        final var finger1 = CommonActions.getDriverAttribute (driver -> FingerGestureBuilder.init ()
+        final var finger1 = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (SwipeDirection.LEFT)
             .name ("Finger 1")
             .sourceElement (this.locator)
             .offset (10)
             .build ()
             .swipe (), null);
-        final var finger2 = CommonActions.getDriverAttribute (driver -> FingerGestureBuilder.init ()
+        final var finger2 = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (SwipeDirection.RIGHT)
             .name ("Finger 2")
             .sourceElement (this.locator)
             .offset (10)
             .build ()
             .swipe (), null);
-        CommonActions.performMobileGestures (asList (finger1, finger2));
+        performMobileGestures (asList (finger1, finger2));
         LOGGER.traceExit ();
     }
 
@@ -85,7 +85,7 @@ public class FingersActions extends FingerActions implements IFingersActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Zooming out on the element [{}].", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onZoomOut (this.locator));
-        final var finger1 = CommonActions.getDriverAttribute (driver -> FingerGestureBuilder.init ()
+        final var finger1 = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (SwipeDirection.LEFT)
             .name ("Finger 1")
             .sourceElement (this.locator)
@@ -93,7 +93,7 @@ public class FingersActions extends FingerActions implements IFingersActions {
             .offset (10)
             .build ()
             .swipe (), null);
-        final var finger2 = CommonActions.getDriverAttribute (driver -> FingerGestureBuilder.init ()
+        final var finger2 = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (SwipeDirection.RIGHT)
             .name ("Finger 2")
             .sourceElement (this.locator)
@@ -101,7 +101,7 @@ public class FingersActions extends FingerActions implements IFingersActions {
             .offset (10)
             .build ()
             .swipe (), null);
-        CommonActions.performMobileGestures (asList (finger1, finger2));
+        performMobileGestures (asList (finger1, finger2));
         LOGGER.traceExit ();
     }
 }

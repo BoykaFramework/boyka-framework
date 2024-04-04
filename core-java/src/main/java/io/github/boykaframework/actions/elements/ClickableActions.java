@@ -16,17 +16,19 @@
 
 package io.github.boykaframework.actions.elements;
 
+import static io.github.boykaframework.actions.CommonActions.pause;
+import static io.github.boykaframework.actions.CommonActions.performElementAction;
+import static io.github.boykaframework.actions.elements.ElementFinder.find;
+import static io.github.boykaframework.enums.WaitStrategy.CLICKABLE;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.elements.IClickableActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IClickableActionsListener;
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.enums.ApplicationType;
 import io.github.boykaframework.enums.ListenerType;
 import io.github.boykaframework.enums.PlatformType;
-import io.github.boykaframework.enums.WaitStrategy;
 import io.github.boykaframework.manager.ParallelSession;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -70,8 +72,9 @@ public class ClickableActions extends FingersActions implements IClickableAction
             .getDevice ()
             .getApplication ()
             .getType () == ApplicationType.WEB && session.getPlatformType () == PlatformType.IOS)) {
+            pause (this.delaySetting.getBeforeClick ());
             scrollIntoView ();
-            CommonActions.performElementAction (WebElement::click, this.locator);
+            performElementAction (WebElement::click, this.locator);
         } else {
             tap ();
         }
@@ -83,7 +86,8 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Click and hold on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onClickAndHold (this.locator));
-        CommonActions.performElementAction ((driver, element) -> {
+        pause (this.delaySetting.getBeforeClick ());
+        performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.clickAndHold (element)
                 .perform ();
@@ -96,7 +100,8 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Double Click on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onDoubleClick (this.locator));
-        CommonActions.performElementAction ((driver, element) -> {
+        pause (this.delaySetting.getBeforeClick ());
+        performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.doubleClick (element)
                 .perform ();
@@ -109,9 +114,10 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Drag and Drop on element: {} , {}", this.locator.getName (), destination.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onDragTo (this.locator, destination));
-        CommonActions.performElementAction ((driver, element) -> {
+        pause (this.delaySetting.getBeforeClick ());
+        performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
-            actions.dragAndDrop (element, ElementFinder.find (destination, WaitStrategy.CLICKABLE))
+            actions.dragAndDrop (element, find (destination, CLICKABLE))
                 .perform ();
         }, this.locator);
         LOGGER.traceExit ();
@@ -122,7 +128,8 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Hover on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onHover (this.locator));
-        CommonActions.performElementAction ((driver, element) -> {
+        pause (this.delaySetting.getBeforeMouseMove ());
+        performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.moveToElement (element)
                 .perform ();
@@ -135,7 +142,8 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Right Click on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onRightClick (this.locator));
-        CommonActions.performElementAction ((driver, element) -> {
+        pause (this.delaySetting.getBeforeClick ());
+        performElementAction ((driver, element) -> {
             final var actions = new Actions (driver);
             actions.contextClick (element)
                 .perform ();
@@ -148,7 +156,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Submitting element located by: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onSubmit (this.locator));
-        CommonActions.performElementAction (WebElement::submit, this.locator);
+        performElementAction (WebElement::submit, this.locator);
         LOGGER.traceExit ();
     }
 }

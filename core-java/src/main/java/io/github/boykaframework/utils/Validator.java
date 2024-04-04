@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.utils;
 
+import static io.github.boykaframework.enums.Message.DELAY_OVERFLOW;
 import static io.github.boykaframework.enums.Message.INDEX_OUT_OF_BOUNDS;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static java.util.Objects.isNull;
@@ -93,6 +94,17 @@ public final class Validator {
             } else {
                 of (value).ifPresent (action);
             }
+        }
+    }
+
+    /**
+     * Validate delay that it should be greater than 0 and less than or equal to 1s
+     *
+     * @param delay Delay to validate
+     */
+    public static void validateDelay (final int delay) {
+        if (delay < 0 || delay > 1000) {
+            throwError (DELAY_OVERFLOW);
         }
     }
 

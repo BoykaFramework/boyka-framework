@@ -23,6 +23,7 @@ import static io.github.boykaframework.enums.Message.INVALID_SWIPE_DISTANCE;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static io.github.boykaframework.utils.Validator.requireNonNull;
+import static io.github.boykaframework.utils.Validator.validateDelay;
 import static java.time.Duration.ZERO;
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
@@ -61,12 +62,10 @@ final class FingerGestureBuilder {
     @Builder.Default
     private       String              name     = "Finger 1";
     private       int                 offset;
-    @Builder.Default
-    private       Duration            pause    = ofMillis (500);
+    private       Duration            pause;
     private       boolean             reverse;
     private       Locator             sourceElement;
-    @Builder.Default
-    private       Duration            speed    = ofMillis (500);
+    private       Duration            speed;
     private final PointerInput.Origin viewport = viewport ();
 
     Sequence dragTo (final Locator targetElement) {
@@ -179,6 +178,23 @@ final class FingerGestureBuilder {
     }
 
     private Sequence singleFingerGesture (final Point start, final Point end) {
+        final var swipeSetting = getSession ().getMobileSetting ()
+            .getDevice ()
+            .getSwipe ();
+        final var delaySetting = getSession ().getSetting ()
+            .getUi ()
+            .getDelay ();
+
+        validateDelay (swipeSetting.getSpeed ()
+            .getDelay ());
+        validateDelay (delaySetting.getBeforeSwipe ());
+
+        this.speed = this.speed != ZERO
+                     ? this.speed
+                     : ofMillis (swipeSetting.getSpeed ()
+                         .getDelay ());
+        this.pause = this.pause != ZERO ? this.pause : ofMillis (delaySetting.getBeforeSwipe ());
+
         return composeSequence ((finger, steps) -> {
             steps.addAction (finger.createPointerMove (ZERO, this.viewport, start.getX (), start.getY ()));
             steps.addAction (finger.createPointerDown (LEFT.asArg ()));

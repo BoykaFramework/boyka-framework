@@ -20,8 +20,11 @@ import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.actions.elements.ElementFinder.find;
 import static io.github.boykaframework.enums.Message.DRIVER_ERROR_OCCURRED;
 import static io.github.boykaframework.enums.PlatformType.WEB;
+import static io.github.boykaframework.enums.WaitStrategy.CLICKABLE;
+import static io.github.boykaframework.enums.WaitStrategy.VISIBLE;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
+import static io.github.boykaframework.utils.Validator.validateDelay;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofMillis;
 import static java.util.Objects.isNull;
@@ -34,7 +37,6 @@ import java.util.function.Function;
 
 import io.appium.java_client.AppiumDriver;
 import io.github.boykaframework.builders.Locator;
-import io.github.boykaframework.enums.WaitStrategy;
 import io.github.boykaframework.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -90,11 +92,21 @@ public final class CommonActions {
         final E defaultValue) {
         LOGGER.traceEntry ();
         try {
-            prepareElementAction (find (locator, WaitStrategy.VISIBLE), "green");
-            return LOGGER.traceExit (action.apply (find (locator, WaitStrategy.VISIBLE)));
+            prepareElementAction (find (locator, VISIBLE), "green");
+            return LOGGER.traceExit (action.apply (find (locator, VISIBLE)));
         } catch (final FrameworkError e) {
             return defaultValue;
         }
+    }
+
+    /**
+     * Pause till the specified delay.
+     *
+     * @param delayMillis Delay till this amount millis
+     */
+    public static void pause (final int delayMillis) {
+        validateDelay (delayMillis);
+        withDriver ().pause (ofMillis (delayMillis));
     }
 
     /**
@@ -114,24 +126,6 @@ public final class CommonActions {
     }
 
     /**
-     * Perform element specific action.
-     *
-     * @param action action to perform
-     * @param locator locator to find element
-     */
-    public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
-        LOGGER.traceEntry ();
-        try {
-            delay ();
-            prepareElementAction (find (locator, WaitStrategy.CLICKABLE), "red");
-            action.accept (find (locator, WaitStrategy.CLICKABLE));
-        } catch (final WebDriverException e) {
-            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
-        }
-        LOGGER.traceExit ();
-    }
-
-    /**
      * Perform element specific action with Driver.
      *
      * @param action action to perform
@@ -142,9 +136,25 @@ public final class CommonActions {
         final Locator locator) {
         LOGGER.traceEntry ();
         try {
-            delay ();
-            prepareElementAction (find (locator, WaitStrategy.CLICKABLE), "red");
-            action.accept ((D) getSession ().getDriver (), find (locator, WaitStrategy.CLICKABLE));
+            prepareElementAction (find (locator, CLICKABLE), "red");
+            action.accept ((D) getSession ().getDriver (), find (locator, CLICKABLE));
+        } catch (final WebDriverException e) {
+            handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
+        }
+        LOGGER.traceExit ();
+    }
+
+    /**
+     * Perform element specific action.
+     *
+     * @param action action to perform
+     * @param locator locator to find element
+     */
+    public static void performElementAction (final Consumer<WebElement> action, final Locator locator) {
+        LOGGER.traceEntry ();
+        try {
+            prepareElementAction (find (locator, CLICKABLE), "red");
+            action.accept (find (locator, CLICKABLE));
         } catch (final WebDriverException e) {
             handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
         }
@@ -166,14 +176,6 @@ public final class CommonActions {
         LOGGER.traceExit ();
     }
 
-    private static void delay () {
-        withDriver ().pause (ofMillis (getSession ().getSetting ()
-            .getUi ()
-            .getTimeout ()
-            .getRunSpeed ()
-            .getDelay ()));
-    }
-
     private static void highlight (final String color, final WebElement element) {
         if (getSession ().getWebSetting ()
             .isHighlight ()) {
@@ -181,10 +183,10 @@ public final class CommonActions {
             getSession ().setSharedData (HIGHLIGHT_STYLE, style);
             withDriver ().executeScript ("arguments[0].setAttribute('style', arguments[1] + arguments[2]);", element,
                 style, format ("color: {0}; border: 3px solid {0};", color));
-            withDriver ().pause (ofMillis (getSession ().getSetting ()
+            pause (getSession ().getSetting ()
                 .getUi ()
                 .getTimeout ()
-                .getHighlightDelay ()));
+                .getHighlightDelay ());
         }
     }
 
