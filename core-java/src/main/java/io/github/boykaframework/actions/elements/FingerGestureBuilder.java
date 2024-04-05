@@ -62,10 +62,12 @@ final class FingerGestureBuilder {
     @Builder.Default
     private       String              name     = "Finger 1";
     private       int                 offset;
-    private       Duration            pause;
+    @Builder.Default
+    private       Duration            pause    = ZERO;
     private       boolean             reverse;
     private       Locator             sourceElement;
-    private       Duration            speed;
+    @Builder.Default
+    private       Duration            speed    = ZERO;
     private final PointerInput.Origin viewport = viewport ();
 
     Sequence dragTo (final Locator targetElement) {

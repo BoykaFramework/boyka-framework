@@ -163,6 +163,10 @@ public enum Message {
      */
     ERROR_STOPPING_SERVER ("Error occurred stopping Appium server: {0}..."),
     /**
+     * Error while sleeping.
+     */
+    ERROR_WHILE_SLEEPING ("Error encountered while pausing the thread..."),
+    /**
      * Error writing file
      */
     ERROR_WRITING_FILE ("Error occurred writing file ({0})..."),

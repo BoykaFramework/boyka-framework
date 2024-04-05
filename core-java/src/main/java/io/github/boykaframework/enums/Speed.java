@@ -31,15 +31,15 @@ public enum Speed {
     /**
      * Fast speed with no delay.
      */
-    FAST (0),
+    FAST (100),
     /**
      * Normal means, with delay of 200ms between each action.
      */
-    NORMAL (200),
+    NORMAL (500),
     /**
      * Slow means, with delay of 500ms between each action.
      */
-    SLOW (500);
+    SLOW (1000);
 
     private final int delay;
 }

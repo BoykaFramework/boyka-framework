@@ -18,10 +18,14 @@ package io.github.boykaframework.actions.drivers;
 
 import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
 import static io.github.boykaframework.actions.CommonActions.performDriverAction;
+import static io.github.boykaframework.enums.Message.ERROR_WHILE_SLEEPING;
+import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static java.lang.System.getProperty;
 import static java.lang.System.lineSeparator;
 import static java.lang.Thread.currentThread;
+import static java.lang.Thread.sleep;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
@@ -83,10 +87,18 @@ public final class DriverActions implements IDriverActions {
         LOGGER.traceEntry ();
         ofNullable (this.listener).ifPresent (l -> l.onPause (time));
         performDriverAction (driver -> {
-            final var action = new Actions (driver);
-            action.pause (time)
-                .build ()
-                .perform ();
+            if (getSession ().getPlatformType () == WEB) {
+                final var action = new Actions (driver);
+                action.pause (time)
+                    .build ()
+                    .perform ();
+            } else {
+                try {
+                    sleep (time.toMillis ());
+                } catch (final InterruptedException e) {
+                    throwError (ERROR_WHILE_SLEEPING);
+                }
+            }
         });
         LOGGER.traceExit ();
     }
