@@ -25,6 +25,7 @@ import static io.github.boykaframework.enums.Message.ERROR_SAVING_SCREENSHOT;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.Validator.requireNonNull;
+import static java.util.Calendar.getInstance;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -35,7 +36,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import com.google.common.truth.StringSubject;
@@ -87,7 +87,7 @@ public class WindowActions implements IWindowActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Gets the current window handle...");
         ofNullable (this.listener).ifPresent (IWindowActionsListener::onCurrentHandle);
-        final String handle = getDriverAttribute (WebDriver::getWindowHandle, EMPTY);
+        final var handle = getDriverAttribute (WebDriver::getWindowHandle, EMPTY);
         LOGGER.traceExit ();
         return handle;
     }
@@ -186,8 +186,7 @@ public class WindowActions implements IWindowActions {
         final var prefix = setting.getPrefix ();
         final var extension = setting.getExtension ();
         final var date = new SimpleDateFormat ("yyyyMMdd-HHmmss");
-        final var timeStamp = date.format (Calendar.getInstance ()
-            .getTime ());
+        final var timeStamp = date.format (getInstance ().getTime ());
         final var fileName = "%s/%s-%s.%s";
         takeScreenshot (String.format (fileName, path, prefix, timeStamp, extension));
     }

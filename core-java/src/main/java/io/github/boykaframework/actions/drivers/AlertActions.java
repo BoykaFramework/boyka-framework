@@ -17,16 +17,16 @@
 package io.github.boykaframework.actions.drivers;
 
 import static com.google.common.truth.Truth.assertWithMessage;
+import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
+import static io.github.boykaframework.enums.ListenerType.ALERT_ACTION;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.google.common.truth.StringSubject;
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.drivers.IAlertActions;
 import io.github.boykaframework.actions.interfaces.listeners.drivers.IAlertActionsListener;
-import io.github.boykaframework.enums.ListenerType;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -51,13 +51,13 @@ public class AlertActions implements IAlertActions {
     private final IAlertActionsListener listener;
 
     private AlertActions () {
-        this.listener = getSession ().getListener (ListenerType.ALERT_ACTION);
+        this.listener = getSession ().getListener (ALERT_ACTION);
     }
 
     @Override
     public String accept (final String text) {
         LOGGER.traceEntry ();
-        return CommonActions.getDriverAttribute (driver -> {
+        return getDriverAttribute (driver -> {
             final var alert = driver.switchTo ()
                 .alert ();
             final var message = alert.getText ();
@@ -71,7 +71,7 @@ public class AlertActions implements IAlertActions {
     @Override
     public String accept () {
         LOGGER.traceEntry ();
-        return CommonActions.getDriverAttribute (driver -> {
+        return getDriverAttribute (driver -> {
             final var alert = driver.switchTo ()
                 .alert ();
             final var message = alert.getText ();
@@ -84,7 +84,7 @@ public class AlertActions implements IAlertActions {
     @Override
     public String dismiss () {
         LOGGER.traceEntry ();
-        return CommonActions.getDriverAttribute (driver -> {
+        return getDriverAttribute (driver -> {
             final var alert = driver.switchTo ()
                 .alert ();
             final var message = alert.getText ();

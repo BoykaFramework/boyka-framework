@@ -101,11 +101,14 @@ public final class Validator {
      * Validate delay that it should be greater than 0 and less than or equal to 1s
      *
      * @param delay Delay to validate
+     *
+     * @return delay after validation
      */
-    public static void validateDelay (final int delay) {
+    public static int validateDelay (final int delay) {
         if (delay < 0 || delay > 1000) {
             throwError (DELAY_OVERFLOW);
         }
+        return delay;
     }
 
     private Validator () {

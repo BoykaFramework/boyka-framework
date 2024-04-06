@@ -16,7 +16,9 @@
 
 package io.github.boykaframework.actions.data;
 
+import static io.github.boykaframework.enums.ListenerType.TEST_DATA_ACTION;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.parser.DataFactory.getParser;
 import static io.github.boykaframework.utils.Validator.checkIndex;
 import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
@@ -27,8 +29,6 @@ import java.util.List;
 import io.github.boykaframework.actions.interfaces.data.IDataRow;
 import io.github.boykaframework.actions.interfaces.data.ITestDataAction;
 import io.github.boykaframework.actions.interfaces.listeners.data.ITestDataActionsListener;
-import io.github.boykaframework.enums.ListenerType;
-import io.github.boykaframework.parser.DataFactory;
 import io.github.boykaframework.parser.IDataParser;
 import org.apache.logging.log4j.Logger;
 
@@ -61,8 +61,8 @@ public class TestDataAction implements ITestDataAction {
 
     private TestDataAction (final String fileName) {
         this.fileName = fileName;
-        this.listener = getSession ().getListener (ListenerType.TEST_DATA_ACTION);
-        this.parser = DataFactory.getParser ();
+        this.listener = getSession ().getListener (TEST_DATA_ACTION);
+        this.parser = getParser ();
     }
 
     @Override

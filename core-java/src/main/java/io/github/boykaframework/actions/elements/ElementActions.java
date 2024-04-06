@@ -90,7 +90,7 @@ public class ElementActions implements IElementActions {
     @Override
     public String getStyle (final String styleName) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting attribute: {} of element located by: {}", styleName, this.locator.getName ());
+        LOGGER.info ("Getting style: {} of element located by: {}", styleName, this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onGetStyle (this.locator, styleName));
         LOGGER.traceExit ();
         return getElementAttribute (e -> e.getCssValue (styleName), this.locator, EMPTY);

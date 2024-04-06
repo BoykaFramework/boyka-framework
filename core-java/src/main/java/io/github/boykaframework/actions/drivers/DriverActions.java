@@ -18,9 +18,13 @@ package io.github.boykaframework.actions.drivers;
 
 import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
 import static io.github.boykaframework.actions.CommonActions.performDriverAction;
+import static io.github.boykaframework.enums.ListenerType.DRIVER_ACTION;
+import static io.github.boykaframework.enums.Message.ERROR_CREATING_LOGS;
 import static io.github.boykaframework.enums.Message.ERROR_WHILE_SLEEPING;
+import static io.github.boykaframework.enums.Message.ERROR_WRITING_LOGS;
 import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static java.lang.System.getProperty;
 import static java.lang.System.lineSeparator;
@@ -39,9 +43,6 @@ import java.util.function.Function;
 
 import io.github.boykaframework.actions.interfaces.drivers.IDriverActions;
 import io.github.boykaframework.actions.interfaces.listeners.drivers.IDriverActionsListener;
-import io.github.boykaframework.enums.ListenerType;
-import io.github.boykaframework.enums.Message;
-import io.github.boykaframework.utils.ErrorHandler;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -70,7 +71,7 @@ public final class DriverActions implements IDriverActions {
     private final IDriverActionsListener listener;
 
     private DriverActions () {
-        this.listener = getSession ().getListener (ListenerType.DRIVER_ACTION);
+        this.listener = getSession ().getListener (DRIVER_ACTION);
     }
 
     @Override
@@ -96,6 +97,7 @@ public final class DriverActions implements IDriverActions {
                 try {
                     sleep (time.toMillis ());
                 } catch (final InterruptedException e) {
+                    currentThread ().interrupt ();
                     throwError (ERROR_WHILE_SLEEPING);
                 }
             }
@@ -159,11 +161,11 @@ public final class DriverActions implements IDriverActions {
                     writer.write (logEntry.getMessage ());
                     writer.write (lineSeparator ());
                 } catch (final IOException e) {
-                    ErrorHandler.handleAndThrow (Message.ERROR_WRITING_LOGS, e);
+                    handleAndThrow (ERROR_WRITING_LOGS, e);
                 }
             });
         } catch (final IOException e) {
-            ErrorHandler.handleAndThrow (Message.ERROR_CREATING_LOGS, e);
+            handleAndThrow (ERROR_CREATING_LOGS, e);
         }
     }
 }
