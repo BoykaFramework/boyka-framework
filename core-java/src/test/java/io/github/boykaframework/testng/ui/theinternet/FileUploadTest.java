@@ -16,8 +16,10 @@
 
 package io.github.boykaframework.testng.ui.theinternet;
 
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.testng.ui.theinternet.pages.FileUploadPage.fileUploadPage;
@@ -25,8 +27,6 @@ import static java.lang.System.getProperty;
 
 import java.nio.file.Path;
 
-import io.github.boykaframework.actions.drivers.NavigateActions;
-import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -52,10 +52,8 @@ public class FileUploadTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createSession ("FileUploadTest", platformType, driverKey);
-        NavigateActions.navigate ()
-            .toBaseUrl ();
-        NavigateActions.navigate ()
-            .to (URL);
+        navigate ().toBaseUrl ();
+        navigate ().to (URL);
     }
 
     /**
@@ -70,8 +68,7 @@ public class FileUploadTest {
     public void testFileUpload () {
         final var filePath = Path.of (getProperty ("user.dir"), "src/test/resources/test-file.txt")
             .toFile ();
-        TextBoxActions.onTextBox (fileUploadPage ().getFileUploadInput ())
-            .enterText (filePath.getPath ());
+        onTextBox (fileUploadPage ().getFileUploadInput ()).enterText (filePath.getPath ());
 
         withMouse (fileUploadPage ().getFileSubmit ()).click ();
         onElement (fileUploadPage ().getSuccessTitle ()).verifyText ()

@@ -16,12 +16,12 @@
 
 package io.github.boykaframework.actions.elements;
 
+import static io.github.boykaframework.actions.CommonActions.pause;
 import static io.github.boykaframework.actions.CommonActions.performElementAction;
 import static io.github.boykaframework.enums.ApplicationType.WEB;
 import static io.github.boykaframework.enums.ListenerType.TEXT_BOX_ACTION;
 import static io.github.boykaframework.enums.PlatformType.IOS;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
-import static io.github.boykaframework.utils.Validator.validateDelay;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -29,7 +29,6 @@ import io.github.boykaframework.actions.interfaces.elements.ITextBoxActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.ITextBoxActionsListener;
 import io.github.boykaframework.builders.Locator;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.interactions.Actions;
 
 /**
  * All text box related actions
@@ -63,17 +62,15 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
         LOGGER.traceEntry ();
         LOGGER.info ("Entering text {} to element {}", text, this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onEnterText (this.locator, text));
-        performElementAction ((driver, element) -> {
-            final var action = new Actions (driver);
-            action.pause (validateDelay (this.delaySetting.getBeforeTyping ()))
-                .sendKeys (element, text);
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (e -> {
+            e.sendKeys (text);
             if (getSession ().getPlatformType () == IOS && getSession ().getMobileSetting ()
                 .getDevice ()
                 .getApplication ()
                 .getType () != WEB) {
-                action.sendKeys ("\n");
+                e.sendKeys ("\n");
             }
-            action.perform ();
         }, this.locator);
         LOGGER.traceExit ();
     }
