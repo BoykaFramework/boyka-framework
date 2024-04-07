@@ -364,6 +364,7 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
 | `screenshot` | Contains screenshot configuration. See [Screenshot Config below](#screenshot-config). | `ScreenshotSetting` | |
 | `web` | Contains web platform configuration. See [Web Config below](#web-config). | `Map<String, WebSetting>` | |
 | `mobile` | Contains Mobile platform configuration. See [Mobile Config below](#mobile-config). | `object` | |
+| `delay` | Contains settings for delay between actions. See [DelaySettings](#delay-setting) | `DelaySetting` | |
 
 :::info Web Configuration
 In `ui` configuration block, you can provide different versions of web settings having different key names under `web` object.
@@ -397,6 +398,16 @@ See the example in [sample configuration file](#config-sample).
 | `path` | Path to the directory where screenshots are stored | `string` | `./screenshots` |
 | `extension` | Extension of the screenshot file | `string` | `jpeg` |
 | `prefix` | Prefix of the screenshot file | `string` | `SCR` |
+
+#### Delay Configuration {#delay-setting}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `before_click` | Delay before clicking on an element | `int` | `0` |
+| `before_mouse_move` | Delay before moving the mouse | `int` | `0` |
+| `before_swipe` | Delay before swiping | `int` | `500` |
+| `before_tap` | Delay before tapping on an element | `int` | `0` |
+| `before_typing` | Delay before typing any text | `int` | `0` |
 
 #### Web Configuration {#web-config}
 
@@ -551,6 +562,13 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | -------- | ----------- | ---- | ------- |
 | `distance` | Amount of distance to swipe from the center of the screen to the edge of the screen or element | `int` | `25` |
 | `max_swipe_until_found` | Maximum amount of time to swipe until an element is found on the screen | `int` | `5` |
+| `speed` | Speed of swipe action | [`Speed`](#swipe-speed) | `FAST` |
+
+##### Swipe Speed {#swipe-speed}
+
+- `FAST`: Speed of `100ms` is used while swiping
+- `NORMAL`: Speed of `500ms` is used while swiping
+- `SLOW`: Speed of `1000ms` is used while swiping
 
 ##### WebDriverAgent Configuration {#wda-config}
 
