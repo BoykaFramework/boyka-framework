@@ -19,16 +19,16 @@ package io.github.boykaframework.config.ui;
 import lombok.Data;
 
 /**
- * Playback setting.
+ * UI Action delay settings.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 04-Apr-2024
  */
 @Data
-public class TimeoutSetting {
-    private int explicitWait    = 10;
-    private int highlightDelay  = 100;
-    private int implicitWait    = 1;
-    private int pageLoadTimeout = 30;
-    private int scriptTimeout   = 10;
+public class DelaySetting {
+    private int beforeClick;
+    private int beforeMouseMove;
+    private int beforeSwipe = 500;
+    private int beforeTap;
+    private int beforeTyping;
 }

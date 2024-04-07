@@ -17,21 +17,22 @@
 package io.github.boykaframework.actions.elements;
 
 import static com.google.common.truth.Truth.assertWithMessage;
+import static io.github.boykaframework.actions.CommonActions.getElementAttribute;
+import static io.github.boykaframework.actions.CommonActions.pause;
+import static io.github.boykaframework.actions.CommonActions.performElementAction;
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.enums.ListenerType.ELEMENT_ACTION;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.StringSubject;
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.elements.IElementActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IElementActionsListener;
 import io.github.boykaframework.builders.Locator;
-import io.github.boykaframework.config.ui.mobile.device.SwipeSetting;
-import io.github.boykaframework.enums.ListenerType;
-import io.github.boykaframework.enums.PlatformType;
-import io.github.boykaframework.manager.ParallelSession;
+import io.github.boykaframework.config.ui.DelaySetting;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
@@ -55,21 +56,16 @@ public class ElementActions implements IElementActions {
         return new ElementActions (locator);
     }
 
+    protected final DelaySetting            delaySetting;
     protected final Locator                 locator;
-    protected       SwipeSetting            swipeSetting;
     private final   IElementActionsListener listener;
 
     ElementActions (final Locator locator) {
         this.locator = locator;
-        this.listener = ParallelSession.getSession ()
-            .getListener (ListenerType.ELEMENT_ACTION);
-        if (ParallelSession.getSession ()
-            .getPlatformType () != PlatformType.WEB) {
-            this.swipeSetting = ParallelSession.getSession ()
-                .getMobileSetting ()
-                .getDevice ()
-                .getSwipe ();
-        }
+        this.listener = getSession ().getListener (ELEMENT_ACTION);
+        this.delaySetting = getSession ().getSetting ()
+            .getUi ()
+            .getDelay ();
     }
 
     @Override
@@ -77,7 +73,8 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Clearing element located by: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onClear (this.locator));
-        CommonActions.performElementAction (WebElement::clear, this.locator);
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (WebElement::clear, this.locator);
         LOGGER.traceExit ();
     }
 
@@ -87,16 +84,16 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onGetAttribute (this.locator, attribute));
         LOGGER.traceExit ();
-        return CommonActions.getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
+        return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
     }
 
     @Override
     public String getStyle (final String styleName) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Getting attribute: {} of element located by: {}", styleName, this.locator.getName ());
+        LOGGER.info ("Getting style: {} of element located by: {}", styleName, this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onGetStyle (this.locator, styleName));
         LOGGER.traceExit ();
-        return CommonActions.getElementAttribute (e -> e.getCssValue (styleName), this.locator, EMPTY);
+        return getElementAttribute (e -> e.getCssValue (styleName), this.locator, EMPTY);
     }
 
     @Override
@@ -104,7 +101,7 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting text of element located by: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onGetText (this.locator));
-        return LOGGER.traceExit (CommonActions.getElementAttribute (WebElement::getText, this.locator, EMPTY));
+        return LOGGER.traceExit (getElementAttribute (WebElement::getText, this.locator, EMPTY));
     }
 
     @Override
@@ -112,7 +109,7 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Checking if element located by: {} is displayed", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onIsDisplayed (this.locator));
-        return LOGGER.traceExit (CommonActions.getElementAttribute (WebElement::isDisplayed, this.locator, false));
+        return LOGGER.traceExit (getElementAttribute (WebElement::isDisplayed, this.locator, false));
     }
 
     @Override
@@ -120,7 +117,7 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Checking if element located by: {} is enabled", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onIsEnabled (this.locator));
-        return LOGGER.traceExit (CommonActions.getElementAttribute (WebElement::isEnabled, this.locator, false));
+        return LOGGER.traceExit (getElementAttribute (WebElement::isEnabled, this.locator, false));
     }
 
     @Override
@@ -128,15 +125,15 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Checking if element located by: {} is selected", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onIsSelected (this.locator));
-        return LOGGER.traceExit (CommonActions.getElementAttribute (WebElement::isSelected, this.locator, false));
+        return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, this.locator, false));
     }
 
     @Override
     public void scrollIntoView () {
         LOGGER.info ("Scrolling element located by [{}] into view", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onScrollIntoView (this.locator));
-        CommonActions.performElementAction (e -> withDriver ().executeScript ("arguments[0].scrollIntoView(true);", e),
-            this.locator);
+        pause (this.delaySetting.getBeforeMouseMove ());
+        performElementAction (e -> withDriver ().executeScript ("arguments[0].scrollIntoView(true);", e), this.locator);
     }
 
     @Override

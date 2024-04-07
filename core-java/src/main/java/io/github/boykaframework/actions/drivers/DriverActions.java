@@ -16,8 +16,20 @@
 
 package io.github.boykaframework.actions.drivers;
 
+import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
+import static io.github.boykaframework.actions.CommonActions.performDriverAction;
+import static io.github.boykaframework.enums.ListenerType.DRIVER_ACTION;
+import static io.github.boykaframework.enums.Message.ERROR_CREATING_LOGS;
+import static io.github.boykaframework.enums.Message.ERROR_WHILE_SLEEPING;
+import static io.github.boykaframework.enums.Message.ERROR_WRITING_LOGS;
+import static io.github.boykaframework.enums.PlatformType.WEB;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
+import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static java.lang.System.getProperty;
+import static java.lang.System.lineSeparator;
 import static java.lang.Thread.currentThread;
+import static java.lang.Thread.sleep;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
@@ -29,13 +41,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.function.Function;
 
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.drivers.IDriverActions;
 import io.github.boykaframework.actions.interfaces.listeners.drivers.IDriverActionsListener;
-import io.github.boykaframework.enums.ListenerType;
-import io.github.boykaframework.enums.Message;
-import io.github.boykaframework.manager.ParallelSession;
-import io.github.boykaframework.utils.ErrorHandler;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -64,8 +71,7 @@ public final class DriverActions implements IDriverActions {
     private final IDriverActionsListener listener;
 
     private DriverActions () {
-        this.listener = ParallelSession.getSession ()
-            .getListener (ListenerType.DRIVER_ACTION);
+        this.listener = getSession ().getListener (DRIVER_ACTION);
     }
 
     @Override
@@ -74,19 +80,27 @@ public final class DriverActions implements IDriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Executing script");
         ofNullable (this.listener).ifPresent (l -> l.onExecuteScript (script, args));
-        return (T) CommonActions.getDriverAttribute (
-            driver -> ((JavascriptExecutor) driver).executeScript (script, args), null);
+        return (T) getDriverAttribute (driver -> ((JavascriptExecutor) driver).executeScript (script, args), null);
     }
 
     @Override
     public void pause (final Duration time) {
         LOGGER.traceEntry ();
         ofNullable (this.listener).ifPresent (l -> l.onPause (time));
-        CommonActions.performDriverAction (driver -> {
-            final var action = new Actions (driver);
-            action.pause (time)
-                .build ()
-                .perform ();
+        performDriverAction (driver -> {
+            if (getSession ().getPlatformType () == WEB) {
+                final var action = new Actions (driver);
+                action.pause (time)
+                    .build ()
+                    .perform ();
+            } else {
+                try {
+                    sleep (time.toMillis ());
+                } catch (final InterruptedException e) {
+                    currentThread ().interrupt ();
+                    throwError (ERROR_WHILE_SLEEPING);
+                }
+            }
         });
         LOGGER.traceExit ();
     }
@@ -95,9 +109,8 @@ public final class DriverActions implements IDriverActions {
     public void saveLogs () {
         LOGGER.traceEntry ();
         ofNullable (this.listener).ifPresent (IDriverActionsListener::onSaveLogs);
-        CommonActions.performDriverAction (d -> {
-            final var logSetting = ParallelSession.getSession ()
-                .getSetting ()
+        performDriverAction (d -> {
+            final var logSetting = getSession ().getSetting ()
                 .getUi ()
                 .getLogging ();
             if (!logSetting.isEnable ()) {
@@ -130,9 +143,8 @@ public final class DriverActions implements IDriverActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Waiting for condition...");
         ofNullable (this.listener).ifPresent (IDriverActionsListener::onWaitUntil);
-        CommonActions.performDriverAction (driver -> {
-            final var wait = ParallelSession.getSession ()
-                .getWait ();
+        performDriverAction (driver -> {
+            final var wait = getSession ().getWait ();
             wait.until (condition);
         });
     }
@@ -147,13 +159,13 @@ public final class DriverActions implements IDriverActions {
             logEntries.forEach (logEntry -> {
                 try {
                     writer.write (logEntry.getMessage ());
-                    writer.write (getProperty ("line.separator"));
+                    writer.write (lineSeparator ());
                 } catch (final IOException e) {
-                    ErrorHandler.handleAndThrow (Message.ERROR_WRITING_LOGS, e);
+                    handleAndThrow (ERROR_WRITING_LOGS, e);
                 }
             });
         } catch (final IOException e) {
-            ErrorHandler.handleAndThrow (Message.ERROR_CREATING_LOGS, e);
+            handleAndThrow (ERROR_CREATING_LOGS, e);
         }
     }
 }

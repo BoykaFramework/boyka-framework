@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.actions.elements;
 
+import static io.github.boykaframework.actions.CommonActions.pause;
 import static io.github.boykaframework.actions.CommonActions.performElementAction;
 import static io.github.boykaframework.enums.ApplicationType.WEB;
 import static io.github.boykaframework.enums.ListenerType.TEXT_BOX_ACTION;
@@ -61,6 +62,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
         LOGGER.traceEntry ();
         LOGGER.info ("Entering text {} to element {}", text, this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onEnterText (this.locator, text));
+        pause (this.delaySetting.getBeforeTyping ());
         performElementAction (e -> {
             e.sendKeys (text);
             if (getSession ().getPlatformType () == IOS && getSession ().getMobileSetting ()

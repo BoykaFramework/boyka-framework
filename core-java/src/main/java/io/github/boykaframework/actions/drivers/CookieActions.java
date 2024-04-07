@@ -16,6 +16,9 @@
 
 package io.github.boykaframework.actions.drivers;
 
+import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
+import static io.github.boykaframework.actions.CommonActions.performDriverAction;
+import static io.github.boykaframework.enums.ListenerType.COOKIE_ACTION;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
@@ -23,10 +26,8 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.List;
 
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.drivers.ICookieActions;
 import io.github.boykaframework.actions.interfaces.listeners.drivers.ICookieActionsListener;
-import io.github.boykaframework.enums.ListenerType;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
 
@@ -52,7 +53,7 @@ public class CookieActions implements ICookieActions {
     private final ICookieActionsListener listener;
 
     private CookieActions () {
-        this.listener = getSession ().getListener (ListenerType.COOKIE_ACTION);
+        this.listener = getSession ().getListener (COOKIE_ACTION);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class CookieActions implements ICookieActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Get Cookie named [{}]...", name);
         ofNullable (this.listener).ifPresent (l -> l.onCookie (name));
-        return CommonActions.getDriverAttribute (driver -> driver.manage ()
+        return getDriverAttribute (driver -> driver.manage ()
             .getCookieNamed (name), null);
     }
 
@@ -69,7 +70,7 @@ public class CookieActions implements ICookieActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting all the cookies...");
         ofNullable (this.listener).ifPresent (ICookieActionsListener::onCookies);
-        return CommonActions.getDriverAttribute (driver -> driver.manage ()
+        return getDriverAttribute (driver -> driver.manage ()
             .getCookies ()
             .stream ()
             .map (Cookie::getName)
@@ -81,7 +82,7 @@ public class CookieActions implements ICookieActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Delete Cookie named [{}]...", name);
         ofNullable (this.listener).ifPresent (l -> l.onDelete (name));
-        CommonActions.performDriverAction (driver -> driver.manage ()
+        performDriverAction (driver -> driver.manage ()
             .deleteCookieNamed (name));
         LOGGER.traceExit ();
     }
@@ -91,7 +92,7 @@ public class CookieActions implements ICookieActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Deleting all the cookies...");
         ofNullable (this.listener).ifPresent (ICookieActionsListener::onDeleteAll);
-        CommonActions.performDriverAction (driver -> driver.manage ()
+        performDriverAction (driver -> driver.manage ()
             .deleteAllCookies ());
         LOGGER.traceExit ();
     }

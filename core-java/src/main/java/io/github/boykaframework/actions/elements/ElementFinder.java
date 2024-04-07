@@ -18,6 +18,8 @@ package io.github.boykaframework.actions.elements;
 
 import static io.github.boykaframework.enums.Message.ELEMENT_NOT_FOUND;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
+import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
@@ -30,7 +32,6 @@ import java.util.List;
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.enums.WaitStrategy;
 import io.github.boykaframework.exception.FrameworkError;
-import io.github.boykaframework.utils.ErrorHandler;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -57,7 +58,7 @@ public final class ElementFinder {
         LOGGER.traceEntry ();
         final var elements = finds (locator, waitStrategy);
         if (elements.isEmpty ()) {
-            ErrorHandler.throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
+            throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
         }
         if (!isNull (locator.getFilter ())) {
             return elements.stream ()
@@ -96,7 +97,7 @@ public final class ElementFinder {
         LOGGER.traceEntry ();
         final var platformLocator = locator.getLocator ();
         if (isNull (platformLocator)) {
-            ErrorHandler.throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
+            throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
         }
         return LOGGER.traceExit (!isNull (parent)
                                  ? parent.findElements (locator.getLocator ())
@@ -117,7 +118,7 @@ public final class ElementFinder {
                 wait.until (visibilityOfElementLocated (locator.getLocator ()));
             }
         } catch (final TimeoutException e) {
-            ErrorHandler.handleAndThrow (ELEMENT_NOT_FOUND, e, locator.getName (), getSession ().getPlatformType ());
+            handleAndThrow (ELEMENT_NOT_FOUND, e, locator.getName (), getSession ().getPlatformType ());
         }
     }
 

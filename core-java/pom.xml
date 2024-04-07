@@ -430,7 +430,7 @@
                 <configuration>
                     <release>17</release>
                     <encoding>UTF-8</encoding>
-                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                    <forceLegacyJavacApi>true</forceLegacyJavacApi>
                 </configuration>
             </plugin>
             <plugin>

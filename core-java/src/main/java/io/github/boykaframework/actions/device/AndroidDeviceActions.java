@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.actions.device;
 
+import static io.github.boykaframework.actions.CommonActions.performDriverAction;
 import static io.github.boykaframework.enums.ListenerType.ANDROID_DEVICE_ACTION;
 import static io.github.boykaframework.enums.Message.ACTION_NOT_SUPPORTED_ON_PLATFORM;
 import static io.github.boykaframework.enums.PlatformType.ANDROID;
@@ -27,7 +28,6 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.device.IAndroidDeviceActions;
 import io.github.boykaframework.actions.interfaces.listeners.device.IAndroidDeviceActionsListener;
 import org.apache.logging.log4j.Logger;
@@ -66,7 +66,7 @@ public class AndroidDeviceActions extends DeviceActions implements IAndroidDevic
         }
         LOGGER.info ("Pressing key [{}] on Android device...", key);
         ofNullable (this.listener).ifPresent (l -> l.onPressKey (key));
-        CommonActions.performDriverAction ((AndroidDriver d) -> d.pressKey (new KeyEvent ().withKey (key)));
+        performDriverAction ((AndroidDriver d) -> d.pressKey (new KeyEvent ().withKey (key)));
         LOGGER.traceExit ();
     }
 }

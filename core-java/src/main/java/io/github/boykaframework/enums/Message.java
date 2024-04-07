@@ -67,6 +67,10 @@ public enum Message {
     CONTEXT_SWITCHING_NOT_ALLOWED (
         "Context switching is not allowed for application other than Hybrid, current application type is ({0})..."),
     /**
+     * Delay should be less than 1000ms.
+     */
+    DELAY_OVERFLOW ("Delay should not be < 0, or > 1000ms may slow your run further..."),
+    /**
      * Error when driver is null.
      */
     DRIVER_CANNOT_BE_NULL ("Driver cannot be null, make sure you started the session correctly.."),
@@ -158,6 +162,10 @@ public enum Message {
      * Error stopping Appium server.
      */
     ERROR_STOPPING_SERVER ("Error occurred stopping Appium server: {0}..."),
+    /**
+     * Error while sleeping.
+     */
+    ERROR_WHILE_SLEEPING ("Error encountered while pausing the thread..."),
     /**
      * Error writing file
      */

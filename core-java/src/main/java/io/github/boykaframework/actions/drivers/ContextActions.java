@@ -16,8 +16,11 @@
 
 package io.github.boykaframework.actions.drivers;
 
+import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
+import static io.github.boykaframework.actions.CommonActions.performDriverAction;
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.enums.ApplicationType.HYBRID;
+import static io.github.boykaframework.enums.ListenerType.CONTEXT_ACTION;
 import static io.github.boykaframework.enums.Message.CONTEXT_SWITCHING_NOT_ALLOWED;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
@@ -28,10 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.appium.java_client.remote.SupportsContextSwitching;
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.drivers.IContextActions;
 import io.github.boykaframework.actions.interfaces.listeners.drivers.IContextActionsListener;
-import io.github.boykaframework.enums.ListenerType;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -56,7 +57,7 @@ public class ContextActions implements IContextActions {
     private final IContextActionsListener listener;
 
     private ContextActions () {
-        this.listener = getSession ().getListener (ListenerType.CONTEXT_ACTION);
+        this.listener = getSession ().getListener (CONTEXT_ACTION);
     }
 
     @Override
@@ -64,8 +65,8 @@ public class ContextActions implements IContextActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting All available context names...");
         ofNullable (this.listener).ifPresent (IContextActionsListener::onContexts);
-        return CommonActions.getDriverAttribute (
-            (final SupportsContextSwitching d) -> new ArrayList<> (d.getContextHandles ()), null);
+        return getDriverAttribute ((final SupportsContextSwitching d) -> new ArrayList<> (d.getContextHandles ()),
+            null);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class ContextActions implements IContextActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting current context name...");
         ofNullable (this.listener).ifPresent (IContextActionsListener::onCurrentContext);
-        return CommonActions.getDriverAttribute (SupportsContextSwitching::getContext, null);
+        return getDriverAttribute (SupportsContextSwitching::getContext, null);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class ContextActions implements IContextActions {
         if (applicationType != HYBRID) {
             throwError (CONTEXT_SWITCHING_NOT_ALLOWED, applicationType);
         }
-        CommonActions.performDriverAction ((SupportsContextSwitching d) -> d.context (contextName));
+        performDriverAction ((SupportsContextSwitching d) -> d.context (contextName));
         LOGGER.traceExit ();
     }
 

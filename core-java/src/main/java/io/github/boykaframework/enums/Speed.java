@@ -14,21 +14,32 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.ui;
+package io.github.boykaframework.enums;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
- * Playback setting.
+ * UI execution speed.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 27-Mar-2024
  */
-@Data
-public class TimeoutSetting {
-    private int explicitWait    = 10;
-    private int highlightDelay  = 100;
-    private int implicitWait    = 1;
-    private int pageLoadTimeout = 30;
-    private int scriptTimeout   = 10;
+@AllArgsConstructor
+@Getter
+public enum Speed {
+    /**
+     * Fast speed with no delay.
+     */
+    FAST (100),
+    /**
+     * Normal means, with delay of 200ms between each action.
+     */
+    NORMAL (500),
+    /**
+     * Slow means, with delay of 500ms between each action.
+     */
+    SLOW (1000);
+
+    private final int delay;
 }

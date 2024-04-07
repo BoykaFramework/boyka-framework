@@ -16,28 +16,31 @@
 
 package io.github.boykaframework.actions.elements;
 
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.actions.elements.ElementFinder.find;
 import static io.github.boykaframework.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static io.github.boykaframework.enums.Message.FINGER_OUT_OF_BOUND;
 import static io.github.boykaframework.enums.Message.INVALID_SWIPE_DISTANCE;
+import static io.github.boykaframework.enums.SwipeDirection.DOWN;
+import static io.github.boykaframework.enums.SwipeDirection.RIGHT;
+import static io.github.boykaframework.enums.SwipeDirection.UP;
+import static io.github.boykaframework.enums.WaitStrategy.CLICKABLE;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static io.github.boykaframework.utils.Validator.requireNonNull;
+import static io.github.boykaframework.utils.Validator.validateDelay;
 import static java.time.Duration.ZERO;
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.isNull;
 import static org.openqa.selenium.interactions.PointerInput.Kind.TOUCH;
-import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
 import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
 
 import java.time.Duration;
 import java.util.function.BiFunction;
 
-import io.github.boykaframework.actions.drivers.WindowActions;
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.enums.SwipeDirection;
-import io.github.boykaframework.enums.WaitStrategy;
 import lombok.Builder;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -53,8 +56,7 @@ import org.openqa.selenium.interactions.Sequence;
  */
 @Builder (builderMethodName = "init")
 final class FingerGestureBuilder {
-    private static final Dimension SCREEN_SIZE = WindowActions.onWindow ()
-        .viewportSize ();
+    private static final Dimension SCREEN_SIZE = onWindow ().viewportSize ();
 
     private       SwipeDirection      direction;
     private       int                 initialIndex;
@@ -62,11 +64,11 @@ final class FingerGestureBuilder {
     private       String              name     = "Finger 1";
     private       int                 offset;
     @Builder.Default
-    private       Duration            pause    = ofMillis (500);
+    private       Duration            pause    = ZERO;
     private       boolean             reverse;
     private       Locator             sourceElement;
     @Builder.Default
-    private       Duration            speed    = ofMillis (500);
+    private       Duration            speed    = ZERO;
     private final PointerInput.Origin viewport = viewport ();
 
     Sequence dragTo (final Locator targetElement) {
@@ -105,7 +107,7 @@ final class FingerGestureBuilder {
         var h = SCREEN_SIZE.getHeight ();
 
         if (!isNull (locator)) {
-            final var element = find (locator, WaitStrategy.CLICKABLE);
+            final var element = find (locator, CLICKABLE);
             final var size = element.getSize ();
             final var location = element.getLocation ();
             w = size.getWidth () + location.getX ();
@@ -135,7 +137,7 @@ final class FingerGestureBuilder {
     }
 
     private Point getElementCenter (final Locator element) {
-        final var webElement = find (requireNonNull (element, ELEMENT_CANNOT_BE_NULL), WaitStrategy.CLICKABLE);
+        final var webElement = find (requireNonNull (element, ELEMENT_CANNOT_BE_NULL), CLICKABLE);
         final var location = webElement.getLocation ();
         final var size = webElement.getSize ();
         final var x = location.getX () + (size.getWidth () / 2);
@@ -146,12 +148,8 @@ final class FingerGestureBuilder {
     private Point getOffSetPosition (final Point position) {
         var result = position;
         if (this.offset > 0) {
-            final var offSetX = this.direction == SwipeDirection.LEFT || this.direction == SwipeDirection.RIGHT
-                                ? -this.offset
-                                : 0;
-            final var offSetY = this.direction == SwipeDirection.UP || this.direction == SwipeDirection.DOWN
-                                ? this.offset
-                                : 0;
+            final var offSetX = this.direction == SwipeDirection.LEFT || this.direction == RIGHT ? -this.offset : 0;
+            final var offSetY = this.direction == UP || this.direction == DOWN ? this.offset : 0;
             result = new Point (result.getX () + offSetX, result.getY () + offSetY);
         }
         return result;
@@ -179,14 +177,31 @@ final class FingerGestureBuilder {
     }
 
     private Sequence singleFingerGesture (final Point start, final Point end) {
+        final var swipeSetting = getSession ().getMobileSetting ()
+            .getDevice ()
+            .getSwipe ();
+        final var delaySetting = getSession ().getSetting ()
+            .getUi ()
+            .getDelay ();
+
+        validateDelay (swipeSetting.getSpeed ()
+            .getDelay ());
+        validateDelay (delaySetting.getBeforeSwipe ());
+
+        this.speed = this.speed != ZERO
+                     ? this.speed
+                     : ofMillis (swipeSetting.getSpeed ()
+                         .getDelay ());
+        this.pause = this.pause != ZERO ? this.pause : ofMillis (delaySetting.getBeforeSwipe ());
+
         return composeSequence ((finger, steps) -> {
             steps.addAction (finger.createPointerMove (ZERO, this.viewport, start.getX (), start.getY ()));
-            steps.addAction (finger.createPointerDown (LEFT.asArg ()));
+            steps.addAction (finger.createPointerDown (PointerInput.MouseButton.LEFT.asArg ()));
             steps.addAction (new Pause (finger, this.pause));
             if (!isNull (end)) {
                 steps.addAction (finger.createPointerMove (this.speed, this.viewport, end.getX (), end.getY ()));
             }
-            steps.addAction (finger.createPointerUp (LEFT.asArg ()));
+            steps.addAction (finger.createPointerUp (PointerInput.MouseButton.LEFT.asArg ()));
             return steps;
         });
     }

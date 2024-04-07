@@ -16,14 +16,14 @@
 
 package io.github.boykaframework.actions.drivers;
 
+import static io.github.boykaframework.actions.CommonActions.performDriverAction;
+import static io.github.boykaframework.enums.ListenerType.FRAME_ACTION;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.drivers.IFrameActions;
 import io.github.boykaframework.actions.interfaces.listeners.drivers.IFrameActionsListener;
-import io.github.boykaframework.enums.ListenerType;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -48,7 +48,7 @@ public class FrameActions implements IFrameActions {
     private final IFrameActionsListener listener;
 
     private FrameActions () {
-        this.listener = getSession ().getListener (ListenerType.FRAME_ACTION);
+        this.listener = getSession ().getListener (FRAME_ACTION);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class FrameActions implements IFrameActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to frame: {}", frameName);
         ofNullable (this.listener).ifPresent (l -> l.onSwitchTo (frameName));
-        CommonActions.performDriverAction (driver -> driver.switchTo ()
+        performDriverAction (driver -> driver.switchTo ()
             .frame (frameName));
         LOGGER.traceExit ();
     }
@@ -66,7 +66,7 @@ public class FrameActions implements IFrameActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to frame index: {}", index);
         ofNullable (this.listener).ifPresent (l -> l.onSwitchTo (index));
-        CommonActions.performDriverAction (driver -> driver.switchTo ()
+        performDriverAction (driver -> driver.switchTo ()
             .frame (index));
         LOGGER.traceExit ();
     }
@@ -76,7 +76,7 @@ public class FrameActions implements IFrameActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to main frame...");
         ofNullable (this.listener).ifPresent (IFrameActionsListener::onSwitchToParent);
-        CommonActions.performDriverAction (driver -> driver.switchTo ()
+        performDriverAction (driver -> driver.switchTo ()
             .parentFrame ());
         LOGGER.traceExit ();
     }

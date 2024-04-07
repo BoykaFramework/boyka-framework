@@ -17,6 +17,10 @@
 package io.github.boykaframework.actions.elements;
 
 import static com.google.common.truth.Truth.assertWithMessage;
+import static io.github.boykaframework.actions.CommonActions.getElementAttribute;
+import static io.github.boykaframework.actions.CommonActions.pause;
+import static io.github.boykaframework.actions.CommonActions.performElementAction;
+import static io.github.boykaframework.enums.ListenerType.DROP_DOWN_ACTION;
 import static io.github.boykaframework.enums.Message.ERROR_DESELECT_FROM_DROPDOWN;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
@@ -29,11 +33,9 @@ import java.util.List;
 
 import com.google.common.truth.IterableSubject;
 import com.google.common.truth.StringSubject;
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.elements.IDropDownActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IDropDownActionsListener;
 import io.github.boykaframework.builders.Locator;
-import io.github.boykaframework.enums.ListenerType;
 import lombok.Setter;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
@@ -65,7 +67,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
 
     DropDownActions (final Locator locator) {
         super (locator);
-        this.listener = getSession ().getListener (ListenerType.DROP_DOWN_ACTION);
+        this.listener = getSession ().getListener (DROP_DOWN_ACTION);
     }
 
     @Override
@@ -73,7 +75,8 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onDeselectAll (this.locator));
-        CommonActions.performElementAction (e -> {
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
                 throwError (ERROR_DESELECT_FROM_DROPDOWN);
@@ -88,7 +91,8 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by index: {}", this.locator.getName (), index);
         ofNullable (this.listener).ifPresent (l -> l.onDeselectByIndex (this.locator, index));
-        CommonActions.performElementAction (e -> {
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
                 throwError (ERROR_DESELECT_FROM_DROPDOWN);
@@ -103,7 +107,8 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by visible text: {}", this.locator.getName (), text);
         ofNullable (this.listener).ifPresent (l -> l.onDeselectByText (this.locator, text));
-        CommonActions.performElementAction (e -> {
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
                 throwError (ERROR_DESELECT_FROM_DROPDOWN);
@@ -118,7 +123,8 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Deselecting element located by: {} by value: {}", this.locator.getName (), value);
         ofNullable (this.listener).ifPresent (l -> l.onDeselectByValue (this.locator, value));
-        CommonActions.performElementAction (e -> {
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (e -> {
             final var select = new Select (e);
             if (!select.isMultiple ()) {
                 throwError (ERROR_DESELECT_FROM_DROPDOWN);
@@ -133,7 +139,8 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by index: {}", this.locator.getName (), index);
         ofNullable (this.listener).ifPresent (l -> l.onSelectByIndex (this.locator, index));
-        CommonActions.performElementAction (e -> {
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (e -> {
             final var select = new Select (e);
             select.selectByIndex (index);
         }, this.locator);
@@ -145,7 +152,8 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by text: {}", this.locator.getName (), text);
         ofNullable (this.listener).ifPresent (l -> l.onSelectByText (this.locator, text));
-        CommonActions.performElementAction (e -> {
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (e -> {
             final var select = new Select (e);
             select.selectByVisibleText (text);
         }, this.locator);
@@ -157,7 +165,8 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Selecting element located by: {} by value: {}", this.locator.getName (), value);
         ofNullable (this.listener).ifPresent (l -> l.onSelectByValue (this.locator, value));
-        CommonActions.performElementAction (e -> {
+        pause (this.delaySetting.getBeforeTyping ());
+        performElementAction (e -> {
             final var select = new Select (e);
             select.selectByValue (value);
         }, this.locator);
@@ -169,7 +178,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Getting selected option from element located by: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onSelectedItem (this.locator));
-        return CommonActions.getElementAttribute (element -> {
+        return getElementAttribute (element -> {
             final var select = new Select (element);
             try {
                 return select.getFirstSelectedOption ()
@@ -185,7 +194,7 @@ public class DropDownActions extends ClickableActions implements IDropDownAction
         LOGGER.traceEntry ();
         LOGGER.info ("Getting all selected options from element located by: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onSelectedItems (this.locator));
-        return CommonActions.getElementAttribute (e -> {
+        return getElementAttribute (e -> {
             final var select = new Select (e);
             return select.getAllSelectedOptions ()
                 .stream ()

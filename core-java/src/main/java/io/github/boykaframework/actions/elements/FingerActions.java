@@ -16,21 +16,24 @@
 
 package io.github.boykaframework.actions.elements;
 
-import static java.time.Duration.ZERO;
+import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
+import static io.github.boykaframework.actions.CommonActions.getElementAttribute;
+import static io.github.boykaframework.actions.CommonActions.performMobileGestures;
+import static io.github.boykaframework.enums.ListenerType.FINGER_ACTION;
+import static io.github.boykaframework.enums.Message.ELEMENT_NOT_FOUND;
+import static io.github.boykaframework.enums.PlatformType.WEB;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static java.time.Duration.ofMillis;
 import static java.util.Collections.singletonList;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
-import io.github.boykaframework.actions.CommonActions;
 import io.github.boykaframework.actions.interfaces.elements.IFingerActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IFingerActionsListener;
 import io.github.boykaframework.builders.Locator;
-import io.github.boykaframework.enums.ListenerType;
-import io.github.boykaframework.enums.Message;
+import io.github.boykaframework.config.ui.mobile.device.SwipeSetting;
 import io.github.boykaframework.enums.SwipeDirection;
-import io.github.boykaframework.manager.ParallelSession;
-import io.github.boykaframework.utils.ErrorHandler;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -63,6 +66,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     }
 
     private final IFingerActionsListener listener;
+    private       SwipeSetting           swipeSetting;
 
     FingerActions () {
         this (null);
@@ -70,8 +74,12 @@ public class FingerActions extends ElementActions implements IFingerActions {
 
     FingerActions (final Locator locator) {
         super (locator);
-        this.listener = ParallelSession.getSession ()
-            .getListener (ListenerType.FINGER_ACTION);
+        this.listener = getSession ().getListener (FINGER_ACTION);
+        if (getSession ().getPlatformType () != WEB) {
+            this.swipeSetting = getSession ().getMobileSetting ()
+                .getDevice ()
+                .getSwipe ();
+        }
     }
 
     @Override
@@ -79,12 +87,12 @@ public class FingerActions extends ElementActions implements IFingerActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Dragging [{}] to [{}] on Mobile devices.", this.locator.getName (), destination.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onDragTo (this.locator, destination));
-        final var dragSequence = CommonActions.getDriverAttribute (driver -> FingerGestureBuilder.init ()
+        final var dragSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .sourceElement (this.locator)
-            .pause (ofMillis (600))
+            .pause (ofMillis (this.delaySetting.getBeforeMouseMove ()))
             .build ()
             .dragTo (destination), null);
-        CommonActions.performMobileGestures (singletonList (dragSequence));
+        performMobileGestures (singletonList (dragSequence));
         LOGGER.traceExit ();
     }
 
@@ -93,12 +101,12 @@ public class FingerActions extends ElementActions implements IFingerActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Swiping {} on Mobile devices.", direction);
         ofNullable (this.listener).ifPresent (l -> l.onSwipe (this.locator, direction));
-        final var swipeUpSequence = CommonActions.getDriverAttribute (driver -> FingerGestureBuilder.init ()
+        final var swipeUpSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
             .direction (direction)
             .sourceElement (this.locator)
             .build ()
             .swipe (), null);
-        CommonActions.performMobileGestures (singletonList (swipeUpSequence));
+        performMobileGestures (singletonList (swipeUpSequence));
         LOGGER.traceExit ();
     }
 
@@ -115,8 +123,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
             finger.swipe (direction);
         }
         if (!element.isDisplayed ()) {
-            ErrorHandler.throwError (Message.ELEMENT_NOT_FOUND, this.locator.getName (), ParallelSession.getSession ()
-                .getPlatformType ());
+            throwError (ELEMENT_NOT_FOUND, this.locator.getName (), getSession ().getPlatformType ());
         }
         LOGGER.traceExit ();
     }
@@ -126,12 +133,12 @@ public class FingerActions extends ElementActions implements IFingerActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Tapping on the element...");
         ofNullable (this.listener).ifPresent (l -> l.onTap (this.locator));
-        final var sequences = CommonActions.getElementAttribute (element -> FingerGestureBuilder.init ()
+        final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
             .sourceElement (this.locator)
-            .pause (ZERO)
+            .pause (ofMillis (this.delaySetting.getBeforeTap ()))
             .build ()
             .tapOn (), this.locator, null);
-        CommonActions.performMobileGestures (singletonList (sequences));
+        performMobileGestures (singletonList (sequences));
         LOGGER.traceExit ();
     }
 }
