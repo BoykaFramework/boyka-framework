@@ -48,13 +48,13 @@
         <json-schema-validator.version>1.4.0</json-schema-validator.version>
         <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.14.2</checkstyle.version>
+        <checkstyle.version>10.15.0</checkstyle.version>
         <aspectj.version>1.9.22</aspectj.version>
         <poi.version>5.2.5</poi.version>
         <suite-name>testng-api</suite-name>
@@ -76,7 +76,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>3.11.0.3922</sonar.maven.version>
-        <jacoco.version>0.8.11</jacoco.version>
+        <jacoco.version>0.8.12</jacoco.version>
         <surefire-version>3.2.5</surefire-version>
         <nexus.version>1.6.13</nexus.version>
         <maven.gpg.version>3.2.2</maven.gpg.version>
