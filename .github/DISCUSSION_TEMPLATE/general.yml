@@ -1,0 +1,22 @@
+title: "<title>"
+labels:
+  - "💬 talk: discussion"
+body:
+  - type: dropdown
+    attributes:
+      label: Select Topic Type
+      description: What would you like to discuss?
+      options:
+        - "̦❓ Question"
+        - "💬 Feedback"
+        - "🐛 Bug"
+        - "👀 Show & Tell"
+        - "🗣️ General"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Body
+      description: Let's start the discussion!
+    validations:
+      required: true
