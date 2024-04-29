@@ -1,0 +1,30 @@
+title: Boyka Framework logging
+labels:
+  - "🧻 aspect: logging"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ This category is solely for discussions and feedback on Boyka Framework logging.
+
+        To ensure you receive a timely response and connect with the proper team(s), please post in the correct category by using the corresponding product category form. If one does not exist, use [the General category](https://github.com/orgs/BoykaFramework/discussions/categories/general).
+
+        Discussions that are posted in the wrong category may be moved. Users who post spam or violate of our [Code of Conduct](https://github.com/BoykaFramework/boyka-framework/blob/0008e3fb2e2c7dd7377f6512ab1ba1a93f92aa1b/.github/CODE_OF_CONDUCT.md) will be blocked.
+  - type: dropdown
+    attributes:
+      label: Select Topic Type
+      description: What would you like to discuss?
+      options:
+        - "̦❓ Question"
+        - "💬 Feedback"
+        - "🐛 Bug"
+        - "👀 Show & Tell"
+        - "🗣️ General"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Body
+      description: Let's start the discussion!
+    validations:
+      required: true
