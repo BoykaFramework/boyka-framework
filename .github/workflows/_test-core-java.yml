@@ -95,9 +95,9 @@ jobs:
         if: ${{ inputs.run-ios }}
         uses: futureware-tech/simulator-action@v3
         with:
-          model: 'iPhone 14'
+          model: 'iPhone 15'
           os: 'iOS'
-          os_version: 16.2
+          os_version: 17.0
           shutdown_after_job: true
 
       - name: Cache AVD snapshot
