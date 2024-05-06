@@ -651,7 +651,8 @@
     },
     "test_bad_ssl_wo_verify": {
       "base_uri": "https://expired.badssl.com",
-      "validate_ssl": false
+      "validate_ssl": false,
+      "connection_timeout": 2
     },
     "test_bad_host_name_wo_verify_ssl": {
       "base_uri": "http://wrong.host.badssl.com",
