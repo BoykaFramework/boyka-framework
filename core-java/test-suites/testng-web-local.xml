@@ -24,8 +24,6 @@
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
-            <package name="io.github.boykaframework.testng.ui.saucedemo"/>
-            <package name="io.github.boykaframework.testng.ui.theinternet"/>
             <package name="io.github.boykaframework.testng.ui.jiomeet"/>
         </packages>
     </test>
@@ -37,7 +35,7 @@
             <package name="io.github.boykaframework.testng.ui.theinternet"/>
         </packages>
     </test>
-    <test name="Test web on Local Edge">
+    <test name="Test web on Local Edge" parallel="classes">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_edge"/>
         <packages>

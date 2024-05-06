@@ -26,8 +26,8 @@
   <a href="https://central.sonatype.com/artifact/io.github.boykaframework/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/io.github.boykaframework/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v1.0.0">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v1.0.0/total?color=brightgreen&label=Downloads%20for%20v1.0.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v1.1.0">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v1.1.0/total?color=brightgreen&label=Downloads%20for%20v1.1.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -88,7 +88,7 @@ Use this space to tell a little more about your project and how it can be used. 
 <dependency>
   <groupId>io.github.boykaframework</groupId>
   <artifactId>boyka-framework</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
