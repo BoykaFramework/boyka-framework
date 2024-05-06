@@ -35,7 +35,7 @@
             <package name="io.github.boykaframework.testng.ui.theinternet"/>
         </packages>
     </test>
-    <test name="Test web on Local Edge" parallel="classes">
+    <test name="Test web on Local Edge">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_edge"/>
         <packages>

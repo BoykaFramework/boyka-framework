@@ -16,10 +16,13 @@
 
 package io.github.boykaframework.testng.ui.wdio;
 
+import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.drivers.ContextActions.withContext;
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
 import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 import static io.github.boykaframework.enums.PlatformType.ANDROID;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
@@ -29,12 +32,8 @@ import static io.github.boykaframework.testng.ui.wdio.pages.DragDropPage.dragDro
 import static io.github.boykaframework.testng.ui.wdio.pages.SignUpPage.signUpPage;
 import static io.github.boykaframework.testng.ui.wdio.pages.WDIOHomePage.wdioHomePage;
 import static io.github.boykaframework.testng.ui.wdio.pages.WebViewPage.webViewPage;
-import static java.text.MessageFormat.format;
 
-import io.github.boykaframework.actions.device.DeviceActions;
-import io.github.boykaframework.actions.drivers.ContextActions;
 import io.github.boykaframework.actions.drivers.WindowActions;
-import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -70,9 +69,8 @@ public class WdioDemoTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
-        createSession (format ("WdioDemoTest-{0}", platformType), platformType, driverKey);
-        DeviceActions.onDevice ()
-            .startRecording ();
+        createSession (platformType, driverKey);
+        onDevice ().startRecording ();
     }
 
     /**
@@ -80,8 +78,7 @@ public class WdioDemoTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownTestClass () {
-        DeviceActions.onDevice ()
-            .stopRecording ();
+        onDevice ().stopRecording ();
         withDriver ().saveLogs ();
         clearSession ();
     }
@@ -113,16 +110,12 @@ public class WdioDemoTest {
         withFinger (wdioHomePage ().getLoginTab ()).tap ();
 
         withFinger (signUpPage ().getSignUpTab ()).tap ();
-        TextBoxActions.onTextBox (signUpPage ().getEmail ())
-            .enterText (userName);
-        TextBoxActions.onTextBox (signUpPage ().getPassword ())
-            .enterText (password);
-        TextBoxActions.onTextBox (signUpPage ().getConfirmPassword ())
-            .enterText (password);
+        onTextBox (signUpPage ().getEmail ()).enterText (userName);
+        onTextBox (signUpPage ().getPassword ()).enterText (password);
+        onTextBox (signUpPage ().getConfirmPassword ()).enterText (password);
 
         if (getSession ().getPlatformType () == ANDROID) {
-            DeviceActions.onDevice ()
-                .hideKeyboard ();
+            onDevice ().hideKeyboard ();
         }
 
         withFinger (signUpPage ().getSignUp ()).tap ();
@@ -141,14 +134,12 @@ public class WdioDemoTest {
     }
 
     private void verifyWebView () {
-        ContextActions.withContext ()
-            .switchToWebView ();
+        withContext ().switchToWebView ();
 
         onElement (webViewPage ().getPageTitle ()).verifyText ()
             .isEqualTo ("Next-gen browser and mobile automation test framework for Node.js");
 
-        ContextActions.withContext ()
-            .switchToNative ();
+        withContext ().switchToNative ();
 
         onElement (wdioHomePage ().getWebViewTab ()).verifyIsDisplayed ()
             .isTrue ();
