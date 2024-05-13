@@ -238,7 +238,6 @@
           },
           "application": {
             "path": "/apps/android/wdio-demo.apk",
-            "wait_activity": "com.wdiodemoapp.MainActivity",
             "type": "HYBRID",
             "install_timeout": 180,
             "wait_timeout": 120
@@ -270,7 +269,6 @@
           },
           "application": {
             "path": "/apps/android/wdio-demo.apk",
-            "wait_activity": "com.wdiodemoapp.MainActivity",
             "type": "HYBRID",
             "install_timeout": 180,
             "wait_timeout": 120
