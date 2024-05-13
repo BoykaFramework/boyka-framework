@@ -226,8 +226,7 @@
           "ignore_unimportant_views": true,
           "full_reset": true,
           "swipe": {
-            "max_swipe_until_found": 5,
-            "speed": "NORMAL"
+            "max_swipe_until_found": 5
           },
           "video": {
             "enabled": true,
@@ -459,8 +458,7 @@
           "connect_keyboard": false,
           "typing_speed": 35,
           "swipe": {
-            "max_swipe_until_found": 5,
-            "speed": "NORMAL"
+            "max_swipe_until_found": 5
           },
           "virtual_device": {
             "headless": true,

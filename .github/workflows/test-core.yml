@@ -136,7 +136,7 @@ jobs:
       run-android: true
       emulator-name: Pixel_8_Pro
       emulator-version: 33
-      emulator-arch: x86_64
+      emulator-arch: x86
       emulator-target: playstore
 
   # test-mobile-web:
