@@ -23,6 +23,10 @@ on:
         type: boolean
         description: Start Appium server
         default: false
+      emulator-name:
+        type: string
+        description: Emulator / Simulator name
+        default: Pixel_7_Pro
       emulator-target:
         type: string
         description: Emulator target image
@@ -39,6 +43,14 @@ on:
         type: string
         description: Emulator SDK channel
         default: stable
+      simulator-name:
+        type: string
+        description: iOS Simulator Name
+        default: iPhone 15
+      simulator-version:
+        type: number
+        description: iOS Simulator Name
+        default: 17.4
       run-grid:
         type: boolean
         description: Start Selenium Grid
@@ -95,9 +107,9 @@ jobs:
         if: ${{ inputs.run-ios }}
         uses: futureware-tech/simulator-action@v3
         with:
-          model: 'iPhone 15'
+          model: ${{ inputs.simulator-name }}
           os: 'iOS'
-          os_version: 17.0
+          os_version: ${{ inputs.simulator-version }}
           shutdown_after_job: true
 
       - name: Cache AVD snapshot
@@ -114,11 +126,11 @@ jobs:
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          avd-name: Pixel_7_Pro
+          avd-name: ${{ inputs.emulator-name }}
           api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
-          profile: pixel_6_pro
+          profile: pixel_7_pro
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -130,11 +142,11 @@ jobs:
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          avd-name: Pixel_7_Pro
+          avd-name: ${{ inputs.emulator-name }}
           api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
-          profile: pixel_6_pro
+          profile: pixel_7_pro
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none

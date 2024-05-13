@@ -185,8 +185,8 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
-          "name": "Pixel_7_Pro",
+          "version": "13",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -203,7 +203,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }
@@ -217,8 +217,8 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
-          "name": "Pixel_7_Pro",
+          "version": "13",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "system_port": 8201,
@@ -226,7 +226,8 @@
           "ignore_unimportant_views": true,
           "full_reset": true,
           "swipe": {
-            "max_swipe_until_found": 5
+            "max_swipe_until_found": 5,
+            "speed": "NORMAL"
           },
           "video": {
             "enabled": true,
@@ -243,7 +244,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }
@@ -257,8 +258,8 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
-          "name": "Pixel_7_Pro",
+          "version": "13",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -274,7 +275,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }
@@ -366,8 +367,8 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
-          "name": "Pixel_7_Pro",
+          "version": "13",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 120,
           "system_port": 8202,
@@ -391,7 +392,7 @@
             "base_url": "https://the-internet.herokuapp.com/"
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }
@@ -405,7 +406,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.0",
+          "version": "17.4",
           "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -450,7 +451,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.0",
+          "version": "17.4",
           "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -458,7 +459,8 @@
           "connect_keyboard": false,
           "typing_speed": 35,
           "swipe": {
-            "max_swipe_until_found": 5
+            "max_swipe_until_found": 5,
+            "speed": "NORMAL"
           },
           "virtual_device": {
             "headless": true,
@@ -485,7 +487,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.0",
+          "version": "17.4",
           "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -520,8 +522,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16",
-          "name": "iPhone 14",
+          "version": "17",
+          "name": "iPhone 15",
           "type": "CLOUD",
           "application": {
             "path": "IOSApp",
@@ -560,8 +562,8 @@
           },
           "capabilities": {
             "platformName": "iOS",
-            "deviceName": "iPhone 14",
-            "platformVersion": "16",
+            "deviceName": "iPhone 15",
+            "platformVersion": "17",
             "app": "IOSApp",
             "project": "LambdaTest iOS Project",
             "build": "Test LambdaTest Build",
@@ -589,7 +591,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.0",
+          "version": "17.4",
           "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,

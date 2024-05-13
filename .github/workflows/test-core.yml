@@ -129,14 +129,15 @@ jobs:
       - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos-13
+      runs-on: macos-latest
       suite-name: testng-mobile-local
       run-appium: true
       run-ios: true
       run-android: true
-      emulator-channel: canary
-      emulator-arch: x86
-      emulator-target: aosp_atd
+      emulator-name: Pixel_8_Pro
+      emulator-version: 33
+      emulator-arch: x86_64
+      emulator-target: playstore
 
   # test-mobile-web:
   #   needs:
