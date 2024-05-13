@@ -16,15 +16,16 @@
 
 package io.github.boykaframework.testng.ui.saucedemo;
 
+import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.manager.ParallelSession.clearSession;
+import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static java.text.MessageFormat.format;
 
-import io.github.boykaframework.actions.device.DeviceActions;
 import io.github.boykaframework.actions.drivers.ContextActions;
-import io.github.boykaframework.actions.drivers.DriverActions;
-import io.github.boykaframework.actions.drivers.WindowActions;
 import io.github.boykaframework.enums.PlatformType;
 import io.github.boykaframework.exception.FrameworkError;
-import io.github.boykaframework.manager.ParallelSession;
 import io.github.boykaframework.testng.ui.saucedemo.actions.SauceDemoActions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -48,8 +49,7 @@ public class SauceDemoTest {
     @AfterMethod
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
-            WindowActions.onWindow ()
-                .takeScreenshot ();
+            onWindow ().takeScreenshot ();
         }
     }
 
@@ -62,9 +62,8 @@ public class SauceDemoTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
-        ParallelSession.createSession (format ("SauceDemoTest-{0}", platformType), platformType, driverKey);
-        DeviceActions.onDevice ()
-            .startRecording ();
+        createSession (format ("SauceDemoTest-{0}", platformType), platformType, driverKey);
+        onDevice ().startRecording ();
         this.sauceDemo = new SauceDemoActions ();
     }
 
@@ -73,11 +72,9 @@ public class SauceDemoTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownTestClass () {
-        DeviceActions.onDevice ()
-            .stopRecording ();
-        DriverActions.withDriver ()
-            .saveLogs ();
-        ParallelSession.clearSession ();
+        onDevice ().stopRecording ();
+        withDriver ().saveLogs ();
+        clearSession ();
     }
 
     /**

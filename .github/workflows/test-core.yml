@@ -135,9 +135,10 @@ jobs:
       run-ios: true
       run-android: true
       emulator-name: Pixel_8_Pro
-      emulator-version: 33
-      emulator-arch: x86
-      emulator-target: playstore
+      emulator-version: 30
+      emulator-channel: canary
+      emulator-arch: arm64-v8a
+      emulator-target: aosp_atd
 
   # test-mobile-web:
   #   needs:

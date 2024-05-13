@@ -20,7 +20,7 @@
     <listeners>
         <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
-    <test name="Test Mobile app on LambdaTest Android Device" group-by-instances="true">
+    <test name="Test Mobile app on LambdaTest Android Device">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_lt_android"/>
         <classes>
@@ -33,7 +33,7 @@
             </class>
         </classes>
     </test>
-    <test name="Test Mobile app on LambdaTest iOS Device" group-by-instances="true">
+    <test name="Test Mobile app on LambdaTest iOS Device">
         <parameter name="platformType" value="IOS"/>
         <parameter name="driverKey" value="test_lt_ios"/>
         <classes>
