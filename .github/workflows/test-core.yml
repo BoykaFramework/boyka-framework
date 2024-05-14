@@ -136,7 +136,7 @@ jobs:
       run-android: true
       emulator-name: Pixel_8_Pro
       emulator-version: 30
-      emulator-channel: canary
+      emulator-channel: stable
       emulator-arch: x86
       emulator-target: aosp_atd
       simulator-version: 17.2
