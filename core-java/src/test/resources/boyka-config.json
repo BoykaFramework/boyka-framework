@@ -6,7 +6,7 @@
   "ui": {
     "timeout": {
       "implicit_wait": 10,
-      "explicit_wait": 10,
+      "explicit_wait": 30,
       "page_load_timeout": 30,
       "script_timeout": 10,
       "highlight_delay": 100
