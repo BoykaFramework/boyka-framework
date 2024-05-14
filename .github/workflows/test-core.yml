@@ -137,7 +137,7 @@ jobs:
       emulator-name: Pixel_8_Pro
       emulator-version: 30
       emulator-channel: canary
-      emulator-arch: arm64-v8a
+      emulator-arch: x86
       emulator-target: aosp_atd
 
   # test-mobile-web:
