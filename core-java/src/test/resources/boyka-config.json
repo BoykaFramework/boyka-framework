@@ -185,7 +185,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "13",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -217,7 +217,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "13",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -257,7 +257,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "13",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -366,7 +366,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "13",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 120,
@@ -405,8 +405,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.2",
-          "name": "iPhone 15",
+          "version": "17.4",
+          "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -450,8 +450,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.2",
-          "name": "iPhone 15",
+          "version": "17.4",
+          "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -485,8 +485,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.2",
-          "name": "iPhone 15",
+          "version": "17.4",
+          "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -589,8 +589,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.2",
-          "name": "iPhone 15",
+          "version": "17.4",
+          "name": "iPhone 14",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
