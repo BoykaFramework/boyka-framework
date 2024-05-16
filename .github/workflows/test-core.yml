@@ -135,12 +135,12 @@ jobs:
       run-ios: true
       run-android: true
       emulator-name: Pixel_8_Pro
-      emulator-version: 31
+      emulator-version: 33
       emulator-channel: stable
       emulator-arch: x86_64
       emulator-target: google_apis
       simulator-name: iPhone 14
-      simulator-version: 17.2
+      simulator-version: 16.2
 
   # test-mobile-web:
   #   needs:
