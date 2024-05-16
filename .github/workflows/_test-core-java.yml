@@ -130,7 +130,7 @@ jobs:
           api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
-          profile: pixel_7_pro
+          profile: pixel_6_pro
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -146,7 +146,7 @@ jobs:
           api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
-          profile: pixel_7_pro
+          profile: pixel_6_pro
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
