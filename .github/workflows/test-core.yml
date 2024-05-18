@@ -129,7 +129,7 @@ jobs:
       - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos-latest
+      runs-on: macos-12
       suite-name: testng-mobile-local
       run-appium: true
       run-ios: true
@@ -140,7 +140,7 @@ jobs:
       emulator-arch: x86
       emulator-target: aosp_atd
       simulator-name: iPhone 14
-      simulator-version: 17.4
+      simulator-version: 16.2
 
   # test-mobile-web:
   #   needs:
