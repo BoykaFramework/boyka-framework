@@ -27,8 +27,8 @@
         "base_url": "https://the-internet.herokuapp.com/",
         "browser": "CHROME",
         "page_load_strategy": "NORMAL",
-        "highlight": true,
-        "headless": false,
+        "highlight": false,
+        "headless": true,
         "resize": "CUSTOM",
         "custom_size": {
           "width": 1580,
@@ -186,7 +186,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_7_Pro",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -203,7 +203,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }
@@ -218,7 +218,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_7_Pro",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "system_port": 8201,
@@ -238,13 +238,12 @@
           },
           "application": {
             "path": "/apps/android/wdio-demo.apk",
-            "wait_activity": "com.wdiodemoapp.MainActivity",
             "type": "HYBRID",
             "install_timeout": 180,
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }
@@ -259,7 +258,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_7_Pro",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -270,13 +269,12 @@
           },
           "application": {
             "path": "/apps/android/wdio-demo.apk",
-            "wait_activity": "com.wdiodemoapp.MainActivity",
             "type": "HYBRID",
             "install_timeout": 180,
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }
@@ -369,7 +367,7 @@
         "device": {
           "os": "ANDROID",
           "version": "11",
-          "name": "Pixel_7_Pro",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 120,
           "system_port": 8202,
@@ -393,7 +391,7 @@
             "base_url": "https://the-internet.herokuapp.com/"
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }
@@ -629,9 +627,9 @@
   "api": {
     "test_restfulbooker": {
       "base_uri": "https://restful-booker.herokuapp.com",
-      "read_timeout": 2,
-      "write_timeout": 2,
-      "connection_timeout": 1,
+      "read_timeout": 3,
+      "write_timeout": 3,
+      "connection_timeout": 2,
       "schema_path": "schema/",
       "logging": {
         "request": true,
@@ -640,9 +638,9 @@
     },
     "test_postman": {
       "base_uri": "https://postman-echo.com",
-      "read_timeout": 2,
-      "write_timeout": 2,
-      "connection_timeout": 1,
+      "read_timeout": 3,
+      "write_timeout": 3,
+      "connection_timeout": 2,
       "schema_path": "schema/",
       "logging": {
         "request": true,
@@ -651,16 +649,25 @@
     },
     "test_bad_ssl_wo_verify": {
       "base_uri": "https://expired.badssl.com",
-      "validate_ssl": false
+      "validate_ssl": false,
+      "read_timeout": 3,
+      "write_timeout": 3,
+      "connection_timeout": 3
     },
     "test_bad_host_name_wo_verify_ssl": {
       "base_uri": "http://wrong.host.badssl.com",
-      "validate_ssl": false
+      "validate_ssl": false,
+      "read_timeout": 3,
+      "write_timeout": 3,
+      "connection_timeout": 3
     },
     "test_bad_host_name_wo_verify_hn": {
       "base_uri": "http://wrong.host.badssl.com",
       "validate_ssl": false,
-      "verify_host_name": false
+      "verify_host_name": false,
+      "read_timeout": 3,
+      "write_timeout": 3,
+      "connection_timeout": 3
     }
   }
 }

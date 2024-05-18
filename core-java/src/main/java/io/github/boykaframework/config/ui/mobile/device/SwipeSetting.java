@@ -16,7 +16,7 @@
 
 package io.github.boykaframework.config.ui.mobile.device;
 
-import static io.github.boykaframework.enums.Speed.FAST;
+import static io.github.boykaframework.enums.Speed.NORMAL;
 
 import io.github.boykaframework.enums.Speed;
 import lombok.Data;
@@ -31,5 +31,5 @@ import lombok.Data;
 public class SwipeSetting {
     private int   distance           = 75;
     private int   maxSwipeUntilFound = 5;
-    private Speed speed              = FAST;
+    private Speed speed              = NORMAL;
 }

@@ -23,6 +23,10 @@ on:
         type: boolean
         description: Start Appium server
         default: false
+      emulator-name:
+        type: string
+        description: Emulator / Simulator name
+        default: Pixel_7_Pro
       emulator-target:
         type: string
         description: Emulator target image
@@ -39,6 +43,14 @@ on:
         type: string
         description: Emulator SDK channel
         default: stable
+      simulator-name:
+        type: string
+        description: iOS Simulator Name
+        default: iPhone 15
+      simulator-version:
+        type: number
+        description: iOS Simulator Name
+        default: 17.4
       run-grid:
         type: boolean
         description: Start Selenium Grid
@@ -95,42 +107,16 @@ jobs:
         if: ${{ inputs.run-ios }}
         uses: futureware-tech/simulator-action@v3
         with:
-          model: 'iPhone 14'
+          model: ${{ inputs.simulator-name }}
           os: 'iOS'
-          os_version: 16.2
+          os_version: ${{ inputs.simulator-version }}
           shutdown_after_job: true
-
-      - name: Cache AVD snapshot
-        uses: actions/cache@v4
-        if: ${{ inputs.run-android }}
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-${{ inputs.emulator-version }}-${{ inputs.emulator-target }}-${{ inputs.emulator-arch }}
-
-      - name: Create AVD and generate snapshot for caching
-        if: ${{ inputs.run-android }}
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          avd-name: Pixel_7_Pro
-          api-level: ${{ inputs.emulator-version }}
-          target: ${{ inputs.emulator-target }}
-          arch: ${{ inputs.emulator-arch }}
-          profile: pixel_6_pro
-          channel: ${{ inputs.emulator-channel }}
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: echo "Generated AVD snapshot for caching..."
-          pre-emulator-launch-script: avdmanager list device
 
       - name: All Test execution
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          avd-name: Pixel_7_Pro
+          avd-name: ${{ inputs.emulator-name }}
           api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
@@ -139,6 +125,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
+          pre-emulator-launch-script: avdmanager list device
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 
       - name: All ${{ inputs.suite-name }} Test execution
