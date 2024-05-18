@@ -136,9 +136,9 @@ jobs:
       run-android: true
       emulator-name: Pixel_8_Pro
       emulator-version: 30
-      emulator-channel: stable
-      emulator-arch: x86_64
-      emulator-target: google_apis
+      emulator-channel: canary
+      emulator-arch: x86
+      emulator-target: aosp_atd
       simulator-name: iPhone 14
       simulator-version: 16.2
 
