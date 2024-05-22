@@ -625,49 +625,36 @@
     }
   },
   "api": {
-    "test_restfulbooker": {
-      "base_uri": "https://restful-booker.herokuapp.com",
+    "logging": {
+      "request": true,
+      "response": true
+    },
+    "timeout": {
       "read_timeout": 3,
       "write_timeout": 3,
-      "connection_timeout": 2,
-      "schema_path": "schema/",
-      "logging": {
-        "request": true,
-        "response": true
+      "connection_timeout": 5
+    },
+    "schema_path": "schema/",
+    "api": {
+      "test_restfulbooker": {
+        "base_uri": "https://restful-booker.herokuapp.com"
+      },
+      "test_postman": {
+        "base_uri": "https://postman-echo.com"
+      },
+      "test_bad_ssl_wo_verify": {
+        "base_uri": "https://expired.badssl.com",
+        "validate_ssl": false
+      },
+      "test_bad_host_name_wo_verify_ssl": {
+        "base_uri": "http://wrong.host.badssl.com",
+        "validate_ssl": false
+      },
+      "test_bad_host_name_wo_verify_hn": {
+        "base_uri": "http://wrong.host.badssl.com",
+        "validate_ssl": false,
+        "verify_host_name": false
       }
-    },
-    "test_postman": {
-      "base_uri": "https://postman-echo.com",
-      "read_timeout": 3,
-      "write_timeout": 3,
-      "connection_timeout": 2,
-      "schema_path": "schema/",
-      "logging": {
-        "request": true,
-        "response": true
-      }
-    },
-    "test_bad_ssl_wo_verify": {
-      "base_uri": "https://expired.badssl.com",
-      "validate_ssl": false,
-      "read_timeout": 3,
-      "write_timeout": 3,
-      "connection_timeout": 3
-    },
-    "test_bad_host_name_wo_verify_ssl": {
-      "base_uri": "http://wrong.host.badssl.com",
-      "validate_ssl": false,
-      "read_timeout": 3,
-      "write_timeout": 3,
-      "connection_timeout": 3
-    },
-    "test_bad_host_name_wo_verify_hn": {
-      "base_uri": "http://wrong.host.badssl.com",
-      "validate_ssl": false,
-      "verify_host_name": false,
-      "read_timeout": 3,
-      "write_timeout": 3,
-      "connection_timeout": 3
     }
   }
 }

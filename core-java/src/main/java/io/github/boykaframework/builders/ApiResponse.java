@@ -19,13 +19,17 @@ package io.github.boykaframework.builders;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static com.jayway.jsonpath.JsonPath.compile;
 import static com.jayway.jsonpath.JsonPath.parse;
+import static com.networknt.schema.JsonSchemaFactory.getInstance;
+import static com.networknt.schema.SpecVersion.VersionFlag.V7;
 import static io.github.boykaframework.enums.Message.ERROR_READING_FILE;
 import static io.github.boykaframework.enums.Message.INVALID_HEADER_KEY;
 import static io.github.boykaframework.enums.Message.NO_BODY_TO_PARSE;
 import static io.github.boykaframework.enums.Message.RESPONSE_SCHEMA_NOT_MATCHING;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
+import static java.lang.System.getProperty;
 import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNullElse;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.FileInputStream;
@@ -38,9 +42,8 @@ import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.IntegerSubject;
 import com.google.common.truth.StringSubject;
 import com.jayway.jsonpath.DocumentContext;
-import com.networknt.schema.JsonSchemaFactory;
-import com.networknt.schema.SpecVersion;
 import io.github.boykaframework.config.api.ApiSetting;
+import io.github.boykaframework.config.api.DefaultApiSetting;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -60,6 +63,7 @@ public class ApiResponse {
 
     private ApiSetting          apiSetting;
     private String              body;
+    private DefaultApiSetting   defaultApiSetting;
     private Map<String, String> headers;
     private ApiResponse         networkResponse;
     private ApiResponse         previousResponse;
@@ -151,17 +155,16 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying Response Schema");
         try (
-            final var inputStream = new FileInputStream (
-                Path.of (System.getProperty ("user.dir"), "/src/test/resources", this.apiSetting.getSchemaPath (),
-                        schemaName)
-                    .toFile ())) {
-            final var factory = JsonSchemaFactory.getInstance (SpecVersion.VersionFlag.V7);
+            final var inputStream = new FileInputStream (Path.of (getProperty ("user.dir"), "/src/test/resources",
+                    requireNonNullElse (this.apiSetting.getSchemaPath (), this.defaultApiSetting.getSchemaPath ()),
+                    schemaName)
+                .toFile ())) {
+            final var factory = getInstance (V7);
             final var jsonSchema = factory.getSchema (inputStream);
             final var errors = jsonSchema.validate (new ObjectMapper ().readTree (this.body));
 
             assertWithMessage (RESPONSE_SCHEMA_NOT_MATCHING.getMessageText ()).that (errors)
                 .isEmpty ();
-
         } catch (final IOException e) {
             handleAndThrow (ERROR_READING_FILE, e, schemaName);
         }
