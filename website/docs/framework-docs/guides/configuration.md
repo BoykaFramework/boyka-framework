@@ -613,14 +613,26 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 
 ### API Configuration {#api-config}
 
+### Common API Configuration {#common-api-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `base_path` | Base path of the API. | `string` | |
+| `timeout` | Timeout specific settings | [`TimeoutSetting`](#timeout-config) | |
+| `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` | |
+| `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
+| `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
+| `verify_host_name` | If set to `true`, host name verification will happen | `boolean` | `true` |
+| `api` | Different API Configurations | [`ApiSetting`](#specific-api-config) | |
+
+### Specific API Configuration {#specific-api-config}
+
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | `base_uri` | Base URL of the API. | `string` | |
 | `base_path` | Base path of the API. | `string` | |
 | `port` | Port of the API. | `number` | |
-| `connection_timeout` | Connection timeout in seconds for the API. | `number` | `5` |
-| `read_timeout`       | Read timeout in seconds for the API. | `number` | `5` |
-| `write_timeout` | Write timeout in seconds for the API. | `number` | `5` |
+| `timeout` | Timeout specific settings | [`TimeoutSetting`](#timeout-config) | |
 | `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` | |
 | `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
 | `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
@@ -631,6 +643,14 @@ In `api` configuration block, you can provide different versions of API settings
 
 See the example in [sample configuration file](#config-sample).
 :::
+
+#### Timeout Configurations {#timeout-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `connection_timeout` | Connection timeout in seconds for the API. | `number` | `5` |
+| `read_timeout`       | Read timeout in seconds for the API. | `number` | `5` |
+| `write_timeout` | Write timeout in seconds for the API. | `number` | `5` |
 
 ### Test Data Configuration {#data-config}
 
