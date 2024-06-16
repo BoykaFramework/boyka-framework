@@ -50,7 +50,7 @@
         <maven-javadoc-plugin.version>3.7.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.7.0</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
@@ -77,12 +77,12 @@
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>4.0.0.4121</sonar.maven.version>
         <jacoco.version>0.8.12</jacoco.version>
-        <surefire-version>3.2.5</surefire-version>
+        <surefire-version>3.3.0</surefire-version>
         <nexus.version>1.7.0</nexus.version>
         <maven.gpg.version>3.2.4</maven.gpg.version>
         <maven-jar-plugin.version>3.4.1</maven-jar-plugin.version>
         <allure-testng.version>2.27.0</allure-testng.version>
-        <maven-failsafe.version>3.2.5</maven-failsafe.version>
+        <maven-failsafe.version>3.3.0</maven-failsafe.version>
         <central.sonatype>0.4.0</central.sonatype>
     </properties>
 
