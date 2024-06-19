@@ -30,11 +30,11 @@
     <properties>
         <selenium-webdriver.version>4.21.0</selenium-webdriver.version>
         <testng.version>7.10.2</testng.version>
-        <appium-java-client.version>9.2.2</appium-java-client.version>
+        <appium-java-client.version>9.2.3</appium-java-client.version>
         <okhttp.version>4.12.0</okhttp.version>
         <lombok.version>1.18.32</lombok.version>
         <google-gson.version>2.11.0</google-gson.version>
-        <google.guava.version>33.2.0-jre</google.guava.version>
+        <google.guava.version>33.2.1-jre</google.guava.version>
         <google-truth.version>1.4.2</google-truth.version>
         <apache-commons-text.version>1.12.0</apache-commons-text.version>
         <commons-io.version>2.16.1</commons-io.version>
@@ -47,14 +47,14 @@
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>1.4.0</json-schema-validator.version>
         <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
-        <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.7.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.7.0</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+        <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.16.0</checkstyle.version>
+        <checkstyle.version>10.17.0</checkstyle.version>
         <aspectj.version>1.9.22.1</aspectj.version>
         <poi.version>5.2.5</poi.version>
         <suite-name>testng-api</suite-name>
@@ -71,18 +71,18 @@
         <checkstyle.suppress>checkstyles/checkstyle-suppressions.xml</checkstyle.suppress>
         <sonar.report>${project.basedir}/reports/${suite-name}-jacoco.exec</sonar.report>
         <jacoco.report>${project.reporting.outputDirectory}/jacoco</jacoco.report>
-        <maven-enforcer.version>3.4.1</maven-enforcer.version>
+        <maven-enforcer.version>3.5.0</maven-enforcer.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
-        <sonar.maven.version>3.11.0.3922</sonar.maven.version>
+        <sonar.maven.version>4.0.0.4121</sonar.maven.version>
         <jacoco.version>0.8.12</jacoco.version>
-        <surefire-version>3.2.5</surefire-version>
-        <nexus.version>1.6.13</nexus.version>
+        <surefire-version>3.3.0</surefire-version>
+        <nexus.version>1.7.0</nexus.version>
         <maven.gpg.version>3.2.4</maven.gpg.version>
         <maven-jar-plugin.version>3.4.1</maven-jar-plugin.version>
         <allure-testng.version>2.27.0</allure-testng.version>
-        <maven-failsafe.version>3.2.5</maven-failsafe.version>
+        <maven-failsafe.version>3.3.0</maven-failsafe.version>
         <central.sonatype>0.4.0</central.sonatype>
     </properties>
 
