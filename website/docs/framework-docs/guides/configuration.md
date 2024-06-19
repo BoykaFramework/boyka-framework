@@ -43,6 +43,20 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
       "extension": "jpeg",
       "prefix": "SCR"
     },
+    "common_setting": {
+      "api": {
+        "logging": {
+          "request": true,
+          "response": true
+        },
+        "timeout": {
+          "read_timeout": 3,
+          "write_timeout": 3,
+          "connection_timeout": 5
+        },
+        "schema_path": "schema/"
+      }
+    },
     "web": {
       "test_local_chrome": {
         "base_url": "http://the-internet.herokuapp.com/",
@@ -333,14 +347,6 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
   "api": {
     "test_restfulbooker": {
       "base_uri": "https://restful-booker.herokuapp.com",
-      "read_timeout": 2,
-      "write_timeout": 2,
-      "connection_timeout": 1,
-      "schema_path": "schema/",
-      "logging": {
-        "request": true,
-        "response": true
-      }
     }
   }
 }
@@ -354,6 +360,7 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
 | `api` | Contains API platform specific configuration. See [API config below](#api-config). | `object` | |
 | `listeners_package` | This will be the package name under which all the Boyka framework listeners are saved. | `string` | |
 | `data` | Contains Test data related configurations. See [Test data configuration](#data-config) below | `TestDataSetting` | |
+| `common_setting` | Contains Common settings for different platforms. See [Common Setting configuration](#common-config) below | `CommonSetting` | |
 
 ### UI Configuration {#ui-config}
 
@@ -613,7 +620,13 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 
 ### API Configuration {#api-config}
 
-### Common API Configuration {#common-api-config}
+### Common Configuration {#common-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `api` | Contains Common API settings | `CommonApiSetting` | |
+
+#### Common API Configuration {#common-api-config}
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -642,6 +655,10 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 In `api` configuration block, you can provide different versions of API settings having different key names.
 
 See the example in [sample configuration file](#config-sample).
+:::
+
+:::info Tip!
+If any setting is missing in the API block, the common API setting will be used.
 :::
 
 #### Timeout Configurations {#timeout-config}

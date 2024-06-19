@@ -34,7 +34,7 @@ import io.github.boykaframework.actions.interfaces.listeners.BoykaListener;
 import io.github.boykaframework.config.FrameworkSetting;
 import io.github.boykaframework.config.TestDataSetting;
 import io.github.boykaframework.config.api.ApiSetting;
-import io.github.boykaframework.config.api.DefaultApiSetting;
+import io.github.boykaframework.config.api.CommonApiSetting;
 import io.github.boykaframework.config.ui.mobile.MobileSetting;
 import io.github.boykaframework.config.ui.web.WebSetting;
 import io.github.boykaframework.enums.ListenerType;
@@ -106,12 +106,22 @@ public class DriverSession<D extends WebDriver> {
     }
 
     /**
-     * Gets default API specific settings
+     * Gets API specific settings
      *
      * @return {@link ApiSetting} instance
      */
-    public DefaultApiSetting getDefaultApiSetting () {
-        return this.setting.getApi ();
+    public ApiSetting getApiSetting () {
+        return this.setting.getApiSetting (this.configKey);
+    }
+
+    /**
+     * Gets Common API specific settings
+     *
+     * @return {@link CommonApiSetting} instance
+     */
+    public CommonApiSetting getCommonApiSetting () {
+        return this.setting.getCommonSetting ()
+            .getApi ();
     }
 
     /**

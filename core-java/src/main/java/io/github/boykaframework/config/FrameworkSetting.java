@@ -16,9 +16,19 @@
 
 package io.github.boykaframework.config;
 
-import io.github.boykaframework.config.api.DefaultApiSetting;
+import static io.github.boykaframework.enums.Message.CONFIG_KEY_NOT_FOUND;
+import static io.github.boykaframework.enums.Message.NO_API_SETTINGS_FOUND;
+import static io.github.boykaframework.utils.ErrorHandler.throwError;
+import static io.github.boykaframework.utils.Validator.requireNonNull;
+import static java.lang.String.join;
+import static org.apache.logging.log4j.LogManager.getLogger;
+
+import java.util.Map;
+
+import io.github.boykaframework.config.api.ApiSetting;
 import io.github.boykaframework.config.ui.UISetting;
 import lombok.Data;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Framework setting.
@@ -28,8 +38,27 @@ import lombok.Data;
  */
 @Data
 public class FrameworkSetting {
-    private DefaultApiSetting api;
-    private TestDataSetting   data = new TestDataSetting ();
-    private String            listenersPackage;
-    private UISetting         ui;
+    private static final Logger LOGGER = getLogger ();
+
+    private Map<String, ApiSetting> api;
+    private CommonSetting           commonSetting = new CommonSetting ();
+    private TestDataSetting         data          = new TestDataSetting ();
+    private String                  listenersPackage;
+    private UISetting               ui;
+
+    /**
+     * Get API setting.
+     *
+     * @param key API config key
+     *
+     * @return {@link ApiSetting} instance
+     */
+    public ApiSetting getApiSetting (final String key) {
+        LOGGER.traceEntry ("Key: {}", key);
+        if (!this.api.containsKey (key)) {
+            final var keys = join (", ", this.api.keySet ());
+            throwError (CONFIG_KEY_NOT_FOUND, key, keys);
+        }
+        return LOGGER.traceExit (requireNonNull (this.api.get (key), NO_API_SETTINGS_FOUND, key));
+    }
 }

@@ -43,7 +43,7 @@ import com.google.common.truth.IntegerSubject;
 import com.google.common.truth.StringSubject;
 import com.jayway.jsonpath.DocumentContext;
 import io.github.boykaframework.config.api.ApiSetting;
-import io.github.boykaframework.config.api.DefaultApiSetting;
+import io.github.boykaframework.config.api.CommonApiSetting;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -63,7 +63,7 @@ public class ApiResponse {
 
     private ApiSetting          apiSetting;
     private String              body;
-    private DefaultApiSetting   defaultApiSetting;
+    private CommonApiSetting    commonApiSetting;
     private Map<String, String> headers;
     private ApiResponse         networkResponse;
     private ApiResponse         previousResponse;
@@ -156,7 +156,7 @@ public class ApiResponse {
         LOGGER.info ("Verifying Response Schema");
         try (
             final var inputStream = new FileInputStream (Path.of (getProperty ("user.dir"), "/src/test/resources",
-                    requireNonNullElse (this.apiSetting.getSchemaPath (), this.defaultApiSetting.getSchemaPath ()),
+                    requireNonNullElse (this.apiSetting.getSchemaPath (), this.commonApiSetting.getSchemaPath ()),
                     schemaName)
                 .toFile ())) {
             final var factory = getInstance (V7);

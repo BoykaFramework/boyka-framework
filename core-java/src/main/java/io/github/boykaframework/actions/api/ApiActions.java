@@ -61,7 +61,7 @@ import io.github.boykaframework.actions.interfaces.listeners.api.IApiActionsList
 import io.github.boykaframework.builders.ApiRequest;
 import io.github.boykaframework.builders.ApiResponse;
 import io.github.boykaframework.config.api.ApiSetting;
-import io.github.boykaframework.config.api.DefaultApiSetting;
+import io.github.boykaframework.config.api.CommonApiSetting;
 import io.github.boykaframework.config.api.LogSetting;
 import io.github.boykaframework.enums.ContentType;
 import io.github.boykaframework.enums.RequestMethod;
@@ -99,7 +99,7 @@ public final class ApiActions implements IApiActions {
     private final ApiRequest          apiRequest;
     private final ApiSetting          apiSetting;
     private final OkHttpClient        client;
-    private final DefaultApiSetting   defaultApiSetting;
+    private final CommonApiSetting    commonApiSetting;
     private final IApiActionsListener listener;
     private final LogSetting          logSetting;
     private       MediaType           mediaType;
@@ -114,12 +114,12 @@ public final class ApiActions implements IApiActions {
         this.listener = getSession ().getListener (API_ACTION);
         this.apiRequest = apiRequest;
         this.pathParams = new HashMap<> ();
-        this.defaultApiSetting = getSession ().getDefaultApiSetting ();
-        this.apiSetting = this.defaultApiSetting.getApiSetting (getSession ().getConfigKey ());
+        this.commonApiSetting = getSession ().getCommonApiSetting ();
+        this.apiSetting = getSession ().getApiSetting ();
 
         final var builder = getApiBuilder ();
         this.client = builder.build ();
-        this.logSetting = requireNonNullElse (this.apiSetting.getLogging (), this.defaultApiSetting.getLogging ());
+        this.logSetting = requireNonNullElse (this.apiSetting.getLogging (), this.commonApiSetting.getLogging ());
         this.request = new Request.Builder ();
         LOGGER.traceExit ();
     }
@@ -202,15 +202,15 @@ public final class ApiActions implements IApiActions {
     }
 
     private OkHttpClient.Builder getApiBuilder () {
-        final var timeout = requireNonNullElse (this.apiSetting.getTimeout (), this.defaultApiSetting.getTimeout ());
+        final var timeout = requireNonNullElse (this.apiSetting.getTimeout (), this.commonApiSetting.getTimeout ());
         final var builder = new OkHttpClient.Builder ().connectTimeout (ofSeconds (timeout.getConnectionTimeout ()))
             .readTimeout (ofSeconds (timeout.getReadTimeout ()))
             .writeTimeout (ofSeconds (timeout.getWriteTimeout ()));
-        if (!this.apiSetting.isValidateSsl () || !this.defaultApiSetting.isValidateSsl ()) {
+        if (!this.apiSetting.isValidateSsl () || !this.commonApiSetting.isValidateSsl ()) {
             builder.sslSocketFactory (requireNonNull (getSslContext ()).getSocketFactory (),
                 (X509TrustManager) getTrustedCertificates ()[0]);
         }
-        if (!this.apiSetting.isVerifyHostName () || !this.defaultApiSetting.isVerifyHostName ()) {
+        if (!this.apiSetting.isVerifyHostName () || !this.commonApiSetting.isVerifyHostName ()) {
             builder.hostnameVerifier ((hostname, session) -> true);
         }
         return builder;
@@ -279,7 +279,7 @@ public final class ApiActions implements IApiActions {
         if (this.apiSetting.getPort () > 0) {
             hostName = format ("{0}:{1}", hostName, this.apiSetting.getPort ());
         }
-        final var basePath = requireNonNullElse (this.apiSetting.getBasePath (), this.defaultApiSetting.getBasePath ());
+        final var basePath = requireNonNullElse (this.apiSetting.getBasePath (), this.commonApiSetting.getBasePath ());
         return LOGGER.traceExit (format ("{0}{1}", hostName, basePath));
     }
 
@@ -362,7 +362,7 @@ public final class ApiActions implements IApiActions {
                     .headers (headers)
                     .networkResponse (parseResponse (res.networkResponse ()))
                     .apiSetting (this.apiSetting)
-                    .defaultApiSetting (this.defaultApiSetting)
+                    .commonApiSetting (this.commonApiSetting)
                     .networkResponse (parseResponse (res.networkResponse ()))
                     .previousResponse (parseResponse (res.priorResponse ()))
                     .receivedResponseAt (res.receivedResponseAtMillis ())
