@@ -66,6 +66,9 @@ public class DeviceActions implements IDeviceActions {
 
     private final IDeviceActionsListener listener;
 
+    /**
+     * Initializes device actions.
+     */
     protected DeviceActions () {
         this.listener = getSession ().getListener (DEVICE_ACTION);
     }

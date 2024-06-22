@@ -17,11 +17,11 @@
 package io.github.boykaframework.testng.ui.wdio.pages;
 
 import static io.appium.java_client.AppiumBy.id;
+import static io.github.boykaframework.actions.drivers.AlertActions.onAlert;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
 import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 
-import io.github.boykaframework.actions.drivers.AlertActions;
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.enums.PlatformType;
 import lombok.Getter;
@@ -74,8 +74,7 @@ public class AlertDialog {
                 withFinger (getButton1 ()).tap ();
             }
         } else {
-            AlertActions.onAlert ()
-                .verifyAccept (expectedMessage);
+            onAlert ().verifyAccept (expectedMessage);
         }
     }
 }

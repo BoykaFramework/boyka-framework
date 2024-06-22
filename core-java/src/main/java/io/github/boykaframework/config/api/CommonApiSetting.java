@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Wasiq Bhamla
+ * Copyright (c) 2024, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,19 +19,17 @@ package io.github.boykaframework.config.api;
 import lombok.Data;
 
 /**
- * API setting class.
+ * Default API settings.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 21-May-2024
  */
 @Data
-public class ApiSetting {
-    private String         basePath;
-    private String         baseUri;
-    private LogSetting     logging;
-    private int            port;
-    private String         schemaPath;
-    private TimeoutSetting timeout;
-    private boolean        validateSsl;
-    private boolean        verifyHostName;
+public class CommonApiSetting {
+    private String         basePath       = "";
+    private LogSetting     logging        = new LogSetting ();
+    private String         schemaPath     = "";
+    private TimeoutSetting timeout        = new TimeoutSetting ();
+    private boolean        validateSsl    = true;
+    private boolean        verifyHostName = true;
 }

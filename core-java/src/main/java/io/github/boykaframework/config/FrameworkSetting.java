@@ -41,7 +41,8 @@ public class FrameworkSetting {
     private static final Logger LOGGER = getLogger ();
 
     private Map<String, ApiSetting> api;
-    private TestDataSetting         data = new TestDataSetting ();
+    private CommonSetting           commonSetting = new CommonSetting ();
+    private TestDataSetting         data          = new TestDataSetting ();
     private String                  listenersPackage;
     private UISetting               ui;
 

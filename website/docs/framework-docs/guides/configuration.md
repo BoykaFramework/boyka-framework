@@ -43,6 +43,20 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
       "extension": "jpeg",
       "prefix": "SCR"
     },
+    "common_setting": {
+      "api": {
+        "logging": {
+          "request": true,
+          "response": true
+        },
+        "timeout": {
+          "read_timeout": 3,
+          "write_timeout": 3,
+          "connection_timeout": 5
+        },
+        "schema_path": "schema/"
+      }
+    },
     "web": {
       "test_local_chrome": {
         "base_url": "http://the-internet.herokuapp.com/",
@@ -333,14 +347,6 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
   "api": {
     "test_restfulbooker": {
       "base_uri": "https://restful-booker.herokuapp.com",
-      "read_timeout": 2,
-      "write_timeout": 2,
-      "connection_timeout": 1,
-      "schema_path": "schema/",
-      "logging": {
-        "request": true,
-        "response": true
-      }
     }
   }
 }
@@ -354,6 +360,7 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
 | `api` | Contains API platform specific configuration. See [API config below](#api-config). | `object` | |
 | `listeners_package` | This will be the package name under which all the Boyka framework listeners are saved. | `string` | |
 | `data` | Contains Test data related configurations. See [Test data configuration](#data-config) below | `TestDataSetting` | |
+| `common_setting` | Contains Common settings for different platforms. See [Common Setting configuration](#common-config) below | `CommonSetting` | |
 
 ### UI Configuration {#ui-config}
 
@@ -613,14 +620,32 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 
 ### API Configuration {#api-config}
 
+### Common Configuration {#common-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `api` | Contains Common API settings | `CommonApiSetting` | |
+
+#### Common API Configuration {#common-api-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `base_path` | Base path of the API. | `string` | |
+| `timeout` | Timeout specific settings | [`TimeoutSetting`](#timeout-config) | |
+| `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` | |
+| `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
+| `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
+| `verify_host_name` | If set to `true`, host name verification will happen | `boolean` | `true` |
+| `api` | Different API Configurations | [`ApiSetting`](#specific-api-config) | |
+
+### Specific API Configuration {#specific-api-config}
+
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | `base_uri` | Base URL of the API. | `string` | |
 | `base_path` | Base path of the API. | `string` | |
 | `port` | Port of the API. | `number` | |
-| `connection_timeout` | Connection timeout in seconds for the API. | `number` | `5` |
-| `read_timeout`       | Read timeout in seconds for the API. | `number` | `5` |
-| `write_timeout` | Write timeout in seconds for the API. | `number` | `5` |
+| `timeout` | Timeout specific settings | [`TimeoutSetting`](#timeout-config) | |
 | `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` | |
 | `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
 | `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
@@ -631,6 +656,18 @@ In `api` configuration block, you can provide different versions of API settings
 
 See the example in [sample configuration file](#config-sample).
 :::
+
+:::info Tip!
+If any setting is missing in the API block, the common API setting will be used.
+:::
+
+#### Timeout Configurations {#timeout-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `connection_timeout` | Connection timeout in seconds for the API. | `number` | `5` |
+| `read_timeout`       | Read timeout in seconds for the API. | `number` | `5` |
+| `write_timeout` | Write timeout in seconds for the API. | `number` | `5` |
 
 ### Test Data Configuration {#data-config}
 

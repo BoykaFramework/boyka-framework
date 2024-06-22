@@ -56,7 +56,13 @@ public class ElementActions implements IElementActions {
         return new ElementActions (locator);
     }
 
+    /**
+     * delay related settings.
+     */
     protected final DelaySetting            delaySetting;
+    /**
+     * Locator of the target element.
+     */
     protected final Locator                 locator;
     private final   IElementActionsListener listener;
 
