@@ -28,7 +28,7 @@
     <url>https://github.com/BoykaFramework/boyka-framework</url>
 
     <properties>
-        <selenium-webdriver.version>4.21.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.22.0</selenium-webdriver.version>
         <testng.version>7.10.2</testng.version>
         <appium-java-client.version>9.2.3</appium-java-client.version>
         <okhttp.version>4.12.0</okhttp.version>
@@ -45,12 +45,12 @@
         <jackson-dataformat-yaml.version>2.17.1</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.17.1</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <json-schema-validator.version>1.4.0</json-schema-validator.version>
-        <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
+        <json-schema-validator.version>1.4.2</json-schema-validator.version>
+        <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.7.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-dependency-plugin.version>3.7.0</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
@@ -80,10 +80,10 @@
         <surefire-version>3.3.0</surefire-version>
         <nexus.version>1.7.0</nexus.version>
         <maven.gpg.version>3.2.4</maven.gpg.version>
-        <maven-jar-plugin.version>3.4.1</maven-jar-plugin.version>
+        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <allure-testng.version>2.27.0</allure-testng.version>
         <maven-failsafe.version>3.3.0</maven-failsafe.version>
-        <central.sonatype>0.4.0</central.sonatype>
+        <central.sonatype>0.5.0</central.sonatype>
     </properties>
 
     <organization>
