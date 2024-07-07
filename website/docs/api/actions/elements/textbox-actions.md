@@ -25,12 +25,12 @@ import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox
 onTextBox (locator).enterText (text);
 ```
 
-### `pressKey (key)` {#press-key}
+### `focus` {#focus}
 
-This method is used to press the given key to the given element.
+This method is used to focus the cursor on the input element.
 
 ```java
 import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 . . .
-onTextBox (locator).pressKey (key);
+onTextBox (locator).focus ();
 ```
