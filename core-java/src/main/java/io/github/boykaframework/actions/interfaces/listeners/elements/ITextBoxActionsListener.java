@@ -35,4 +35,13 @@ public interface ITextBoxActionsListener extends BoykaListener {
     default void onEnterText (final Locator locator, final String text) {
         // not implemented.
     }
+
+    /**
+     * Handles input element focus method.
+     *
+     * @param locator Locator of the element.
+     */
+    default void onFocus (final Locator locator) {
+        // not implemented.
+    }
 }

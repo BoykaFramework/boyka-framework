@@ -107,6 +107,7 @@ public class SauceDemoActions {
 
     public void verifyLogin (final String userName, final String password) {
         verifyNavigateToSite ();
+        onTextBox (loginPage ().getUsername ()).focus ();
         onTextBox (loginPage ().getUsername ()).enterText (userName);
         onTextBox (loginPage ().getPassword ()).enterText (password);
         if (this.platformType == ANDROID && onDevice ().isKeyboardVisible ()) {

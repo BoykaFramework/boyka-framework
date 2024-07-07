@@ -29,4 +29,9 @@ public interface ITextBoxActions extends IClickableActions {
      * @param text text to enter
      */
     void enterText (final String text);
+
+    /**
+     * Focus the element.
+     */
+    void focus ();
 }

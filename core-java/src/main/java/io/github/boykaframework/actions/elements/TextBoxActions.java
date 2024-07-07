@@ -23,6 +23,7 @@ import static io.github.boykaframework.enums.ListenerType.TEXT_BOX_ACTION;
 import static io.github.boykaframework.enums.PlatformType.IOS;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import io.github.boykaframework.actions.interfaces.elements.ITextBoxActions;
@@ -63,6 +64,20 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
         LOGGER.info ("Entering text {} to element {}", text, this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onEnterText (this.locator, text));
         pause (this.delaySetting.getBeforeTyping ());
+        sendKeys (text);
+        LOGGER.traceExit ();
+    }
+
+    @Override
+    public void focus () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Focusing element located by: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onFocus (this.locator));
+        sendKeys (EMPTY);
+        LOGGER.traceExit ();
+    }
+
+    private void sendKeys (final String text) {
         performElementAction (e -> {
             e.sendKeys (text);
             if (getSession ().getPlatformType () == IOS && getSession ().getMobileSetting ()
@@ -72,6 +87,5 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
                 e.sendKeys ("\n");
             }
         }, this.locator);
-        LOGGER.traceExit ();
     }
 }
