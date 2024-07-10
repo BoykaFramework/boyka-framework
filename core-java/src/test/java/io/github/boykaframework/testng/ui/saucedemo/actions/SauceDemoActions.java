@@ -109,6 +109,13 @@ public class SauceDemoActions {
         verifyNavigateToSite ();
         onTextBox (loginPage ().getUsername ()).focus ();
         onTextBox (loginPage ().getUsername ()).enterText (userName);
+
+        if (onTextBox (loginPage ().getUsername ()).inputValue ()
+            .equals (userName)) {
+            onTextBox (loginPage ().getUsername ()).verifyInputValue ()
+                .isEqualTo (userName);
+        }
+
         onTextBox (loginPage ().getPassword ()).enterText (password);
         if (this.platformType == ANDROID && onDevice ().isKeyboardVisible ()) {
             onAndroidDevice ().pressKey (BACK);

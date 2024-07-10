@@ -89,8 +89,7 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting attribute: {} of element located by: {}", attribute, this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onGetAttribute (this.locator, attribute));
-        LOGGER.traceExit ();
-        return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
+        return LOGGER.traceExit (getAttributeValue (attribute));
     }
 
     @Override
@@ -148,7 +147,7 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Verifying attribute of {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onVerifyAttribute (this.locator, attribute));
         LOGGER.traceExit ();
-        return assertWithMessage (attribute).that (getAttribute (attribute));
+        return assertWithMessage (attribute).that (getAttributeValue (attribute));
     }
 
     @Override
@@ -194,5 +193,9 @@ public class ElementActions implements IElementActions {
         ofNullable (this.listener).ifPresent (l -> l.onVerifyText (this.locator));
         LOGGER.traceExit ();
         return assertWithMessage ("Text").that (getText ().trim ());
+    }
+
+    protected String getAttributeValue (final String attribute) {
+        return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
     }
 }
