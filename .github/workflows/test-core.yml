@@ -327,3 +327,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         env: 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: core-java
+          args: >
+            -Dsonar.organization=boykaframework
+            -Dsonar.projectKey=boyka-framework
