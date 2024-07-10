@@ -20,8 +20,8 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static io.github.boykaframework.actions.CommonActions.pause;
 import static io.github.boykaframework.actions.CommonActions.performElementAction;
 import static io.github.boykaframework.enums.ListenerType.TEXT_BOX_ACTION;
+import static io.github.boykaframework.enums.PlatformType.ANDROID;
 import static io.github.boykaframework.enums.PlatformType.IOS;
-import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -100,7 +100,7 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
 
     private String getInputAttribute () {
         var result = "value";
-        if (getSession ().getPlatformType () != WEB) {
+        if (getSession ().getPlatformType () == ANDROID) {
             result = "text";
         }
         return result;
