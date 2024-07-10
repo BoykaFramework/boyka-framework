@@ -195,6 +195,13 @@ public class ElementActions implements IElementActions {
         return assertWithMessage ("Text").that (getText ().trim ());
     }
 
+    /**
+     * Gets the element attribute value.
+     *
+     * @param attribute Attribute name
+     *
+     * @return Attribute value
+     */
     protected String getAttributeValue (final String attribute) {
         return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
     }
