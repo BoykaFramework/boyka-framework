@@ -16,6 +16,8 @@
 
 package io.github.boykaframework.actions.interfaces.elements;
 
+import com.google.common.truth.StringSubject;
+
 /**
  * All text box related actions
  *
@@ -34,4 +36,18 @@ public interface ITextBoxActions extends IClickableActions {
      * Focus the element.
      */
     void focus ();
+
+    /**
+     * Gets the input value from the textbox.
+     *
+     * @return Input value
+     */
+    String inputValue ();
+
+    /**
+     * Verifies the value entered in textbox.
+     *
+     * @return String subject
+     */
+    StringSubject verifyInputValue ();
 }

@@ -16,19 +16,22 @@
 
 package io.github.boykaframework.actions.elements;
 
+import static com.google.common.truth.Truth.assertWithMessage;
 import static io.github.boykaframework.actions.CommonActions.pause;
 import static io.github.boykaframework.actions.CommonActions.performElementAction;
-import static io.github.boykaframework.enums.ApplicationType.WEB;
 import static io.github.boykaframework.enums.ListenerType.TEXT_BOX_ACTION;
+import static io.github.boykaframework.enums.PlatformType.ANDROID;
 import static io.github.boykaframework.enums.PlatformType.IOS;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import com.google.common.truth.StringSubject;
 import io.github.boykaframework.actions.interfaces.elements.ITextBoxActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.ITextBoxActionsListener;
 import io.github.boykaframework.builders.Locator;
+import io.github.boykaframework.enums.ApplicationType;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -77,13 +80,39 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
         LOGGER.traceExit ();
     }
 
+    @Override
+    public String inputValue () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting input value of textbox located by: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onInputValue (this.locator));
+        final var attribute = getInputAttribute ();
+        return LOGGER.traceExit (getAttributeValue (attribute));
+    }
+
+    @Override
+    public StringSubject verifyInputValue () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verify the input value of textbox located by: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onVerifyInputValue (this.locator));
+        return LOGGER.traceExit (
+            assertWithMessage (this.locator.getName ()).that (getAttributeValue (getInputAttribute ())));
+    }
+
+    private String getInputAttribute () {
+        var result = "value";
+        if (getSession ().getPlatformType () == ANDROID) {
+            result = "text";
+        }
+        return result;
+    }
+
     private void sendKeys (final String text) {
         performElementAction (e -> {
             e.sendKeys (text);
             if (getSession ().getPlatformType () == IOS && getSession ().getMobileSetting ()
                 .getDevice ()
                 .getApplication ()
-                .getType () != WEB) {
+                .getType () != ApplicationType.WEB) {
                 e.sendKeys ("\n");
             }
         }, this.locator);

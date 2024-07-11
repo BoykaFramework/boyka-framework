@@ -34,3 +34,24 @@ import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox
 . . .
 onTextBox (locator).focus ();
 ```
+
+### `inputValue` {#input-value}
+
+This method is used to get the value from the Textbox element.
+
+```java
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
+. . .
+String value = onTextBox (locator).inputValue ();
+```
+
+### `verifyInputValue` {#verify-input-value}
+
+This method is used to verify the value from the Textbox element.
+
+```java
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
+. . .
+onTextBox (locator).verifyInputValue ()
+    .isEqualTo (userName);
+```
