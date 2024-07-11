@@ -332,3 +332,4 @@ jobs:
           args: >
             -Dsonar.organization=boykaframework
             -Dsonar.projectKey=boyka-framework
+            -Dsonar.exclusions=**/*.java
