@@ -28,7 +28,7 @@
     <url>https://github.com/BoykaFramework/boyka-framework</url>
 
     <properties>
-        <selenium-webdriver.version>4.22.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.23.0</selenium-webdriver.version>
         <testng.version>7.10.2</testng.version>
         <appium-java-client.version>9.2.3</appium-java-client.version>
         <okhttp.version>4.12.0</okhttp.version>
@@ -47,7 +47,7 @@
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>1.5.0</json-schema-validator.version>
         <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
-        <maven-javadoc-plugin.version>3.7.0</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.8.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
