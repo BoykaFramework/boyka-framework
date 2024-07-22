@@ -45,7 +45,7 @@
     "eslint-plugin-react": "^7.35.0",
     "husky": "^9.1.1",
     "js-yaml": "^4.1.0",
-    "lerna": "8.1.6",
+    "lerna": "8.1.7",
     "lerna-changelog": "^2.2.0",
     "lerna-version": "^6.6.2",
     "lint-staged": "^15.2.7",
