@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/boyka-config.json",
   "listeners_package": "io.github.boykaframework.testng.listeners",
   "data": {
     "path": "data/excel"
