@@ -33,8 +33,8 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@lerna/child-process": "^7.4.2",
     "@types/node": "^20.14.11",
-    "@typescript-eslint/eslint-plugin": "^7.16.1",
-    "@typescript-eslint/parser": "^7.16.1",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
     "commitlint": "^19.3.0",
     "eslint": "^9.7.0",
     "eslint-config-google": "^0.14.0",
@@ -50,16 +50,16 @@
     "lerna-version": "^6.6.2",
     "lint-staged": "^15.2.7",
     "lodash": "^4.17.21",
-    "nx": "^19.5.1",
+    "nx": "^19.5.2",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install",
+    "postinstall": "husky",
     "build:site": "pnpm -r --filter=\"./website\" build",
     "start:site": "pnpm -r --filter=\"./website\" start",
     "deploy:site": "pnpm -r --filter=\"./website\" deploy",
@@ -92,5 +92,5 @@
       "pnpm format"
     ]
   },
-  "packageManager": "pnpm@9.3.0"
+  "packageManager": "pnpm@9.6.0"
 }
