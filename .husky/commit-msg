@@ -1,5 +1,4 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/h"
 
 pnpm lint-staged
 pnpm build:site
