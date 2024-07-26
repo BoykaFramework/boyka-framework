@@ -1,6 +1,6 @@
 {
   "version": "1.2.0",
-  "npmClient": "npm",
+  "npmClient": "pnpm",
   "changelog": {
     "repo": "BoykaFramework/boyka-framework",
     "labels": {
