@@ -41,11 +41,11 @@
         <json-path.version>2.9.0</json-path.version>
         <log4j-core.version>2.23.1</log4j-core.version>
         <log4j-api.version>2.23.1</log4j-api.version>
-        <faker.version>2.0.2</faker.version>
+        <faker.version>2.3.1</faker.version>
         <jackson-dataformat-yaml.version>2.17.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.17.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <json-schema-validator.version>1.5.0</json-schema-validator.version>
+        <json-schema-validator.version>1.5.1</json-schema-validator.version>
         <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.8.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>

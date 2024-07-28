@@ -1,0 +1,25 @@
+{
+  "$schema": "https://unpkg.com/release-it@17/schema/release-it.json",
+  "plugins": {
+    "@release-it-plugins/lerna-changelog": {
+      "infile": "CHANGELOG.md"
+    }
+  },
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "commit": true,
+    "tag": true,
+    "push": true,
+    "requireCleanWorkingDir": true
+  },
+  "github": {
+    "release": true,
+    "tokenRef": "PUSH_TOKEN",
+    "comments": {
+      "submit": true,
+      "issue": ":rocket: _This issue has been resolved in v${version}. See [${releaseName}](${releaseUrl}) for release notes._",
+      "pr": ":rocket: _This pull request is included in v${version}. See [${releaseName}](${releaseUrl}) for release notes._"
+    }
+  },
+  "npm": false
+}

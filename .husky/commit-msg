@@ -1,5 +1,3 @@
-. "$(dirname "$0")/h"
-
 pnpm lint-staged
 pnpm build:site
 mvn clean install -f core-java/pom.xml -DskipTests
