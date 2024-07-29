@@ -24,8 +24,10 @@
     }
   },
   "hooks": {
-    "before:init": "mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip",
-    "after:bump": "mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${version} versions:commit"
+    "after:bump": [
+      "mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${version} versions:commit",
+      "mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip"
+    ]
   },
   "npm": false
 }
