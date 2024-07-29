@@ -27,19 +27,15 @@ env:
   NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
 
 jobs:
-  prepare:
+  release:
     runs-on: ubuntu-latest
-
-    outputs:
-      new-version: ${{ steps.version.outputs.version }}
-      old-version: ${{ steps.old_version.outputs.previous_version }}
-      changelog: ${{ steps.changelog.outputs.changes }}
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ env.PUSH_TOKEN }}
 
       - uses: pnpm/action-setup@v4
 
@@ -48,66 +44,6 @@ jobs:
         with:
           node-version: 18
           cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm i
-
-      - name: Get the previous version
-        id: old_version
-        run: |
-          export PRE_RELEASE=${{ inputs.pre-release }}
-          if $PRE_RELEASE ; then
-            export MVN_OLD_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
-            echo "previous_version=${MVN_OLD_VERSION:1}" >> $GITHUB_OUTPUT
-          else
-            export MVN_OLD_VERSION=$(node -pe "require('./package.json').version")
-            echo "previous_version=${MVN_OLD_VERSION}" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Update pre-release version
-        if: ${{ inputs.pre-release }}
-        run: pnpm prerelease:${{ inputs.release-type }}
-
-      - name: Update release version
-        if: ${{ ! inputs.pre-release }}
-        run: pnpm release:${{ inputs.release-type }}
-
-      - name: Get the new version
-        id: version
-        run: |
-          export MVN_VERSION=$(node -pe "require('./website/package.json').version")
-          echo "version=$MVN_VERSION" >> $GITHUB_OUTPUT
-
-      - name: Generate Change log
-        if: ${{ steps.version.outputs.version != null }}
-        id: changelog
-        run: |
-          export CHANGELOG=$(pnpm --silent changelog --from v${{ steps.old_version.outputs.previous_version }} --next-version v${{ steps.version.outputs.version }})
-          delimiter="$(openssl rand -hex 8)"
-          echo "changes<<${delimiter}" >> "${GITHUB_OUTPUT}"
-          echo "$CHANGELOG" >> "${GITHUB_OUTPUT}"
-          echo "${delimiter}" >> "${GITHUB_OUTPUT}"
-
-      - name: Print Changelog
-        run: echo "${{ steps.changelog.outputs.changes }}"
-
-      - name: Upload updated version related files to artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: version-files-${{ github.run_id }}
-          retention-days: 1
-          path: |
-            ${{ github.workspace }}/lerna.json
-            ${{ github.workspace }}/website/package.json
-
-  release:
-    runs-on: ubuntu-latest
-    needs:
-      - prepare
-
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
 
       - name: Install Java and Maven
         uses: actions/setup-java@v4
@@ -122,8 +58,21 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ github.sha }}
 
-      - name: Maven command to update release version
-        run: mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${{ needs.prepare.outputs.new-version }} versions:commit
+      - name: Set Git Config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Update pre-release version
+        if: ${{ inputs.pre-release }}
+        run: pnpm release:pre${{ inputs.release-type }}
+
+      - name: Update release version
+        if: ${{ ! inputs.pre-release }}
+        run: pnpm release:${{ inputs.release-type }}
 
       - name: Release package to Maven central
         uses: WasiqB/maven-publish-action@v2
@@ -138,70 +87,6 @@ jobs:
           directory: ${{ github.workspace }}/core-java
           maven_args: -DskipTests -Dcheckstyle.skip
 
-      - name: Build the project JAR files
-        run: mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip
-
-      - name: Upload target folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: target-${{ github.run_id }}
-          retention-days: 1
-          path: |
-            ${{ github.workspace }}/core-java/target
-
-      - name: Upload version files folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: version-pom-files-${{ github.run_id }}
-          retention-days: 1
-          path: ${{ github.workspace }}/core-java/pom.xml
-
-  push-pom:
-    runs-on: ubuntu-latest
-    needs:
-      - prepare
-      - release
-
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ env.PUSH_TOKEN }}
-
-      - name: Download Version files
-        uses: actions/download-artifact@v4
-        with:
-          name: version-files-${{ github.run_id }}
-
-      - name: Download Version pom files
-        uses: actions/download-artifact@v4
-        with:
-          name: version-pom-files-${{ github.run_id }}
-          path: ${{ github.workspace }}/core-java
-
-      - name: Update new version in README and Usage
-        uses: jacobtomlinson/gha-find-replace@v3
-        if: ${{ ! inputs.pre-release }}
-        with:
-          find: ${{ needs.prepare.outputs.old-version }}
-          replace: ${{ needs.prepare.outputs.new-version }}
-          include: |
-            ${{ github.workspace }}/README.md
-            ${{ github.workspace }}/website/docs/framework-docs/getting-started/usage.md
-
-      - name: Update new version in package.json
-        uses: jacobtomlinson/gha-find-replace@v3
-        if: ${{ ! inputs.pre-release }}
-        with:
-          find: '"version": "${{ needs.prepare.outputs.old-version }}"'
-          replace: '"version": "${{ needs.prepare.outputs.new-version }}"'
-          include: |
-            ${{ github.workspace }}/package.json
-      
-      - name: Update Changelog file for v${{ needs.prepare.outputs.new-version }}
-        run: |
-          echo "${{ needs.prepare.outputs.changelog }}" > CHANGELOG.md
-
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -214,46 +99,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           message: |
-            chore(Internal): :bookmark: released v${{ needs.prepare.outputs.new-version }} to maven central
+            chore(Internal): :bookmark: released new version to maven central
           push: true
           default_author: user_info
           commit: --no-verify
-
-  github:
-    runs-on: ubuntu-latest
-    needs:
-      - prepare
-      - push-pom
-
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Download target folder
-        uses: actions/download-artifact@v4
-        with:
-          name: target-${{ github.run_id }}
-          path: ${{ github.workspace }}/core-java/target
-
-      - name: Download Version files
-        uses: actions/download-artifact@v4
-        with:
-          name: version-files-${{ github.run_id }}
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        env:
-          GITHUB_TOKEN: ${{ env.PUSH_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        with:
-          tag_name: v${{ needs.prepare.outputs.new-version }}
-          name: Version ${{ needs.prepare.outputs.new-version }}
-          prerelease: ${{ inputs.pre-release }}
-          draft: false
-          body: ${{ needs.prepare.outputs.changelog }}
-          discussion_category_name: Announcements
-          generate_release_notes: false
-          files: |
-            core-java/target/*.jar

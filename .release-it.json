@@ -16,11 +16,18 @@
   "github": {
     "release": true,
     "tokenRef": "PUSH_TOKEN",
+    "assets": ["core-java/target/*.jar"],
     "comments": {
       "submit": true,
       "issue": ":rocket: _This issue has been resolved in v${version}. See [${releaseName}](${releaseUrl}) for release notes._",
       "pr": ":rocket: _This pull request is included in v${version}. See [${releaseName}](${releaseUrl}) for release notes._"
     }
+  },
+  "hooks": {
+    "after:bump": [
+      "mvn build-helper:parse-version versions:set -f core-java/pom.xml -DnewVersion=${version} versions:commit",
+      "mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip"
+    ]
   },
   "npm": false
 }
