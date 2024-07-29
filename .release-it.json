@@ -11,6 +11,8 @@
     "commit": true,
     "tag": true,
     "push": true,
+    "commitArgs": ["-S", "--no-verify"],
+    "tagArgs": ["-s"],
     "requireCleanWorkingDir": true
   },
   "github": {
@@ -29,5 +31,7 @@
       "mvn clean install -f core-java/pom.xml -DskipTests -Dcheckstyle.skip"
     ]
   },
-  "npm": false
+  "npm": {
+    "publish": false
+  }
 }
