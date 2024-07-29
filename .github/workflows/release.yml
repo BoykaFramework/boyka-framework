@@ -63,14 +63,22 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
+          passphrase: ${{ env.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
       - name: Install dependencies
         run: pnpm i
 
-      - name: Update pre-release version
+      - name: Publish pre-release version on GitHub
         if: ${{ inputs.pre-release }}
         run: pnpm release:pre${{ inputs.release-type }}
 
-      - name: Update release version
+      - name: Publish stable release version on GitHub
         if: ${{ ! inputs.pre-release }}
         run: pnpm release:${{ inputs.release-type }}
 
@@ -86,20 +94,3 @@ jobs:
           settings_path: ${{ github.workspace }}/core-java/setting/settings.xml
           directory: ${{ github.workspace }}/core-java
           maven_args: -DskipTests -Dcheckstyle.skip
-
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ env.GPG_PRIVATE_KEY }}
-          passphrase: ${{ env.GPG_PASSPHRASE }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-
-      - name: Push updated version files
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: |
-            chore(Internal): :bookmark: released new version to maven central
-          push: true
-          default_author: user_info
-          commit: --no-verify
