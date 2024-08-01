@@ -66,7 +66,6 @@
     </module>
 
     <module name="TreeWalker">
-        <!-- Highlight any TODO or FIXME comments in info messages -->
         <module name="TodoComment">
             <property name="severity" value="info"/>
             <property name="format" value="(TODO)|(FIXME)"/>

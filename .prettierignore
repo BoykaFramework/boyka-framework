@@ -7,3 +7,4 @@ core-java/
 *.xml
 *.toml
 build/
+*-lock.yaml
