@@ -101,7 +101,7 @@ jobs:
       - name: Start Selenium Grid for Web
         if: ${{ inputs.run-grid && ! inputs.run-appium }}
         run: |
-          docker-compose -f core-java/compose/docker-compose.yml up -d
+          docker compose -f core-java/compose/docker-compose.yml up -d
 
       - name: Launch iOS Simulator
         if: ${{ inputs.run-ios }}
@@ -140,7 +140,7 @@ jobs:
       - name: Stop Selenium Grid for Web
         if: ${{ inputs.run-grid && ! inputs.run-appium && always() }}
         run: |
-          docker-compose -f core-java/compose/docker-compose.yml down --remove-orphans
+          docker compose -f core-java/compose/docker-compose.yml down --remove-orphans
 
       - name: Stop Appium Server
         if: ${{ inputs.run-appium && always() }}
