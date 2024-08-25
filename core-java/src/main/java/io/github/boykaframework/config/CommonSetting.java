@@ -17,6 +17,7 @@
 package io.github.boykaframework.config;
 
 import io.github.boykaframework.config.api.CommonApiSetting;
+import io.github.boykaframework.config.ui.CommonUiSetting;
 import lombok.Data;
 
 /**
@@ -28,4 +29,5 @@ import lombok.Data;
 @Data
 public class CommonSetting {
     private CommonApiSetting api = new CommonApiSetting ();
+    private CommonUiSetting  ui  = new CommonUiSetting ();
 }

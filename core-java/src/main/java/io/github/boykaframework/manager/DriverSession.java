@@ -16,6 +16,10 @@
 
 package io.github.boykaframework.manager;
 
+import static io.github.boykaframework.enums.Message.INVALID_LISTENER_FOUND;
+import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
+import static io.github.boykaframework.utils.SettingUtils.loadSetting;
+import static java.lang.ClassLoader.getSystemClassLoader;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -30,18 +34,17 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
 import io.github.boykaframework.actions.interfaces.listeners.BoykaListener;
 import io.github.boykaframework.config.FrameworkSetting;
 import io.github.boykaframework.config.TestDataSetting;
 import io.github.boykaframework.config.api.ApiSetting;
 import io.github.boykaframework.config.api.CommonApiSetting;
 import io.github.boykaframework.config.ui.mobile.MobileSetting;
+import io.github.boykaframework.config.ui.web.CommonWebSetting;
 import io.github.boykaframework.config.ui.web.WebSetting;
 import io.github.boykaframework.enums.ListenerType;
-import io.github.boykaframework.enums.Message;
 import io.github.boykaframework.enums.PlatformType;
-import io.github.boykaframework.utils.ErrorHandler;
-import io.github.boykaframework.utils.SettingUtils;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -58,16 +61,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @SuppressWarnings ("unchecked")
 @Data
 public class DriverSession<D extends WebDriver> {
-    private static final ImmutableSet<ClassPath.ClassInfo> ALL_CLASSES = getAllClasses ();
-    private static final Logger                            LOGGER      = getLogger ();
+    private static final ImmutableSet<ClassInfo> ALL_CLASSES = getAllClasses ();
+    private static final Logger                  LOGGER      = getLogger ();
 
-    private static ImmutableSet<ClassPath.ClassInfo> getAllClasses () {
-        ImmutableSet<ClassPath.ClassInfo> result = null;
+    private static ImmutableSet<ClassInfo> getAllClasses () {
+        ImmutableSet<ClassInfo> result = null;
         try {
-            result = ClassPath.from (ClassLoader.getSystemClassLoader ())
+            result = ClassPath.from (getSystemClassLoader ())
                 .getAllClasses ();
         } catch (final IOException e) {
-            ErrorHandler.handleAndThrow (Message.INVALID_LISTENER_FOUND, e);
+            handleAndThrow (INVALID_LISTENER_FOUND, e);
         }
         return result;
     }
@@ -85,7 +88,7 @@ public class DriverSession<D extends WebDriver> {
      * Driver session constructor.
      */
     DriverSession () {
-        this.setting = SettingUtils.loadSetting ();
+        this.setting = loadSetting ();
         this.sharedData = new HashMap<> ();
         this.listeners = new EnumMap<> (ListenerType.class);
         LOGGER.traceExit ();
@@ -125,6 +128,17 @@ public class DriverSession<D extends WebDriver> {
     }
 
     /**
+     * Gets Common Web Settings.
+     *
+     * @return {@link WebSetting} instance
+     */
+    public CommonWebSetting getCommonWebSetting () {
+        return this.setting.getCommonSetting ()
+            .getUi ()
+            .getWeb ();
+    }
+
+    /**
      * Gets the listener for provided listener type.
      *
      * @param listenerType {@link ListenerType}
@@ -146,7 +160,7 @@ public class DriverSession<D extends WebDriver> {
             result = (T) constructor.newInstance ();
         } catch (final NoSuchMethodException | InstantiationException | IllegalAccessException |
                        InvocationTargetException e) {
-            ErrorHandler.handleAndThrow (Message.INVALID_LISTENER_FOUND, e, listener);
+            handleAndThrow (INVALID_LISTENER_FOUND, e, listener);
         }
         return result;
     }
@@ -217,7 +231,7 @@ public class DriverSession<D extends WebDriver> {
             ALL_CLASSES.stream ()
                 .filter (clazz -> clazz.getPackageName ()
                     .startsWith (packageName))
-                .map (ClassPath.ClassInfo::getName)
+                .map (ClassInfo::getName)
                 .forEach (listenerList::add);
         }
     }
@@ -240,7 +254,7 @@ public class DriverSession<D extends WebDriver> {
                     this.listeners.put (listenerType, cls);
                 }
             } catch (final ClassNotFoundException e) {
-                ErrorHandler.handleAndThrow (Message.INVALID_LISTENER_FOUND, e, listener);
+                handleAndThrow (INVALID_LISTENER_FOUND, e, listener);
             }
         });
     }

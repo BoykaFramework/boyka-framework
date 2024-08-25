@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Wasiq Bhamla
+ * Copyright (c) 2024, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -16,30 +16,12 @@
 
 package io.github.boykaframework.config.ui.mobile;
 
-import static io.github.boykaframework.utils.Validator.requireNonNullElse;
-
 import io.github.boykaframework.config.ui.mobile.device.DeviceSetting;
 import io.github.boykaframework.config.ui.mobile.server.ServerSetting;
 import lombok.Data;
 
-/**
- * Mobile settings.
- *
- * @author Wasiq Bhamla
- * @since 06-Sept-2022
- */
 @Data
-public class MobileSetting {
-    private static final CommonMobileSetting MOBILE_SETTING = new CommonMobileSetting ();
-
+public class CommonMobileSetting {
     private DeviceSetting device = new DeviceSetting ();
     private ServerSetting server = new ServerSetting ();
-
-    public DeviceSetting getDevice () {
-        return requireNonNullElse (this.device, MOBILE_SETTING.getDevice ());
-    }
-
-    public ServerSetting getServer () {
-        return requireNonNullElse (this.server, MOBILE_SETTING.getServer ());
-    }
 }

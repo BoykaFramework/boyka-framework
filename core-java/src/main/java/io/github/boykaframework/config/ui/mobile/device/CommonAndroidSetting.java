@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Wasiq Bhamla
+ * Copyright (c) 2024, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,23 +14,16 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.ui.mobile.server;
+package io.github.boykaframework.config.ui.mobile.device;
 
-import static io.github.boykaframework.enums.LogLevel.ERROR;
-
-import io.github.boykaframework.enums.LogLevel;
 import lombok.Data;
 
-/**
- * Mobile logging settings.
- *
- * @author Wasiq Bhamla
- * @since 21-Sept-2023
- */
 @Data
-public class LogSetting {
-    private boolean  debugSpacing  = true;
-    private LogLevel level         = ERROR;
-    private boolean  localTimezone = true;
-    private boolean  timestamp     = true;
+public class CommonAndroidSetting {
+    private int     adbTimeout             = 30;
+    private boolean clearLogs              = true;
+    private boolean ignoreUnimportantViews = true;
+    private int     serverInstallTimeout   = 30;
+    private int     serverLaunchTimeout    = 30;
+    private int     systemPort             = 8200;
 }

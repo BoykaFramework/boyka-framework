@@ -30,9 +30,9 @@ import lombok.Data;
  */
 @Data
 public class ApplicationSetting {
-    private String  baseUrl;
-    private Browser browser;
-    private String  bundleId;
+    private String          baseUrl;
+    private Browser         browser;
+    private String          bundleId;
     private int             chromeDriverPort;
     private boolean         external;
     private int             installTimeout = 30;

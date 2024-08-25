@@ -79,6 +79,16 @@ public final class Validator {
         return obj;
     }
 
+    public static <T> T requireNonNullElse (final T value, final T defaultValue) {
+        if (isNull (value)) {
+            return defaultValue;
+        }
+        if (value instanceof Integer && !value.equals (0)) {
+            return defaultValue;
+        }
+        return value;
+    }
+
     /**
      * Checks if the value is not null or zero and perform action on it.
      *

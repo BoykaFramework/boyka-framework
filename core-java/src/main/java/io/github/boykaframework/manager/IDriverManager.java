@@ -16,30 +16,29 @@
 
 package io.github.boykaframework.manager;
 
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.enums.ApplicationType.WEB;
 import static io.github.boykaframework.enums.TargetProviders.LOCAL;
+import static io.github.boykaframework.utils.StringUtils.interpolate;
 import static java.lang.System.getProperty;
+import static java.nio.file.Path.of;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
 import io.appium.java_client.remote.options.BaseOptions;
 import io.appium.java_client.remote.options.SupportsAppOption;
-import io.github.boykaframework.actions.drivers.NavigateActions;
 import io.github.boykaframework.config.ui.mobile.device.ApplicationSetting;
-import io.github.boykaframework.enums.ApplicationType;
 import io.github.boykaframework.enums.TargetProviders;
-import io.github.boykaframework.utils.StringUtils;
 import org.openqa.selenium.MutableCapabilities;
 
 interface IDriverManager {
     default void navigateToBaseUrl (final ApplicationSetting application) {
-        if (application.getType () == ApplicationType.WEB && isNotEmpty (application.getBaseUrl ())) {
-            NavigateActions.navigate ()
-                .to (application.getBaseUrl ());
+        if (application.getType () == WEB && isNotEmpty (application.getBaseUrl ())) {
+            navigate ().to (application.getBaseUrl ());
         }
     }
 
@@ -47,10 +46,10 @@ interface IDriverManager {
         final ApplicationSetting application, final T options) {
         if (isNotEmpty (application.getPath ())) {
             if (!application.isExternal ()) {
-                options.setApp (Path.of (getProperty ("user.dir"), "/src/test/resources", application.getPath ())
-                    .toString ());
+                options.setApp (
+                    of (getProperty ("user.dir"), "/src/test/resources", application.getPath ()).toString ());
             } else {
-                options.setApp (StringUtils.interpolate (application.getPath ()));
+                options.setApp (interpolate (application.getPath ()));
             }
         }
     }
@@ -61,7 +60,7 @@ interface IDriverManager {
             final var optionCapabilities = new HashMap<String, Object> ();
             capabilities.forEach ((k, v) -> {
                 if (v instanceof String) {
-                    optionCapabilities.put (k, StringUtils.interpolate (v.toString ()));
+                    optionCapabilities.put (k, interpolate (v.toString ()));
                 } else {
                     optionCapabilities.put (k, v);
                 }

@@ -16,11 +16,9 @@
 
 package io.github.boykaframework.config.ui.web;
 
-import static io.github.boykaframework.enums.Browser.NONE;
-import static io.github.boykaframework.enums.Protocol.HTTP;
-import static io.github.boykaframework.enums.TargetProviders.LOCAL;
-import static io.github.boykaframework.enums.WindowResizeType.NORMAL;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.StringUtils.interpolate;
+import static io.github.boykaframework.utils.Validator.requireNonNullElse;
 
 import java.util.List;
 import java.util.Map;
@@ -41,23 +39,53 @@ import org.openqa.selenium.PageLoadStrategy;
  */
 @Data
 public class WebSetting {
+    private static final CommonWebSetting WEB_SETTING = getSession ().getCommonWebSetting ();
+
     private String              baseUrl;
-    private Browser             browser          = NONE;
+    private Browser             browser;
     private List<String>        browserOptions;
     private Map<String, Object> capabilities;
-    private Dimension           customSize       = new Dimension (1920, 1080);
-    private boolean             headless         = true;
-    private boolean             highlight        = false;
+    private Dimension           customSize;
+    private boolean             headless;
+    private boolean             highlight;
     private String              host;
-    private PageLoadStrategy    pageLoadStrategy = PageLoadStrategy.NORMAL;
+    private PageLoadStrategy    pageLoadStrategy;
     private String              password;
     private String              platform;
     private int                 port;
-    private Protocol            protocol         = HTTP;
-    private WindowResizeType    resize           = NORMAL;
-    private TargetProviders     target           = LOCAL;
+    private Protocol            protocol;
+    private WindowResizeType    resize;
+    private TargetProviders     target;
     private String              userName;
-    private String              version          = "stable";
+    private String              version;
+
+    public String getBaseUrl () {
+        return requireNonNullElse (this.baseUrl, WEB_SETTING.getBaseUrl ());
+    }
+
+    public Browser getBrowser () {
+        return requireNonNullElse (this.browser, WEB_SETTING.getBrowser ());
+    }
+
+    public List<String> getBrowserOptions () {
+        return requireNonNullElse (this.browserOptions, WEB_SETTING.getBrowserOptions ());
+    }
+
+    public Map<String, Object> getCapabilities () {
+        return requireNonNullElse (this.capabilities, WEB_SETTING.getCapabilities ());
+    }
+
+    public Dimension getCustomSize () {
+        return requireNonNullElse (this.customSize, WEB_SETTING.getCustomSize ());
+    }
+
+    public String getHost () {
+        return requireNonNullElse (this.host, WEB_SETTING.getHost ());
+    }
+
+    public PageLoadStrategy getPageLoadStrategy () {
+        return requireNonNullElse (this.pageLoadStrategy, WEB_SETTING.getPageLoadStrategy ());
+    }
 
     /**
      * Gets cloud password.
@@ -65,7 +93,27 @@ public class WebSetting {
      * @return the cloud password
      */
     public String getPassword () {
-        return interpolate (this.password);
+        return interpolate (requireNonNullElse (this.password, WEB_SETTING.getPassword ()));
+    }
+
+    public String getPlatform () {
+        return requireNonNullElse (this.platform, WEB_SETTING.getPlatform ());
+    }
+
+    public int getPort () {
+        return requireNonNullElse (this.port, WEB_SETTING.getPort ());
+    }
+
+    public Protocol getProtocol () {
+        return requireNonNullElse (this.protocol, WEB_SETTING.getProtocol ());
+    }
+
+    public WindowResizeType getResize () {
+        return requireNonNullElse (this.resize, WEB_SETTING.getResize ());
+    }
+
+    public TargetProviders getTarget () {
+        return requireNonNullElse (this.target, WEB_SETTING.getTarget ());
     }
 
     /**
@@ -74,6 +122,18 @@ public class WebSetting {
      * @return the cloud username.
      */
     public String getUserName () {
-        return interpolate (this.userName);
+        return interpolate (requireNonNullElse (this.userName, WEB_SETTING.getUserName ()));
+    }
+
+    public String getVersion () {
+        return requireNonNullElse (this.version, WEB_SETTING.getVersion ());
+    }
+
+    public boolean isHeadless () {
+        return requireNonNullElse (this.headless, WEB_SETTING.isHeadless ());
+    }
+
+    public boolean isHighlight () {
+        return requireNonNullElse (this.highlight, WEB_SETTING.isHighlight ());
     }
 }

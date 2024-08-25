@@ -91,6 +91,14 @@ public enum Message {
      */
     EMPTY_BROWSER_NOT_ALLOWED ("Browser type cannot be empty in the config..."),
     /**
+     * Empty request body.
+     */
+    EMPTY_REQUEST_BODY ("Request Body is empty"),
+    /**
+     * URL cannot be empty.
+     */
+    EMPTY_URL ("URL cannot be empty..."),
+    /**
      * Error while calling setter method.
      */
     ERROR_CALLING_SETTER ("Error encountered when calling setter method [{0}] in [{1}] data class..."),
@@ -270,6 +278,10 @@ public enum Message {
      * Session persona cannot be null.
      */
     SESSION_PERSONA_CANNOT_BE_NULL ("Session Persona cannot be empty or null..."),
+    /**
+     * SSL Context cannot be empty.
+     */
+    SSL_CONTEXT_EMPTY ("SSL Context is empty..."),
     /**
      * SSL Context Error.
      */
