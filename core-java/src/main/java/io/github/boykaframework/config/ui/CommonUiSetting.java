@@ -19,6 +19,12 @@ package io.github.boykaframework.config.ui;
 import io.github.boykaframework.config.ui.web.CommonWebSetting;
 import lombok.Data;
 
+/**
+ * Common UI settings
+ *
+ * @author Wasiq Bhamla
+ * @since 22-Aug-2024
+ */
 @Data
 public class CommonUiSetting {
     private CommonWebSetting web = new CommonWebSetting ();

@@ -32,6 +32,12 @@ import lombok.Data;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.PageLoadStrategy;
 
+/**
+ * Common Web Settings.
+ *
+ * @author Wasiq Bhamla
+ * @since 22-Aug-2024
+ */
 @Data
 public class CommonWebSetting {
     private String              baseUrl;

@@ -40,26 +40,50 @@ public class ApiSetting {
     private boolean        validateSsl;
     private boolean        verifyHostName;
 
+    /**
+     * Gets the base path
+     * @return base path url
+     */
     public String getBasePath () {
         return requireNonNullElse (this.basePath, COMMON_SETTING.getBasePath ());
     }
 
+    /**
+     * Gets the logging settings
+     * @return Logging settings
+     */
     public LogSetting getLogging () {
         return requireNonNullElse (this.logging, COMMON_SETTING.getLogging ());
     }
 
+    /**
+     * Gets the schema path
+     * @return Schema path
+     */
     public String getSchemaPath () {
         return requireNonNullElse (this.schemaPath, COMMON_SETTING.getSchemaPath ());
     }
 
+    /**
+     * Gets the timeout config
+     * @return timeout config
+     */
     public TimeoutSetting getTimeout () {
         return requireNonNullElse (this.timeout, COMMON_SETTING.getTimeout ());
     }
 
+    /**
+     * Should SSL validation be done?
+     * @return Validate SSL
+     */
     public boolean isValidateSsl () {
         return requireNonNullElse (this.validateSsl, COMMON_SETTING.isValidateSsl ());
     }
 
+    /**
+     * Should Verify Host name?
+     * @return verify host name
+     */
     public boolean isVerifyHostName () {
         return requireNonNullElse (this.verifyHostName, COMMON_SETTING.isVerifyHostName ());
     }

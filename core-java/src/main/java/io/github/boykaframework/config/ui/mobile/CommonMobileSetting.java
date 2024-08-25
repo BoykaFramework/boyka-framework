@@ -20,6 +20,12 @@ import io.github.boykaframework.config.ui.mobile.device.DeviceSetting;
 import io.github.boykaframework.config.ui.mobile.server.ServerSetting;
 import lombok.Data;
 
+/**
+ * Common Mobile settings
+ *
+ * @author Wasiq Bhamla
+ * @since 25-Aug-2024
+ */
 @Data
 public class CommonMobileSetting {
     private DeviceSetting device = new DeviceSetting ();
