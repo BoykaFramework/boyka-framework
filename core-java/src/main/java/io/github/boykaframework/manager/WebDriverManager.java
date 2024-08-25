@@ -22,10 +22,10 @@ import static io.github.boykaframework.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
 import static io.github.boykaframework.enums.Message.HOSTNAME_REQUIRED_FOR_REMOTE;
 import static io.github.boykaframework.enums.Message.INVALID_BROWSER;
 import static io.github.boykaframework.enums.Message.INVALID_REMOTE_URL;
+import static io.github.boykaframework.enums.Message.INVALID_TARGET;
 import static io.github.boykaframework.enums.Message.NULL_REMOTE_URL;
 import static io.github.boykaframework.enums.Message.PAGE_LOAD_STRATEGY_MISSING;
 import static io.github.boykaframework.enums.Message.PASSWORD_REQUIRED_FOR_CLOUD;
-import static io.github.boykaframework.enums.Message.PROTOCOL_REQUIRED_FOR_HOST;
 import static io.github.boykaframework.enums.Message.SESSION_NOT_STARTED;
 import static io.github.boykaframework.enums.Message.USER_NAME_REQUIRED_FOR_CLOUD;
 import static io.github.boykaframework.enums.TargetProviders.LOCAL;
@@ -155,16 +155,18 @@ class WebDriverManager implements IDriverManager {
         final var URL_PATTERN = "{0}://{1}";
         final var target = webSetting.getTarget ();
         final var hostName = new StringBuilder (getHostName (webSetting, target));
+
+        if (target == LOCAL) {
+            throwError (INVALID_TARGET, target);
+        }
+
         if (webSetting.getPort () != 0) {
             hostName.append (":")
                 .append (webSetting.getPort ());
         }
-        if (target != LOCAL) {
-            hostName.append ("/wd/hub");
-        }
+        hostName.append ("/wd/hub");
         final var url = format (URL_PATTERN,
-            requireNonNull (requireNonNullElse (webSetting.getProtocol (), target.getProtocol ()),
-                PROTOCOL_REQUIRED_FOR_HOST, hostName).name ()
+            requireNonNullElse (webSetting.getProtocol (), target.getProtocol ()).name ()
                 .toLowerCase (), hostName);
         try {
             return LOGGER.traceExit (new URL (url));

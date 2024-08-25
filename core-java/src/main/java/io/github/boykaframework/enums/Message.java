@@ -219,6 +219,10 @@ public enum Message {
      */
     INVALID_SWIPE_DISTANCE ("Swipe Distance should be greater than 0% and less than 100%..."),
     /**
+     * Invalid target for remote session.
+     */
+    INVALID_TARGET ("Invalid target ({0}) for Remote session..."),
+    /**
      * Malformed JSON syntax error.
      */
     JSON_SYNTAX_ERROR ("JSON syntax error..."),
@@ -254,10 +258,6 @@ public enum Message {
      * Path should be a folder / directory.
      */
     PATH_NOT_DIRECTORY ("Path [{0}] is not a folder. Only folder path should be provided..."),
-    /**
-     * Protocol is required for host name
-     */
-    PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host ({0})..."),
     /**
      * Schema validation assert failure
      */

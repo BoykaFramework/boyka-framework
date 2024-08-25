@@ -16,16 +16,21 @@
 
 package io.github.boykaframework.testng.api.restful;
 
+import static io.github.boykaframework.actions.api.ApiActions.withRequest;
 import static io.github.boykaframework.enums.PlatformType.API;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.testng.api.restful.data.BookingRequestData.getBookingData;
+import static io.github.boykaframework.testng.api.restful.requests.BookingRequest.createBooking;
+import static io.github.boykaframework.testng.api.restful.requests.BookingRequest.deleteBooking;
+import static io.github.boykaframework.testng.api.restful.requests.BookingRequest.getBooking;
+import static io.github.boykaframework.testng.api.restful.requests.BookingRequest.updateBooking;
+import static io.github.boykaframework.testng.api.restful.requests.BookingRequest.updatePartialBooking;
 
-import io.github.boykaframework.actions.api.ApiActions;
 import io.github.boykaframework.exception.FrameworkError;
 import io.github.boykaframework.testng.api.restful.data.BookingRequestData;
 import io.github.boykaframework.testng.api.restful.pojo.BookingData;
-import io.github.boykaframework.testng.api.restful.requests.BookingRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -54,7 +59,7 @@ public class RestfulBookerEndToEndTests {
     @BeforeClass (description = "Setup test class")
     public void setupTestClass () {
         createSession (API, "test_restfulbooker");
-        this.newBooking = BookingRequestData.getBookingData ();
+        this.newBooking = getBookingData ();
     }
 
     /**
@@ -68,9 +73,8 @@ public class RestfulBookerEndToEndTests {
     @Story ("Create Booking with POST request")
     @Test (description = "Test for creating new booking with POST request")
     public void testCreateBooking () {
-        final var request = BookingRequest.createBooking (this.newBooking);
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var request = createBooking (this.newBooking);
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
@@ -93,9 +97,8 @@ public class RestfulBookerEndToEndTests {
     @Story ("Delete Booking")
     @Test (description = "Test for Deleting a booking using DELETE request")
     public void testDeleteBooking () {
-        final var request = BookingRequest.deleteBooking (getSession ().getSharedData (BOOKING_ID));
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var request = deleteBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (201);
     }
@@ -103,9 +106,8 @@ public class RestfulBookerEndToEndTests {
     @Story ("Get deleted Booking")
     @Test (description = "Test for checking deleted booking using GET request")
     public void testDeletedBooking () {
-        final var request = BookingRequest.getBooking (getSession ().getSharedData (BOOKING_ID));
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var request = getBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (404);
     }
@@ -113,9 +115,8 @@ public class RestfulBookerEndToEndTests {
     @Story ("Get Created Booking")
     @Test (description = "Test for retrieving booking using GET request")
     public void testGetBooking () {
-        final var request = BookingRequest.getBooking (getSession ().getSharedData (BOOKING_ID));
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var request = getBooking (getSession ().getSharedData (BOOKING_ID));
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
@@ -128,9 +129,8 @@ public class RestfulBookerEndToEndTests {
     @Story ("Json Validation Exception tests")
     @Test (description = "Tests for file not found exception", expectedExceptions = FrameworkError.class)
     public void testJsonSchemaFileException () {
-        final var request = BookingRequest.createBooking (this.newBooking);
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var request = createBooking (this.newBooking);
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);
@@ -144,9 +144,8 @@ public class RestfulBookerEndToEndTests {
     public void testUpdateBooking () {
         final var updateBookingData = this.newBooking;
 
-        final var request = BookingRequest.updateBooking (getSession ().getSharedData (BOOKING_ID), updateBookingData);
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var request = updateBooking (getSession ().getSharedData (BOOKING_ID), updateBookingData);
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("firstname")
@@ -160,10 +159,8 @@ public class RestfulBookerEndToEndTests {
     public void testUpdatePartialBooking () {
         final var partialBookingData = BookingRequestData.getPartialBookingData ();
 
-        final var request = BookingRequest.updatePartialBooking (getSession ().getSharedData (BOOKING_ID),
-            partialBookingData);
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var request = updatePartialBooking (getSession ().getSharedData (BOOKING_ID), partialBookingData);
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
         response.verifyTextField ("firstname")

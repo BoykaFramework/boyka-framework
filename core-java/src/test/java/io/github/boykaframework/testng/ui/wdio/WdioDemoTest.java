@@ -19,6 +19,7 @@ package io.github.boykaframework.testng.ui.wdio;
 import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
 import static io.github.boykaframework.actions.drivers.ContextActions.withContext;
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
 import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
@@ -33,7 +34,6 @@ import static io.github.boykaframework.testng.ui.wdio.pages.SignUpPage.signUpPag
 import static io.github.boykaframework.testng.ui.wdio.pages.WDIOHomePage.wdioHomePage;
 import static io.github.boykaframework.testng.ui.wdio.pages.WebViewPage.webViewPage;
 
-import io.github.boykaframework.actions.drivers.WindowActions;
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -55,8 +55,7 @@ public class WdioDemoTest {
     @AfterMethod
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
-            WindowActions.onWindow ()
-                .takeScreenshot ();
+            onWindow ().takeScreenshot ();
         }
     }
 

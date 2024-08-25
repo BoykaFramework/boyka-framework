@@ -16,13 +16,13 @@
 
 package io.github.boykaframework.testng.ui.theinternet;
 
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.testng.ui.theinternet.pages.DragDropPage.dragDropPage;
 
-import io.github.boykaframework.actions.drivers.NavigateActions;
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -48,8 +48,7 @@ public class DragDropTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createSession ("DragDropTest", platformType, driverKey);
-        NavigateActions.navigate ()
-            .to (URL);
+        navigate ().to (URL);
     }
 
     /**

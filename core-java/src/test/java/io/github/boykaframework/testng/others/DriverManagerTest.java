@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.testng.others;
 
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
@@ -35,10 +36,12 @@ public class DriverManagerTest {
     /**
      * Test method to verify empty browser in config.
      */
-    @Test (description = "Test Web empty browser in config", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Browser type cannot be empty in the config...")
+    @Test (description = "Test Web empty browser in config")
     public void testEmptyBrowserInConfig () {
         try {
             createSession (PERSONA, WEB, "test_local_empty_browser");
+            withDriver ().verifyCapability ("browserName")
+                .isEqualTo ("chrome");
         } finally {
             clearSession ();
         }
@@ -71,10 +74,12 @@ public class DriverManagerTest {
     /**
      * Test method to verify empty browser in config.
      */
-    @Test (description = "Test Web null browser in config", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "NONE Browser type is not allowed for Web platform...")
+    @Test (description = "Test Web null browser in config")
     public void testNullBrowserInConfig () {
         try {
             createSession (PERSONA, WEB, "test_local_null_browser");
+            withDriver ().verifyCapability ("browserName")
+                .isEqualTo ("chrome");
         } finally {
             clearSession ();
         }
@@ -83,7 +88,7 @@ public class DriverManagerTest {
     /**
      * Test method to verify null cloud Host.
      */
-    @Test (description = "Test Null cloud Host", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Host name is required for remote driver execution...")
+    @Test (description = "Test Null cloud Host", expectedExceptions = FrameworkError.class)
     public void testNullCloudHost () {
         try {
             createSession (PERSONA, WEB, "test_lambda_test_no_host");

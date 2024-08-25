@@ -20,14 +20,14 @@ import static io.github.boykaframework.actions.api.ApiActions.withRequest;
 import static io.github.boykaframework.builders.ApiRequest.createRequest;
 import static io.github.boykaframework.enums.PlatformType.API;
 import static io.github.boykaframework.enums.RequestMethod.GET;
+import static io.github.boykaframework.enums.RequestMethod.POST;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
+import static io.github.boykaframework.testng.api.restful.data.BookingRequestData.getBookingData;
 import static io.github.boykaframework.testng.api.restful.requests.BookingRequest.createBooking;
 import static io.github.boykaframework.testng.api.restful.requests.BookingRequest.getBooking;
 
-import io.github.boykaframework.enums.RequestMethod;
 import io.github.boykaframework.exception.FrameworkError;
-import io.github.boykaframework.testng.api.restful.data.BookingRequestData;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -69,11 +69,11 @@ public class ApiTests {
     @Test
     public void testNullHeader () {
         createSession (API, "test_restfulbooker");
-        final var request = createRequest ().method (RequestMethod.POST)
+        final var request = createRequest ().method (POST)
             .header ("Accept", "application/json")
             .header ("Content-Type", null)
             .path ("/booking")
-            .bodyObject (createBooking (BookingRequestData.getBookingData ()))
+            .bodyObject (createBooking (getBookingData ()))
             .create ();
 
         final var response = withRequest (request).execute ();

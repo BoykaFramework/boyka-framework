@@ -19,6 +19,7 @@ package io.github.boykaframework.actions.interfaces.drivers;
 import java.time.Duration;
 import java.util.function.Function;
 
+import com.google.common.truth.StringSubject;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -28,6 +29,15 @@ import org.openqa.selenium.WebDriver;
  * @since 16-Feb-2023
  */
 public interface IDriverActions {
+    /**
+     * Get Current sessions capability based on the name.
+     *
+     * @param name Name of capability
+     *
+     * @return value of the capability
+     */
+    String capability (String name);
+
     /**
      * Executes javascript in browser.
      *
@@ -50,6 +60,15 @@ public interface IDriverActions {
      * Save all the available logs to files in `logs` folder.
      */
     void saveLogs ();
+
+    /**
+     * Verify the current sessions capability based on its name
+     *
+     * @param capabilityName Name of capability to verify
+     *
+     * @return String subject to verify the capability value
+     */
+    StringSubject verifyCapability (String capabilityName);
 
     /**
      * Wait for a specific condition to be true.
