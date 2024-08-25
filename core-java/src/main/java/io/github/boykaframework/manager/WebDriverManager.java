@@ -155,7 +155,7 @@ class WebDriverManager implements IDriverManager {
         final var target = webSetting.getTarget ();
         final var hostName = new StringBuilder (getHostName (webSetting, target));
 
-        if (webSetting.getPort () != 0) {
+        if (webSetting.getPort () > 0) {
             hostName.append (":")
                 .append (webSetting.getPort ());
         }

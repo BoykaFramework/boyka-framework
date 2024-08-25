@@ -83,9 +83,6 @@ public final class Validator {
         if (isNull (value)) {
             return defaultValue;
         }
-        if (value instanceof Integer && !value.equals (0)) {
-            return defaultValue;
-        }
         return value;
     }
 

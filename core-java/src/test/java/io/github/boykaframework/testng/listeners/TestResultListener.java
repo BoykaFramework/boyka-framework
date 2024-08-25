@@ -18,6 +18,9 @@ package io.github.boykaframework.testng.listeners;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.joining;
+import static org.apache.commons.io.FileUtils.createParentDirectories;
+import static org.apache.commons.io.FileUtils.delete;
+import static org.apache.commons.io.FileUtils.deleteDirectory;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.testng.ITestResult.FAILURE;
 
@@ -106,16 +109,21 @@ public class TestResultListener implements IReporter {
     }
 
     private void saveReportTemplate (final String outputDirectory, final String reportTemplate) {
-        final var dirCreated = new File (outputDirectory).mkdirs ();
-        if (dirCreated) {
+        final var outputDir = new File (outputDirectory);
+        try {
+            final var reportFile = new File (outputDirectory, "my-report.md");
+            deleteDirectory (outputDir);
+            createParentDirectories (outputDir);
+            delete (reportFile);
             try (
-                final var reportWriter = new PrintWriter (
-                    new BufferedWriter (new FileWriter (new File (outputDirectory, "my-report.md"))))) {
+                final var reportWriter = new PrintWriter (new BufferedWriter (new FileWriter (reportFile)))) {
                 reportWriter.println (reportTemplate);
                 reportWriter.flush ();
             } catch (final IOException e) {
                 LOGGER.error ("Problem saving template", e);
             }
+        } catch (final IOException e) {
+            LOGGER.error ("Problem creating output directory", e);
         }
     }
 
