@@ -16,7 +16,9 @@
 
 package io.github.boykaframework.config.ui;
 
-import io.github.boykaframework.config.ui.web.CommonWebSetting;
+import io.github.boykaframework.config.BoykaConfig;
+import io.github.boykaframework.config.ui.mobile.MobileSetting;
+import io.github.boykaframework.config.ui.web.WebSetting;
 import lombok.Data;
 
 /**
@@ -26,6 +28,7 @@ import lombok.Data;
  * @since 22-Aug-2024
  */
 @Data
-public class CommonUiSetting {
-    private CommonWebSetting web = new CommonWebSetting ();
+public class CommonUiSetting implements BoykaConfig {
+    private MobileSetting mobile = new MobileSetting ();
+    private WebSetting    web    = new WebSetting ();
 }

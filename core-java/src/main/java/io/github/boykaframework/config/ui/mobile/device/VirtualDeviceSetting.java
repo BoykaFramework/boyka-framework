@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui.mobile.device;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,10 +26,10 @@ import lombok.Data;
  * @since 13-Sept-2022
  */
 @Data
-public class VirtualDeviceSetting {
+public class VirtualDeviceSetting implements BoykaConfig {
     private boolean connectKeyboard = true;
     private boolean headless        = false;
-    private int     launchTimeout   = 120;
+    private Integer launchTimeout   = 120;
     private String  name;
-    private int     readyTimeout    = 60;
+    private Integer readyTimeout    = 60;
 }

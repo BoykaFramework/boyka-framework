@@ -18,6 +18,7 @@ package io.github.boykaframework.config.ui.mobile.device;
 
 import static io.github.boykaframework.enums.ApplicationType.NATIVE;
 
+import io.github.boykaframework.config.BoykaConfig;
 import io.github.boykaframework.enums.ApplicationType;
 import io.github.boykaframework.enums.Browser;
 import lombok.Data;
@@ -29,15 +30,15 @@ import lombok.Data;
  * @since 13-Sept-2022
  */
 @Data
-public class ApplicationSetting {
+public class ApplicationSetting implements BoykaConfig {
     private String          baseUrl;
     private Browser         browser;
     private String          bundleId;
-    private int             chromeDriverPort;
+    private Integer         chromeDriverPort = 0;
     private boolean         external;
-    private int             installTimeout = 30;
+    private Integer         installTimeout   = 30;
     private String          path;
-    private ApplicationType type           = NATIVE;
+    private ApplicationType type             = NATIVE;
     private String          waitActivity;
-    private int             waitTimeout    = 30;
+    private Integer         waitTimeout      = 30;
 }

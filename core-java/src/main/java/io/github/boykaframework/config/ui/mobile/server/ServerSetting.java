@@ -16,16 +16,21 @@
 
 package io.github.boykaframework.config.ui.mobile.server;
 
+import static io.github.boykaframework.enums.AutomationType.UI_AUTOMATOR;
+import static io.github.boykaframework.enums.Protocol.HTTP;
+import static io.github.boykaframework.enums.TargetProviders.LOCAL;
+import static io.github.boykaframework.utils.StringUtils.interpolate;
+import static java.lang.System.getProperty;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
+import io.github.boykaframework.config.BoykaConfig;
 import io.github.boykaframework.enums.AutomationType;
 import io.github.boykaframework.enums.Protocol;
 import io.github.boykaframework.enums.TargetProviders;
-import io.github.boykaframework.utils.StringUtils;
 import lombok.Data;
 
 /**
@@ -35,32 +40,32 @@ import lombok.Data;
  * @since 06-Sept-2022
  */
 @Data
-public class ServerSetting {
+public class ServerSetting implements BoykaConfig {
     private boolean             allowCors;
     private List<String>        allowInsecure;
     private String              appiumPath;
     private String              basePath;
     private String              callbackAddress;
-    private int                 callbackPort;
+    private Integer             callbackPort     = 0;
     private String              configPath;
     private List<String>        denyInsecure;
-    private AutomationType      driver;
+    private AutomationType      driver           = UI_AUTOMATOR;
     private boolean             external;
     private boolean             externalConfig;
     private String              host;
-    private int                 keepAliveTimeout;
-    private LogSetting          logging;
+    private Integer             keepAliveTimeout = 120;
+    private LogSetting          logging          = new LogSetting ();
     private String              nodePath;
     private Map<String, Object> otherArgs;
     private String              password;
     private List<String>        plugins;
-    private int                 port;
-    private Protocol            protocol;
+    private Integer             port             = 0;
+    private Protocol            protocol         = HTTP;
     private boolean             relaxedSecurity;
     private boolean             sessionOverride;
     private boolean             strictCapabilities;
-    private TargetProviders     target  = TargetProviders.LOCAL;
-    private int                 timeout = 30;
+    private TargetProviders     target           = LOCAL;
+    private Integer             timeout          = 60;
     private String              userName;
     private String              webhook;
 
@@ -73,7 +78,7 @@ public class ServerSetting {
         if (isExternalConfig () || isEmpty (this.configPath)) {
             return this.configPath;
         }
-        return Path.of (System.getProperty ("user.dir"), this.configPath)
+        return Path.of (getProperty ("user.dir"), this.configPath)
             .toString ();
     }
 
@@ -83,7 +88,7 @@ public class ServerSetting {
      * @return the cloud password
      */
     public String getPassword () {
-        return StringUtils.interpolate (this.password);
+        return interpolate (this.password);
     }
 
     /**
@@ -92,6 +97,6 @@ public class ServerSetting {
      * @return the cloud username.
      */
     public String getUserName () {
-        return StringUtils.interpolate (this.userName);
+        return interpolate (this.userName);
     }
 }

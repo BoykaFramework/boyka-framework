@@ -227,6 +227,14 @@ public enum Message {
      */
     JSON_SYNTAX_ERROR ("JSON syntax error..."),
     /**
+     * Method invoke failed.
+     */
+    METHOD_INVOKE_FAILED ("Cannot invoke method ({0})..."),
+    /**
+     * Method not found.
+     */
+    METHOD_NOT_FOUND ("Method ({0}) is not found in class ({1})..."),
+    /**
      * No API setting found
      */
     NO_API_SETTINGS_FOUND ("No settings found for API for key {0}..."),

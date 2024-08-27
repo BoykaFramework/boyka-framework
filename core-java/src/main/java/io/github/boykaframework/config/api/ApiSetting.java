@@ -16,9 +16,7 @@
 
 package io.github.boykaframework.config.api;
 
-import static io.github.boykaframework.manager.ParallelSession.getSession;
-import static io.github.boykaframework.utils.Validator.requireNonNullElse;
-
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -28,63 +26,13 @@ import lombok.Data;
  * @since 17-Feb-2022
  */
 @Data
-public class ApiSetting {
-    private static final CommonApiSetting COMMON_SETTING = getSession ().getCommonApiSetting ();
-
-    private String         basePath;
+public class ApiSetting implements BoykaConfig {
+    private String         basePath       = "";
     private String         baseUri;
-    private LogSetting     logging;
-    private int            port;
-    private String         schemaPath;
-    private TimeoutSetting timeout;
-    private boolean        validateSsl;
-    private boolean        verifyHostName;
-
-    /**
-     * Gets the base path
-     * @return base path url
-     */
-    public String getBasePath () {
-        return requireNonNullElse (this.basePath, COMMON_SETTING.getBasePath ());
-    }
-
-    /**
-     * Gets the logging settings
-     * @return Logging settings
-     */
-    public LogSetting getLogging () {
-        return requireNonNullElse (this.logging, COMMON_SETTING.getLogging ());
-    }
-
-    /**
-     * Gets the schema path
-     * @return Schema path
-     */
-    public String getSchemaPath () {
-        return requireNonNullElse (this.schemaPath, COMMON_SETTING.getSchemaPath ());
-    }
-
-    /**
-     * Gets the timeout config
-     * @return timeout config
-     */
-    public TimeoutSetting getTimeout () {
-        return requireNonNullElse (this.timeout, COMMON_SETTING.getTimeout ());
-    }
-
-    /**
-     * Should SSL validation be done?
-     * @return Validate SSL
-     */
-    public boolean isValidateSsl () {
-        return requireNonNullElse (this.validateSsl, COMMON_SETTING.isValidateSsl ());
-    }
-
-    /**
-     * Should Verify Host name?
-     * @return verify host name
-     */
-    public boolean isVerifyHostName () {
-        return requireNonNullElse (this.verifyHostName, COMMON_SETTING.isVerifyHostName ());
-    }
+    private LogSetting     logging        = new LogSetting ();
+    private Integer        port           = 0;
+    private String         schemaPath     = "";
+    private TimeoutSetting timeout        = new TimeoutSetting ();
+    private boolean        validateSsl    = true;
+    private boolean        verifyHostName = true;
 }

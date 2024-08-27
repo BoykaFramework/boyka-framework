@@ -14,13 +14,14 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.ui.mobile.device;
+package io.github.boykaframework.config;
 
-import lombok.Data;
-
-@Data
-public class CommonIOSSetting {
-    private boolean    acceptAlerts = true;
-    private int        typingSpeed  = 60;
-    private WDASetting wda;
+/**
+ * Marker Interface
+ *
+ * @author Wasiq Bhamla
+ * @since 27-Aug-2024
+ */
+public interface BoykaConfig {
+    // Marker interface
 }

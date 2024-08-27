@@ -28,6 +28,44 @@
           "width": 1580,
           "height": 1080
         }
+      },
+      "mobile": {
+        "server": {
+          "target": "LOCAL",
+          "session_override": true,
+          "logging": {
+            "level": "ERROR",
+            "debug_spacing": true,
+            "local_timezone": true,
+            "timestamp": true
+          }
+        },
+        "device": {
+          "type": "VIRTUAL",
+          "server_install_timeout": 60,
+          "server_launch_timeout": 60,
+          "ignore_unimportant_views": true,
+          "full_reset": true,
+          "system_port": 8200,
+          "connect_keyboard": false,
+          "typing_speed": 35,
+          "swipe": {
+            "max_swipe_until_found": 5
+          },
+          "application": {
+            "install_timeout": 180,
+            "wait_timeout": 120
+          },
+          "virtual_device": {
+            "headless": true,
+            "launch_timeout": 180
+          },
+          "wda": {
+            "launch_timeout": 120,
+            "connection_timeout": 120,
+            "local_port": 8101
+          }
+        }
       }
     }
   },
@@ -193,9 +231,7 @@
     "mobile": {
       "test_local_sauce_android": {
         "server": {
-          "target": "LOCAL",
           "port": 4723,
-          "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
             "get_server_logs",
@@ -206,30 +242,14 @@
           "os": "ANDROID",
           "version": "11",
           "name": "Pixel_8_Pro",
-          "type": "VIRTUAL",
-          "server_install_timeout": 60,
-          "server_launch_timeout": 60,
-          "ignore_unimportant_views": true,
-          "full_reset": true,
-          "system_port": 8200,
-          "swipe": {
-            "max_swipe_until_found": 5
-          },
           "application": {
             "path": "/apps/android/sauce-demo.apk",
-            "wait_activity": "com.swaglabsmobileapp.MainActivity",
-            "install_timeout": 180,
-            "wait_timeout": 120
-          },
-          "virtual_device": {
-            "name": "Pixel_8_Pro",
-            "headless": true
+            "wait_activity": "com.swaglabsmobileapp.MainActivity"
           }
         }
       },
       "test_local_wdio_android": {
         "server": {
-          "target": "LOCAL",
           "port": 4724,
           "external": true,
           "driver": "UI_AUTOMATOR"
@@ -238,32 +258,9 @@
           "os": "ANDROID",
           "version": "11",
           "name": "Pixel_8_Pro",
-          "type": "VIRTUAL",
-          "server_install_timeout": 60,
-          "system_port": 8201,
-          "server_launch_timeout": 60,
-          "ignore_unimportant_views": true,
-          "full_reset": true,
-          "swipe": {
-            "max_swipe_until_found": 5
-          },
-          "video": {
-            "enabled": true,
-            "time_limit": 300,
-            "size": "800x720",
-            "android": {
-              "bit_rate": 4
-            }
-          },
           "application": {
             "path": "/apps/android/wdio-demo.apk",
-            "type": "HYBRID",
-            "install_timeout": 180,
-            "wait_timeout": 120
-          },
-          "virtual_device": {
-            "name": "Pixel_8_Pro",
-            "headless": true
+            "type": "HYBRID"
           }
         }
       },
@@ -451,16 +448,9 @@
       },
       "test_local_wdio_ios": {
         "server": {
-          "target": "LOCAL",
           "port": 4726,
           "callback_port": 4726,
-          "session_override": true,
           "driver": "XCUI",
-          "logging": {
-            "debug_spacing": true,
-            "timestamp": true,
-            "local_timezone": true
-          },
           "other_args": {
             "--long-stacktrace": true,
             "--callback-port": 4726,
@@ -471,27 +461,9 @@
           "os": "IOS",
           "version": "16.2",
           "name": "iPhone 14",
-          "type": "VIRTUAL",
-          "server_install_timeout": 60,
-          "server_launch_timeout": 60,
-          "connect_keyboard": false,
-          "typing_speed": 35,
-          "swipe": {
-            "max_swipe_until_found": 5
-          },
-          "virtual_device": {
-            "headless": true,
-            "launch_timeout": 180
-          },
-          "wda": {
-            "launch_timeout": 120,
-            "connection_timeout": 120,
-            "local_port": 8101
-          },
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",
-            "type": "HYBRID",
-            "install_timeout": 180
+            "type": "HYBRID"
           }
         }
       },

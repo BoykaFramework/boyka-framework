@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,7 +26,7 @@ import lombok.Data;
  * @since 13-Jul-2022
  */
 @Data
-public class ScreenshotSetting {
+public class ScreenshotSetting implements BoykaConfig {
     private boolean enabled   = false;
     private String  extension = "png";
     private String  path      = "./screenshots";

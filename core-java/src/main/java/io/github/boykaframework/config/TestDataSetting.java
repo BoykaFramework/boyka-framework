@@ -16,6 +16,8 @@
 
 package io.github.boykaframework.config;
 
+import static io.github.boykaframework.enums.TestDataSource.EXCEL;
+
 import io.github.boykaframework.enums.TestDataSource;
 import lombok.Data;
 
@@ -26,9 +28,9 @@ import lombok.Data;
  * @since 18-Nov-2023
  */
 @Data
-public class TestDataSetting {
+public class TestDataSetting implements BoykaConfig {
     private String         extension = "xlsx";
     private boolean        external;
-    private String         path = "test-data";
-    private TestDataSource type = TestDataSource.EXCEL;
+    private String         path      = "test-data";
+    private TestDataSource type      = EXCEL;
 }

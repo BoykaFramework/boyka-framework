@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.api;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,8 +26,8 @@ import lombok.Data;
  * @since 21-May-2024
  */
 @Data
-public class TimeoutSetting {
-    private int connectionTimeout = 5;
-    private int readTimeout       = 5;
-    private int writeTimeout      = 5;
+public class TimeoutSetting implements BoykaConfig {
+    private Integer connectionTimeout = 5;
+    private Integer readTimeout       = 5;
+    private Integer writeTimeout      = 5;
 }

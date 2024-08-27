@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui.mobile.device;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,6 +26,6 @@ import lombok.Data;
  * @since 16-Oct-2023
  */
 @Data
-public class AndroidVideoSetting {
-    private int bitRate = 4;
+public class AndroidVideoSetting implements BoykaConfig {
+    private Integer bitRate = 4;
 }

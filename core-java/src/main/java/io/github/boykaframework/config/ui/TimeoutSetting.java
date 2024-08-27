@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,7 +26,7 @@ import lombok.Data;
  * @since 17-Feb-2022
  */
 @Data
-public class TimeoutSetting {
+public class TimeoutSetting implements BoykaConfig {
     private int explicitWait    = 10;
     private int highlightDelay  = 100;
     private int implicitWait    = 1;

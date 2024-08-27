@@ -16,8 +16,7 @@
 
 package io.github.boykaframework.config.ui.mobile;
 
-import static io.github.boykaframework.utils.Validator.requireNonNullElse;
-
+import io.github.boykaframework.config.BoykaConfig;
 import io.github.boykaframework.config.ui.mobile.device.DeviceSetting;
 import io.github.boykaframework.config.ui.mobile.server.ServerSetting;
 import lombok.Data;
@@ -29,17 +28,7 @@ import lombok.Data;
  * @since 06-Sept-2022
  */
 @Data
-public class MobileSetting {
-    private static final CommonMobileSetting MOBILE_SETTING = new CommonMobileSetting ();
-
+public class MobileSetting implements BoykaConfig {
     private DeviceSetting device = new DeviceSetting ();
     private ServerSetting server = new ServerSetting ();
-
-    public DeviceSetting getDevice () {
-        return requireNonNullElse (this.device, MOBILE_SETTING.getDevice ());
-    }
-
-    public ServerSetting getServer () {
-        return requireNonNullElse (this.server, MOBILE_SETTING.getServer ());
-    }
 }

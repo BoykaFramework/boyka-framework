@@ -16,7 +16,7 @@
 
 package io.github.boykaframework.config;
 
-import io.github.boykaframework.config.api.CommonApiSetting;
+import io.github.boykaframework.config.api.ApiSetting;
 import io.github.boykaframework.config.ui.CommonUiSetting;
 import lombok.Data;
 
@@ -27,7 +27,7 @@ import lombok.Data;
  * @since 19-Jun-2024
  */
 @Data
-public class CommonSetting {
-    private CommonApiSetting api = new CommonApiSetting ();
-    private CommonUiSetting  ui  = new CommonUiSetting ();
+public class CommonSetting implements BoykaConfig {
+    private ApiSetting      api = new ApiSetting ();
+    private CommonUiSetting ui  = new CommonUiSetting ();
 }
