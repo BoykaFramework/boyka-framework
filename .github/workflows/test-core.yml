@@ -135,10 +135,11 @@ jobs:
       run-ios: true
       run-android: true
       emulator-name: Pixel_8_Pro
+      emulator-profile: pixel_7_pro
       emulator-version: 34
       emulator-channel: stable
       emulator-arch: x86_64
-      emulator-target: google_apis
+      emulator-target: aosp_atd
       simulator-name: iPhone 15
       simulator-version: 17.2
 
