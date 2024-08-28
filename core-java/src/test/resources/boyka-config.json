@@ -46,6 +46,7 @@
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
           "full_reset": true,
+          "no_reset": false,
           "system_port": 8200,
           "connect_keyboard": false,
           "typing_speed": 35,
@@ -261,6 +262,9 @@
           "application": {
             "path": "/apps/android/wdio-demo.apk",
             "type": "HYBRID"
+          },
+          "virtual_device": {
+            "name": "Pixel_8_Pro"
           }
         }
       },
@@ -459,8 +463,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.2",
-          "name": "iPhone 14",
+          "version": "17.5",
+          "name": "iPhone 15",
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",
             "type": "HYBRID"

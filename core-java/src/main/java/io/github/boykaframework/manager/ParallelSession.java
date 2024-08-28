@@ -19,6 +19,8 @@ package io.github.boykaframework.manager;
 import static io.github.boykaframework.enums.Message.SESSION_ALREADY_CLEARED;
 import static io.github.boykaframework.enums.Message.SESSION_ALREADY_CREATED;
 import static io.github.boykaframework.enums.Message.SESSION_PERSONA_CANNOT_BE_NULL;
+import static io.github.boykaframework.enums.PlatformType.API;
+import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static io.github.boykaframework.utils.Validator.requireNonEmpty;
 import static java.lang.ThreadLocal.withInitial;
@@ -32,7 +34,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.github.boykaframework.enums.PlatformType;
-import io.github.boykaframework.utils.ErrorHandler;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
@@ -70,19 +71,23 @@ public final class ParallelSession {
      */
     public static void clearSession () {
         LOGGER.info ("Clearing session for persona [{}]...", getCurrentPersona ());
-        final var session = SESSION.get ();
+
         if (!isSessionCreated ()) {
-            ErrorHandler.throwError (SESSION_ALREADY_CLEARED);
+            throwError (SESSION_ALREADY_CLEARED);
         }
-        getSession ().clearListeners ();
-        getSession ().clearSharedData ();
-        ofNullable (getSession ().getDriver ()).ifPresent (WebDriver::quit);
-        if (getSession ().getPlatformType () != PlatformType.WEB) {
-            ofNullable (getSession ().getServiceManager ()).ifPresent (ServiceManager::stopServer);
+
+        final var session = getSession ();
+        session.clearListeners ();
+        session.clearSharedData ();
+
+        ofNullable (session.getDriver ()).ifPresent (WebDriver::quit);
+
+        if (session.getPlatformType () != WEB) {
+            ofNullable (session.getServiceManager ()).ifPresent (ServiceManager::stopServer);
         }
-        if (isSessionCreated ()) {
-            session.remove (getCurrentPersona ());
-        }
+
+        SESSION.get ()
+            .remove (getCurrentPersona ());
         CURRENT_PERSONA.remove ();
     }
 
@@ -102,7 +107,7 @@ public final class ParallelSession {
         final var currentSession = getSession ();
         currentSession.setPlatformType (platformType);
         currentSession.setConfigKey (configKey);
-        if (platformType != PlatformType.API) {
+        if (platformType != API) {
             final var instance = new DriverManager ();
             instance.setupDriver ();
         }
