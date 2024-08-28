@@ -463,7 +463,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.5",
+          "version": "17.2",
           "name": "iPhone 15",
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",
