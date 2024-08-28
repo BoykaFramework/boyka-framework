@@ -11,9 +11,9 @@
         "response": true
       },
       "timeout": {
-        "read_timeout": 3,
-        "write_timeout": 3,
-        "connection_timeout": 5
+        "read_timeout": 10,
+        "write_timeout": 10,
+        "connection_timeout": 10
       },
       "schema_path": "schema/"
     },
