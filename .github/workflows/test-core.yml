@@ -140,8 +140,8 @@ jobs:
       emulator-channel: stable
       emulator-arch: x86_64
       emulator-target: aosp_atd
-      simulator-name: iPhone 15
-      simulator-version: 17.2
+      simulator-name: iPhone 14
+      simulator-version: 16.2
 
   # test-mobile-web:
   #   needs:

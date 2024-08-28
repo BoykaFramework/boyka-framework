@@ -35,7 +35,7 @@ import lombok.Data;
 @Data
 public class DeviceSetting implements BoykaConfig {
     private boolean              acceptAlerts           = true;
-    private Integer              adbTimeout             = 30;
+    private Integer              adbTimeout             = 0;
     private ApplicationSetting   application;
     private Map<String, Object>  capabilities;
     private boolean              clearFiles             = true;
@@ -45,8 +45,8 @@ public class DeviceSetting implements BoykaConfig {
     private String               name;
     private boolean              noReset                = true;
     private OS                   os                     = ANDROID;
-    private Integer              serverInstallTimeout   = 30;
-    private Integer              serverLaunchTimeout    = 30;
+    private Integer              serverInstallTimeout   = 0;
+    private Integer              serverLaunchTimeout    = 0;
     private SwipeSetting         swipe                  = new SwipeSetting ();
     private Integer              systemPort             = 8200;
     private DeviceType           type                   = VIRTUAL;

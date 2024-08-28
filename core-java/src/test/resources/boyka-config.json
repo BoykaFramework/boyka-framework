@@ -463,8 +463,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "17.2",
-          "name": "iPhone 15",
+          "version": "16.2",
+          "name": "iPhone 14",
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",
             "type": "HYBRID"
