@@ -257,7 +257,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "14",
           "name": "Pixel_8_Pro",
           "application": {
             "path": "/apps/android/wdio-demo.apk",
