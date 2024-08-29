@@ -42,8 +42,8 @@
         },
         "device": {
           "type": "VIRTUAL",
-          "server_install_timeout": 60,
-          "server_launch_timeout": 60,
+          "server_install_timeout": 90,
+          "server_launch_timeout": 90,
           "ignore_unimportant_views": true,
           "full_reset": true,
           "no_reset": false,
@@ -257,7 +257,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "14",
+          "version": "12",
           "name": "Pixel_8_Pro",
           "application": {
             "path": "/apps/android/wdio-demo.apk",
