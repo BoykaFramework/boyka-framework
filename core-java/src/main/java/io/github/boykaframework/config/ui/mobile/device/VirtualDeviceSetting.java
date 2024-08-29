@@ -29,7 +29,7 @@ import lombok.Data;
 public class VirtualDeviceSetting implements BoykaConfig {
     private boolean connectKeyboard = true;
     private boolean headless        = false;
-    private Integer launchTimeout   = 120;
+    private Integer launchTimeout   = 0;
     private String  name;
-    private Integer readyTimeout    = 60;
+    private Integer readyTimeout    = 0;
 }

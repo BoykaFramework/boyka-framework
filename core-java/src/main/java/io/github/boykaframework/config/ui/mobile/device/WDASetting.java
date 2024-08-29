@@ -27,12 +27,12 @@ import lombok.Data;
  */
 @Data
 public class WDASetting implements BoykaConfig {
-    private Integer connectionTimeout    = 60;
-    private Integer launchTimeout        = 60;
-    private Integer localPort            = 8100;
+    private Integer connectionTimeout    = 0;
+    private Integer launchTimeout        = 0;
+    private Integer localPort            = 0;
     private String  signingId;
-    private Integer startupRetries       = 2;
-    private Integer startupRetryInterval = 10;
+    private Integer startupRetries       = 0;
+    private Integer startupRetryInterval = 0;
     private String  teamId;
     private String  updateBundleId;
     private boolean useNew               = true;

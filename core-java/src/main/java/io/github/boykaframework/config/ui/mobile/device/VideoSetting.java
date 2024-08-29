@@ -33,5 +33,5 @@ public class VideoSetting implements BoykaConfig {
     private String              path      = "./videos";
     private String              prefix    = "VID";
     private String              size;
-    private Integer             timeLimit = 300;
+    private Integer             timeLimit = 0;
 }

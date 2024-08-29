@@ -48,9 +48,9 @@ public class DeviceSetting implements BoykaConfig {
     private Integer              serverInstallTimeout   = 0;
     private Integer              serverLaunchTimeout    = 0;
     private SwipeSetting         swipe                  = new SwipeSetting ();
-    private Integer              systemPort             = 8200;
+    private Integer              systemPort             = 0;
     private DeviceType           type                   = VIRTUAL;
-    private Integer              typingSpeed            = 60;
+    private Integer              typingSpeed            = 0;
     private String               uniqueId;
     private String               version;
     private VideoSetting         video                  = new VideoSetting ();

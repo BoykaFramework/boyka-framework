@@ -27,5 +27,5 @@ import lombok.Data;
  */
 @Data
 public class AndroidVideoSetting implements BoykaConfig {
-    private Integer bitRate = 4;
+    private Integer bitRate = 0;
 }

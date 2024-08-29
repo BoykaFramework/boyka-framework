@@ -36,9 +36,9 @@ public class ApplicationSetting implements BoykaConfig {
     private String          bundleId;
     private Integer         chromeDriverPort = 0;
     private boolean         external;
-    private Integer         installTimeout   = 30;
+    private Integer         installTimeout   = 0;
     private String          path;
     private ApplicationType type             = NATIVE;
     private String          waitActivity;
-    private Integer         waitTimeout      = 30;
+    private Integer         waitTimeout      = 0;
 }

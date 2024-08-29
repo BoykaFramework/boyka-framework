@@ -31,6 +31,6 @@ import lombok.Data;
 @Data
 public class IOSVideoSetting implements BoykaConfig {
     private String       codec   = "mpeg4";
-    private Integer      fps     = 10;
+    private Integer      fps     = 0;
     private VideoQuality quality = MEDIUM;
 }

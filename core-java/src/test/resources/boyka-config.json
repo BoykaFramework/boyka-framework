@@ -34,7 +34,7 @@
           "target": "LOCAL",
           "session_override": true,
           "logging": {
-            "level": "ERROR",
+            "level": "INFO",
             "debug_spacing": true,
             "local_timezone": true,
             "timestamp": true
@@ -60,6 +60,19 @@
           "virtual_device": {
             "headless": true,
             "launch_timeout": 180
+          },
+          "video": {
+            "enabled": false,
+            "time_limit": 300,
+            "size": "800x720",
+            "android": {
+              "bit_rate": 4
+            },
+            "ios": {
+              "codec": "mpeg4",
+              "fps": 10,
+              "quality": "MEDIUM"
+            }
           },
           "wda": {
             "launch_timeout": 120,
