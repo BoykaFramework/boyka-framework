@@ -135,7 +135,7 @@ jobs:
       run-ios: true
       run-android: true
       emulator-name: Pixel_8_Pro
-      emulator-profile: pixel_7_pro
+      emulator-profile: pixel_6_pro
       emulator-version: 31
       emulator-channel: stable
       emulator-arch: x86_64
