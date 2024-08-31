@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui.web;
 
+import static io.github.boykaframework.enums.Browser.NONE;
 import static io.github.boykaframework.enums.Protocol.HTTP;
 import static io.github.boykaframework.enums.TargetProviders.LOCAL;
 import static io.github.boykaframework.enums.WindowResizeType.NORMAL;
@@ -42,7 +43,7 @@ import org.openqa.selenium.PageLoadStrategy;
 @Data
 public class WebSetting implements BoykaConfig {
     private String              baseUrl;
-    private Browser             browser;
+    private Browser             browser          = NONE;
     private List<String>        browserOptions;
     private Map<String, Object> capabilities;
     private Dimension           customSize       = new Dimension (1920, 1080);
@@ -52,7 +53,7 @@ public class WebSetting implements BoykaConfig {
     private PageLoadStrategy    pageLoadStrategy = PageLoadStrategy.NORMAL;
     private String              password;
     private String              platform;
-    private Integer             port             = 0;
+    private int                 port             = 0;
     private Protocol            protocol         = HTTP;
     private WindowResizeType    resize           = NORMAL;
     private TargetProviders     target           = LOCAL;

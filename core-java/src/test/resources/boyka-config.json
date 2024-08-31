@@ -6,6 +6,8 @@
   },
   "common_setting": {
     "api": {
+      "validate_ssl": true,
+      "verify_host_name": true,
       "logging": {
         "request": true,
         "response": true
@@ -476,8 +478,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.2",
-          "name": "iPhone 14",
+          "version": "17.5",
+          "name": "iPhone 15",
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",
             "type": "HYBRID"

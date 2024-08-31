@@ -36,7 +36,7 @@ public class DriverManagerTest {
     /**
      * Test method to verify empty browser in config.
      */
-    @Test (description = "Test Web empty browser in config")
+    @Test (description = "Test Web empty browser in config", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Browser type cannot be empty in the config...")
     public void testEmptyBrowserInConfig () {
         try {
             createSession (PERSONA, WEB, "test_local_empty_browser");
@@ -62,7 +62,7 @@ public class DriverManagerTest {
     /**
      * Test method to verify none browser.
      */
-    @Test (description = "Test None Browser", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "NONE Browser type is not allowed for Web platform...")
+    @Test (description = "Test None Browser")
     public void testNoneBrowser () {
         try {
             createSession (PERSONA, WEB, "test_local_none_browser");

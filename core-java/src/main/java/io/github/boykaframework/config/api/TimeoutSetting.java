@@ -27,7 +27,7 @@ import lombok.Data;
  */
 @Data
 public class TimeoutSetting implements BoykaConfig {
-    private Integer connectionTimeout = 5;
-    private Integer readTimeout       = 5;
-    private Integer writeTimeout      = 5;
+    private int connectionTimeout = 5;
+    private int readTimeout       = 5;
+    private int writeTimeout      = 5;
 }

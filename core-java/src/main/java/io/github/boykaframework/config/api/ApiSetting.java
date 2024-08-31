@@ -30,7 +30,7 @@ public class ApiSetting implements BoykaConfig {
     private String         basePath       = "";
     private String         baseUri;
     private LogSetting     logging        = new LogSetting ();
-    private Integer        port           = 0;
+    private int            port           = 0;
     private String         schemaPath     = "";
     private TimeoutSetting timeout        = new TimeoutSetting ();
     private boolean        validateSsl    = true;

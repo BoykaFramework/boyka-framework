@@ -30,7 +30,7 @@ import lombok.Data;
  */
 @Data
 public class SwipeSetting implements BoykaConfig {
-    private Integer distance           = 0;
-    private Integer maxSwipeUntilFound = 0;
-    private Speed   speed              = NORMAL;
+    private int   distance           = 75;
+    private int   maxSwipeUntilFound = 5;
+    private Speed speed              = NORMAL;
 }

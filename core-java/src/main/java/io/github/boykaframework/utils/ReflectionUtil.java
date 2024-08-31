@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.utils;
 
+import static io.github.boykaframework.enums.Message.METHOD_INVOKE_FAILED;
 import static io.github.boykaframework.enums.Message.METHOD_NOT_FOUND;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static java.util.Objects.isNull;
@@ -37,30 +38,35 @@ public final class ReflectionUtil {
      * Replaces any null or missing field value with the default object
      *
      * @param source Source object to scan
-     * @param defaultObject Default object from where missing values is to be replaced from
+     * @param common Default object from where missing values is to be replaced from
      * @param <T> Object type
      *
      * @return New object with all the null and missing fields replaced with default
      */
-    public static <T> T replaceEmptyWithCommon (final T source, final T defaultObject) {
+    public static <T> T replaceEmptyWithCommon (final T source, final T common) {
         final var sourceMethods = getMethods (source);
 
         for (final var sourceMethod : sourceMethods) {
             if (sourceMethod.getName ()
-                .startsWith ("get")) {
+                .startsWith ("get") || sourceMethod.getName ()
+                .startsWith ("is")) {
                 try {
-                    final var defaultMethod = getMethod (sourceMethod, defaultObject);
                     final var sourceValue = getMethodValue (sourceMethod, source);
-                    final var defaultValue = getMethodValue (defaultMethod, defaultObject);
+                    final var defaultObject = init (source.getClass ());
+                    final var defaultValue = getMethodValue (sourceMethod, defaultObject);
+                    final var commonMethod = getMethod (sourceMethod, common);
+                    final var commonValue = getMethodValue (commonMethod, common);
 
-                    if (shouldReplaceValue (sourceValue, defaultValue)) {
-                        setMethodValue (sourceMethod, source, defaultValue);
-                    } else if (sourceValue instanceof BoykaConfig) {
-                        replaceEmptyWithCommon (sourceValue, defaultValue);
+                    if (sourceValue instanceof BoykaConfig) {
+                        replaceEmptyWithCommon (sourceValue, commonValue);
+                    } else if (shouldReplaceValue (sourceValue, commonValue, defaultValue)) {
+                        setMethodValue (sourceMethod, source, commonValue, defaultValue);
                     }
                 } catch (final NoSuchMethodException e) {
-                    handleAndThrow (METHOD_NOT_FOUND, e, sourceMethod.getName (), defaultObject.getClass ()
+                    handleAndThrow (METHOD_NOT_FOUND, e, sourceMethod.getName (), common.getClass ()
                         .getSimpleName ());
+                } catch (final InvocationTargetException | InstantiationException | IllegalAccessException e) {
+                    handleAndThrow (METHOD_INVOKE_FAILED, e, sourceMethod.getName ());
                 }
             }
         }
@@ -75,11 +81,12 @@ public final class ReflectionUtil {
     @SuppressWarnings ("unchecked")
     private static <T, E> E getMethodValue (final Method method, final T object) {
         if (method.getName ()
-            .startsWith ("get")) {
+            .startsWith ("get") || method.getName ()
+            .startsWith ("is")) {
             try {
                 return (E) method.invoke (object);
             } catch (final IllegalAccessException | InvocationTargetException e) {
-                handleAndThrow (METHOD_NOT_FOUND, e, method.getName ());
+                handleAndThrow (METHOD_INVOKE_FAILED, e, method.getName ());
             }
         }
         return null;
@@ -90,29 +97,79 @@ public final class ReflectionUtil {
             .getDeclaredMethods ();
     }
 
-    private static <T> void setMethodValue (final Method method, final T object, final T value) {
-        if (!method.getName ()
-            .startsWith ("get") || isNull (value)) {
+    @SuppressWarnings ("unchecked")
+    private static <T> T init (final Class<T> cls)
+        throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        final var ctor = cls.getDeclaredConstructors ()[0];
+        return (T) ctor.newInstance ();
+    }
+
+    private static <T> void setMethodValue (final Method method, final T source, final T commonValue,
+        final T defaultValue) {
+        final var methodName = method.getName ();
+
+        if (!(methodName.startsWith ("get") || methodName.startsWith ("is"))) {
             return;
         }
 
-        final var setMethodName = "set" + method.getName ()
-            .substring (3);
+        final var setMethodName = "set" + (methodName.startsWith ("is")
+                                           ? methodName.substring (2)
+                                           : methodName.substring (3));
+        final T valueToSet;
+
+        if (methodName.startsWith ("is") && source instanceof Boolean && commonValue instanceof Boolean) {
+            valueToSet = !commonValue.equals (source) && source.equals (defaultValue) ? commonValue : source;
+        } else {
+            valueToSet = !isNull (commonValue) && !commonValue.equals (defaultValue) ? commonValue : defaultValue;
+        }
+
+        var valueType = valueToSet.getClass ();
+        if (valueToSet instanceof Boolean) {
+            valueType = Boolean.TYPE;
+        } else if (valueToSet instanceof Integer) {
+            valueType = Integer.TYPE;
+        }
+
         try {
-            final var setter = object.getClass ()
-                .getDeclaredMethod (setMethodName, value.getClass ());
-            setter.invoke (object, value);
+            final var sourceClass = source.getClass ();
+            final var setter = sourceClass.getDeclaredMethod (setMethodName, valueType);
+            setter.invoke (source, valueToSet);
         } catch (final NoSuchMethodException e) {
-            handleAndThrow (METHOD_NOT_FOUND, e, method.getName (), object.getClass ()
+            handleAndThrow (METHOD_NOT_FOUND, e, methodName, source.getClass ()
                 .getSimpleName ());
         } catch (final InvocationTargetException | IllegalAccessException e) {
-            handleAndThrow (METHOD_NOT_FOUND, e, method.getName ());
+            handleAndThrow (METHOD_INVOKE_FAILED, e, methodName);
         }
     }
 
-    private static boolean shouldReplaceValue (final Object sourceValue, final Object defaultValue) {
-        return isNull (sourceValue) || (sourceValue instanceof String && isEmpty (sourceValue.toString ()) && !isEmpty (
-            (String) defaultValue)) || (sourceValue instanceof Integer && (int) sourceValue == 0);
+    private static <T> boolean shouldReplaceValue (final T sourceValue, final T commonValue, final T defaultValue) {
+        if (isNull (sourceValue) && isNull (commonValue) && isNull (defaultValue)) {
+            return false;
+        }
+
+        if (sourceValue instanceof String) {
+            return isEmpty (sourceValue.toString ()) && !isEmpty ((String) commonValue);
+        }
+
+        if (sourceValue instanceof Boolean) {
+            final var source = (boolean) sourceValue;
+            final var common = (boolean) commonValue;
+            final var defaultVal = (boolean) defaultValue;
+            return (source != common && source == defaultVal);
+        }
+
+        if (sourceValue instanceof Integer && (int) sourceValue == 0) {
+            if (commonValue instanceof Integer && (int) commonValue != 0) {
+                return false;
+            }
+            return defaultValue instanceof Integer && (int) defaultValue != 0;
+        }
+
+        if (sourceValue instanceof Enum<?>) {
+            return sourceValue != commonValue && sourceValue == defaultValue;
+        }
+
+        return false;
     }
 
     private ReflectionUtil () {
