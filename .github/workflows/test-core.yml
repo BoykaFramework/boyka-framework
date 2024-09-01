@@ -138,7 +138,7 @@ jobs:
       emulator-profile: pixel_6_pro
       emulator-version: 31
       emulator-channel: canary
-      emulator-arch: x86_64
+      emulator-arch: x86
       emulator-target: aosp_atd
       simulator-name: iPhone 14
       simulator-version: 16.2
