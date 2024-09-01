@@ -19,6 +19,7 @@ package io.github.boykaframework.utils;
 import static io.github.boykaframework.enums.Message.METHOD_INVOKE_FAILED;
 import static io.github.boykaframework.enums.Message.METHOD_NOT_FOUND;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
+import static java.text.MessageFormat.format;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -73,6 +74,27 @@ public final class ReflectionUtil {
         return source;
     }
 
+    private static <T> T determineValueToSet (final String methodName, final T source, final T commonValue,
+        final T defaultValue) {
+        if (methodName.startsWith ("is") && source instanceof Boolean) {
+            return !commonValue.equals (source) && source.equals (defaultValue) ? commonValue : source;
+        }
+        return !isNull (commonValue) && !commonValue.equals (defaultValue) ? commonValue : defaultValue;
+    }
+
+    private static Class<?> determineValueType (final Object valueToSet) {
+        if (valueToSet instanceof Boolean) {
+            return Boolean.TYPE;
+        } else if (valueToSet instanceof Integer) {
+            return Integer.TYPE;
+        }
+        return valueToSet.getClass ();
+    }
+
+    private static String generateSetterMethodName (final String methodName) {
+        return format ("set{0}", methodName.startsWith ("is") ? methodName.substring (2) : methodName.substring (3));
+    }
+
     private static <T> Method getMethod (final Method method, final T object) throws NoSuchMethodException {
         return object.getClass ()
             .getDeclaredMethod (method.getName ());
@@ -104,35 +126,30 @@ public final class ReflectionUtil {
         return (T) ctor.newInstance ();
     }
 
+    private static boolean isGetterMethod (final String methodName) {
+        return methodName.startsWith ("get") || methodName.startsWith ("is");
+    }
+
     private static <T> void setMethodValue (final Method method, final T source, final T commonValue,
         final T defaultValue) {
         final var methodName = method.getName ();
 
-        if (!(methodName.startsWith ("get") || methodName.startsWith ("is"))) {
+        if (!isGetterMethod (methodName)) {
             return;
         }
 
-        final var setMethodName = "set" + (methodName.startsWith ("is")
-                                           ? methodName.substring (2)
-                                           : methodName.substring (3));
-        final T valueToSet;
+        final var setMethodName = generateSetterMethodName (methodName);
+        final var valueToSet = determineValueToSet (methodName, source, commonValue, defaultValue);
 
-        if (methodName.startsWith ("is") && source instanceof Boolean && commonValue instanceof Boolean) {
-            valueToSet = !commonValue.equals (source) && source.equals (defaultValue) ? commonValue : source;
-        } else {
-            valueToSet = !isNull (commonValue) && !commonValue.equals (defaultValue) ? commonValue : defaultValue;
+        if (isNull (valueToSet)) {
+            return;
         }
 
-        var valueType = valueToSet.getClass ();
-        if (valueToSet instanceof Boolean) {
-            valueType = Boolean.TYPE;
-        } else if (valueToSet instanceof Integer) {
-            valueType = Integer.TYPE;
-        }
+        final var valueType = determineValueType (valueToSet);
 
         try {
-            final var sourceClass = source.getClass ();
-            final var setter = sourceClass.getDeclaredMethod (setMethodName, valueType);
+            final var setter = source.getClass ()
+                .getDeclaredMethod (setMethodName, valueType);
             setter.invoke (source, valueToSet);
         } catch (final NoSuchMethodException e) {
             handleAndThrow (METHOD_NOT_FOUND, e, methodName, source.getClass ()
@@ -158,15 +175,15 @@ public final class ReflectionUtil {
             return (source != common && source == defaultVal);
         }
 
-        if (sourceValue instanceof Integer && (int) sourceValue == 0) {
-            if (commonValue instanceof Integer && (int) commonValue != 0) {
-                return false;
-            }
-            return defaultValue instanceof Integer && (int) defaultValue != 0;
+        if (sourceValue instanceof Integer) {
+            final var source = (int) sourceValue;
+            final var common = (int) commonValue;
+            final var defaultVal = (int) defaultValue;
+            return source == 0 && common != 0 || source == 0 && defaultVal != 0;
         }
 
         if (sourceValue instanceof Enum<?>) {
-            return sourceValue != commonValue && sourceValue == defaultValue;
+            return !sourceValue.equals (commonValue) && sourceValue.equals (defaultValue);
         }
 
         return false;
