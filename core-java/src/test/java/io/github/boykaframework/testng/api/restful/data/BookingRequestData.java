@@ -16,7 +16,6 @@
 
 package io.github.boykaframework.testng.api.restful.data;
 
-import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
 
 import io.github.boykaframework.testng.api.restful.pojo.BookingData;
@@ -38,7 +37,7 @@ public final class BookingRequestData {
      * @return {@link BookingData} instance
      */
     public static BookingData getBookingData () {
-        final var formatter = new SimpleDateFormat ("yyyy-MM-dd");
+        final var dateTime = FAKER.timeAndDate ();
         return BookingData.builder ()
             .firstname (FAKER.name ()
                 .firstName ())
@@ -48,10 +47,10 @@ public final class BookingRequestData {
                 .numberBetween (1, 2000))
             .depositpaid (true)
             .bookingdates (BookingDates.builder ()
-                .checkin (formatter.format (FAKER.date ()
-                    .past (20, TimeUnit.DAYS)))
-                .checkout (formatter.format (FAKER.date ()
-                    .future (5, TimeUnit.DAYS)))
+                .checkin (dateTime.past (20, TimeUnit.DAYS)
+                    .toString ())
+                .checkout (dateTime.future (5, TimeUnit.DAYS)
+                    .toString ())
                 .build ())
             .additionalneeds ("Breakfast")
             .build ();

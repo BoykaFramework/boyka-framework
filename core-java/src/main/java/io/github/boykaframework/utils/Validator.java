@@ -80,6 +80,22 @@ public final class Validator {
     }
 
     /**
+     * Returns default value if current value is null.
+     *
+     * @param value Current value to check
+     * @param defaultValue Default value to use if value is null
+     * @param <T> Value type
+     *
+     * @return non empty value.
+     */
+    public static <T> T requireNonNullElse (final T value, final T defaultValue) {
+        if (isNull (value)) {
+            return defaultValue;
+        }
+        return value;
+    }
+
+    /**
      * Checks if the value is not null or zero and perform action on it.
      *
      * @param value Value to check

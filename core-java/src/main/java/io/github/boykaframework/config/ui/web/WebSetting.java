@@ -25,6 +25,7 @@ import static io.github.boykaframework.utils.StringUtils.interpolate;
 import java.util.List;
 import java.util.Map;
 
+import io.github.boykaframework.config.BoykaConfig;
 import io.github.boykaframework.enums.Browser;
 import io.github.boykaframework.enums.Protocol;
 import io.github.boykaframework.enums.TargetProviders;
@@ -40,7 +41,7 @@ import org.openqa.selenium.PageLoadStrategy;
  * @since 24-Feb-2022
  */
 @Data
-public class WebSetting {
+public class WebSetting implements BoykaConfig {
     private String              baseUrl;
     private Browser             browser          = NONE;
     private List<String>        browserOptions;
@@ -52,7 +53,7 @@ public class WebSetting {
     private PageLoadStrategy    pageLoadStrategy = PageLoadStrategy.NORMAL;
     private String              password;
     private String              platform;
-    private int                 port;
+    private int                 port             = 0;
     private Protocol            protocol         = HTTP;
     private WindowResizeType    resize           = NORMAL;
     private TargetProviders     target           = LOCAL;

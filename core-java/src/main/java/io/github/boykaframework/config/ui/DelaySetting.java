@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,7 +26,7 @@ import lombok.Data;
  * @since 04-Apr-2024
  */
 @Data
-public class DelaySetting {
+public class DelaySetting implements BoykaConfig {
     private int beforeClick;
     private int beforeMouseMove;
     private int beforeSwipe = 500;

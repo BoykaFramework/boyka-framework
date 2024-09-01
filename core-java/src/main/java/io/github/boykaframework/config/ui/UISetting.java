@@ -20,6 +20,7 @@ import static io.github.boykaframework.utils.SettingUtils.getSetting;
 
 import java.util.Map;
 
+import io.github.boykaframework.config.BoykaConfig;
 import io.github.boykaframework.config.ui.mobile.MobileSetting;
 import io.github.boykaframework.config.ui.web.WebSetting;
 import lombok.Data;
@@ -29,7 +30,7 @@ import lombok.Data;
  * @since 17-Feb-2022
  */
 @Data
-public class UISetting {
+public class UISetting implements BoykaConfig {
     private DelaySetting               delay      = new DelaySetting ();
     private LogSetting                 logging    = new LogSetting ();
     private Map<String, MobileSetting> mobile;

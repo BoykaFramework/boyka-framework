@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.manager;
 
+import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.time.Duration.ofSeconds;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -46,7 +47,7 @@ final class DriverManager {
         LOGGER.traceEntry ();
         final var settings = getSession ().getSetting ()
             .getUi ();
-        if (this.platformType != PlatformType.WEB) {
+        if (this.platformType != WEB) {
             final var mobileSetting = getSession ().getMobileSetting ();
             setupAppiumServer (mobileSetting.getServer ());
         }
@@ -67,7 +68,7 @@ final class DriverManager {
         final var timeouts = driver.manage ()
             .timeouts ();
         timeouts.implicitlyWait (ofSeconds (timeoutSetting.getImplicitWait ()));
-        if (this.platformType == PlatformType.WEB || session.getMobileSetting ()
+        if (this.platformType == WEB || session.getMobileSetting ()
             .getDevice ()
             .getApplication ()
             .getType () == ApplicationType.WEB) {

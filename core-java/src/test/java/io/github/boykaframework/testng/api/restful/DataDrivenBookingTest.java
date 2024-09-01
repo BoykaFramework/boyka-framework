@@ -16,15 +16,15 @@
 
 package io.github.boykaframework.testng.api.restful;
 
+import static io.github.boykaframework.actions.api.ApiActions.withRequest;
+import static io.github.boykaframework.enums.PlatformType.API;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 
 import java.text.DecimalFormat;
 
-import io.github.boykaframework.actions.api.ApiActions;
 import io.github.boykaframework.actions.interfaces.data.IDataRow;
 import io.github.boykaframework.builders.ApiRequest;
-import io.github.boykaframework.enums.PlatformType;
 import io.github.boykaframework.enums.RequestMethod;
 import io.github.boykaframework.testng.api.restful.data.BookingDataProviders;
 import io.github.boykaframework.testng.api.restful.pojo.BookingData;
@@ -44,7 +44,7 @@ import org.testng.annotations.Test;
 public class DataDrivenBookingTest {
     @BeforeClass
     public void setupClass () {
-        createSession (PlatformType.API, "test_restfulbooker");
+        createSession (API, "test_restfulbooker");
     }
 
     @AfterClass
@@ -106,8 +106,7 @@ public class DataDrivenBookingTest {
             .bodyObject (bookingData)
             .create ();
 
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var response = withRequest (request).execute ();
 
         response.verifyStatusCode ()
             .isEqualTo (200);

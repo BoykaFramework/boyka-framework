@@ -37,7 +37,7 @@ import org.apache.logging.log4j.Logger;
  * @since 17-Feb-2022
  */
 @Data
-public class FrameworkSetting {
+public class FrameworkSetting implements BoykaConfig {
     private static final Logger LOGGER = getLogger ();
 
     private Map<String, ApiSetting> api;

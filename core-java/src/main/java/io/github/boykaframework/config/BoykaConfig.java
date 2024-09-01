@@ -14,22 +14,14 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.api;
-
-import lombok.Data;
+package io.github.boykaframework.config;
 
 /**
- * Default API settings.
+ * Marker Interface
  *
  * @author Wasiq Bhamla
- * @since 21-May-2024
+ * @since 27-Aug-2024
  */
-@Data
-public class CommonApiSetting {
-    private String         basePath       = "";
-    private LogSetting     logging        = new LogSetting ();
-    private String         schemaPath     = "";
-    private TimeoutSetting timeout        = new TimeoutSetting ();
-    private boolean        validateSsl    = true;
-    private boolean        verifyHostName = true;
+public interface BoykaConfig {
+    // Marker interface
 }

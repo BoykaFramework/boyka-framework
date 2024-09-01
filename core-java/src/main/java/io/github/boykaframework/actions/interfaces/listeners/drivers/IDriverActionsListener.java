@@ -28,6 +28,15 @@ import io.github.boykaframework.actions.interfaces.listeners.BoykaListener;
  */
 public interface IDriverActionsListener extends BoykaListener {
     /**
+     * Handles get capability method
+     *
+     * @param capability Name of capability
+     */
+    default void onCapability (final String capability) {
+        // not implemented.
+    }
+
+    /**
      * Handle execute script method.
      *
      * @param script Script to be executed
@@ -50,6 +59,15 @@ public interface IDriverActionsListener extends BoykaListener {
      * Handle save logs method.
      */
     default void onSaveLogs () {
+        // not implemented.
+    }
+
+    /**
+     * Handles verify capability method.
+     *
+     * @param capability Name of capability
+     */
+    default void onVerifyCapability (final String capability) {
         // not implemented.
     }
 

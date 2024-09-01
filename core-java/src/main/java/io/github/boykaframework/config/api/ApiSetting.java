@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.api;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,13 +26,13 @@ import lombok.Data;
  * @since 17-Feb-2022
  */
 @Data
-public class ApiSetting {
-    private String         basePath;
+public class ApiSetting implements BoykaConfig {
+    private String         basePath       = "";
     private String         baseUri;
-    private LogSetting     logging;
-    private int            port;
-    private String         schemaPath;
-    private TimeoutSetting timeout;
-    private boolean        validateSsl;
-    private boolean        verifyHostName;
+    private LogSetting     logging        = new LogSetting ();
+    private int            port           = 0;
+    private String         schemaPath     = "";
+    private TimeoutSetting timeout        = new TimeoutSetting ();
+    private boolean        validateSsl    = true;
+    private boolean        verifyHostName = true;
 }

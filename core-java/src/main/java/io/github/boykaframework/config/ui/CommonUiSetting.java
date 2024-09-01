@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Wasiq Bhamla
+ * Copyright (c) 2024, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,18 +14,21 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.ui.mobile.device;
+package io.github.boykaframework.config.ui;
 
 import io.github.boykaframework.config.BoykaConfig;
+import io.github.boykaframework.config.ui.mobile.MobileSetting;
+import io.github.boykaframework.config.ui.web.WebSetting;
 import lombok.Data;
 
 /**
- * Android specific video recording settings.
+ * Common UI settings
  *
  * @author Wasiq Bhamla
- * @since 16-Oct-2023
+ * @since 22-Aug-2024
  */
 @Data
-public class AndroidVideoSetting implements BoykaConfig {
-    private int bitRate = 4;
+public class CommonUiSetting implements BoykaConfig {
+    private MobileSetting mobile = new MobileSetting ();
+    private WebSetting    web    = new WebSetting ();
 }

@@ -21,21 +21,26 @@ import static io.github.boykaframework.enums.ListenerType.API_ACTION;
 import static io.github.boykaframework.enums.Message.AUTH_PASSWORD_REQUIRED;
 import static io.github.boykaframework.enums.Message.BASE_URL_EMPTY;
 import static io.github.boykaframework.enums.Message.CONTENT_TYPE_NOT_SET;
+import static io.github.boykaframework.enums.Message.EMPTY_REQUEST_BODY;
+import static io.github.boykaframework.enums.Message.EMPTY_URL;
 import static io.github.boykaframework.enums.Message.ERROR_EXECUTING_REQUEST;
 import static io.github.boykaframework.enums.Message.ERROR_PARSING_REQUEST_BODY;
 import static io.github.boykaframework.enums.Message.ERROR_PARSING_RESPONSE_BODY;
+import static io.github.boykaframework.enums.Message.SSL_CONTEXT_EMPTY;
 import static io.github.boykaframework.enums.Message.SSL_ERROR;
+import static io.github.boykaframework.enums.RequestMethod.GET;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.StringUtils.interpolate;
 import static io.github.boykaframework.utils.Validator.requireNonEmpty;
+import static io.github.boykaframework.utils.Validator.requireNonNull;
+import static io.github.boykaframework.utils.Validator.requireNonNullElse;
 import static java.lang.String.join;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.isNull;
-import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNullElse;
 import static java.util.Optional.ofNullable;
+import static javax.net.ssl.SSLContext.getInstance;
 import static okhttp3.Credentials.basic;
 import static okhttp3.MediaType.parse;
 import static okhttp3.RequestBody.create;
@@ -51,6 +56,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
@@ -61,7 +67,6 @@ import io.github.boykaframework.actions.interfaces.listeners.api.IApiActionsList
 import io.github.boykaframework.builders.ApiRequest;
 import io.github.boykaframework.builders.ApiResponse;
 import io.github.boykaframework.config.api.ApiSetting;
-import io.github.boykaframework.config.api.CommonApiSetting;
 import io.github.boykaframework.config.api.LogSetting;
 import io.github.boykaframework.enums.ContentType;
 import io.github.boykaframework.enums.RequestMethod;
@@ -99,7 +104,6 @@ public final class ApiActions implements IApiActions {
     private final ApiRequest          apiRequest;
     private final ApiSetting          apiSetting;
     private final OkHttpClient        client;
-    private final CommonApiSetting    commonApiSetting;
     private final IApiActionsListener listener;
     private final LogSetting          logSetting;
     private       MediaType           mediaType;
@@ -114,12 +118,11 @@ public final class ApiActions implements IApiActions {
         this.listener = getSession ().getListener (API_ACTION);
         this.apiRequest = apiRequest;
         this.pathParams = new HashMap<> ();
-        this.commonApiSetting = getSession ().getCommonApiSetting ();
         this.apiSetting = getSession ().getApiSetting ();
 
         final var builder = getApiBuilder ();
         this.client = builder.build ();
-        this.logSetting = requireNonNullElse (this.apiSetting.getLogging (), this.commonApiSetting.getLogging ());
+        this.logSetting = this.apiSetting.getLogging ();
         this.request = new Request.Builder ();
         LOGGER.traceExit ();
     }
@@ -152,8 +155,7 @@ public final class ApiActions implements IApiActions {
     private ApiActions basicAuth (final String userName, final String password) {
         if (!isNull (userName)) {
             LOGGER.traceEntry ("Parameters: userName={}", userName);
-            final var credentials = basic (userName,
-                requireNonNull (password, AUTH_PASSWORD_REQUIRED.getMessageText ()));
+            final var credentials = basic (userName, requireNonNull (password, AUTH_PASSWORD_REQUIRED));
             addHeader ("Authorization", credentials);
         }
         return LOGGER.traceExit (this);
@@ -169,7 +171,7 @@ public final class ApiActions implements IApiActions {
 
     private ApiActions body (final String body) {
         LOGGER.traceEntry ();
-        this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
+        this.requestBody = create (body, requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET));
         return LOGGER.traceExit (this);
     }
 
@@ -178,8 +180,7 @@ public final class ApiActions implements IApiActions {
         final var body = new ArrayList<String> ();
         bodyMap.forEach ((k, v) -> body.add (format ("{0}={1}", k, v)));
         if (!body.isEmpty ()) {
-            this.requestBody = create (join ("&", body),
-                requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
+            this.requestBody = create (join ("&", body), requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET));
         }
         return LOGGER.traceExit (this);
     }
@@ -202,15 +203,14 @@ public final class ApiActions implements IApiActions {
     }
 
     private OkHttpClient.Builder getApiBuilder () {
-        final var timeout = requireNonNullElse (this.apiSetting.getTimeout (), this.commonApiSetting.getTimeout ());
+        final var timeout = this.apiSetting.getTimeout ();
         final var builder = new OkHttpClient.Builder ().connectTimeout (ofSeconds (timeout.getConnectionTimeout ()))
             .readTimeout (ofSeconds (timeout.getReadTimeout ()))
             .writeTimeout (ofSeconds (timeout.getWriteTimeout ()));
-        if (!this.apiSetting.isValidateSsl () || !this.commonApiSetting.isValidateSsl ()) {
-            builder.sslSocketFactory (requireNonNull (getSslContext ()).getSocketFactory (),
-                (X509TrustManager) getTrustedCertificates ()[0]);
+        if (!this.apiSetting.isValidateSsl ()) {
+            builder.sslSocketFactory (getSslContext (), (X509TrustManager) getTrustedCertificates ()[0]);
         }
-        if (!this.apiSetting.isVerifyHostName () || !this.commonApiSetting.isVerifyHostName ()) {
+        if (!this.apiSetting.isVerifyHostName ()) {
             builder.hostnameVerifier ((hostname, session) -> true);
         }
         return builder;
@@ -230,7 +230,7 @@ public final class ApiActions implements IApiActions {
     private ApiResponse getResponse (final Map<String, String> queryParams, final String path) {
         LOGGER.traceEntry ("Parameters: {}", path);
         try {
-            final var urlBuilder = requireNonNull (HttpUrl.parse (getUrl (path))).newBuilder ();
+            final var urlBuilder = requireNonNull (HttpUrl.parse (getUrl (path)), EMPTY_URL).newBuilder ();
             queryParams.forEach (urlBuilder::addQueryParameter);
             this.response = parseResponse (this.client.newCall (this.request.url (urlBuilder.build ())
                     .build ())
@@ -243,15 +243,15 @@ public final class ApiActions implements IApiActions {
         return LOGGER.traceExit (this.response);
     }
 
-    private SSLContext getSslContext () {
+    private SSLSocketFactory getSslContext () {
         SSLContext sslContext = null;
         try {
-            sslContext = SSLContext.getInstance ("SSL");
+            sslContext = getInstance ("SSL");
             sslContext.init (null, getTrustedCertificates (), new java.security.SecureRandom ());
         } catch (final NoSuchAlgorithmException | KeyManagementException e) {
             handleAndThrow (SSL_ERROR, e, e.getMessage ());
         }
-        return sslContext;
+        return requireNonNull (sslContext, SSL_CONTEXT_EMPTY).getSocketFactory ();
     }
 
     private TrustManager[] getTrustedCertificates () {
@@ -279,7 +279,7 @@ public final class ApiActions implements IApiActions {
         if (this.apiSetting.getPort () > 0) {
             hostName = format ("{0}:{1}", hostName, this.apiSetting.getPort ());
         }
-        final var basePath = requireNonNullElse (this.apiSetting.getBasePath (), this.commonApiSetting.getBasePath ());
+        final var basePath = this.apiSetting.getBasePath ();
         return LOGGER.traceExit (format ("{0}{1}", hostName, basePath));
     }
 
@@ -326,8 +326,8 @@ public final class ApiActions implements IApiActions {
 
     private ApiActions method (final RequestMethod method) {
         LOGGER.traceEntry ("Parameter: {}", method);
-        if (method != RequestMethod.GET) {
-            this.request.method (method.name (), requireNonNull (this.requestBody));
+        if (method != GET) {
+            this.request.method (method.name (), requireNonNull (this.requestBody, EMPTY_REQUEST_BODY));
         }
         return LOGGER.traceExit (this);
     }
@@ -362,7 +362,6 @@ public final class ApiActions implements IApiActions {
                     .headers (headers)
                     .networkResponse (parseResponse (res.networkResponse ()))
                     .apiSetting (this.apiSetting)
-                    .commonApiSetting (this.commonApiSetting)
                     .networkResponse (parseResponse (res.networkResponse ()))
                     .previousResponse (parseResponse (res.priorResponse ()))
                     .receivedResponseAt (res.receivedResponseAtMillis ())

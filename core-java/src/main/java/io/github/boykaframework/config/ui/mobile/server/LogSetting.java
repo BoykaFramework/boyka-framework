@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui.mobile.server;
 
+import io.github.boykaframework.config.BoykaConfig;
 import io.github.boykaframework.enums.LogLevel;
 import lombok.Data;
 
@@ -26,9 +27,9 @@ import lombok.Data;
  * @since 21-Sept-2023
  */
 @Data
-public class LogSetting {
-    private boolean  debugSpacing;
-    private LogLevel level = LogLevel.INFO;
-    private boolean  localTimezone;
-    private boolean  timestamp;
+public class LogSetting implements BoykaConfig {
+    private boolean  debugSpacing  = true;
+    private LogLevel level;
+    private boolean  localTimezone = true;
+    private boolean  timestamp     = true;
 }

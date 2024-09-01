@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.api;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,7 +26,7 @@ import lombok.Data;
  * @since 07-Sept-2022
  */
 @Data
-public class LogSetting {
+public class LogSetting implements BoykaConfig {
     private boolean enable   = true;
     private boolean request  = true;
     private boolean response = true;

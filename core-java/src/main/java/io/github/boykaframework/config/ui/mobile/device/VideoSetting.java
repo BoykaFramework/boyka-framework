@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui.mobile.device;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,12 +26,12 @@ import lombok.Data;
  * @since 13-Oct-2023
  */
 @Data
-public class VideoSetting {
-    private AndroidVideoSetting android = new AndroidVideoSetting ();
-    private boolean             enabled = false;
-    private IOSVideoSetting     ios     = new IOSVideoSetting ();
-    private String              path    = "./videos";
-    private String              prefix  = "VID";
+public class VideoSetting implements BoykaConfig {
+    private AndroidVideoSetting android   = new AndroidVideoSetting ();
+    private boolean             enabled   = false;
+    private IOSVideoSetting     ios       = new IOSVideoSetting ();
+    private String              path      = "./videos";
+    private String              prefix    = "VID";
     private String              size;
-    private int                 timeLimit;
+    private int                 timeLimit = 0;
 }

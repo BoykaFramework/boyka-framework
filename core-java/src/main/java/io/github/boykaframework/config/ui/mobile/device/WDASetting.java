@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui.mobile.device;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -25,7 +26,7 @@ import lombok.Data;
  * @since 26-Jan-2023
  */
 @Data
-public class WDASetting {
+public class WDASetting implements BoykaConfig {
     private int     connectionTimeout    = 60;
     private int     launchTimeout        = 60;
     private int     localPort            = 8100;
@@ -34,6 +35,6 @@ public class WDASetting {
     private int     startupRetryInterval = 10;
     private String  teamId;
     private String  updateBundleId;
-    private boolean useNew;
-    private boolean usePrebuilt;
+    private boolean useNew               = true;
+    private boolean usePrebuilt          = false;
 }

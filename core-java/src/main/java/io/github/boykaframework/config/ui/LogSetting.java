@@ -18,6 +18,7 @@ package io.github.boykaframework.config.ui;
 
 import java.util.List;
 
+import io.github.boykaframework.config.BoykaConfig;
 import lombok.Data;
 
 /**
@@ -27,7 +28,7 @@ import lombok.Data;
  * @since 07-Sept-2022
  */
 @Data
-public class LogSetting {
+public class LogSetting implements BoykaConfig {
     private boolean      enable = true;
     private List<String> excludeLogs;
     private String       path   = "./logs";

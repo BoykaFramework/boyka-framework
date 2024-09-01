@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.ui.mobile;
 
+import io.github.boykaframework.config.BoykaConfig;
 import io.github.boykaframework.config.ui.mobile.device.DeviceSetting;
 import io.github.boykaframework.config.ui.mobile.server.ServerSetting;
 import lombok.Data;
@@ -27,7 +28,7 @@ import lombok.Data;
  * @since 06-Sept-2022
  */
 @Data
-public class MobileSetting {
+public class MobileSetting implements BoykaConfig {
     private DeviceSetting device = new DeviceSetting ();
     private ServerSetting server = new ServerSetting ();
 }

@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.actions.drivers;
 
+import static com.google.common.truth.Truth.assertWithMessage;
 import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
 import static io.github.boykaframework.actions.CommonActions.performDriverAction;
 import static io.github.boykaframework.enums.ListenerType.DRIVER_ACTION;
@@ -33,6 +34,7 @@ import static java.lang.Thread.sleep;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.BufferedWriter;
@@ -41,6 +43,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.function.Function;
 
+import com.google.common.truth.StringSubject;
 import io.github.boykaframework.actions.interfaces.drivers.IDriverActions;
 import io.github.boykaframework.actions.interfaces.listeners.drivers.IDriverActionsListener;
 import org.apache.logging.log4j.Logger;
@@ -48,6 +51,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * Device / Browser specific actions.
@@ -72,6 +76,14 @@ public final class DriverActions implements IDriverActions {
 
     private DriverActions () {
         this.listener = getSession ().getListener (DRIVER_ACTION);
+    }
+
+    @Override
+    public String capability (final String name) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting the capability of [{}]...", name);
+        ofNullable (this.listener).ifPresent (l -> l.onCapability (name));
+        return LOGGER.traceExit (getCapability (name));
     }
 
     @Override
@@ -139,6 +151,14 @@ public final class DriverActions implements IDriverActions {
     }
 
     @Override
+    public StringSubject verifyCapability (final String capabilityName) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying the capability of [{}]...", capabilityName);
+        ofNullable (this.listener).ifPresent (l -> l.onCapability (capabilityName));
+        return assertWithMessage (capabilityName).that (getCapability (capabilityName));
+    }
+
+    @Override
     public <T> void waitUntil (final Function<WebDriver, T> condition) {
         LOGGER.traceEntry ();
         LOGGER.info ("Waiting for condition...");
@@ -147,6 +167,11 @@ public final class DriverActions implements IDriverActions {
             final var wait = getSession ().getWait ();
             wait.until (condition);
         });
+    }
+
+    private String getCapability (final String name) {
+        return getDriverAttribute (d -> ((RemoteWebDriver) d).getCapabilities ()
+            .getCapability (name), EMPTY).toString ();
     }
 
     private <D extends WebDriver> void saveLogType (final D driver, final String logType, final String logPath) {

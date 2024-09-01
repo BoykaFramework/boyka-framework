@@ -21,6 +21,7 @@ import static io.github.boykaframework.enums.OS.ANDROID;
 
 import java.util.Map;
 
+import io.github.boykaframework.config.BoykaConfig;
 import io.github.boykaframework.enums.DeviceType;
 import io.github.boykaframework.enums.OS;
 import lombok.Data;
@@ -32,27 +33,27 @@ import lombok.Data;
  * @since 08-Sept-2022
  */
 @Data
-public class DeviceSetting {
-    private boolean              acceptAlerts           = true;
-    private int                  adbTimeout             = 30;
+public class DeviceSetting implements BoykaConfig {
+    private boolean              acceptAlerts;
+    private int                  adbTimeout           = 30;
     private ApplicationSetting   application;
     private Map<String, Object>  capabilities;
-    private boolean              clearFiles             = true;
-    private boolean              clearLogs              = true;
+    private boolean              clearFiles;
+    private boolean              clearLogs;
     private boolean              fullReset;
-    private boolean              ignoreUnimportantViews = true;
+    private boolean              ignoreUnimportantViews;
     private String               name;
     private boolean              noReset;
-    private OS                   os                     = ANDROID;
-    private int                  serverInstallTimeout   = 30;
-    private int                  serverLaunchTimeout    = 30;
-    private SwipeSetting         swipe                  = new SwipeSetting ();
-    private int                  systemPort             = 8200;
-    private DeviceType           type                   = VIRTUAL;
-    private int                  typingSpeed            = 60;
+    private OS                   os                   = ANDROID;
+    private int                  serverInstallTimeout = 30;
+    private int                  serverLaunchTimeout  = 30;
+    private SwipeSetting         swipe                = new SwipeSetting ();
+    private int                  systemPort           = 8200;
+    private DeviceType           type                 = VIRTUAL;
+    private int                  typingSpeed          = 60;
     private String               uniqueId;
     private String               version;
-    private VideoSetting         video                  = new VideoSetting ();
-    private VirtualDeviceSetting virtualDevice          = new VirtualDeviceSetting ();
-    private WDASetting           wda;
+    private VideoSetting         video                = new VideoSetting ();
+    private VirtualDeviceSetting virtualDevice        = new VirtualDeviceSetting ();
+    private WDASetting           wda                  = new WDASetting ();
 }

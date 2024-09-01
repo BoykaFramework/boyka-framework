@@ -91,6 +91,14 @@ public enum Message {
      */
     EMPTY_BROWSER_NOT_ALLOWED ("Browser type cannot be empty in the config..."),
     /**
+     * Empty request body.
+     */
+    EMPTY_REQUEST_BODY ("Request Body is empty"),
+    /**
+     * URL cannot be empty.
+     */
+    EMPTY_URL ("URL cannot be empty..."),
+    /**
      * Error while calling setter method.
      */
     ERROR_CALLING_SETTER ("Error encountered when calling setter method [{0}] in [{1}] data class..."),
@@ -211,9 +219,21 @@ public enum Message {
      */
     INVALID_SWIPE_DISTANCE ("Swipe Distance should be greater than 0% and less than 100%..."),
     /**
+     * Invalid target for remote session.
+     */
+    INVALID_TARGET ("Invalid target ({0}) for Remote session..."),
+    /**
      * Malformed JSON syntax error.
      */
     JSON_SYNTAX_ERROR ("JSON syntax error..."),
+    /**
+     * Method invoke failed.
+     */
+    METHOD_INVOKE_FAILED ("Cannot invoke method ({0})..."),
+    /**
+     * Method not found.
+     */
+    METHOD_NOT_FOUND ("Method ({0}) is not found in class ({1})..."),
     /**
      * No API setting found
      */
@@ -247,10 +267,6 @@ public enum Message {
      */
     PATH_NOT_DIRECTORY ("Path [{0}] is not a folder. Only folder path should be provided..."),
     /**
-     * Protocol is required for host name
-     */
-    PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host ({0})..."),
-    /**
      * Schema validation assert failure
      */
     RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),
@@ -270,6 +286,10 @@ public enum Message {
      * Session persona cannot be null.
      */
     SESSION_PERSONA_CANNOT_BE_NULL ("Session Persona cannot be empty or null..."),
+    /**
+     * SSL Context cannot be empty.
+     */
+    SSL_CONTEXT_EMPTY ("SSL Context is empty..."),
     /**
      * SSL Context Error.
      */

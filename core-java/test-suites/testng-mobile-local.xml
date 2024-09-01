@@ -25,9 +25,9 @@
         <classes>
             <class name="io.github.boykaframework.testng.ui.wdio.WdioDemoTest">
                 <methods>
-                    <include name="testDragDrop" />
-                    <include name="testSignUp" />
-                    <include name="testWebView" />
+                    <include name="testDragDrop"/>
+                    <include name="testSignUp"/>
+                    <include name="testWebView"/>
                 </methods>
             </class>
         </classes>
@@ -38,8 +38,8 @@
         <classes>
             <class name="io.github.boykaframework.testng.ui.wdio.WdioDemoTest">
                 <methods>
-                    <include name="testDragDrop" />
-                    <include name="testWebView" />
+                    <include name="testDragDrop"/>
+                    <include name="testWebView"/>
                 </methods>
             </class>
         </classes>
