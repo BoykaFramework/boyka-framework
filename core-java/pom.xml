@@ -25,7 +25,7 @@
     <inceptionYear>2022</inceptionYear>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>🎉 Ultimate test automation framework for testing any application on any platform</description>
-    <url>https://github.com/BoykaFramework/boyka-framework</url>
+    <url>https://git.new/boyka-githubk</url>
 
     <properties>
         <selenium-webdriver.version>4.24.0</selenium-webdriver.version>
@@ -136,7 +136,7 @@
     <scm>
         <connection>scm:git:git@github.com:BoykaFramework/boyka-framework.git</connection>
         <developerConnection>scm:git:git@github.com:BoykaFramework/boyka-framework.git</developerConnection>
-        <url>https://github.com/BoykaFramework/boyka-framework</url>
+        <url>https://git.new/boyka-github</url>
     </scm>
 
     <ciManagement>

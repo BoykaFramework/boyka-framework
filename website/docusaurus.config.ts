@@ -111,7 +111,7 @@ const config: Config = {
       id: 'star-the-repo',
       content: `⭐ Don't forget to Star the repo on 👉 
 <a target='_blank' rel='noopener noreferrer' 
-href='https://github.com/BoykaFramework/boyka-framework'>GitHub</a> ⭐ |
+href='https://git.new/boyka-github'>GitHub</a> ⭐ |
 🤝 Support us by Sponsoring us on <a target='_blank' rel='noopener noreferrer' 
 href='https://github.com/sponsors/BoykaFramework'>GitHub Sponsors</a> 🤝`,
       backgroundColor: '#ffb600',
@@ -162,7 +162,7 @@ href='https://github.com/sponsors/BoykaFramework'>GitHub Sponsors</a> 🤝`,
         },
         { to: '/blog', label: 'Blogs' },
         {
-          href: 'https://github.com/BoykaFramework/boyka-framework',
+          href: 'https://git.new/boyka-github',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -235,7 +235,7 @@ href='https://github.com/sponsors/BoykaFramework'>GitHub Sponsors</a> 🤝`,
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/BoykaFramework/boyka-framework',
+              href: 'https://git.new/boyka-github',
             },
           ],
         },
