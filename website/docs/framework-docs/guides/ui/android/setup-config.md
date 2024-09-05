@@ -3,9 +3,32 @@ title: 🪛 Setup Configuration
 sidebar_position: 1
 ---
 
-You can set multiple configurations in the configuration file with different key name for different Android devices.
+## Create Android configuration
 
-Let's see how to set configuration in the configuration file for Android application to run on different devices.
+To generate a new configuration, run the following command on your terminal:
+
+```shell
+boyka config android [config-name]
+```
+
+A set of questions will be asked, depending on your response, a new config settings will get created with the given config name.
+
+:::tip
+You can add as many different Android configs as you want using the above command
+:::
+
+## Update existing configuration
+
+To update any existing Android configuration, you can update the required values in the `boyka-config.json` file.
+
+:::info
+Check out complete details about Android configurations in [Mobile configuration guide][mobile-config].
+:::
+
+Let's see how a sample Android configuration in the config file is:
+
+<details>
+  <summary>Sample Android config</summary>
 
 ```json title="src/test/resources/boyka-config.json"
 {
@@ -128,9 +151,7 @@ Let's see how to set configuration in the configuration file for Android applica
 }
 ```
 
-:::info
-For more information about API configurations, please refer to [Mobile configuration guide][mobile-config].
-:::
+</details>
 
 ## Details of each Android configurations {#android-config-details}
 
@@ -138,4 +159,4 @@ For more information about API configurations, please refer to [Mobile configura
 - `test_bs_android`: This is the configuration for running the test on the BrowserStack cloud Android device.
 - `test_lt_android`: This is the configuration for running the test on the LambdaTest cloud Android device.
 
-[mobile-config]: /docs/guides/configuration#mobile-config
+[mobile-config]: /docs/guides/config/configuration#mobile-config

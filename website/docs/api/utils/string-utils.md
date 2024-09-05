@@ -21,5 +21,5 @@ System.out.println (interpolate ("${USER_NAME}", values));
 ```
 
 :::tip
-You can explore all the available formats for interpolation in Web configuration [`info` section](/docs/guides/configuration#web-config).
+You can explore all the available formats for interpolation in Web configuration [`info` section](/docs/guides/config/configuration#web-config).
 :::

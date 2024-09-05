@@ -3,7 +3,32 @@ title: 🪛 Setup Configuration
 sidebar_position: 1
 ---
 
-Before starting to automate Web applications, we need to first setup the configuration file for our Application under test.
+## Create Web configuration
+
+To generate a new configuration, run the following command on your terminal:
+
+```shell
+boyka config web [config-name]
+```
+
+A set of questions will be asked, depending on your response, a new config settings will get created with the given config name.
+
+:::tip
+You can add as many different Web configs as you want using the above command
+:::
+
+## Update existing configuration
+
+To update any existing Web configuration, you can update the required values in the `boyka-config.json` file.
+
+:::info
+Check out complete details about Web configurations in [Web configuration guide][web-config].
+:::
+
+Let's see how a sample Android configuration in the config file is:
+
+<details>
+  <summary>Sample Web config</summary>
 
 ```json title="src/test/resources/boyka-config.json"
 {
@@ -86,9 +111,7 @@ Before starting to automate Web applications, we need to first setup the configu
 }
 ```
 
-:::info
-To know more about Web configurations, please refer to the [Web Configuration guide][web-config].
-:::
+</details>
 
 ## Details of each Web configurations {#web-config-details}
 
@@ -100,4 +123,4 @@ To know more about Web configurations, please refer to the [Web Configuration gu
 - `test_selenium_grid`: This is the configuration for running the test on Selenium Grid.
 - `test_lambda_test_chrome`: This is the configuration for running the test on LambdaTest Chrome browser.
 
-[web-config]: /docs/guides/configuration#web-config
+[web-config]: /docs/guides/config/configuration#web-config

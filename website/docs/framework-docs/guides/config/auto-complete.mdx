@@ -1,0 +1,26 @@
+---
+sidebar_position: 2
+title: 🤖 Enable Auto complete in the IDE
+sidebar_label: 🤖 Auto complete in the IDE
+---
+
+## Using `$schema` field
+
+The easiest option is to add the following line in your `boyka-config.json` file, if the same is not already there:
+
+```json
+{
+    "$schema": "https://json.schemastore.org/boyka-config.json",
+    . . .
+}
+```
+
+After adding this line, you should be able to see auto complete options when you press <kbd>Ctrl</kbd> + <kbd>Space</kbd>
+
+Below is an example after enabling auto completion:
+
+![IntelliJ auto complete](/img/docs/framework-docs/auto-complete-config.png)
+
+:::tip
+You will also see the fields description when you hover the mouse over it.
+:::
