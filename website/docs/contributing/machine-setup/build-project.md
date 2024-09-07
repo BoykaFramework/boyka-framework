@@ -115,11 +115,11 @@ This will resolve the dependencies and run check-style check for the project wit
 
 The documentation project is located in `website/` directory.
 
-### Install Node >= v16.15.0 {#install-node}
+### Install Node >= v18.20.3 {#install-node}
 
 1. Install NVM (Node Version Manager) on your machine.
 1. Open your terminal or command prompt and run the following command: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
-1. Run the following command to set up the project: `nvm install`
+1. Run the following command to set up the project: `nvm install lts/hydrogen`
 1. Verify if Node is installed correctly.
    1. Open Command Prompt and run the command: `nvm -v` and `node -v`
    1. It should display the NVM and Node version as shown in the screenshot below:

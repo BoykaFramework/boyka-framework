@@ -3,9 +3,9 @@ title: 💄 Coding style
 sidebar_position: 5
 ---
 
-## Java coding style
+## 💄 Java coding style
 
-### IntelliJ IDEA Code style setup
+### 1️⃣ IntelliJ IDEA Code style setup
 
 We have defined a common coding style which we follow while writing Java code. The defined code formatter can be found at `core-java/code-formatter` directory. You need to import the formatter from the mentioned directory in your IntelliJ IDEA properties.
 
@@ -15,7 +15,7 @@ We have defined a common coding style which we follow while writing Java code. T
 2. Select `Import Schema` -> `IntelliJ IDEA code style XML` from the options and select the `boyka-formatter.xml` file from the path mentioned above.
 3. Now click on `Apply` and `OK` buttons.
 
-### Save Action plugin settings
+### 2️⃣ Save Action plugin settings
 
 In your IntelliJ IDEA, add `Save Actions` plugin to your project. This plugin is used to format code files on save when working on the Java project.
 
