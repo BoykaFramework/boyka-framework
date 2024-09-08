@@ -3,9 +3,32 @@ title: 🪛 Setup Configuration
 sidebar_position: 1
 ---
 
-You can set multiple configurations in the configuration file with different key name for different iOS devices.
+## Create iOS configuration
 
-Let's see how to set configuration in the configuration file for iOS application to run on different devices.
+To generate a new configuration, run the following command on your terminal:
+
+```shell
+boyka config ios [config-name]
+```
+
+A set of questions will be asked, depending on your response, a new config settings will get created with the given config name.
+
+:::tip
+You can add as many different iOS configs as you want using the above command
+:::
+
+## Update existing configuration
+
+To update any existing iOS configuration, you can update the required values in the `boyka-config.json` file.
+
+:::info
+Check out complete details about iOS configurations in [Mobile configuration guide][mobile-config].
+:::
+
+Let's see how a sample iOS configuration in the config file is:
+
+<details>
+  <summary>Sample iOS configs</summary>
 
 ```json title="src/test/resources/boyka-config.json"
 {
@@ -136,9 +159,7 @@ Let's see how to set configuration in the configuration file for iOS application
 }
 ```
 
-:::info
-For more information about API configurations, please refer to [Mobile configuration guide][mobile-config].
-:::
+</details>
 
 ## Details of each iOS configurations {#ios-config-details}
 
@@ -146,4 +167,4 @@ For more information about API configurations, please refer to [Mobile configura
 - `test_bs_ios`: This is the configuration for running the test on the BrowserStack cloud iOS device.
 - `test_lt_ios`: This is the configuration for running the test on the LambdaTest cloud iOS device.
 
-[mobile-config]: /docs/guides/configuration#mobile-config
+[mobile-config]: /docs/guides/config/configuration#mobile-config

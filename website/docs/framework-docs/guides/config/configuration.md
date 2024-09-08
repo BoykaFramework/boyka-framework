@@ -1,17 +1,23 @@
 ---
 sidebar_position: 1
-title: 🔩 Configuration
+title: 🔩 Configuration File
 ---
 
 The framework is highly configurable. You can configure repeated setting for your test in the framework configuration file.
 
 ## Configuration File
 
+:::info
+When you create the Boyka project using the command line assistant, the config file gets created automatically at `src/test/resources/` folder.
+:::
+
 :::caution
 Boyka framework is driven by `boyka-config.json` configuration file. You must have this file in order to use the framework.
 :::
 
-Configuration is stored in `boyka-config.json` file. This file is in JSON format. Following is the logic which Boyka-framework will find the config file:
+Configuration is stored in `boyka-config.json` file. This file is in JSON format. It will be automatically created when you initialize the new project using Boyka command line assistant.
+
+Following is the logic which Boyka-framework will use to find the config file:
 
 - First it will check for the config folder in the `BOYKA_CONFIG_PATH` environment variable
 - If the environment variable is not set, then it will check `boyka.config.path` system property
@@ -21,7 +27,10 @@ Configuration is stored in `boyka-config.json` file. This file is in JSON format
 The Config file name cannot be modified. It should always be `boyka-config.json`
 :::
 
-## Configuration file sample {#config-sample}
+### Configuration file sample {#config-sample}
+
+<details>
+  <summary>Sample Config</summary>
 
 ```json title="boyka-config.json"
 {
@@ -351,6 +360,8 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
   }
 }
 ```
+
+</details>
 
 ## Configuration File properties
 
