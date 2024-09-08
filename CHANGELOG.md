@@ -1,4 +1,28 @@
 
+
+## 2.1.0 (2024-09-08)
+
+#### :rocket: New Feature
+* [#892](https://github.com/BoykaFramework/boyka-framework/pull/892) feat(website): :memo: updated docs for missing features ([@WasiqB](https://github.com/WasiqB))
+
+#### :bug: Bug Fix
+* [#884](https://github.com/BoykaFramework/boyka-framework/pull/884) fix(workflow): :bug: fixed failing grid workflow ([@WasiqB](https://github.com/WasiqB))
+* [#875](https://github.com/BoykaFramework/boyka-framework/pull/875) fix(workflow): :bug: fixed issue with maven publish timed out ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#879](https://github.com/BoykaFramework/boyka-framework/pull/879) build(deps-dev): bump io.qameta.allure:allure-testng from 2.28.1 to 2.29.0 in /core-java ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#891](https://github.com/BoykaFramework/boyka-framework/pull/891) build(deps): bump the dependencies group in /core-java with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#890](https://github.com/BoykaFramework/boyka-framework/pull/890) build(deps-dev): bump the dependencies group with 11 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#889](https://github.com/BoykaFramework/boyka-framework/pull/889) build(deps-dev): bump the dependencies group with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#888](https://github.com/BoykaFramework/boyka-framework/pull/888) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#882](https://github.com/BoykaFramework/boyka-framework/pull/882) build(deps): bump the dependencies group across 1 directory with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#881](https://github.com/BoykaFramework/boyka-framework/pull/881) build(deps): bump the dependencies group with 16 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#880](https://github.com/BoykaFramework/boyka-framework/pull/880) build(deps): bump the dependencies group with 18 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#877](https://github.com/BoykaFramework/boyka-framework/pull/877) build(deps-dev): bump the dependencies group with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.0.0 (2024-07-29)
 
 #### :boom: Breaking Change
