@@ -1,7 +1,6 @@
 {
   "version": "2.0.0",
   "npmClient": "pnpm",
-  "useWorkspace": false,
   "changelog": {
     "repo": "BoykaFramework/boyka-framework",
     "labels": {

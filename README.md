@@ -32,7 +32,7 @@
 </p>
 
   <h4>
-    <a href="https://boykaframework.github.io/boyka-framework/docs/intro">Documentation</a>
+    <a href="https://boykaframework.github.io/docs/intro">Documentation</a>
   <span> | </span>
     <a href="https://github.com/BoykaFramework/boyka-framework/issues/new/choose">Report Bug</a>
   <span> | </span>
@@ -42,31 +42,31 @@
 
 <br />
 
-- [🤔 What is Boyka Framework?](https://boykaframework.github.io/boyka-framework/docs/intro#what-is-boyka-framework)
-- [💡 Why Boyka Framework was created?](https://boykaframework.github.io/boyka-framework/docs/intro#why-boyka-framework-was-created)
-- [🎯 Features](https://boykaframework.github.io/boyka-framework/docs/intro#features)
-- [🚀 Quick start](https://boykaframework.github.io/boyka-framework/docs/getting-started/quickstart)
+- [🤔 What is Boyka Framework?](https://boykaframework.github.io/docs/intro#what-is-boyka-framework)
+- [💡 Why Boyka Framework was created?](https://boykaframework.github.io/docs/intro#why-boyka-framework-was-created)
+- [🎯 Features](https://boykaframework.github.io/docs/intro#features)
+- [🚀 Quick start](https://boykaframework.github.io/docs/getting-started/quickstart)
 
 ## ☕ Examples
 
 - API:
-  - [How to configure Boyka for API Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/api/setup-config)
-  - [How to compose a request?](https://boykaframework.github.io/boyka-framework/docs/guides/api/compose-request)
-  - [How to execute a request?](https://boykaframework.github.io/boyka-framework/docs/guides/api/execute-request)
-  - [How to verify the response?](https://boykaframework.github.io/boyka-framework/docs/guides/api/verify-response)
+  - [How to configure Boyka for API Automation?](https://boykaframework.github.io/docs/guides/api/setup-config)
+  - [How to compose a request?](https://boykaframework.github.io/docs/guides/api/compose-request)
+  - [How to execute a request?](https://boykaframework.github.io/docs/guides/api/execute-request)
+  - [How to verify the response?](https://boykaframework.github.io/docs/guides/api/verify-response)
   - [How to verify the response schema?](http://localhost:3000/boyka-framework/docs/guides/api/verify-response-schema)
 - UI:
   - Web:
-    - [How to configure Boyka for Web Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/web/setup-config)
-    - [How to create page object for Web?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/web/create-page-object)
+    - [How to configure Boyka for Web Automation?](https://boykaframework.github.io/docs/guides/ui/web/setup-config)
+    - [How to create page object for Web?](https://boykaframework.github.io/docs/guides/ui/web/create-page-object)
   - Android:
-    - [How to configure Boyka for Android Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/android/setup-config)
-    - [How to update existing page object with Android locators?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/android/create-page-object)
+    - [How to configure Boyka for Android Automation?](https://boykaframework.github.io/docs/guides/ui/android/setup-config)
+    - [How to update existing page object with Android locators?](https://boykaframework.github.io/docs/guides/ui/android/create-page-object)
   - iOS:
-    - [How to configure Boyka for iOS Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/ios/setup-config)
-    - [How to update existing page object for iOS locators?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/ios/create-page-object)
-  - [How to create common application action class?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/page-action)
-  - [How to write test class using common action class?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/write-test)
+    - [How to configure Boyka for iOS Automation?](https://boykaframework.github.io/docs/guides/ui/ios/setup-config)
+    - [How to update existing page object for iOS locators?](https://boykaframework.github.io/docs/guides/ui/ios/create-page-object)
+  - [How to create common application action class?](https://boykaframework.github.io/docs/guides/ui/page-action)
+  - [How to write test class using common action class?](https://boykaframework.github.io/docs/guides/ui/write-test)
 
 ## 👾 Tech Stack
 
