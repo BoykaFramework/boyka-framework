@@ -9,7 +9,7 @@ const config: Config = {
   tagline:
     'Ultimate test automation framework for automating Web, Android, iOS and API applications',
   url: 'https://BoykaFramework.github.io',
-  baseUrl: '/',
+  baseUrl: '/boyka-framework/',
   deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
