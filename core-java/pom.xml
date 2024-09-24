@@ -28,7 +28,7 @@
     <url>https://git.new/boyka-githubk</url>
 
     <properties>
-        <selenium-webdriver.version>4.24.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.25.0</selenium-webdriver.version>
         <testng.version>7.10.2</testng.version>
         <appium-java-client.version>9.3.0</appium-java-client.version>
         <okhttp.version>4.12.0</okhttp.version>
@@ -37,15 +37,15 @@
         <google.guava.version>33.3.0-jre</google.guava.version>
         <google-truth.version>1.4.4</google-truth.version>
         <apache-commons-text.version>1.12.0</apache-commons-text.version>
-        <commons-io.version>2.16.1</commons-io.version>
+        <commons-io.version>2.17.0</commons-io.version>
         <json-path.version>2.9.0</json-path.version>
-        <log4j-core.version>2.23.1</log4j-core.version>
-        <log4j-api.version>2.23.1</log4j-api.version>
+        <log4j-core.version>2.24.0</log4j-core.version>
+        <log4j-api.version>2.24.0</log4j-api.version>
         <faker.version>2.3.1</faker.version>
         <jackson-dataformat-yaml.version>2.17.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.17.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <json-schema-validator.version>1.5.1</json-schema-validator.version>
+        <json-schema-validator.version>1.5.2</json-schema-validator.version>
         <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.10.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
@@ -79,7 +79,7 @@
         <jacoco.version>0.8.12</jacoco.version>
         <surefire-version>3.5.0</surefire-version>
         <nexus.version>1.7.0</nexus.version>
-        <maven.gpg.version>3.2.5</maven.gpg.version>
+        <maven.gpg.version>3.2.6</maven.gpg.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <allure-testng.version>2.29.0</allure-testng.version>
         <maven-failsafe.version>3.5.0</maven-failsafe.version>
