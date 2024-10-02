@@ -36,6 +36,7 @@ body:
         - iOS
         - Workflow
         - Documentations
+        - README
         - Issues / PR templates
         - Dependencies
         - NOT APPLICABLE
@@ -57,5 +58,14 @@ body:
       label: ✅ Expected Behavior
       placeholder: What were you expecting?
       description: Describe the expected behavior you were expecting.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-result
+    attributes:
+      label: ❌ Actual Behavior
+      placeholder: What actually happened?
+      description: Describe the actual behavior you encountered.
     validations:
       required: true
