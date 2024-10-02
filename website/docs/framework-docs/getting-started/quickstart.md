@@ -33,10 +33,20 @@ Here, you can give any project name of your choosing.
 
 When you execute this command, you will be asked a set of questions, based on which, the Boyka project will be setup.
 
+:::tip
+Read the questions very carefully and understand it, then reply with your answers
+:::
+
 A new folder of the project name which you provided to the command will be created which you can open in any IDE of your choosing.
 
-:::tip
+:::info
 It is recommended to use IntelliJ IDEA for writing your test.
+:::
+
+When you open the newly created project in IntelliJ, first do Maven refresh in the Maven Tab, Then build the project from the `Build` menu, when prompted to `Enable Lombok Annotation processing`, click on that button. That's it!
+
+:::tip
+If you had selected to generate sample tests option in the `boyka init` command execution, then you can refer to the tests, how it is structured and what methods are being used, and create your own tests.
 :::
 
 ## 💪 Using manual approach

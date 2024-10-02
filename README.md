@@ -42,6 +42,27 @@
 
 <br />
 
+## 🖱️ One command Boyka project setup
+
+First you need to install [Boyka command line assistant](https://github.com/BoykaFramework/boyka-cli) by running the following command:
+
+```shell
+npm i -g @boykaframework/boyka-cli
+```
+
+Once it is installed, run the following command to setup Boyka project:
+
+```shell
+boyka init [project-name]
+```
+
+When you execute this command, you will be prompted by a set of questions which you must answer to setup the Boyka project with Maven and Java 17.
+
+> [!TIP]
+> This will only take few seconds.
+
+## 👜 Resources
+
 - [🤔 What is Boyka Framework?](https://BoykaFramework.github.io/boyka-framework/docs/intro#what-is-boyka-framework)
 - [💡 Why Boyka Framework was created?](https://BoykaFramework.github.io/boyka-framework/docs/intro#why-boyka-framework-was-created)
 - [🎯 Features](https://BoykaFramework.github.io/boyka-framework/docs/intro#features)
