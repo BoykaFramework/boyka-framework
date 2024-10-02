@@ -34,16 +34,16 @@
         <okhttp.version>4.12.0</okhttp.version>
         <lombok.version>1.18.34</lombok.version>
         <google-gson.version>2.11.0</google-gson.version>
-        <google.guava.version>33.3.0-jre</google.guava.version>
+        <google.guava.version>33.3.1-jre</google.guava.version>
         <google-truth.version>1.4.4</google-truth.version>
         <apache-commons-text.version>1.12.0</apache-commons-text.version>
         <commons-io.version>2.17.0</commons-io.version>
         <json-path.version>2.9.0</json-path.version>
-        <log4j-core.version>2.24.0</log4j-core.version>
-        <log4j-api.version>2.24.0</log4j-api.version>
+        <log4j-core.version>2.24.1</log4j-core.version>
+        <log4j-api.version>2.24.1</log4j-api.version>
         <faker.version>2.3.1</faker.version>
-        <jackson-dataformat-yaml.version>2.17.2</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.17.2</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.18.0</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.18.0</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>1.5.2</json-schema-validator.version>
         <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
@@ -54,7 +54,7 @@
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.5.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.18.1</checkstyle.version>
+        <checkstyle.version>10.18.2</checkstyle.version>
         <aspectj.version>1.9.22.1</aspectj.version>
         <poi.version>5.3.0</poi.version>
         <suite-name>testng-api</suite-name>
@@ -79,11 +79,11 @@
         <jacoco.version>0.8.12</jacoco.version>
         <surefire-version>3.5.0</surefire-version>
         <nexus.version>1.7.0</nexus.version>
-        <maven.gpg.version>3.2.6</maven.gpg.version>
+        <maven.gpg.version>3.2.7</maven.gpg.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <allure-testng.version>2.29.0</allure-testng.version>
         <maven-failsafe.version>3.5.0</maven-failsafe.version>
-        <central.sonatype>0.5.0</central.sonatype>
+        <central.sonatype>0.6.0</central.sonatype>
     </properties>
 
     <organization>
