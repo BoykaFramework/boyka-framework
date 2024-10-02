@@ -74,7 +74,6 @@ public class ClickableActions extends FingersActions implements IClickableAction
             .getApplication ()
             .getType () == WEB && session.getPlatformType () == IOS)) {
             pause (this.delaySetting.getBeforeClick ());
-            scrollIntoView ();
             performElementAction (WebElement::click, this.locator);
         } else {
             tap ();

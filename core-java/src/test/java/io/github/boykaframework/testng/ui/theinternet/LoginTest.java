@@ -16,17 +16,17 @@
 
 package io.github.boykaframework.testng.ui.theinternet;
 
+import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.testng.ui.theinternet.pages.LoginPage.loginPage;
 import static java.text.MessageFormat.format;
 
-import io.github.boykaframework.actions.device.DeviceActions;
-import io.github.boykaframework.actions.drivers.NavigateActions;
-import io.github.boykaframework.actions.drivers.WindowActions;
-import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -49,8 +49,7 @@ public class LoginTest {
      */
     @AfterMethod
     public void afterMethod (final ITestResult result) {
-        WindowActions.onWindow ()
-            .takeScreenshot ();
+        onWindow ().takeScreenshot ();
     }
 
     /**
@@ -63,10 +62,8 @@ public class LoginTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createSession (format ("LoginTest-{0}", platformType), platformType, driverKey);
-        DeviceActions.onDevice ()
-            .startRecording ();
-        NavigateActions.navigate ()
-            .to (URL);
+        onDevice ().startRecording ();
+        navigate ().to (URL);
     }
 
     /**
@@ -74,17 +71,14 @@ public class LoginTest {
      */
     @AfterClass (description = "Tear down test class")
     public void tearDownClass () {
-        DeviceActions.onDevice ()
-            .stopRecording ();
+        onDevice ().stopRecording ();
         clearSession ();
     }
 
     @Test (description = "Test Login Flow")
     public void testLogin () {
-        TextBoxActions.onTextBox (loginPage ().getUserName ())
-            .enterText ("tomsmith");
-        TextBoxActions.onTextBox (loginPage ().getPassword ())
-            .enterText ("SuperSecretPassword!");
+        onTextBox (loginPage ().getUserName ()).enterText ("tomsmith");
+        onTextBox (loginPage ().getPassword ()).enterText ("SuperSecretPassword!");
         withMouse (loginPage ().getLogin ()).click ();
         onElement (loginPage ().getMessage ()).verifyText ()
             .contains ("You logged into a secure area!");
