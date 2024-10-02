@@ -114,7 +114,7 @@ public class ElementActions implements IElementActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Checking if element located by: {} is displayed", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onIsDisplayed (this.locator));
-        return LOGGER.traceExit (getElementAttribute (WebElement::isDisplayed, this.locator, false));
+        return LOGGER.traceExit (displayed ());
     }
 
     @Override
@@ -138,7 +138,11 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Scrolling element located by [{}] into view", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onScrollIntoView (this.locator));
         pause (this.delaySetting.getBeforeMouseMove ());
-        performElementAction (e -> withDriver ().executeScript ("arguments[0].scrollIntoView(true);", e), this.locator);
+        performElementAction (e -> {
+            if (!displayed ()) {
+                withDriver ().executeScript ("arguments[0].scrollIntoView(true);", e);
+            }
+        }, this.locator);
     }
 
     @Override
@@ -204,5 +208,9 @@ public class ElementActions implements IElementActions {
      */
     protected String getAttributeValue (final String attribute) {
         return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
+    }
+
+    private boolean displayed () {
+        return getElementAttribute (WebElement::isDisplayed, this.locator, false);
     }
 }

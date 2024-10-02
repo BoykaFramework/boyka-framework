@@ -354,11 +354,6 @@
                     <version>${maven.gpg.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>${nexus.version}</version>
-                </plugin>
-                <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
                     <version>${central.sonatype}</version>
@@ -479,7 +474,7 @@
                     <properties>
                         <property>
                             <name>usedefaultlisteners</name>
-                            <value>false</value>
+                            <value>true</value>
                         </property>
                     </properties>
                     <systemPropertyVariables>
@@ -585,6 +580,12 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
                             <argLine>${failsafe.jacoco.args}</argLine>
+                            <properties>
+                                <property>
+                                    <name>usedefaultlisteners</name>
+                                    <value>true</value>
+                                </property>
+                            </properties>
                             <suiteXmlFiles>
                                 <suiteXmlFile>${suite-xml}</suiteXmlFile>
                             </suiteXmlFiles>

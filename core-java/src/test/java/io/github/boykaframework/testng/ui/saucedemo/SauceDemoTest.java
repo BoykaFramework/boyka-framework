@@ -17,13 +17,13 @@
 package io.github.boykaframework.testng.ui.saucedemo;
 
 import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
+import static io.github.boykaframework.actions.drivers.ContextActions.withContext;
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static java.text.MessageFormat.format;
 
-import io.github.boykaframework.actions.drivers.ContextActions;
 import io.github.boykaframework.enums.PlatformType;
 import io.github.boykaframework.exception.FrameworkError;
 import io.github.boykaframework.testng.ui.saucedemo.actions.SauceDemoActions;
@@ -106,8 +106,7 @@ public class SauceDemoTest {
      */
     @Test (description = "Test context switching in Native app", dependsOnMethods = "testSignOut", expectedExceptions = FrameworkError.class)
     public void testContextSwitching () {
-        ContextActions.withContext ()
-            .switchToWebView ("WEBVIEW");
+        withContext ().switchToWebView ("WEBVIEW");
     }
 
     /**
