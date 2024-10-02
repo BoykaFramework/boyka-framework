@@ -17,14 +17,14 @@
 package io.github.boykaframework.testng.ui.theinternet;
 
 import static com.google.common.truth.Truth.assertWithMessage;
+import static io.github.boykaframework.actions.drivers.CookieActions.withCookies;
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.testng.ui.theinternet.pages.HomePage.homePage;
 
-import io.github.boykaframework.actions.drivers.CookieActions;
-import io.github.boykaframework.actions.drivers.NavigateActions;
-import io.github.boykaframework.actions.drivers.WindowActions;
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -50,10 +50,8 @@ public class CookiesTest {
     @Parameters ({ "platformType", "driverKey" })
     public void setupClass (final PlatformType platformType, final String driverKey) {
         createSession ("CookiesTest", platformType, driverKey);
-        WindowActions.onWindow ()
-            .minimize ();
-        NavigateActions.navigate ()
-            .to (URL);
+        onWindow ().minimize ();
+        navigate ().to (URL);
         withMouse (homePage ().link ("JavaScript Alerts")).click ();
     }
 
@@ -70,10 +68,8 @@ public class CookiesTest {
      */
     @Test (description = "Verify delete all cookies", priority = 3)
     public void testDeleteAllCookies () {
-        CookieActions.withCookies ()
-            .deleteAll ();
-        assertWithMessage ("Cookie size").that (CookieActions.withCookies ()
-                .cookies ()
+        withCookies ().deleteAll ();
+        assertWithMessage ("Cookie size").that (withCookies ().cookies ()
                 .size ())
             .isEqualTo (0);
     }
@@ -83,13 +79,10 @@ public class CookiesTest {
      */
     @Test (description = "Tests delete of single cookie", priority = 2)
     public void testDeleteSingleCookie () {
-        final var cookies = CookieActions.withCookies ()
-            .cookies ();
+        final var cookies = withCookies ().cookies ();
         final var cookieCount = cookies.size ();
-        CookieActions.withCookies ()
-            .delete (cookies.get (0));
-        assertWithMessage ("Cookie Size").that (CookieActions.withCookies ()
-                .cookies ()
+        withCookies ().delete (cookies.get (0));
+        assertWithMessage ("Cookie Size").that (withCookies ().cookies ()
                 .size ())
             .isEqualTo (cookieCount - 1);
     }
@@ -99,11 +92,9 @@ public class CookiesTest {
      */
     @Test (description = "Test get cookie", priority = 1)
     public void testGetCookie () {
-        final var cookie = CookieActions.withCookies ()
-            .cookies ()
+        final var cookie = withCookies ().cookies ()
             .get (0);
-        assertWithMessage ("Cookie Name").that (CookieActions.withCookies ()
-                .cookie (cookie)
+        assertWithMessage ("Cookie Name").that (withCookies ().cookie (cookie)
                 .getName ())
             .isEqualTo (cookie);
     }

@@ -18,8 +18,10 @@ package io.github.boykaframework.testng.ui.jiomeet;
 
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 import static io.github.boykaframework.manager.ParallelSession.clearAllSessions;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
@@ -31,8 +33,6 @@ import static io.github.boykaframework.testng.ui.jiomeet.pages.SignInPage.signIn
 import static io.github.boykaframework.testng.ui.jiomeet.pages.StartMeetingPage.startMeetingPage;
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 
-import io.github.boykaframework.actions.drivers.WindowActions;
-import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -50,8 +50,7 @@ public class JioMeetTest {
     @AfterMethod
     public void afterMethod (final ITestResult result) {
         if (!result.isSuccess ()) {
-            WindowActions.onWindow ()
-                .takeScreenshot ();
+            onWindow ().takeScreenshot ();
         }
     }
 
@@ -96,8 +95,7 @@ public class JioMeetTest {
         switchPersona (GUEST_PERSONA);
         navigate ().to (meetingUrl);
 
-        TextBoxActions.onTextBox (guestJoinPage ().getGuestName ())
-            .enterText (GUEST_PERSONA);
+        onTextBox (guestJoinPage ().getGuestName ()).enterText (GUEST_PERSONA);
         withMouse (guestJoinPage ().getJoinButton ()).click ();
 
         withDriver ().waitUntil (invisibilityOfElementLocated (homePage ().getLoader ()
@@ -118,11 +116,9 @@ public class JioMeetTest {
         navigate ().to ("https://jiomeetpro.jio.com/home");
 
         withMouse (homePage ().getSignIn ()).click ();
-        TextBoxActions.onTextBox (signInPage ().getEmail ())
-            .enterText ("test-user1@mailinator.com");
+        onTextBox (signInPage ().getEmail ()).enterText ("test-user1@mailinator.com");
         withMouse (signInPage ().getProceedButton ()).click ();
-        TextBoxActions.onTextBox (signInPage ().getPassword ())
-            .enterText ("Admin@1234");
+        onTextBox (signInPage ().getPassword ()).enterText ("Admin@1234");
         withMouse (signInPage ().getSignInButton ()).click ();
     }
 
