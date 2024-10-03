@@ -449,30 +449,11 @@ See the example in [sample configuration file](#config-sample).
 | `page_load_strategy` | Page loading strategy (all in capital letters) | [`PageLoadStrategy`](https://www.selenium.dev/documentation/webdriver/drivers/options/#pageloadstrategy) | `NORMAL` |
 
 :::info
-For fields `user_name` and `password`, you can use placeholder variables in the following format:
+You can use Environment variables for `user_name` and `password` by using `${env:ENV_NAME}` format
+:::
 
-| Input type | Variable sample |
-| ---------- | --------------- |
-| Base64 Decoder | `${base64Decoder:SGVsbG9Xb3JsZCE=}` |
-| Base64 Encoder | `${base64Encoder:HelloWorld!}` |
-| Java Constant | `${const:java.awt.event.KeyEvent.VK_ESCAPE}` |
-| Date | `${date:yyyy-MM-dd}` |
-| DNS | `${dns:address\|apache.org}` |
-| Environment Variable | `${env:USERNAME}` |
-| File Content | `${file:UTF-8:src/test/resources/document.properties}` |
-| Java | `${java:version}` |
-| Localhost | `${localhost:canonical-name}` |
-| Properties File | `${properties:src/test/resources/document.properties::mykey}` |
-| Resource Bundle | `${resourceBundle:org.example.testResourceBundleLookup:mykey}` |
-| Script | `${script:javascript:3 + 4}` |
-| System Property | `${sys:user.dir}` |
-| URL Decoder | `${urlDecoder:Hello%20World%21}` |
-| URL Encoder | `${urlEncoder:Hello World!}` |
-| URL Content (HTTP) | `${url:UTF-8:http://www.apache.org}` |
-| URL Content (HTTPS) | `${url:UTF-8:https://www.apache.org}` |
-| URL Content (File) | `${url:UTF-8:file:///${sys:user.dir}/src/test/resources/document.properties}` |
-| XML XPath | `${xml:src/test/resources/document.xml:/root/path/to/node}` |
-
+:::tip
+When you use Boyka command line assistant to configure your test to run on any Cloud providers using `boyka config [web | api | android | ios] [config_name]` command, then it is **MANDATORY** to provide Environment variable names when prompted for user name and password
 :::
 
 #### Mobile Configuration {#mobile-config}
@@ -520,6 +501,14 @@ For fields `user_name` and `password`, you can use placeholder variables in the 
 | `level` | Log level | [`LogLevel`](#log-level) | `INFO` |
 | `local_timezone` | Use local timezone for timestamps | `boolean` | `false` |
 | `timestamp` | Show timestamps in console output | `boolean` | `false` |
+
+:::info
+You can use Environment variables for `user_name` and `password` by using `${env:ENV_NAME}` format
+:::
+
+:::tip
+When you use Boyka command line assistant to configure your test to run on any Cloud providers using `boyka config [web | api | android | ios] [config_name]` command, then it is **MANDATORY** to provide Environment variable names when prompted for user name and password
+:::
 
 ##### Mobile Device Configuration {#device-config}
 
