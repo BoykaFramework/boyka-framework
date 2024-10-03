@@ -3,7 +3,7 @@ sidebar_position: 1
 title: 🚀 Quick start
 ---
 
-## 🤖 Using automated approach
+## 🤖 Using automated approach (Recommended)
 
 ### 🚩 Pre-requisites
 
@@ -34,7 +34,7 @@ Here, you can give any project name of your choosing.
 When you execute this command, you will be asked a set of questions, based on which, the Boyka project will be setup.
 
 :::tip
-Read the questions very carefully and understand it, then reply with your answers
+While answering the questions, make sure you read it carefully and reply accordingly to your requirement.
 :::
 
 A new folder of the project name which you provided to the command will be created which you can open in any IDE of your choosing.
@@ -43,10 +43,10 @@ A new folder of the project name which you provided to the command will be creat
 It is recommended to use IntelliJ IDEA for writing your test.
 :::
 
-When you open the newly created project in IntelliJ, first do Maven refresh in the Maven Tab, Then build the project from the `Build` menu, when prompted to `Enable Lombok Annotation processing`, click on that button. That's it!
+Open the newly created project in IntelliJ IDE and do a Maven refresh using the `Maven Tab`. Next, build the project using the `Build menu`, when prompted `Enable Lombok Annotation Processing`, click to enable it.
 
 :::tip
-If you had selected to generate sample tests option in the `boyka init` command execution, then you can refer to the tests, how it is structured and what methods are being used, and create your own tests.
+If the project is set using Boyka CLI assistant and the sample tests have been generated, refer those tests for code walkthrough and write your own tests using it as an example.
 :::
 
 ## 💪 Using manual approach
@@ -69,17 +69,12 @@ You can also enforce the Java version in `pom.xml` file as shown below.
 
 ### ⬇️ Add Dependency
 
-Add the following dependency to your `pom.xml` file:
-
-```xml title="pom.xml"
-<dependency>
-  <groupId>io.github.boykaframework</groupId>
-  <artifactId>boyka-framework</artifactId>
-  <version>2.1.0</version>
-</dependency>
-```
+:::info
+Use the latest version from [Maven Central][maven-central] and add it to your `pom.xml`
+:::
 
 [jdk17]: https://adoptium.net/temurin/releases/
 [maven]: https://maven.apache.org/install.html
 [maven-download]: https://maven.apache.org/download.cgi
 [node]: https://nodejs.org/en/download/package-manager
+[maven-central]: https://mvnrepository.com/artifact/io.github.boykaframework/boyka-framework
