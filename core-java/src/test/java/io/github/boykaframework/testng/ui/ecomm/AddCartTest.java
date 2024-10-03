@@ -54,6 +54,7 @@ public class AddCartTest {
     @Test
     public void testAddCart () {
         navigate ().to ("https://ecommerce-playground.lambdatest.io/");
+        withMouse (homePage ().getProduct1 ()).scrollIntoView ();
         withMouse (homePage ().getProduct1 ()).hover ();
         withMouse (homePage ().getAddToCart ()).click ();
         withMouse (homePage ().getCloseToast ()).click ();
