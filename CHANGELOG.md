@@ -1,5 +1,21 @@
 
 
+
+## 2.1.1 (2024-10-03)
+
+#### :bug: Bug Fix
+* [#902](https://github.com/BoykaFramework/boyka-framework/pull/902) fix(website): :bug: fixing issues in the documentations ([@WasiqB](https://github.com/WasiqB))
+* [#903](https://github.com/BoykaFramework/boyka-framework/pull/903) fix(java): :bug: fixed issue when clicking hovered element ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#899](https://github.com/BoykaFramework/boyka-framework/pull/899) build(deps): bump the dependencies group in /core-java with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#900](https://github.com/BoykaFramework/boyka-framework/pull/900) build(deps-dev): bump the dependencies group with 7 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#898](https://github.com/BoykaFramework/boyka-framework/pull/898) build(deps-dev): bump the dependencies group across 1 directory with 14 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#897](https://github.com/BoykaFramework/boyka-framework/pull/897) build(deps): bump the dependencies group across 1 directory with 6 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.1.0 (2024-09-08)
 
 #### :rocket: New Feature
