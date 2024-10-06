@@ -46,6 +46,7 @@ public class WebSetting {
     private List<String>        browserOptions;
     private Map<String, Object> capabilities;
     private Dimension           customSize       = new Dimension (1920, 1080);
+    private Map<String, Object> experimentalOptions;
     private boolean             headless         = true;
     private boolean             highlight        = false;
     private String              host;

@@ -23,8 +23,8 @@
   <a href="https://central.sonatype.com/artifact/io.github.boykaframework/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/io.github.boykaframework/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
   </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v1.2.0">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v1.2.0/total?color=brightgreen&label=Downloads%20for%20v1.2.0&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v2.1.1">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v2.1.1/total?color=brightgreen&label=Downloads%20for%20v2.1.1&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />

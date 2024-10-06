@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "1.2.0",
+  "version": "2.1.1",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -45,5 +45,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "pnpm@9.11.0"
 }
