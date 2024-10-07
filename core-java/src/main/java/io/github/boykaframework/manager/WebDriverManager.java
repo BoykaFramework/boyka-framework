@@ -128,6 +128,7 @@ class WebDriverManager implements IDriverManager {
         final var options = new FirefoxOptions ();
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
         ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        ofNullable (webSetting.getExperimentalOptions ()).ifPresent (l -> l.forEach (options::addPreference));
         if (webSetting.getTarget () == LOCAL && isNull (webSetting.getCapabilities ())) {
             options.setBrowserVersion (webSetting.getVersion ());
         }
@@ -202,6 +203,7 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
         ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        ofNullable (webSetting.getExperimentalOptions ()).ifPresent (l -> l.forEach (options::setExperimentalOption));
         if (webSetting.isHeadless ()) {
             options.addArguments (HEADLESS);
         }

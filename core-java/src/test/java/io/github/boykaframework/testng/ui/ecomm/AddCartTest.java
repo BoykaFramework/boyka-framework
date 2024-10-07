@@ -20,6 +20,7 @@ import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.testng.ui.ecomm.pages.HomePage.homePage;
@@ -54,6 +55,10 @@ public class AddCartTest {
     @Test
     public void testAddCart () {
         navigate ().to ("https://ecommerce-playground.lambdatest.io/");
+
+        onTextBox (homePage ().getSearch ()).enterText ("HTC");
+        withMouse (homePage ().getSearchButton ()).click ();
+
         withMouse (homePage ().getProduct1 ()).scrollIntoView ();
         withMouse (homePage ().getProduct1 ()).hover ();
         withMouse (homePage ().getAddToCart ()).click ();

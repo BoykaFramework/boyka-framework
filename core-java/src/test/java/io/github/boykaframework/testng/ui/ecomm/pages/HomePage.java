@@ -17,6 +17,7 @@
 package io.github.boykaframework.testng.ui.ecomm.pages;
 
 import static org.openqa.selenium.By.cssSelector;
+import static org.openqa.selenium.By.name;
 
 import io.github.boykaframework.builders.Locator;
 import lombok.Getter;
@@ -40,21 +41,29 @@ public class HomePage {
         return HOME_PAGE;
     }
 
-    private final Locator addToCart  = Locator.buildLocator ()
+    private final Locator addToCart    = Locator.buildLocator ()
         .name ("Add To Cart")
         .web (cssSelector ("div.product-action button[title=\"Add to Cart\"]"))
         .build ();
-    private final Locator cartCount  = Locator.buildLocator ()
+    private final Locator cartCount    = Locator.buildLocator ()
         .name ("Cart Count")
         .web (cssSelector ("div.cart-icon span"))
         .build ();
-    private final Locator closeToast = Locator.buildLocator ()
+    private final Locator closeToast   = Locator.buildLocator ()
         .name ("Close Toast")
         .web (cssSelector ("button[data-dismiss=\"toast\"]"))
         .build ();
-    private final Locator product1   = Locator.buildLocator ()
-        .web (cssSelector ("div.entry-section div[aria-label=\"1 / 10\"] div.product-thumb-top"))
+    private final Locator product1     = Locator.buildLocator ()
+        .web (cssSelector ("img[title=\"HTC Touch HD\"]"))
         .name ("Product 1")
+        .build ();
+    private final Locator search       = Locator.buildLocator ()
+        .name ("Sear Box")
+        .web (name ("search"))
+        .build ();
+    private final Locator searchButton = Locator.buildLocator ()
+        .name ("Search button")
+        .web (cssSelector ("div.search-button button"))
         .build ();
 
     private HomePage () {

@@ -447,6 +447,8 @@ See the example in [sample configuration file](#config-sample).
 | `resize` | How to resize the window initial state | [`WindowResizeType`](#window-resize-type) | `WindowResizeType.NORMAL` |
 | `custom_size` | Custom window size, when `resize` option is selected as `CUSTOM` | `Dimension` | `1920x1080` |
 | `page_load_strategy` | Page loading strategy (all in capital letters) | [`PageLoadStrategy`](https://www.selenium.dev/documentation/webdriver/drivers/options/#pageloadstrategy) | `NORMAL` |
+| `browser_options` | An array of browser specific arguments | `string[]` | `null` |
+| `experimental_options` | A key-value pair of Browsers Experimental options | `Map<string, object>` | `null` |
 
 :::info
 You can use Environment variables for `user_name` and `password` by using `${env:ENV_NAME}` format
@@ -454,6 +456,12 @@ You can use Environment variables for `user_name` and `password` by using `${env
 
 :::tip
 When you use Boyka command line assistant to configure your test to run on any Cloud providers using `boyka config [web | api | android | ios] [config_name]` command, then it is **MANDATORY** to provide Environment variable names when prompted for user name and password
+:::
+
+:::warning
+Browser options and Experimental options is not supported for **Safari browser**.
+
+Please raise a [new feature request](https://github.com/BoykaFramework/boyka-framework/issues/new/choose) along with sample example test and options support that is required
 :::
 
 #### Mobile Configuration {#mobile-config}
