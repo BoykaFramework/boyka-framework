@@ -460,6 +460,8 @@ When you use Boyka command line assistant to configure your test to run on any C
 
 :::warning
 Browser options and Experimental options is not supported for **Safari browser**.
+
+Please raise a [new feature request](https://github.com/BoykaFramework/boyka-framework/issues/new/choose) along with sample example test and options support that is required
 :::
 
 #### Mobile Configuration {#mobile-config}
