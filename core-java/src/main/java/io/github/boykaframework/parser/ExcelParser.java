@@ -22,6 +22,7 @@ import static io.github.boykaframework.enums.Message.ERROR_NO_CTOR;
 import static io.github.boykaframework.enums.Message.ERROR_READING_FILE;
 import static io.github.boykaframework.enums.Message.ERROR_SETTER_NOT_FOUND;
 import static io.github.boykaframework.enums.Message.PATH_NOT_DIRECTORY;
+import static io.github.boykaframework.enums.Message.UNSUPPORTED_EXCEL_VALUE_FORMAT;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
@@ -42,7 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import io.github.boykaframework.utils.ErrorHandler;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -137,12 +137,15 @@ public class ExcelParser implements IDataParser {
                     final var value = rowData[col];
                     methodName = format ("set{0}", capitalize (header));
                     if (!isNull (value)) {
+                        if (value instanceof Boolean) {
+                            System.out.println ();
+                        }
                         setFieldValue (dataObject, value, methodName);
                     }
                 }
                 result.add (dataObject);
             } catch (final InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                ErrorHandler.handleAndThrow (ERROR_CALLING_SETTER, e, format ("set{0}", capitalize (header)), dataCtor.getClass ()
+                handleAndThrow (ERROR_CALLING_SETTER, e, format ("set{0}", capitalize (header)), dataCtor.getClass ()
                     .getSimpleName ());
             }
         }
@@ -162,11 +165,17 @@ public class ExcelParser implements IDataParser {
             } else if (value instanceof Double) {
                 method = dataClass.getMethod (methodName, Double.class);
                 method.invoke (dataObject, Double.parseDouble (value.toString ()));
+            } else if (value instanceof Boolean) {
+                method = dataClass.getMethod (methodName, Boolean.class);
+                method.invoke (dataObject, Boolean.parseBoolean (value.toString ()));
+            } else {
+                throwError (UNSUPPORTED_EXCEL_VALUE_FORMAT, value.getClass ()
+                    .getSimpleName ());
             }
         } catch (final IllegalAccessException | InvocationTargetException e) {
-            ErrorHandler.handleAndThrow (ERROR_CALLING_SETTER, e, methodName, dataClass.getSimpleName ());
+            handleAndThrow (ERROR_CALLING_SETTER, e, methodName, dataClass.getSimpleName ());
         } catch (final NoSuchMethodException e) {
-            ErrorHandler.handleAndThrow (ERROR_SETTER_NOT_FOUND, e, methodName, dataClass.getSimpleName (), value.getClass ()
+            handleAndThrow (ERROR_SETTER_NOT_FOUND, e, methodName, dataClass.getSimpleName (), value.getClass ()
                 .getSimpleName ());
         }
     }

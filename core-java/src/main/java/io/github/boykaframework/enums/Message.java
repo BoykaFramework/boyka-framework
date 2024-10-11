@@ -279,6 +279,11 @@ public enum Message {
      */
     TEST_ERROR ("Test error..."),
     /**
+     * Unsupported Excel value format.
+     */
+    UNSUPPORTED_EXCEL_VALUE_FORMAT (
+        "The Excel value format of ({0}) is not supported. Please create a GitHub issue " + "with details to handle the same."),
+    /**
      * User name required for cloud execution
      */
     USER_NAME_REQUIRED_FOR_CLOUD ("User name is required for cloud execution...");

@@ -50,6 +50,7 @@ public final class BookingDataProviders {
     public static Iterator<Object[]> getBookingDataObject () {
         final var rows = DATA.get (BookingTestData.class);
         return rows.stream ()
+            .filter (BookingTestData::getEnabled)
             .map (d -> new Object[] { d })
             .toList ()
             .iterator ();
