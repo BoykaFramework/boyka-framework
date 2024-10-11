@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 import io.github.boykaframework.actions.interfaces.data.IDataRow;
+import lombok.ToString;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -32,6 +33,7 @@ import org.apache.logging.log4j.Logger;
  * @author Wasiq Bhamla
  * @since 28-Nov-2023
  */
+@ToString
 class DataRow implements IDataRow {
     private static final Logger LOGGER = getLogger ();
 

@@ -22,12 +22,13 @@ import lombok.ToString;
 @ToString
 @Data
 public class BookingTestData {
-    private String additionalNeeds;
-    private String checkInDate;
-    private String checkOutDate;
-    private String depositPaid;
-    private String firstName;
-    private String lastName;
-    private Double srNo;
-    private Double totalPrice;
+    private String  additionalNeeds;
+    private String  checkInDate;
+    private String  checkOutDate;
+    private String  depositPaid;
+    private Boolean enabled;
+    private String  firstName;
+    private String  lastName;
+    private Double  srNo;
+    private Double  totalPrice;
 }
