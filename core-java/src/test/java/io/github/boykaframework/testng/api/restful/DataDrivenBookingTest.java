@@ -80,13 +80,14 @@ public class DataDrivenBookingTest {
 
     @Test (dataProviderClass = BookingDataProviders.class, dataProvider = "getBookingDataObject")
     public void testBookingObject (final BookingTestData bookingTestData) {
-        final var depositPaid = bookingTestData.getDepositPaid ();
+        final var depositPaid = bookingTestData.getDepositPaid ()
+            .equalsIgnoreCase ("yes");
         final var bookingData = BookingData.builder ()
             .firstname (bookingTestData.getFirstName ())
             .lastname (bookingTestData.getLastName ())
             .totalprice (bookingTestData.getTotalPrice ()
                 .intValue ())
-            .depositpaid (Boolean.parseBoolean (depositPaid))
+            .depositpaid (depositPaid)
             .bookingdates (BookingDates.builder ()
                 .checkin (bookingTestData.getCheckInDate ())
                 .checkout (bookingTestData.getCheckOutDate ())

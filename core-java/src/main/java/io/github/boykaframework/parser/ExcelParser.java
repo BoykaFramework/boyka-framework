@@ -137,9 +137,6 @@ public class ExcelParser implements IDataParser {
                     final var value = rowData[col];
                     methodName = format ("set{0}", capitalize (header));
                     if (!isNull (value)) {
-                        if (value instanceof Boolean) {
-                            System.out.println ();
-                        }
                         setFieldValue (dataObject, value, methodName);
                     }
                 }
