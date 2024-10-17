@@ -19,6 +19,10 @@ This method will get executed after getting the current window handle.
 
 This method will get executed after making the window full screen.
 
+## `onGetScreenshot` {#on-get-screenshot}
+
+This method will get executed after getting the screenshot content.
+
 ## `onGetTitle` {#on-get-title}
 
 This method will get executed after getting the current window title.
