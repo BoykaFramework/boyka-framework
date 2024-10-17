@@ -45,6 +45,16 @@ import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 onWindow ().fullScreen ();
 ```
 
+### `getScreenshot` {#get-screenshot}
+
+This method will get the screenshot of the current page and return its Base64 encoded string.
+
+```java
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
+. . .
+System.out.println (onWindow ().getScreenshot ());
+```
+
 ### `maximize`
 
 This method will maximize the browser window.
