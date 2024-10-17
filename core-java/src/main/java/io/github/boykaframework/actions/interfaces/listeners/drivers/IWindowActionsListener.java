@@ -48,6 +48,13 @@ public interface IWindowActionsListener extends BoykaListener {
     }
 
     /**
+     * Handles Get screenshot method.
+     */
+    default void onGetScreenshot () {
+        // not implemented.
+    }
+
+    /**
      * Handles get title method.
      */
     default void onGetTitle () {

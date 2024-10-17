@@ -47,6 +47,13 @@ public interface IWindowActions {
     void fullScreen ();
 
     /**
+     * Gets the base 64 content of the screenshot.
+     *
+     * @return Image content in Base64 encoded string
+     */
+    String getScreenshot ();
+
+    /**
      * Title of the browser.
      *
      * @return title of the browser

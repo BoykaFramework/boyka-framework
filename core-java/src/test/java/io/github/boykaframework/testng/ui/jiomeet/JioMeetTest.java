@@ -32,6 +32,7 @@ import static io.github.boykaframework.testng.ui.jiomeet.pages.MeetingPage.meeti
 import static io.github.boykaframework.testng.ui.jiomeet.pages.SignInPage.signInPage;
 import static io.github.boykaframework.testng.ui.jiomeet.pages.StartMeetingPage.startMeetingPage;
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
+import static org.testng.Reporter.log;
 
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.ITestResult;
@@ -49,6 +50,7 @@ public class JioMeetTest {
 
     @AfterMethod
     public void afterMethod (final ITestResult result) {
+        log (onWindow ().getScreenshot ());
         if (!result.isSuccess ()) {
             onWindow ().takeScreenshot ();
         }

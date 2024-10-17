@@ -30,6 +30,7 @@ import static java.util.Optional.ofNullable;
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.openqa.selenium.OutputType.BASE64;
 import static org.openqa.selenium.OutputType.FILE;
 
 import java.io.File;
@@ -41,6 +42,7 @@ import java.util.List;
 import com.google.common.truth.StringSubject;
 import io.github.boykaframework.actions.interfaces.drivers.IWindowActions;
 import io.github.boykaframework.actions.interfaces.listeners.drivers.IWindowActionsListener;
+import io.github.boykaframework.config.ui.UISetting;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.TakesScreenshot;
@@ -67,9 +69,12 @@ public class WindowActions implements IWindowActions {
     }
 
     private final IWindowActionsListener listener;
+    private final UISetting              setting;
 
     private WindowActions () {
         this.listener = getSession ().getListener (WINDOW_ACTION);
+        this.setting = getSession ().getSetting ()
+            .getUi ();
     }
 
     @Override
@@ -101,6 +106,22 @@ public class WindowActions implements IWindowActions {
             .window ()
             .fullscreen ());
         LOGGER.traceExit ();
+    }
+
+    @Override
+    public String getScreenshot () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting the screenshot content...");
+        final var screenshotSetting = this.setting.getScreenshot ();
+        if (!screenshotSetting.isEnabled ()) {
+            return EMPTY;
+        }
+        ofNullable (this.listener).ifPresent (IWindowActionsListener::onGetScreenshot);
+        final var content = getDriverAttribute (
+            driver -> ((TakesScreenshot) requireNonNull (driver, DRIVER_CANNOT_BE_NULL)).getScreenshotAs (BASE64),
+            EMPTY);
+        LOGGER.traceExit ();
+        return content;
     }
 
     @Override
@@ -176,15 +197,13 @@ public class WindowActions implements IWindowActions {
     @Override
     public void takeScreenshot () {
         LOGGER.info ("Taking the screenshot...");
-        final var setting = getSession ().getSetting ()
-            .getUi ()
-            .getScreenshot ();
-        if (!setting.isEnabled ()) {
+        final var screenshotSetting = this.setting.getScreenshot ();
+        if (!screenshotSetting.isEnabled ()) {
             return;
         }
-        final var path = setting.getPath ();
-        final var prefix = setting.getPrefix ();
-        final var extension = setting.getExtension ();
+        final var path = screenshotSetting.getPath ();
+        final var prefix = screenshotSetting.getPrefix ();
+        final var extension = screenshotSetting.getExtension ();
         final var date = new SimpleDateFormat ("yyyyMMdd-HHmmss");
         final var timeStamp = date.format (getInstance ().getTime ());
         final var fileName = "%s/%s-%s.%s";
@@ -195,10 +214,8 @@ public class WindowActions implements IWindowActions {
     public void takeScreenshot (final String fileName) {
         LOGGER.traceEntry ();
         LOGGER.info ("Taking screenshot and saving at [{}]...", fileName);
-        final var setting = getSession ().getSetting ()
-            .getUi ()
-            .getScreenshot ();
-        if (!setting.isEnabled ()) {
+        final var screenshotSetting = this.setting.getScreenshot ();
+        if (!screenshotSetting.isEnabled ()) {
             return;
         }
         performDriverAction (driver -> {
