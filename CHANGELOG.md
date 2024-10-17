@@ -1,6 +1,23 @@
 
 
 
+
+## 2.2.0 (2024-10-17)
+
+#### :rocket: New Feature
+* [#914](https://github.com/BoykaFramework/boyka-framework/pull/914) feat(java): :sparkles: added new screenshot method to get content ([@WasiqB](https://github.com/WasiqB))
+* [#912](https://github.com/BoykaFramework/boyka-framework/pull/912) feat(java): :sparkles: boolean values handled as test data in excel s… ([@mfaisalkhatri](https://github.com/mfaisalkhatri))
+* [#909](https://github.com/BoykaFramework/boyka-framework/pull/909) feat(java): :sparkles: added experimental options support for web ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#913](https://github.com/BoykaFramework/boyka-framework/pull/913) build(deps-dev): bump the dependencies group with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#910](https://github.com/BoykaFramework/boyka-framework/pull/910) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#911](https://github.com/BoykaFramework/boyka-framework/pull/911) build(deps-dev): bump the dependencies group with 7 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 2
+- Mohammad Faisal Khatri ([@mfaisalkhatri](https://github.com/mfaisalkhatri))
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.1.1 (2024-10-03)
 
 #### :bug: Bug Fix
