@@ -27,6 +27,10 @@ on:
         type: string
         description: Emulator / Simulator name
         default: Pixel_7_Pro
+      emulator-profile:
+        type: string
+        description: Emulator Profile Name
+        default: pixel_6_pro
       emulator-target:
         type: string
         description: Emulator target image
@@ -120,7 +124,7 @@ jobs:
           api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
-          profile: pixel_6_pro
+          profile: ${{ inputs.emulator-profile }}
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
