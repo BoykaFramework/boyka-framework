@@ -139,7 +139,7 @@ jobs:
       emulator-version: 34
       emulator-channel: canary
       emulator-arch: x86
-      emulator-target: aosp_atd
+      emulator-target: google_apis
       simulator-name: iPhone 15
       simulator-version: 17.5
 
