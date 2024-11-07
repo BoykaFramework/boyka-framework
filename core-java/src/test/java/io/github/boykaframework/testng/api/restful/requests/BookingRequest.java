@@ -17,12 +17,16 @@
 package io.github.boykaframework.testng.api.restful.requests;
 
 import static io.github.boykaframework.builders.ApiRequest.createRequest;
+import static io.github.boykaframework.enums.RequestMethod.DELETE;
+import static io.github.boykaframework.enums.RequestMethod.GET;
+import static io.github.boykaframework.enums.RequestMethod.PATCH;
+import static io.github.boykaframework.enums.RequestMethod.POST;
+import static io.github.boykaframework.enums.RequestMethod.PUT;
 import static io.github.boykaframework.testng.api.restful.data.AuthRequestData.getTokenData;
 import static java.text.MessageFormat.format;
 
 import io.github.boykaframework.actions.api.ApiActions;
 import io.github.boykaframework.builders.ApiRequest;
-import io.github.boykaframework.enums.RequestMethod;
 import io.github.boykaframework.testng.api.restful.pojo.BookingData;
 
 /**
@@ -32,8 +36,17 @@ import io.github.boykaframework.testng.api.restful.pojo.BookingData;
  * @since 28-Feb-2023
  */
 public final class BookingRequest {
+    private static final ApiRequest.ApiRequestBuilder COMMON_REQUEST;
+
+    static {
+        COMMON_REQUEST = createRequest ().header ("Accept", "application/json")
+            .header ("Cookie", format ("token={0}", generateToken ()))
+            .create ()
+            .toBuilder ();
+    }
+
     public static ApiRequest createBooking (final BookingData requestBody) {
-        return createRequest ().method (RequestMethod.POST)
+        return createRequest ().method (POST)
             .header ("Accept", "application/json")
             .path ("/booking")
             .bodyObject (requestBody)
@@ -41,16 +54,14 @@ public final class BookingRequest {
     }
 
     public static ApiRequest deleteBooking (final String id) {
-        return createRequest ().method (RequestMethod.DELETE)
-            .header ("Content-Type", "application/json")
-            .header ("Cookie", format ("token={0}", generateToken ()))
+        return COMMON_REQUEST.method (DELETE)
             .path ("/booking/${id}")
             .pathParam ("id", id)
             .create ();
     }
 
     public static ApiRequest getBooking (final String id) {
-        return createRequest ().method (RequestMethod.GET)
+        return createRequest ().method (GET)
             .header ("Accept", "application/json")
             .path ("/booking/${id}")
             .pathParam ("id", id)
@@ -58,9 +69,7 @@ public final class BookingRequest {
     }
 
     public static ApiRequest updateBooking (final String id, final BookingData requestBody) {
-        return createRequest ().method (RequestMethod.PUT)
-            .header ("Accept", "application/json")
-            .header ("Cookie", format ("token={0}", generateToken ()))
+        return COMMON_REQUEST.method (PUT)
             .path ("/booking/${id}")
             .bodyObject (requestBody)
             .pathParam ("id", id)
@@ -68,9 +77,7 @@ public final class BookingRequest {
     }
 
     public static ApiRequest updatePartialBooking (final String id, final BookingData requestBody) {
-        return createRequest ().method (RequestMethod.PATCH)
-            .header ("Accept", "application/json")
-            .header ("Cookie", format ("token={0}", generateToken ()))
+        return COMMON_REQUEST.method (PATCH)
             .path ("/booking/${id}")
             .bodyObject (requestBody)
             .pathParam ("id", id)
@@ -79,7 +86,7 @@ public final class BookingRequest {
 
     private static String generateToken () {
         final var generateTokenRequest = createRequest ().header ("Accept", "application/json")
-            .method (RequestMethod.POST)
+            .method (POST)
             .path ("/auth")
             .bodyObject (getTokenData ())
             .create ();

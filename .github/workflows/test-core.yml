@@ -92,7 +92,7 @@ jobs:
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-local
-      runs-on: macos-13
+      runs-on: macos-latest
 
   test-web-bs:
     needs:
@@ -129,7 +129,7 @@ jobs:
       - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos-12
+      runs-on: macos-latest
       suite-name: testng-mobile-local
       run-appium: true
       run-ios: true
@@ -139,8 +139,8 @@ jobs:
       emulator-channel: canary
       emulator-arch: x86
       emulator-target: aosp_atd
-      simulator-name: iPhone 14
-      simulator-version: 16.2
+      simulator-name: iPhone 15
+      simulator-version: 17.5
 
   # test-mobile-web:
   #   needs:

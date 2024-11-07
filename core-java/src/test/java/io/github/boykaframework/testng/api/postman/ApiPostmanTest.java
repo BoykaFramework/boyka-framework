@@ -16,14 +16,14 @@
 
 package io.github.boykaframework.testng.api.postman;
 
+import static io.github.boykaframework.actions.api.ApiActions.withRequest;
+import static io.github.boykaframework.builders.ApiRequest.createRequest;
 import static io.github.boykaframework.enums.ContentType.FORM_URLENCODED;
 import static io.github.boykaframework.enums.PlatformType.API;
 import static io.github.boykaframework.enums.RequestMethod.POST;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 
-import io.github.boykaframework.actions.api.ApiActions;
-import io.github.boykaframework.builders.ApiRequest;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -56,16 +56,14 @@ public class ApiPostmanTest {
      */
     @Test (description = "Test Form body POST request")
     public void testFormBodyRequest () {
-        final var request = ApiRequest.createRequest ()
-            .contentType (FORM_URLENCODED)
+        final var request = createRequest ().contentType (FORM_URLENCODED)
             .formBody ("strange", "boom")
             .formBody ("test", "abc")
             .method (POST)
             .path ("/post")
             .create ();
 
-        final var response = ApiActions.withRequest (request)
-            .execute ();
+        final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
     }

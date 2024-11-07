@@ -16,11 +16,11 @@
 
 package io.github.boykaframework.testng.others;
 
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 
-import io.github.boykaframework.actions.drivers.NavigateActions;
-import io.github.boykaframework.enums.PlatformType;
 import io.github.boykaframework.exception.FrameworkError;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -38,7 +38,7 @@ public class NavigationTest {
      */
     @BeforeClass
     public void setupClass () {
-        createSession (PlatformType.WEB, "test_chrome_no_base_url");
+        createSession (WEB, "test_chrome_no_base_url");
     }
 
     /**
@@ -54,7 +54,6 @@ public class NavigationTest {
      */
     @Test (description = "Test Empty base URL in config", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Base URL is not provided in the config...")
     public void testEmptyBrowserInConfig () {
-        NavigateActions.navigate ()
-            .toBaseUrl ();
+        navigate ().toBaseUrl ();
     }
 }

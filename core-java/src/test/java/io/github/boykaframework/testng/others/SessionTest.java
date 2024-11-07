@@ -16,11 +16,11 @@
 
 package io.github.boykaframework.testng.others;
 
+import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.clearAllSessions;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 
-import io.github.boykaframework.enums.PlatformType;
 import io.github.boykaframework.exception.FrameworkError;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -47,7 +47,7 @@ public class SessionTest {
      */
     @Test (description = "Test duplicate clear session", expectedExceptions = FrameworkError.class)
     public void testDuplicateClearSession () {
-        createSession (PERSONA, PlatformType.WEB, "test_local_chrome");
+        createSession (PERSONA, WEB, "test_local_chrome");
         clearSession ();
         clearSession ();
     }
@@ -57,8 +57,8 @@ public class SessionTest {
      */
     @Test (description = "Test Duplicate Session creation", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session is already created for .SessionTest. persona...")
     public void testDuplicateSessionCreation () {
-        createSession (PERSONA, PlatformType.WEB, "test_local_chrome");
-        createSession (PERSONA, PlatformType.WEB, "test_local_chrome");
+        createSession (PERSONA, WEB, "test_local_chrome");
+        createSession (PERSONA, WEB, "test_local_chrome");
         clearSession ();
     }
 
@@ -67,6 +67,6 @@ public class SessionTest {
      */
     @Test (description = "Test session creation with Null persona", expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Session Persona cannot be empty or null...")
     public void testSessionCreationWithNullPersona () {
-        createSession (null, PlatformType.WEB, "test_local_chrome");
+        createSession (null, WEB, "test_local_chrome");
     }
 }

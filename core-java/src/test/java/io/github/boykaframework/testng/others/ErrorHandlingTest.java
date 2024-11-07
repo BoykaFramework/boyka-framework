@@ -17,11 +17,11 @@
 package io.github.boykaframework.testng.others;
 
 import static io.github.boykaframework.enums.Message.TEST_ERROR;
+import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 
 import java.io.IOException;
 
 import io.github.boykaframework.exception.FrameworkError;
-import io.github.boykaframework.utils.ErrorHandler;
 import org.testng.annotations.Test;
 
 /**
@@ -36,6 +36,6 @@ public class ErrorHandlingTest {
      */
     @Test (expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Test error...")
     public void testFrameworkError () {
-        ErrorHandler.handleAndThrow (TEST_ERROR, new IOException ("File not found"));
+        handleAndThrow (TEST_ERROR, new IOException ("File not found"));
     }
 }
