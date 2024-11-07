@@ -92,7 +92,7 @@ jobs:
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-local
-      runs-on: macos-latest
+      runs-on: macos-13
 
   test-web-bs:
     needs:

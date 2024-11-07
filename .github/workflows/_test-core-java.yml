@@ -121,6 +121,38 @@ jobs:
           os_version: ${{ inputs.simulator-version }}
           shutdown_after_job: true
 
+      - name: Enable KVM
+        if: inputs.run-android
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: AVD cache
+        uses: actions/cache@v4
+        id: avd-cache
+        if: inputs.run-android
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ inputs.emulator-target }}
+
+      - name: create AVD and generate snapshot for caching
+        if: inputs.run-android && steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          avd-name: ${{ inputs.emulator-name }}
+          api-level: ${{ inputs.emulator-version }}
+          target: ${{ inputs.emulator-target }}
+          arch: ${{ inputs.emulator-arch }}
+          profile: ${{ inputs.emulator-profile }}
+          channel: ${{ inputs.emulator-channel }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
       - name: All Test execution
         if: ${{ inputs.run-android }}
         uses: reactivecircus/android-emulator-runner@v2
