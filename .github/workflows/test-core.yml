@@ -136,7 +136,7 @@ jobs:
       run-android: true
       emulator-name: Pixel_8_Pro
       emulator-profile: pixel_6_pro
-      emulator-version: 35
+      emulator-version: 34
       emulator-channel: canary
       emulator-arch: x86_64
       emulator-target: google_apis
@@ -146,7 +146,7 @@ jobs:
       - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos-latest
+      runs-on: macos-14
       suite-name: testng-mobile-ios-local
       run-appium: true
       run-ios: true
