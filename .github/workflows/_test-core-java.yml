@@ -165,7 +165,7 @@ jobs:
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
+          disable-animations: true
           pre-emulator-launch-script: |
             avdmanager list device
             emulator -avd ${{ inputs.emulator-name }} -wipe-data
