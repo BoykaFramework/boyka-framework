@@ -138,7 +138,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ inputs.emulator-target }}
+          key: avd-${{ inputs.emulator-name }}-${{ inputs.emulator-version }}-${{ inputs.emulator-profile }}-${{ inputs.emulator-arch }}-${{ inputs.emulator-target }}-${{ inputs.emulator-channel }}
 
       - name: create AVD and generate snapshot for caching
         if: inputs.run-android && steps.avd-cache.outputs.cache-hit != 'true'
