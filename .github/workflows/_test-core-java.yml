@@ -120,6 +120,8 @@ jobs:
           os: 'iOS'
           os_version: ${{ inputs.simulator-version }}
           shutdown_after_job: true
+          wait_for_boot: true
+          erase_before_boot: true
 
       - name: Enable KVM
         if: inputs.run-android
