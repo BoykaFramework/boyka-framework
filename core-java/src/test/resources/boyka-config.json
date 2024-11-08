@@ -381,7 +381,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "14",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 120,
@@ -420,8 +420,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "18.0",
-          "name": "iPhone 15",
+          "version": "18.1",
+          "name": "iPhone 16",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -466,7 +466,7 @@
         "device": {
           "os": "IOS",
           "version": "18.1",
-          "name": "iPhone 15",
+          "name": "iPhone 16",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -604,8 +604,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "18.0",
-          "name": "iPhone 15",
+          "version": "18.1",
+          "name": "iPhone 16",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
