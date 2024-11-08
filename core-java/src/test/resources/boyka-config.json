@@ -421,7 +421,7 @@
         "device": {
           "os": "IOS",
           "version": "18.1",
-          "name": "iPhone 16",
+          "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -466,7 +466,7 @@
         "device": {
           "os": "IOS",
           "version": "18.1",
-          "name": "iPhone 16",
+          "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -605,7 +605,7 @@
         "device": {
           "os": "IOS",
           "version": "18.1",
-          "name": "iPhone 16",
+          "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
