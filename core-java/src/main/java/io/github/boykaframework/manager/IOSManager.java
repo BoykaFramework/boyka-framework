@@ -118,6 +118,8 @@ class IOSManager implements IDriverManager {
         options.setClearSystemFiles (this.settings.isClearFiles ());
         options.setNoReset (this.settings.isNoReset ());
         options.setFullReset (this.settings.isFullReset ());
+        options.setWebviewConnectTimeout (ofSeconds (this.settings.getWebViewConnectTimeout ()));
+        options.setWebviewConnectRetries (this.settings.getWebViewConnectRetries ());
         options.setMaxTypingFrequency (this.settings.getTypingSpeed ());
         setWdaOptions (this.settings.getWda (), options);
     }

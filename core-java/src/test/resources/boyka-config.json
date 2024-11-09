@@ -200,7 +200,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "14",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -232,7 +232,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "12",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -381,7 +381,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "14",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 120,
@@ -420,11 +420,13 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.2",
-          "name": "iPhone 14",
+          "version": "18.1",
+          "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
+          "web_view_connect_timeout": 120,
+          "web_view_connect_retries": 3,
           "connect_keyboard": false,
           "typing_speed": 25,
           "swipe": {
@@ -465,11 +467,13 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.2",
-          "name": "iPhone 14",
+          "version": "17.5",
+          "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
+          "web_view_connect_timeout": 120,
+          "web_view_connect_retries": 3,
           "connect_keyboard": false,
           "typing_speed": 35,
           "swipe": {
@@ -477,11 +481,11 @@
           },
           "virtual_device": {
             "headless": true,
-            "launch_timeout": 180
+            "launch_timeout": 240
           },
           "wda": {
-            "launch_timeout": 120,
-            "connection_timeout": 120,
+            "launch_timeout": 240,
+            "connection_timeout": 240,
             "local_port": 8101
           },
           "application": {
@@ -604,8 +608,8 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16.2",
-          "name": "iPhone 14",
+          "version": "18.1",
+          "name": "iPhone 15",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,

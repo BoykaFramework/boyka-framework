@@ -55,4 +55,6 @@ public class DeviceSetting {
     private VideoSetting         video                  = new VideoSetting ();
     private VirtualDeviceSetting virtualDevice          = new VirtualDeviceSetting ();
     private WDASetting           wda;
+    private int                  webViewConnectRetries  = 3;
+    private int                  webViewConnectTimeout  = 60;
 }

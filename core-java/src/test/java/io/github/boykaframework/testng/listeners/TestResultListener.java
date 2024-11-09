@@ -18,7 +18,6 @@ package io.github.boykaframework.testng.listeners;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.testng.ITestResult.FAILURE;
 
@@ -72,7 +71,7 @@ public class TestResultListener implements IReporter {
         final Set<ITestResult> allTestResults) {
         return allTestResults.stream ()
             .map (testResultToResultRow (testName, suiteName))
-            .collect (toList ());
+            .toList ();
     }
 
     private String initReportTemplate () {
@@ -131,27 +130,21 @@ public class TestResultListener implements IReporter {
             final var testClass = testResult.getTestClass ()
                 .getRealClass ();
             final var index = counter.getAndIncrement ();
-            switch (testResult.getStatus ()) {
-                case FAILURE:
-                    return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "❌", "NA", testResult.getThrowable ()
-                            .getMessage ());
-
-                case ITestResult.SUCCESS:
-                    return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
+            return switch (testResult.getStatus ()) {
+                case FAILURE -> format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
+                    testClass.getSimpleName (), testResult.getName (), "❌", "NA", testResult.getThrowable ()
+                        .getMessage ());
+                case ITestResult.SUCCESS ->
+                    format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
                         testClass.getSimpleName (), testResult.getName (), "✅",
                         String.valueOf (testResult.getEndMillis () - testResult.getStartMillis ()), StringUtils.EMPTY);
-
-                case ITestResult.SKIP:
-                    return format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
-                        testClass.getSimpleName (), testResult.getName (), "⛔", "NA", testResult.getSkipCausedBy ()
-                            .stream ()
-                            .map (ITestNGMethod::getMethodName)
-                            .collect (joining ()));
-
-                default:
-                    return "";
-            }
+                case ITestResult.SKIP -> format (ROW_TEMPLATE, index, suiteName, testName, testClass.getPackageName (),
+                    testClass.getSimpleName (), testResult.getName (), "⛔", "NA", testResult.getSkipCausedBy ()
+                        .stream ()
+                        .map (ITestNGMethod::getMethodName)
+                        .collect (joining ()));
+                default -> "";
+            };
         };
     }
 }

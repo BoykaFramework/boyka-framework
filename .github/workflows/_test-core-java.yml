@@ -27,6 +27,10 @@ on:
         type: string
         description: Emulator / Simulator name
         default: Pixel_7_Pro
+      emulator-profile:
+        type: string
+        description: Emulator Profile Name
+        default: pixel_6_pro
       emulator-target:
         type: string
         description: Emulator target image
@@ -91,7 +95,12 @@ jobs:
       - name: Install Appium 2.0
         if: ${{ inputs.run-appium }}
         run: |
-          brew install ffmpeg
+          if [ "${{ startsWith(inputs.runs-on, 'ubuntu') }}" == "true" ]; then
+            sudo apt update && sudo apt upgrade
+            sudo apt install ffmpeg
+          else
+            brew install ffmpeg
+          fi
           npm install -g appium
           appium driver install uiautomator2
           appium driver install xcuitest
@@ -111,6 +120,40 @@ jobs:
           os: 'iOS'
           os_version: ${{ inputs.simulator-version }}
           shutdown_after_job: true
+          wait_for_boot: true
+          erase_before_boot: true
+
+      - name: Enable KVM
+        if: inputs.run-android
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: AVD cache
+        uses: actions/cache@v4
+        id: avd-cache
+        if: inputs.run-android
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ inputs.emulator-name }}-${{ inputs.emulator-version }}-${{ inputs.emulator-profile }}-${{ inputs.emulator-arch }}-${{ inputs.emulator-target }}-${{ inputs.emulator-channel }}
+
+      - name: create AVD and generate snapshot for caching
+        if: inputs.run-android && steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          avd-name: ${{ inputs.emulator-name }}
+          api-level: ${{ inputs.emulator-version }}
+          target: ${{ inputs.emulator-target }}
+          arch: ${{ inputs.emulator-arch }}
+          profile: ${{ inputs.emulator-profile }}
+          channel: ${{ inputs.emulator-channel }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
 
       - name: All Test execution
         if: ${{ inputs.run-android }}
@@ -120,11 +163,11 @@ jobs:
           api-level: ${{ inputs.emulator-version }}
           target: ${{ inputs.emulator-target }}
           arch: ${{ inputs.emulator-arch }}
-          profile: pixel_6_pro
+          profile: ${{ inputs.emulator-profile }}
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
+          disable-animations: true
           pre-emulator-launch-script: avdmanager list device
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test
 

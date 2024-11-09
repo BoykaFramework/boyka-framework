@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 @ToString
 @Getter
-@Builder (builderMethodName = "createRequest", buildMethodName = "create")
+@Builder (toBuilder = true, builderMethodName = "createRequest", buildMethodName = "create")
 public class ApiRequest {
     private String              body;
     private Object              bodyObject;

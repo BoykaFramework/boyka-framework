@@ -124,23 +124,35 @@ jobs:
       suite-name: testng-web-grid
       run-grid: true
 
-  test-mobile-local:
+  test-mobile-android-local:
     needs:
       - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: macos-12
-      suite-name: testng-mobile-local
+      runs-on: ubuntu-latest
+      suite-name: testng-mobile-android-local
       run-appium: true
-      run-ios: true
+      run-ios: false
       run-android: true
       emulator-name: Pixel_8_Pro
-      emulator-version: 30
-      emulator-channel: canary
-      emulator-arch: x86
-      emulator-target: aosp_atd
-      simulator-name: iPhone 14
-      simulator-version: 16.2
+      emulator-profile: pixel_6_pro
+      emulator-version: 31
+      # emulator-channel: canary
+      emulator-arch: x86_64
+      emulator-target: google_apis
+
+  test-mobile-ios-local:
+    needs:
+      - check-cloud
+    uses: ./.github/workflows/_test-core-java.yml
+    with:
+      runs-on: macos-14
+      suite-name: testng-mobile-ios-local
+      run-appium: true
+      run-ios: true
+      run-android: false
+      simulator-name: iPhone 15
+      simulator-version: 17.5
 
   # test-mobile-web:
   #   needs:
@@ -185,7 +197,8 @@ jobs:
       - test-web-bs
       - test-web-lt
       - test-web-grid
-      - test-mobile-local
+      - test-mobile-android-local
+      - test-mobile-ios-local
       # - test-mobile-web
       - test-mobile-bs
       - test-mobile-lt
@@ -215,10 +228,16 @@ jobs:
           name: reports-testng-mobile-bs
           path: ${{ github.workspace }}/core-java/reports
 
-      - name: Download reports-testng-mobile-local files
+      - name: Download reports-testng-mobile-android-local files
         uses: actions/download-artifact@v4
         with:
-          name: reports-testng-mobile-local
+          name: reports-testng-mobile-android-local
+          path: ${{ github.workspace }}/core-java/reports
+
+      - name: Download reports-testng-mobile-ios-local files
+        uses: actions/download-artifact@v4
+        with:
+          name: reports-testng-mobile-ios-local
           path: ${{ github.workspace }}/core-java/reports
 
       # - name: Download reports-testng-mobile-web files

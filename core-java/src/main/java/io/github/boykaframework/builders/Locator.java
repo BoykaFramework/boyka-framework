@@ -36,7 +36,7 @@ import org.openqa.selenium.WebElement;
  */
 @ToString
 @Getter
-@Builder (builderMethodName = "buildLocator")
+@Builder (toBuilder = true, builderMethodName = "buildLocator")
 public class Locator {
     private By                    android;
     private Predicate<WebElement> filter;
@@ -53,15 +53,11 @@ public class Locator {
      * @return Locator for the element
      */
     public By getLocator () {
-        switch (getSession ().getPlatformType ()) {
-            case ANDROID:
-                return getMobileOrWebLocator (this.android);
-            case IOS:
-                return getMobileOrWebLocator (this.ios);
-            case WEB:
-            default:
-                return this.web;
-        }
+        return switch (getSession ().getPlatformType ()) {
+            case ANDROID -> getMobileOrWebLocator (this.android);
+            case IOS -> getMobileOrWebLocator (this.ios);
+            default -> this.web;
+        };
     }
 
     private By getMobileOrWebLocator (final By locator) {
