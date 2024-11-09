@@ -2,6 +2,23 @@
 
 
 
+
+## 2.3.0 (2024-11-09)
+
+#### :rocket: New Feature
+* [#923](https://github.com/BoykaFramework/boyka-framework/pull/923) feat(java): :sparkles: allowed using default instance for api request and locators ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#924](https://github.com/BoykaFramework/boyka-framework/pull/924) build(deps): bump the dependencies group across 1 directory with 9 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#920](https://github.com/BoykaFramework/boyka-framework/pull/920) build(deps-dev): bump the dependencies group with 10 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#918](https://github.com/BoykaFramework/boyka-framework/pull/918) build(deps): bump futureware-tech/simulator-action from 3 to 4 in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#919](https://github.com/BoykaFramework/boyka-framework/pull/919) build(deps-dev): bump the dependencies group with 6 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#917](https://github.com/BoykaFramework/boyka-framework/pull/917) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#916](https://github.com/BoykaFramework/boyka-framework/pull/916) build(deps): bump the dependencies group with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.2.0 (2024-10-17)
 
 #### :rocket: New Feature
