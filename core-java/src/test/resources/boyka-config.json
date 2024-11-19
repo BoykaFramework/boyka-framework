@@ -579,8 +579,8 @@
           },
           "capabilities": {
             "platformName": "iOS",
-            "deviceName": "iPhone 16",
-            "platformVersion": "18",
+            "deviceName": "iPhone 14",
+            "platformVersion": "16",
             "app": "IOSApp",
             "project": "LambdaTest iOS Project",
             "build": "Test LambdaTest Build",
