@@ -17,6 +17,7 @@
 package io.github.boykaframework.actions.api;
 
 import static io.github.boykaframework.enums.ContentType.JSON;
+import static io.github.boykaframework.enums.ContentType.OCTET_STREAM;
 import static io.github.boykaframework.enums.ListenerType.API_ACTION;
 import static io.github.boykaframework.enums.Message.AUTH_PASSWORD_REQUIRED;
 import static io.github.boykaframework.enums.Message.BASE_URL_EMPTY;
@@ -28,8 +29,9 @@ import static io.github.boykaframework.enums.Message.SSL_ERROR;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.StringUtils.interpolate;
+import static io.github.boykaframework.utils.StringUtils.isValidPath;
 import static io.github.boykaframework.utils.Validator.requireNonEmpty;
-import static java.lang.String.join;
+import static java.nio.file.Path.of;
 import static java.text.MessageFormat.format;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.isNull;
@@ -38,6 +40,7 @@ import static java.util.Objects.requireNonNullElse;
 import static java.util.Optional.ofNullable;
 import static okhttp3.Credentials.basic;
 import static okhttp3.MediaType.parse;
+import static okhttp3.MultipartBody.FORM;
 import static okhttp3.RequestBody.create;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
@@ -46,7 +49,6 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -68,6 +70,7 @@ import io.github.boykaframework.enums.RequestMethod;
 import io.github.boykaframework.utils.JsonUtil;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -175,11 +178,19 @@ public final class ApiActions implements IApiActions {
 
     private ApiActions body (final Map<String, String> bodyMap) {
         LOGGER.traceEntry ();
-        final var body = new ArrayList<String> ();
-        bodyMap.forEach ((k, v) -> body.add (format ("{0}={1}", k, v)));
-        if (!body.isEmpty ()) {
-            this.requestBody = create (join ("&", body),
-                requireNonNull (this.mediaType, CONTENT_TYPE_NOT_SET.getMessageText ()));
+        if (!bodyMap.isEmpty ()) {
+            final var formBody = new MultipartBody.Builder ().setType (FORM);
+            bodyMap.forEach ((key, value) -> {
+                LOGGER.debug ("Form Data: {}, {}", key, value);
+                if (isValidPath (value)) {
+                    final var filePath = of (value).toFile ();
+                    formBody.addFormDataPart (key, filePath.getName (),
+                        create (filePath, parse (OCTET_STREAM.getType ())));
+                } else {
+                    formBody.addFormDataPart (key, value);
+                }
+            });
+            this.requestBody = formBody.build ();
         }
         return LOGGER.traceExit (this);
     }
