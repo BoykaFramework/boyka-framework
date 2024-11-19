@@ -3,6 +3,20 @@
 
 
 
+
+## 2.3.1 (2024-11-19)
+
+#### :bug: Bug Fix
+* [#930](https://github.com/BoykaFramework/boyka-framework/pull/930) fix(java): :bug: fixed issues in api form data request ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#928](https://github.com/BoykaFramework/boyka-framework/pull/928) build(deps): bump org.projectlombok:lombok from 1.18.34 to 1.18.36 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#927](https://github.com/BoykaFramework/boyka-framework/pull/927) build(deps-dev): bump the dependencies group with 6 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#926](https://github.com/BoykaFramework/boyka-framework/pull/926) build(deps-dev): bump nx from 20.0.11 to 20.0.12 in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.3.0 (2024-11-09)
 
 #### :rocket: New Feature
