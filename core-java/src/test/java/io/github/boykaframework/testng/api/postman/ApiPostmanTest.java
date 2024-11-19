@@ -17,13 +17,16 @@
 package io.github.boykaframework.testng.api.postman;
 
 import static io.github.boykaframework.actions.api.ApiActions.withRequest;
-import static io.github.boykaframework.builders.ApiRequest.createRequest;
-import static io.github.boykaframework.enums.ContentType.FORM_URLENCODED;
+import static io.github.boykaframework.enums.ContentType.MULTIPART_FORM_DATA;
 import static io.github.boykaframework.enums.PlatformType.API;
 import static io.github.boykaframework.enums.RequestMethod.POST;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
+import static java.lang.System.getProperty;
+import static java.nio.file.Path.of;
+import static java.text.MessageFormat.format;
 
+import io.github.boykaframework.builders.ApiRequest;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -56,9 +59,12 @@ public class ApiPostmanTest {
      */
     @Test (description = "Test Form body POST request")
     public void testFormBodyRequest () {
-        final var request = createRequest ().contentType (FORM_URLENCODED)
+        final var fileName = "test-file.txt";
+        final var request = ApiRequest.createRequest ()
+            .contentType (MULTIPART_FORM_DATA)
             .formBody ("strange", "boom")
             .formBody ("test", "abc")
+            .formBody ("profile", of (getProperty ("user.dir"), "src/test/resources", fileName).toString ())
             .method (POST)
             .path ("/post")
             .create ();
@@ -66,5 +72,10 @@ public class ApiPostmanTest {
         final var response = withRequest (request).execute ();
         response.verifyStatusCode ()
             .isEqualTo (200);
+
+        response.verifyTextField ("form.strange")
+            .isEqualTo ("boom");
+        response.verifyTextField (format ("files[\"{0}\"]", fileName))
+            .isNotEmpty ();
     }
 }

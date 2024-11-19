@@ -11,9 +11,9 @@
         "response": true
       },
       "timeout": {
-        "read_timeout": 3,
-        "write_timeout": 3,
-        "connection_timeout": 5
+        "read_timeout": 10,
+        "write_timeout": 10,
+        "connection_timeout": 10
       },
       "schema_path": "schema/"
     }
@@ -93,7 +93,7 @@
         "browser": "REMOTE",
         "base_url": "https://the-internet.herokuapp.com/",
         "target": "LOCAL",
-        "port": "4444",
+        "port": 4444,
         "capabilities": {
           "browserName": "chrome"
         }
@@ -304,8 +304,8 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12.0",
-          "name": "Google Pixel 5",
+          "version": "14.0",
+          "name": "Google Pixel 8 Pro",
           "type": "CLOUD",
           "ignore_unimportant_views": true,
           "application": {
@@ -318,7 +318,7 @@
             "projectName": "BrowserStack Android Project",
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
-            "appiumVersion": "2.0.0",
+            "appiumVersion": "2.6.0",
             "automationVersion": "latest",
             "deviceLogs": true,
             "networkLogs": true,
@@ -348,8 +348,8 @@
           "ignore_unimportant_views": true,
           "capabilities": {
             "platformName": "Android",
-            "deviceName": "Pixel 5",
-            "platformVersion": "11",
+            "deviceName": "Pixel 8 Pro",
+            "platformVersion": "14",
             "app": "AndroidApp",
             "project": "LambdaTest Android Project",
             "build": "Test LambdaTest Build",
@@ -539,7 +539,7 @@
         },
         "device": {
           "os": "IOS",
-          "version": "16",
+          "version": "18",
           "name": "iPhone 14",
           "type": "CLOUD",
           "application": {
@@ -551,7 +551,7 @@
             "projectName": "BrowserStack iOS Project",
             "buildName": "Test BrowserStack Build",
             "sessionName": "Test BrowserStack Session",
-            "appiumVersion": "2.0.0",
+            "appiumVersion": "2.6.0",
             "automationVersion": "latest",
             "deviceLogs": true,
             "networkLogs": true,
@@ -648,7 +648,12 @@
       "base_uri": "https://restful-booker.herokuapp.com"
     },
     "test_postman": {
-      "base_uri": "https://postman-echo.com"
+      "base_uri": "https://postman-echo.com",
+      "timeout": {
+        "connection_timeout": 60,
+        "read_timeout": 60,
+        "write_timeout": 60
+      }
     },
     "test_bad_ssl_wo_verify": {
       "base_uri": "https://expired.badssl.com",

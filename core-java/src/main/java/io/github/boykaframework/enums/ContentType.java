@@ -29,19 +29,23 @@ import lombok.Getter;
 @Getter
 public enum ContentType {
     /**
-     * Application/x-www-form-urlencoded.
+     * Application/x-www-form-urlencoded
      */
     FORM_URLENCODED ("application/x-www-form-urlencoded"),
     /**
-     * Application/json.
+     * Application/json
      */
     JSON ("application/json"),
     /**
-     * Multipart/form-data.
+     * Multipart/form-data
      */
     MULTIPART_FORM_DATA ("multipart/form-data"),
     /**
-     * Plain text.
+     * application/octet-stream
+     */
+    OCTET_STREAM ("application/octet-stream"),
+    /**
+     * Plain text
      */
     PLAIN_TEXT ("text/plain");
 

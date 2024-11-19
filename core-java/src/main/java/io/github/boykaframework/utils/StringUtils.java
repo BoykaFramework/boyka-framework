@@ -16,10 +16,12 @@
 
 package io.github.boykaframework.utils;
 
+import static java.nio.file.Path.of;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.text.StringSubstitutor.createInterpolator;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.nio.file.InvalidPathException;
 import java.util.Map;
 
 import org.apache.commons.text.StringSubstitutor;
@@ -72,6 +74,22 @@ public final class StringUtils {
         }
         LOGGER.traceExit ();
         return result;
+    }
+
+    /**
+     * Checks if the string is a valid file path.
+     *
+     * @param path String to test
+     *
+     * @return True if the path is a valid file path, else False.
+     */
+    public static boolean isValidPath (final String path) {
+        try {
+            return of (path).toFile ()
+                .exists ();
+        } catch (final InvalidPathException | NullPointerException ex) {
+            return false;
+        }
     }
 
     private StringUtils () {
