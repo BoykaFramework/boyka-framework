@@ -81,7 +81,7 @@
         <nexus.version>1.7.0</nexus.version>
         <maven.gpg.version>3.2.7</maven.gpg.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
-        <allure-testng.version>2.29.0</allure-testng.version>
+        <allure-testng.version>2.29.1</allure-testng.version>
         <maven-failsafe.version>3.5.2</maven-failsafe.version>
         <central.sonatype>0.6.0</central.sonatype>
     </properties>
