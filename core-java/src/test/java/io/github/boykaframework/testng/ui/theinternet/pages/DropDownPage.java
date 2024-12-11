@@ -17,6 +17,7 @@
 package io.github.boykaframework.testng.ui.theinternet.pages;
 
 import static org.openqa.selenium.By.id;
+import static org.openqa.selenium.By.tagName;
 
 import io.github.boykaframework.builders.Locator;
 import lombok.Getter;
@@ -43,6 +44,11 @@ public class DropDownPage {
     private final Locator fruits      = Locator.buildLocator ()
         .web (id ("fruits"))
         .name ("Fruits")
+        .build ();
+    private final Locator fruitList   = Locator.buildLocator ()
+        .name ("Fruit List")
+        .web (tagName ("options"))
+        .parent (this.fruits)
         .build ();
     private final Locator superHeroes = Locator.buildLocator ()
         .web (id ("superheros"))

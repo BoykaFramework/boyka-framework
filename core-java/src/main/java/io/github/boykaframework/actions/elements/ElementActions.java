@@ -21,18 +21,24 @@ import static io.github.boykaframework.actions.CommonActions.getElementAttribute
 import static io.github.boykaframework.actions.CommonActions.pause;
 import static io.github.boykaframework.actions.CommonActions.performElementAction;
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
+import static io.github.boykaframework.actions.elements.ElementFinder.finds;
 import static io.github.boykaframework.enums.ListenerType.ELEMENT_ACTION;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.List;
+
 import com.google.common.truth.BooleanSubject;
+import com.google.common.truth.IterableSubject;
 import com.google.common.truth.StringSubject;
+import com.google.common.truth.Truth;
 import io.github.boykaframework.actions.interfaces.elements.IElementActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IElementActionsListener;
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.config.ui.DelaySetting;
+import io.github.boykaframework.enums.WaitStrategy;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
@@ -93,6 +99,14 @@ public class ElementActions implements IElementActions {
     }
 
     @Override
+    public String getProperty (final String property) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting Property: {} of element located by: {}", property, this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onGetProperty (property));
+        return LOGGER.traceExit (getPropertyValue (property));
+    }
+
+    @Override
     public String getStyle (final String styleName) {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting style: {} of element located by: {}", styleName, this.locator.getName ());
@@ -131,6 +145,13 @@ public class ElementActions implements IElementActions {
         LOGGER.info ("Checking if element located by: {} is selected", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onIsSelected (this.locator));
         return LOGGER.traceExit (getElementAttribute (WebElement::isSelected, this.locator, false));
+    }
+
+    @Override
+    public List<String> itemList () {
+        LOGGER.info ("Getting the list of elements: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (IElementActionsListener::onItemList);
+        return getElementList ();
     }
 
     @Override
@@ -182,6 +203,23 @@ public class ElementActions implements IElementActions {
     }
 
     @Override
+    public IterableSubject verifyItems () {
+        LOGGER.info ("Verifying the list of elements: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (IElementActionsListener::onVerifyItems);
+        return Truth.assertWithMessage (this.locator.getName ())
+            .that (getElementList ());
+    }
+
+    @Override
+    public StringSubject verifyProperty (final String property) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Verifying property of {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onVerifyProperty (property));
+        LOGGER.traceExit ();
+        return assertWithMessage (property).that (getProperty (property));
+    }
+
+    @Override
     public StringSubject verifyStyle (final String styleName) {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying style of {}", this.locator.getName ());
@@ -207,10 +245,23 @@ public class ElementActions implements IElementActions {
      * @return Attribute value
      */
     protected String getAttributeValue (final String attribute) {
-        return getElementAttribute (e -> e.getAttribute (attribute), this.locator, EMPTY);
+        return getElementAttribute (e -> e.getDomAttribute (attribute), this.locator, EMPTY);
     }
 
     private boolean displayed () {
         return getElementAttribute (WebElement::isDisplayed, this.locator, false);
+    }
+
+    private List<String> getElementList () {
+        return getElementAttribute (element -> {
+            final var items = finds (this.locator, WaitStrategy.VISIBLE);
+            return items.stream ()
+                .map (WebElement::getText)
+                .toList ();
+        }, this.locator, List.of ());
+    }
+
+    private String getPropertyValue (final String property) {
+        return getElementAttribute (e -> e.getDomProperty (property), this.locator, EMPTY);
     }
 }

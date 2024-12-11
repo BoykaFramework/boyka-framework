@@ -17,6 +17,7 @@
 package io.github.boykaframework.testng.ui.theinternet;
 
 import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
@@ -110,6 +111,13 @@ public class DropDownTest {
         onDropDown (dropDownPage ().getSuperHeroes ()).deselectByValue ("bt");
         onDropDown (dropDownPage ().getSuperHeroes ()).verifySelectedItem ()
             .isEqualTo (EMPTY);
+    }
+
+    @Test (description = "Verify the list of fruits")
+    public void testFruitList () {
+        final var expected = withMouse (dropDownPage ().getFruitList ()).itemList ();
+        withMouse (dropDownPage ().getFruitList ()).verifyItems ()
+            .containsExactlyElementsIn (expected);
     }
 
     /**

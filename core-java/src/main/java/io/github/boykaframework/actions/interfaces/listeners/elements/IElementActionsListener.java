@@ -46,6 +46,15 @@ public interface IElementActionsListener extends BoykaListener {
     }
 
     /**
+     * Handles getProperty method.
+     *
+     * @param property property name
+     */
+    default void onGetProperty (final String property) {
+        // not implemented.
+    }
+
+    /**
      * Handle get style method.
      *
      * @param locator Locator of the element.
@@ -92,6 +101,13 @@ public interface IElementActionsListener extends BoykaListener {
     }
 
     /**
+     * Handles itemList method.
+     */
+    default void onItemList () {
+        // not implemented.
+    }
+
+    /**
      * Handle scroll into view method.
      *
      * @param locator Locator of the element.
@@ -134,6 +150,22 @@ public interface IElementActionsListener extends BoykaListener {
      * @param locator Locator of the element.
      */
     default void onVerifyIsSelected (final Locator locator) {
+        // not implemented.
+    }
+
+    /**
+     * Handles verifyItems method.
+     */
+    default void onVerifyItems () {
+        // not implemented.
+    }
+
+    /**
+     * Handles verifyProperty value.
+     *
+     * @param property Property name
+     */
+    default void onVerifyProperty (final String property) {
         // not implemented.
     }
 
