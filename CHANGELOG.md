@@ -4,6 +4,24 @@
 
 
 
+
+## 2.4.0 (2024-12-12)
+
+#### :rocket: New Feature
+* [#940](https://github.com/BoykaFramework/boyka-framework/pull/940) feat(java): :sparkles: added element list and dom property support ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#938](https://github.com/BoykaFramework/boyka-framework/pull/938) build(deps): bump org.apache.maven.plugins:maven-javadoc-plugin from 3.11.1 to 3.11.2 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#937](https://github.com/BoykaFramework/boyka-framework/pull/937) build(deps): bump the dependencies group with 10 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#936](https://github.com/BoykaFramework/boyka-framework/pull/936) build(deps-dev): bump io.qameta.allure:allure-testng from 2.29.0 to 2.29.1 in /core-java ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#934](https://github.com/BoykaFramework/boyka-framework/pull/934) build(deps-dev): bump the dependencies group with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#935](https://github.com/BoykaFramework/boyka-framework/pull/935) build(deps): bump the dependencies group in /core-java with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#932](https://github.com/BoykaFramework/boyka-framework/pull/932) build(deps): bump the dependencies group with 11 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#933](https://github.com/BoykaFramework/boyka-framework/pull/933) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.3.1 (2024-11-19)
 
 #### :bug: Bug Fix
