@@ -25,6 +25,7 @@ import static io.github.boykaframework.enums.PlatformType.IOS;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import com.google.common.truth.StringSubject;
@@ -108,12 +109,14 @@ public class TextBoxActions extends ClickableActions implements ITextBoxActions 
 
     private void sendKeys (final String text) {
         performElementAction (e -> {
-            e.sendKeys (text);
-            if (getSession ().getPlatformType () == IOS && getSession ().getMobileSetting ()
-                .getDevice ()
-                .getApplication ()
-                .getType () != ApplicationType.WEB) {
-                e.sendKeys ("\n");
+            if (!isEmpty (text)) {
+                e.sendKeys (text);
+                if (getSession ().getPlatformType () == IOS && getSession ().getMobileSetting ()
+                    .getDevice ()
+                    .getApplication ()
+                    .getType () != ApplicationType.WEB) {
+                    e.sendKeys ("\n");
+                }
             }
         }, this.locator);
     }

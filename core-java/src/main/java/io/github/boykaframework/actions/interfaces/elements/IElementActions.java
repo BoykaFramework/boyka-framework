@@ -16,7 +16,10 @@
 
 package io.github.boykaframework.actions.interfaces.elements;
 
+import java.util.List;
+
 import com.google.common.truth.BooleanSubject;
+import com.google.common.truth.IterableSubject;
 import com.google.common.truth.StringSubject;
 
 /**
@@ -39,6 +42,15 @@ public interface IElementActions {
      * @return value of the attribute of the element
      */
     String getAttribute (final String attribute);
+
+    /**
+     * Get Dom property value.
+     *
+     * @param property DOM property
+     *
+     * @return Property value
+     */
+    String getProperty (String property);
 
     /**
      * Gets the styling attribute of the element.
@@ -78,6 +90,13 @@ public interface IElementActions {
     boolean isSelected ();
 
     /**
+     * Gets all the list of items identified by the provided locator.
+     *
+     * @return List of elements text
+     */
+    List<String> itemList ();
+
+    /**
      * Scroll the element into view.
      */
     void scrollIntoView ();
@@ -111,6 +130,22 @@ public interface IElementActions {
      * @return {@link BooleanSubject} to verify the result
      */
     BooleanSubject verifyIsSelected ();
+
+    /**
+     * Verify the list of elements text.
+     *
+     * @return Iterable subject to verify the list of elements.
+     */
+    IterableSubject verifyItems ();
+
+    /**
+     * Verify DOM property.
+     *
+     * @param property DOM property.
+     *
+     * @return StringSubject to verify the value.
+     */
+    StringSubject verifyProperty (final String property);
 
     /**
      * Verify style of element.
