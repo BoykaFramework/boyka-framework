@@ -19,10 +19,13 @@ package io.github.boykaframework.testng.ui.theinternet;
 import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.DropDownActions.onDropDown;
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.testng.ui.theinternet.pages.DropDownPage.dropDownPage;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+
+import java.util.List;
 
 import io.github.boykaframework.enums.PlatformType;
 import org.testng.annotations.AfterClass;
@@ -115,9 +118,14 @@ public class DropDownTest {
 
     @Test (description = "Verify the list of fruits")
     public void testFruitList () {
-        final var expected = withMouse (dropDownPage ().getFruitList ()).itemList ();
-        withMouse (dropDownPage ().getFruitList ()).verifyItems ()
+        withMouse (dropDownPage ().getFruits ()).click ();
+        final var expected = onElement (dropDownPage ().getFruitList ()).itemList ();
+        onElement (dropDownPage ().getFruitList ()).verifyItems ()
+            .isNotEmpty ();
+        onElement (dropDownPage ().getFruitList ()).verifyItems ()
             .containsExactlyElementsIn (expected);
+        onElement (dropDownPage ().getFruitList ()).verifyItems ()
+            .containsAtLeastElementsIn (List.of ("Apple", "Mango", "Banana"));
     }
 
     /**

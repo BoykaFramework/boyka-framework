@@ -47,7 +47,7 @@ public class DropDownPage {
         .build ();
     private final Locator fruitList   = Locator.buildLocator ()
         .name ("Fruit List")
-        .web (tagName ("options"))
+        .web (tagName ("option"))
         .parent (this.fruits)
         .build ();
     private final Locator superHeroes = Locator.buildLocator ()

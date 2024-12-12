@@ -23,6 +23,7 @@ import static io.github.boykaframework.actions.CommonActions.performElementActio
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.actions.elements.ElementFinder.finds;
 import static io.github.boykaframework.enums.ListenerType.ELEMENT_ACTION;
+import static io.github.boykaframework.enums.WaitStrategy.VISIBLE;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -38,7 +39,6 @@ import io.github.boykaframework.actions.interfaces.elements.IElementActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IElementActionsListener;
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.config.ui.DelaySetting;
-import io.github.boykaframework.enums.WaitStrategy;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
@@ -254,7 +254,7 @@ public class ElementActions implements IElementActions {
 
     private List<String> getElementList () {
         return getElementAttribute (element -> {
-            final var items = finds (this.locator, WaitStrategy.VISIBLE);
+            final var items = finds (this.locator, VISIBLE);
             return items.stream ()
                 .map (WebElement::getText)
                 .toList ();
