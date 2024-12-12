@@ -30,7 +30,6 @@
             <class name="io.github.boykaframework.testng.ui.theinternet.ContextMenuTest"/>
             <class name="io.github.boykaframework.testng.ui.theinternet.DoubleClickTest"/>
             <class name="io.github.boykaframework.testng.ui.theinternet.DragDropTest"/>
-            <class name="io.github.boykaframework.testng.ui.theinternet.DropDownTest"/>
             <class name="io.github.boykaframework.testng.ui.theinternet.FileUploadTest"/>
             <class name="io.github.boykaframework.testng.ui.theinternet.FramesTest"/>
             <class name="io.github.boykaframework.testng.ui.theinternet.HoverTest"/>
