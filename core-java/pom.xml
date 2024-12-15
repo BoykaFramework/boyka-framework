@@ -36,11 +36,11 @@
         <google-gson.version>2.11.0</google-gson.version>
         <google.guava.version>33.3.1-jre</google.guava.version>
         <google-truth.version>1.4.4</google-truth.version>
-        <apache-commons-text.version>1.12.0</apache-commons-text.version>
+        <apache-commons-text.version>1.13.0</apache-commons-text.version>
         <commons-io.version>2.18.0</commons-io.version>
         <json-path.version>2.9.0</json-path.version>
-        <log4j-core.version>2.24.2</log4j-core.version>
-        <log4j-api.version>2.24.2</log4j-api.version>
+        <log4j-core.version>2.24.3</log4j-core.version>
+        <log4j-api.version>2.24.3</log4j-api.version>
         <faker.version>2.3.1</faker.version>
         <jackson-dataformat-yaml.version>2.18.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.18.2</jackson-databind.version>
@@ -54,7 +54,7 @@
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.20.2</checkstyle.version>
+        <checkstyle.version>10.21.0</checkstyle.version>
         <aspectj.version>1.9.22.1</aspectj.version>
         <poi.version>5.3.0</poi.version>
         <suite-name>testng-api</suite-name>
