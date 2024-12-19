@@ -50,6 +50,11 @@ public class WDIOHomePage {
         .android (accessibilityId ("Login"))
         .ios (accessibilityId ("Login"))
         .build ();
+    private final Locator swipeTab   = Locator.buildLocator ()
+        .name ("Swipe Tab")
+        .android (accessibilityId ("Swipe"))
+        .ios (accessibilityId ("Swipe"))
+        .build ();
     private final Locator webViewTab = Locator.buildLocator ()
         .android (accessibilityId ("Webview"))
         .ios (accessibilityId ("Webview"))

@@ -25,6 +25,7 @@
         <classes>
             <class name="io.github.boykaframework.testng.ui.wdio.WdioDemoTest">
                 <methods>
+                    <include name="testSwipe"/>
                     <include name="testDragDrop"/>
                     <include name="testSignUp"/>
                     <include name="testWebView"/>

@@ -25,12 +25,15 @@ import static io.github.boykaframework.actions.elements.ElementActions.onElement
 import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
 import static io.github.boykaframework.actions.elements.TextBoxActions.onTextBox;
 import static io.github.boykaframework.enums.PlatformType.ANDROID;
+import static io.github.boykaframework.enums.SwipeDirection.DOWN;
+import static io.github.boykaframework.enums.SwipeDirection.UP;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.testng.ui.wdio.pages.AlertDialog.alertDialog;
 import static io.github.boykaframework.testng.ui.wdio.pages.DragDropPage.dragDropPage;
 import static io.github.boykaframework.testng.ui.wdio.pages.SignUpPage.signUpPage;
+import static io.github.boykaframework.testng.ui.wdio.pages.SwipePage.swipePage;
 import static io.github.boykaframework.testng.ui.wdio.pages.WDIOHomePage.wdioHomePage;
 import static io.github.boykaframework.testng.ui.wdio.pages.WebViewPage.webViewPage;
 
@@ -120,6 +123,21 @@ public class WdioDemoTest {
         withFinger (signUpPage ().getSignUp ()).tap ();
 
         alertDialog ().verifyMessage ("You successfully signed up!");
+    }
+
+    /**
+     * Test Swipe page.
+     */
+    @Test
+    public void testSwipe () {
+        withFinger (wdioHomePage ().getSwipeTab ()).tap ();
+        withFinger (swipePage ().getLogo ()).swipeTill (UP);
+        onElement (swipePage ().getLogo ()).verifyIsDisplayed ()
+            .isTrue ();
+
+        withFinger (swipePage ().getCarousal ()).swipeTill (DOWN);
+        onElement (swipePage ().getCarousal ()).verifyIsDisplayed ()
+            .isTrue ();
     }
 
     /**
