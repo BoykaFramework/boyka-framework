@@ -136,7 +136,7 @@ jobs:
       run-android: true
       emulator-name: Pixel_8_Pro
       emulator-profile: pixel_6_pro
-      emulator-version: 31
+      emulator-version: 34
       # emulator-channel: canary
       emulator-arch: x86_64
       emulator-target: google_apis
