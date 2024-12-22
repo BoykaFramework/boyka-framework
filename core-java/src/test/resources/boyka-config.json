@@ -236,7 +236,7 @@
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
-          "auto_grant_permissions": false,
+          "auto_grant_permissions": true,
           "system_port": 8201,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
@@ -496,6 +496,7 @@
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",
             "type": "HYBRID",
+            "bundle_id": "org.reactjs.native.example.wdiodemoapp",
             "install_timeout": 180
           }
         }

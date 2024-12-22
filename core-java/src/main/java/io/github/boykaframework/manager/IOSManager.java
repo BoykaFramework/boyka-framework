@@ -19,10 +19,12 @@ package io.github.boykaframework.manager;
 import static io.github.boykaframework.enums.ApplicationType.WEB;
 import static io.github.boykaframework.enums.DeviceType.CLOUD;
 import static io.github.boykaframework.enums.DeviceType.VIRTUAL;
+import static io.github.boykaframework.enums.Message.BUNDLE_ID_REQUIRED;
 import static io.github.boykaframework.enums.Message.SESSION_NOT_STARTED;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.manager.ParallelSession.setDriver;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
+import static io.github.boykaframework.utils.Validator.requireNonNull;
 import static io.github.boykaframework.utils.Validator.setOptionIfPresent;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.isNull;
@@ -96,10 +98,12 @@ class IOSManager implements IDriverManager {
     private void setPermissions (final XCUITestOptions options, final DeviceSetting settings) {
         if (!isNull (settings.getPermissions ()) && !settings.getPermissions ()
             .isEmpty ()) {
-            final Map<String, Object> permissions = new HashMap<> ();
+            final Map<String, String> permissions = new HashMap<> ();
             settings.getPermissions ()
                 .forEach ((k, v) -> permissions.put (k.getName (), v.getValue ()));
-            options.setPermissions (new Permissions (permissions));
+            final var bundleId = requireNonNull (settings.getApplication ()
+                .getBundleId (), BUNDLE_ID_REQUIRED);
+            options.setPermissions (new Permissions ().withAppPermissions (bundleId, permissions));
         }
     }
 
