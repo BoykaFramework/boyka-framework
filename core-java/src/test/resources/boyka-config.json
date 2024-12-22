@@ -236,6 +236,7 @@
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
+          "auto_grant_permissions": false,
           "system_port": 8201,
           "server_launch_timeout": 60,
           "ignore_unimportant_views": true,
@@ -472,6 +473,10 @@
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
+          "permissions": {
+            "NOTIFICATIONS": "YES",
+            "MICROPHONE": "YES"
+          },
           "web_view_connect_timeout": 120,
           "web_view_connect_retries": 3,
           "connect_keyboard": false,

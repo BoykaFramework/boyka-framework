@@ -28,8 +28,12 @@ import static java.time.Duration.ofSeconds;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
+import io.appium.java_client.ios.options.simulator.Permissions;
 import io.appium.java_client.ios.options.wda.XcodeCertificate;
 import io.github.boykaframework.config.ui.mobile.MobileSetting;
 import io.github.boykaframework.config.ui.mobile.device.ApplicationSetting;
@@ -89,6 +93,16 @@ class IOSManager implements IDriverManager {
         setApplicationCapabilities (options, this.settings.getApplication ());
     }
 
+    private void setPermissions (final XCUITestOptions options, final DeviceSetting settings) {
+        if (!isNull (settings.getPermissions ()) && !settings.getPermissions ()
+            .isEmpty ()) {
+            final Map<String, Object> permissions = new HashMap<> ();
+            settings.getPermissions ()
+                .forEach ((k, v) -> permissions.put (k.getName (), v.getValue ()));
+            options.setPermissions (new Permissions (permissions));
+        }
+    }
+
     private void setWdaOptions (final WDASetting wda, final XCUITestOptions options) {
         if (!isNull (wda)) {
             setOptionIfPresent (wda.getLocalPort (), options::setWdaLocalPort);
@@ -122,6 +136,7 @@ class IOSManager implements IDriverManager {
         options.setWebviewConnectRetries (this.settings.getWebViewConnectRetries ());
         options.setMaxTypingFrequency (this.settings.getTypingSpeed ());
         setWdaOptions (this.settings.getWda (), options);
+        setPermissions (options, settings);
     }
 
     private void setupVirtualDeviceSetting (final DeviceType deviceType, final VirtualDeviceSetting virtualDevice,

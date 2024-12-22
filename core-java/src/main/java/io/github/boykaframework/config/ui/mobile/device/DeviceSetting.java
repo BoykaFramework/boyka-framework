@@ -23,6 +23,8 @@ import java.util.Map;
 
 import io.github.boykaframework.enums.DeviceType;
 import io.github.boykaframework.enums.OS;
+import io.github.boykaframework.enums.PermissionDecision;
+import io.github.boykaframework.enums.Permissions;
 import lombok.Data;
 
 /**
@@ -33,28 +35,30 @@ import lombok.Data;
  */
 @Data
 public class DeviceSetting {
-    private boolean              acceptAlerts           = true;
-    private int                  adbTimeout             = 30;
-    private ApplicationSetting   application;
-    private Map<String, Object>  capabilities;
-    private boolean              clearFiles             = true;
-    private boolean              clearLogs              = true;
-    private boolean              fullReset;
-    private boolean              ignoreUnimportantViews = true;
-    private String               name;
-    private boolean              noReset;
-    private OS                   os                     = ANDROID;
-    private int                  serverInstallTimeout   = 30;
-    private int                  serverLaunchTimeout    = 30;
-    private SwipeSetting         swipe                  = new SwipeSetting ();
-    private int                  systemPort             = 8200;
-    private DeviceType           type                   = VIRTUAL;
-    private int                  typingSpeed            = 60;
-    private String               uniqueId;
-    private String               version;
-    private VideoSetting         video                  = new VideoSetting ();
-    private VirtualDeviceSetting virtualDevice          = new VirtualDeviceSetting ();
-    private WDASetting           wda;
-    private int                  webViewConnectRetries  = 3;
-    private int                  webViewConnectTimeout  = 60;
+    private boolean                              acceptAlerts           = true;
+    private int                                  adbTimeout             = 30;
+    private ApplicationSetting                   application;
+    private boolean                              autoGrantPermissions;
+    private Map<String, Object>                  capabilities;
+    private boolean                              clearFiles             = true;
+    private boolean                              clearLogs              = true;
+    private boolean                              fullReset;
+    private boolean                              ignoreUnimportantViews = true;
+    private String                               name;
+    private boolean                              noReset;
+    private OS                                   os                     = ANDROID;
+    private Map<Permissions, PermissionDecision> permissions;
+    private int                                  serverInstallTimeout   = 30;
+    private int                                  serverLaunchTimeout    = 30;
+    private SwipeSetting                         swipe                  = new SwipeSetting ();
+    private int                                  systemPort             = 8200;
+    private DeviceType                           type                   = VIRTUAL;
+    private int                                  typingSpeed            = 60;
+    private String                               uniqueId;
+    private String                               version;
+    private VideoSetting                         video                  = new VideoSetting ();
+    private VirtualDeviceSetting                 virtualDevice          = new VirtualDeviceSetting ();
+    private WDASetting                           wda;
+    private int                                  webViewConnectRetries  = 3;
+    private int                                  webViewConnectTimeout  = 60;
 }
