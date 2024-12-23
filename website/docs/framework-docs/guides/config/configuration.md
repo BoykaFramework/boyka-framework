@@ -545,6 +545,14 @@ When you use Boyka command line assistant to configure your test to run on any C
 | `system_port` | System port for Android devices | `int` | `8200` |
 | `unique_id` | Device UDID | `string` | `null` |
 | `video` | Video recording related settings | `VideoSetting` | `null` |
+| `auto_grant_permissions` | Auto grant permissions for Android devices | `boolean` | `false` |
+| `permissions` | Map of permissions to grant for iOS devices | `Map<Permissions, PermissionDecision>` | `null` |
+
+:::danger
+When providing `permissions` option in the device configuration, make sure to provide the `bundle_id` for the app under test in the `application` block.
+
+If `bundle_id` is not provided, then Boyka Framework will throw an exception.
+:::
 
 ###### Device Application Configurations {#app-config}
 
@@ -785,3 +793,32 @@ We have an enum `OS` where we maintain the list of currently supported device OS
 ## Test Data Source types {#data-source-types}
 
 - `EXCEL`: Excel test data file
+
+## Supported iOS permissions {#ios-permissions}
+
+- `CALENDAR`
+- `CAMERA`
+- `CONTACTS`
+- `FACE_ID`
+- `HEALTH`
+- `HOME_KIT`
+- `LOCATION`
+- `MEDIA_LIBRARY`
+- `MICROPHONE`
+- `MOTION`
+- `NOTIFICATIONS`
+- `REMINDERS`
+- `SIRI`
+- `SPEECH`
+- `USER_TRACKING`
+
+## Supported iOS permission options {#ios-permission-options}
+
+- `YES`
+- `NO`
+- `ALWAYS`
+- `CRITICAL`
+- `IN_USE`
+- `LIMITED`
+- `NEVER`
+- `UNSET`

@@ -49,6 +49,10 @@ public enum Message {
      */
     BROWSER_OPTION_NOT_SUPPORTED ("Browser options not supported for ({0}) browser..."),
     /**
+     * Bundle ID is required for setting permissions.
+     */
+    BUNDLE_ID_REQUIRED ("Bundle ID is required for setting permissions..."),
+    /**
      * Remote execution requires capabilities
      */
     CAPABILITIES_REQUIRED_FOR_REMOTE ("Capabilities required for remote execution..."),

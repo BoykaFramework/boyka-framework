@@ -17,8 +17,14 @@
 package io.github.boykaframework.manager;
 
 import static io.appium.java_client.Setting.IGNORE_UNIMPORTANT_VIEWS;
+import static io.github.boykaframework.enums.ApplicationType.WEB;
 import static io.github.boykaframework.enums.AutomationType.UI_AUTOMATOR;
+import static io.github.boykaframework.enums.DeviceType.CLOUD;
 import static io.github.boykaframework.enums.DeviceType.VIRTUAL;
+import static io.github.boykaframework.enums.Message.SESSION_NOT_STARTED;
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.manager.ParallelSession.setDriver;
+import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.isNull;
 
@@ -28,11 +34,8 @@ import io.github.boykaframework.config.ui.mobile.MobileSetting;
 import io.github.boykaframework.config.ui.mobile.device.ApplicationSetting;
 import io.github.boykaframework.config.ui.mobile.device.DeviceSetting;
 import io.github.boykaframework.config.ui.mobile.device.VirtualDeviceSetting;
-import io.github.boykaframework.enums.ApplicationType;
 import io.github.boykaframework.enums.DeviceType;
-import io.github.boykaframework.enums.Message;
 import io.github.boykaframework.enums.TargetProviders;
-import io.github.boykaframework.utils.ErrorHandler;
 import io.github.boykaframework.utils.Validator;
 import org.openqa.selenium.SessionNotCreatedException;
 
@@ -41,8 +44,7 @@ class AndroidManager implements IDriverManager {
     private final DeviceSetting settings;
 
     public AndroidManager () {
-        this.mobileSetting = ParallelSession.getSession ()
-            .getMobileSetting ();
+        this.mobileSetting = getSession ().getMobileSetting ();
         this.settings = this.mobileSetting.getDevice ();
     }
 
@@ -59,7 +61,7 @@ class AndroidManager implements IDriverManager {
 
     private void setAndroidApplicationOptions (final UiAutomator2Options options,
         final ApplicationSetting application) {
-        if (application.getType () == ApplicationType.WEB) {
+        if (application.getType () == WEB) {
             options.withBrowserName (application.getBrowser ()
                 .name ());
             Validator.setOptionIfPresent (application.getChromeDriverPort (), options::setChromedriverPort);
@@ -97,6 +99,7 @@ class AndroidManager implements IDriverManager {
         options.setClearSystemFiles (this.settings.isClearFiles ());
         options.setClearDeviceLogsOnStart (this.settings.isClearLogs ());
         options.setNoReset (this.settings.isNoReset ());
+        options.setAutoGrantPermissions (settings.isAutoGrantPermissions ());
         options.setFullReset (this.settings.isFullReset ());
         options.setUiautomator2ServerLaunchTimeout (ofSeconds (this.settings.getServerLaunchTimeout ()));
         options.setUiautomator2ServerInstallTimeout (ofSeconds (this.settings.getServerInstallTimeout ()));
@@ -106,25 +109,23 @@ class AndroidManager implements IDriverManager {
     }
 
     private void setupAndroidSettings () {
-        final var driver = (AndroidDriver) ParallelSession.getSession ()
-            .getDriver ();
+        final var driver = (AndroidDriver) getSession ().getDriver ();
         driver.setSetting (IGNORE_UNIMPORTANT_VIEWS, this.settings.isIgnoreUnimportantViews ());
     }
 
     private void setupUiAutomatorDriver (final TargetProviders targetProviders) {
         final var options = new UiAutomator2Options ();
         setCommonUiAutomatorOptions (options);
-        if (this.settings.getType () == DeviceType.CLOUD) {
+        if (this.settings.getType () == CLOUD) {
             setupCloudDriverOptions (options, this.settings.getCapabilities (), targetProviders);
         } else {
             setLocalUiAutomatorOptions (options);
         }
         try {
-            ParallelSession.setDriver (new AndroidDriver (ParallelSession.getSession ()
-                .getServiceManager ()
+            setDriver (new AndroidDriver (getSession ().getServiceManager ()
                 .getServiceUrl (), options));
         } catch (final SessionNotCreatedException e) {
-            ErrorHandler.handleAndThrow (Message.SESSION_NOT_STARTED, e);
+            handleAndThrow (SESSION_NOT_STARTED, e);
         }
         navigateToBaseUrl (this.settings.getApplication ());
     }
