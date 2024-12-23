@@ -28,14 +28,14 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PermissionDecision {
-    YES ("YES"),
+    ALWAYS ("always"),
+    CRITICAL ("critical"),
+    IN_USE ("inuse"),
+    LIMITED ("limited"),
+    NEVER ("never"),
     NO ("NO"),
     UNSET ("unset"),
-    ALWAYS ("always"),
-    IN_USE ("inuse"),
-    NEVER ("never"),
-    CRITICAL ("critical"),
-    LIMITED ("limited");
+    YES ("YES");
 
     private final String value;
 }
