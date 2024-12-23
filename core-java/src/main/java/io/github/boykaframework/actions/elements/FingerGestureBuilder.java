@@ -31,7 +31,6 @@ import static io.github.boykaframework.utils.Validator.requireNonNull;
 import static io.github.boykaframework.utils.Validator.validateDelay;
 import static java.time.Duration.ZERO;
 import static java.time.Duration.ofMillis;
-import static java.time.Duration.ofSeconds;
 import static java.util.Objects.isNull;
 import static org.openqa.selenium.interactions.PointerInput.Kind.TOUCH;
 import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
@@ -89,9 +88,9 @@ final class FingerGestureBuilder {
         return singleFingerGesture (startPosition, endPosition);
     }
 
-    Sequence tapAndHold () {
+    Sequence tapAndHold (final long millis) {
         final var start = getElementCenter (this.sourceElement);
-        this.pause = ofSeconds (1);
+        this.pause = ofMillis (millis);
         return singleFingerGesture (start, null);
     }
 

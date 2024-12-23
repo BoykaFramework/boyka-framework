@@ -99,7 +99,8 @@ class AndroidManager implements IDriverManager {
         options.setClearSystemFiles (this.settings.isClearFiles ());
         options.setClearDeviceLogsOnStart (this.settings.isClearLogs ());
         options.setNoReset (this.settings.isNoReset ());
-        options.setAutoGrantPermissions (settings.isAutoGrantPermissions ());
+        options.setNewCommandTimeout (ofSeconds (this.settings.getCommandTimeout ()));
+        options.setAutoGrantPermissions (this.settings.isAutoGrantPermissions ());
         options.setFullReset (this.settings.isFullReset ());
         options.setUiautomator2ServerLaunchTimeout (ofSeconds (this.settings.getServerLaunchTimeout ()));
         options.setUiautomator2ServerInstallTimeout (ofSeconds (this.settings.getServerInstallTimeout ()));

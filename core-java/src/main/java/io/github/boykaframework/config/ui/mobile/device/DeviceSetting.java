@@ -42,6 +42,7 @@ public class DeviceSetting {
     private Map<String, Object>                  capabilities;
     private boolean                              clearFiles             = true;
     private boolean                              clearLogs              = true;
+    private int                                  commandTimeout         = 60;
     private boolean                              fullReset;
     private boolean                              ignoreUnimportantViews = true;
     private String                               name;
