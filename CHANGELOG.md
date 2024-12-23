@@ -5,6 +5,24 @@
 
 
 
+
+## 2.4.1 (2024-12-23)
+
+#### :rocket: New Feature
+* [#954](https://github.com/BoykaFramework/boyka-framework/pull/954) feat(java): :sparkles: added longPress and doubleTap support for mobile ([@WasiqB](https://github.com/WasiqB))
+
+#### :bug: Bug Fix
+* [#950](https://github.com/BoykaFramework/boyka-framework/pull/950) fix(java): :bug: added support for permissions related capabilities ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#942](https://github.com/BoykaFramework/boyka-framework/pull/942) build(deps): bump the dependencies group in /core-java with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### :running_woman: Performance
+* [#946](https://github.com/BoykaFramework/boyka-framework/pull/946) test(java): :white_check_mark: added swipeTill method test ([@WasiqB](https://github.com/WasiqB))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.4.0 (2024-12-12)
 
 #### :rocket: New Feature
