@@ -23,6 +23,36 @@ IFingerActions fingerActions = FingerActions.withFinger ();
 
 ## Instance methods
 
+### `doubleTap`
+
+This method will double tap on the screen / element.
+
+```java
+import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
+
+withFinger (sourceElement).doubleTap ();
+```
+
+### `longPress`
+
+This method will long press on the screen / element.
+
+```java
+import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
+
+withFinger (sourceElement).longPress ();
+```
+
+### `tap`
+
+This method will tap on the screen / element.
+
+```java
+import static io.github.boykaframework.actions.elements.FingerActions.withFinger;
+
+withFinger (sourceElement).tap ();
+```
+
 ### `swipe`
 
 This method will swipe on the screen / element, i.e: finger will move from center of the screen to mentioned direction of the screen / element.
