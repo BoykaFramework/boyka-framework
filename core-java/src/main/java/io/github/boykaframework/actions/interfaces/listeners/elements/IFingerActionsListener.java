@@ -28,6 +28,15 @@ import io.github.boykaframework.enums.SwipeDirection;
  */
 public interface IFingerActionsListener extends BoykaListener {
     /**
+     * Handles double tap method.
+     *
+     * @param locator Locator of the element.
+     */
+    default void onDoubleTap (final Locator locator) {
+        // not implemented
+    }
+
+    /**
      * Handle drag to method.
      *
      * @param source Source element to drag.
@@ -35,6 +44,16 @@ public interface IFingerActionsListener extends BoykaListener {
      */
     default void onDragTo (final Locator source, final Locator destination) {
         // not implemented.
+    }
+
+    /**
+     * Handles long press method with specified duration
+     *
+     * @param locator Locator of the element.
+     * @param millis Duration of long press.
+     */
+    default void onLongPress (final Locator locator, long millis) {
+        // not implemented
     }
 
     /**

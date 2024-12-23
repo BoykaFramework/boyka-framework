@@ -29,6 +29,8 @@ import static java.util.Collections.singletonList;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.List;
+
 import io.github.boykaframework.actions.interfaces.elements.IFingerActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IFingerActionsListener;
 import io.github.boykaframework.builders.Locator;
@@ -83,6 +85,20 @@ public class FingerActions extends ElementActions implements IFingerActions {
     }
 
     @Override
+    public void doubleTap () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Double Tapping on the element...");
+        ofNullable (this.listener).ifPresent (l -> l.onDoubleTap (this.locator));
+        final var sequences = getElementAttribute (element -> FingerGestureBuilder.init ()
+            .sourceElement (this.locator)
+            .pause (ofMillis (this.delaySetting.getBeforeTap ()))
+            .build ()
+            .tapOn (), this.locator, null);
+        performMobileGestures (List.of (sequences, sequences));
+        LOGGER.traceExit ();
+    }
+
+    @Override
     public void dragTo (final Locator destination) {
         LOGGER.traceEntry ();
         LOGGER.info ("Dragging [{}] to [{}] on Mobile devices.", this.locator.getName (), destination.getName ());
@@ -94,6 +110,24 @@ public class FingerActions extends ElementActions implements IFingerActions {
             .dragTo (destination), null);
         performMobileGestures (singletonList (dragSequence));
         LOGGER.traceExit ();
+    }
+
+    @Override
+    public void longPress (final long millis) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Long pressing on [{}] for [{}] ms.", this.locator.getName (), millis);
+        ofNullable (this.listener).ifPresent (l -> l.onLongPress (this.locator, millis));
+        final var dragSequence = getDriverAttribute (driver -> FingerGestureBuilder.init ()
+            .sourceElement (this.locator)
+            .build ()
+            .tapAndHold (millis), null);
+        performMobileGestures (singletonList (dragSequence));
+        LOGGER.traceExit ();
+    }
+
+    @Override
+    public void longPress () {
+        longPress (500);
     }
 
     @Override

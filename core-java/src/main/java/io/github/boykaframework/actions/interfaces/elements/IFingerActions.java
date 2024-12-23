@@ -27,11 +27,28 @@ import io.github.boykaframework.enums.SwipeDirection;
  */
 public interface IFingerActions extends IElementActions {
     /**
+     * Double tap on an element.
+     */
+    void doubleTap ();
+
+    /**
      * Drag one element to another element.
      *
      * @param destination Target element
      */
     void dragTo (final Locator destination);
+
+    /**
+     * Long press on element for a particular duration.
+     *
+     * @param millis Duration of long press.
+     */
+    void longPress (long millis);
+
+    /**
+     * Long press on an element for 500 ms.
+     */
+    void longPress ();
 
     /**
      * Swipe on the Mobile screen starting from center of the screen to the direction mentioned
