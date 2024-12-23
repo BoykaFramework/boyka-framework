@@ -232,7 +232,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "14",
+          "version": "12",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,

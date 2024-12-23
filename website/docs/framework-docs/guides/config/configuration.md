@@ -547,6 +547,7 @@ When you use Boyka command line assistant to configure your test to run on any C
 | `video` | Video recording related settings | `VideoSetting` | `null` |
 | `auto_grant_permissions` | Auto grant permissions for Android devices | `boolean` | `false` |
 | `permissions` | Map of permissions to grant for iOS devices | `Map<Permissions, PermissionDecision>` | `null` |
+| `command_timeout` | Timeout in seconds to wait for a command to execute | `int` | `60` |
 
 :::danger
 When providing `permissions` option in the device configuration, make sure to provide the `bundle_id` for the app under test in the `application` block.

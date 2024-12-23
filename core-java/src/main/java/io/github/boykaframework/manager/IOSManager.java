@@ -136,11 +136,12 @@ class IOSManager implements IDriverManager {
         options.setClearSystemFiles (this.settings.isClearFiles ());
         options.setNoReset (this.settings.isNoReset ());
         options.setFullReset (this.settings.isFullReset ());
+        options.setNewCommandTimeout (ofSeconds (this.settings.getCommandTimeout ()));
         options.setWebviewConnectTimeout (ofSeconds (this.settings.getWebViewConnectTimeout ()));
         options.setWebviewConnectRetries (this.settings.getWebViewConnectRetries ());
         options.setMaxTypingFrequency (this.settings.getTypingSpeed ());
         setWdaOptions (this.settings.getWda (), options);
-        setPermissions (options, settings);
+        setPermissions (options, this.settings);
     }
 
     private void setupVirtualDeviceSetting (final DeviceType deviceType, final VirtualDeviceSetting virtualDevice,
