@@ -355,7 +355,7 @@ The Config file name cannot be modified. It should always be `boyka-config.json`
   },
   "api": {
     "test_restfulbooker": {
-      "base_uri": "https://restful-booker.herokuapp.com",
+      "base_uri": "https://restful-booker.herokuapp.com"
     }
   }
 }
