@@ -179,7 +179,7 @@ public final class CommonActions {
     private static void highlight (final String color, final WebElement element) {
         if (getSession ().getWebSetting ()
             .isHighlight ()) {
-            final var style = element.getAttribute ("style");
+            final var style = element.getDomAttribute ("style");
             getSession ().setSharedData (HIGHLIGHT_STYLE, style);
             withDriver ().executeScript ("arguments[0].setAttribute('style', arguments[1] + arguments[2]);", element,
                 style, format ("color: {0}; border: 3px solid {0};", color));
