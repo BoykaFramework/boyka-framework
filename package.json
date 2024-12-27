@@ -38,8 +38,8 @@
     "@stylistic/eslint-plugin-js": "^2.12.1",
     "@stylistic/eslint-plugin-ts": "^2.12.1",
     "@types/node": "^22.10.2",
-    "@typescript-eslint/eslint-plugin": "^8.18.1",
-    "@typescript-eslint/parser": "^8.18.1",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
     "commitlint": "^19.6.1",
     "eslint": "^9.17.0",
     "eslint-config-google": "^0.14.0",
@@ -47,7 +47,7 @@
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react": "^7.37.3",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
     "js-yaml": "^4.1.0",
@@ -60,10 +60,10 @@
     "prettier": "^3.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "release-it": "^17.10.0",
+    "release-it": "^17.11.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.1"
+    "typescript-eslint": "^8.18.2"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
