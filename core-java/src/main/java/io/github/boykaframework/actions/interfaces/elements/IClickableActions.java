@@ -44,9 +44,24 @@ public interface IClickableActions extends IFingersActions {
     void hover ();
 
     /**
+     * Presses the back button on Mouse.
+     */
+    void pressBackButton ();
+
+    /**
+     * Presses the forward button on Mouse.
+     */
+    void pressForwardButton ();
+
+    /**
      * RightClick on element
      */
     void rightClick ();
+
+    /**
+     * Scroll to element.
+     */
+    void scrollToElement ();
 
     /**
      * Submit the element.

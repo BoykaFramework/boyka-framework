@@ -73,11 +73,34 @@ public interface IClickableActionsListener extends BoykaListener {
     }
 
     /**
+     * Handles the pressBackButton method.
+     */
+    default void onPressBackButton () {
+        // not implemented.
+    }
+
+    /**
+     * Handles the pressForwardButton method.
+     */
+    default void onPressForwardButton () {
+        // not implemented.
+    }
+
+    /**
      * Handle right click method.
      *
      * @param locator Locator of the element.
      */
     default void onRightClick (final Locator locator) {
+        // not implemented.
+    }
+
+    /**
+     * Scroll to the element.
+     *
+     * @param locator locator of the element.
+     */
+    default void onScrollToElement (final Locator locator) {
         // not implemented.
     }
 
