@@ -77,6 +77,36 @@ import static io.github.boykaframework.actions.elements.ClickableActions.withMou
 withMouse (locator).hover ();
 ```
 
+### `pressBackButton` {#press-back-button}
+
+This method is used to press the back button of mouse on the device.
+
+```java
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
+. . .
+withMouse ().pressBackButton ();
+```
+
+### `pressForwardButton` {#press-forward-button}
+
+This method is used to press the forward button of mouse on the device.
+
+```java
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
+. . .
+withMouse ().pressForwardButton ();
+```
+
+### `scrollToElement` {#scroll-to-element}
+
+This method is used to scroll the given element into view.
+
+```java
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
+. . .
+withMouse (locator).scrollToElement ();
+```
+
 ### `submit`
 
 This method is used to submit the given element.
