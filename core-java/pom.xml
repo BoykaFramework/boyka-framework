@@ -54,7 +54,7 @@
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.21.0</checkstyle.version>
+        <checkstyle.version>10.21.1</checkstyle.version>
         <aspectj.version>1.9.22.1</aspectj.version>
         <poi.version>5.3.0</poi.version>
         <suite-name>testng-api</suite-name>
