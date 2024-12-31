@@ -56,3 +56,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 . . .
 withDriver ().waitUntil (ExpectedConditions.urlMatches (URL));
 ```
+
+### `waitUntil(condition, timeout)` {#wait-until-with-timeout}
+
+This method will wait for any given condition to be true. It takes in Selenium WebDrivers `ExpectedCondition<Boolean>` object as parameter.
+
+```java
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
+. . .
+withDriver ().waitUntil (ExpectedConditions.urlMatches (URL), Duration.ofSeconds(10));
+```
