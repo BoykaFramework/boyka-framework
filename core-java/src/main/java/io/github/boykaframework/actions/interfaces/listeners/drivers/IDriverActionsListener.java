@@ -59,4 +59,11 @@ public interface IDriverActionsListener extends BoykaListener {
     default void onWaitUntil () {
         // not implemented.
     }
+
+    /**
+     * Handle wait until method.
+     */
+    default void onWaitUntil (final Duration timeout) {
+        // not implemented.
+    }
 }
