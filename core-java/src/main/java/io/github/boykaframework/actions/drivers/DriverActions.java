@@ -48,6 +48,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Device / Browser specific actions.
@@ -145,6 +146,17 @@ public final class DriverActions implements IDriverActions {
         ofNullable (this.listener).ifPresent (IDriverActionsListener::onWaitUntil);
         performDriverAction (driver -> {
             final var wait = getSession ().getWait ();
+            wait.until (condition);
+        });
+    }
+
+    @Override
+    public <T> void waitUntil (final Function<WebDriver, T> condition, final Duration timeout) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Waiting for the expected condition for {} duration...", timeout);
+        ofNullable (this.listener).ifPresent (l -> l.onWaitUntil (timeout));
+        performDriverAction (driver -> {
+            final var wait = new WebDriverWait (driver, timeout);
             wait.until (condition);
         });
     }

@@ -22,3 +22,7 @@ This method will get executed after saving all the driver logs.
 ## `onWaitUntil` {#on-wait-until}
 
 This method will get executed after waiting until a particular condition.
+
+## `onWaitUntil(timeout)` {#on-wait-until-timeout}
+
+This method will get executed after waiting until a particular condition for provided timeout.

@@ -28,6 +28,7 @@ import static io.github.boykaframework.manager.ParallelSession.createSession;
 import static io.github.boykaframework.testng.ui.theinternet.pages.HomePage.homePage;
 import static io.github.boykaframework.testng.ui.theinternet.pages.MultiWindowPage.multiWindowPage;
 import static java.text.MessageFormat.format;
+import static java.time.Duration.ofSeconds;
 import static org.openqa.selenium.WindowType.TAB;
 import static org.openqa.selenium.support.ui.ExpectedConditions.urlMatches;
 
@@ -129,8 +130,8 @@ public class WindowTest {
             .findFirst ();
         assertWithMessage ("Window").that (newWindow.isPresent ())
             .isTrue ();
-        onWindow ().switchTo (newWindow.get ());
-        withDriver ().waitUntil (urlMatches (format ("{0}windows/new", URL)));
+        onWindow ().switchTo (newWindow.orElseThrow ());
+        withDriver ().waitUntil (urlMatches (format ("{0}windows/new", URL)), ofSeconds (10));
         navigate ().verifyUrl ()
             .isEqualTo (format ("{0}windows/new", URL));
         onElement (multiWindowPage ().getTitle ()).verifyText ()
