@@ -6,6 +6,23 @@
 
 
 
+
+## 2.4.2 (2025-01-01)
+
+#### :rocket: New Feature
+* [#962](https://github.com/BoykaFramework/boyka-framework/pull/962) feat(java): :sparkles: updated waitUntil method with timeout param ([@WasiqB](https://github.com/WasiqB))
+* [#959](https://github.com/BoykaFramework/boyka-framework/pull/959) feat(java): :zap: updated mouse related actions ([@WasiqB](https://github.com/WasiqB))
+
+#### :memo: Documentation
+* [#958](https://github.com/BoykaFramework/boyka-framework/pull/958) docs(website): :memo: updated the sample file in configuration document ([@mfaisalkhatri](https://github.com/mfaisalkhatri))
+
+#### :house: Internal
+* [#960](https://github.com/BoykaFramework/boyka-framework/pull/960) build(deps): bump com.puppycrawl.tools:checkstyle from 10.21.0 to 10.21.1 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 2
+- Mohammad Faisal Khatri ([@mfaisalkhatri](https://github.com/mfaisalkhatri))
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.4.1 (2024-12-23)
 
 #### :rocket: New Feature
