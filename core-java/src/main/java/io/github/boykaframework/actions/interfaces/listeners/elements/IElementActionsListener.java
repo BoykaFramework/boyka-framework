@@ -46,11 +46,38 @@ public interface IElementActionsListener extends BoykaListener {
     }
 
     /**
+     * Handles get element method.
+     *
+     * @param locator locator of the element.
+     */
+    default void onGetElement (final Locator locator) {
+        // not implemented.
+    }
+
+    /**
+     * Handles get location method
+     *
+     * @param locator locator of the element.
+     */
+    default void onGetLocation (final Locator locator) {
+        // not implemented.
+    }
+
+    /**
      * Handles getProperty method.
      *
      * @param property property name
      */
     default void onGetProperty (final String property) {
+        // not implemented.
+    }
+
+    /**
+     * Handles get size method.
+     *
+     * @param locator locator of the element.
+     */
+    default void onGetSize (final Locator locator) {
         // not implemented.
     }
 

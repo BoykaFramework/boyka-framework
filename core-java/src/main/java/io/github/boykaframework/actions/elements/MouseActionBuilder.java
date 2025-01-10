@@ -19,6 +19,9 @@ package io.github.boykaframework.actions.elements;
 import static io.github.boykaframework.actions.CommonActions.performDriverAction;
 import static io.github.boykaframework.actions.CommonActions.performElementAction;
 import static io.github.boykaframework.actions.elements.ElementFinder.find;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PAUSE;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PRESSED;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.RELEASED;
 import static io.github.boykaframework.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static io.github.boykaframework.enums.WaitStrategy.CLICKABLE;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
@@ -28,7 +31,9 @@ import static java.util.Objects.isNull;
 import static org.openqa.selenium.interactions.PointerInput.Kind.MOUSE;
 import static org.openqa.selenium.interactions.PointerInput.MouseButton.BACK;
 import static org.openqa.selenium.interactions.PointerInput.MouseButton.FORWARD;
+import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
 
+import java.util.List;
 import java.util.function.BiFunction;
 
 import io.github.boykaframework.builders.Locator;
@@ -44,12 +49,12 @@ import org.openqa.selenium.interactions.Sequence;
  * @author Wasiq Bhamla
  * @since 27-Dec-2024
  */
-@Builder
+@Builder (builderMethodName = "buildAction")
 public class MouseActionBuilder {
     private Locator sourceLocator;
 
     Sequence backButtonClick () {
-        return mouseAction (BACK);
+        return mouseButtonAction (BACK);
     }
 
     void click () {
@@ -60,6 +65,23 @@ public class MouseActionBuilder {
     void clickAndHold () {
         performElementAction ((d, e) -> new Actions (d).clickAndHold (e)
             .perform (), this.sourceLocator);
+    }
+
+    Sequence composeActions (final List<MouseAction> actions) {
+        return composeMouseSequence ((mouse, steps) -> {
+            actions.forEach (action -> {
+                switch (action.getActionType ()) {
+                    case MOVE -> steps.addAction (
+                        mouse.createPointerMove (action.getDuration (), viewport (), action.getLocation ()));
+                    case PAUSE -> steps.addAction (new Pause (mouse, action.getDuration ()));
+                    case PRESSED -> steps.addAction (mouse.createPointerDown (action.getButton ()
+                        .asArg ()));
+                    default -> steps.addAction (mouse.createPointerUp (action.getButton ()
+                        .asArg ()));
+                }
+            });
+            return steps;
+        });
     }
 
     void doubleClick () {
@@ -74,7 +96,7 @@ public class MouseActionBuilder {
     }
 
     Sequence forwardButtonClick () {
-        return mouseAction (FORWARD);
+        return mouseButtonAction (FORWARD);
     }
 
     void moveTo () {
@@ -84,7 +106,7 @@ public class MouseActionBuilder {
 
     void rightClick () {
         if (isNull (this.sourceLocator)) {
-            performDriverAction ((d) -> new Actions (d).contextClick ()
+            performDriverAction (d -> new Actions (d).contextClick ()
                 .perform ());
         } else {
             performElementAction ((d, e) -> new Actions (d).contextClick (e)
@@ -103,16 +125,22 @@ public class MouseActionBuilder {
         return steps.apply (mouse, sequence);
     }
 
-    private Sequence mouseAction (final PointerInput.MouseButton button) {
+    private Sequence mouseButtonAction (final PointerInput.MouseButton button) {
         final var delaySetting = getSession ().getSetting ()
             .getUi ()
             .getDelay ();
 
-        return composeMouseSequence ((mouse, steps) -> {
-            steps.addAction (mouse.createPointerDown (button.asArg ()));
-            steps.addAction (new Pause (mouse, ofMillis (delaySetting.getBeforeSwipe ())));
-            steps.addAction (mouse.createPointerUp (button.asArg ()));
-            return steps;
-        });
+        final var actions = List.of (MouseAction.composeAction ()
+            .button (button)
+            .actionType (PRESSED)
+            .compose (), MouseAction.composeAction ()
+            .actionType (PAUSE)
+            .duration (ofMillis (delaySetting.getBeforeSwipe ()))
+            .compose (), MouseAction.composeAction ()
+            .actionType (RELEASED)
+            .button (button)
+            .compose ());
+
+        return composeActions (actions);
     }
 }

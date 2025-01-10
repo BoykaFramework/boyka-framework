@@ -35,7 +35,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import io.appium.java_client.AppiumDriver;
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
@@ -43,6 +42,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * Common action methods to perform different actions on devices / browsers and on elements.
@@ -169,7 +169,7 @@ public final class CommonActions {
     public static void performMobileGestures (final Collection<Sequence> sequences) {
         LOGGER.traceEntry ();
         try {
-            performDriverAction (driver -> ((AppiumDriver) driver).perform (sequences));
+            performDriverAction (driver -> ((RemoteWebDriver) driver).perform (sequences));
         } catch (final WebDriverException e) {
             handleAndThrow (DRIVER_ERROR_OCCURRED, e, e.getMessage ());
         }
