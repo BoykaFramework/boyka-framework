@@ -25,6 +25,8 @@ import static java.util.Collections.singletonList;
 import static java.util.Optional.ofNullable;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
+import java.util.List;
+
 import io.github.boykaframework.actions.interfaces.elements.IClickableActions;
 import io.github.boykaframework.actions.interfaces.listeners.elements.IClickableActionsListener;
 import io.github.boykaframework.builders.Locator;
@@ -64,7 +66,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.info ("Clicking on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onClick (this.locator));
         pause (this.delaySetting.getBeforeClick ());
-        MouseActionBuilder.builder ()
+        MouseActionBuilder.buildAction ()
             .sourceLocator (this.locator)
             .build ()
             .click ();
@@ -76,7 +78,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Click and hold on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onClickAndHold (this.locator));
-        MouseActionBuilder.builder ()
+        MouseActionBuilder.buildAction ()
             .sourceLocator (this.locator)
             .build ()
             .clickAndHold ();
@@ -88,7 +90,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Double Click on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onDoubleClick (this.locator));
-        MouseActionBuilder.builder ()
+        MouseActionBuilder.buildAction ()
             .sourceLocator (this.locator)
             .build ()
             .doubleClick ();
@@ -100,10 +102,23 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Drag and Drop on element: {} , {}", this.locator.getName (), destination.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onDragTo (this.locator, destination));
-        MouseActionBuilder.builder ()
+        MouseActionBuilder.buildAction ()
             .sourceLocator (this.locator)
             .build ()
             .dragAndDrop (destination);
+        LOGGER.traceExit ();
+    }
+
+    @Override
+    public void draw (final List<MouseAction> actions) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Drawing on element: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onDraw (actions));
+        final var sequence = MouseActionBuilder.buildAction ()
+            .sourceLocator (this.locator)
+            .build ()
+            .composeActions (actions);
+        performMobileGestures (singletonList (sequence));
         LOGGER.traceExit ();
     }
 
@@ -112,7 +127,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Hover on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onHover (this.locator));
-        MouseActionBuilder.builder ()
+        MouseActionBuilder.buildAction ()
             .sourceLocator (this.locator)
             .build ()
             .moveTo ();
@@ -124,7 +139,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Pressing the Mouse Back button...");
         ofNullable (this.listener).ifPresent (IClickableActionsListener::onPressBackButton);
-        final var sequence = MouseActionBuilder.builder ()
+        final var sequence = MouseActionBuilder.buildAction ()
             .build ()
             .backButtonClick ();
         performMobileGestures (singletonList (sequence));
@@ -136,7 +151,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Pressing the Mouse Forward button...");
         ofNullable (this.listener).ifPresent (IClickableActionsListener::onPressForwardButton);
-        final var sequence = MouseActionBuilder.builder ()
+        final var sequence = MouseActionBuilder.buildAction ()
             .build ()
             .forwardButtonClick ();
         performMobileGestures (singletonList (sequence));
@@ -148,7 +163,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Right Click on element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onRightClick (this.locator));
-        MouseActionBuilder.builder ()
+        MouseActionBuilder.buildAction ()
             .sourceLocator (this.locator)
             .build ()
             .rightClick ();
@@ -160,7 +175,7 @@ public class ClickableActions extends FingersActions implements IClickableAction
         LOGGER.traceEntry ();
         LOGGER.info ("Scrolling to element: {}", this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onScrollToElement (this.locator));
-        MouseActionBuilder.builder ()
+        MouseActionBuilder.buildAction ()
             .sourceLocator (this.locator)
             .build ()
             .scrollTo ();

@@ -40,7 +40,9 @@ import io.github.boykaframework.actions.interfaces.listeners.elements.IElementAc
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.config.ui.DelaySetting;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -111,11 +113,35 @@ public class ElementActions implements IElementActions {
     }
 
     @Override
+    public WebElement getElement () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting the WebElement located by: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onGetElement (this.locator));
+        return getElementAttribute (e -> e, this.locator, null);
+    }
+
+    @Override
+    public Point getLocation () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting location of element located by: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onGetLocation (this.locator));
+        return LOGGER.traceExit (getElementAttribute (WebElement::getLocation, this.locator, new Point (0, 0)));
+    }
+
+    @Override
     public String getProperty (final String property) {
         LOGGER.traceEntry ();
         LOGGER.info ("Getting Property: {} of element located by: {}", property, this.locator.getName ());
         ofNullable (this.listener).ifPresent (l -> l.onGetProperty (property));
         return LOGGER.traceExit (getPropertyValue (property));
+    }
+
+    @Override
+    public Dimension getSize () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Getting size of element located by: {}", this.locator.getName ());
+        ofNullable (this.listener).ifPresent (l -> l.onGetSize (this.locator));
+        return LOGGER.traceExit (getElementAttribute (WebElement::getSize, this.locator, new Dimension (0, 0)));
     }
 
     @Override

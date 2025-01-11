@@ -35,6 +35,36 @@ import static io.github.boykaframework.actions.elements.ElementActions.onElement
 onElement (locator).clear ();
 ```
 
+### `getElement` {#get-element}
+
+This method is used to get the element of the given locator.
+
+```java
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+. . .
+WebElement element = onElement (locator).getElement ();
+```
+
+### `getLocation` {#get-location}
+
+This method is used to get the location of the given element.
+
+```java
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+. . .
+Point location = onElement (locator).getLocation ();
+```
+
+### `getSize` {#get-size}
+
+This method is used to get the size of the given element.
+
+```java
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+. . .
+Dimension size = onElement (locator).getSize ();
+```
+
 ### `isDisplayed` {#is-displayed}
 
 This method is used to check whether the given element is displayed or not.

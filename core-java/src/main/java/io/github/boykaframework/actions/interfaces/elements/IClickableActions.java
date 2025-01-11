@@ -16,6 +16,10 @@
 
 package io.github.boykaframework.actions.interfaces.elements;
 
+import java.util.List;
+
+import io.github.boykaframework.actions.elements.MouseAction;
+
 /**
  * All Clickable actions
  *
@@ -37,6 +41,13 @@ public interface IClickableActions extends IFingersActions {
      * DoubleClick on element
      */
     void doubleClick ();
+
+    /**
+     * Draw shapes based on the list of points.
+     *
+     * @param actions Mouse actions for composing the draw action.
+     */
+    void draw (List<MouseAction> actions);
 
     /**
      * Hover on element

@@ -23,6 +23,10 @@ This method will get executed after double clicking on the element located by us
 
 This method will get executed after dragging the source element located by using the provided source locator to the destination element located by using the provided destination locator.
 
+## `onDraw (steps)` {#on-draw}
+
+ This method will get executed after drawing the steps provided in the steps parameter.
+
 ## `onHover (locator)` {#on-hover}
 
 This method will get executed after hovering on the element located by using the provided locator.
