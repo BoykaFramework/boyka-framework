@@ -19,6 +19,18 @@ This method will get executed after getting the given attribute in the element l
 
 This method will get executed after getting the given style in the element located by using the provided locator.
 
+## `onGetElement (locator)` {#on-get-element}
+
+This method will get executed after getting the element located by using the provided locator.
+
+## `onGetLocation (locator)` {#on-get-location}
+
+This method will get executed after getting the location of the element located by using the provided locator.
+
+## `onGetSize (locator)` {#on-get-size}
+
+This method will get executed after getting the size of the element located by using the provided locator.
+
 ## `onGetText (locator)` {#on-get-text}
 
 This method will get executed after getting the text of the element located by using the provided locator.

@@ -47,6 +47,15 @@ public interface IDriverActionsListener extends BoykaListener {
     }
 
     /**
+     * Handles press keys method.
+     *
+     * @param keys Keys to press.
+     */
+    default void onPressKeys (final String... keys) {
+        // not implemented.
+    }
+
+    /**
      * Handle save logs method.
      */
     default void onSaveLogs () {

@@ -47,6 +47,13 @@ public interface IDriverActions {
     void pause (final Duration time);
 
     /**
+     * Press keys on the window.
+     *
+     * @param keys Keys to press.
+     */
+    void pressKeys (final String... keys);
+
+    /**
      * Save all the available logs to files in `logs` folder.
      */
     void saveLogs ();

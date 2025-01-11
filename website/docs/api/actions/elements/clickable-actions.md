@@ -67,6 +67,39 @@ Locator target = // target element to drag the source to
 withMouse (source).dragTo (target);
 ```
 
+### `draw (steps)` {#draw}
+
+This method is used to draw on the given element.
+
+```java
+import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.MOVE;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PAUSE;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PRESSED;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.RELEASED;
+import static io.github.boykaframework.testng.ui.excalidraw.pages.HomePage.homePage;
+import static java.time.Duration.ofMillis;
+. . .
+final var steps = new ArrayList<MouseAction> ();
+steps.add (MouseAction.composeAction ()
+    .actionType (MOVE)
+    .duration (ofMillis (5))
+    .location (new Point (x, y))
+    .compose ());
+steps.add (MouseAction.composeAction ()
+    .actionType (PRESS)
+    .compose ());
+steps.add (MouseAction.composeAction ()
+    .actionType (PAUSE)
+    .duration (ofMillis (10))
+    .compose ());
+steps.add (MouseAction.composeAction ()
+    .actionType (RELEASE)
+    .compose ());
+
+withMouse (homePage ().getCanvas ()).draw (steps);
+```
+
 ### `hover`
 
 This method is used to hover on the given element.

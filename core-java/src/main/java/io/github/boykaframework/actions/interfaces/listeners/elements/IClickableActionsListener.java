@@ -16,6 +16,9 @@
 
 package io.github.boykaframework.actions.interfaces.listeners.elements;
 
+import java.util.List;
+
+import io.github.boykaframework.actions.elements.MouseAction;
 import io.github.boykaframework.actions.interfaces.listeners.BoykaListener;
 import io.github.boykaframework.builders.Locator;
 
@@ -60,6 +63,15 @@ public interface IClickableActionsListener extends BoykaListener {
      * @param destination target element
      */
     default void onDragTo (final Locator source, final Locator destination) {
+        // not implemented.
+    }
+
+    /**
+     * Handles draw method.
+     *
+     * @param actions Mouse actions to perform for drawing.
+     */
+    default void onDraw (final List<MouseAction> actions) {
         // not implemented.
     }
 

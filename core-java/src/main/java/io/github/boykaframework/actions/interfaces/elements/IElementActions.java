@@ -21,6 +21,9 @@ import java.util.List;
 import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.IterableSubject;
 import com.google.common.truth.StringSubject;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 
 /**
  * Element specific actions
@@ -44,6 +47,20 @@ public interface IElementActions {
     String getAttribute (final String attribute);
 
     /**
+     * Gets the underlying WebElement
+     *
+     * @return WebElement
+     */
+    WebElement getElement ();
+
+    /**
+     * Gets the element location.
+     *
+     * @return Element location.
+     */
+    Point getLocation ();
+
+    /**
      * Get Dom property value.
      *
      * @param property DOM property
@@ -51,6 +68,13 @@ public interface IElementActions {
      * @return Property value
      */
     String getProperty (String property);
+
+    /**
+     * Gets the element size.
+     *
+     * @return Element size.
+     */
+    Dimension getSize ();
 
     /**
      * Gets the styling attribute of the element.

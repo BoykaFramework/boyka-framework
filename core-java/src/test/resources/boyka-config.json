@@ -54,6 +54,10 @@
           "use-fake-ui-for-media-stream"
         ]
       },
+      "test_draw": {
+        "base_url": "https://excalidraw.com/",
+        "browser": "CHROME"
+      },
       "test_local_firefox": {
         "browser": "FIREFOX"
       },

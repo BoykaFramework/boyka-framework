@@ -15,6 +15,10 @@ This method will get executed after executing the script on the driver using pro
 
 This method will get executed after pausing for the mentioned duration.
 
+## `onPressKeys (keys)` {#on-press-keys}
+
+ This method will get executed after pressing the provided keys.
+
 ## `onSaveLogs` {#on-save-logs}
 
 This method will get executed after saving all the driver logs.
