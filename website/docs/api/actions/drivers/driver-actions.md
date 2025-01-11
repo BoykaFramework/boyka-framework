@@ -25,6 +25,17 @@ import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 String output = withDriver ().executeScript ("alert('Hello World');");
 ```
 
+### `pressKeys (keys)` {#press-keys}
+
+ This method will simulate the given keys being pressed.
+
+ ```java
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
+import org.openqa.selenium.Keys;
+
+withDriver ().pressKeys (Keys.ENTER, "Hello World");
+ ```
+
 ### `pause` {#pause}
 
 This method is used to navigate to the given URL.

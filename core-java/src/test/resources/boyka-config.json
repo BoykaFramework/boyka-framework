@@ -56,8 +56,7 @@
       },
       "test_draw": {
         "base_url": "https://excalidraw.com/",
-        "browser": "CHROME",
-        "headless": false
+        "browser": "CHROME"
       },
       "test_local_firefox": {
         "browser": "FIREFOX"

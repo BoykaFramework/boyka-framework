@@ -17,22 +17,17 @@
 package io.github.boykaframework.testng.ui.excalidraw;
 
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
-import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
+import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
-import static io.github.boykaframework.actions.elements.MouseAction.ActionType.MOVE;
-import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PAUSE;
-import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PRESSED;
 import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
+import static io.github.boykaframework.testng.ui.excalidraw.actions.DrawingAction.drawCircle;
+import static io.github.boykaframework.testng.ui.excalidraw.actions.DrawingAction.drawSmile;
 import static io.github.boykaframework.testng.ui.excalidraw.pages.HomePage.homePage;
-import static java.time.Duration.ofMillis;
+import static java.time.Duration.ofSeconds;
 
-import java.util.ArrayList;
-
-import io.github.boykaframework.actions.elements.MouseAction;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -58,6 +53,8 @@ public class DrawSmileyTest {
     public void testDrawSmiley () {
         withDriver ().pressKeys (Keys.chord ("p"));
         drawSmiley ();
+        onWindow ().takeScreenshot ();
+        withDriver ().pause (ofSeconds (5));
     }
 
     private void drawSmiley () {
@@ -66,54 +63,14 @@ public class DrawSmileyTest {
         final var centerX = location.getX () + (size.getWidth () / 2);
         final var centerY = location.getY () + (size.getHeight () / 2);
 
-        final var steps = new ArrayList<MouseAction> ();
-        steps.add (MouseAction.composeAction ()
-            .actionType (MOVE)
-            .duration (ofMillis (100))
-            .location (new Point (centerX + 60, centerY - 91))
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (PRESSED)
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (PAUSE)
-            .duration (ofMillis (10))
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (MOVE)
-            .duration (ofMillis (100))
-            .location (new Point (centerX - 77, centerY + 46))
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (MOVE)
-            .duration (ofMillis (100))
-            .location (new Point (centerX + 44, centerY + 48))
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (MOVE)
-            .duration (ofMillis (100))
-            .location (new Point (centerX - 44, centerY + 136))
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (MOVE)
-            .duration (ofMillis (100))
-            .location (new Point (centerX - 10, centerY + 69))
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (MOVE)
-            .duration (ofMillis (100))
-            .location (new Point (centerX - 99, centerY + 68))
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (PAUSE)
-            .duration (ofMillis (1000))
-            .compose ());
-        steps.add (MouseAction.composeAction ()
-            .actionType (MOVE)
-            .duration (ofMillis (10))
-            .location (new Point (centerX - 99, centerY + 68))
-            .compose ());
-
-        withMouse (homePage ().getCanvas ()).draw (steps);
+        // Draw the smiley face
+        // 1. Draw the circle (face)
+        drawCircle (centerX, centerY, 75);
+        // 2. Draw the left eye
+        drawCircle (centerX - 20, centerY - 20, 5);
+        // 3. Draw the right eye
+        drawCircle (centerX + 20, centerY - 20, 5);
+        // 4. Draw the smile (arc)
+        drawSmile (centerX, centerY + 10, 30);
     }
 }
