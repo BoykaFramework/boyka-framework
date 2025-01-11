@@ -36,6 +36,17 @@ public interface IElementActionsListener extends BoykaListener {
     }
 
     /**
+     * Handles execute script method.
+     *
+     * @param locator Locator of the element.
+     * @param script JS script
+     * @param args Arguments of the script.
+     */
+    default void onExecuteScript (final Locator locator, final String script, final Object... args) {
+        // not implemented.
+    }
+
+    /**
      * Handle get attribute method.
      *
      * @param locator Locator of the element.

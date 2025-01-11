@@ -40,6 +40,7 @@ import io.github.boykaframework.actions.interfaces.listeners.elements.IElementAc
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.config.ui.DelaySetting;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -88,6 +89,17 @@ public class ElementActions implements IElementActions {
         pause (this.delaySetting.getBeforeTyping ());
         performElementAction (WebElement::clear, this.locator);
         LOGGER.traceExit ();
+    }
+
+    @SuppressWarnings ("unchecked")
+    @Override
+    public <T> T executeScript (final String script, final Object... args) {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Executing script on element");
+        ofNullable (this.listener).ifPresent (l -> l.onExecuteScript (this.locator, script, args));
+        return (T) getElementAttribute (
+            (driver, element) -> ((JavascriptExecutor) driver).executeScript (script, element, args), this.locator,
+            null);
     }
 
     @Override
