@@ -109,7 +109,7 @@ public final class DriverActions implements IDriverActions {
     @Override
     public void pressKeys (final String... keys) {
         LOGGER.traceEntry ();
-        LOGGER.info ("Pressing keys: {}", keys);
+        LOGGER.info ("Pressing keys: {}", (Object[]) keys);
         ofNullable (this.listener).ifPresent (l -> l.onPressKeys (keys));
         performDriverAction (driver -> new Actions (driver).sendKeys (keys)
             .perform ());
