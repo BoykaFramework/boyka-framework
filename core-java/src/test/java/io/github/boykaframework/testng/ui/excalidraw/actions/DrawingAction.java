@@ -19,8 +19,8 @@ package io.github.boykaframework.testng.ui.excalidraw.actions;
 import static io.github.boykaframework.actions.elements.ClickableActions.withMouse;
 import static io.github.boykaframework.actions.elements.MouseAction.ActionType.MOVE;
 import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PAUSE;
-import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PRESSED;
-import static io.github.boykaframework.actions.elements.MouseAction.ActionType.RELEASED;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PRESS;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.RELEASE;
 import static io.github.boykaframework.testng.ui.excalidraw.pages.HomePage.homePage;
 import static java.time.Duration.ofMillis;
 
@@ -72,14 +72,14 @@ public final class DrawingAction {
                 .location (new Point (x, y))
                 .compose ());
             steps.add (MouseAction.composeAction ()
-                .actionType (PRESSED)
+                .actionType (PRESS)
                 .compose ());
             steps.add (MouseAction.composeAction ()
                 .actionType (PAUSE)
                 .duration (ofMillis (10))
                 .compose ());
             steps.add (MouseAction.composeAction ()
-                .actionType (RELEASED)
+                .actionType (RELEASE)
                 .compose ());
 
             withMouse (homePage ().getCanvas ()).draw (steps);

@@ -87,14 +87,14 @@ steps.add (MouseAction.composeAction ()
     .location (new Point (x, y))
     .compose ());
 steps.add (MouseAction.composeAction ()
-    .actionType (PRESSED)
+    .actionType (PRESS)
     .compose ());
 steps.add (MouseAction.composeAction ()
     .actionType (PAUSE)
     .duration (ofMillis (10))
     .compose ());
 steps.add (MouseAction.composeAction ()
-    .actionType (RELEASED)
+    .actionType (RELEASE)
     .compose ());
 
 withMouse (homePage ().getCanvas ()).draw (steps);

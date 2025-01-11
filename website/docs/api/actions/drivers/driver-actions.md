@@ -33,7 +33,7 @@ String output = withDriver ().executeScript ("alert('Hello World');");
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import org.openqa.selenium.Keys;
 
-withDriver ().pressKeys (Keys.ENTER, "Hello World");
+withDriver ().pressKeys (Keys.CONTROL, "v");
  ```
 
 ### `pause` {#pause}

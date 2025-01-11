@@ -49,11 +49,11 @@ public class MouseAction {
         /**
          * Pointer down.
          */
-        PRESSED,
+        PRESS,
         /**
          * Pointer up.
          */
-        RELEASED
+        RELEASE
     }
 
     private ActionType               actionType;

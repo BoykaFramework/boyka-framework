@@ -20,8 +20,8 @@ import static io.github.boykaframework.actions.CommonActions.performDriverAction
 import static io.github.boykaframework.actions.CommonActions.performElementAction;
 import static io.github.boykaframework.actions.elements.ElementFinder.find;
 import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PAUSE;
-import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PRESSED;
-import static io.github.boykaframework.actions.elements.MouseAction.ActionType.RELEASED;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.PRESS;
+import static io.github.boykaframework.actions.elements.MouseAction.ActionType.RELEASE;
 import static io.github.boykaframework.enums.Message.ELEMENT_CANNOT_BE_NULL;
 import static io.github.boykaframework.enums.WaitStrategy.CLICKABLE;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
@@ -74,7 +74,7 @@ public class MouseActionBuilder {
                     case MOVE -> steps.addAction (
                         mouse.createPointerMove (action.getDuration (), viewport (), action.getLocation ()));
                     case PAUSE -> steps.addAction (new Pause (mouse, action.getDuration ()));
-                    case PRESSED -> steps.addAction (mouse.createPointerDown (action.getButton ()
+                    case PRESS -> steps.addAction (mouse.createPointerDown (action.getButton ()
                         .asArg ()));
                     default -> steps.addAction (mouse.createPointerUp (action.getButton ()
                         .asArg ()));
@@ -132,12 +132,12 @@ public class MouseActionBuilder {
 
         final var actions = List.of (MouseAction.composeAction ()
             .button (button)
-            .actionType (PRESSED)
+            .actionType (PRESS)
             .compose (), MouseAction.composeAction ()
             .actionType (PAUSE)
             .duration (ofMillis (delaySetting.getBeforeSwipe ()))
             .compose (), MouseAction.composeAction ()
-            .actionType (RELEASED)
+            .actionType (RELEASE)
             .button (button)
             .compose ());
 
