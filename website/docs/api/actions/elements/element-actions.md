@@ -85,6 +85,16 @@ import static io.github.boykaframework.actions.elements.ElementActions.onElement
 boolean enabled = onElement (locator).isEnabled ();
 ```
 
+### `executeScript (script, args)` {#execute-script}
+
+This method is used to execute the given JavaScript on the given element.
+
+```java
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
+. . .
+String result = onElement (locator).executeScript ("return arguments[0].innerHTML");
+```
+
 ### `isSelected` {#is-selected}
 
 This method is used to check whether the given element is selected or not.

@@ -38,6 +38,17 @@ public interface IElementActions {
     void clear ();
 
     /**
+     * Executes javascript with the element.
+     *
+     * @param script Javascript to execute
+     * @param args Arguments to pass to javascript
+     * @param <T> Return type of the result of the script
+     *
+     * @return the result of the script
+     */
+    <T> T executeScript (final String script, final Object... args);
+
+    /**
      * Gets the value of the attribute of the element.
      *
      * @param attribute attribute of the element

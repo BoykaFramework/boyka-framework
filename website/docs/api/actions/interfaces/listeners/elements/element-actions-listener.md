@@ -11,6 +11,10 @@ In order inject your customized logging for your reports or you want to perform 
 
 This method will get executed after clearing the value in the element located by using the provided locator.
 
+## `onExecuteScript (script, args)` {#on-execute-script}
+
+This method will get executed after executing the provided script on the element with the provided arguments.
+
 ## `onGetAttribute (locator, attribute)` {#on-get-attribute}
 
 This method will get executed after getting the given attribute in the element located by using the provided locator.

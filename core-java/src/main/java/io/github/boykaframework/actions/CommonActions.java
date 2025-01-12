@@ -32,6 +32,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.util.Collection;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -94,6 +95,27 @@ public final class CommonActions {
         try {
             prepareElementAction (find (locator, VISIBLE), "green");
             return LOGGER.traceExit (action.apply (find (locator, VISIBLE)));
+        } catch (final FrameworkError e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Gets element specific attributes.
+     *
+     * @param action action to get element specific attributes
+     * @param locator locator to find element
+     * @param defaultValue default value if any error occurred
+     * @param <E> attribute type
+     *
+     * @return element specific attribute.
+     */
+    public static <E> E getElementAttribute (final BiFunction<WebDriver, WebElement, E> action, final Locator locator,
+        final E defaultValue) {
+        LOGGER.traceEntry ();
+        try {
+            prepareElementAction (find (locator, VISIBLE), "green");
+            return LOGGER.traceExit (action.apply (getSession ().getDriver (), find (locator, VISIBLE)));
         } catch (final FrameworkError e) {
             return defaultValue;
         }
