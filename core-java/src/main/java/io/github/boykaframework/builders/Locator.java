@@ -45,6 +45,8 @@ public class Locator {
     @NotNull
     private String                name;
     private Locator               parent;
+    @Builder.Default
+    private boolean               shadowRoot = false;
     private By                    web;
 
     /**
