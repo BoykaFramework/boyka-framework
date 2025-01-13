@@ -5,6 +5,20 @@ sidebar_position: 3
 
 ## Properties
 
+### `name`
+
+This property will set the name of the WebElement. This property is required.
+
+```java
+. . .
+private final Locator loginButton = Locator.buildLocator ()
+    .web (By.id ("login-button"))
+    // highlight-next-line
+    .name ("Login Button")
+    .build ();
+. . .
+```
+
 ### `android`
 
 This property will set Android specific locator.
@@ -15,6 +29,22 @@ private final Locator loginButton = Locator.buildLocator ()
     .web (By.id ("login-button"))
     // highlight-next-line
     .android (AppiumBy.accessibilityId ("test-LOGIN"))
+    .name ("Login Button")
+    .parent (this.loginBox)
+    .build ();
+. . .
+```
+
+### `ios`
+
+This property will set iOS specific locator.
+
+```java
+. . .
+private final Locator loginButton = Locator.buildLocator ()
+    .web (By.id ("login-button"))
+    // highlight-next-line
+    .ios (AppiumBy.accessibilityId ("test-LOGIN"))
     .name ("Login Button")
     .parent (this.loginBox)
     .build ();
@@ -72,22 +102,6 @@ private final Locator username = Locator.buildLocator ()
 . . . 
 ```
 
-### `waitStrategy`
-
-This property will set the wait strategy to apply while finding the element.
-
-```java
-. . .
-private final Locator username = Locator.buildLocator ()
-    .web (By.id ("user-name"))
-    .android (AppiumBy.accessibilityId ("test-Username"))
-    .name ("User Name")
-    // highlight-next-line
-    .waitStrategy (WaitStrategy.CLICKABLE)
-    .build ();
-. . . 
-```
-
 ### `web`
 
 This property will set Web specific locator.
@@ -98,6 +112,21 @@ private final Locator loginButton = Locator.buildLocator ()
     // highlight-next-line
     .web (By.id ("login-button"))
     .name ("Login Button")
+    .build ();
+. . .
+```
+
+### `shadowRoot`
+
+This property will mark the element as shadow root element when set to `true`.
+
+```java
+. . .
+private final Locator shadowParent = Locator.buildLocator ()
+    .web (By.tagName ("div"))
+    // highlight-next-line
+    .shadowRoot (true)
+    .name ("Title")
     .build ();
 . . .
 ```
