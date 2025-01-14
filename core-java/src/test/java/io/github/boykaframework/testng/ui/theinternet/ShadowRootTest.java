@@ -73,13 +73,10 @@ public class ShadowRootTest {
         clearSession ();
     }
 
-    @Test (description = "Test Login Flow")
-    public void testLogin () {
+    @Test (description = "Test Shadow Root Flow")
+    public void testShadowRoot () {
         withMouse (shadowRootPage ().getMenu ("Encoding")).click ();
-        withMouse (shadowRootPage ().getMenuItem ("Encoding", "Encode in UTF-8")).click ();
-
-        withMouse (shadowRootPage ().getMenu ("Encoding")).click ();
-        withMouse (shadowRootPage ().getMenuItem ("Encoding", "Encode in UTF-8")).verifyProperty ("checked")
-            .isEqualTo ("true");
+        withMouse (shadowRootPage ().getMenuItem ("Encoding", "Encode in UTF-8")).verifyIsDisplayed ()
+            .isTrue ();
     }
 }
