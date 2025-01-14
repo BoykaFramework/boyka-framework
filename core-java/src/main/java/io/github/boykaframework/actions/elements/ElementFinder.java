@@ -83,8 +83,9 @@ public final class ElementFinder {
         final var driver = getSession ().getDriver ();
         final List<WebElement> elements;
         if (!isNull (locator.getParent ())) {
-            final var parent = find (locator.getParent (), waitStrategy);
-            elements = finds (driver, parent, locator);
+            final var parentLocator = locator.getParent ();
+            final var parent = find (parentLocator, waitStrategy);
+            elements = finds (driver, parent, parentLocator, locator);
         } else {
             waitForElement (locator, waitStrategy);
             elements = finds (driver, locator);
@@ -93,20 +94,25 @@ public final class ElementFinder {
     }
 
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final WebElement parent,
-        final Locator locator) {
+        final Locator parentLocator, final Locator locator) {
         LOGGER.traceEntry ();
         final var platformLocator = locator.getLocator ();
         if (isNull (platformLocator)) {
             throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
         }
-        return LOGGER.traceExit (!isNull (parent)
-                                 ? parent.findElements (locator.getLocator ())
-                                 : driver.findElements (locator.getLocator ()));
+        if (!isNull (parent)) {
+            if (parentLocator.isShadowRoot ()) {
+                return parent.getShadowRoot ()
+                    .findElements (locator.getLocator ());
+            }
+            return parent.findElements (locator.getLocator ());
+        }
+        return driver.findElements (locator.getLocator ());
     }
 
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator) {
         LOGGER.traceEntry ();
-        return LOGGER.traceExit (finds (driver, null, locator));
+        return LOGGER.traceExit (finds (driver, null, null, locator));
     }
 
     private static void waitForElement (final Locator locator, final WaitStrategy waitStrategy) {
