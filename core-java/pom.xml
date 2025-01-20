@@ -45,7 +45,7 @@
         <jackson-dataformat-yaml.version>2.18.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.18.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <json-schema-validator.version>1.5.4</json-schema-validator.version>
+        <json-schema-validator.version>1.5.5</json-schema-validator.version>
         <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
