@@ -84,6 +84,7 @@
         <allure-testng.version>2.29.1</allure-testng.version>
         <maven-failsafe.version>3.5.2</maven-failsafe.version>
         <central.sonatype>0.7.0</central.sonatype>
+        <recorder.version>0.7.7.0</recorder.version>
     </properties>
 
     <organization>
@@ -275,6 +276,11 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.stephenc.monte</groupId>
+            <artifactId>monte-screen-recorder</artifactId>
+            <version>${recorder.version}</version>
         </dependency>
     </dependencies>
 

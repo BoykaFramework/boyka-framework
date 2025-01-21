@@ -78,6 +78,16 @@ public interface IWindowActions {
     void minimize ();
 
     /**
+     * \ Starts video recording of the window.
+     */
+    void startRecording ();
+
+    /**
+     * Stops video recording of the window.
+     */
+    void stopRecording ();
+
+    /**
      * Switch to window for specific name / handle.
      *
      * @param nameOrHandle name or handle of the window

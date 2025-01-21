@@ -61,10 +61,12 @@ public class JioMeetTest {
     public void setupTestClass (final PlatformType platformType, final String chromeConfig) {
         createSession (HOST_PERSONA, platformType, chromeConfig);
         createSession (GUEST_PERSONA, platformType, chromeConfig);
+        onWindow ().startRecording ();
     }
 
     @AfterClass
     public void tearDownClass () {
+        onWindow ().stopRecording ();
         clearAllSessions ();
     }
 

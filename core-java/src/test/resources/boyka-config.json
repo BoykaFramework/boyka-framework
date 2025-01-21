@@ -42,12 +42,15 @@
         "base_url": "https://the-internet.herokuapp.com/",
         "browser": "CHROME",
         "page_load_strategy": "NORMAL",
-        "highlight": false,
-        "headless": true,
+        "highlight": true,
+        "headless": false,
         "resize": "CUSTOM",
         "custom_size": {
           "width": 1580,
           "height": 1080
+        },
+        "video": {
+          "enabled": true
         },
         "browser_options": [
           "use-fake-device-for-media-stream",

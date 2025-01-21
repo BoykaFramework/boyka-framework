@@ -83,6 +83,20 @@ public interface IWindowActionsListener extends BoykaListener {
     }
 
     /**
+     * Handle start recording method.
+     */
+    default void onStartRecording () {
+        // not implemented.
+    }
+
+    /**
+     * Handle stop recording method.
+     */
+    default void onStopRecording () {
+        // not implemented.
+    }
+
+    /**
      * Handles switch to window method.
      *
      * @param nameOfHandle Name / Window handle

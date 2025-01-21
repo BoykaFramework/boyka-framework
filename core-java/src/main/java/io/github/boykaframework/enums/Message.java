@@ -255,6 +255,14 @@ public enum Message {
      */
     PROTOCOL_REQUIRED_FOR_HOST ("Protocol is required for host ({0})..."),
     /**
+     * Error when starting the recording.
+     */
+    RECORDING_NOT_STARTED ("Error while starting video recording."),
+    /**
+     * Error stopping the recording.
+     */
+    RECORDING_NOT_STOPPED ("Error while stopping video recording."),
+    /**
      * Schema validation assert failure
      */
     RESPONSE_SCHEMA_NOT_MATCHING ("Schema validation assert failure..."),

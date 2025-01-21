@@ -165,6 +165,24 @@ public class WindowActions implements IWindowActions {
     }
 
     @Override
+    public void startRecording () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Starting video recording...");
+        ofNullable (this.listener).ifPresent (IWindowActionsListener::onStartRecording);
+        CustomVideoRecorder.startRecording ();
+        LOGGER.traceExit ();
+    }
+
+    @Override
+    public void stopRecording () {
+        LOGGER.traceEntry ();
+        LOGGER.info ("Stopping video recording...");
+        ofNullable (this.listener).ifPresent (IWindowActionsListener::onStopRecording);
+        CustomVideoRecorder.stopRecording ();
+        LOGGER.traceExit ();
+    }
+
+    @Override
     public void switchTo (final String nameOrHandle) {
         LOGGER.traceEntry ();
         LOGGER.info ("Switching to window: [{}]...", nameOrHandle);

@@ -59,6 +59,7 @@ public class WebSetting {
     private TargetProviders     target           = LOCAL;
     private String              userName;
     private String              version          = "stable";
+    private VideoSetting        video            = new VideoSetting ();
 
     /**
      * Gets cloud password.
