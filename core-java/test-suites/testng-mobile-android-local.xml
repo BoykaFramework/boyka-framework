@@ -2,7 +2,7 @@
 <!--
   ~ MIT License
   ~
-  ~ Copyright (c) 2022 Wasiq Bhamla
+  ~ Copyright (c) 2022 Boyka Framework
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,13 @@
                     <include name="testDragDrop"/>
                     <include name="testSignUp"/>
                     <include name="testWebView"/>
+                </methods>
+            </class>
+            <class name="io.github.boykaframework.testng.ui.wdio.AndroidActionTest">
+                <methods>
+                    <include name="testClipboardText"/>
+                    <include name="testFileTransfer"/>
+                    <include name="testOpenNotification"/>
                 </methods>
             </class>
         </classes>

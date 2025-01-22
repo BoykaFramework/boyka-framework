@@ -236,7 +236,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
+          "version": "14",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -277,7 +277,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "11",
+          "version": "14",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,

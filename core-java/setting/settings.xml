@@ -1,7 +1,7 @@
 <!--
   ~ MIT License
   ~
-  ~ Copyright (c) 2022 Wasiq Bhamla
+  ~ Copyright (c) 2022 Boyka Framework
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -15,8 +15,8 @@
   -->
 
 <settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+          xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
     <profiles>
         <profile>
             <id>central</id>

@@ -2,7 +2,7 @@
 <!--
   ~ MIT License
   ~
-  ~ Copyright (c) 2022 Wasiq Bhamla
+  ~ Copyright (c) 2022 Boyka Framework
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -145,7 +145,7 @@
         </module>
         <!-- Validate whitespace around Generics (angle brackets) per typical conventions
             http://checkstyle.sourceforge.net/config_whitespace.html#GenericWhitespace -->
-<!--        <module name="GenericWhitespace"/>-->
+        <!--        <module name="GenericWhitespace"/>-->
 
         <!-- ##### Blank line requirements ##### -->
         <module name="EmptyLineSeparator">
