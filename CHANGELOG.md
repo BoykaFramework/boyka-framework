@@ -7,6 +7,24 @@
 
 
 
+
+## 2.5.0 (2025-01-22)
+
+#### :rocket: New Feature
+* [#975](https://github.com/BoykaFramework/boyka-framework/pull/975) feat(java): :sparkles: added android specific critical actions ([@WasiqB](https://github.com/WasiqB))
+* [#971](https://github.com/BoykaFramework/boyka-framework/pull/971) feat(java): :sparkles: added shadow root support ([@WasiqB](https://github.com/WasiqB))
+* [#969](https://github.com/BoykaFramework/boyka-framework/pull/969) feat(java): :sparkles: added executeScript method for element ([@WasiqB](https://github.com/WasiqB))
+* [#968](https://github.com/BoykaFramework/boyka-framework/pull/968) feat(java): :sparkles: added support to draw diagrams using points ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#972](https://github.com/BoykaFramework/boyka-framework/pull/972) build(deps): bump com.networknt:json-schema-validator from 1.5.4 to 1.5.5 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#973](https://github.com/BoykaFramework/boyka-framework/pull/973) build(deps-dev): bump the dependencies group with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#970](https://github.com/BoykaFramework/boyka-framework/pull/970) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#964](https://github.com/BoykaFramework/boyka-framework/pull/964) build(deps): bump the dependencies group with 9 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.4.2 (2025-01-01)
 
 #### :rocket: New Feature
