@@ -14,19 +14,25 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.testng.ui.saucedemo;
+package io.github.boykaframework.testng.ui.wdio;
 
+import static com.google.common.truth.Truth.assertThat;
+import static io.appium.java_client.android.nativekey.AndroidKey.BACK;
+import static io.github.boykaframework.actions.device.AndroidDeviceActions.onAndroidDevice;
 import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
-import static io.github.boykaframework.actions.drivers.ContextActions.withContext;
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.actions.drivers.WindowActions.onWindow;
+import static io.github.boykaframework.actions.elements.ElementActions.onElement;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
-import static java.text.MessageFormat.format;
+import static io.github.boykaframework.testng.ui.wdio.pages.WDIOHomePage.wdioHomePage;
+import static java.lang.System.getProperty;
+import static java.nio.file.Path.of;
+import static java.util.Objects.isNull;
+import static org.apache.commons.io.FileUtils.readFileToByteArray;
 
 import io.github.boykaframework.enums.PlatformType;
-import io.github.boykaframework.exception.FrameworkError;
-import io.github.boykaframework.testng.ui.saucedemo.actions.SauceDemoActions;
+import lombok.SneakyThrows;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -35,14 +41,12 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
- * Sauce Demo Test class
+ * Test class for testing different Android actions.
  *
  * @author Wasiq Bhamla
- * @since 18-Dec-2022
+ * @since 22-Jan-2025
  */
-public class SauceDemoTest {
-    private SauceDemoActions sauceDemo;
-
+public class AndroidActionTest {
     /**
      * Setup test method to take screenshot after each test method.
      */
@@ -62,9 +66,8 @@ public class SauceDemoTest {
     @BeforeClass (description = "Setup test class")
     @Parameters ({ "platformType", "driverKey" })
     public void setupTestClass (final PlatformType platformType, final String driverKey) {
-        createSession (format ("SauceDemoTest-{0}", platformType), platformType, driverKey);
+        createSession (platformType, driverKey);
         onDevice ().startRecording ();
-        this.sauceDemo = new SauceDemoActions ();
     }
 
     /**
@@ -78,50 +81,47 @@ public class SauceDemoTest {
     }
 
     /**
-     * Test add to cart functionality.
+     * Test clipboard.
      */
-    @Test (description = "Test adding a product to cart", dependsOnMethods = "testLogin")
-    public void testAddToCart () {
-        this.sauceDemo.verifyAddToCart ();
+    @Test
+    public void testClipboardText () {
+        final var expectedClipboardText = "Hello World!";
+        onAndroidDevice ().setClipboardText (expectedClipboardText);
+        onAndroidDevice ().verifyClipboardText ()
+            .isEqualTo (expectedClipboardText);
+
+        assertThat (onAndroidDevice ().getClipboardText ()).isEqualTo (expectedClipboardText);
     }
 
     /**
-     * Test checkout page step 1.
+     * Test Put and Pull file.
      */
-    @Test (description = "Test checkout page step 1.", dependsOnMethods = "testAddToCart")
-    public void testCheckoutStep1 () {
-        this.sauceDemo.verifyCheckoutStep1 ();
+    @SneakyThrows
+    @Test
+    public void testFileTransfer () {
+        final var imageFile = of (getProperty ("user.dir"), "src/test/resources/data/image/Boyka.png").toFile ();
+        final var deviceFilePath = of ("/sdcard/Pictures", imageFile.getName ()).toString ();
+        final var imageBytes = readFileToByteArray (imageFile);
+        var actualFileBytes = onAndroidDevice ().pullFile (deviceFilePath);
+
+        if (isNull (actualFileBytes)) {
+            onAndroidDevice ().putFile (imageFile, deviceFilePath);
+            actualFileBytes = onAndroidDevice ().pullFile (deviceFilePath);
+        }
+
+        assertThat (actualFileBytes).isEqualTo (imageBytes);
     }
 
     /**
-     * Test checkout page step 2.
+     * Test Open Notification
      */
-    @Test (description = "Test checkout page step 2.", dependsOnMethods = "testCheckoutStep1")
-    public void testCheckoutStep2 () {
-        this.sauceDemo.verifyCheckoutStep2 ();
-    }
-
-    /**
-     * Test context switching in Native app
-     */
-    @Test (description = "Test context switching in Native app", dependsOnMethods = "testSignOut", expectedExceptions = FrameworkError.class)
-    public void testContextSwitching () {
-        withContext ().switchToWebView ("WEBVIEW");
-    }
-
-    /**
-     * Test login functionality.
-     */
-    @Test (description = "Test login functionality")
-    public void testLogin () {
-        this.sauceDemo.verifyLogin ("standard_user", "secret_sauce");
-    }
-
-    /**
-     * Test checkout page step 2.
-     */
-    @Test (description = "Test Sign out.", dependsOnMethods = "testCheckoutStep2")
-    public void testSignOut () {
-        this.sauceDemo.verifySignOut ();
+    @Test
+    public void testOpenNotification () {
+        onAndroidDevice ().openNotification ();
+        onElement (wdioHomePage ().getDragTab ()).verifyIsDisplayed ()
+            .isFalse ();
+        onAndroidDevice ().pressKey (BACK);
+        onElement (wdioHomePage ().getDragTab ()).verifyIsDisplayed ()
+            .isTrue ();
     }
 }
