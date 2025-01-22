@@ -39,6 +39,7 @@ import io.appium.java_client.clipboard.HasClipboard;
 import io.github.boykaframework.actions.interfaces.device.IAndroidDeviceActions;
 import io.github.boykaframework.actions.interfaces.listeners.device.IAndroidDeviceActionsListener;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * Handles all Android device specific actions.
@@ -100,7 +101,13 @@ public class AndroidDeviceActions extends DeviceActions implements IAndroidDevic
         isActionSupported ();
         LOGGER.info ("Pulling file [{}] from Android device...", targetFile);
         ofNullable (this.listener).ifPresent (l -> l.onPullFile (targetFile));
-        return getDriverAttribute ((final AndroidDriver d) -> d.pullFile (targetFile), null);
+        return getDriverAttribute ((final AndroidDriver d) -> {
+            try {
+                return d.pullFile (targetFile);
+            } catch (final WebDriverException e) {
+                return null;
+            }
+        }, null);
     }
 
     @Override
