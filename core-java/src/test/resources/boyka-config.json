@@ -49,6 +49,12 @@
           "width": 1580,
           "height": 1080
         },
+        "experimental_options": {
+          "prefs": {
+            "download.prompt_for_download": false,
+            "safebrowsing.enabled": true
+          }
+        },
         "browser_options": [
           "use-fake-device-for-media-stream",
           "use-fake-ui-for-media-stream"
