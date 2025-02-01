@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.manager;
 
+import static io.github.boykaframework.actions.drivers.NavigateActions.navigate;
 import static io.github.boykaframework.enums.Message.BROWSER_OPTION_NOT_SUPPORTED;
 import static io.github.boykaframework.enums.Message.CAPABILITIES_REQUIRED_FOR_REMOTE;
 import static io.github.boykaframework.enums.Message.EMPTY_BROWSER_NOT_ALLOWED;
@@ -45,7 +46,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
-import io.github.boykaframework.actions.drivers.NavigateActions;
 import io.github.boykaframework.config.ui.web.WebSetting;
 import io.github.boykaframework.enums.Browser;
 import io.github.boykaframework.enums.TargetProviders;
@@ -127,14 +127,14 @@ class WebDriverManager implements IDriverManager {
     private FirefoxOptions getFirefoxOptions (final WebSetting webSetting) {
         final var options = new FirefoxOptions ();
         ofNullable (webSetting.getPlatform ()).ifPresent (options::setPlatformName);
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (o -> setOptionArgument (options, o)));
         ofNullable (webSetting.getExperimentalOptions ()).ifPresent (l -> l.forEach (options::addPreference));
         if (webSetting.getTarget () == LOCAL && isNull (webSetting.getCapabilities ())) {
             options.setBrowserVersion (webSetting.getVersion ());
         }
         options.setPageLoadStrategy (requireNonNull (webSetting.getPageLoadStrategy (), PAGE_LOAD_STRATEGY_MISSING));
         if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
+            setOptionArgument (options, HEADLESS);
         }
         return options;
     }
@@ -187,8 +187,7 @@ class WebDriverManager implements IDriverManager {
 
     private void navigateToBaseUrl (final String baseUrl) {
         if (isNotEmpty (baseUrl)) {
-            NavigateActions.navigate ()
-                .to (baseUrl);
+            navigate ().to (baseUrl);
         }
     }
 
@@ -198,14 +197,15 @@ class WebDriverManager implements IDriverManager {
             options.setBrowserVersion (webSetting.getVersion ());
         }
         options.setPageLoadStrategy (requireNonNull (webSetting.getPageLoadStrategy (), PAGE_LOAD_STRATEGY_MISSING));
-        options.addArguments ("enable-automation");
-        options.addArguments ("--no-sandbox");
-        options.addArguments ("--disable-gpu");
-        options.addArguments ("--disable-dev-shm-usage");
-        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
-        ofNullable (webSetting.getExperimentalOptions ()).ifPresent (l -> l.forEach (options::setExperimentalOption));
+
+        setOptionArgument (options, "enable-automation");
+        setOptionArgument (options, "--no-sandbox");
+        setOptionArgument (options, "--disable-gpu");
+        setOptionArgument (options, "--disable-dev-shm-usage");
+        ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (o -> setOptionArgument (options, o)));
+        ofNullable (webSetting.getExperimentalOptions ()).ifPresent (l -> setExperimentalOptions (options, l));
         if (webSetting.isHeadless ()) {
-            options.addArguments (HEADLESS);
+            setOptionArgument (options, HEADLESS);
         }
     }
 
@@ -214,9 +214,6 @@ class WebDriverManager implements IDriverManager {
             .manage ()
             .window ();
         switch (webSetting.getResize ()) {
-            case CUSTOM:
-                window.setSize (webSetting.getCustomSize ());
-                break;
             case FULL_SCREEN:
                 window.fullscreen ();
                 break;
@@ -226,8 +223,34 @@ class WebDriverManager implements IDriverManager {
             case MINIMIZED:
                 window.minimize ();
                 break;
+            case CUSTOM:
             default:
+                window.setSize (webSetting.getCustomSize ());
                 break;
+        }
+    }
+
+    private <T extends ChromiumOptions<T>> void setExperimentalOptions (final T options,
+        final Map<String, Object> arguments) {
+        if (!isNull (arguments) && !arguments.isEmpty ()) {
+            arguments.forEach ((k, v) -> {
+                LOGGER.debug ("Chrome Experimental options: {} = {}", k, v);
+                options.setExperimentalOption (k, v);
+            });
+        }
+    }
+
+    private <T extends ChromiumOptions<T>> void setOptionArgument (final T options, final String argument) {
+        if (isNotEmpty (argument)) {
+            LOGGER.debug ("Chrome setOptionArgument argument: {}", argument);
+            options.addArguments (argument);
+        }
+    }
+
+    private void setOptionArgument (final FirefoxOptions options, final String argument) {
+        if (isNotEmpty (argument)) {
+            LOGGER.debug ("Firefox setOptionArgument argument: {}", argument);
+            options.addArguments (argument);
         }
     }
 
