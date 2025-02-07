@@ -72,6 +72,8 @@ class MapPlaceholderDeserializer implements JsonDeserializer<Map<String, Object>
                     interpolateArrayValues (result, key, value.getAsJsonArray ());
                 } else if (value.isJsonPrimitive ()) {
                     interpolatePrimitive (result, key, value.getAsJsonPrimitive ());
+                } else if (value.isJsonNull ()) {
+                    result.put (key, value.getAsJsonNull ());
                 }
             });
         return result;
@@ -84,6 +86,8 @@ class MapPlaceholderDeserializer implements JsonDeserializer<Map<String, Object>
             result.put (key, value.getAsNumber ());
         } else if (value.isString ()) {
             result.put (key, interpolate (value.getAsString ()));
+        } else if (value.isJsonNull ()) {
+            result.put (key, value.getAsJsonNull ());
         }
     }
 }

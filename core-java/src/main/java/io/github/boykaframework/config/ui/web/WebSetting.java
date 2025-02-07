@@ -18,7 +18,6 @@ package io.github.boykaframework.config.ui.web;
 
 import static io.github.boykaframework.enums.Browser.NONE;
 import static io.github.boykaframework.enums.Protocol.HTTP;
-import static io.github.boykaframework.enums.TargetProviders.LOCAL;
 import static io.github.boykaframework.enums.WindowResizeType.NORMAL;
 
 import java.util.List;
@@ -55,7 +54,7 @@ public class WebSetting {
     private int                 port;
     private Protocol            protocol         = HTTP;
     private WindowResizeType    resize           = NORMAL;
-    private TargetProviders     target           = LOCAL;
+    private TargetProviders     target;
     private String              userName;
     private String              version          = "stable";
 }
