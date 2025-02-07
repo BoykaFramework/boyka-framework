@@ -27,6 +27,30 @@ Following is the logic which Boyka-framework will use to find the config file:
 The Config file name cannot be modified. It should always be `boyka-config.json`
 :::
 
+:::info
+You can use String placeholders in the configuration file. The placeholders can be used to interpolate the values from environment variables, system properties, or any other sources.
+
+Following are the supported placeholder formats:
+
+| Required | Placeholder format |
+| -------- | ------------------ |
+| Base64 Decoder  | `${base64Decoder:SGVsbG9Xb3JsZCE=}` |
+| Base64 Encoder  | `${base64Encoder:HelloWorld!}` |
+| Java Constant   | `${const:java.awt.event.KeyEvent.VK_ESCAPE}` |
+| Date            | `${date:yyyy-MM-dd}` |
+| Environment Variable | `${env:USERNAME}` |
+| File Content    | `${file:UTF-8:src/test/resources/document.properties}` |
+| Java            | `${java:version}` |
+| Localhost       | `${localhost:canonical-name}` |
+| Properties File | `${properties:src/test/resources/document.properties::mykey}` |
+| Resource Bundle | `${resourceBundle:org.apache.commons.text.example.testResourceBundleLookup:mykey}` |
+| System Property | `${sys:user.dir}` |
+| URL Decoder     | `${urlDecoder:Hello%20World%21}` |
+| URL Encoder     | `${urlEncoder:Hello World!}` |
+| XML XPath       | `${xml:src/test/resources/document.xml:/root/path/to/node}` |
+
+:::
+
 ### Configuration file sample {#config-sample}
 
 <details>
@@ -450,10 +474,6 @@ See the example in [sample configuration file](#config-sample).
 | `browser_options` | An array of browser specific arguments | `string[]` | `null` |
 | `experimental_options` | A key-value pair of Browsers Experimental options | `Map<string, object>` | `null` |
 
-:::info
-You can use Environment variables for `user_name` and `password` by using `${env:ENV_NAME}` format
-:::
-
 :::tip
 When you use Boyka command line assistant to configure your test to run on any Cloud providers using `boyka config [web | api | android | ios] [config_name]` command, then it is **MANDATORY** to provide Environment variable names when prompted for user name and password
 :::
@@ -509,10 +529,6 @@ Please raise a [new feature request](https://github.com/BoykaFramework/boyka-fra
 | `level` | Log level | [`LogLevel`](#log-level) | `INFO` |
 | `local_timezone` | Use local timezone for timestamps | `boolean` | `false` |
 | `timestamp` | Show timestamps in console output | `boolean` | `false` |
-
-:::info
-You can use Environment variables for `user_name` and `password` by using `${env:ENV_NAME}` format
-:::
 
 :::tip
 When you use Boyka command line assistant to configure your test to run on any Cloud providers using `boyka config [web | api | android | ios] [config_name]` command, then it is **MANDATORY** to provide Environment variable names when prompted for user name and password
