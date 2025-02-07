@@ -51,6 +51,7 @@
         },
         "experimental_options": {
           "prefs": {
+            "download.default_directory": "${sys:user.home}/Downloads",
             "download.prompt_for_download": false,
             "safebrowsing.enabled": true
           }

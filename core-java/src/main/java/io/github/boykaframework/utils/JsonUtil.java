@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,6 +46,8 @@ public final class JsonUtil {
 
     static {
         GSON = new GsonBuilder ().setFieldNamingPolicy (LOWER_CASE_WITH_UNDERSCORES)
+            .registerTypeAdapter (String.class, new StringPlaceholderDeserializer ())
+            .registerTypeAdapter (Map.class, new MapPlaceholderDeserializer ())
             .setPrettyPrinting ()
             .create ();
     }
