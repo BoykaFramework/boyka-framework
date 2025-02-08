@@ -17,6 +17,7 @@
 package io.github.boykaframework.utils;
 
 import static io.github.boykaframework.enums.Message.CONFIG_KEY_NOT_FOUND;
+import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static io.github.boykaframework.utils.JsonUtil.fromFile;
 import static java.lang.String.join;
 import static java.lang.System.getProperty;
@@ -55,7 +56,7 @@ public final class SettingUtils {
         LOGGER.traceEntry ("Key: {}", key);
         if (!settings.containsKey (key)) {
             final var keys = join (", ", settings.keySet ());
-            ErrorHandler.throwError (CONFIG_KEY_NOT_FOUND, key, keys);
+            throwError (CONFIG_KEY_NOT_FOUND, key, keys);
         }
         return LOGGER.traceExit (settings.get (key));
     }

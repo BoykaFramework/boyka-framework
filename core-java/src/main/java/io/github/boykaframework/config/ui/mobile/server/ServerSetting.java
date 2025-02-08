@@ -25,7 +25,6 @@ import java.util.Map;
 import io.github.boykaframework.enums.AutomationType;
 import io.github.boykaframework.enums.Protocol;
 import io.github.boykaframework.enums.TargetProviders;
-import io.github.boykaframework.utils.StringUtils;
 import lombok.Data;
 
 /**
@@ -75,23 +74,5 @@ public class ServerSetting {
         }
         return Path.of (System.getProperty ("user.dir"), this.configPath)
             .toString ();
-    }
-
-    /**
-     * Gets cloud password.
-     *
-     * @return the cloud password
-     */
-    public String getPassword () {
-        return StringUtils.interpolate (this.password);
-    }
-
-    /**
-     * Gets cloud user name.
-     *
-     * @return the cloud username.
-     */
-    public String getUserName () {
-        return StringUtils.interpolate (this.userName);
     }
 }
