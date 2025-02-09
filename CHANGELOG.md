@@ -8,6 +8,21 @@
 
 
 
+
+## 2.6.0 (2025-02-09)
+
+#### :rocket: New Feature
+* [#988](https://github.com/BoykaFramework/boyka-framework/pull/988) feat(java): :sparkles: allow using placeholders in the boyka config file ([@WasiqB](https://github.com/WasiqB))
+* [#982](https://github.com/BoykaFramework/boyka-framework/pull/982) feat(java): :sparkles: added logging for browser and experimental options ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#984](https://github.com/BoykaFramework/boyka-framework/pull/984) build(deps): bump com.google.code.gson:gson from 2.11.0 to 2.12.1 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#989](https://github.com/BoykaFramework/boyka-framework/pull/989) build(deps-dev): bump the dependencies group across 1 directory with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#978](https://github.com/BoykaFramework/boyka-framework/pull/978) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.5.0 (2025-01-22)
 
 #### :rocket: New Feature
