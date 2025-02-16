@@ -9,6 +9,15 @@
 
 
 
+
+## 2.6.1 (2025-02-16)
+
+#### :bug: Bug Fix
+* [#993](https://github.com/BoykaFramework/boyka-framework/pull/993) fix(java): :bug: fixed api credential interpolation issue ([@WasiqB](https://github.com/WasiqB))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.6.0 (2025-02-09)
 
 #### :rocket: New Feature
