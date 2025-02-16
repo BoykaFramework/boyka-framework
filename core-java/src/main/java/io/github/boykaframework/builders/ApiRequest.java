@@ -16,6 +16,8 @@
 
 package io.github.boykaframework.builders;
 
+import static io.github.boykaframework.utils.StringUtils.interpolate;
+
 import java.util.Map;
 
 import io.github.boykaframework.enums.ContentType;
@@ -50,4 +52,22 @@ public class ApiRequest {
     @Singular
     private Map<String, String> queryParams;
     private String              userName;
+
+    /**
+     * Gets the password after interpolation.
+     *
+     * @return API Password
+     */
+    public String getPassword () {
+        return interpolate (this.password);
+    }
+
+    /**
+     * Gets the username after interpolation.
+     *
+     * @return API Username
+     */
+    public String getUserName () {
+        return interpolate (this.userName);
+    }
 }
