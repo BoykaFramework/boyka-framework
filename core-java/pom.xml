@@ -28,7 +28,7 @@
     <url>https://git.new/boyka-githubk</url>
 
     <properties>
-        <selenium-webdriver.version>4.28.1</selenium-webdriver.version>
+        <selenium-webdriver.version>4.29.0</selenium-webdriver.version>
         <testng.version>7.11.0</testng.version>
         <appium-java-client.version>9.4.0</appium-java-client.version>
         <okhttp.version>4.12.0</okhttp.version>
@@ -45,16 +45,16 @@
         <jackson-dataformat-yaml.version>2.18.2</jackson-dataformat-yaml.version>
         <jackson-databind.version>2.18.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
-        <json-schema-validator.version>1.5.5</json-schema-validator.version>
-        <maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
+        <json-schema-validator.version>1.5.6</json-schema-validator.version>
+        <maven-clean-plugin.version>3.4.1</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.21.2</checkstyle.version>
+        <checkstyle.version>10.21.3</checkstyle.version>
         <aspectj.version>1.9.22.1</aspectj.version>
         <poi.version>5.4.0</poi.version>
         <suite-name>testng-api</suite-name>
