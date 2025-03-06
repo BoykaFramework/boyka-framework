@@ -18,7 +18,9 @@ package io.github.boykaframework.testng.api.postman;
 
 import static io.github.boykaframework.actions.api.ApiActions.withRequest;
 import static io.github.boykaframework.enums.ContentType.MULTIPART_FORM_DATA;
+import static io.github.boykaframework.enums.ContentType.PLAIN_TEXT;
 import static io.github.boykaframework.enums.PlatformType.API;
+import static io.github.boykaframework.enums.RequestMethod.GET;
 import static io.github.boykaframework.enums.RequestMethod.POST;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
@@ -27,6 +29,7 @@ import static java.nio.file.Path.of;
 import static java.text.MessageFormat.format;
 
 import io.github.boykaframework.builders.ApiRequest;
+import io.github.boykaframework.exception.FrameworkError;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -77,5 +80,27 @@ public class ApiPostmanTest {
             .isEqualTo ("boom");
         response.verifyTextField (format ("files[\"{0}\"]", fileName))
             .isNotEmpty ();
+    }
+
+    /**
+     * Test plain text body in GET method.
+     */
+    @Test (expectedExceptions = FrameworkError.class, expectedExceptionsMessageRegExp = "Error setting request method: method GET must not have a request body.")
+    public void testPlainTextGetRequest () {
+        final var requestBody = """
+            Duis posuere augue vel cursus pharetra. In luctus a ex nec pretium. Praesent neque quam, tincidunt nec leo eget, rutrum vehicula magna.
+            Maecenas consequat elementum elit, id semper sem tristique et. Integer pulvinar enim quis consectetur interdum volutpat.
+            """;
+        final var request = ApiRequest.createRequest ()
+            .contentType (PLAIN_TEXT)
+            .method (GET)
+            .body (requestBody)
+            .queryParam ("test", "123")
+            .path ("/get")
+            .create ();
+        final var response = withRequest (request).execute ();
+
+        response.verifyStatusCode ()
+            .isEqualTo (200);
     }
 }

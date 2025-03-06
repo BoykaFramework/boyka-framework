@@ -159,6 +159,10 @@ public enum Message {
      */
     ERROR_SETTER_NOT_FOUND ("Setter method [{0}] not found in [{1}] class of type [{2}]..."),
     /**
+     * Error setting the API request method.
+     */
+    ERROR_SETTING_REQUEST_METHOD ("Error setting request method: {0}"),
+    /**
      * Error starting Appium server.
      */
     ERROR_STARTING_SERVER ("Error occurred starting Appium server: {0}..."),
