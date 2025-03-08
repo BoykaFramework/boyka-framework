@@ -26,6 +26,7 @@ import static io.github.boykaframework.enums.Message.ERROR_EXECUTING_REQUEST;
 import static io.github.boykaframework.enums.Message.ERROR_PARSING_REQUEST_BODY;
 import static io.github.boykaframework.enums.Message.ERROR_PARSING_RESPONSE_BODY;
 import static io.github.boykaframework.enums.Message.SSL_ERROR;
+import static io.github.boykaframework.enums.RequestMethod.GET;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.StringUtils.interpolate;
@@ -337,8 +338,8 @@ public final class ApiActions implements IApiActions {
 
     private ApiActions method (final RequestMethod method) {
         LOGGER.traceEntry ("Parameter: {}", method);
-        if (method != RequestMethod.GET) {
-            this.request.method (method.name (), requireNonNull (this.requestBody));
+        if (method != GET) {
+            this.request.method (method.name (), this.requestBody);
         }
         return LOGGER.traceExit (this);
     }
