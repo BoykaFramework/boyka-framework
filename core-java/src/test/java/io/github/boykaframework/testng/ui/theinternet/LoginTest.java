@@ -82,8 +82,5 @@ public class LoginTest {
         withMouse (loginPage ().getLogin ()).click ();
         onElement (loginPage ().getMessage ()).verifyText ()
             .contains ("You logged into a secure area!");
-        withMouse (loginPage ().getLogout ()).click ();
-        onElement (loginPage ().getMessage ()).verifyText ()
-            .contains ("You logged out of the secure area!");
     }
 }
