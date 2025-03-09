@@ -42,8 +42,8 @@
         <log4j-core.version>2.24.3</log4j-core.version>
         <log4j-api.version>2.24.3</log4j-api.version>
         <faker.version>2.3.1</faker.version>
-        <jackson-dataformat-yaml.version>2.18.2</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.18.2</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.18.3</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.18.3</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>1.5.6</json-schema-validator.version>
         <maven-clean-plugin.version>3.4.1</maven-clean-plugin.version>
@@ -54,7 +54,7 @@
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.21.3</checkstyle.version>
+        <checkstyle.version>10.21.4</checkstyle.version>
         <aspectj.version>1.9.22.1</aspectj.version>
         <poi.version>5.4.0</poi.version>
         <suite-name>testng-api</suite-name>
