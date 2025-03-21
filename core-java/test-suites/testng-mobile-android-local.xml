@@ -19,7 +19,7 @@
     <listeners>
         <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
-    <test name="Test Mobile on Local Android Emulator" parallel="classes">
+    <test name="Test Mobile on Local Android Emulator">
         <parameter name="platformType" value="ANDROID"/>
         <parameter name="driverKey" value="test_local_wdio_android"/>
         <classes>
