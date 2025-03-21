@@ -20,7 +20,7 @@
     <listeners>
         <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
-    <test name="Test web on Selenium Grid Browser" parallel="classes">
+    <test name="Test web on Selenium Grid Browser">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_selenium_grid"/>
         <classes>
