@@ -15,7 +15,7 @@
   ~ copies or substantial portions of the Software.
   -->
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Framework Local Mobile Web Suite" verbose="2">
+<suite name="Boyka Framework Local Mobile Web Suite" verbose="2" parallel="tests">
     <listeners>
         <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>

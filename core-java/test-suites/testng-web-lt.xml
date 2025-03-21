@@ -20,7 +20,7 @@
     <listeners>
         <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
-    <test name="Test web on LambdaTest Browser">
+    <test name="Test web on LambdaTest Browser" parallel="classes">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_lambda_test_chrome"/>
         <packages>

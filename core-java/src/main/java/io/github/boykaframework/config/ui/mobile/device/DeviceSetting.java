@@ -21,6 +21,7 @@ import static io.github.boykaframework.enums.OS.ANDROID;
 
 import java.util.Map;
 
+import io.github.boykaframework.config.LanguageSetting;
 import io.github.boykaframework.enums.DeviceType;
 import io.github.boykaframework.enums.OS;
 import io.github.boykaframework.enums.PermissionDecision;
@@ -45,6 +46,7 @@ public class DeviceSetting {
     private int                                  commandTimeout         = 60;
     private boolean                              fullReset;
     private boolean                              ignoreUnimportantViews = true;
+    private LanguageSetting                      language               = new LanguageSetting ();
     private String                               name;
     private boolean                              noReset;
     private OS                                   os                     = ANDROID;

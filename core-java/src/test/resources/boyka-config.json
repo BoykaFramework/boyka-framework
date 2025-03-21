@@ -61,6 +61,26 @@
           "use-fake-ui-for-media-stream"
         ]
       },
+      "test_local_en": {
+        "base_url": "https://webdriver.io/",
+        "browser": "CHROME",
+        "resize": "MAXIMIZED",
+        "language": {
+          "language": "EN"
+        },
+        "highlight": false,
+        "headless": true
+      },
+      "test_local_de": {
+        "base_url": "https://webdriver.io/",
+        "browser": "CHROME",
+        "resize": "MAXIMIZED",
+        "language": {
+          "language": "GR"
+        },
+        "highlight": false,
+        "headless": true
+      },
       "test_draw": {
         "base_url": "https://excalidraw.com/",
         "browser": "CHROME"
@@ -219,11 +239,14 @@
           "ignore_unimportant_views": true,
           "full_reset": true,
           "system_port": 8200,
+          "language": {
+            "language": "DE"
+          },
           "swipe": {
             "max_swipe_until_found": 5
           },
           "application": {
-            "path": "/apps/android/sauce-demo.apk",
+            "path": "/apps/android/sauce-demo-i18n.apk",
             "wait_activity": "com.swaglabsmobileapp.MainActivity",
             "install_timeout": 180,
             "wait_timeout": 120
@@ -441,6 +464,9 @@
           "web_view_connect_retries": 3,
           "connect_keyboard": false,
           "typing_speed": 25,
+          "language": {
+            "language": "GR"
+          },
           "swipe": {
             "max_swipe_until_found": 5
           },
@@ -454,7 +480,7 @@
             "local_port": 8100
           },
           "application": {
-            "path": "/apps/ios/sauce-demo.zip",
+            "path": "/apps/ios/sauce-demo-i18n.zip",
             "install_timeout": 180
           }
         }
