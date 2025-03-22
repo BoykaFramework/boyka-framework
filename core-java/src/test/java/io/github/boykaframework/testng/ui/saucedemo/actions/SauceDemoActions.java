@@ -126,6 +126,7 @@ public class SauceDemoActions {
 
     public void verifySignOut () {
         withMouse (homePage ().getMenuButton ()).click ();
+        withMouse (homePage ().getLogout ()).hover ();
         withMouse (homePage ().getLogout ()).click ();
         if (this.platformType == WEB) {
             navigate ().verifyUrl ()
