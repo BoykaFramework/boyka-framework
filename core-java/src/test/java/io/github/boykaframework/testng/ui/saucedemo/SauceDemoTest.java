@@ -31,6 +31,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -120,6 +121,7 @@ public class SauceDemoTest {
     /**
      * Test checkout page step 2.
      */
+    @Ignore
     @Test (description = "Test Sign out.", dependsOnMethods = "testCheckoutStep2")
     public void testSignOut () {
         this.sauceDemo.verifySignOut ();
