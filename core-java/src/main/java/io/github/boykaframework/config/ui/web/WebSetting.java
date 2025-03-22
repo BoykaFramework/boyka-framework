@@ -23,6 +23,7 @@ import static io.github.boykaframework.enums.WindowResizeType.NORMAL;
 import java.util.List;
 import java.util.Map;
 
+import io.github.boykaframework.config.LanguageSetting;
 import io.github.boykaframework.enums.Browser;
 import io.github.boykaframework.enums.Protocol;
 import io.github.boykaframework.enums.TargetProviders;
@@ -48,6 +49,7 @@ public class WebSetting {
     private boolean             headless         = true;
     private boolean             highlight        = false;
     private String              host;
+    private LanguageSetting     language         = new LanguageSetting ();
     private PageLoadStrategy    pageLoadStrategy = PageLoadStrategy.NORMAL;
     private String              password;
     private String              platform;

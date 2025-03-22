@@ -20,7 +20,7 @@
     <listeners>
         <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
-    <test name="Test Rest API">
+    <test name="Test Rest API" parallel="classes">
         <classes>
             <class name="io.github.boykaframework.testng.api.restful.RestfulBookerEndToEndTests">
                 <methods>

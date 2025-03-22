@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Boyka Framework
+ * Copyright (c) 2025, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,26 +14,21 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.api;
+package io.github.boykaframework.actions.interfaces.listeners.data;
 
-import io.github.boykaframework.config.LanguageSetting;
-import lombok.Data;
+import io.github.boykaframework.actions.interfaces.listeners.BoykaListener;
 
 /**
- * API setting class.
+ * Language action listener
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 15-Mar-2025
  */
-@Data
-public class ApiSetting {
-    private String          basePath;
-    private String          baseUri;
-    private LanguageSetting language = new LanguageSetting ();
-    private LogSetting      logging;
-    private int             port;
-    private String          schemaPath;
-    private TimeoutSetting  timeout;
-    private boolean         validateSsl;
-    private boolean         verifyHostName;
+public interface ILanguageActionListener extends BoykaListener {
+    /**
+     * Handles the get language method.
+     */
+    default void onGetLanguage () {
+        // not implemented
+    }
 }

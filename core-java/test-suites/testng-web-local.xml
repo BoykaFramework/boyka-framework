@@ -16,7 +16,7 @@
   -->
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Boyka Framework Local Web Suite" verbose="2">
+<suite name="Boyka Framework Local Web Suite" verbose="2" parallel="tests">
     <listeners>
         <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
@@ -52,5 +52,19 @@
             <package name="io.github.boykaframework.testng.ui.saucedemo"/>
             <package name="io.github.boykaframework.testng.ui.theinternet"/>
         </packages>
+    </test>
+    <test name="Test German language Web App">
+        <parameter name="driverKey" value="test_local_de"/>
+        <parameter name="language" value="Deutsch"/>
+        <classes>
+            <class name="io.github.boykaframework.testng.ui.lang.HomePageTest"/>
+        </classes>
+    </test>
+    <test name="Test English language Web App">
+        <parameter name="driverKey" value="test_local_en"/>
+        <parameter name="language" value="English"/>
+        <classes>
+            <class name="io.github.boykaframework.testng.ui.lang.HomePageTest"/>
+        </classes>
     </test>
 </suite>

@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import io.github.boykaframework.actions.interfaces.listeners.BoykaListener;
 import io.github.boykaframework.actions.interfaces.listeners.api.IApiActionsListener;
+import io.github.boykaframework.actions.interfaces.listeners.data.ILanguageActionListener;
 import io.github.boykaframework.actions.interfaces.listeners.data.ITestDataActionsListener;
 import io.github.boykaframework.actions.interfaces.listeners.device.IAndroidDeviceActionsListener;
 import io.github.boykaframework.actions.interfaces.listeners.device.IDeviceActionsListener;
@@ -98,6 +99,10 @@ public enum ListenerType {
      * Frame action listener.
      */
     FRAME_ACTION (IFrameActionsListener.class),
+    /**
+     * Language action listener.
+     */
+    LANGUAGE_ACTION (ILanguageActionListener.class),
     /**
      * Navigate action listener.
      */

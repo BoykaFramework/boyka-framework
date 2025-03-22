@@ -23,6 +23,7 @@ import static io.appium.java_client.AppiumBy.iOSNsPredicateString;
 import static java.text.MessageFormat.format;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.id;
+import static org.openqa.selenium.By.linkText;
 import static org.openqa.selenium.By.xpath;
 
 import io.github.boykaframework.builders.Locator;
@@ -58,7 +59,7 @@ public class HomePage {
         .ios (accessibilityId ("test-Cart drop zone"))
         .build ();
     private final Locator logout              = Locator.buildLocator ()
-        .web (id ("logout_sidebar_link"))
+        .web (linkText ("Logout"))
         .android (accessibilityId ("test-LOGOUT"))
         .ios (accessibilityId ("test-LOGOUT"))
         .name ("Logout")
