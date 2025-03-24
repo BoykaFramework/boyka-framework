@@ -32,6 +32,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import io.github.boykaframework.actions.interfaces.listeners.BoykaListener;
 import io.github.boykaframework.config.FrameworkSetting;
+import io.github.boykaframework.config.LanguageSetting;
 import io.github.boykaframework.config.TestDataSetting;
 import io.github.boykaframework.config.api.ApiSetting;
 import io.github.boykaframework.config.api.CommonApiSetting;
@@ -122,6 +123,20 @@ public class DriverSession<D extends WebDriver> {
     public CommonApiSetting getCommonApiSetting () {
         return this.setting.getCommonSetting ()
             .getApi ();
+    }
+
+    /**
+     * Gets the language settings for the current config.
+     *
+     * @return Language setting
+     */
+    public LanguageSetting getLanguageSettings () {
+        return switch (getPlatformType ()) {
+            case ANDROID, IOS -> getMobileSetting ().getDevice ()
+                .getLanguage ();
+            case API -> getApiSetting ().getLanguage ();
+            case WEB -> getWebSetting ().getLanguage ();
+        };
     }
 
     /**

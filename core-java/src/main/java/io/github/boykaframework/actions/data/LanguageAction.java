@@ -27,7 +27,6 @@ import java.nio.file.Path;
 
 import io.github.boykaframework.actions.interfaces.data.ILanguageAction;
 import io.github.boykaframework.actions.interfaces.listeners.data.ILanguageActionListener;
-import io.github.boykaframework.config.LanguageSetting;
 
 /**
  * Handles language data files.
@@ -51,13 +50,11 @@ public class LanguageAction implements ILanguageAction {
     private LanguageAction () {
         this.listener = getSession ().getListener (LANGUAGE_ACTION);
 
-        final var setting = getLanguageSettings ();
+        final var setting = getSession ().getLanguageSettings ();
         final var fileName = setting.getLanguage ()
             .name ()
             .toLowerCase ();
-        this.filePath = Path.of (getProperty ("user.dir"), "src/test/resources", setting.getPath (),
-                format ("{0}.json", fileName))
-            .toString ();
+        this.filePath = getFilePath (setting.isExternal (), setting.getPath (), fileName);
     }
 
     @Override
@@ -66,15 +63,12 @@ public class LanguageAction implements ILanguageAction {
         return fromFile (this.filePath, clazz);
     }
 
-    private LanguageSetting getLanguageSettings () {
-        return switch (getSession ().getPlatformType ()) {
-            case ANDROID, IOS -> getSession ().getMobileSetting ()
-                .getDevice ()
-                .getLanguage ();
-            case API -> getSession ().getApiSetting ()
-                .getLanguage ();
-            case WEB -> getSession ().getWebSetting ()
-                .getLanguage ();
-        };
+    private String getFilePath (final boolean isExternal, final String filePath, final String fileName) {
+        if (isExternal) {
+            return Path.of (filePath, format ("{0}.json", fileName))
+                .toString ();
+        }
+        return Path.of (getProperty ("user.dir"), "src/test/resources", filePath, format ("{0}.json", fileName))
+            .toString ();
     }
 }
