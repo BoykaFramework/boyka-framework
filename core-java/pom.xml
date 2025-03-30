@@ -34,7 +34,7 @@
         <okhttp.version>4.12.0</okhttp.version>
         <lombok.version>1.18.36</lombok.version>
         <google-gson.version>2.12.1</google-gson.version>
-        <google.guava.version>33.4.5-jre</google.guava.version>
+        <google.guava.version>33.4.6-jre</google.guava.version>
         <google-truth.version>1.4.4</google-truth.version>
         <apache-commons-text.version>1.13.0</apache-commons-text.version>
         <commons-io.version>2.18.0</commons-io.version>
@@ -54,7 +54,7 @@
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>10.21.4</checkstyle.version>
+        <checkstyle.version>10.22.0</checkstyle.version>
         <aspectj.version>1.9.23</aspectj.version>
         <poi.version>5.4.0</poi.version>
         <suite-name>testng-api</suite-name>
@@ -75,7 +75,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
-        <sonar.maven.version>5.0.0.4389</sonar.maven.version>
+        <sonar.maven.version>5.1.0.4751</sonar.maven.version>
         <jacoco.version>0.8.12</jacoco.version>
         <surefire-version>3.5.2</surefire-version>
         <nexus.version>1.7.0</nexus.version>
