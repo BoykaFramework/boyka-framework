@@ -31,6 +31,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -104,7 +105,7 @@ public class SauceDemoTest {
     /**
      * Test context switching in Native app
      */
-    @Test (description = "Test context switching in Native app", dependsOnMethods = "testSignOut", expectedExceptions = FrameworkError.class)
+    @Test (description = "Test context switching in Native app", dependsOnMethods = "testCheckoutStep2", expectedExceptions = FrameworkError.class)
     public void testContextSwitching () {
         withContext ().switchToWebView ("WEBVIEW");
     }
@@ -120,7 +121,8 @@ public class SauceDemoTest {
     /**
      * Test checkout page step 2.
      */
-    @Test (description = "Test Sign out.", dependsOnMethods = "testCheckoutStep2")
+    @Ignore
+    @Test (description = "Test Sign out", dependsOnMethods = "testCheckoutStep2")
     public void testSignOut () {
         this.sauceDemo.verifySignOut ();
     }

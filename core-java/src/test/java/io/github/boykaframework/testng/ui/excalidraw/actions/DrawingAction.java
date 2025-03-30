@@ -60,10 +60,10 @@ public final class DrawingAction {
 
     private static void drawCircle (final int centerX, final int centerY, final int radius, final int startIndex,
         final int endIndex) {
-        for (int i = startIndex; i <= endIndex; i++) {
-            final double angle = Math.toRadians (i);
-            final int x = (int) (centerX + radius * Math.cos (angle));
-            final int y = (int) (centerY + radius * Math.sin (angle));
+        for (var i = startIndex; i <= endIndex; i++) {
+            final var angle = Math.toRadians (i);
+            final var x = (int) (centerX + radius * Math.cos (angle));
+            final var y = (int) (centerY + radius * Math.sin (angle));
 
             final var steps = new ArrayList<MouseAction> ();
             steps.add (MouseAction.composeAction ()

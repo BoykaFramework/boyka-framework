@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Boyka Framework
+ * Copyright (c) 2025, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,26 +14,22 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.api;
+package io.github.boykaframework.config;
 
-import io.github.boykaframework.config.LanguageSetting;
+import static io.github.boykaframework.enums.Language.EN;
+
+import io.github.boykaframework.enums.Language;
 import lombok.Data;
 
 /**
- * API setting class.
+ * Language settings.
  *
  * @author Wasiq Bhamla
- * @since 17-Feb-2022
+ * @since 15-Mar-2025
  */
 @Data
-public class ApiSetting {
-    private String          basePath;
-    private String          baseUri;
-    private LanguageSetting language = new LanguageSetting ();
-    private LogSetting      logging;
-    private int             port;
-    private String          schemaPath;
-    private TimeoutSetting  timeout;
-    private boolean         validateSsl;
-    private boolean         verifyHostName;
+public class LanguageSetting {
+    private boolean  external;
+    private Language language = EN;
+    private String   path     = "./lang";
 }
