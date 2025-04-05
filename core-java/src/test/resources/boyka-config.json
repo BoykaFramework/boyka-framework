@@ -10,6 +10,7 @@
     "archive": {
       "max_days": 1,
       "max_size": 5,
+      "size_unit": "MB",
       "on_every_run": true
     }
   },

@@ -14,23 +14,29 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.logging;
-
-import static io.github.boykaframework.enums.FileSize.MB;
-
-import io.github.boykaframework.enums.FileSize;
-import lombok.Data;
+package io.github.boykaframework.enums;
 
 /**
- * Logs archive setting
+ * Logging file size unit
  *
  * @author Wasiq Bhamla
- * @since 02-Apr-2025
+ * @since 03-Apr-2025
  */
-@Data
-public class ArchiveSetting {
-    private int      maxDays  = 1;
-    private int      maxSize  = 5;
-    private boolean  onEveryRun;
-    private FileSize sizeUnit = MB;
+public enum FileSize {
+    /**
+     * Giga Byte
+     */
+    GB,
+    /**
+     * Kilo Byte.
+     */
+    KB,
+    /**
+     * Mega Byte.
+     */
+    MB,
+    /**
+     * Terra Byte.
+     */
+    TB
 }

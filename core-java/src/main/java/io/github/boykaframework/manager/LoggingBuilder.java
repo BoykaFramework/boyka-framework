@@ -109,7 +109,7 @@ class LoggingBuilder {
 
             appenderCom.addAttribute ("fileName", format ("{0}/{1}.log", dir, fileName));
 
-            final var filePattern = "%s-%%d{{yyyy-MM-dd}.log".formatted (fileName);
+            final var filePattern = "%s/%%d{yyyy-MM-dd}/%s-%%d{hh-mm}.log".formatted (dir, fileName);
             appenderCom.addAttribute ("filePattern", filePattern);
 
             appenderCom.addAttribute ("append", false);
@@ -120,7 +120,7 @@ class LoggingBuilder {
     private void addComponent (final AppenderComponentBuilder component,
         final ConfigurationBuilder<BuiltConfiguration> build, final LoggerType loggerType,
         final ArchiveSetting archiveSetting) {
-        if (loggerType != LoggerType.CONSOLE) {
+        if (loggerType == LoggerType.FILE) {
             final ComponentBuilder<?> comp = build.newComponent ("Policies");
             if (!isNull (archiveSetting)) {
                 if (archiveSetting.getMaxDays () > 0) {
@@ -131,11 +131,14 @@ class LoggingBuilder {
                 }
                 if (archiveSetting.getMaxSize () > 0) {
                     final ComponentBuilder<?> newComp = build.newComponent ("SizeBasedTriggeringPolicy");
-                    newComp.addAttribute ("size", format ("{0} MB", archiveSetting.getMaxSize ()));
+                    newComp.addAttribute ("size", format ("{0} {1}", archiveSetting.getMaxSize (),
+                        archiveSetting.getSizeUnit ()
+                            .name ()));
                     comp.addComponent (newComp);
                 }
                 if (archiveSetting.isOnEveryRun ()) {
                     final ComponentBuilder<?> newComp = build.newComponent ("OnStartupTriggeringPolicy");
+                    newComp.addAttribute ("minSize", 0);
                     comp.addComponent (newComp);
                 }
             }
