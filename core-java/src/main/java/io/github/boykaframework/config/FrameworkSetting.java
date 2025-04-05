@@ -26,6 +26,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.util.Map;
 
 import io.github.boykaframework.config.api.ApiSetting;
+import io.github.boykaframework.config.logging.LoggerSetting;
 import io.github.boykaframework.config.ui.UISetting;
 import lombok.Data;
 import org.apache.logging.log4j.Logger;
@@ -44,6 +45,7 @@ public class FrameworkSetting {
     private CommonSetting           commonSetting = new CommonSetting ();
     private TestDataSetting         data          = new TestDataSetting ();
     private String                  listenersPackage;
+    private LoggerSetting           logging       = new LoggerSetting ();
     private UISetting               ui;
 
     /**

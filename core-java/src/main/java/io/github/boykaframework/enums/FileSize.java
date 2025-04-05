@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Boyka Framework
+ * Copyright (c) 2025, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -16,50 +16,27 @@
 
 package io.github.boykaframework.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 /**
- * Permission decision enum
+ * Logging file size unit
  *
  * @author Wasiq Bhamla
- * @since 22=Dec-2024
+ * @since 03-Apr-2025
  */
-@Getter
-@AllArgsConstructor
-public enum PermissionDecision {
+public enum FileSize {
     /**
-     * Always.
+     * Giga Byte
      */
-    ALWAYS ("always"),
+    GB,
     /**
-     * Critical
+     * Kilo Byte.
      */
-    CRITICAL ("critical"),
+    KB,
     /**
-     * In use
+     * Mega Byte.
      */
-    IN_USE ("inuse"),
+    MB,
     /**
-     * Limited
+     * Terra Byte.
      */
-    LIMITED ("limited"),
-    /**
-     * Never
-     */
-    NEVER ("never"),
-    /**
-     * No
-     */
-    NO ("NO"),
-    /**
-     * Unset
-     */
-    UNSET ("unset"),
-    /**
-     * Yes
-     */
-    YES ("YES");
-
-    private final String value;
+    TB
 }

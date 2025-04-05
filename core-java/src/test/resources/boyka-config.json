@@ -4,6 +4,16 @@
   "data": {
     "path": "data/excel"
   },
+  "logging": {
+    "logs_folder": "./logs",
+    "console_logs": true,
+    "archive": {
+      "max_days": 1,
+      "max_size": 5,
+      "size_unit": "MB",
+      "on_every_run": true
+    }
+  },
   "common_setting": {
     "api": {
       "logging": {
