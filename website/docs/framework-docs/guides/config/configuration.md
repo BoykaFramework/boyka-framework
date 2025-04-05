@@ -59,6 +59,19 @@ Following are the supported placeholder formats:
 ```json title="boyka-config.json"
 {
   "listeners_package": "io.github.boykaframework.testng.listeners",
+  "data": {
+    "path": "data/excel"
+  },
+  "logging": {
+    "logs_folder": "./logs",
+    "console_logs": true,
+    "archive": {
+      "max_days": 1,
+      "max_size": 5,
+      "size_unit": "MB",
+      "on_every_run": true
+    }
+  },
   "ui": {
     "timeout": {
       "implicit_wait": 10,
@@ -396,6 +409,37 @@ Following are the supported placeholder formats:
 | `listeners_package` | This will be the package name under which all the Boyka framework listeners are saved. | `string` | |
 | `data` | Contains Test data related configurations. See [Test data configuration](#data-config) below | `TestDataSetting` | |
 | `common_setting` | Contains Common settings for different platforms. See [Common Setting configuration](#common-config) below | `CommonSetting` | |
+| `logging` | Contains logging specific configuration. See [Logging Config below](#logging-config) | `LoggingSetting` | |
+
+### Logging Configuration {#logging-config}
+
+This configuration handles all the Log4j2 specific settings. It is used to configure the logging behavior of the framework.
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `logs_folder` | Folder where the logs will be saved | `string` | `./logs` |
+| `console_logs` | If set to `true`, console logs will be enabled | `boolean` | `false` |
+| `archive` | Contains archive specific settings | [`ArchiveSetting`](#archive-config) | |
+
+#### Archive Configuration {#archive-config}
+
+This configuration handles the archive settings for the logs. It is used to configure the archiving behavior of the framework logging.
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `max_days` | Maximum number of days to keep the logs | `int` | `1` |
+| `max_size` | Maximum size of the log file | `int` | `5` |
+| `size_unit` | Size unit of the log file | [`SizeUnit`](#size-unit) | `MB` |
+| `on_every_run` | If set to `true`, archive will be created on every run | `boolean` | `false` |
+
+#### Size Unit {#size-unit}
+
+This configuration handles the size unit for the log file. It is used to configure the size unit of the log file.
+
+- `MB`: Megabytes
+- `KB`: Kilobytes
+- `GB`: Gigabytes
+- `TB`: Terabytes
 
 ### UI Configuration {#ui-config}
 
@@ -665,7 +709,7 @@ If `bundle_id` is not provided, then Boyka Framework will throw an exception.
 | -------- | ----------- | ---- | ------- |
 | `base_path` | Base path of the API. | `string` | |
 | `timeout` | Timeout specific settings | [`TimeoutSetting`](#timeout-config) | |
-| `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` | |
+| `logging` | Logging configuration. See [API Logging Config below](#api-logging-config). | `object` | |
 | `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
 | `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
 | `verify_host_name` | If set to `true`, host name verification will happen | `boolean` | `true` |
@@ -679,7 +723,7 @@ If `bundle_id` is not provided, then Boyka Framework will throw an exception.
 | `base_path` | Base path of the API. | `string` | |
 | `port` | Port of the API. | `number` | |
 | `timeout` | Timeout specific settings | [`TimeoutSetting`](#timeout-config) | |
-| `logging` | Logging configuration. See [Logging Config below](#logging-config). | `object` | |
+| `logging` | Logging configuration. See [API Logging Config below](#api-logging-config). | `object` | |
 | `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
 | `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
 | `verify_host_name` | If set to `true`, host name verification will happen | `boolean` | `true` |
@@ -711,7 +755,7 @@ If any setting is missing in the API block, the common API setting will be used.
 | `type` | Type of test data file | [`TestDataSource`](#data-source-types) | `EXCEL` |
 | `extension` | Test data file extension | `string` | `xlsx` |
 
-#### Logging Configuration {#logging-config}
+#### API Logging Configuration {#api-logging-config}
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

@@ -28,20 +28,65 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Permissions {
+    /**
+     * Calendar
+     */
     CALENDAR ("calendar"),
+    /**
+     * Camera
+     */
     CAMERA ("camera"),
+    /**
+     * Contacts
+     */
     CONTACTS ("contacts"),
+    /**
+     * Face ID
+     */
     FACE_ID ("faceid"),
+    /**
+     * Health
+     */
     HEALTH ("health"),
+    /**
+     * Home Kit
+     */
     HOME_KIT ("homekit"),
+    /**
+     * Location
+     */
     LOCATION ("location"),
+    /**
+     * Media library
+     */
     MEDIA_LIBRARY ("medialibrary"),
+    /**
+     * Microphone
+     */
     MICROPHONE ("microphone"),
+    /**
+     * Motion
+     */
     MOTION ("motion"),
+    /**
+     * Notification
+     */
     NOTIFICATIONS ("notifications"),
+    /**
+     * Reminders
+     */
     REMINDERS ("reminders"),
+    /**
+     * Siri
+     */
     SIRI ("siri"),
+    /**
+     * Speech
+     */
     SPEECH ("speech"),
+    /**
+     * User tracking
+     */
     USER_TRACKING ("userTracking");
 
     private final String name;
