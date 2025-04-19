@@ -1,5 +1,5 @@
 ---
-title: 🪛 Setup Configuration
+title: 1️⃣ Setup Configuration
 sidebar_position: 1
 ---
 

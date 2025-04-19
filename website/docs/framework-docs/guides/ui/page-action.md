@@ -1,5 +1,5 @@
 ---
-title: 🏗️ Create Page Action class
+title: 3️⃣ Create Page Action class
 sidebar_position: 3
 ---
 

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: ✅ Verify Response
+title: 4️⃣ Verify API Response
 ---
 
 Once the `ApiResponse` object is returned from the `withRequest` method, it can be used to verify that the response is valid.

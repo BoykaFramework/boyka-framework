@@ -1,9 +1,9 @@
 ---
 sidebar_position: 3
-title: 🔫 Execute Request
+title: 3️⃣ Execute API Request
 ---
 
-Once you have composed your API request, you can execute it using class `ApiActions` and method `withRequest`.
+Once you have composed your [API request](/docs/guides/api/compose-request), you can execute it using class `ApiActions` and method `withRequest`.
 
 :::tip
 Check out complete documentation for [ApiActions](/api/actions/api/api-actions).
@@ -22,6 +22,6 @@ final ApiResponse response = withRequest (request).execute ();
 
 The `withRequest` method will return `ApiResponse` class object which contains methods to verify the response body and status code.
 
-:::tip
+:::info
 Check out complete documentation for [ApiResponse](/api/builders/api-response).
 :::

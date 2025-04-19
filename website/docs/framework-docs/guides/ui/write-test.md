@@ -1,5 +1,5 @@
 ---
-title: ✅ Write Test class
+title: 4️⃣ Write common Test class
 sidebar_position: 4
 ---
 
@@ -26,6 +26,7 @@ Check out all the available static methods to interact with the page in your tes
 - [`FingerActions`](/api/actions/elements/finger-actions): Contains all methods for single finger actions on element / screen related
 - [`FingersAction`](/api/actions/elements/fingers-actions): Contains all method for multi finger actions on element / screen
 - [`TextBoxActions`](/api/actions/elements/textbox-actions): Contains all text box related actions methods
+
 :::
 
 ## Example
@@ -51,19 +52,21 @@ import org.testng.annotations.Test;
 public class SauceDemoTest {
   private SauceDemoActions sauceDemo;
 
-  @AfterMethod (alwaysRun = true)
-  public void afterMethod () {
-    onWindow ().takeScreenshot ();
+  @AfterMethod
+  public void afterMethod (final ITestResult result) {
+    if (!result.isSuccess ()) {
+      onWindow ().takeScreenshot ();
+    }
   }
 
-  @BeforeClass (description = "Setup test class", alwaysRun = true)
+  @BeforeClass (description = "Setup test class")
   @Parameters ({ "platformType", "driverKey" })
   public void setupTestClass (final PlatformType platformType, final String driverKey) {
     createSession ("SauceDemoTest Persona", platformType, driverKey);
     this.sauceDemo = new SauceDemoActions ();
   }
 
-  @AfterClass (description = "Tear down test class", alwaysRun = true)
+  @AfterClass (description = "Tear down test class")
   public void tearDownTestClass () {
     withDriver ().saveLogs ();
     clearSession ();
