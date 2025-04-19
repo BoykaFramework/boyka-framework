@@ -16,6 +16,7 @@
 
 package io.github.boykaframework.config.api;
 
+import io.github.boykaframework.config.LanguageSetting;
 import lombok.Data;
 
 /**
@@ -26,10 +27,11 @@ import lombok.Data;
  */
 @Data
 public class CommonApiSetting {
-    private String         basePath       = "";
-    private LogSetting     logging        = new LogSetting ();
-    private String         schemaPath     = "";
-    private TimeoutSetting timeout        = new TimeoutSetting ();
-    private boolean        validateSsl    = true;
-    private boolean        verifyHostName = true;
+    private String          basePath       = "";
+    private LanguageSetting language       = new LanguageSetting ();
+    private LogSetting      logging        = new LogSetting ();
+    private String          schemaPath     = "";
+    private TimeoutSetting  timeout        = new TimeoutSetting ();
+    private boolean         validateSsl    = true;
+    private boolean         verifyHostName = true;
 }

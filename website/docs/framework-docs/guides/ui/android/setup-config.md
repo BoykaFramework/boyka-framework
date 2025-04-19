@@ -1,5 +1,5 @@
 ---
-title: 🪛 Setup Configuration
+title: 1️⃣ Setup Configuration
 sidebar_position: 1
 ---
 
@@ -60,8 +60,8 @@ Let's see how a sample Android configuration in the config file is:
         },
         "device": {
           "os": "ANDROID",
-          "version": "12",
-          "name": "Pixel_7_Pro",
+          "version": "14",
+          "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -75,7 +75,7 @@ Let's see how a sample Android configuration in the config file is:
             "install_timeout": 180
           },
           "virtual_device": {
-            "name": "Pixel_7_Pro",
+            "name": "Pixel_8_Pro",
             "headless": true
           }
         }

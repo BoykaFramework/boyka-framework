@@ -1,5 +1,5 @@
 ---
-title: 📄 Create Page Object
+title: 2️⃣ Create Web Page Object
 sidebar_position: 2
 ---
 

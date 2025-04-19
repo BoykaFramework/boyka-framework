@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: ✅ Verify Response schema
+title: 5️⃣ Verify Response schema
 ---
 
 ## Generate response schema

@@ -4,6 +4,20 @@ title: 🤖 Enable Auto complete in the IDE
 sidebar_label: 🤖 Auto complete in the IDE
 ---
 
+## Auto complete in the IDE
+
+Your IDE will be able to automatically identify the `boyka-config.json` file and provide auto complete options for the fields in the configuration file. This will help you to easily configure the Boyka framework without having to remember all the field names and their values.
+
+In IntelliJ IDEA, you can check the statusbar to see if the IDE has identified the `boyka-config.json` file. If it is identified, you will see a message like this:
+
+![Failing IntelliJ status bar](/img/docs/framework-docs/guides/config/auto-complete-status.png)
+
+In case the IDE is not able to identify the `boyka-config.json` file, and you see a message like this:
+
+![Failing IntelliJ status bar](/img/docs/framework-docs/guides/config/auto-complete-status-error.png)
+
+Then you can simply click on `File -> Invalidate Caches / Restart` and select `Invalidate and Restart`. This will clear the cache and restart the IDE. After restarting, the IDE should be able to identify the `boyka-config.json` file and provide auto complete options.
+
 ## Using `$schema` field
 
 The easiest option is to add the following line in your `boyka-config.json` file, if the same is not already there:

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: 🏗️ Compose Request
+title: 2️⃣ Compose Request
 ---
 
 For API automation, we have created `ApiRequest` class which you can utilize to build API requests.
