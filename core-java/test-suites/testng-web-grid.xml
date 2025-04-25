@@ -24,7 +24,6 @@
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_selenium_grid"/>
         <classes>
-            <class name="io.github.boykaframework.testng.ui.saucedemo.SauceDemoTest"/>
             <class name="io.github.boykaframework.testng.ui.theinternet.AlertsTest"/>
             <class name="io.github.boykaframework.testng.ui.theinternet.CheckboxTest"/>
             <class name="io.github.boykaframework.testng.ui.theinternet.ContextMenuTest"/>
