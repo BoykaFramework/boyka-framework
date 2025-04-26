@@ -3,31 +3,51 @@ title: 🏗️ Building the project
 sidebar_position: 2
 ---
 
+## Forking the Project
+
+The first step to take before you start contributing to this project is to Fork the project.
+
+To fork the project, click on the `Fork` button on the top right corner of the repository page.
+
 ## Cloning the Project
 
-The first step to take before you start contributing to this project is to Clone the project.
+Once you have forked the project, you can clone it to your local machine.
+
+To clone the project, you can use the `git clone` command.
 
 Run the following command if you want to clone using `SSH`:
 
 ```shell
-> git clone git@github.com:BoykaFramework/boyka-framework.git
+> git clone git@github.com:[your-username]/boyka-framework.git
 ```
 
 Run the following command if you want to clone using `HTTPS`:
 
 ```shell
-> git clone https://github.com/BoykaFramework/boyka-framework.git
+> git clone https://github.com/[your-username]/boyka-framework.git
 ```
 
 Run the following command if you want to clone using [Github CLI][github_cli]:
 
 ```shell
-> git clone gh repo clone BoykaFramework/boyka-framework
+> git clone gh repo clone [your-username]/boyka-framework
 ```
 
 The above URLs for `SSH`, `HTTPS` and `Github CLI` can be found on the github repo main page as well.
 
 ![Github repo main page](/img/docs/contributing/gh-repo-main-page.png)
+
+## Creating a new branch
+
+Once you have cloned the project, you can create a new branch to work on.
+
+To create a new branch, run the following command:
+
+```shell
+> git switch -c [branch-name]
+```
+
+Replace `[branch-name]` with the name of the branch you want to create.
 
 ## Setting up the project
 

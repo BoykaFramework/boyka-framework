@@ -20,11 +20,11 @@
   <a href="https://github.com/BoykaFramework/boyka-framework/commits/main">
     <img src="https://img.shields.io/github/last-commit/BoykaFramework/boyka-framework?style=for-the-badge" alt="last update" />
   </a>
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/latest">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/latest/total?color=brightgreen&label=Downloads%20for%20latest&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  </a>
   <a href="https://central.sonatype.com/artifact/io.github.boykaframework/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/io.github.boykaframework/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
-  </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v2.6.1">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v2.6.1/total?color=brightgreen&label=Downloads%20for%20v2.6.1&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
