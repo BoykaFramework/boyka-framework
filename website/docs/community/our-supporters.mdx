@@ -13,10 +13,13 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
         href="http://www.lambdatest.com?fp_ref=wasiq95" 
         target="_blank" 
         style={{ outline: 'none', border: 'none' }}>
-        <img 
+        <ThemedImage 
             className="supporter-img"
-            src="https://d2gdx5nv84sdx2.cloudfront.net/uploads/n3ufe5o3/marketing_asset/banner/6476/728_x_90.png" 
-            alt="lambdatest" />
+            sources={{
+                light: useBaseUrl("/img/docs/community/our-supporters/lambdatest-light.png"),
+                dark: useBaseUrl("/img/docs/community/our-supporters/lambdatest-dark.png"),
+            }}
+            alt="lamndatest" />
     </a>
     <br/>
     <a 
@@ -43,12 +46,15 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
     </a>
     <br/>
     <a 
-        href="https://tuple.app/"
+        href="https://www.jetbrains.com/"
         target="_blank" 
         style={{ outline: 'none', border: 'none' }}>
-        <img 
+        <ThemedImage 
             className="supporter-img"
-            src={useBaseUrl('/img/docs/community/our-supporters/jetbrains.png')} 
-            alt="tuple" />
+            sources={{
+                light: useBaseUrl("/img/docs/community/our-supporters/jetbrains-black.png"),
+                dark: useBaseUrl("/img/docs/community/our-supporters/jetbrains-white.png"),
+            }}
+            alt="jetbrains" />
     </a>
 </div>
