@@ -123,7 +123,7 @@ href='https://github.com/sponsors/BoykaFramework'>GitHub Sponsors</a> 🤝`,
       indexName: 'boyka-framework',
     },
     colorMode: {
-      defaultMode: 'dark',
+      defaultMode: 'light',
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },

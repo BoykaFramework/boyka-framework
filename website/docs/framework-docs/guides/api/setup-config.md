@@ -1,5 +1,5 @@
 ---
-title: 🪛 Setup API Configuration
+title: 1️⃣ Setup API Configuration
 sidebar_position: 1
 ---
 
@@ -43,7 +43,9 @@ Let's see how a sample API configuration in the config file is:
         "request": true,
         "response": true
       },
-      "schema_path":"schema/"
+      "schema_path":"schema/",
+      "validate_ssl": true,
+      "verify_host_name": true
     }
   }
 }

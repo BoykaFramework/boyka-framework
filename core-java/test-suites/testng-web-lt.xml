@@ -24,7 +24,6 @@
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_lambda_test_chrome"/>
         <packages>
-            <package name="io.github.boykaframework.testng.ui.saucedemo"/>
             <package name="io.github.boykaframework.testng.ui.theinternet"/>
         </packages>
     </test>

@@ -20,11 +20,11 @@
   <a href="https://github.com/BoykaFramework/boyka-framework/commits/main">
     <img src="https://img.shields.io/github/last-commit/BoykaFramework/boyka-framework?style=for-the-badge" alt="last update" />
   </a>
+  <a href="https://github.com/BoykaFramework/boyka-framework/releases/latest">
+    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/latest/total?color=brightgreen&label=Downloads%20for%20latest&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
+  </a>
   <a href="https://central.sonatype.com/artifact/io.github.boykaframework/boyka-framework">
     <img src="https://img.shields.io/maven-central/v/io.github.boykaframework/boyka-framework.svg?style=for-the-badge" alt="Maven Central" />
-  </a>
-  <a href="https://github.com/BoykaFramework/boyka-framework/releases/tag/v2.1.1">
-    <img src="https://img.shields.io/github/downloads/BoykaFramework/boyka-framework/v2.1.1/total?color=brightgreen&label=Downloads%20for%20v2.1.1&logo=GitHub&style=for-the-badge" alt="GitHub releases" />
   </a>
   <a href="https://github.com/BoykaFramework/boyka-framework/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/BoykaFramework/boyka-framework.svg?style=for-the-badge" alt="license" />
@@ -32,7 +32,7 @@
 </p>
 
   <h4>
-    <a href="https://BoykaFramework.github.io/boyka-framework/docs/intro">Documentation</a>
+    <a href="https://boykaframework.github.io/boyka-framework/docs/intro">Documentation</a>
   <span> | </span>
     <a href="https://github.com/BoykaFramework/boyka-framework/issues/new/choose">Report Bug</a>
   <span> | </span>
@@ -41,6 +41,58 @@
 </div>
 
 <br />
+
+## 🎯 Features
+
+### Browsers
+
+| OS | Windows | MacOS | Linux | Android | iOS |
+| -- | ------- | ----- | ----- | ------- | --- |
+| Chrome | ✅ | ✅ | ✅ | ✅ |  |
+| Firefox | ✅ | ✅ | ✅ |  |  |
+| Safari |  | ✅ |  |  | ✅ |
+| Edge | ✅ | ✅ | ✅ |  |  |
+
+### Mobile applications
+
+| OS | Android | iOS |
+| -- | ------- | --- |
+| Native | ✅ | ✅ |
+| Hybrid | ✅ | ✅ |
+| Web | ✅ | ✅ |
+
+### Remote platforms
+
+| Platform | Status |
+| -------- | ------ |
+| BrowserStack | ✅ |
+| LambdaTest | ✅ |
+| Selenium Grid | ✅ |
+
+### Test frameworks
+
+| Framework | Java |
+| -------- | --- |
+| JUnit 5 | ✅ |
+| TestNG | ✅ |
+| Cucumber | ✅ |
+
+### Other features
+
+| Feature | Status |
+| ------- | ------ |
+| Zero boilerplate code | ✅ |
+| Page Object Model | ✅ |
+| Request object model | ✅ |
+| Single configuration | ✅ |
+| Page actions | ✅ |
+| Multi-user multi-platform | ✅ |
+| Take screenshots | ✅ |
+| Video recording (Mobile) | ✅ |
+| Logging | ✅ |
+| Extension support | ✅ |
+| Inline assertion | ✅ |
+| API response schema validation | ✅ |
 
 ## 🖱️ One command Boyka project setup
 
@@ -63,31 +115,39 @@ When this command is executed, multiple set of questions will be prompted that m
 
 ## 👜 Resources
 
-- [🤔 What is Boyka Framework?](https://BoykaFramework.github.io/boyka-framework/docs/intro#what-is-boyka-framework)
-- [💡 Why Boyka Framework was created?](https://BoykaFramework.github.io/boyka-framework/docs/intro#why-boyka-framework-was-created)
-- [🎯 Features](https://BoykaFramework.github.io/boyka-framework/docs/intro#features)
-- [🚀 Quick start](https://BoykaFramework.github.io/boyka-framework/docs/getting-started/quickstart)
+- [🤔 What is Boyka Framework?](https://boykaframework.github.io/boyka-framework/docs/intro#what-is-boyka-framework)
+- [💡 Why Boyka Framework was created?](https://boykaframework.github.io/boyka-framework/docs/intro#why-boyka-framework-was-created)
+- [🎯 Features](https://boykaframework.github.io/boyka-framework/docs/intro#features)
+- [🚀 Quick start](https://boykaframework.github.io/boyka-framework/docs/getting-started/quickstart)
 
 ## ☕ Examples
 
+- [Create your first Boyka framework project](https://boykaframework.github.io/boyka-framework/docs/guides/create-first-project)
 - API:
-  - [How to configure Boyka for API Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/setup-config)
-  - [How to compose a request?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/compose-request)
-  - [How to execute a request?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/execute-request)
-  - [How to verify the response?](https://BoykaFramework.github.io/boyka-framework/docs/guides/api/verify-response)
-  - [How to verify the response schema?](http://localhost:3000/boyka-framework/docs/guides/api/verify-response-schema)
+  - [How to configure Boyka for API Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/api/setup-config)
+  - [How to compose a request?](https://boykaframework.github.io/boyka-framework/docs/guides/api/compose-request)
+  - [How to execute a request?](https://boykaframework.github.io/boyka-framework/docs/guides/api/execute-request)
+  - [How to verify the response?](https://boykaframework.github.io/boyka-framework/docs/guides/api/verify-response)
+  - [How to verify the response schema?](https://boykaframework.github.io/boyka-framework/docs/guides/api/verify-response-schema)
 - UI:
   - Web:
-    - [How to configure Boyka for Web Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/ui/web/setup-config)
-    - [How to create page object for Web?](https://BoykaFramework.github.io/boyka-framework/docs/guides/ui/web/create-page-object)
+    - [How to configure Boyka for Web Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/web/setup-config)
+    - [How to create page object for Web?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/web/create-page-object)
   - Android:
-    - [How to configure Boyka for Android Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/ui/android/setup-config)
-    - [How to update existing page object with Android locators?](https://BoykaFramework.github.io/boyka-framework/docs/guides/ui/android/create-page-object)
+    - [How to configure Boyka for Android Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/android/setup-config)
+    - [How to update existing page object with Android locators?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/android/create-page-object)
   - iOS:
-    - [How to configure Boyka for iOS Automation?](https://BoykaFramework.github.io/boyka-framework/docs/guides/ui/ios/setup-config)
-    - [How to update existing page object for iOS locators?](https://BoykaFramework.github.io/boyka-framework/docs/guides/ui/ios/create-page-object)
-  - [How to create common application action class?](https://BoykaFramework.github.io/boyka-framework/docs/guides/ui/page-action)
-  - [How to write test class using common action class?](https://BoykaFramework.github.io/boyka-framework/docs/guides/ui/write-test)
+    - [How to configure Boyka for iOS Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/ios/setup-config)
+    - [How to update existing page object for iOS locators?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/ios/create-page-object)
+  - [How to create common application action class?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/page-actions)
+  - [How to write test class using common action class?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/write-test)
+
+## 👨‍🎓 Tutorials
+
+- [Appium with Selenium Grid 4](https://boykaframework.github.io/boyka-framework/docs/tutorials/appium-grid)
+- [How to automate i18n and l10n?](https://boykaframework.github.io/boyka-framework/docs/tutorials/i18n-l10n)
+- [Generate Allure Report](https://boykaframework.github.io/boyka-framework/docs/tutorials/generate-allure-report)
+- [Data Driven Testing](https://boykaframework.github.io/boyka-framework/docs/tutorials/data-driven-testing)
 
 ## 👾 Tech Stack
 
@@ -119,13 +179,29 @@ When this command is executed, multiple set of questions will be prompted that m
 Big thanks to the following organizations for their support to the project with their open source licenses:
 
 <div align="center">
-  <a href="http://www.lambdatest.com?fp_ref=wasiq95" target="_blank" style="outline:none;border:none;"><img src="https://d2gdx5nv84sdx2.cloudfront.net/uploads/n3ufe5o3/marketing_asset/banner/6476/728_x_90.png" alt="lambdatest"/></a>
+  <a href="http://www.lambdatest.com?fp_ref=wasiq95" target="_blank" style="outline:none;border:none;">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="./website/static/img/docs/community/our-supporters/lambdatest-dark.png">
+      <source media="(prefers-color-scheme: light)" srcset="./website/static/img/docs/community/our-supporters/lambdatest-light.png">
+      <img alt="lambdatest" src="./website/static/img/docs/community/our-supporters/lambdatest-light.png">
+    </picture>
+  </a>
   <br/>
-  <a href="https://www.browserstack.com/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/></a>
+  <a href="https://www.browserstack.com/" target="_blank" style="outline:none;border:none;">
+    <img src="./website/static/img/docs/community/our-supporters/browser-stack.png" alt="browserstack"/>
+  </a>
   <br/>
-  <a href="https://www.jetbrains.com/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/jetbrains.png" alt="JetBrains" width="300px"/></a>
+  <a href="https://www.jetbrains.com/" target="_blank" style="outline:none;border:none;">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="./website/static/img/docs/community/our-supporters/jetbrains-white.png">
+      <source media="(prefers-color-scheme: light)" srcset="./website/static/img/docs/community/our-supporters/jetbrains-black.png">
+      <img alt="JetBrains" src="./website/static/img/docs/community/our-supporters/jetbrains-black.png">
+    </picture>
+  </a>
   <br/>
-  <a href="https://tuple.app/" target="_blank" style="outline:none;border:none;"><img src="./website/static/img/docs/community/our-supporters/tuple.svg" alt="Tuple" width="300px"/></a>
+  <a href="https://tuple.app/" target="_blank" style="outline:none;border:none;">
+    <img src="./website/static/img/docs/community/our-supporters/tuple.svg" alt="Tuple" width="300px"/>
+  </a>
 </div>
 
 ## 🧭 Project Road-map
@@ -141,7 +217,7 @@ Check out our road map to know which features we are cooking,
 
 These are our awesome contributors:
 
-[![Contributors](https://contrib.rocks/image?repo=BoykaFramework/boyka-framework)](https://github.com/BoykaFramework/boyka-framework/graphs/contributors)
+[![Repo contributors](https://contrib.rocks/image?repo=BoykaFramework/boyka-framework)](https://github.com/BoykaFramework/boyka-framework/graphs/contributors)
 
 Contributions are always welcome!
 
@@ -161,6 +237,10 @@ Distributed under MIT [License](LICENSE).
 - Open a [new Discussion](https://github.com/BoykaFramework/boyka-framework/discussions/new) on GitHub to ask questions or to discuss ideas
 - Connect with us on [X](https://dub.sh/boyka-twitter)
 - Follow us on [GitHub](https://git.new/boyka-github) and [LinkedIn](https://dub.sh/boyka-linkedin)
+
+## 💗 Repo Activity
+
+![Boyka Framework Repo activity](https://repobeats.axiom.co/api/embed/c0102808cee0d0c66a005dc18f95d3ef35a844a3.svg "Repobeats analytics image")
 
 ## ⭐ Star History
 

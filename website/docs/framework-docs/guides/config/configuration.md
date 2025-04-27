@@ -517,6 +517,7 @@ See the example in [sample configuration file](#config-sample).
 | `page_load_strategy` | Page loading strategy (all in capital letters) | [`PageLoadStrategy`](https://www.selenium.dev/documentation/webdriver/drivers/options/#pageloadstrategy) | `NORMAL` |
 | `browser_options` | An array of browser specific arguments | `string[]` | `null` |
 | `experimental_options` | A key-value pair of Browsers Experimental options | `Map<string, object>` | `null` |
+| `language` | Language related settings | [`LanguageSetting`](#language-setting) | `null` |
 
 :::tip
 When you use Boyka command line assistant to configure your test to run on any Cloud providers using `boyka config [web | api | android | ios] [config_name]` command, then it is **MANDATORY** to provide Environment variable names when prompted for user name and password
@@ -608,6 +609,7 @@ When you use Boyka command line assistant to configure your test to run on any C
 | `auto_grant_permissions` | Auto grant permissions for Android devices | `boolean` | `false` |
 | `permissions` | Map of permissions to grant for iOS devices | `Map<Permissions, PermissionDecision>` | `null` |
 | `command_timeout` | Timeout in seconds to wait for a command to execute | `int` | `60` |
+| `language` | Language related settings | [`LanguageSetting`](#language-setting) | `null` |
 
 :::danger
 When providing `permissions` option in the device configuration, make sure to provide the `bundle_id` for the app under test in the `application` block.
@@ -714,6 +716,7 @@ If `bundle_id` is not provided, then Boyka Framework will throw an exception.
 | `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
 | `verify_host_name` | If set to `true`, host name verification will happen | `boolean` | `true` |
 | `api` | Different API Configurations | [`ApiSetting`](#specific-api-config) | |
+| `language` | Language related settings | [`LanguageSetting`](#language-setting) | `null` |
 
 ### Specific API Configuration {#specific-api-config}
 
@@ -727,6 +730,7 @@ If `bundle_id` is not provided, then Boyka Framework will throw an exception.
 | `schema_path` | Path of schema file at location `src/test/resources` | `string` | |
 | `validate_ssl` | If set to `true`, SSL validation will happen | `boolean` | `true` |
 | `verify_host_name` | If set to `true`, host name verification will happen | `boolean` | `true` |
+| `language` | Language related settings | [`LanguageSetting`](#language-setting) | `null` |
 
 :::info API Configuration
 In `api` configuration block, you can provide different versions of API settings having different key names.
@@ -883,3 +887,19 @@ We have an enum `OS` where we maintain the list of currently supported device OS
 - `LIMITED`
 - `NEVER`
 - `UNSET`
+
+## Language Settings {#language-setting}
+
+This configuration handles the language settings for the framework. It is used to configure the language behavior of the framework.
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `language` | Language code for the framework | `Language` | `EN` |
+| `external` | If set to `false`, the language file will be searched in `src/test/resources` folder | `boolean` | `false` |
+| `path` | Path to the language file | `string` | `null` |
+
+## Language Codes {#language-codes}
+
+- `EN`: English
+- `GR`: German
+- `AR`: Arabic

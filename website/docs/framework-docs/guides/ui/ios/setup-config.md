@@ -1,5 +1,5 @@
 ---
-title: 🪛 Setup Configuration
+title: 1️⃣ Setup Configuration
 sidebar_position: 1
 ---
 
@@ -64,8 +64,8 @@ Let's see how a sample iOS configuration in the config file is:
         },
         "device": {
           "os": "IOS",
-          "version": "16.2",
-          "name": "iPhone 14 Pro Max",
+          "version": "18.2",
+          "name": "iPhone 16 Pro Max",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "server_launch_timeout": 60,
@@ -99,8 +99,8 @@ Let's see how a sample iOS configuration in the config file is:
         },
         "device": {
           "os": "IOS",
-          "version": "16",
-          "name": "iPhone 14 Pro",
+          "version": "18.2",
+          "name": "iPhone 16 Pro",
           "type": "CLOUD",
           "application": {
             "path": "IOSApp",
@@ -137,8 +137,8 @@ Let's see how a sample iOS configuration in the config file is:
           "ignore_unimportant_views": true,
           "capabilities": {
             "platformName": "iOS",
-            "deviceName": "iPhone 14 Pro",
-            "platformVersion": "16",
+            "deviceName": "iPhone 15 Pro",
+            "platformVersion": "17",
             "app": "${env:LT_APP_IOS}",
             "project": "LambdaTest iOS Project",
             "build": "Test LambdaTest Build",
