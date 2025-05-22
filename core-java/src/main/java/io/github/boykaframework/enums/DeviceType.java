@@ -28,6 +28,10 @@ public enum DeviceType {
      */
     CLOUD,
     /**
+     * Real device.
+     */
+    REAL,
+    /**
      * Virtual device.
      */
     VIRTUAL

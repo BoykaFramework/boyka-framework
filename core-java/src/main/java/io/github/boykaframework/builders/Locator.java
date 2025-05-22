@@ -42,6 +42,7 @@ public class Locator {
     private Predicate<WebElement> filter;
     private int                   index;
     private By                    ios;
+    private By                    mac;
     @NotNull
     private String                name;
     private Locator               parent;
@@ -58,6 +59,7 @@ public class Locator {
         return switch (getSession ().getPlatformType ()) {
             case ANDROID -> getMobileOrWebLocator (this.android);
             case IOS -> getMobileOrWebLocator (this.ios);
+            case MAC -> this.mac;
             default -> this.web;
         };
     }

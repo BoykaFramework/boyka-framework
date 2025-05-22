@@ -59,7 +59,7 @@ public class DeviceSetting {
     private int                                  typingSpeed            = 60;
     private String                               uniqueId;
     private String                               version;
-    private VideoSetting                         video                  = new VideoSetting ();
+    private MobileVideoSetting                   video                  = new MobileVideoSetting ();
     private VirtualDeviceSetting                 virtualDevice          = new VirtualDeviceSetting ();
     private WDASetting                           wda;
     private int                                  webViewConnectRetries  = 3;

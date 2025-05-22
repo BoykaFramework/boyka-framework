@@ -23,6 +23,7 @@ import static io.github.boykaframework.enums.ListenerType.DEVICE_ACTION;
 import static io.github.boykaframework.enums.Message.NO_KEYBOARD_ERROR;
 import static io.github.boykaframework.enums.PlatformType.ANDROID;
 import static io.github.boykaframework.enums.PlatformType.IOS;
+import static io.github.boykaframework.enums.PlatformType.MAC;
 import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
@@ -38,10 +39,12 @@ import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
 import io.appium.java_client.android.AndroidStopScreenRecordingOptions;
 import io.appium.java_client.ios.IOSStartScreenRecordingOptions;
 import io.appium.java_client.ios.IOSStopScreenRecordingOptions;
+import io.appium.java_client.mac.Mac2StartScreenRecordingOptions;
 import io.appium.java_client.screenrecording.CanRecordScreen;
 import io.github.boykaframework.actions.interfaces.device.IDeviceActions;
 import io.github.boykaframework.actions.interfaces.listeners.device.IDeviceActionsListener;
-import io.github.boykaframework.config.ui.mobile.device.VideoSetting;
+import io.github.boykaframework.config.ui.desktop.machine.DesktopVideoSetting;
+import io.github.boykaframework.config.ui.mobile.device.MobileVideoSetting;
 import io.github.boykaframework.enums.PlatformType;
 import org.apache.logging.log4j.Logger;
 
@@ -129,7 +132,7 @@ public class DeviceActions implements IDeviceActions {
         }
     }
 
-    private AndroidStartScreenRecordingOptions getAndroidRecordOptions (final VideoSetting setting) {
+    private AndroidStartScreenRecordingOptions getAndroidRecordOptions (final MobileVideoSetting setting) {
         final var androidSetting = setting.getAndroid ();
         final var options = AndroidStartScreenRecordingOptions.startScreenRecordingOptions ();
         if (!isNull (androidSetting)) {
@@ -140,7 +143,7 @@ public class DeviceActions implements IDeviceActions {
         return options;
     }
 
-    private IOSStartScreenRecordingOptions getIOSRecordOptions (final VideoSetting setting) {
+    private IOSStartScreenRecordingOptions getIOSRecordOptions (final MobileVideoSetting setting) {
         final var iosSetting = setting.getIos ();
         final var options = IOSStartScreenRecordingOptions.startScreenRecordingOptions ();
         if (!isNull (iosSetting)) {
@@ -155,14 +158,28 @@ public class DeviceActions implements IDeviceActions {
         return options;
     }
 
-    private void startRecording (final CanRecordScreen screen, final VideoSetting setting,
+    private Mac2StartScreenRecordingOptions getMacRecordingOptions (final DesktopVideoSetting setting) {
+        final var macSetting = setting.getMac ();
+        final var options = Mac2StartScreenRecordingOptions.startScreenRecordingOptions ();
+        options.withTimeLimit (ofSeconds (setting.getTimeLimit ()));
+        options.withFps (macSetting.getFps ());
+
+        if (macSetting.isCaptureClicks ()) {
+            options.enableClicksCapture ();
+        }
+        return options;
+    }
+
+    private void startRecording (final CanRecordScreen screen, final MobileVideoSetting setting,
         final PlatformType platform) {
         if (platform == ANDROID) {
             final var options = getAndroidRecordOptions (setting);
             screen.startRecordingScreen (options);
-        } else {
+        } else if (platform == IOS) {
             final var options = getIOSRecordOptions (setting);
             screen.startRecordingScreen (options);
+        } else if (platform == MAC) {
+            var options = getMacRecordingOptions (se)
         }
     }
 

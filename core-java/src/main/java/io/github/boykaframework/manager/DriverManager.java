@@ -16,6 +16,9 @@
 
 package io.github.boykaframework.manager;
 
+import static io.github.boykaframework.enums.PlatformType.ANDROID;
+import static io.github.boykaframework.enums.PlatformType.IOS;
+import static io.github.boykaframework.enums.PlatformType.MAC;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.time.Duration.ofSeconds;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -46,14 +49,18 @@ final class DriverManager {
         LOGGER.traceEntry ();
         final var settings = getSession ().getSetting ()
             .getUi ();
-        if (this.platformType != PlatformType.WEB) {
+        if (this.platformType == ANDROID || this.platformType == IOS) {
             final var mobileSetting = getSession ().getMobileSetting ();
             setupAppiumServer (mobileSetting.getServer ());
+        } else if (this.platformType == MAC) {
+            final var desktopSetting = getSession ().getDesktopSetting ();
+            setupAppiumServer (desktopSetting.getServer ());
         }
         final IDriverManager driverManager = switch (this.platformType) {
             case WEB -> new WebDriverManager ();
             case ANDROID -> new AndroidManager ();
-            default -> new IOSManager ();
+            case IOS -> new IOSManager ();
+            default -> new MacManager ();
         };
         driverManager.setupDriver ();
         setDriverWaits (settings.getTimeout ());
@@ -67,10 +74,10 @@ final class DriverManager {
         final var timeouts = driver.manage ()
             .timeouts ();
         timeouts.implicitlyWait (ofSeconds (timeoutSetting.getImplicitWait ()));
-        if (this.platformType == PlatformType.WEB || session.getMobileSetting ()
+        if (this.platformType == PlatformType.WEB || (this.platformType != MAC && session.getMobileSetting ()
             .getDevice ()
             .getApplication ()
-            .getType () == ApplicationType.WEB) {
+            .getType () == ApplicationType.WEB)) {
             timeouts.pageLoadTimeout (ofSeconds (timeoutSetting.getPageLoadTimeout ()));
             timeouts.scriptTimeout (ofSeconds (timeoutSetting.getScriptTimeout ()));
         }

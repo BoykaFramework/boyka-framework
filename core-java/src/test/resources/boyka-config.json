@@ -227,6 +227,23 @@
         "browser": "CHROME"
       }
     },
+    "desktop": {
+      "test_mac": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4729,
+          "session_override": true,
+          "driver": "MAC"
+        },
+        "machine": {
+          "os": "MAC",
+          "version": "15.4",
+          "application": {
+            "bundle_id": "com.apple.calculator"
+          }
+        }
+      }
+    },
     "mobile": {
       "test_local_sauce_android": {
         "server": {

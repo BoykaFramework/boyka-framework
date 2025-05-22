@@ -25,6 +25,7 @@ import static io.github.boykaframework.enums.Message.SESSION_NOT_STARTED;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.manager.ParallelSession.setDriver;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
+import static io.github.boykaframework.utils.Validator.setOptionIfPresent;
 import static java.time.Duration.ofSeconds;
 import static java.util.Objects.isNull;
 
@@ -36,7 +37,6 @@ import io.github.boykaframework.config.ui.mobile.device.DeviceSetting;
 import io.github.boykaframework.config.ui.mobile.device.VirtualDeviceSetting;
 import io.github.boykaframework.enums.DeviceType;
 import io.github.boykaframework.enums.TargetProviders;
-import io.github.boykaframework.utils.Validator;
 import org.openqa.selenium.SessionNotCreatedException;
 
 class AndroidManager implements IDriverManager {
@@ -64,7 +64,7 @@ class AndroidManager implements IDriverManager {
         if (application.getType () == WEB) {
             options.withBrowserName (application.getBrowser ()
                 .name ());
-            Validator.setOptionIfPresent (application.getChromeDriverPort (), options::setChromedriverPort);
+            setOptionIfPresent (application.getChromeDriverPort (), options::setChromedriverPort);
         } else {
             setupApplicationOptions (application, options);
             options.setAppWaitActivity (application.getWaitActivity ());

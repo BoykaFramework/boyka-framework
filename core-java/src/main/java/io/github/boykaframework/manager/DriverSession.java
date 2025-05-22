@@ -36,6 +36,7 @@ import io.github.boykaframework.config.LanguageSetting;
 import io.github.boykaframework.config.TestDataSetting;
 import io.github.boykaframework.config.api.ApiSetting;
 import io.github.boykaframework.config.api.CommonApiSetting;
+import io.github.boykaframework.config.ui.desktop.DesktopSetting;
 import io.github.boykaframework.config.ui.mobile.MobileSetting;
 import io.github.boykaframework.config.ui.web.WebSetting;
 import io.github.boykaframework.enums.ListenerType;
@@ -126,13 +127,23 @@ public class DriverSession<D extends WebDriver> {
     }
 
     /**
+     * Gets the Desktop settings.
+     *
+     * @return {@link DesktopSetting} instance
+     */
+    public DesktopSetting getDesktopSetting () {
+        return this.setting.getUi ()
+            .getDesktopSetting (this.configKey);
+    }
+
+    /**
      * Gets the language settings for the current config.
      *
      * @return Language setting
      */
     public LanguageSetting getLanguageSettings () {
         return switch (getPlatformType ()) {
-            case ANDROID, IOS -> getMobileSetting ().getDevice ()
+            case ANDROID, IOS, MAC -> getMobileSetting ().getDevice ()
                 .getLanguage ();
             case API -> getApiSetting ().getLanguage ();
             case WEB -> getWebSetting ().getLanguage ();
