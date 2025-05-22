@@ -22,7 +22,7 @@
     "url": "https://github.com/BoykaFramework/boyka-framework/issues"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "workspaces": [
     "website"
@@ -33,19 +33,19 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/compat": "^1.2.9",
-    "@eslint/js": "^9.25.1",
+    "@eslint/js": "^9.27.0",
     "@lerna/child-process": "^7.4.2",
     "@release-it-plugins/lerna-changelog": "^7.0.0",
     "@stylistic/eslint-plugin-js": "^4.2.0",
     "@stylistic/eslint-plugin-ts": "^4.2.0",
-    "@types/node": "^22.15.2",
+    "@types/node": "^22.15.21",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
     "@typescript-eslint/parser": "^8.31.0",
     "commitlint": "^19.8.0",
-    "eslint": "^9.25.1",
+    "eslint": "^9.27.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^10.1.2",
-    "eslint-import-resolver-typescript": "^4.3.4",
+    "eslint-import-resolver-typescript": "^4.3.5",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-react": "^7.37.5",
@@ -57,7 +57,7 @@
     "lerna-version": "^6.6.2",
     "lint-staged": "^15.5.1",
     "lodash": "^4.17.21",
-    "nx": "^21.0.3",
+    "nx": "^21.1.1",
     "prettier": "^3.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -100,5 +100,5 @@
       "pnpm format"
     ]
   },
-  "packageManager": "pnpm@10.9.0"
+  "packageManager": "pnpm@10.11.0"
 }
