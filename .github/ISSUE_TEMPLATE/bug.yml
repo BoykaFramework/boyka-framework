@@ -3,6 +3,7 @@ description: |
   This template is used to create a new bug report.
   Please provide as much information as possible.
 title: '🐛 New Bug:'
+type: Bug
 labels:
   - '🛠 goal: fix'
   - '🏷 status: label work required'

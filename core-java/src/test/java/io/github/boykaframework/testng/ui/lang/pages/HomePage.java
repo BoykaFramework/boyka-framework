@@ -43,7 +43,7 @@ public class HomePage {
 
     private final Locator languageSelector = Locator.buildLocator ()
         .name ("Language Selector")
-        .web (cssSelector ("nav[aria-label=\"Main\"] div.dropdown"))
+        .web (cssSelector ("nav div.dropdown:nth-child(2)"))
         .build ();
     private final Locator title            = Locator.buildLocator ()
         .name ("Page Title")
