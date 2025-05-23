@@ -1,4 +1,4 @@
-name: ✨ Update existing Feature request"
+name: ✨ Update existing Feature request
 description: |
   This template is used to create a new feature request.
   Please provide as much information as possible.
@@ -7,6 +7,7 @@ labels:
   - '🏷 status: label work required'
   - '🏁 status: ready for dev'
 title: '✨ Update feature:'
+type: Enhancement
 body:
   - type: dropdown
     id: domain-type

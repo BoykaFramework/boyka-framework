@@ -1,4 +1,4 @@
-name: ⭐ New Feature request"
+name: ⭐ New Feature request
 description: |
   This template is used to create a new feature request.
   Please provide as much information as possible.
@@ -7,6 +7,7 @@ labels:
   - '🏷 status: label work required'
   - '🏁 status: ready for dev'
 title: '⭐ New feature:'
+type: Feature
 body:
   - type: textarea
     attributes:

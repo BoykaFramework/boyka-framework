@@ -10,6 +10,40 @@
 
 
 
+
+## 2.7.0 (2025-05-14)
+
+#### :rocket: New Feature
+* [#1012](https://github.com/BoykaFramework/boyka-framework/pull/1012) feat(java): :sparkles: added log file config to boyka config ([@WasiqB](https://github.com/WasiqB))
+* [#1008](https://github.com/BoykaFramework/boyka-framework/pull/1008) feat(java): :sparkles: added support for i18n applications ([@WasiqB](https://github.com/WasiqB))
+
+#### :bug: Bug Fix
+* [#1002](https://github.com/BoykaFramework/boyka-framework/pull/1002) fix(java): :bug: handled get api request with body ([@WasiqB](https://github.com/WasiqB))
+
+#### :memo: Documentation
+* [#1018](https://github.com/BoykaFramework/boyka-framework/pull/1018) docs(website): :memo: updating docs in progress with tutorials and guides ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#1024](https://github.com/BoykaFramework/boyka-framework/pull/1024) build(deps-dev): bump the dependencies group with 12 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1022](https://github.com/BoykaFramework/boyka-framework/pull/1022) build(deps-dev): bump the dependencies group with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1020](https://github.com/BoykaFramework/boyka-framework/pull/1020) build(deps): bump the dependencies group across 1 directory with 7 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1019](https://github.com/BoykaFramework/boyka-framework/pull/1019) build(deps-dev): bump the dependencies group with 6 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1016](https://github.com/BoykaFramework/boyka-framework/pull/1016) build(deps-dev): bump the dependencies group with 9 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1013](https://github.com/BoykaFramework/boyka-framework/pull/1013) build(deps): bump the dependencies group in /core-java with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1011](https://github.com/BoykaFramework/boyka-framework/pull/1011) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1010](https://github.com/BoykaFramework/boyka-framework/pull/1010) build(deps): bump the dependencies group in /core-java with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1009](https://github.com/BoykaFramework/boyka-framework/pull/1009) build(deps-dev): bump the dependencies group with 7 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1006](https://github.com/BoykaFramework/boyka-framework/pull/1006) build(deps): bump org.aspectj:aspectjweaver from 1.9.22.1 to 1.9.23 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1007](https://github.com/BoykaFramework/boyka-framework/pull/1007) build(deps-dev): bump the dependencies group with 6 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1003](https://github.com/BoykaFramework/boyka-framework/pull/1003) build(deps): bump the dependencies group across 1 directory with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1000](https://github.com/BoykaFramework/boyka-framework/pull/1000) build(deps-dev): bump the dependencies group with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#998](https://github.com/BoykaFramework/boyka-framework/pull/998) build(deps): bump the dependencies group across 1 directory with 14 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#996](https://github.com/BoykaFramework/boyka-framework/pull/996) build(deps): bump the dependencies group in /core-java with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#995](https://github.com/BoykaFramework/boyka-framework/pull/995) build(deps-dev): bump org.testng:testng from 7.10.2 to 7.11.0 in /core-java ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.6.1 (2025-02-16)
 
 #### :bug: Bug Fix
