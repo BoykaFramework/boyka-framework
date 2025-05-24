@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Boyka Framework
+ * Copyright (c) 2025, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -16,23 +16,54 @@
 
 package io.github.boykaframework.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
- * Device type.
+ * Gets MacOS Video recording preset
  *
  * @author Wasiq Bhamla
- * @since 06-Sept-2022
+ * @since 24-May-2025
  */
-public enum DeviceType {
+@Getter
+@AllArgsConstructor
+public enum Preset {
     /**
-     * Cloud device.
+     * Fast
      */
-    CLOUD,
+    FAST ("fast"),
     /**
-     * Real device.
+     * Faster
      */
-    REAL,
+    FASTER ("faster"),
     /**
-     * Virtual device.
+     * Medium
      */
-    VIRTUAL
+    MEDIUM ("medium"),
+    /**
+     * Slow
+     */
+    SLOW ("slow"),
+    /**
+     * Slower
+     */
+    SLOWER ("slower"),
+    /**
+     * Superfast
+     */
+    SUPER_FAST ("superfast"),
+    /**
+     * Ultrafast
+     */
+    ULTRA_FAST ("ultrafast"),
+    /**
+     * Very fast
+     */
+    VERY_FAST ("veryfast"),
+    /**
+     * Very slow
+     */
+    VERY_SLOW ("veryslow");
+
+    private final String name;
 }

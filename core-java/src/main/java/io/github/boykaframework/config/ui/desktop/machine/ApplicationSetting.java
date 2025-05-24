@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Boyka Framework
+ * Copyright (c) 2025, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,25 +14,18 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.enums;
+package io.github.boykaframework.config.ui.desktop.machine;
+
+import lombok.Data;
 
 /**
- * Device type.
+ * Desktop application setting.
  *
  * @author Wasiq Bhamla
- * @since 06-Sept-2022
+ * @since 24-May-2025
  */
-public enum DeviceType {
-    /**
-     * Cloud device.
-     */
-    CLOUD,
-    /**
-     * Real device.
-     */
-    REAL,
-    /**
-     * Virtual device.
-     */
-    VIRTUAL
+@Data
+public class ApplicationSetting {
+    private String  bundleId;
+    private boolean skipAppKill;
 }

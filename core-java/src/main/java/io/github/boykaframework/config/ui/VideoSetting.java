@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Boyka Framework
+ * Copyright (c) 2025, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,8 +14,11 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.config.ui.mobile.device;
+package io.github.boykaframework.config.ui;
 
+import io.github.boykaframework.config.ui.desktop.machine.MacVideoSetting;
+import io.github.boykaframework.config.ui.mobile.device.AndroidVideoSetting;
+import io.github.boykaframework.config.ui.mobile.device.IOSVideoSetting;
 import lombok.Data;
 
 /**
@@ -29,6 +32,7 @@ public class VideoSetting {
     private AndroidVideoSetting android = new AndroidVideoSetting ();
     private boolean             enabled = false;
     private IOSVideoSetting     ios     = new IOSVideoSetting ();
+    private MacVideoSetting     mac     = new MacVideoSetting ();
     private String              path    = "./videos";
     private String              prefix  = "VID";
     private String              size;

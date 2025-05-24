@@ -29,7 +29,7 @@ import lombok.Getter;
 @Getter
 public enum Message {
     /**
-     * Action not supported error.
+     * Action is not supported error.
      */
     ACTION_NOT_SUPPORTED_ON_PLATFORM ("({0}) action is not supported on ({1}) platform..."),
     /**
@@ -49,13 +49,17 @@ public enum Message {
      */
     BROWSER_OPTION_NOT_SUPPORTED ("Browser options not supported for ({0}) browser..."),
     /**
-     * Bundle ID is required for setting permissions.
+     * Bundle ID is required.
      */
-    BUNDLE_ID_REQUIRED ("Bundle ID is required for setting permissions..."),
+    BUNDLE_ID_REQUIRED ("Bundle ID is required..."),
     /**
      * Remote execution requires capabilities
      */
     CAPABILITIES_REQUIRED_FOR_REMOTE ("Capabilities required for remote execution..."),
+    /**
+     * Cloud provider does not support this platform.
+     */
+    CLOUD_NOT_SUPPORTED ("Cloud provider does not support ({0}) platform..."),
     /**
      * Config key is not found.
      */

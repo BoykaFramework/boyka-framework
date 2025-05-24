@@ -227,6 +227,33 @@
         "browser": "CHROME"
       }
     },
+    "desktop": {
+      "test_mac": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4729,
+          "session_override": true,
+          "driver": "MAC"
+        },
+        "machine": {
+          "os": "MAC",
+          "version": "15.4",
+          "application": {
+            "bundle_id": "com.apple.calculator"
+          },
+          "video": {
+            "enabled": true,
+            "time_limit": 300,
+            "preset": "VERY_FAST",
+            "device_id": 2,
+            "mac": {
+              "capture_clicks": true,
+              "fps": 10
+            }
+          }
+        }
+      }
+    },
     "mobile": {
       "test_local_sauce_android": {
         "server": {

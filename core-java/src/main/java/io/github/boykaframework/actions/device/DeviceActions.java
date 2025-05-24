@@ -18,11 +18,12 @@ package io.github.boykaframework.actions.device;
 
 import static io.github.boykaframework.actions.CommonActions.getDriverAttribute;
 import static io.github.boykaframework.actions.CommonActions.performDriverAction;
+import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.enums.DeviceType.CLOUD;
 import static io.github.boykaframework.enums.ListenerType.DEVICE_ACTION;
 import static io.github.boykaframework.enums.Message.NO_KEYBOARD_ERROR;
 import static io.github.boykaframework.enums.PlatformType.ANDROID;
-import static io.github.boykaframework.enums.PlatformType.IOS;
+import static io.github.boykaframework.enums.PlatformType.MAC;
 import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
@@ -38,10 +39,12 @@ import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
 import io.appium.java_client.android.AndroidStopScreenRecordingOptions;
 import io.appium.java_client.ios.IOSStartScreenRecordingOptions;
 import io.appium.java_client.ios.IOSStopScreenRecordingOptions;
+import io.appium.java_client.mac.Mac2StartScreenRecordingOptions;
+import io.appium.java_client.mac.Mac2StopScreenRecordingOptions;
 import io.appium.java_client.screenrecording.CanRecordScreen;
 import io.github.boykaframework.actions.interfaces.device.IDeviceActions;
 import io.github.boykaframework.actions.interfaces.listeners.device.IDeviceActionsListener;
-import io.github.boykaframework.config.ui.mobile.device.VideoSetting;
+import io.github.boykaframework.config.ui.VideoSetting;
 import io.github.boykaframework.enums.PlatformType;
 import org.apache.logging.log4j.Logger;
 
@@ -94,14 +97,11 @@ public class DeviceActions implements IDeviceActions {
     @Override
     public void startRecording () {
         final var platform = getSession ().getPlatformType ();
-        if (platform == ANDROID || platform == IOS) {
-            final var mobileSetting = getSession ().getMobileSetting ()
-                .getDevice ();
-            final var setting = mobileSetting.getVideo ();
-            if (mobileSetting.getType () != CLOUD && setting.isEnabled ()) {
-                final var screen = (CanRecordScreen) getSession ().getDriver ();
-                ofNullable (this.listener).ifPresent (IDeviceActionsListener::onStartRecording);
-                startRecording (screen, setting, platform);
+        switch (platform) {
+            case ANDROID, IOS -> startMobileRecording (platform);
+            case MAC -> startMacRecording ();
+            default -> {
+                // Nothing to do for other platform.
             }
         }
     }
@@ -109,22 +109,18 @@ public class DeviceActions implements IDeviceActions {
     @Override
     public void stopRecording () {
         final var platform = getSession ().getPlatformType ();
-        if (platform == ANDROID || platform == IOS) {
-            final var mobileSetting = getSession ().getMobileSetting ()
-                .getDevice ();
-            final var setting = mobileSetting.getVideo ();
-            if (mobileSetting.getType () != CLOUD && setting.isEnabled ()) {
-                final var screen = (CanRecordScreen) getSession ().getDriver ();
-                ofNullable (this.listener).ifPresent (IDeviceActionsListener::onStopRecording);
-                final var content = stopRecording (screen, platform);
-                saveVideo (content);
+        switch (platform) {
+            case ANDROID, IOS -> stopMobileRecording (platform);
+            case MAC -> stopMacRecording ();
+            default -> {
+                // Nothing to do for other platform.
             }
         }
     }
 
     private void checkKeyboardSupported () {
         final var platform = getSession ().getPlatformType ();
-        if (platform == WEB) {
+        if (platform == WEB || platform == MAC) {
             throwError (NO_KEYBOARD_ERROR);
         }
     }
@@ -155,26 +151,71 @@ public class DeviceActions implements IDeviceActions {
         return options;
     }
 
-    private void startRecording (final CanRecordScreen screen, final VideoSetting setting,
-        final PlatformType platform) {
-        if (platform == ANDROID) {
-            final var options = getAndroidRecordOptions (setting);
-            screen.startRecordingScreen (options);
-        } else {
-            final var options = getIOSRecordOptions (setting);
+    private Mac2StartScreenRecordingOptions getMacRecordingOptions (final VideoSetting setting) {
+        final var macSetting = setting.getMac ();
+        final var options = Mac2StartScreenRecordingOptions.startScreenRecordingOptions ();
+        options.withTimeLimit (ofSeconds (setting.getTimeLimit ()));
+        options.withFps (macSetting.getFps ());
+        options.withPreset (macSetting.getPreset ()
+            .getName ());
+        options.withDeviceId (macSetting.getDeviceId ());
+
+        if (macSetting.isCaptureClicks ()) {
+            options.enableCursorCapture ();
+        }
+        if (macSetting.isCaptureClicks ()) {
+            options.enableClicksCapture ();
+        }
+        return options;
+    }
+
+    private void startMacRecording () {
+        final var machineSetting = getSession ().getDesktopSetting ()
+            .getMachine ();
+        final var setting = machineSetting.getVideo ();
+        if (machineSetting.getType () != CLOUD && setting.isEnabled ()) {
+            ofNullable (this.listener).ifPresent (IDeviceActionsListener::onStartRecording);
+            final var options = getMacRecordingOptions (setting);
+            withDriver ().executeScript ("macos: startNativeScreenRecording", options.build ());
+        }
+    }
+
+    private void startMobileRecording (final PlatformType platform) {
+        final var mobileSetting = getSession ().getMobileSetting ()
+            .getDevice ();
+        final var setting = mobileSetting.getVideo ();
+        if (mobileSetting.getType () != CLOUD && setting.isEnabled ()) {
+            final var screen = (CanRecordScreen) getSession ().getDriver ();
+            ofNullable (this.listener).ifPresent (IDeviceActionsListener::onStartRecording);
+            final var options = platform == ANDROID ? getAndroidRecordOptions (setting) : getIOSRecordOptions (setting);
             screen.startRecordingScreen (options);
         }
     }
 
-    private String stopRecording (final CanRecordScreen screen, final PlatformType platform) {
-        final String content;
-        if (platform == ANDROID) {
-            final var options = AndroidStopScreenRecordingOptions.stopScreenRecordingOptions ();
-            content = screen.stopRecordingScreen (options);
-        } else {
-            final var options = IOSStopScreenRecordingOptions.stopScreenRecordingOptions ();
-            content = screen.stopRecordingScreen (options);
+    private void stopMacRecording () {
+        final var machineSetting = getSession ().getDesktopSetting ()
+            .getMachine ();
+        final var setting = machineSetting.getVideo ();
+        if (machineSetting.getType () != CLOUD && setting.isEnabled ()) {
+            ofNullable (this.listener).ifPresent (IDeviceActionsListener::onStopRecording);
+            final var options = Mac2StopScreenRecordingOptions.stopScreenRecordingOptions ();
+            final var content = withDriver ().executeScript ("macos: stopNativeScreenRecording", options.build ());
+            saveVideo (content.toString (), setting);
         }
-        return content;
+    }
+
+    private void stopMobileRecording (final PlatformType platform) {
+        final var mobileSetting = getSession ().getMobileSetting ()
+            .getDevice ();
+        final var setting = mobileSetting.getVideo ();
+        if (mobileSetting.getType () != CLOUD && setting.isEnabled ()) {
+            final var screen = (CanRecordScreen) getSession ().getDriver ();
+            ofNullable (this.listener).ifPresent (IDeviceActionsListener::onStopRecording);
+            final var options = platform == ANDROID
+                                ? AndroidStopScreenRecordingOptions.stopScreenRecordingOptions ()
+                                : IOSStopScreenRecordingOptions.stopScreenRecordingOptions ();
+            final var content = screen.stopRecordingScreen (options);
+            saveVideo (content, setting);
+        }
     }
 }

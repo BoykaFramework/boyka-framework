@@ -22,6 +22,7 @@ import static io.github.boykaframework.enums.OS.ANDROID;
 import java.util.Map;
 
 import io.github.boykaframework.config.LanguageSetting;
+import io.github.boykaframework.config.ui.VideoSetting;
 import io.github.boykaframework.enums.DeviceType;
 import io.github.boykaframework.enums.OS;
 import io.github.boykaframework.enums.PermissionDecision;

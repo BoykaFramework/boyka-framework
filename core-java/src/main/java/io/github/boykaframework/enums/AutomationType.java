@@ -18,6 +18,7 @@ package io.github.boykaframework.enums;
 
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
+import static io.appium.java_client.remote.AutomationName.MAC2;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +32,10 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum AutomationType {
+    /**
+     * Mac driver.
+     */
+    MAC ("mac2", MAC2),
     /**
      * Android Ui Automator 2 driver.
      */

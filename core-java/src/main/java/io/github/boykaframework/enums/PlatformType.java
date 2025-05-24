@@ -36,6 +36,10 @@ public enum PlatformType {
      */
     IOS,
     /**
+     * Map application.
+     */
+    MAC,
+    /**
      * Web application.
      */
     WEB

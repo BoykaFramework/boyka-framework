@@ -13,6 +13,7 @@ on:
       - main
     paths:
       - 'core-java/**'
+      - '.github/workflows/**'
 
 concurrency:
   group: boyka-tests-${{ github.ref }}-1
@@ -137,7 +138,6 @@ jobs:
       emulator-name: Pixel_8_Pro
       emulator-profile: pixel_6_pro
       emulator-version: 31
-      # emulator-channel: canary
       emulator-arch: x86_64
       emulator-target: google_apis
 
@@ -153,6 +153,17 @@ jobs:
       run-android: false
       simulator-name: iPhone 15
       simulator-version: 17.5
+
+  test-desktop-macos:
+    needs:
+      - check-cloud
+    uses: ./.github/workflows/_test-core-java.yml
+    with:
+      runs-on: macos-14
+      suite-name: testng-desktop-mac
+      run-appium: true
+      run-ios: false
+      run-android: false
 
   # test-mobile-web:
   #   needs:
@@ -199,6 +210,7 @@ jobs:
       - test-web-grid
       - test-mobile-android-local
       - test-mobile-ios-local
+      - test-desktop-macos
       # - test-mobile-web
       - test-mobile-bs
       - test-mobile-lt
@@ -239,6 +251,11 @@ jobs:
         with:
           name: reports-testng-mobile-ios-local
           path: ${{ github.workspace }}/core-java/reports
+
+      - name: Download reports-testng-desktop-mac files
+        uses: actions/download-artifact@v4
+        with:
+          name: reports-testng-desktop-mac
 
       # - name: Download reports-testng-mobile-web files
       #   uses: actions/download-artifact@v4
