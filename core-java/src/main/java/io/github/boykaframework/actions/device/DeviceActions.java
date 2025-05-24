@@ -21,7 +21,6 @@ import static io.github.boykaframework.actions.CommonActions.performDriverAction
 import static io.github.boykaframework.actions.drivers.DriverActions.withDriver;
 import static io.github.boykaframework.enums.DeviceType.CLOUD;
 import static io.github.boykaframework.enums.ListenerType.DEVICE_ACTION;
-import static io.github.boykaframework.enums.Message.INVALID_PLATFORM_FOR_OPERATION;
 import static io.github.boykaframework.enums.Message.NO_KEYBOARD_ERROR;
 import static io.github.boykaframework.enums.PlatformType.ANDROID;
 import static io.github.boykaframework.enums.PlatformType.MAC;
@@ -101,7 +100,9 @@ public class DeviceActions implements IDeviceActions {
         switch (platform) {
             case ANDROID, IOS -> startMobileRecording (platform);
             case MAC -> startMacRecording ();
-            default -> throwError (INVALID_PLATFORM_FOR_OPERATION, platform);
+            default -> {
+                // Nothing to do for other platform.
+            }
         }
     }
 
@@ -111,7 +112,9 @@ public class DeviceActions implements IDeviceActions {
         switch (platform) {
             case ANDROID, IOS -> stopMobileRecording (platform);
             case MAC -> stopMacRecording ();
-            default -> throwError (INVALID_PLATFORM_FOR_OPERATION, platform);
+            default -> {
+                // Nothing to do for other platform.
+            }
         }
     }
 
