@@ -20,16 +20,13 @@ import static io.github.boykaframework.actions.elements.ClickableActions.withMou
 import static io.github.boykaframework.actions.elements.ElementActions.onElement;
 import static io.github.boykaframework.testng.ui.mac.pages.CalculatorPage.calculatorPage;
 
-import lombok.experimental.UtilityClass;
-
 /**
  * Calculator action class.
  *
  * @author Wasiq Bhamla
  * @since 09-May-2025
  */
-@UtilityClass
-public class CalculatorActions {
+public final class CalculatorActions {
     public static void verifyAdd (final int a, final int b) {
         final var expected = a + b;
 
@@ -40,5 +37,9 @@ public class CalculatorActions {
 
         onElement (calculatorPage ().getInput ()).verifyText ()
             .endsWith (Integer.toString (expected));
+    }
+
+    private CalculatorActions () {
+        // Utility class.
     }
 }

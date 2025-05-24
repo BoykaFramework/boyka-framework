@@ -240,6 +240,16 @@
           "version": "15.4",
           "application": {
             "bundle_id": "com.apple.calculator"
+          },
+          "video": {
+            "enabled": true,
+            "time_limit": 300,
+            "preset": "VERY_FAST",
+            "device_id": 2,
+            "mac": {
+              "capture_clicks": true,
+              "fps": 10
+            }
           }
         }
       }

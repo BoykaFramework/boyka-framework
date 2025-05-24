@@ -61,8 +61,9 @@ class MacManager implements IDriverManager {
     }
 
     private void setApplicationOptions (final Mac2Options options) {
-        options.setBundleId (requireNonNull (this.settings.getApplication ()
-            .getBundleId (), BUNDLE_ID_REQUIRED));
+        final var appSetting = this.settings.getApplication ();
+        options.setBundleId (requireNonNull (appSetting.getBundleId (), BUNDLE_ID_REQUIRED));
+        options.setSkipAppKill (appSetting.isSkipAppKill ());
     }
 
     private void setCommonOptions (final Mac2Options options) {
@@ -70,6 +71,7 @@ class MacManager implements IDriverManager {
             throwError (CLOUD_NOT_SUPPORTED, getSession ().getPlatformType ());
         }
 
+        options.setShowServerLogs (this.settings.isShowServerLogs ());
         setOptionIfPresent (this.settings.getVersion (), options::setPlatformVersion);
         setOptionIfPresent (this.settings.isEventTimings (), options::setEventTimings);
         setOptionIfPresent (this.settings.isFullReset (), options::setFullReset);

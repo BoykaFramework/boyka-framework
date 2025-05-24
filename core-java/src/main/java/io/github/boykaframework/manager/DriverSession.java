@@ -143,7 +143,9 @@ public class DriverSession<D extends WebDriver> {
      */
     public LanguageSetting getLanguageSettings () {
         return switch (getPlatformType ()) {
-            case ANDROID, IOS, MAC -> getMobileSetting ().getDevice ()
+            case ANDROID, IOS -> getMobileSetting ().getDevice ()
+                .getLanguage ();
+            case MAC -> getDesktopSetting ().getMachine ()
                 .getLanguage ();
             case API -> getApiSetting ().getLanguage ();
             case WEB -> getWebSetting ().getLanguage ();

@@ -20,6 +20,7 @@ import static io.github.boykaframework.utils.SettingUtils.getSetting;
 
 import java.util.Map;
 
+import io.github.boykaframework.config.ui.desktop.DesktopSetting;
 import io.github.boykaframework.config.ui.mobile.MobileSetting;
 import io.github.boykaframework.config.ui.web.WebSetting;
 import lombok.Data;
@@ -30,12 +31,24 @@ import lombok.Data;
  */
 @Data
 public class UISetting {
-    private DelaySetting               delay      = new DelaySetting ();
-    private LogSetting                 logging    = new LogSetting ();
-    private Map<String, MobileSetting> mobile;
-    private ScreenshotSetting          screenshot = new ScreenshotSetting ();
-    private TimeoutSetting             timeout    = new TimeoutSetting ();
-    private Map<String, WebSetting>    web;
+    private DelaySetting                delay      = new DelaySetting ();
+    private Map<String, DesktopSetting> desktop;
+    private LogSetting                  logging    = new LogSetting ();
+    private Map<String, MobileSetting>  mobile;
+    private ScreenshotSetting           screenshot = new ScreenshotSetting ();
+    private TimeoutSetting              timeout    = new TimeoutSetting ();
+    private Map<String, WebSetting>     web;
+
+    /**
+     * Get Desktop settings.
+     *
+     * @param key config key for desktop
+     *
+     * @return the {@link DesktopSetting}
+     */
+    public DesktopSetting getDesktopSetting (final String key) {
+        return getSetting (this.desktop, key);
+    }
 
     /**
      * Get Mobile settings.

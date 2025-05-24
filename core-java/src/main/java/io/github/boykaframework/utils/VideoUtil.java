@@ -17,7 +17,6 @@
 package io.github.boykaframework.utils;
 
 import static io.github.boykaframework.enums.Message.ERROR_SAVING_VIDEO;
-import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.text.MessageFormat.format;
 import static org.apache.commons.io.FileUtils.writeByteArrayToFile;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -28,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Calendar;
 
-import io.github.boykaframework.config.ui.mobile.device.VideoSetting;
+import io.github.boykaframework.config.ui.VideoSetting;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -44,13 +43,11 @@ public final class VideoUtil {
      * Save Mobile video content to file.
      *
      * @param content Video content
+     * @param setting Video setting
      */
-    public static void saveVideo (final String content) {
+    public static void saveVideo (final String content, final VideoSetting setting) {
         final var decode = Base64.getDecoder ()
             .decode (content);
-        final var setting = getSession ().getMobileSetting ()
-            .getDevice ()
-            .getVideo ();
         saveVideo (decode, setting);
     }
 
