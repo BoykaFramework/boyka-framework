@@ -174,6 +174,34 @@ Following are the supported placeholder formats:
         }
       }
     },
+    "desktop": {
+      "test_mac": {
+        "server": {
+          "target": "LOCAL",
+          "port": 4729,
+          "session_override": true,
+          "driver": "MAC"
+        },
+        "machine": {
+          "os": "MAC",
+          "version": "15.4",
+          "application": {
+            "bundle_id": "com.apple.calculator"
+          },
+          "video": {
+            "enabled": true,
+            "time_limit": 300,
+            "mac": {
+              "preset": "VERY_FAST",
+              "device_id": 4,
+              "capture_clicks": true,
+              "capture_cursor": true,
+              "fps": 10
+            }
+          }
+        }
+      }
+    },
     "mobile": {
       "test_local_sauce_android": {
         "server": {
@@ -449,6 +477,7 @@ This configuration handles the size unit for the log file. It is used to configu
 | `logging` | Contains logging specific configuration. See [Logging Config below](#ui-logging-config) | `LoggingSetting` | |
 | `screenshot` | Contains screenshot configuration. See [Screenshot Config below](#screenshot-config). | `ScreenshotSetting` | |
 | `web` | Contains web platform configuration. See [Web Config below](#web-config). | `Map<String, WebSetting>` | |
+| `desktop` | Contains desktop platform configuration. See [Desktop Config below](#desktop-config). | `Map<String, DesktopSetting>` | |
 | `mobile` | Contains Mobile platform configuration. See [Mobile Config below](#mobile-config). | `object` | |
 | `delay` | Contains settings for delay between actions. See [DelaySettings](#delay-setting) | `DelaySetting` | |
 
@@ -529,6 +558,37 @@ Browser options and Experimental options is not supported for **Safari browser**
 Please raise a [new feature request](https://github.com/BoykaFramework/boyka-framework/issues/new/choose) along with sample example test and options support that is required
 :::
 
+#### Desktop Configuration {#desktop-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `server` | Contains Desktop Server related configurations | [`ServerSetting`](#server-config) | |
+| `machine` | Contains Desktop machine related configurations | [`MachineSetting`](#desktop-machine-config) | |
+
+##### Desktop machine Configuration {#desktop-machine-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `os` | Operating System of the machine | [`OS`](#supported-os) | |
+| `version` | OS version of the machine | `string` | |
+| `type` | Machine type | [`DeviceType`](#supported-device-types) | `VIRTUAL` |
+| `application` | Contains application related configs | [`ApplicationSetting`](#mac-app-config) | |
+| `video` | Video recording related settings | [`VideoSetting`](#video-config) | `null` |
+| `full_reset` | Determines if full reset needs to be done | `boolean` | `false` |
+| `no_reset` | Determines if there should be no reset | `boolean` | `false` |
+| `command_timeout` | Timeout in seconds to wait for a command to execute | `int` | `60` |
+| `event_timings` | Determines if event timings needs to be captured | `boolean` | `false` |
+| `language` | Language related settings | [`LanguageSetting`](#language-setting) | `null` |
+| `server_startup_timeout` | Timeout in seconds to wait for the server to start | `int` | `60` |
+| `show_server_logs` | Determines if server logs needs to be shown in console | `boolean` | `false` |
+
+###### Desktop Application Configurations {#mac-app-config}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `bundle_id` | Bundle ID of the application | `string` | |
+| `skip_app_kill` | Skip killing the application before starting it | `boolean` | `false` |
+
 #### Mobile Configuration {#mobile-config}
 
 | Property | Description | Type | Default |
@@ -576,7 +636,7 @@ Please raise a [new feature request](https://github.com/BoykaFramework/boyka-fra
 | `timestamp` | Show timestamps in console output | `boolean` | `false` |
 
 :::tip
-When you use Boyka command line assistant to configure your test to run on any Cloud providers using `boyka config [web | api | android | ios] [config_name]` command, then it is **MANDATORY** to provide Environment variable names when prompted for user name and password
+When you use Boyka command line assistant to configure your test to run on any Cloud providers using `boyka config [web | api | android | mac | ios] [config_name]` command, then it is **MANDATORY** to provide Environment variable names when prompted for user name and password
 :::
 
 ##### Mobile Device Configuration {#device-config}
@@ -682,6 +742,7 @@ If `bundle_id` is not provided, then Boyka Framework will throw an exception.
 | `time_limit` | Time limit of the video recording. Maximum `30` mins of recording is supported | `integer` | `0` |
 | `android` | Android specific video record settings | `AndroidVideoSetting` | `default instance` |
 | `ios` | iOS specific video record settings | `IOSVideoSetting` | `default instance` |
+| `mac` | MacOS specific video record settings | `MacVideoSetting` | `default instance` |
 
 ###### Android video recording configurations {#android-video}
 
@@ -696,6 +757,16 @@ If `bundle_id` is not provided, then Boyka Framework will throw an exception.
 | `fps` | Frames per second between range of `1` to `60` | `int` | `10` |
 | `codec` | Video codec type to be used for encoding the video. Use the value from the output of command `ffmpeg -codecs` | `string` | `mpeg4` |
 | `quality` | Video encoding quality. It can be any of `LOW`, `MEDIUM`, `HIGH`, `PHOTO` | `io.appium.java_client.ios.IOSStartScreenRecordingOptions.VideoQuality` | `MEDIUM` |
+
+###### MacOS video recording configurations {#mac-video}
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `capture_clicks` | If set to `true`, mouse clicks will be captured in the video | `boolean` | `false` |
+| `capture_cursor` | If set to `true`, mouse cursor will be captured in the video | `boolean` | `false` |
+| `fps` | Frames per second between range of `1` to `60` | `int` | `10` |
+| `preset` | Preset for the video encoding. It can be any of `Preset` enum values | `Preset` | `VERY_FAST` |
+| `device_id` | Device ID of the MacOS device | `string` | `null` |
 
 ### API Configuration {#api-config}
 
@@ -807,16 +878,19 @@ We have an enum `OS` where we maintain the list of currently supported device OS
 
 - `ANDROID`
 - `IOS`
+- `MAC`
 
 ## Supported device types {#supported-device-types}
 
 - `CLOUD`
 - `VIRTUAL`
+- `REAL`
 
 ## Supported Automation types {#supported-automation-types}
 
 - `UI_AUTOMATOR`: Equivalent for `UIAutomator2` in Appium
 - `XCUI`: Equivalent for `XCuiTest` in Appium
+- `MAC`: Equivalent for `Mac2` in Appium
 
 ## Supported Server Log levels {#log-level}
 
@@ -903,3 +977,15 @@ This configuration handles the language settings for the framework. It is used t
 - `EN`: English
 - `GR`: German
 - `AR`: Arabic
+
+## Preset {#preset}
+
+- `ULTRA_FAST`: Ultra fast preset for video encoding
+- `SUPER_FAST`: Super fast preset for video encoding
+- `VERY_FAST`: Very fast preset for video encoding
+- `FASTER`: Faster preset for video encoding
+- `FAST`: Fast preset for video encoding
+- `MEDIUM`: Medium preset for video encoding
+- `SLOWER`: Slower preset for video encoding
+- `SLOW`: Slow preset for video encoding
+- `VERY_SLOW`: Very slow preset for video encoding

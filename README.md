@@ -61,6 +61,14 @@
 | Hybrid | ✅ | ✅ |
 | Web | ✅ | ✅ |
 
+### Desktop applications
+
+| OS | Supported |
+| -- | ------- |
+| MacOS | ✅ |
+| Windows |  |
+| Linux |  |
+
 ### Remote platforms
 
 | Platform | Status |
@@ -141,6 +149,11 @@ When this command is executed, multiple set of questions will be prompted that m
     - [How to update existing page object for iOS locators?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/ios/create-page-object)
   - [How to create common application action class?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/page-actions)
   - [How to write test class using common action class?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/write-test)
+  - MacOS:
+    - [How to configure Boyka for MacOS Automation?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/mac/setup-config)
+    - [How to create page object for MacOS?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/mac/create-page-object)
+    - [How to write page actions for MacOS?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/mac/page-action)
+    - [How to write test class for MacOS?](https://boykaframework.github.io/boyka-framework/docs/guides/ui/mac/write-test)
 
 ## 👨‍🎓 Tutorials
 

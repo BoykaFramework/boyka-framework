@@ -244,10 +244,11 @@
           "video": {
             "enabled": true,
             "time_limit": 300,
-            "preset": "VERY_FAST",
-            "device_id": 2,
             "mac": {
+              "preset": "VERY_FAST",
+              "device_id": 4,
               "capture_clicks": true,
+              "capture_cursor": true,
               "fps": 10
             }
           }

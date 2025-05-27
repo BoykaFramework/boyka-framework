@@ -1,6 +1,6 @@
 ---
 title: 4️⃣ Write common Test class
-sidebar_position: 4
+sidebar_position: 6
 ---
 
 Once the page object class is created with locators for all the platforms and the [application action class](/docs/guides/ui/page-action) is also created, we can now use it to interact with the page in our tests by calling the corresponding methods from the action class.
