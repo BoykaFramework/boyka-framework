@@ -1,6 +1,6 @@
 ---
 title: 3️⃣ Create Page Action class
-sidebar_position: 3
+sidebar_position: 5
 ---
 
 Since we have a common page object for all the three platforms (i.e.: Web. Android and iOS), we will create an Action class for the application where we will expose different methods which will take care of each page specific user flow.

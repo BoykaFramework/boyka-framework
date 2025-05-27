@@ -42,6 +42,16 @@ This method gets the Boyka listener for the given listener type.
 This method is for internal use only.
 :::
 
+## `getDesktopSetting` {#get-desktop-setting}
+
+This method gets the Desktop settings for the current session.
+
+```java
+import static io.github.boykaframework.manager.ParallelSession.getSession;
+. . .
+var desktopSetting = getSession ().getDesktopSetting ();
+```
+
 ## `getMobileSetting` {#get-mobile-setting}
 
 This method gets the Mobile settings for the current session.

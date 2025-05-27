@@ -21,7 +21,8 @@ import static io.github.boykaframework.actions.CommonActions.getElementAttribute
 import static io.github.boykaframework.actions.CommonActions.performMobileGestures;
 import static io.github.boykaframework.enums.ListenerType.FINGER_ACTION;
 import static io.github.boykaframework.enums.Message.ELEMENT_NOT_FOUND;
-import static io.github.boykaframework.enums.PlatformType.WEB;
+import static io.github.boykaframework.enums.PlatformType.ANDROID;
+import static io.github.boykaframework.enums.PlatformType.IOS;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static java.time.Duration.ofMillis;
@@ -77,7 +78,7 @@ public class FingerActions extends ElementActions implements IFingerActions {
     FingerActions (final Locator locator) {
         super (locator);
         this.listener = getSession ().getListener (FINGER_ACTION);
-        if (getSession ().getPlatformType () != WEB) {
+        if (getSession ().getPlatformType () == ANDROID || getSession ().getPlatformType () == IOS) {
             this.swipeSetting = getSession ().getMobileSetting ()
                 .getDevice ()
                 .getSwipe ();

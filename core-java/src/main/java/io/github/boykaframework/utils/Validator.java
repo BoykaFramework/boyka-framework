@@ -23,6 +23,7 @@ import static java.util.Objects.isNull;
 import static java.util.Optional.of;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import io.github.boykaframework.enums.Message;
@@ -88,12 +89,11 @@ public final class Validator {
      */
     public static <T> void setOptionIfPresent (final T value, final Consumer<T> action) {
         if (!isNull (value)) {
+            Optional<T> result = of (value);
             if (value instanceof Integer) {
-                of (value).filter (i -> (Integer) i > 0)
-                    .ifPresent (action);
-            } else {
-                of (value).ifPresent (action);
+                result = result.filter (i -> (Integer) i > 0);
             }
+            result.ifPresent (action);
         }
     }
 

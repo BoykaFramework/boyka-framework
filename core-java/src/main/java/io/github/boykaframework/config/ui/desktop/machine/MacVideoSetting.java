@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2024, Boyka Framework
+ * Copyright (c) 2025, Boyka Framework
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,25 +14,24 @@
  * copies or substantial portions of the Software.
  */
 
-package io.github.boykaframework.enums;
+package io.github.boykaframework.config.ui.desktop.machine;
+
+import static io.github.boykaframework.enums.Preset.VERY_FAST;
+
+import io.github.boykaframework.enums.Preset;
+import lombok.Data;
 
 /**
- * Device type.
+ * MacOS specific video recording setting
  *
  * @author Wasiq Bhamla
- * @since 06-Sept-2022
+ * @since 24-May-2025
  */
-public enum DeviceType {
-    /**
-     * Cloud device.
-     */
-    CLOUD,
-    /**
-     * Real device.
-     */
-    REAL,
-    /**
-     * Virtual device.
-     */
-    VIRTUAL
+@Data
+public class MacVideoSetting {
+    private boolean captureClicks = true;
+    private boolean captureCursor = true;
+    private int     deviceId;
+    private int     fps           = 10;
+    private Preset  preset        = VERY_FAST;
 }
