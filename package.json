@@ -38,7 +38,7 @@
     "@release-it-plugins/lerna-changelog": "^7.0.0",
     "@stylistic/eslint-plugin-js": "^4.4.0",
     "@stylistic/eslint-plugin-ts": "^4.4.0",
-    "@types/node": "^22.15.21",
+    "@types/node": "^22.15.23",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "commitlint": "^19.8.0",
