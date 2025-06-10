@@ -36,7 +36,7 @@
     "@eslint/js": "^9.28.0",
     "@lerna/child-process": "^7.4.2",
     "@release-it-plugins/lerna-changelog": "^7.0.0",
-    "@stylistic/eslint-plugin-js": "^4.4.0",
+    "@stylistic/eslint-plugin-js": "^4.4.1",
     "@stylistic/eslint-plugin-ts": "^4.4.0",
     "@types/node": "^22.15.23",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
