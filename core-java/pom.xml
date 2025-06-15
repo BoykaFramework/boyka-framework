@@ -42,8 +42,8 @@
         <log4j-core.version>2.24.3</log4j-core.version>
         <log4j-api.version>2.24.3</log4j-api.version>
         <faker.version>2.3.1</faker.version>
-        <jackson-dataformat-yaml.version>2.19.0</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.19.0</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.19.1</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.19.1</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>1.5.7</json-schema-validator.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
