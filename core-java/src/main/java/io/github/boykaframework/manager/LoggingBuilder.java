@@ -16,7 +16,7 @@
 
 package io.github.boykaframework.manager;
 
-import static io.github.boykaframework.manager.ParallelSession.getSession;
+import static io.github.boykaframework.utils.SettingUtils.loadSetting;
 import static java.lang.System.getProperty;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.isNull;
@@ -70,8 +70,7 @@ class LoggingBuilder {
 
     LoggingBuilder () {
         super ();
-        this.setting = getSession ().getSetting ()
-            .getLogging ();
+        this.setting = loadSetting ().getLogging ();
     }
 
     Configuration build (final String name, final ConfigurationBuilder<BuiltConfiguration> build) {
@@ -82,7 +81,7 @@ class LoggingBuilder {
             build.setMonitorInterval ("30");
             addAppender (build);
             addRootLogger (build);
-            result = build.build ();
+            result = build.build (false);
         }
         return result;
     }

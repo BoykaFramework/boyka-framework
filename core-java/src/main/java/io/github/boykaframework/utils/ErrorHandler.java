@@ -44,7 +44,7 @@ public final class ErrorHandler {
      */
     public static void handleAndThrow (final Message message, final Throwable cause, final Object... args) {
         var throwable = cause;
-        final var stack = new ArrayList<> ();
+        final var stack = new ArrayList<String> ();
         stack.add (format ("Error occurred: ({0})", throwable.getClass ()
             .getName ()));
         final var stackTrace = "\tat {0}: {1} Line Number: {2}";
