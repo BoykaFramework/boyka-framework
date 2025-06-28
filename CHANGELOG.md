@@ -11,6 +11,31 @@
 
 
 
+
+## 2.8.0 (2025-06-28)
+
+#### :rocket: New Feature
+* [#1030](https://github.com/BoykaFramework/boyka-framework/pull/1030) feat(java): ✨ added support for MacOS platform application ([@WasiqB](https://github.com/WasiqB))
+
+#### :bug: Bug Fix
+* [#1042](https://github.com/BoykaFramework/boyka-framework/pull/1042) fix(java): :bug: fixed issue with the recent logging changes ([@WasiqB](https://github.com/WasiqB))
+* [#1028](https://github.com/BoykaFramework/boyka-framework/pull/1028) fix(java): :bug: fixed failing web test ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#1040](https://github.com/BoykaFramework/boyka-framework/pull/1040) build(deps-dev): bump the dependencies group with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1038](https://github.com/BoykaFramework/boyka-framework/pull/1038) build(deps): bump the dependencies group in /core-java with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1037](https://github.com/BoykaFramework/boyka-framework/pull/1037) build(deps-dev): bump the dependencies group with 9 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1036](https://github.com/BoykaFramework/boyka-framework/pull/1036) build(deps): bump the dependencies group with 16 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1035](https://github.com/BoykaFramework/boyka-framework/pull/1035) build(deps): bump the dependencies group in /core-java with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1034](https://github.com/BoykaFramework/boyka-framework/pull/1034) build(deps-dev): bump the dependencies group with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1033](https://github.com/BoykaFramework/boyka-framework/pull/1033) build(deps-dev): bump the dependencies group across 1 directory with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1031](https://github.com/BoykaFramework/boyka-framework/pull/1031) build(deps): bump the dependencies group in /core-java with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1023](https://github.com/BoykaFramework/boyka-framework/pull/1023) build(deps): bump the dependencies group across 1 directory with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1029](https://github.com/BoykaFramework/boyka-framework/pull/1029) build(deps-dev): bump the dependencies group across 1 directory with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.7.0 (2025-05-14)
 
 #### :rocket: New Feature
