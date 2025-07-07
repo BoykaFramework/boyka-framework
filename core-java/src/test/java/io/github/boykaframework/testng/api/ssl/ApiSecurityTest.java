@@ -17,12 +17,12 @@
 package io.github.boykaframework.testng.api.ssl;
 
 import static io.github.boykaframework.actions.api.ApiActions.withRequest;
-import static io.github.boykaframework.builders.ApiRequest.createRequest;
 import static io.github.boykaframework.enums.PlatformType.API;
 import static io.github.boykaframework.enums.RequestMethod.GET;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
 import static io.github.boykaframework.manager.ParallelSession.createSession;
 
+import io.github.boykaframework.builders.ApiRequest;
 import org.testng.annotations.Test;
 
 /**
@@ -39,7 +39,8 @@ public class ApiSecurityTest {
     public void testBadHostName () {
         try {
             createSession (API, "test_bad_host_name_wo_verify_hn");
-            final var request = createRequest ().method (GET)
+            final var request = ApiRequest.createRequest ()
+                .method (GET)
                 .create ();
             final var response = withRequest (request).execute ();
 
@@ -57,7 +58,8 @@ public class ApiSecurityTest {
     public void testBadSsl () {
         try {
             createSession (API, "test_bad_ssl_wo_verify");
-            final var request = createRequest ().method (GET)
+            final var request = ApiRequest.createRequest ()
+                .method (GET)
                 .create ();
             final var response = withRequest (request).execute ();
 

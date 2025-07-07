@@ -65,7 +65,6 @@ public class ApiResponse {
     private String              body;
     private CommonApiSetting    commonApiSetting;
     private Map<String, String> headers;
-    private ApiResponse         networkResponse;
     private ApiResponse         previousResponse;
     private long                receivedResponseAt;
     private ApiRequest          request;
