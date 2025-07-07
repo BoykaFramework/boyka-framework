@@ -28,9 +28,9 @@
     <url>https://git.new/boyka-githubk</url>
 
     <properties>
-        <selenium-webdriver.version>4.33.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.34.0</selenium-webdriver.version>
         <testng.version>7.11.0</testng.version>
-        <appium-java-client.version>9.4.0</appium-java-client.version>
+        <appium-java-client.version>9.5.0</appium-java-client.version>
         <okhttp.version>5.0.0</okhttp.version>
         <lombok.version>1.18.38</lombok.version>
         <google-gson.version>2.13.1</google-gson.version>
@@ -71,7 +71,7 @@
         <checkstyle.suppress>checkstyles/checkstyle-suppressions.xml</checkstyle.suppress>
         <sonar.report>${project.basedir}/reports/${suite-name}-jacoco.exec</sonar.report>
         <jacoco.report>${project.reporting.outputDirectory}/jacoco</jacoco.report>
-        <maven-enforcer.version>3.5.0</maven-enforcer.version>
+        <maven-enforcer.version>3.6.0</maven-enforcer.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
@@ -79,7 +79,7 @@
         <jacoco.version>0.8.13</jacoco.version>
         <surefire-version>3.5.3</surefire-version>
         <nexus.version>1.7.0</nexus.version>
-        <maven.gpg.version>3.2.7</maven.gpg.version>
+        <maven.gpg.version>3.2.8</maven.gpg.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <allure-testng.version>2.29.1</allure-testng.version>
         <maven-failsafe.version>3.5.3</maven-failsafe.version>
