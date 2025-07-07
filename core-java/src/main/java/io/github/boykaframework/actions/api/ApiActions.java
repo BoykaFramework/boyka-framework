@@ -255,6 +255,18 @@ public final class ApiActions implements IApiActions {
         return LOGGER.traceExit (this.response);
     }
 
+    private String getResponseBody (final ResponseBody response) {
+        try {
+            return JsonUtil.toString (
+                requireNonNullElse (response, ResponseBody.create (EMPTY, parse (JSON.getType ()))).string ());
+        } catch (final IOException e) {
+            handleAndThrow (ERROR_PARSING_RESPONSE_BODY, e);
+        } catch (final IllegalStateException e) {
+            return EMPTY;
+        }
+        return null;
+    }
+
     private SSLContext getSslContext () {
         SSLContext sslContext = null;
         try {
@@ -365,25 +377,18 @@ public final class ApiActions implements IApiActions {
             final var headers = new HashMap<String, String> ();
             res.headers ()
                 .forEach (entry -> headers.put (entry.getFirst (), entry.getSecond ()));
-            try {
-                apiResponse = ApiResponse.createResponse ()
-                    .request (parseRequest (res.request ()))
-                    .statusCode (res.code ())
-                    .statusMessage (res.message ())
-                    .sentRequestAt (res.sentRequestAtMillis ())
-                    .headers (headers)
-                    .networkResponse (parseResponse (res.networkResponse ()))
-                    .apiSetting (this.apiSetting)
-                    .commonApiSetting (this.commonApiSetting)
-                    .networkResponse (parseResponse (res.networkResponse ()))
-                    .previousResponse (parseResponse (res.priorResponse ()))
-                    .receivedResponseAt (res.receivedResponseAtMillis ())
-                    .body (JsonUtil.toString (requireNonNullElse (res.body (),
-                        ResponseBody.create (EMPTY, parse (JSON.getType ()))).string ()))
-                    .create ();
-            } catch (final IOException e) {
-                handleAndThrow (ERROR_PARSING_RESPONSE_BODY, e);
-            }
+            apiResponse = ApiResponse.createResponse ()
+                .request (parseRequest (res.request ()))
+                .statusCode (res.code ())
+                .statusMessage (res.message ())
+                .sentRequestAt (res.sentRequestAtMillis ())
+                .headers (headers)
+                .apiSetting (this.apiSetting)
+                .commonApiSetting (this.commonApiSetting)
+                .previousResponse (parseResponse (res.priorResponse ()))
+                .receivedResponseAt (res.receivedResponseAtMillis ())
+                .body (getResponseBody (res.body ()))
+                .create ();
         }
         return LOGGER.traceExit (apiResponse);
     }

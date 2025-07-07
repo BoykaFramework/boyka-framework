@@ -31,7 +31,7 @@
         <selenium-webdriver.version>4.33.0</selenium-webdriver.version>
         <testng.version>7.11.0</testng.version>
         <appium-java-client.version>9.4.0</appium-java-client.version>
-        <okhttp.version>4.12.0</okhttp.version>
+        <okhttp.version>5.0.0</okhttp.version>
         <lombok.version>1.18.38</lombok.version>
         <google-gson.version>2.13.1</google-gson.version>
         <google.guava.version>33.4.8-jre</google.guava.version>
@@ -167,7 +167,7 @@
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
+            <artifactId>okhttp-jvm</artifactId>
             <version>${okhttp.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
