@@ -19,6 +19,7 @@ package io.github.boykaframework.manager;
 import static io.github.boykaframework.enums.PlatformType.ANDROID;
 import static io.github.boykaframework.enums.PlatformType.IOS;
 import static io.github.boykaframework.enums.PlatformType.MAC;
+import static io.github.boykaframework.enums.PlatformType.WINDOWS;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static java.time.Duration.ofSeconds;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -52,7 +53,7 @@ final class DriverManager {
         if (this.platformType == ANDROID || this.platformType == IOS) {
             final var mobileSetting = getSession ().getMobileSetting ();
             setupAppiumServer (mobileSetting.getServer ());
-        } else if (this.platformType == MAC) {
+        } else if (this.platformType == MAC || this.platformType == WINDOWS) {
             final var desktopSetting = getSession ().getDesktopSetting ();
             setupAppiumServer (desktopSetting.getServer ());
         }
@@ -60,7 +61,8 @@ final class DriverManager {
             case WEB -> new WebDriverManager ();
             case ANDROID -> new AndroidManager ();
             case IOS -> new IOSManager ();
-            default -> new MacManager ();
+            case MAC -> new MacManager ();
+            default -> new WindowsManager ();
         };
         driverManager.setupDriver ();
         setDriverWaits (settings.getTimeout ());

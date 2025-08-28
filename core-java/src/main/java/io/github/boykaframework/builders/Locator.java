@@ -49,6 +49,7 @@ public class Locator {
     @Builder.Default
     private boolean               shadowRoot = false;
     private By                    web;
+    private By                    windows;
 
     /**
      * Gets the platform specific locator
@@ -60,6 +61,7 @@ public class Locator {
             case ANDROID -> getMobileOrWebLocator (this.android);
             case IOS -> getMobileOrWebLocator (this.ios);
             case MAC -> this.mac;
+            case WINDOWS -> this.windows;
             default -> this.web;
         };
     }

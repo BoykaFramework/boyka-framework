@@ -149,6 +149,7 @@ public class DriverSession<D extends WebDriver> {
                 .getLanguage ();
             case API -> getApiSetting ().getLanguage ();
             case WEB -> getWebSetting ().getLanguage ();
+            case WINDOWS -> null;
         };
     }
 

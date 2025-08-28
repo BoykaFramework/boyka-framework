@@ -20,6 +20,7 @@ import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
 import static io.appium.java_client.remote.AutomationName.MAC2;
 
+import io.appium.java_client.remote.AutomationName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -40,6 +41,10 @@ public enum AutomationType {
      * Android Ui Automator 2 driver.
      */
     UI_AUTOMATOR ("uiautomator2", ANDROID_UIAUTOMATOR2),
+    /**
+     * Windows driver.
+     */
+    WINDOWS ("windows", AutomationName.WINDOWS),
     /**
      * iOS XCUITest driver.
      */

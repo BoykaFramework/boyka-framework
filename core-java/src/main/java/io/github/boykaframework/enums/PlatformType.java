@@ -42,6 +42,10 @@ public enum PlatformType {
     /**
      * Web application.
      */
-    WEB
+    WEB,
+    /**
+     * Windows application.
+     */
+    WINDOWS
 
 }

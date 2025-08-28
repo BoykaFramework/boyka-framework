@@ -7,5 +7,6 @@
     "Internal"
   ],
   "git.enableCommitSigning": true,
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "nxConsole.generateAiAgentRules": true
 }
