@@ -8,8 +8,6 @@ updates:
     labels:
       - ':house: pr: internal'
       - 'javascript'
-    reviewers:
-      - 'boyka-core'
     schedule:
       interval: 'weekly'
       timezone: 'Asia/Calcutta'
@@ -24,8 +22,6 @@ updates:
     labels:
       - ':house: pr: internal'
       - 'java'
-    reviewers:
-      - 'boyka-core'
     schedule:
       interval: 'weekly'
       timezone: 'Asia/Calcutta'
@@ -40,8 +36,6 @@ updates:
     labels:
       - ':house: pr: internal'
       - 'github_actions'
-    reviewers:
-      - 'boyka-core'
     schedule:
       interval: 'weekly'
       timezone: 'Asia/Calcutta'

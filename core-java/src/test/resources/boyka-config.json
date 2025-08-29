@@ -269,7 +269,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "14",
+          "version": "15",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -304,7 +304,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "14",
+          "version": "15",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -345,7 +345,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "14",
+          "version": "15",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
