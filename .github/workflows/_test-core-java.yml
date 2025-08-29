@@ -109,8 +109,8 @@ jobs:
           if [ "${{ inputs.run-ios }}" == "true" ]; then
             appium driver install xcuitest
           fi
-          if [[ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" ] && ["${{ inputs.run-ios }}" == "true"]]; then
-            appium driver install mac2
+          if [[ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" && "${{ inputs.run-ios }}" == "false" ]]; then
+            npx appium driver install mac2
           fi
           mkdir core-java/logs
           appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-android-server.log 2>&1 &
