@@ -25,7 +25,6 @@
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
             <package name="io.github.boykaframework.testng.ui.theinternet"/>
-            <package name="io.github.boykaframework.testng.ui.ecomm"/>
             <package name="io.github.boykaframework.testng.ui.jiomeet"/>
         </packages>
     </test>

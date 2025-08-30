@@ -269,7 +269,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "14",
+          "version": "15",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -300,11 +300,15 @@
           "target": "LOCAL",
           "port": 4724,
           "external": true,
-          "driver": "UI_AUTOMATOR"
+          "driver": "UI_AUTOMATOR",
+          "allow_insecure": [
+            "get_server_logs",
+            "chromedriver_autodownload"
+          ]
         },
         "device": {
           "os": "ANDROID",
-          "version": "14",
+          "version": "15",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
@@ -345,7 +349,7 @@
         },
         "device": {
           "os": "ANDROID",
-          "version": "14",
+          "version": "15",
           "name": "Pixel_8_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
