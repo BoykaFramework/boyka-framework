@@ -94,17 +94,18 @@ jobs:
 
       - name: Install Appium 3.0 on Windows
         if: inputs.run-appium && startsWith(inputs.runs-on, 'windows')
+        shell: cmd
         run: |
           @echo off
           choco install ffmpeg -y
 
           npm install -g appium
 
-          if "%{{ inputs.run-android }}"=="true" (
+          IF "${{ inputs.run-android }}"=="true" (
             appium driver install uiautomator2
           )
 
-          mkdir core-java\logs
+          IF NOT EXIST "core-java\logs" mkdir core-java\logs
 
           start /B appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java\logs\appium-android-server.log 2>&1
 
