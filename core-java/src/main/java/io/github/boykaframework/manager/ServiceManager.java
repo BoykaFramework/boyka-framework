@@ -206,8 +206,10 @@ class ServiceManager {
         setArgument (SESSION_OVERRIDE, this.setting.isSessionOverride ());
         setArgument (USE_DRIVERS, this.setting.getDriver ()
             .getDriverName ());
-        setArgument (ALLOW_INSECURE, this.setting.getAllowInsecure ());
-        setArgument (DENY_INSECURE, this.setting.getDenyInsecure ());
+        setArgument (ALLOW_INSECURE, this.setting.getAllowInsecure (this.setting.getDriver ()
+            .getDriverName ()));
+        setArgument (DENY_INSECURE, this.setting.getDenyInsecure (this.setting.getDriver ()
+            .getDriverName ()));
         setArgument (CALLBACK_ADDRESS, this.setting.getCallbackAddress ());
         setArgument (CALLBACK_PORT, this.setting.getCallbackPort ());
         setArgument (() -> "--keep-alive-timeout", this.setting.getKeepAliveTimeout ());
