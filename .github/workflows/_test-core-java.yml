@@ -92,7 +92,7 @@ jobs:
           cache: 'maven'
           check-latest: true
 
-      - name: Install Appium 2.0
+      - name: Install Appium 3.0
         if: ${{ inputs.run-appium }}
         run: |
           if [ "${{ startsWith(inputs.runs-on, 'ubuntu') }}" == "true" ]; then
