@@ -109,9 +109,9 @@ jobs:
           if [ "${{ inputs.run-ios }}" == "true" ]; then
             appium driver install xcuitest
           fi
-          if [[ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" && 
-          "${{ inputs.run-android }}" == "false" &&
-          "${{ inputs.run-ios }}" == "false" ]]; then
+          if [[ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" ]] &&
+            [[ "${{ inputs.run-android }}" == "false" ]] &&
+            [[ "${{ inputs.run-ios }}" == "false" ]]; then
             npx appium driver install mac2
           fi
           mkdir core-java/logs
