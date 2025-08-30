@@ -263,8 +263,8 @@
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
-            "uiautomator2:get_server_logs",
-            "uiautomator2:chromedriver_autodownload"
+            "get_server_logs",
+            "chromedriver_autodownload"
           ]
         },
         "device": {
@@ -302,8 +302,8 @@
           "external": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
-            "uiautomator2:get_server_logs",
-            "uiautomator2:chromedriver_autodownload"
+            "get_server_logs",
+            "chromedriver_autodownload"
           ]
         },
         "device": {
