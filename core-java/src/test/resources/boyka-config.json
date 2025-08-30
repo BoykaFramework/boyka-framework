@@ -263,8 +263,8 @@
           "session_override": true,
           "driver": "UI_AUTOMATOR",
           "allow_insecure": [
-            "get_server_logs",
-            "chromedriver_autodownload"
+            "uiautomator2:get_server_logs",
+            "uiautomator2:chromedriver_autodownload"
           ]
         },
         "device": {
@@ -300,7 +300,11 @@
           "target": "LOCAL",
           "port": 4724,
           "external": true,
-          "driver": "UI_AUTOMATOR"
+          "driver": "UI_AUTOMATOR",
+          "allow_insecure": [
+            "uiautomator2:get_server_logs",
+            "uiautomator2:chromedriver_autodownload"
+          ]
         },
         "device": {
           "os": "ANDROID",
