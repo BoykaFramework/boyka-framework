@@ -17,6 +17,8 @@
 package io.github.boykaframework.config.ui.mobile.server;
 
 import static java.text.MessageFormat.format;
+import static java.util.Collections.emptyList;
+import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.nio.file.Path;
@@ -72,9 +74,12 @@ public class ServerSetting {
      * @return List of allowed insecure arguments with driver prefix
      */
     public List<String> getAllowInsecure (final String driverName) {
-        return this.allowInsecure.stream ()
-            .map (s -> format ("{0}:{1}", driverName, s))
-            .toList ();
+        if (nonNull (this.allowInsecure)) {
+            return this.allowInsecure.stream ()
+                .map (s -> format ("{0}:{1}", driverName, s))
+                .toList ();
+        }
+        return emptyList ();
     }
 
     /**
@@ -98,8 +103,11 @@ public class ServerSetting {
      * @return List of denied insecure arguments with driver prefix
      */
     public List<String> getDenyInsecure (final String driverName) {
-        return this.denyInsecure.stream ()
-            .map (s -> format ("{0}:{1}", driverName, s))
-            .toList ();
+        if (nonNull (this.denyInsecure)) {
+            return this.denyInsecure.stream ()
+                .map (s -> format ("{0}:{1}", driverName, s))
+                .toList ();
+        }
+        return emptyList ();
     }
 }
