@@ -92,43 +92,46 @@ jobs:
           cache: 'maven'
           check-latest: true
 
-      - name: Install Appium 3.0
-        if: ${{ inputs.run-appium }}
+      - name: Install Appium 3.0 on Windows
+        if: inputs.run-appium && startsWith(inputs.runs-on, 'windows')
         run: |
-          if [ "${{ startsWith(inputs.runs-on, 'ubuntu') }}" == "true" ]; then
-              sudo apt update && sudo apt upgrade
-              sudo apt install ffmpeg
-          elif [ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" ]; then
-              brew install ffmpeg
-              brew tap wix/brew && brew install wix/brew/applesimutils
-          else
-              # Windows-specific commands
-              choco install ffmpeg -y
-          fi
+          @echo off
+          choco install ffmpeg -y
 
           npm install -g appium
 
+          if "%{{ inputs.run-android }}"=="true" (
+            appium driver install uiautomator2
+          )
+
+          mkdir core-java\logs
+
+          start /B appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java\logs\appium-android-server.log 2>&1
+
+      - name: Install Appium 3.0 on Mac or Linux
+        if: inputs.run-appium && ! startsWith(inputs.runs-on, 'windows')
+        run: |
+          if [ "${{ startsWith(inputs.runs-on, 'ubuntu') }}" == "true" ]; then
+            sudo apt update && sudo apt upgrade
+            sudo apt install ffmpeg
+          else
+            brew install ffmpeg
+            brew tap wix/brew && brew install wix/brew/applesimutils
+          fi
+          npm install -g appium
           if [ "${{ inputs.run-android }}" == "true" ]; then
-              appium driver install uiautomator2
+            appium driver install uiautomator2
           fi
-
           if [ "${{ inputs.run-ios }}" == "true" ]; then
-              appium driver install xcuitest
+            appium driver install xcuitest
           fi
-
           if [[ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" ]] &&
             [[ "${{ inputs.run-android }}" == "false" ]] &&
             [[ "${{ inputs.run-ios }}" == "false" ]]; then
-              npx appium driver install mac2
+            npx appium driver install mac2
           fi
-
-          mkdir -p core-java/logs
-
-          if [ "${{ startsWith(inputs.runs-on, 'windows') }}" == "true" ]; then
-              start /B appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-android-server.log 2>&1
-          else
-              appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-android-server.log 2>&1 &
-          fi
+          mkdir core-java/logs
+          appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-android-server.log 2>&1 &
 
       - name: Start Selenium Grid for Web
         if: ${{ inputs.run-grid && ! inputs.run-appium }}
