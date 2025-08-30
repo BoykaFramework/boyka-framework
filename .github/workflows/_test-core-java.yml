@@ -109,7 +109,9 @@ jobs:
           if [ "${{ inputs.run-ios }}" == "true" ]; then
             appium driver install xcuitest
           fi
-          if [[ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" && "${{ inputs.run-ios }}" == "false" ]]; then
+          if [[ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" && 
+          "${{ inputs.run-android }}" == "false" &&
+          "${{ inputs.run-ios }}" == "false" ]]; then
             npx appium driver install mac2
           fi
           mkdir core-java/logs
@@ -132,7 +134,7 @@ jobs:
           erase_before_boot: true
 
       - name: Enable KVM
-        if: inputs.run-android
+        if: inputs.run-android && ${{ startsWith(inputs.runs-on, 'ubuntu') }}
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
