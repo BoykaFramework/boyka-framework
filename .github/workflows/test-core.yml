@@ -138,7 +138,7 @@ jobs:
       emulator-name: Pixel_8_Pro
       emulator-profile: pixel_7_pro
       emulator-version: 35
-      emulator-arch: x86_64
+      emulator-arch: arm64-v8a
       emulator-target: google_apis
 
   test-mobile-ios-local:

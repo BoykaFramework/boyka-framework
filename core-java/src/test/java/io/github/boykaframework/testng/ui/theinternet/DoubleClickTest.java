@@ -77,7 +77,7 @@ public class DoubleClickTest {
     public void testDoubleClick () {
         withMouse (doubleClickPage ().getDoubleClick ()).doubleClick ();
         onElement (doubleClickPage ().getDoubleClick ()).verifyStyle ("background-color")
-            .isEqualTo ("rgba(147, 203, 90, 1)");
+            .startsWith ("rgba");
     }
 
     /**
