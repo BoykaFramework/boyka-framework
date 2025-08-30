@@ -96,26 +96,39 @@ jobs:
         if: ${{ inputs.run-appium }}
         run: |
           if [ "${{ startsWith(inputs.runs-on, 'ubuntu') }}" == "true" ]; then
-            sudo apt update && sudo apt upgrade
-            sudo apt install ffmpeg
+              sudo apt update && sudo apt upgrade
+              sudo apt install ffmpeg
+          elif [ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" ]; then
+              brew install ffmpeg
+              brew tap wix/brew && brew install wix/brew/applesimutils
           else
-            brew install ffmpeg
-            brew tap wix/brew && brew install wix/brew/applesimutils
+              # Windows-specific commands
+              choco install ffmpeg -y
           fi
+
           npm install -g appium
+
           if [ "${{ inputs.run-android }}" == "true" ]; then
-            appium driver install uiautomator2
+              appium driver install uiautomator2
           fi
+
           if [ "${{ inputs.run-ios }}" == "true" ]; then
-            appium driver install xcuitest
+              appium driver install xcuitest
           fi
+
           if [[ "${{ startsWith(inputs.runs-on, 'macos') }}" == "true" ]] &&
             [[ "${{ inputs.run-android }}" == "false" ]] &&
             [[ "${{ inputs.run-ios }}" == "false" ]]; then
-            npx appium driver install mac2
+              npx appium driver install mac2
           fi
-          mkdir core-java/logs
-          appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-android-server.log 2>&1 &
+
+          mkdir -p core-java/logs
+
+          if [ "${{ startsWith(inputs.runs-on, 'windows') }}" == "true" ]; then
+              start /B appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-android-server.log 2>&1
+          else
+              appium server --address 127.0.0.1 --port 4724 --use-drivers uiautomator2 --allow-insecure get_server_logs,chromedriver_autodownload > core-java/logs/appium-android-server.log 2>&1 &
+          fi
 
       - name: Start Selenium Grid for Web
         if: ${{ inputs.run-grid && ! inputs.run-appium }}
