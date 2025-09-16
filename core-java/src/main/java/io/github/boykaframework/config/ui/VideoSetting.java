@@ -17,6 +17,7 @@
 package io.github.boykaframework.config.ui;
 
 import io.github.boykaframework.config.ui.desktop.machine.MacVideoSetting;
+import io.github.boykaframework.config.ui.desktop.machine.WindowsVideoSetting;
 import io.github.boykaframework.config.ui.mobile.device.AndroidVideoSetting;
 import io.github.boykaframework.config.ui.mobile.device.IOSVideoSetting;
 import lombok.Data;
@@ -37,4 +38,5 @@ public class VideoSetting {
     private String              prefix  = "VID";
     private String              size;
     private int                 timeLimit;
+    private WindowsVideoSetting windows = new WindowsVideoSetting ();
 }
