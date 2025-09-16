@@ -52,7 +52,7 @@ public interface IFingerActionsListener extends BoykaListener {
      * @param locator Locator of the element.
      * @param millis Duration of long press.
      */
-    default void onLongPress (final Locator locator, long millis) {
+    default void onLongPress (final Locator locator, final long millis) {
         // not implemented
     }
 

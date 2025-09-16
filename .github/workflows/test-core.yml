@@ -24,10 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install Java and Maven
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 17
           distribution: 'temurin'
@@ -136,8 +136,8 @@ jobs:
       run-ios: false
       run-android: true
       emulator-name: Pixel_8_Pro
-      emulator-profile: pixel_6_pro
-      emulator-version: 31
+      emulator-profile: pixel_7_pro
+      emulator-version: 35
       emulator-arch: x86_64
       emulator-target: google_apis
 
@@ -230,10 +230,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install Java and Maven
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 17
           distribution: 'temurin'
@@ -241,31 +241,31 @@ jobs:
           check-latest: true
 
       - name: Download reports-testng-api files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-api
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-bs files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-mobile-bs
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-android-local files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-mobile-android-local
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-ios-local files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-mobile-ios-local
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-desktop-mac files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-desktop-mac
 
@@ -275,43 +275,43 @@ jobs:
           name: reports-testng-desktop-windows
 
       # - name: Download reports-testng-mobile-web files
-      #   uses: actions/download-artifact@v4
+      #   uses: actions/download-artifact@v5
       #   with:
       #     name: reports-testng-mobile-web
       #     path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-mobile-lt files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-mobile-lt
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-others files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-others
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-web-bs files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-web-bs
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-web-grid files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-web-grid
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-web-local files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-web-local
           path: ${{ github.workspace }}/core-java/reports
 
       - name: Download reports-testng-web-lt files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-testng-web-lt
           path: ${{ github.workspace }}/core-java/reports
@@ -346,12 +346,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Install Java and Maven
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -359,13 +359,13 @@ jobs:
           check-latest: true
 
       - name: Download target folder
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: target-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java
 
       - name: Download reports folder
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: reports-${{ github.run_id }}
           path: ${{ github.workspace }}/core-java

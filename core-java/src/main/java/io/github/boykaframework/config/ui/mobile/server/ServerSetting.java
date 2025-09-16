@@ -16,6 +16,9 @@
 
 package io.github.boykaframework.config.ui.mobile.server;
 
+import static java.text.MessageFormat.format;
+import static java.util.Collections.emptyList;
+import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.nio.file.Path;
@@ -64,6 +67,22 @@ public class ServerSetting {
     private String              webhook;
 
     /**
+     * Gets the list of allowed insecure arguments for the given driver
+     *
+     * @param driverName Driver name
+     *
+     * @return List of allowed insecure arguments with driver prefix
+     */
+    public List<String> getAllowInsecure (final String driverName) {
+        if (nonNull (this.allowInsecure)) {
+            return this.allowInsecure.stream ()
+                .map (s -> format ("{0}:{1}", driverName, s))
+                .toList ();
+        }
+        return emptyList ();
+    }
+
+    /**
      * Gets the Appium Config path
      *
      * @return Path to Appium Config.
@@ -74,5 +93,21 @@ public class ServerSetting {
         }
         return Path.of (System.getProperty ("user.dir"), this.configPath)
             .toString ();
+    }
+
+    /**
+     * Gets the list of denied insecure arguments for the given driver
+     *
+     * @param driverName Driver name
+     *
+     * @return List of denied insecure arguments with driver prefix
+     */
+    public List<String> getDenyInsecure (final String driverName) {
+        if (nonNull (this.denyInsecure)) {
+            return this.denyInsecure.stream ()
+                .map (s -> format ("{0}:{1}", driverName, s))
+                .toList ();
+        }
+        return emptyList ();
     }
 }
