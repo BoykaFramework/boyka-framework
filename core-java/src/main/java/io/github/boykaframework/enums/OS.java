@@ -34,5 +34,9 @@ public enum OS {
     /**
      * Mac OS platform.
      */
-    MAC
+    MAC,
+    /**
+     * Windows platform.
+     */
+    WINDOWS
 }

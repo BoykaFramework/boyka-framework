@@ -36,12 +36,14 @@ public class MachineSetting {
     private ApplicationSetting application          = new ApplicationSetting ();
     private int                commandTimeout       = 60;
     private boolean            eventTimings;
+    private boolean            experimental;
     private boolean            fullReset;
     private LanguageSetting    language             = new LanguageSetting ();
     private boolean            noReset;
     private OS                 os                   = MAC;
     private int                serverStartupTimeout = 60;
     private boolean            showServerLogs;
+    private int                systemPort           = 4724;
     private DeviceType         type                 = REAL;
     private String             version;
     private VideoSetting       video                = new VideoSetting ();

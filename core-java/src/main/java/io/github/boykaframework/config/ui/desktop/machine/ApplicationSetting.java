@@ -26,6 +26,11 @@ import lombok.Data;
  */
 @Data
 public class ApplicationSetting {
+    private String  arguments;
     private String  bundleId;
+    private int     launchTimeout;
+    private String  path;
     private boolean skipAppKill;
+    private String  topLevelWindow;
+    private String  workingDir;
 }
