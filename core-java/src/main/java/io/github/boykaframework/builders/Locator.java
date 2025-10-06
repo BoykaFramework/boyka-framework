@@ -39,16 +39,25 @@ import org.openqa.selenium.WebElement;
 @Builder (toBuilder = true, builderMethodName = "buildLocator")
 public class Locator {
     private By                    android;
+    @Builder.Default
+    private int                   androidIndex = -1;
     private Predicate<WebElement> filter;
-    private int                   index;
+    @Builder.Default
+    private int                   index        = 0;
     private By                    ios;
+    @Builder.Default
+    private int                   iosIndex     = -1;
     private By                    mac;
+    @Builder.Default
+    private int                   macIndex     = -1;
     @NotNull
     private String                name;
     private Locator               parent;
     @Builder.Default
-    private boolean               shadowRoot = false;
+    private boolean               shadowRoot   = false;
     private By                    web;
+    @Builder.Default
+    private int                   webIndex     = -1;
 
     /**
      * Gets the platform specific locator

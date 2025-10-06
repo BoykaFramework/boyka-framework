@@ -20,7 +20,6 @@ import static io.github.boykaframework.enums.Message.ELEMENT_NOT_FOUND;
 import static io.github.boykaframework.manager.ParallelSession.getSession;
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
-import static java.text.MessageFormat.format;
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -31,7 +30,6 @@ import java.util.List;
 
 import io.github.boykaframework.builders.Locator;
 import io.github.boykaframework.enums.WaitStrategy;
-import io.github.boykaframework.exception.FrameworkError;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -60,14 +58,17 @@ public final class ElementFinder {
         if (elements.isEmpty ()) {
             throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
         }
+        final var index = getPlatformIndex (locator);
         if (!isNull (locator.getFilter ())) {
-            return elements.stream ()
+            final var filteredElements = elements.stream ()
                 .filter (locator.getFilter ())
-                .findFirst ()
-                .orElseThrow (() -> new FrameworkError (format (ELEMENT_NOT_FOUND.getMessageText (), locator.getName (),
-                    getSession ().getPlatformType ())));
+                .toList ();
+            if (filteredElements.isEmpty ()) {
+                throwError (ELEMENT_NOT_FOUND, locator.getName (), getSession ().getPlatformType ());
+            }
+            return filteredElements.get (index);
         }
-        return elements.get (locator.getIndex ());
+        return elements.get (index);
     }
 
     /**
@@ -113,6 +114,16 @@ public final class ElementFinder {
     private static <D extends WebDriver> List<WebElement> finds (final D driver, final Locator locator) {
         LOGGER.traceEntry ();
         return LOGGER.traceExit (finds (driver, null, null, locator));
+    }
+
+    private static int getPlatformIndex (final Locator locator) {
+        final var index = switch (getSession ().getPlatformType ()) {
+            case ANDROID -> locator.getAndroidIndex ();
+            case IOS -> locator.getIosIndex ();
+            case MAC -> locator.getMacIndex ();
+            default -> locator.getWebIndex ();
+        };
+        return index > -1 ? index : locator.getIndex ();
     }
 
     private static void waitForElement (final Locator locator, final WaitStrategy waitStrategy) {
