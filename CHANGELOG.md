@@ -12,6 +12,48 @@
 
 
 
+
+## 2.9.0 (2025-10-07)
+
+#### :bug: Bug Fix
+* [#1087](https://github.com/BoykaFramework/boyka-framework/pull/1087) fix(java): :bug: fixed issue with the Locator class ([@WasiqB](https://github.com/WasiqB))
+* [#1071](https://github.com/BoykaFramework/boyka-framework/pull/1071) fix(workflow): :bug: fixing android test with appium v3 ([@WasiqB](https://github.com/WasiqB))
+* [#1069](https://github.com/BoykaFramework/boyka-framework/pull/1069) fix(java): :arrow_up: upgraded outdated dependencies ([@WasiqB](https://github.com/WasiqB))
+* [#1050](https://github.com/BoykaFramework/boyka-framework/pull/1050) fix(java): :bug: fix issue with latest OkHttp version upgrade ([@WasiqB](https://github.com/WasiqB))
+
+#### :house: Internal
+* [#1085](https://github.com/BoykaFramework/boyka-framework/pull/1085) build(deps): bump the dependencies group in /core-java with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1086](https://github.com/BoykaFramework/boyka-framework/pull/1086) build(deps): bump the dependencies group with 12 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1080](https://github.com/BoykaFramework/boyka-framework/pull/1080) build(deps-dev): bump io.qameta.allure:allure-testng from 2.29.1 to 2.30.0 in /core-java ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1082](https://github.com/BoykaFramework/boyka-framework/pull/1082) build(deps): bump the dependencies group across 1 directory with 6 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1083](https://github.com/BoykaFramework/boyka-framework/pull/1083) build(deps): bump the dependencies group with 17 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1081](https://github.com/BoykaFramework/boyka-framework/pull/1081) build(deps-dev): bump the dependencies group with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1077](https://github.com/BoykaFramework/boyka-framework/pull/1077) build(deps): bump the dependencies group in /core-java with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1078](https://github.com/BoykaFramework/boyka-framework/pull/1078) build(deps-dev): bump the dependencies group with 6 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1074](https://github.com/BoykaFramework/boyka-framework/pull/1074) build(deps): bump org.projectlombok:lombok from 1.18.38 to 1.18.40 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1076](https://github.com/BoykaFramework/boyka-framework/pull/1076) build(deps-dev): bump the dependencies group with 7 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1075](https://github.com/BoykaFramework/boyka-framework/pull/1075) build(deps): bump actions/setup-node from 4 to 5 in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1073](https://github.com/BoykaFramework/boyka-framework/pull/1073) build(deps): bump com.puppycrawl.tools:checkstyle from 11.0.0 to 11.0.1 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1072](https://github.com/BoykaFramework/boyka-framework/pull/1072) build(deps): bump the dependencies group across 1 directory with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1066](https://github.com/BoykaFramework/boyka-framework/pull/1066) build(deps): bump the dependencies group across 1 directory with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1065](https://github.com/BoykaFramework/boyka-framework/pull/1065) build(deps-dev): bump the dependencies group with 6 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1062](https://github.com/BoykaFramework/boyka-framework/pull/1062) build(deps-dev): bump the dependencies group with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1061](https://github.com/BoykaFramework/boyka-framework/pull/1061) build(deps): bump actions/download-artifact from 4 to 5 in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1060](https://github.com/BoykaFramework/boyka-framework/pull/1060) build(deps-dev): bump the dependencies group with 9 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1058](https://github.com/BoykaFramework/boyka-framework/pull/1058) build(deps): bump the dependencies group with 5 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1055](https://github.com/BoykaFramework/boyka-framework/pull/1055) build(deps): bump org.apache.commons:commons-text from 1.13.1 to 1.14.0 in /core-java in the dependencies group ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1056](https://github.com/BoykaFramework/boyka-framework/pull/1056) build(deps-dev): bump the dependencies group with 7 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1054](https://github.com/BoykaFramework/boyka-framework/pull/1054) build(deps): bump the dependencies group in /core-java with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1053](https://github.com/BoykaFramework/boyka-framework/pull/1053) build(deps-dev): bump the dependencies group with 7 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1052](https://github.com/BoykaFramework/boyka-framework/pull/1052) build(deps-dev): bump the dependencies group with 7 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1051](https://github.com/BoykaFramework/boyka-framework/pull/1051) build(deps): bump com.squareup.okhttp3:okhttp-jvm from 5.0.0 to 5.1.0 in /core-java in the dependencies group across 1 directory ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1048](https://github.com/BoykaFramework/boyka-framework/pull/1048) build(deps-dev): bump the dependencies group with 8 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1046](https://github.com/BoykaFramework/boyka-framework/pull/1046) build(deps-dev): bump the dependencies group with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#1045](https://github.com/BoykaFramework/boyka-framework/pull/1045) build(deps): bump the dependencies group across 1 directory with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Wasiq Bhamla ([@WasiqB](https://github.com/WasiqB))
+
 ## 2.8.0 (2025-06-28)
 
 #### :rocket: New Feature
