@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkwebsite=globalThis.webpackChunkwebsite||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Welcome to Boyka!","permalink":"/boyka-framework/blog/welcome","unlisted":false,"date":"2022-04-03T00:00:00.000Z"}]}')}}]);
