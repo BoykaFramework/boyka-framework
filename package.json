@@ -38,9 +38,9 @@
     "@release-it-plugins/lerna-changelog": "^8.0.1",
     "@stylistic/eslint-plugin-js": "^4.4.1",
     "@stylistic/eslint-plugin-ts": "^4.4.1",
-    "@types/node": "^24.8.1",
-    "@typescript-eslint/eslint-plugin": "^8.46.1",
-    "@typescript-eslint/parser": "^8.46.1",
+    "@types/node": "^24.9.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
     "commitlint": "^20.1.0",
     "eslint": "^9.38.0",
     "eslint-config-google": "^0.14.0",
@@ -55,7 +55,7 @@
     "lerna": "9.0.0",
     "lerna-changelog": "^2.2.0",
     "lerna-version": "^6.6.2",
-    "lint-staged": "^16.2.4",
+    "lint-staged": "^16.2.5",
     "lodash": "^4.17.21",
     "nx": "^21.6.5",
     "prettier": "^3.6.2",
@@ -64,7 +64,7 @@
     "release-it": "^19.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.1"
+    "typescript-eslint": "^8.46.2"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -100,5 +100,5 @@
       "pnpm format"
     ]
   },
-  "packageManager": "pnpm@10.18.0"
+  "packageManager": "pnpm@10.19.0"
 }
