@@ -130,7 +130,7 @@ jobs:
       - check-cloud
     uses: ./.github/workflows/_test-core-java.yml
     with:
-      runs-on: ubuntu-latest
+      runs-on: macos-15
       suite-name: testng-mobile-android-local
       run-appium: true
       run-ios: false

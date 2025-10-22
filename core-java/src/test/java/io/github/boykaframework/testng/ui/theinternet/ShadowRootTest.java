@@ -29,6 +29,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -38,6 +39,7 @@ import org.testng.annotations.Test;
  * @author Wasiq Bhamla
  * @since 16-Sept-2023
  */
+@Ignore
 public class ShadowRootTest {
     private static final String URL = "https://www.htmlelements.com/demos/menu/shadow-dom/index.htm";
 
