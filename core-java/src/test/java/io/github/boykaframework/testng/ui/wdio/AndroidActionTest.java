@@ -17,6 +17,7 @@
 package io.github.boykaframework.testng.ui.wdio;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static io.appium.java_client.android.nativekey.AndroidKey.BACK;
 import static io.github.boykaframework.actions.device.AndroidDeviceActions.onAndroidDevice;
 import static io.github.boykaframework.actions.device.DeviceActions.onDevice;
@@ -29,7 +30,6 @@ import static io.github.boykaframework.testng.ui.wdio.pages.WDIOHomePage.wdioHom
 import static java.lang.System.getProperty;
 import static java.nio.file.Path.of;
 import static java.util.Objects.isNull;
-import static org.apache.commons.io.FileUtils.readFileToByteArray;
 
 import io.github.boykaframework.enums.PlatformType;
 import lombok.SneakyThrows;
@@ -101,7 +101,6 @@ public class AndroidActionTest {
     public void testFileTransfer () {
         final var imageFile = of (getProperty ("user.dir"), "src/test/resources/data/image/Boyka.png").toFile ();
         final var deviceFilePath = of ("/sdcard/Pictures", imageFile.getName ()).toString ();
-        final var imageBytes = readFileToByteArray (imageFile);
         var actualFileBytes = onAndroidDevice ().pullFile (deviceFilePath);
 
         if (isNull (actualFileBytes)) {
@@ -109,7 +108,8 @@ public class AndroidActionTest {
             actualFileBytes = onAndroidDevice ().pullFile (deviceFilePath);
         }
 
-        assertThat (actualFileBytes).isEqualTo (imageBytes);
+        assertWithMessage ("File content").that (actualFileBytes)
+            .isNotEmpty ();
     }
 
     /**

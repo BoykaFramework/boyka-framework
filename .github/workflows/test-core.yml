@@ -5,15 +5,15 @@ on:
     branches:
       - main
     paths:
-      - 'core-java/**'
-      - '.github/workflows/**'
+      - "core-java/**"
+      - ".github/workflows/**"
 
   push:
     branches:
       - main
     paths:
-      - 'core-java/**'
-      - '.github/workflows/**'
+      - "core-java/**"
+      - ".github/workflows/**"
 
 concurrency:
   group: boyka-tests-${{ github.ref }}-1
@@ -30,8 +30,8 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: 17
-          distribution: 'temurin'
-          cache: 'maven'
+          distribution: "temurin"
+          cache: "maven"
           check-latest: true
 
       - name: Build the project
@@ -46,7 +46,7 @@ jobs:
     env:
       LT_USER: ${{ secrets.LT_USER }}
       BS_USER: ${{ secrets.BS_USER }}
-    
+
     outputs:
       bs-present: ${{ steps.bs-secrets.outputs.present }}
       lt-present: ${{ steps.lt-secrets.outputs.present }}
@@ -93,7 +93,7 @@ jobs:
     uses: ./.github/workflows/_test-core-java.yml
     with:
       suite-name: testng-web-local
-      runs-on: macos-13
+      runs-on: macos-15
 
   test-web-bs:
     needs:
@@ -224,8 +224,8 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: 17
-          distribution: 'temurin'
-          cache: 'maven'
+          distribution: "temurin"
+          cache: "maven"
           check-latest: true
 
       - name: Download reports-testng-api files
@@ -336,9 +336,9 @@ jobs:
       - name: Install Java and Maven
         uses: actions/setup-java@v5
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven'
+          java-version: "17"
+          distribution: "temurin"
+          cache: "maven"
           check-latest: true
 
       - name: Download target folder
@@ -361,7 +361,7 @@ jobs:
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
-        env: 
+        env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: core-java

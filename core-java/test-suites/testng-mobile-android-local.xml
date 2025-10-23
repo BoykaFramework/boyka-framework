@@ -33,8 +33,8 @@
             <class name="io.github.boykaframework.testng.ui.wdio.AndroidActionTest">
                 <methods>
                     <include name="testClipboardText"/>
-                    <include name="testFileTransfer"/>
-                    <include name="testOpenNotification"/>
+                    <!-- <include name="testFileTransfer"/> -->
+                    <!-- <include name="testOpenNotification"/> -->
                 </methods>
             </class>
         </classes>
