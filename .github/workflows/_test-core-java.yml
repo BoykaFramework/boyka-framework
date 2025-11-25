@@ -82,7 +82,7 @@ jobs:
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Java and Maven
         uses: actions/setup-java@v5
