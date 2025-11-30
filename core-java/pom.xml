@@ -48,15 +48,15 @@
         <json-schema-validator.version>2.0.0</json-schema-validator.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.9.0</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>12.1.2</checkstyle.version>
+        <checkstyle.version>12.2.0</checkstyle.version>
         <aspectj.version>1.9.25</aspectj.version>
-        <poi.version>5.5.0</poi.version>
+        <poi.version>5.5.1</poi.version>
         <suite-name>testng-api</suite-name>
         <suite-xml>test-suites/${suite-name}.xml</suite-xml>
         <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent</argLine>
