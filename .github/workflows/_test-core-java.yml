@@ -141,7 +141,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: AVD cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: avd-cache
         if: inputs.run-android
         with:
@@ -203,7 +203,7 @@ jobs:
         run: echo "$(cat ${{ github.workspace }}/core-java/target/failsafe-reports/my-report.md)" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload target folder
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: ${{ failure() }}
         with:
           name: target-${{ inputs.suite-name }}
@@ -215,7 +215,7 @@ jobs:
             ${{ github.workspace }}/core-java/videos
 
       - name: Upload reports folder
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: reports-${{ inputs.suite-name }}
           retention-days: 1
