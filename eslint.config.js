@@ -1,5 +1,4 @@
-import stylisticTs from '@stylistic/eslint-plugin-ts';
-import stylisticJs from '@stylistic/eslint-plugin-js';
+import stylistic from '@stylistic/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import js from '@eslint/js';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
@@ -35,8 +34,8 @@ export default [
     },
     files: ['website/**/*.ts', 'website/**/*.tsx', 'website/**/*.js', 'website/**/*.jsx'],
     plugins: {
-      '@stylistic/ts': stylisticTs,
-      '@stylistic/js': stylisticJs,
+      '@stylistic/ts': stylistic,
+      '@stylistic/js': stylistic,
       react,
     },
     rules: {

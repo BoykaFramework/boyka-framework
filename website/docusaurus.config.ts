@@ -12,10 +12,15 @@ const config: Config = {
   baseUrl: '/boyka-framework/',
   deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/Boyka.png',
   organizationName: 'BoykaFramework',
   projectName: 'boyka-framework',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+      onBrokenMarkdownImages: 'throw',
+    },
+  },
   plugins: [
     [
       '@docusaurus/plugin-content-docs',
