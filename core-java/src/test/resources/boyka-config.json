@@ -575,7 +575,7 @@
           "application": {
             "path": "/apps/ios/wdio-demo.app.zip",
             "type": "HYBRID",
-            "bundle_id": "org.reactjs.native.example.wdiodemoapp",
+            "bundle_id": "org.wdiodemoapp",
             "install_timeout": 180
           }
         }
