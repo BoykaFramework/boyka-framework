@@ -19,8 +19,9 @@ package io.github.boykaframework.builders;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static com.jayway.jsonpath.JsonPath.compile;
 import static com.jayway.jsonpath.JsonPath.parse;
+import static com.networknt.schema.InputFormat.JSON;
 import static com.networknt.schema.SchemaRegistry.withDialect;
-import static com.networknt.schema.dialect.Dialects.getDraft7;
+import static com.networknt.schema.dialect.Dialects.getDraft202012;
 import static io.github.boykaframework.enums.Message.ERROR_READING_FILE;
 import static io.github.boykaframework.enums.Message.INVALID_HEADER_KEY;
 import static io.github.boykaframework.enums.Message.NO_BODY_TO_PARSE;
@@ -28,16 +29,15 @@ import static io.github.boykaframework.enums.Message.RESPONSE_SCHEMA_NOT_MATCHIN
 import static io.github.boykaframework.utils.ErrorHandler.handleAndThrow;
 import static io.github.boykaframework.utils.ErrorHandler.throwError;
 import static java.lang.System.getProperty;
+import static java.nio.file.Path.of;
 import static java.util.Objects.requireNonNull;
 import static java.util.Objects.requireNonNullElse;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.truth.BooleanSubject;
 import com.google.common.truth.IntegerSubject;
 import com.google.common.truth.StringSubject;
@@ -154,13 +154,15 @@ public class ApiResponse {
         LOGGER.traceEntry ();
         LOGGER.info ("Verifying Response Schema");
         try (
-            final var inputStream = new FileInputStream (Path.of (getProperty ("user.dir"), "/src/test/resources",
-                    requireNonNullElse (this.apiSetting.getSchemaPath (), this.commonApiSetting.getSchemaPath ()),
-                    schemaName)
-                .toFile ())) {
-            final var registry = withDialect (getDraft7 ());
+            final var inputStream = new FileInputStream (of (getProperty ("user.dir"), "/src/test/resources",
+                requireNonNullElse (this.apiSetting.getSchemaPath (), this.commonApiSetting.getSchemaPath ()),
+                schemaName).toFile ())) {
+            final var fileBytes = inputStream.readAllBytes ();
+            final var registry = withDialect (getDraft202012 ());
             final var jsonSchema = registry.getSchema (inputStream);
-            final var errors = jsonSchema.validate (new ObjectMapper ().readTree (this.body));
+            final var errors = jsonSchema.validate (new String (fileBytes), JSON,
+                executionContext -> executionContext.executionConfig (
+                    executionConfig -> executionConfig.formatAssertionsEnabled (true)));
 
             assertWithMessage (RESPONSE_SCHEMA_NOT_MATCHING.getMessageText ()).that (errors)
                 .isEmpty ();
