@@ -19,7 +19,7 @@ jobs:
 
       - name: Upload Android App
         id: android_app_upload
-        uses: fjogeleit/http-request-action@v1
+        uses: fjogeleit/http-request-action@v2
         with:
           url: https://api-cloud.browserstack.com/app-automate/upload
           method: POST
@@ -30,7 +30,7 @@ jobs:
 
       - name: Upload iOS App
         id: ios_app_upload
-        uses: fjogeleit/http-request-action@v1
+        uses: fjogeleit/http-request-action@v2
         with:
           url: https://api-cloud.browserstack.com/app-automate/upload
           method: POST
