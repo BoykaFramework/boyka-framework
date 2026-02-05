@@ -309,7 +309,7 @@
         "device": {
           "os": "ANDROID",
           "version": "15",
-          "name": "Pixel_8_Pro",
+          "name": "Pixel_9_Pro",
           "type": "VIRTUAL",
           "server_install_timeout": 60,
           "auto_grant_permissions": true,
@@ -335,7 +335,7 @@
             "wait_timeout": 120
           },
           "virtual_device": {
-            "name": "Pixel_8_Pro",
+            "name": "Pixel_9_Pro",
             "headless": true
           }
         }
