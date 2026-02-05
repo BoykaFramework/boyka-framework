@@ -1,1 +1,0 @@
-core-java/src/test/resources/apps/android/wdio-demo.apk filter=lfs diff=lfs merge=lfs -text
