@@ -51,7 +51,7 @@
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.9.0</maven-dependency-plugin.version>
-        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
         <checkstyle.version>12.3.1</checkstyle.version>
