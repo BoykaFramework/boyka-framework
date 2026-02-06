@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkwebsite=globalThis.webpackChunkwebsite||[]).push([[1903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/boyka-framework/blog","blogTitle":"Blog","authorsListPath":"/boyka-framework/blog/authors"}')}}]);
