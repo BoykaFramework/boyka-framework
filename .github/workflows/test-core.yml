@@ -135,7 +135,7 @@ jobs:
       run-appium: true
       run-ios: false
       run-android: true
-      emulator-name: Pixel_8_Pro
+      emulator-name: Pixel_9_Pro
       emulator-profile: pixel_7_pro
       emulator-version: 35
       emulator-arch: x86_64

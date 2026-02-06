@@ -43,27 +43,19 @@ public class DragDropPage {
         return DRAG_DROP_PAGE;
     }
 
-    private final Locator screen      = Locator.buildLocator ()
-        .android (accessibilityId ("Drag-drop-screen"))
-        .ios (accessibilityId ("Drag-drop-screen"))
-        .name ("Drag Drop screen")
+    private final Locator description = Locator.buildLocator ()
+        .android (androidUIAutomator ("new UiSelector ().textStartsWith (\"You made it\")"))
+        .ios (iOSNsPredicateString ("type == 'XCUIElementTypeStaticText' AND label BEGINSWITH 'You made it'"))
+        .name ("Description")
         .build ();
     private final Locator retryButton = Locator.buildLocator ()
-        .parent (this.screen)
         .name ("Retry Button")
         .android (accessibilityId ("button-Retry"))
         .ios (accessibilityId ("button-Retry"))
         .build ();
-    private final Locator description = Locator.buildLocator ()
-        .android (androidUIAutomator ("new UiSelector ().textStartsWith (\"You made it\")"))
-        .ios (iOSNsPredicateString ("type == 'XCUIElementTypeStaticText' AND label BEGINSWITH 'You made it'"))
-        .parent (this.screen)
-        .name ("Description")
-        .build ();
     private final Locator title       = Locator.buildLocator ()
         .android (androidUIAutomator ("new UiSelector ().text (\"Congratulations\")"))
         .ios (iOSNsPredicateString ("type == 'XCUIElementTypeStaticText' AND label == 'Congratulations'"))
-        .parent (this.screen)
         .name ("Title")
         .build ();
 
