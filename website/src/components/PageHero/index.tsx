@@ -1,9 +1,8 @@
-import React from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
-import { GitHubCountButton } from '../GitHubCountButton';
-import { ActionButton } from '../ActionButton';
 import Typist from 'react-typist';
+import { ActionButton } from '../ActionButton';
+import { GitHubCountButton } from '../GitHubCountButton';
+import styles from './styles.module.css';
 
 const HeroContent = ({ title, tagLine }): JSX.Element => {
   return (
@@ -20,13 +19,7 @@ const CTAButtons = ({ buttons }): JSX.Element => {
   return (
     <div className={styles.ctaButtons}>
       {buttons?.map((button) => (
-        <ActionButton
-          key={button.id}
-          href={button.href}
-          text={button.text}
-          type={button.type}
-          target={button.target}
-        />
+        <ActionButton key={button.id} href={button.href} text={button.text} type={button.type} target={button.target} />
       ))}
     </div>
   );
@@ -53,9 +46,7 @@ const PageHero = ({ title, tagLine, image, buttons = [], gitButtons = [] }): JSX
     <section
       className={styles.HeroContainer}
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${useBaseUrl(
-          image
-        )})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${useBaseUrl(image)})`,
       }}
     >
       <HeroContent title={title} tagLine={tagLine} />

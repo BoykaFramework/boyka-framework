@@ -30,7 +30,7 @@ on:
       emulator-profile:
         type: string
         description: Emulator Profile Name
-        default: pixel_6_pro
+        default: pixel_7_pro
       emulator-target:
         type: string
         description: Emulator target image
@@ -42,7 +42,7 @@ on:
       emulator-version:
         type: number
         description: Emulator Target version
-        default: 30
+        default: 34
       emulator-channel:
         type: string
         description: Emulator SDK channel
@@ -150,7 +150,7 @@ jobs:
             ~/.android/adb*
           key: avd-${{ inputs.emulator-name }}-${{ inputs.emulator-version }}-${{ inputs.emulator-profile }}-${{ inputs.emulator-arch }}-${{ inputs.emulator-target }}-${{ inputs.emulator-channel }}
 
-      - name: create AVD and generate snapshot for caching
+      - name: Create AVD and generate snapshot for caching
         if: inputs.run-android && steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -176,7 +176,7 @@ jobs:
           profile: ${{ inputs.emulator-profile }}
           channel: ${{ inputs.emulator-channel }}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -wipe-data
           disable-animations: true
           pre-emulator-launch-script: avdmanager list device
           script: mvn verify org.jacoco:jacoco-maven-plugin:prepare-agent -f core-java/pom.xml -Dsuite-name=${{ inputs.suite-name }} -Pcoverage-test

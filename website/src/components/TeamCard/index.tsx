@@ -1,8 +1,7 @@
 import Link from '@docusaurus/Link';
-import { FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa6';
-import React from 'react';
-import styles from './style.module.css';
 import clsx from 'clsx';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa6';
+import styles from './style.module.css';
 
 interface Social {
   userName: string;
@@ -47,7 +46,7 @@ const LinkedInLink = ({ userName }: Social): JSX.Element => {
 export const TeamCard = ({ name, avatar, github, twitter, linkedin, children }): JSX.Element => {
   return (
     <article className={clsx('avatar', styles.teamProfile)}>
-      <img className='avatar__photo avatar__photo--lg' src={avatar} />
+      <img className='avatar__photo avatar__photo--lg' src={avatar} alt='Profile pic' />
       <div className='avatar__intro'>
         <h4 className='avatar__name'>
           {name}

@@ -1,13 +1,12 @@
-import type { Config } from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
 import type * as Docs from '@docusaurus/plugin-content-docs';
 import type * as Tag from '@docusaurus/plugin-google-tag-manager';
+import type * as Preset from '@docusaurus/preset-classic';
+import type { Config } from '@docusaurus/types';
 import { themes } from 'prism-react-renderer';
 
 const config: Config = {
   title: 'Boyka-framework',
-  tagline:
-    'Ultimate test automation framework for automating Web, Android, iOS and API applications',
+  tagline: 'Ultimate test automation framework for automating Web, Android, iOS and API applications',
   url: 'https://BoykaFramework.github.io',
   baseUrl: '/boyka-framework/',
   deploymentBranch: 'gh-pages',

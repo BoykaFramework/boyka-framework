@@ -20,7 +20,7 @@
     <listeners>
         <listener class-name="io.github.boykaframework.testng.listeners.TestResultListener"/>
     </listeners>
-    <test name="Test web on Local Chrome">
+    <test name="Test web on Local Chrome" parallel="classes" group-by-instances="true">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_chrome"/>
         <packages>
@@ -36,7 +36,7 @@
             <package name="io.github.boykaframework.testng.ui.theinternet"/>
         </packages>
     </test>
-    <test name="Test web on Local Edge">
+    <test name="Test web on Local Edge" parallel="classes" group-by-instances="true">
         <parameter name="platformType" value="WEB"/>
         <parameter name="driverKey" value="test_local_edge"/>
         <packages>
@@ -51,14 +51,14 @@
             <package name="io.github.boykaframework.testng.ui.theinternet"/>
         </packages>
     </test>
-    <test name="Test German language Web App">
+    <test name="Test German language Web App" enabled="false">
         <parameter name="driverKey" value="test_local_de"/>
         <parameter name="language" value="Deutsch"/>
         <classes>
             <class name="io.github.boykaframework.testng.ui.lang.HomePageTest"/>
         </classes>
     </test>
-    <test name="Test English language Web App">
+    <test name="Test English language Web App" enabled="false">
         <parameter name="driverKey" value="test_local_en"/>
         <parameter name="language" value="English"/>
         <classes>

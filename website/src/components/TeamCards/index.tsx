@@ -1,6 +1,5 @@
-import React from 'react';
-import { TeamCard, TeamMember } from '../TeamCard';
 import Data from '../../data/teams.json';
+import { TeamCard, type TeamMember } from '../TeamCard';
 import styles from './style.module.css';
 
 export const TeamCards = (): JSX.Element => {
