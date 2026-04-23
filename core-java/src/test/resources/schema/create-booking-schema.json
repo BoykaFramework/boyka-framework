@@ -4,41 +4,27 @@
   "$id": "https://example.com/object1688402880.json",
   "title": "Root",
   "type": "object",
-  "required": [
-    "bookingid",
-    "booking"
-  ],
+  "required": ["bookingid", "booking"],
   "properties": {
     "bookingid": {
       "$id": "#root/bookingid",
       "title": "Bookingid",
       "type": "integer",
-      "examples": [
-        2447
-      ],
+      "examples": [2447],
       "default": 0
     },
     "booking": {
       "$id": "#root/booking",
       "title": "Booking",
       "type": "object",
-      "required": [
-        "firstname",
-        "lastname",
-        "totalprice",
-        "depositpaid",
-        "bookingdates",
-        "additionalneeds"
-      ],
+      "required": ["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
       "properties": {
         "firstname": {
           "$id": "#root/booking/firstname",
           "title": "Firstname",
           "type": "string",
           "default": "",
-          "examples": [
-            "Jannette"
-          ],
+          "examples": ["Jannette"],
           "pattern": "^.*$"
         },
         "lastname": {
@@ -46,46 +32,35 @@
           "title": "Lastname",
           "type": "string",
           "default": "",
-          "examples": [
-            "Hessel"
-          ],
+          "examples": ["Hessel"],
           "pattern": "^.*$"
         },
         "totalprice": {
           "$id": "#root/booking/totalprice",
           "title": "Totalprice",
           "type": "integer",
-          "examples": [
-            499
-          ],
+          "examples": [499],
           "default": 0
         },
         "depositpaid": {
           "$id": "#root/booking/depositpaid",
           "title": "Depositpaid",
           "type": "boolean",
-          "examples": [
-            true
-          ],
+          "examples": [true],
           "default": true
         },
         "bookingdates": {
           "$id": "#root/booking/bookingdates",
           "title": "Bookingdates",
           "type": "object",
-          "required": [
-            "checkin",
-            "checkout"
-          ],
+          "required": ["checkin", "checkout"],
           "properties": {
             "checkin": {
               "$id": "#root/booking/bookingdates/checkin",
               "title": "Checkin",
               "type": "string",
               "default": "",
-              "examples": [
-                "2023-07-02"
-              ],
+              "examples": ["2023-07-02"],
               "pattern": "^.*$"
             },
             "checkout": {
@@ -93,9 +68,7 @@
               "title": "Checkout",
               "type": "string",
               "default": "",
-              "examples": [
-                "2023-07-04"
-              ],
+              "examples": ["2023-07-04"],
               "pattern": "^.*$"
             }
           }
@@ -105,9 +78,7 @@
           "title": "Additionalneeds",
           "type": "string",
           "default": "",
-          "examples": [
-            "Breakfast"
-          ],
+          "examples": ["Breakfast"],
           "pattern": "^.*$"
         }
       }

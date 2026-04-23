@@ -1,8 +1,7 @@
-import React from 'react';
 import Layout from '@theme/Layout';
 import { Features } from '../components/Features';
-import Data from '../data/home-page.json';
 import { PageHero } from '../components/PageHero';
+import Data from '../data/home-page.json';
 
 const Home = (): JSX.Element => {
   return (

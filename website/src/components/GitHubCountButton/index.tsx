@@ -1,4 +1,3 @@
-import React from 'react';
 import GitHubButton from 'react-github-btn';
 
 type GitHubButtonType = {
@@ -8,11 +7,7 @@ type GitHubButtonType = {
   type: 'Watch' | 'Star' | 'Fork' | 'Follow';
 };
 
-const GitHubCountButton = ({
-  userId,
-  repoName = undefined,
-  type = 'Follow',
-}: GitHubButtonType): JSX.Element => {
+const GitHubCountButton = ({ userId, repoName = undefined, type = 'Follow' }: GitHubButtonType): JSX.Element => {
   let repoUrl = `${userId}`;
   let label = `${type}`;
   let text = `${type}`;
