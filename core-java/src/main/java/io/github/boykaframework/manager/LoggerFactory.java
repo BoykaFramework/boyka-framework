@@ -37,15 +37,15 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Order (100)
 public class LoggerFactory extends ConfigurationFactory {
     @Override
-    public Configuration getConfiguration (final LoggerContext loggerContext, final ConfigurationSource source) {
-        return getConfiguration (loggerContext, source.toString (), null);
-    }
-
-    @Override
     public Configuration getConfiguration (final LoggerContext loggerContext, final String name,
         final URI configLocation) {
         final LoggingBuilder builder = new LoggingBuilder ();
         return builder.build (name, newConfigurationBuilder ());
+    }
+
+    @Override
+    public Configuration getConfiguration (final LoggerContext loggerContext, final ConfigurationSource source) {
+        return getConfiguration (loggerContext, source.getLocation (), source.getURI ());
     }
 
     @Override

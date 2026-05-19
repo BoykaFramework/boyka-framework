@@ -1,2 +1,7 @@
 packages:
   - website/**
+allowBuilds:
+  '@parcel/watcher': false
+  core-js: true
+  core-js-pure: false
+  nx: false

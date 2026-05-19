@@ -72,7 +72,7 @@ jobs:
           git_commit_gpgsign: true
 
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm install --frozen-lockfile
 
       - name: Publish pre-release version on GitHub
         if: ${{ inputs.pre-release }}
