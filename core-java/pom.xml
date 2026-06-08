@@ -42,8 +42,8 @@
         <log4j-core.version>2.26.0</log4j-core.version>
         <log4j-api.version>2.26.0</log4j-api.version>
         <faker.version>2.3.1</faker.version>
-        <jackson-dataformat-yaml.version>2.21.4</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.21.4</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.22.0</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.22.0</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>3.0.0</json-schema-validator.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
@@ -76,7 +76,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
         <sonar.maven.version>5.7.0.6970</sonar.maven.version>
-        <jacoco.version>0.8.14</jacoco.version>
+        <jacoco.version>0.8.15</jacoco.version>
         <surefire-version>3.5.6</surefire-version>
         <nexus.version>1.7.0</nexus.version>
         <maven.gpg.version>3.2.8</maven.gpg.version>
