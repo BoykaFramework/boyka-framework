@@ -28,7 +28,7 @@
     <url>https://git.new/boyka-githubk</url>
 
     <properties>
-        <selenium-webdriver.version>4.45.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.46.0</selenium-webdriver.version>
         <testng.version>7.12.0</testng.version>
         <appium-java-client.version>10.1.1</appium-java-client.version>
         <okhttp.version>5.4.0</okhttp.version>
@@ -39,11 +39,11 @@
         <apache-commons-text.version>1.15.0</apache-commons-text.version>
         <commons-io.version>2.22.0</commons-io.version>
         <json-path.version>3.0.0</json-path.version>
-        <log4j-core.version>2.26.0</log4j-core.version>
-        <log4j-api.version>2.26.0</log4j-api.version>
+        <log4j-core.version>2.26.1</log4j-core.version>
+        <log4j-api.version>2.26.1</log4j-api.version>
         <faker.version>2.3.1</faker.version>
-        <jackson-dataformat-yaml.version>2.22.0</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.22.0</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.22.1</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.22.1</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>3.0.0</json-schema-validator.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
