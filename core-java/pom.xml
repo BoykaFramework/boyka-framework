@@ -28,13 +28,13 @@
     <url>https://git.new/boyka-githubk</url>
 
     <properties>
-        <selenium-webdriver.version>4.47.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.49.0</selenium-webdriver.version>
         <testng.version>7.12.0</testng.version>
         <appium-java-client.version>10.1.1</appium-java-client.version>
-        <okhttp.version>5.4.0</okhttp.version>
-        <lombok.version>1.18.46</lombok.version>
+        <okhttp.version>5.5.0</okhttp.version>
+        <lombok.version>1.18.48</lombok.version>
         <google-gson.version>2.14.0</google-gson.version>
-        <google.guava.version>33.6.0-jre</google.guava.version>
+        <google.guava.version>33.7.1-jre</google.guava.version>
         <google-truth.version>1.4.5</google-truth.version>
         <apache-commons-text.version>1.15.0</apache-commons-text.version>
         <commons-io.version>2.22.0</commons-io.version>
@@ -42,8 +42,8 @@
         <log4j-core.version>2.26.1</log4j-core.version>
         <log4j-api.version>2.26.1</log4j-api.version>
         <faker.version>2.3.1</faker.version>
-        <jackson-dataformat-yaml.version>2.22.1</jackson-dataformat-yaml.version>
-        <jackson-databind.version>2.22.1</jackson-databind.version>
+        <jackson-dataformat-yaml.version>2.22.2</jackson-dataformat-yaml.version>
+        <jackson-databind.version>2.22.2</jackson-databind.version>
         <ok2curl.version>0.8.0</ok2curl.version>
         <json-schema-validator.version>3.0.0</json-schema-validator.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
@@ -51,10 +51,10 @@
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
         <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
-        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <codestyle.version>1.1.0</codestyle.version>
-        <checkstyle.version>12.3.1</checkstyle.version>
+        <checkstyle.version>14.1.0</checkstyle.version>
         <aspectj.version>1.9.25.1</aspectj.version>
         <poi.version>5.5.1</poi.version>
         <suite-name>testng-api</suite-name>
@@ -75,14 +75,14 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <sonar.version>5.14.0.18788</sonar.version>
-        <sonar.maven.version>5.7.0.6970</sonar.maven.version>
+        <sonar.maven.version>5.8.0.7211</sonar.maven.version>
         <jacoco.version>0.8.15</jacoco.version>
-        <surefire-version>3.5.6</surefire-version>
+        <surefire-version>3.6.0</surefire-version>
         <nexus.version>1.7.0</nexus.version>
         <maven.gpg.version>3.2.8</maven.gpg.version>
         <maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
         <allure-testng.version>2.35.5</allure-testng.version>
-        <maven-failsafe.version>3.5.6</maven-failsafe.version>
+        <maven-failsafe.version>3.6.0</maven-failsafe.version>
         <central.sonatype>0.11.0</central.sonatype>
     </properties>
 
