@@ -124,7 +124,7 @@ jobs:
 
       - name: Launch iOS Simulator
         if: ${{ inputs.run-ios }}
-        uses: futureware-tech/simulator-action@v5
+        uses: futureware-tech/simulator-action@v6
         with:
           model: ${{ inputs.simulator-name }}
           os: 'iOS'
