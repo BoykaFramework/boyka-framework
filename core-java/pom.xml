@@ -28,7 +28,7 @@
     <url>https://git.new/boyka-githubk</url>
 
     <properties>
-        <selenium-webdriver.version>4.50.0</selenium-webdriver.version>
+        <selenium-webdriver.version>4.51.0</selenium-webdriver.version>
         <testng.version>7.12.0</testng.version>
         <appium-java-client.version>11.0.0</appium-java-client.version>
         <okhttp.version>5.5.0</okhttp.version>
@@ -83,7 +83,7 @@
         <maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
         <allure-testng.version>2.35.5</allure-testng.version>
         <maven-failsafe.version>3.6.0</maven-failsafe.version>
-        <central.sonatype>0.11.0</central.sonatype>
+        <central.sonatype>0.12.0</central.sonatype>
     </properties>
 
     <organization>
